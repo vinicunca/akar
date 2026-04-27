@@ -11,6 +11,8 @@ import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectSelectItemAlignedPositionContext } from './select-item-aligned-position.vue';
 import SelectScrollButtonImpl from './select-scroll-button-impl.vue';
 
+defineOptions({ name: 'ASelectScrollDownButton' });
+
 defineProps<ASelectScrollDownButtonProps>();
 
 const contentContext = injectSelectContentContext();

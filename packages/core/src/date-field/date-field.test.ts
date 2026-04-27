@@ -1,7 +1,6 @@
 import type { DateFields, DateValue, TimeFields } from '@internationalized/date';
 import type { ADateFieldRootProps } from './date-field-root.vue';
 import { CalendarDate, CalendarDateTime, now, parseAbsoluteToLocal, toZoned } from '@internationalized/date';
-
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
@@ -286,6 +285,28 @@ describe('dateField', async () => {
     for (const seg of segments.reverse()) {
       await user.keyboard(kbd.SHIFT_TAB);
       expect(seg).toHaveFocus();
+    }
+  });
+
+  it('doesn\'t change focus prematurely with segment value of 0', async () => {
+    const { getByTestId, user, day, month, year } = setup({
+      dateFieldProps: {
+        modelValue: zonedDateTime,
+        granularity: 'second',
+      },
+    });
+    const { hour, minute, second } = getTimeSegments(getByTestId);
+
+    const segments = [month, day, year, hour, minute, second];
+
+    for (const segment of segments) {
+      await user.click(segment);
+      await user.keyboard('{0}');
+      await user.keyboard(kbd.TAB);
+      expect(segment).not.toHaveFocus();
+      await user.click(segment);
+      await user.keyboard('{1}');
+      expect(segment).toHaveFocus();
     }
   });
 

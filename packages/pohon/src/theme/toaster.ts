@@ -3,7 +3,6 @@ export default {
     viewport: '',
     base: '',
   },
-
   variants: {
     position: {
       'top-left': {

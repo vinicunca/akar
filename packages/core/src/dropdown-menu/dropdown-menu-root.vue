@@ -30,6 +30,8 @@ import { useVModel } from '@vueuse/core';
 import { ref, toRefs } from 'vue';
 import { AMenuRoot } from '../menu';
 
+defineOptions({ name: 'ADropdownMenuRoot' });
+
 const props = withDefaults(defineProps<ADropdownMenuRootProps>(), {
   modal: true,
   open: undefined,

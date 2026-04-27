@@ -10,6 +10,8 @@ import { APrimitive } from '../primitive';
 import { useForwardExpose, useId } from '../shared';
 import { injectDialogRootContext } from './dialog-root.vue';
 
+defineOptions({ name: 'ADialogTrigger' });
+
 const props = withDefaults(defineProps<ADialogTriggerProps>(), {
   as: 'button',
 });

@@ -74,6 +74,8 @@ import { APrimitive } from '../primitive';
 import { useDirection, useForwardExpose } from '../shared';
 import { useSingleOrMultipleValue } from '../shared/use-single-or-multiple-value';
 
+defineOptions({ name: 'AAccordionRoot' });
+
 const props = withDefaults(
   defineProps<AAccordionRootProps<T>>(),
   {

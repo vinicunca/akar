@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: '上一頁',
     },
     chatPrompt: {
-      placeholder: '在這裡輸入你的消息...',
+      placeholder: '在這裡輸入你的消息…',
     },
     chatPromptSubmit: {
       label: '發送',
+    },
+    chatReasoning: {
+      thinking: '思考中…',
+      thought: '已思考',
+      thoughtFor: '思考了 {duration}',
     },
     colorMode: {
       dark: '深色',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: '關閉',
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      placeholder: '輸入命令或搜尋...',
+      placeholder: '輸入命令或搜尋…',
     },
     contentSearch: {
       links: '連結',
       theme: '主題',
     },
     contentSearchButton: {
-      label: '搜尋...',
+      label: '搜尋…',
     },
     contentToc: {
       title: '本頁內容',
+    },
+    dropdownMenu: {
+      noMatch: '沒有相符的資料',
+      search: '搜尋…',
     },
     dashboardSearch: {
       theme: '主題',
     },
     dashboardSearchButton: {
-      label: '搜尋...',
+      label: '搜尋…',
     },
     dashboardSidebarCollapse: {
       collapse: '收起側邊欄',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: '減少',
       increment: '增加',
     },
+    listbox: {
+      noData: '沒有資料',
+      noMatch: '沒有相符的資料',
+      search: '搜尋…',
+    },
     modal: {
       close: '關閉',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: '複製程式碼到剪貼簿',
       },
+      prompt: {
+        copy: '複製提示詞',
+        openIn: '在 {name} 中開啟',
+      },
+    },
+    sidebar: {
+      close: '關閉',
+      toggle: '切換',
     },
     selectMenu: {
       create: '建立「{label}」',
       noData: '沒有資料',
       noMatch: '沒有相符的資料',
-      search: '搜尋...',
+      search: '搜尋…',
     },
     slideover: {
       close: '關閉',

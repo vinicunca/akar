@@ -9,6 +9,8 @@ export interface AProgressIndicatorProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAProgressRootContext } from './progress-root.vue';
 
+defineOptions({ name: 'AProgressIndicator' });
+
 const props = defineProps<AProgressIndicatorProps>();
 
 const rootContext = injectAProgressRootContext();

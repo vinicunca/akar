@@ -1,46 +1,101 @@
 <script setup lang="ts">
-import { AScrollAreaRoot, AScrollAreaScrollbar, AScrollAreaThumb, AScrollAreaViewport } from 'akar';
+const virtualize = ref(true)
+const orientation = ref<'vertical' | 'horizontal'>('vertical')
+const estimateSize = ref(480)
+const gap = ref(16)
+const lanes = ref(4)
 
-const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
+const heights = [320, 480, 640, 800]
+
+// Pseudo-random height selection with longer cycle to avoid alignment patterns
+function getHeight(index: number) {
+  const seed = (index * 11 + 7) % 17
+  return heights[seed % heights.length]!
+}
+
+const items = computed(() => {
+  return Array.from({ length: 1000 }, (_, index) => {
+    const height = getHeight(index)
+    return {
+      id: index,
+      title: `Item ${index + 1}`,
+      src: `https://picsum.photos/640/${height}?v=${index}`,
+      width: 640,
+      height
+    }
+  })
+})
+
+const virtualizeOptions = computed(() => {
+  if (!virtualize.value) {
+    return false
+  }
+  return {
+    estimateSize: estimateSize.value,
+    gap: gap.value,
+    lanes: lanes.value
+  }
+})
 </script>
 
 <template>
-  <AScrollAreaRoot
-    class="border border-border rounded-lg bg-background h-[225px] w-[200px] shadow-sm relative overflow-hidden"
-    style="--scrollbar-size: 10px"
-  >
-    <div class="h-6 w-full top-0 absolute z-10 from-transparent to-white bg-gradient-to-t" />
-    <AScrollAreaViewport class="rounded h-full w-full">
-      <div class="px-5 py-[15px]">
-        <div class="text-sm color-primary leading-[18px] font-semibold">
-          Tags
-        </div>
-        <div
-          v-for="tag in tags"
-          :key="tag"
-          class="text-xs leading-[18px] mt-2.5 pt-2.5 border-t border-t-border"
-        >
-          {{ tag }}
-        </div>
-      </div>
-    </AScrollAreaViewport>
-    <AScrollAreaScrollbar
-      class="p-0.5 bg-background-elevated flex select-none transition-colors duration-[160ms] ease-out z-20 touch-none hover:bg-background-accented data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5"
-      orientation="vertical"
-    >
-      <AScrollAreaThumb
-        class="rounded-[10px] bg-primary flex-1 relative before:(h-full min-h-[44px] min-w-[44px] w-full content-empty left-1/2 top-1/2 absolute -translate-x-1/2 -translate-y-1/2)"
-      />
-    </AScrollAreaScrollbar>
-    <AScrollAreaScrollbar
-      class="p-0.5 bg-background-elevated flex select-none transition-colors duration-[160ms] ease-out touch-none hover:bg-background-accented data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5 data-[orientation=vertical]:w-2.5"
-      orientation="horizontal"
-    >
-      <AScrollAreaThumb
-        class="rounded-[10px] bg-primary flex-1 relative before:(h-full min-h-[44px] min-w-[44px] w-full content-empty left-1/2 top-1/2 absolute -translate-x-1/2 -translate-y-1/2)"
-      />
-    </AScrollAreaScrollbar>
+  <Navbar>
+    <PSwitch v-model="virtualize" label="Virtualize" reverse />
 
-    <div class="h-6 w-full bottom-0 absolute z-10 from-transparent to-white bg-gradient-to-b" />
-  </AScrollAreaRoot>
+    <PFieldGroup>
+      <PButton
+        color="neutral"
+        variant="outline"
+        active-variant="solid"
+        active-color="primary"
+        :active="orientation === 'vertical'"
+        icon="i-lucide-move-vertical"
+        @click="orientation = 'vertical'"
+      />
+      <PButton
+        color="neutral"
+        variant="outline"
+        active-variant="solid"
+        active-color="primary"
+        :active="orientation === 'horizontal'"
+        icon="i-lucide-move-horizontal"
+        @click="orientation = 'horizontal'"
+      />
+    </PFieldGroup>
+
+    <template v-if="virtualize">
+      <PInput
+        v-model.number="gap"
+        type="number"
+        :min="0"
+        icon="i-lucide-between-vertical-start"
+        :max="48"
+      />
+
+      <PInput
+        v-model.number="lanes"
+        type="number"
+        :min="1"
+        icon="i-lucide-layout-dashboard"
+        :max="10"
+      />
+    </template>
+  </Navbar>
+
+  <PScrollArea
+    v-slot="{ item }"
+    :items="items"
+    :orientation="orientation"
+    :virtualize="virtualizeOptions"
+    class="size-full p-4"
+  >
+    <img
+      :src="item.src"
+      :alt="item.title"
+      :width="item.width"
+      :height="item.height"
+      loading="lazy"
+      class="rounded-md size-full object-cover"
+    >
+  </PScrollArea>
 </template>

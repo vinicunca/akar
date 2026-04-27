@@ -77,6 +77,7 @@ export default {
       },
     },
   },
+
   defaultVariants: {
     size: 'md',
   },

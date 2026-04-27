@@ -6,6 +6,13 @@ import { fireEvent, render, waitFor } from '@testing-library/vue';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
+import {
+  ARangeCalendarHeader,
+  ARangeCalendarHeading,
+  ARangeCalendarNext,
+  ARangeCalendarPrev,
+  ARangeCalendarRoot,
+} from '..';
 import { useTestKeyboard } from '../shared';
 import RangeCalendar from './story/_range-calendar.vue';
 
@@ -312,6 +319,42 @@ describe('rangeCalendar', () => {
       await user.click(prevBtn);
     }
     expect(heading).toHaveTextContent('January 1979');
+  });
+
+  it('does not navigate when prev is disabled and rendered as div', async () => {
+    const user = userEvent.setup();
+
+    const Test = {
+      components: {
+        ARangeCalendarRoot,
+        ARangeCalendarHeader,
+        ARangeCalendarPrev,
+        ARangeCalendarHeading,
+        ARangeCalendarNext,
+      },
+      setup() {
+        const placeholder = new CalendarDate(1980, 1, 15);
+        const minValue = new CalendarDate(1980, 1, 1);
+        return { placeholder, minValue };
+      },
+      template: `
+        <ARangeCalendarRoot
+          :placeholder="placeholder"
+          :min-value="minValue"
+        >
+          <ARangeCalendarHeader>
+            <ARangeCalendarPrev as="div" data-testid="prev-button" />
+            <ARangeCalendarHeading data-testid="heading" />
+            <ARangeCalendarNext as="div" data-testid="next-button" />
+          </ARangeCalendarHeader>
+        </ARangeCalendarRoot>
+      `,
+    };
+
+    const { getByTestId } = render(Test);
+    expect(getByTestId('heading')).toHaveTextContent('January 1980');
+    await user.click(getByTestId('prev-button'));
+    expect(getByTestId('heading')).toHaveTextContent('January 1980');
   });
 
   it('should navigate one year in the past (prev year button)', async () => {
@@ -928,6 +971,31 @@ describe('handles maximumDays', () => {
     expect(maximumDay).toHaveAttribute('data-highlighted-end');
     expect(maximumDay).toHaveAttribute('data-highlighted');
     expect(beyondMaximumDay).not.toHaveAttribute('data-highlighted');
+  });
+
+  it('keeps backward highlight and disabled boundaries coherent with maximumDays', async () => {
+    const { getByTestId, user } = setup({
+      calendarProps: {
+        placeholder: new CalendarDate(1980, 1, 10),
+        maximumDays: 3,
+      },
+    });
+
+    const startDay = getByTestId('date-1-10');
+    const day8 = getByTestId('date-1-8');
+    const day7 = getByTestId('date-1-7');
+
+    await user.click(startDay);
+    expect(startDay).toHaveAttribute('data-selection-start');
+    expect(day7).toHaveAttribute('aria-disabled', 'true');
+    expect(day8).not.toHaveAttribute('aria-disabled', 'true');
+
+    await user.hover(day8);
+
+    expect(day8).toHaveAttribute('data-highlighted-start');
+    expect(getByTestId('date-1-9')).toHaveAttribute('data-highlighted');
+    expect(startDay).toHaveAttribute('data-highlighted-end');
+    expect(day7).not.toHaveAttribute('data-highlighted');
   });
 
   describe('a11y', async () => {

@@ -14,6 +14,8 @@ import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 import ScrollAreaScrollbarVisible from './scroll-area-scrollbar-visible.vue';
 import { injectAScrollAreaScrollbarContext } from './scroll-area-scrollbar.vue';
 
+defineOptions({ name: 'AScrollAreaScrollbarScroll' });
+
 defineProps<ScrollAreaScrollbarScrollProps>();
 
 const rootContext = injectAScrollAreaRootContext();
@@ -44,10 +46,7 @@ const visible = computed(() => state.value !== 'hidden');
 
 watchEffect((onCleanup) => {
   if (state.value === 'idle') {
-    const timeId = window.setTimeout(
-      () => dispatch('HIDE'),
-      rootContext.scrollHideDelay.value,
-    );
+    const timeId = window.setTimeout(dispatch, rootContext.scrollHideDelay.value, 'HIDE');
 
     onCleanup(() => {
       window.clearTimeout(timeId);

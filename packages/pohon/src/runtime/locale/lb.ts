@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Präz.',
     },
     chatPrompt: {
-      placeholder: 'Tippt hei Äre Message...',
+      placeholder: 'Tippt hei Äre Message…',
     },
     chatPromptSubmit: {
       label: 'Prompt schécken',
+    },
+    chatReasoning: {
+      thinking: 'Denkt no…',
+      thought: 'Nogeduecht',
+      thoughtFor: '{duration} nogeduecht',
     },
     colorMode: {
       dark: 'Donkel',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Zoumaachen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      placeholder: 'Tippt e Befeel oder sicht...',
+      placeholder: 'Tippt e Befeel oder sicht…',
     },
     contentSearch: {
       links: 'Linken',
       theme: 'Thema',
     },
     contentSearchButton: {
-      label: 'Sichen...',
+      label: 'Sichen…',
     },
     contentToc: {
       title: 'Op dëser Säit',
+    },
+    dropdownMenu: {
+      noMatch: 'Keng entspriechend Donnéeën',
+      search: 'Sichen…',
     },
     dashboardSearch: {
       theme: 'Thema',
     },
     dashboardSearchButton: {
-      label: 'Sichen...',
+      label: 'Sichen…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Sidebar zouklappen',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Dekrementéieren',
       increment: 'Inkrementéieren',
     },
+    listbox: {
+      noData: 'Keng Donnéeën',
+      noMatch: 'Keng entspriechend Donnéeën',
+      search: 'Sichen…',
+    },
     modal: {
       close: 'Zoumaachen',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Code an d\'Zwëschspäicher kopéieren',
       },
+      prompt: {
+        copy: 'Prompt kopéieren',
+        openIn: 'An {name} opmaachen',
+      },
+    },
+    sidebar: {
+      close: 'Zoumaachen',
+      toggle: 'Ëmschalten',
     },
     selectMenu: {
       create: '"{label}" erstellen',
       noData: 'Keng Donnéeën',
       noMatch: 'Keng entspriechend Donnéeën',
-      search: 'Sichen..',
+      search: 'Sichen…',
     },
     slideover: {
       close: 'Zoumaachen',

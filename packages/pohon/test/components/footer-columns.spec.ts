@@ -1,11 +1,10 @@
-import type { PFooterColumnsProps, PFooterColumnsSlots } from '../../src/runtime/components/footer-columns.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PFooterColumns from '../../src/runtime/components/footer-columns.vue';
-import ComponentRender from '../component-render';
+import PFooterColumns from '../../src/runtime/components/FooterColumns.vue';
+import { renderEach } from '../component-render';
 
-describe('footerColumns', () => {
+describe('FooterColumns', () => {
   const columns = [{
     label: 'Community',
     children: [{
@@ -56,12 +55,12 @@ describe('footerColumns', () => {
 
   const props = { columns };
 
-  it.each([
+  renderEach(PFooterColumns, [
     // Props
     ['with columns', { props }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'px-10' } }],
-    ['with ui', { props: { ...props, pohon: { list: 'lg:gap-1.5' } } }],
+    ['with pohon', { props: { ...props, pohon: { list: 'lg:gap-1.5' } } }],
     // Slots
     ['with left slot', { props, slots: { left: () => 'Left slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],
@@ -71,10 +70,7 @@ describe('footerColumns', () => {
     ['with link-leading slot', { props, slots: { 'link-leading': () => 'Link leading slot' } }],
     ['with link-label slot', { props, slots: { 'link-label': () => 'Link label slot' } }],
     ['with link-trailing slot', { props, slots: { 'link-trailing': () => 'Link trailing slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PFooterColumnsProps; slots?: Partial<PFooterColumnsSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PFooterColumns);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(PFooterColumns, {

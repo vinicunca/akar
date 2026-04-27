@@ -8,6 +8,8 @@ export interface AContextMenuItemIndicatorProps extends AMenuItemIndicatorProps 
 import { AMenuItemIndicator } from '../menu';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuItemIndicator' });
+
 const props = defineProps<AContextMenuItemIndicatorProps>();
 
 useForwardExpose();

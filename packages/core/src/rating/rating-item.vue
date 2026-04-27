@@ -22,6 +22,8 @@ export const [
 import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ARatingItem' });
+
 const props = withDefaults(
   defineProps<ARatingItemProps>(),
   { as: 'label' },

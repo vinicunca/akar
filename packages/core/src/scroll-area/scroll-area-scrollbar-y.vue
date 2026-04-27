@@ -6,6 +6,8 @@ import ScrollAreaScrollbarImpl from './scroll-area-scrollbar-impl.vue';
 import { injectScrollAreaScrollbarVisibleContext } from './scroll-area-scrollbar-visible.vue';
 import { getThumbSize } from './utils';
 
+defineOptions({ name: 'AScrollAreaScrollbarY' });
+
 const rootContext = injectAScrollAreaRootContext();
 const scrollbarVisibleContext = injectScrollAreaScrollbarVisibleContext();
 

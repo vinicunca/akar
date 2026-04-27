@@ -1,6 +1,5 @@
 // workaround for TS bug with "phantom" deps
 import type { } from '@nuxt/schema';
-
 import type { Components } from 'akar/constant';
 import { addComponent, defineNuxtModule } from '@nuxt/kit';
 import { components as allComponents } from 'akar/constant';

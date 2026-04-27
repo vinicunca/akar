@@ -20,6 +20,8 @@ import MenuItemImpl from './menu-item-impl.vue';
 import { injectAMenuRootContext } from './menu-root.vue';
 import { ITEM_SELECT, SELECTION_KEYS } from './utils';
 
+defineOptions({ name: 'AMenuItem' });
+
 const props = defineProps<AMenuItemProps>();
 const emits = defineEmits<AMenuItemEmits>();
 

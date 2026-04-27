@@ -8,6 +8,8 @@ export interface ADropdownMenuSubTriggerProps extends AMenuSubTriggerProps {}
 <script setup lang="ts">
 import { AMenuSubTrigger } from '../menu';
 
+defineOptions({ name: 'ADropdownMenuSubTrigger' });
+
 const props = defineProps<ADropdownMenuSubTriggerProps>();
 useForwardExpose();
 </script>

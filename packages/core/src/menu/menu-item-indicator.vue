@@ -29,6 +29,8 @@ import { APresence } from '../presence';
 import { APrimitive } from '../primitive';
 import { getCheckedState, isIndeterminate } from './utils';
 
+defineOptions({ name: 'AMenuItemIndicator' });
+
 withDefaults(defineProps<AMenuItemIndicatorProps>(), {
   as: 'span',
 });

@@ -8,11 +8,11 @@ import { useVModel } from '@vueuse/core';
 import { createContext, isValueEqualOrExist, useFormControl, useForwardExpose } from '../shared';
 import { injectACheckboxGroupRootContext } from './checkbox-group-root.vue';
 
-export interface ACheckboxRootProps extends APrimitiveProps, FormFieldProps {
+export interface ACheckboxRootProps<T = boolean> extends APrimitiveProps, FormFieldProps {
   /** The value of the checkbox when it is initially rendered. Use when you do not need to control its value. */
-  defaultValue?: 'indeterminate' | boolean;
+  defaultValue?: 'indeterminate' | T;
   /** The controlled value of the checkbox. Can be binded with v-model. */
-  modelValue?: boolean | 'indeterminate' | null;
+  modelValue?: T | 'indeterminate' | null;
   /** When `true`, prevents the user from interacting with the checkbox */
   disabled?: boolean;
   /**
@@ -22,11 +22,19 @@ export interface ACheckboxRootProps extends APrimitiveProps, FormFieldProps {
   value?: AcceptableValue;
   /** Id of the element */
   id?: string;
+  /**
+   * The value used when the checkbox is checked. Defaults to `true`.
+   */
+  trueValue?: T;
+  /**
+   * The value used when the checkbox is unchecked. Defaults to `false`.
+   */
+  falseValue?: T;
 }
 
-export type ACheckboxRootEmits = {
+export type ACheckboxRootEmits<T = boolean> = {
   /** Event handler called when the value of the checkbox changes. */
-  'update:modelValue': [value: 'indeterminate' | boolean];
+  'update:modelValue': [value: 'indeterminate' | T];
 };
 
 interface CheckboxRootContext {
@@ -40,7 +48,7 @@ export const [
 ] = createContext<CheckboxRootContext>('ACheckboxRoot');
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T = boolean">
 import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { ARovingFocusItem } from '../roving-focus';
@@ -48,19 +56,22 @@ import { AVisuallyHiddenInput } from '../visually-hidden';
 import { getState, isIndeterminate } from './utils';
 
 defineOptions({
+  name: 'ACheckboxRoot',
   inheritAttrs: false,
 });
 
 const props = withDefaults(
-  defineProps<ACheckboxRootProps>(),
+  defineProps<ACheckboxRootProps<T>>(),
   {
     modelValue: undefined,
     value: 'on',
     as: 'button',
+    trueValue: (() => true) as unknown as undefined,
+    falseValue: (() => false) as unknown as undefined,
   },
 );
 
-const emits = defineEmits<ACheckboxRootEmits>();
+const emits = defineEmits<ACheckboxRootEmits<T>>();
 
 defineSlots<{
   default?: (props: {
@@ -76,22 +87,28 @@ const { forwardRef, currentElement } = useForwardExpose();
 const checkboxGroupContext = injectACheckboxGroupRootContext(null);
 
 const modelValue = useVModel(
-  props,
+  props as any,
   'modelValue',
-  emits,
+  emits as any,
   {
-    defaultValue: props.defaultValue,
+    defaultValue: props.defaultValue ?? props.falseValue,
     passive: (props.modelValue === undefined) as false,
   },
-) as Ref<CheckboxCheckedState>;
+) as Ref<T | 'indeterminate'>;
 
 const disabled = computed(() => checkboxGroupContext?.disabled.value || props.disabled);
+
+const isChecked = computed(() => isDeepEqual(modelValue.value, props.trueValue));
 
 const checkboxState = computed<CheckboxCheckedState>(() => {
   if (!isNullish(checkboxGroupContext?.modelValue.value)) {
     return isValueEqualOrExist(checkboxGroupContext.modelValue.value, props.value);
   } else {
-    return modelValue.value === 'indeterminate' ? 'indeterminate' : modelValue.value;
+    if (modelValue.value === 'indeterminate') {
+      return 'indeterminate';
+    }
+
+    return isChecked.value;
   }
 });
 
@@ -106,7 +123,11 @@ function handleClick() {
     }
     checkboxGroupContext.modelValue.value = modelValueArray;
   } else {
-    modelValue.value = isIndeterminate(modelValue.value) ? true : !modelValue.value;
+    if (modelValue.value === 'indeterminate') {
+      modelValue.value = props.trueValue as T;
+    } else {
+      modelValue.value = isChecked.value ? props.falseValue as T : props.trueValue as T;
+    }
   }
 }
 

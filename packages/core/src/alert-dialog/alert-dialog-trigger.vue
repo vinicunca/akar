@@ -8,6 +8,8 @@ export interface AAlertDialogTriggerProps extends ADialogTriggerProps {}
 <script setup lang="ts">
 import { ADialogTrigger } from '../dialog';
 
+defineOptions({ name: 'AAlertDialogTrigger' });
+
 const props = withDefaults(
   defineProps<AAlertDialogTriggerProps>(),
   { as: 'button' },

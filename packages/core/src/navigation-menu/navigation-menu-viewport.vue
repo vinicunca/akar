@@ -25,6 +25,7 @@ import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 import { getOpenState, whenMouse } from './utils';
 
 defineOptions({
+  name: 'ANavigationMenuViewport',
   inheritAttrs: false,
 });
 

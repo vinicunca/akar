@@ -6,6 +6,8 @@ import { useBodyScrollLock } from '../shared/use-body-scroll-lock';
 import PopoverContentImpl from './popover-content-impl.vue';
 import { injectAPopoverRootContext } from './popover-root.vue';
 
+defineOptions({ name: 'APopoverContentModal' });
+
 const props = defineProps<PopoverContentImplProps>();
 const emits = defineEmits<PopoverContentImplEmits>();
 const rootContext = injectAPopoverRootContext();

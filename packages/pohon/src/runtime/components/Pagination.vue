@@ -1,0 +1,295 @@
+<script lang="ts">
+import type { AppConfig } from '@nuxt/schema';
+import type { APaginationRootEmits, APaginationRootProps } from 'akar';
+import type { VNode } from 'vue';
+import type { PButtonProps, PIconProps } from '../types';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/pagination';
+
+type Pagination = ComponentConfig<typeof theme, AppConfig, 'pagination'>;
+
+export interface PPaginationProps extends Partial<Pick<APaginationRootProps, 'defaultPage' | 'disabled' | 'itemsPerPage' | 'page' | 'showEdges' | 'siblingCount' | 'total'>> {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any;
+  /**
+   * The icon to use for the first page control.
+   * @defaultValue appConfig.pohon.icons.chevronDoubleLeft
+   * @IconifyIcon
+   */
+  firstIcon?: PIconProps['name'];
+  /**
+   * The icon to use for the previous page control.
+   * @defaultValue appConfig.pohon.icons.chevronLeft
+   * @IconifyIcon
+   */
+  prevIcon?: PIconProps['name'];
+  /**
+   * The icon to use for the next page control.
+   * @defaultValue appConfig.pohon.icons.chevronRight
+   * @IconifyIcon
+   */
+  nextIcon?: PIconProps['name'];
+  /**
+   * The icon to use for the last page control.
+   * @defaultValue appConfig.pohon.icons.chevronDoubleRight
+   * @IconifyIcon
+   */
+  lastIcon?: PIconProps['name'];
+  /**
+   * The icon to use for the ellipsis control.
+   * @defaultValue appConfig.pohon.icons.ellipsis
+   * @IconifyIcon
+   */
+  ellipsisIcon?: PIconProps['name'];
+  /**
+   * The color of the pagination controls.
+   * @defaultValue 'neutral'
+   */
+  color?: PButtonProps['color'];
+  /**
+   * The variant of the pagination controls.
+   * @defaultValue 'outline'
+   */
+  variant?: PButtonProps['variant'];
+  /**
+   * The color of the active pagination control.
+   * @defaultValue 'primary'
+   */
+  activeColor?: PButtonProps['color'];
+  /**
+   * The variant of the active pagination control.
+   * @defaultValue 'solid'
+   */
+  activeVariant?: PButtonProps['variant'];
+  /**
+   * Whether to show the first, previous, next, and last controls.
+   * @defaultValue true
+   */
+  showControls?: boolean;
+  size?: PButtonProps['size'];
+  /**
+   * A function to render page controls as links.
+   * @param page The page number to navigate to.
+   */
+  to?: (page: number) => PButtonProps['to'];
+  class?: any;
+  pohon?: Pagination['slots'];
+}
+
+export interface PPaginationEmits extends APaginationRootEmits {}
+
+export interface PPaginationSlots {
+  first?: (props?: {}) => Array<VNode>;
+  prev?: (props?: {}) => Array<VNode>;
+  next?: (props?: {}) => Array<VNode>;
+  last?: (props?: {}) => Array<VNode>;
+  ellipsis?: (props: { pohon: Pagination['pohon'] }) => Array<VNode>;
+  item?: (props: {
+    page: number;
+    pageCount: number;
+    item: {
+      type: 'ellipsis';
+    } | {
+      type: 'page';
+      value: number;
+    };
+    index: number;
+  }) => Array<VNode>;
+}
+</script>
+
+<script setup lang="ts">
+import { reactivePick } from '@vueuse/core';
+import {
+  APaginationEllipsis,
+  APaginationFirst,
+  APaginationLast,
+  APaginationList,
+  APaginationListItem,
+  APaginationNext,
+  APaginationPrev,
+  APaginationRoot,
+  useForwardPropsEmits,
+} from 'akar';
+import { computed } from 'vue';
+import { useAppConfig } from '#imports';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { useLocale } from '../composables/use-locale';
+import { uv } from '../utils/uv';
+import PButton from './Button.vue';
+
+const props = withDefaults(
+  defineProps<PPaginationProps>(),
+  {
+    color: 'neutral',
+    variant: 'outline',
+    activeColor: 'primary',
+    activeVariant: 'solid',
+    showControls: true,
+    showEdges: false,
+    itemsPerPage: 10,
+    siblingCount: 2,
+    total: 0,
+  },
+);
+const emits = defineEmits<PPaginationEmits>();
+const slots = defineSlots<PPaginationSlots>();
+
+const { dir } = useLocale();
+const appConfig = useAppConfig() as Pagination['AppConfig'];
+const pohonProp = useComponentPohon('pagination', props);
+
+const rootProps = useForwardPropsEmits(
+  reactivePick(
+    props,
+    'as',
+    'defaultPage',
+    'disabled',
+    'itemsPerPage',
+    'page',
+    'showEdges',
+    'siblingCount',
+    'total',
+  ),
+  emits,
+);
+
+const firstIcon = computed(() => props.firstIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.chevronDoubleRight : appConfig.pohon.icons.chevronDoubleLeft));
+const prevIcon = computed(() => props.prevIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.chevronRight : appConfig.pohon.icons.chevronLeft));
+const nextIcon = computed(() => props.nextIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.chevronLeft : appConfig.pohon.icons.chevronRight));
+const lastIcon = computed(() => props.lastIcon || (dir.value === 'rtl' ? appConfig.pohon.icons.chevronDoubleLeft : appConfig.pohon.icons.chevronDoubleRight));
+
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.pagination || {}) })());
+</script>
+
+<template>
+  <APaginationRoot
+    v-slot="{ page, pageCount }"
+    v-bind="rootProps"
+    data-slot="root"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
+  >
+    <APaginationList
+      v-slot="{ items }"
+      data-slot="list"
+      :class="pohon.list({ class: pohonProp?.list })"
+    >
+      <APaginationFirst
+        v-if="showControls || !!slots.first"
+        as-child
+        data-slot="first"
+        :class="pohon.first({ class: pohonProp?.first })"
+      >
+        <slot name="first">
+          <PButton
+            :color="color"
+            :variant="variant"
+            :size="size"
+            :icon="firstIcon"
+            :to="to?.(1)"
+          />
+        </slot>
+      </APaginationFirst>
+      <APaginationPrev
+        v-if="showControls || !!slots.prev"
+        as-child
+        data-slot="prev"
+        :class="pohon.prev({ class: pohonProp?.prev })"
+      >
+        <slot name="prev">
+          <PButton
+            :color="color"
+            :variant="variant"
+            :size="size"
+            :icon="prevIcon"
+            :to="page > 1 ? to?.(page - 1) : undefined"
+          />
+        </slot>
+      </APaginationPrev>
+
+      <template
+        v-for="(item, index) in items"
+        :key="index"
+      >
+        <APaginationListItem
+          v-if="item.type === 'page'"
+          as-child
+          :value="item.value"
+          data-slot="item"
+          :class="pohon.item({ class: pohonProp?.item })"
+        >
+          <slot
+            name="item"
+            v-bind="{ item, index, page, pageCount }"
+          >
+            <PButton
+              :color="page === item.value ? activeColor : color"
+              :variant="page === item.value ? activeVariant : variant"
+              :size="size"
+              :label="String(item.value)"
+              :pohon="{ label: pohon.label() }"
+              :to="to?.(item.value)"
+              square
+            />
+          </slot>
+        </APaginationListItem>
+
+        <APaginationEllipsis
+          v-else
+          as-child
+          data-slot="ellipsis"
+          :class="pohon.ellipsis({ class: pohonProp?.ellipsis })"
+        >
+          <slot
+            name="ellipsis"
+            :pohon="pohon"
+          >
+            <PButton
+              as="div"
+              :color="color"
+              :variant="variant"
+              :size="size"
+              :icon="ellipsisIcon || appConfig.pohon.icons.ellipsis"
+            />
+          </slot>
+        </APaginationEllipsis>
+      </template>
+
+      <APaginationNext
+        v-if="showControls || !!slots.next"
+        as-child
+        data-slot="next"
+        :class="pohon.next({ class: pohonProp?.next })"
+      >
+        <slot name="next">
+          <PButton
+            :color="color"
+            :variant="variant"
+            :size="size"
+            :icon="nextIcon"
+            :to="page < pageCount ? to?.(page + 1) : undefined"
+          />
+        </slot>
+      </APaginationNext>
+      <APaginationLast
+        v-if="showControls || !!slots.last"
+        as-child
+        data-slot="last"
+        :class="pohon.last({ class: pohonProp?.last })"
+      >
+        <slot name="last">
+          <PButton
+            :color="color"
+            :variant="variant"
+            :size="size"
+            :icon="lastIcon"
+            :to="to?.(pageCount)"
+          />
+        </slot>
+      </APaginationLast>
+    </APaginationList>
+  </APaginationRoot>
+</template>

@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: '이전',
     },
     chatPrompt: {
-      placeholder: '여기에 메시지를 입력하세요...',
+      placeholder: '여기에 메시지를 입력하세요…',
     },
     chatPromptSubmit: {
       label: '전송',
+    },
+    chatReasoning: {
+      thinking: '생각하는 중…',
+      thought: '생각했습니다',
+      thoughtFor: '{duration} 동안 생각했습니다',
     },
     colorMode: {
       dark: '다크',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: '닫기',
       noData: '데이터가 없습니다.',
       noMatch: '일치하는 데이터가 없습니다.',
-      placeholder: '명령을 입력하거나 검색...',
+      placeholder: '명령을 입력하거나 검색…',
     },
     contentSearch: {
       links: '링크',
       theme: '테마',
     },
     contentSearchButton: {
-      label: '검색...',
+      label: '검색…',
     },
     contentToc: {
       title: '이 페이지에서',
+    },
+    dropdownMenu: {
+      noMatch: '일치하는 데이터가 없습니다.',
+      search: '검색…',
     },
     dashboardSearch: {
       theme: '테마',
     },
     dashboardSearchButton: {
-      label: '검색...',
+      label: '검색…',
     },
     dashboardSidebarCollapse: {
       collapse: '사이드바 축소',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: '감소',
       increment: '증가',
     },
+    listbox: {
+      noData: '데이터가 없습니다.',
+      noMatch: '일치하는 데이터가 없습니다.',
+      search: '검색…',
+    },
     modal: {
       close: '닫기',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: '코드를 클립보드에 복사',
       },
+      prompt: {
+        copy: '프롬프트 복사',
+        openIn: '{name}에서 열기',
+      },
+    },
+    sidebar: {
+      close: '닫기',
+      toggle: '토글',
     },
     selectMenu: {
       create: '"{label}" 생성',
       noData: '데이터가 없습니다.',
       noMatch: '일치하는 데이터가 없습니다.',
-      search: '검색...',
+      search: '검색…',
     },
     slideover: {
       close: '닫기',

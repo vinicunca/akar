@@ -9,6 +9,8 @@ export interface ADialogDescriptionProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectDialogRootContext } from './dialog-root.vue';
 
+defineOptions({ name: 'ADialogDescription' });
+
 const props = withDefaults(defineProps<ADialogDescriptionProps>(), { as: 'p' });
 
 useForwardExpose();

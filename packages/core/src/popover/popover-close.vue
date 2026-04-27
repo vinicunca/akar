@@ -11,6 +11,8 @@ import {
   injectAPopoverRootContext,
 } from './popover-root.vue';
 
+defineOptions({ name: 'APopoverClose' });
+
 const props = withDefaults(defineProps<APopoverCloseProps>(), {
   as: 'button',
 });

@@ -1,69 +1,71 @@
-import type { PThemeProps, PThemeSlots } from '../../src/runtime/components/theme.vue';
+import type { PThemeProps, PThemeSlots } from '../../src/runtime/components/Theme.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { h, nextTick, ref } from 'vue';
-import Alert from '../../src/runtime/components/alert.vue';
-import Badge from '../../src/runtime/components/badge.vue';
-import Button from '../../src/runtime/components/button.vue';
-import Input from '../../src/runtime/components/input.vue';
-import Theme from '../../src/runtime/components/theme.vue';
-import ComponentRender from '../component-render';
+import Alert from '../../src/runtime/components/Alert.vue';
+import Badge from '../../src/runtime/components/Badge.vue';
+import Button from '../../src/runtime/components/Button.vue';
+import Input from '../../src/runtime/components/Input.vue';
+import Theme from '../../src/runtime/components/Theme.vue';
+import { componentRender, renderEach } from '../component-render';
 
 interface CaseOptions { props?: PThemeProps; slots?: PThemeSlots }
 
 describe('Theme', () => {
-  it.each([
-    // Props
+  renderEach(
+    Theme,
     [
-      'with empty pohon',
+      // Props
+      [
+        'with empty pohon',
       {
         props: { pohon: {} },
-        slots: { default: () => h(Button, { label: 'Button' }) },
+        slots: { default: () => [h(Button, { label: 'Button' })] },
       } satisfies CaseOptions,
       [],
-    ],
-    [
-      'with theme applied to button base slot',
+      ],
+      [
+        'with theme applied to button base slot',
       {
         props: { pohon: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
-        slots: { default: () => h(Button, { label: 'Button' }) },
+        slots: { default: () => [h(Button, { label: 'Button' })] },
       } satisfies CaseOptions,
       ['px-[1.234rem]', 'text-[#ff0]'],
-    ],
-    [
-      'with pohon prop taking priority over theme',
+      ],
+      [
+        'with pohon prop taking priority over theme',
       {
         props: { pohon: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
-        slots: { default: () => h(Button, { label: 'Button', pohon: { base: 'px-[2.234rem]' } }) },
+        slots: { default: () => [h(Button, { label: 'Button', pohon: { base: 'px-[2.234rem]' } })] },
       } satisfies CaseOptions,
       ['px-[2.234rem]'],
-    ],
-    [
-      'with nested theme overriding outer theme',
+      ],
+      [
+        'with nested theme overriding outer theme',
       {
         props: { pohon: { button: { label: 'text-[#ff0]', base: 'px-[1.234rem]' } } },
-        slots: { default: () => h(Theme, { pohon: { button: { label: 'text-[#000]', base: 'px-[2.234rem]' } } }, () => h(Button, { label: 'Button' })) },
+        slots: { default: () => [h(Theme, { pohon: { button: { label: 'text-[#000]', base: 'px-[2.234rem]' } } }, () => [h(Button, { label: 'Button' })])] },
       } satisfies CaseOptions,
       ['px-[2.234rem]', 'text-[#000]'],
-    ],
-    [
-      'with theme applied to badge',
+      ],
+      [
+        'with theme applied to badge',
       {
         props: { pohon: { badge: { base: 'rounded-[1.234rem]' } } },
-        slots: { default: () => h(Badge, { label: 'Badge' }) },
+        slots: { default: () => [h(Badge, { label: 'Badge' })] },
       } satisfies CaseOptions,
       ['rounded-[1.234rem]'],
-    ],
-    [
-      'with theme applied to alert',
+      ],
+      [
+        'with theme applied to alert',
       {
         props: { pohon: { alert: { root: 'border-[3px]' } } },
-        slots: { default: () => h(Alert, { title: 'Alert' }) },
+        slots: { default: () => [h(Alert, { title: 'Alert' })] },
       } satisfies CaseOptions,
       ['border-[3px]'],
-    ],
-    [
-      'with theme applied to multiple component types',
+      ],
+      [
+        'with theme applied to multiple component types',
       {
         props: { pohon: { button: { base: 'px-[1.234rem]' }, badge: { base: 'rounded-[1.234rem]' } } },
         slots: {
@@ -74,22 +76,24 @@ describe('Theme', () => {
         },
       } satisfies CaseOptions,
       ['px-[1.234rem]', 'rounded-[1.234rem]'],
-    ],
-    [
-      'with theme not affecting unrelated component',
+      ],
+      [
+        'with theme not affecting unrelated component',
       {
         props: { pohon: { badge: { base: 'rounded-[1.234rem]' } } },
-        slots: { default: () => h(Button, { label: 'Button' }) },
+        slots: { default: () => [h(Button, { label: 'Button' })] },
       } satisfies CaseOptions,
       [],
+      ],
     ],
-  ])('renders %s correctly', async (nameOrHtml: string, options: CaseOptions, contains: Array<string> = []) => {
-    const html = await ComponentRender(nameOrHtml, options, Theme);
-    expect(html).toMatchSnapshot();
-    contains.forEach((c) => {
-      expect(html).toContain(c);
-    });
-  });
+    async (nameOrHtml, options, contains) => {
+      const html = await componentRender(nameOrHtml, options, Theme);
+      expect(html).toMatchSnapshot();
+      contains.forEach((c) => {
+        expect(html).toContain(c);
+      });
+    },
+  );
 
   it('applies theme classes to child component', async () => {
     const wrapper = await mountSuspended({
@@ -235,6 +239,6 @@ describe('Theme', () => {
       `,
     });
 
-    expect(wrapper.find('[data-pohon="input-root"]').classes()).toContain('input-theme-class');
+    expect(wrapper.find('[data-slot="root"]').classes()).toContain('input-theme-class');
   });
 });

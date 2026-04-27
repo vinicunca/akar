@@ -9,6 +9,17 @@ interface PropOptions {
 }
 
 /**
+ * Vue coerces optional boolean props (e.g. `foo?: boolean`) to non-optional (`foo: boolean`)
+ * in the `defineProps` return type. Since `useForwardProps` only returns props that were
+ * explicitly assigned, boolean-typed props should remain optional in the return type.
+ */
+type WithOptionalBooleans<T> = {
+  [K in keyof T as [T[K]] extends [boolean] ? K : never]?: T[K]
+} & {
+  [K in keyof T as [T[K]] extends [boolean] ? never : K]: T[K]
+};
+
+/**
  * The `useForwardProps` function in TypeScript takes in a set of props and returns a computed value
  * that combines default props with assigned props from the current instance.
  * @param props - The `props` parameter is an object that represents the props passed to a
@@ -41,10 +52,10 @@ export function useForwardProps<T extends Record<string, any>>(props: MaybeRefOr
     // Only return value from the props parameter
     return Object.keys({ ...defaultProps, ...preservedProps }).reduce((prev, curr) => {
       if (isDefined(refProps.value[curr])) {
-        prev[curr as keyof T] = refProps.value[curr];
+        (prev as Record<string, any>)[curr] = refProps.value[curr];
       }
 
       return prev;
-    }, {} as T);
+    }, {} as WithOptionalBooleans<T>);
   });
 }

@@ -1,0 +1,814 @@
+<!-- eslint-disable vue/block-tag-newline -->
+<script lang="ts">
+import type { AppConfig } from '@nuxt/schema';
+import type {
+  Cell,
+  CellContext,
+  Column,
+  ColumnDef,
+  ColumnFiltersOptions,
+  ColumnFiltersState,
+  ColumnOrderState,
+  ColumnPinningOptions,
+  ColumnPinningState,
+  ColumnSizingInfoState,
+  ColumnSizingOptions,
+  ColumnSizingState,
+  CoreOptions,
+  ExpandedOptions,
+  ExpandedState,
+  FacetedOptions,
+  GlobalFilterOptions,
+  GroupingOptions,
+  GroupingState,
+  Header,
+  HeaderContext,
+  PaginationOptions,
+  PaginationState,
+  Row,
+  RowData,
+  RowPinningOptions,
+  RowPinningState,
+  RowSelectionOptions,
+  RowSelectionState,
+  SortingOptions,
+  SortingState,
+  TableMeta,
+  Updater,
+  VisibilityOptions,
+  VisibilityState,
+} from '@tanstack/vue-table';
+import type { VirtualizerOptions } from '@tanstack/vue-virtual';
+import type { ComponentPublicInstance, Ref, VNode, WatchOptions } from 'vue';
+import type { TableHTMLAttributes } from '../types/html';
+import type { ComponentConfig } from '../types/uv';
+import theme from '#build/pohon/table';
+
+declare module '@tanstack/table-core' {
+  interface ColumnMeta<TData extends RowData, TValue> {
+    class?: {
+      th?: string | ((cell: Header<TData, TValue>) => string);
+      td?: string | ((cell: Cell<TData, TValue>) => string);
+    };
+    style?: {
+      th?: string | Record<string, string> | ((cell: Header<TData, TValue>) => string | Record<string, string>);
+      td?: string | Record<string, string> | ((cell: Cell<TData, TValue>) => string | Record<string, string>);
+    };
+    colspan?: {
+      td?: string | ((cell: Cell<TData, TValue>) => string);
+    };
+    rowspan?: {
+      td?: string | ((cell: Cell<TData, TValue>) => string);
+    };
+
+  }
+
+  interface TableMeta<TData> {
+    class?: {
+      tr?: string | ((row: Row<TData>) => string);
+    };
+    style?: {
+      tr?: string | Record<string, string> | ((row: Row<TData>) => string | Record<string, string>);
+    };
+  }
+
+}
+
+type Table = ComponentConfig<typeof theme, AppConfig, 'table'>;
+
+export type PTableRow<T> = Row<T>;
+export type PTableData = RowData;
+export type PTableColumn<T extends PTableData, D = unknown> = ColumnDef<T, D>;
+
+export interface PTableOptions<T extends PTableData = PTableData> extends Omit<CoreOptions<T>, 'data' | 'columns' | 'getCoreRowModel' | 'state' | 'onStateChange' | 'renderFallbackValue'> {
+  state?: CoreOptions<T>['state'];
+  onStateChange?: CoreOptions<T>['onStateChange'];
+  renderFallbackValue?: CoreOptions<T>['renderFallbackValue'];
+}
+
+export interface PTableProps<T extends PTableData = PTableData> extends PTableOptions<T>, /** @vue-ignore */ TableHTMLAttributes {
+  /**
+   * The element or component this component should render as.
+   * @defaultValue 'div'
+   */
+  as?: any;
+  data?: Array<T>;
+  columns?: Array<PTableColumn<T>>;
+  caption?: string;
+  meta?: TableMeta<T>;
+  /**
+   * Enable virtualization for large datasets.
+   * Note: row pinning is not supported when virtualization is enabled.
+   * @see https://tanstack.com/virtual/latest/docs/api/virtualizer#options
+   * @defaultValue false
+   */
+  virtualize?: boolean | (Partial<Omit<VirtualizerOptions<Element, Element>, 'getScrollElement' | 'count' | 'estimateSize' | 'overscan'>> & {
+    /**
+     * Number of items rendered outside the visible area
+     * @defaultValue 12
+     */
+    overscan?: number;
+    /**
+     * Estimated size (in px) of each item, or a function that returns the size for a given index
+     * @defaultValue 65
+     */
+    estimateSize?: number | ((index: number) => number);
+  });
+  /**
+   * The text to display when the table is empty.
+   * @defaultValue t('table.noData')
+   */
+  empty?: string;
+  /**
+   * Whether the table should have a sticky header or footer. True for both, 'header' for header only, 'footer' for footer only.
+   * @defaultValue false
+   */
+  sticky?: boolean | 'header' | 'footer';
+  /** Whether the table should be in loading state. */
+  loading?: boolean;
+  /**
+   * @defaultValue 'primary'
+   */
+  loadingColor?: Table['variants']['loadingColor'];
+  /**
+   * @defaultValue 'carousel'
+   */
+  loadingAnimation?: Table['variants']['loadingAnimation'];
+  /**
+   * Use the `watchOptions` prop to customize reactivity (for ex: disable deep watching for changes in your data or limiting the max traversal depth). This can improve performance by reducing unnecessary re-renders, but it should be used with caution as it may lead to unexpected behavior if not managed properly.
+   * @see [API](https://vuejs.org/api/options-state.html#watch)
+   * @see [Guide](https://vuejs.org/guide/essentials/watchers.html)
+   * @defaultValue { deep: true }
+   */
+  watchOptions?: WatchOptions;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/global-filtering#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/global-filtering)
+   */
+  globalFilterOptions?: Omit<GlobalFilterOptions<T>, 'onGlobalFilterChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-filtering#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-filtering)
+   */
+  columnFiltersOptions?: Omit<ColumnFiltersOptions<T>, 'getFilteredRowModel' | 'onColumnFiltersChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-pinning#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-pinning)
+   */
+  columnPinningOptions?: Omit<ColumnPinningOptions, 'onColumnPinningChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-sizing#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-sizing)
+   */
+  columnSizingOptions?: Omit<ColumnSizingOptions, 'onColumnSizingChange' | 'onColumnSizingInfoChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-visibility#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-visibility)
+   */
+  visibilityOptions?: Omit<VisibilityOptions, 'onColumnVisibilityChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/sorting#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/sorting)
+   */
+  sortingOptions?: Omit<SortingOptions<T>, 'getSortedRowModel' | 'onSortingChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/grouping#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/grouping)
+   */
+  groupingOptions?: Omit<GroupingOptions, 'onGroupingChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/expanding#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/expanding)
+   */
+  expandedOptions?: Omit<ExpandedOptions<T>, 'getExpandedRowModel' | 'onExpandedChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/row-selection#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/row-selection)
+   */
+  rowSelectionOptions?: Omit<RowSelectionOptions<T>, 'onRowSelectionChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/row-pinning#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/row-pinning)
+   */
+  rowPinningOptions?: Omit<RowPinningOptions<T>, 'onRowPinningChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/pagination#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/pagination)
+   */
+  paginationOptions?: Omit<PaginationOptions, 'onPaginationChange'>;
+  /**
+   * @see [API](https://tanstack.com/table/v8/docs/api/features/column-faceting#table-options)
+   * @see [Guide](https://tanstack.com/table/v8/docs/guide/column-faceting)
+   */
+  facetedOptions?: FacetedOptions<T>;
+  onSelect?: (event: Event, row: PTableRow<T>) => void;
+  onHover?: (event: Event, row: PTableRow<T> | null) => void;
+  onContextmenu?: ((event: Event, row: PTableRow<T>) => void) | Array<((event: Event, row: PTableRow<T>) => void)>;
+  class?: any;
+  pohon?: Table['slots'];
+}
+
+type DynamicHeaderFooterSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-header` | `${K extends string ? K : never}-footer` | (string & {}), (props: HeaderContext<T, unknown>) => Array<VNode>>;
+type DynamicCellSlots<T, K = keyof T> = Record<`${K extends string ? K : never}-cell` | (string & {}), (props: CellContext<T, unknown>) => Array<VNode>>;
+
+export type PTableSlots<T extends PTableData = PTableData> = {
+  'expanded'?: (props: { row: Row<T> }) => Array<VNode>;
+  'empty'?: (props?: {}) => Array<VNode>;
+  'loading'?: (props?: {}) => Array<VNode>;
+  'caption'?: (props?: {}) => Array<VNode>;
+  'body-top'?: (props?: {}) => Array<VNode>;
+  'body-bottom'?: (props?: {}) => Array<VNode>;
+} & DynamicHeaderFooterSlots<T> & DynamicCellSlots<T>;
+
+</script>
+
+<script setup lang="ts" generic="T extends PTableData">
+import {
+  FlexRender,
+  getCoreRowModel,
+  getExpandedRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useVueTable,
+} from '@tanstack/vue-table';
+import { useVirtualizer } from '@tanstack/vue-virtual';
+import { capitalize, isBoolean, isFunction, isNullish } from '@vinicunca/perkakas';
+import { createRef, createReusableTemplate, reactivePick } from '@vueuse/core';
+import { APrimitive, useForwardProps } from 'akar';
+import { defu } from 'defu';
+import { computed, toRef, useTemplateRef, watch } from 'vue';
+import { useAppConfig } from '#imports';
+import { useComponentPohon } from '../composables/use-component-pohon';
+import { useLocale } from '../composables/use-locale';
+import { uv } from '../utils/uv';
+
+defineOptions({ inheritAttrs: false });
+
+const props = withDefaults(
+  defineProps<PTableProps<T>>(),
+  {
+    watchOptions: () => ({
+      deep: true,
+    }),
+    virtualize: false,
+  },
+);
+const slots = defineSlots<PTableSlots<T>>();
+
+const { t } = useLocale();
+const appConfig = useAppConfig() as Table['AppConfig'];
+const pohonProp = useComponentPohon('table', props);
+
+const data = createRef(props.data ?? [], props.watchOptions?.deep !== false);
+const meta = computed(() => props.meta ?? {});
+const columns = computed<Array<PTableColumn<T>>>(() => processColumns(props.columns ?? Object.keys(data.value[0] ?? {}).map((accessorKey: string) => ({ accessorKey, header: capitalize(accessorKey) }))));
+
+function processColumns(columns: Array<PTableColumn<T>>): Array<PTableColumn<T>> {
+  return columns.map((column) => {
+    const col = { ...column } as PTableColumn<T>;
+
+    if ('columns' in col && col.columns) {
+      col.columns = processColumns(col.columns as Array<PTableColumn<T>>);
+    }
+
+    if (!col.cell) {
+      col.cell = ({ getValue }) => {
+        const value = getValue();
+        if (value === '' || isNullish(value)) {
+          return '\u00A0';
+        }
+        return String(value);
+      };
+    }
+
+    return col;
+  });
+}
+
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.table || {}) })({
+  sticky: props.sticky,
+  loading: props.loading,
+  loadingColor: props.loadingColor,
+  loadingAnimation: props.loadingAnimation,
+}));
+
+const [DefineTableTemplate, ReuseTableTemplate] = createReusableTemplate();
+const [DefineRowTemplate, ReuseRowTemplate] = createReusableTemplate<{ row: PTableRow<T>; style?: Record<string, string> }>({
+  props: {
+    row: {
+      type: Object,
+      required: true,
+    },
+    style: {
+      type: Object,
+      required: false,
+    },
+  },
+});
+
+const hasFooter = computed(() => {
+  function hasFooterRecursive(columns: Array<PTableColumn<T>>): boolean {
+    for (const column of columns) {
+      if ('footer' in column) {
+        return true;
+      }
+      if ('columns' in column && hasFooterRecursive(column.columns as Array<PTableColumn<T>>)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  return hasFooterRecursive(columns.value);
+});
+
+const globalFilterState = defineModel<string>('globalFilter');
+const columnFiltersState = defineModel<ColumnFiltersState>('columnFilters');
+const columnOrderState = defineModel<ColumnOrderState>('columnOrder');
+const columnVisibilityState = defineModel<VisibilityState>('columnVisibility');
+const columnPinningState = defineModel<ColumnPinningState>('columnPinning');
+const columnSizingState = defineModel<ColumnSizingState>('columnSizing');
+const columnSizingInfoState = defineModel<ColumnSizingInfoState>('columnSizingInfo');
+const rowSelectionState = defineModel<RowSelectionState>('rowSelection');
+const rowPinningState = defineModel<RowPinningState>('rowPinning');
+const sortingState = defineModel<SortingState>('sorting');
+const groupingState = defineModel<GroupingState>('grouping');
+const expandedState = defineModel<ExpandedState>('expanded');
+const paginationState = defineModel<PaginationState>('pagination');
+
+const rootRef = useTemplateRef<ComponentPublicInstance>('rootRef');
+const tableRef = useTemplateRef<HTMLTableElement>('tableRef');
+
+const tableProps = useForwardProps(reactivePick(props, '_features', 'autoResetAll', 'debugAll', 'debugCells', 'debugColumns', 'debugHeaders', 'debugRows', 'debugTable', 'defaultColumn', 'getRowId', 'getSubRows', 'initialState', 'mergeOptions', 'renderFallbackValue'));
+
+const tableApi = useVueTable({
+  ...tableProps.value,
+  get data() {
+    return data.value;
+  },
+  get columns() {
+    return columns.value;
+  },
+  meta: meta.value,
+  getCoreRowModel: getCoreRowModel(),
+  ...(props.globalFilterOptions || {}),
+  ...(globalFilterState.value !== undefined && { onGlobalFilterChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, globalFilterState) }),
+  ...(props.columnFiltersOptions || {}),
+  getFilteredRowModel: getFilteredRowModel(),
+  ...(columnFiltersState.value !== undefined && { onColumnFiltersChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnFiltersState) }),
+  ...(columnOrderState.value !== undefined && { onColumnOrderChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnOrderState) }),
+  ...(props.visibilityOptions || {}),
+  ...(columnVisibilityState.value !== undefined && { onColumnVisibilityChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnVisibilityState) }),
+  ...(props.columnPinningOptions || {}),
+  ...(columnPinningState.value !== undefined && { onColumnPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnPinningState) }),
+  ...(props.columnSizingOptions || {}),
+  ...(columnSizingState.value !== undefined && { onColumnSizingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingState) }),
+  ...(columnSizingInfoState.value !== undefined && { onColumnSizingInfoChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, columnSizingInfoState) }),
+  ...(props.rowSelectionOptions || {}),
+  ...(rowSelectionState.value !== undefined && { onRowSelectionChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowSelectionState) }),
+  ...(props.rowPinningOptions || {}),
+  ...(rowPinningState.value !== undefined && { onRowPinningChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, rowPinningState) }),
+  ...(props.sortingOptions || {}),
+  getSortedRowModel: getSortedRowModel(),
+  ...(sortingState.value !== undefined && { onSortingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, sortingState) }),
+  ...(props.groupingOptions || {}),
+  ...(groupingState.value !== undefined && { onGroupingChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, groupingState) }),
+  ...(props.expandedOptions || {}),
+  getExpandedRowModel: getExpandedRowModel(),
+  ...(expandedState.value !== undefined && { onExpandedChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, expandedState) }),
+  ...(props.paginationOptions || {}),
+  ...(paginationState.value !== undefined && { onPaginationChange: (updaterOrValue: any) => valueUpdater(updaterOrValue, paginationState) }),
+  ...(props.facetedOptions || {}),
+  state: {
+    get globalFilter() {
+      return globalFilterState.value;
+    },
+    get columnFilters() {
+      return columnFiltersState.value;
+    },
+    get columnOrder() {
+      return columnOrderState.value;
+    },
+    get columnVisibility() {
+      return columnVisibilityState.value;
+    },
+    get columnPinning() {
+      return columnPinningState.value;
+    },
+    get expanded() {
+      return expandedState.value;
+    },
+    get rowSelection() {
+      return rowSelectionState.value;
+    },
+    get sorting() {
+      return sortingState.value;
+    },
+    get grouping() {
+      return groupingState.value;
+    },
+    get rowPinning() {
+      return rowPinningState.value;
+    },
+    get columnSizing() {
+      return columnSizingState.value;
+    },
+    get columnSizingInfo() {
+      return columnSizingInfoState.value;
+    },
+    get pagination() {
+      return paginationState.value;
+    },
+  },
+});
+
+const rows = computed(() => tableApi.getRowModel().rows);
+const topRows = computed(() => props.virtualize ? [] : tableApi.getTopRows());
+const bottomRows = computed(() => props.virtualize ? [] : tableApi.getBottomRows());
+const centerRows = computed(() => topRows.value.length || bottomRows.value.length ? tableApi.getCenterRows() : rows.value);
+
+const virtualizerProps = toRef(() => defu(isBoolean(props.virtualize) ? {} : props.virtualize, {
+  estimateSize: 65,
+  overscan: 12,
+}));
+
+const virtualizer = !!props.virtualize && useVirtualizer({
+  ...virtualizerProps.value,
+  get count() {
+    return centerRows.value.length;
+  },
+  getScrollElement: () => rootRef.value?.$el,
+  estimateSize: (index: number) => {
+    const estimate = virtualizerProps.value.estimateSize;
+    return isFunction(estimate) ? estimate(index) : estimate;
+  },
+});
+
+const virtualItems = computed(() => virtualizer ? virtualizer.value.getVirtualItems() : []);
+
+const virtualPaddingTop = computed(() => virtualItems.value[0]?.start ?? 0);
+
+const virtualPaddingBottom = computed(() => {
+  if (!virtualizer || !virtualItems.value.length) {
+    return 0;
+  }
+  return virtualizer.value.getTotalSize() - (virtualItems.value[virtualItems.value.length - 1]?.end ?? 0);
+});
+
+function valueUpdater<T extends Updater<any>>(updaterOrValue: T, ref: Ref) {
+  ref.value = typeof updaterOrValue === 'function' ? updaterOrValue(ref.value) : updaterOrValue;
+}
+
+function onRowSelect(event: Event, row: PTableRow<T>) {
+  if (!props.onSelect) {
+    return;
+  }
+  const target = event.target as HTMLElement;
+  const isInteractive = target.closest('button') || target.closest('a');
+  if (isInteractive) {
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  props.onSelect(event, row);
+}
+
+function onRowHover(event: Event, row: PTableRow<T> | null) {
+  if (!props.onHover) {
+    return;
+  }
+
+  props.onHover(event, row);
+}
+
+function onRowContextmenu(event: Event, row: PTableRow<T>) {
+  if (!props.onContextmenu) {
+    return;
+  }
+
+  if (Array.isArray(props.onContextmenu)) {
+    props.onContextmenu.forEach((fn) => {
+      fn(event, row);
+    });
+  } else {
+    props.onContextmenu(event, row);
+  }
+}
+
+function resolveValue<T, A = undefined>(prop: T | ((arg: A) => T), arg?: A): T | undefined {
+  if (isFunction(prop)) {
+    // @ts-expect-error: TS can't know if prop is a function here
+    return prop(arg);
+  }
+  return prop;
+}
+
+function getColumnStyles(column: Column<T>): Record<string, string> {
+  const styles: Record<string, string> = {};
+
+  const pinned = column.getIsPinned();
+  if (pinned === 'left') {
+    styles.left = `${column.getStart('left')}px`;
+  } else if (pinned === 'right') {
+    styles.right = `${column.getAfter('right')}px`;
+  }
+
+  return styles;
+}
+
+watch(
+  () => props.data,
+  () => {
+    data.value = props.data ? [...props.data] : [];
+  },
+  props.watchOptions,
+);
+
+defineExpose({
+  get $el() {
+    return rootRef.value?.$el as HTMLElement;
+  },
+  tableRef,
+  tableApi,
+});
+</script>
+
+<template>
+  <DefineRowTemplate v-slot="{ row, style }">
+    <tr
+      :data-selected="row.getIsSelected()"
+      :data-selectable="!!props.onSelect || !!props.onHover || !!props.onContextmenu"
+      :data-expanded="row.getIsExpanded()"
+      :data-pinned="row.getIsPinned() || undefined"
+      :role="props.onSelect ? 'button' : undefined"
+      :tabindex="props.onSelect ? 0 : undefined"
+      data-slot="tr"
+      :class="pohon.tr({
+        class: [
+          pohonProp?.tr,
+          resolveValue(tableApi.options.meta?.class?.tr, row),
+        ],
+      })"
+      :style="[resolveValue(tableApi.options.meta?.style?.tr, row), style]"
+      @click="onRowSelect($event, row)"
+      @pointerenter="onRowHover($event, row)"
+      @pointerleave="onRowHover($event, null)"
+      @contextmenu="onRowContextmenu($event, row)"
+    >
+      <td
+        v-for="cell in row.getVisibleCells()"
+        :key="cell.id"
+        :data-pinned="cell.column.getIsPinned()"
+        :colspan="resolveValue(cell.column.columnDef.meta?.colspan?.td, cell)"
+        :rowspan="resolveValue(cell.column.columnDef.meta?.rowspan?.td, cell)"
+        data-slot="td"
+        :class="pohon.td({
+          class: [
+            pohonProp?.td,
+            resolveValue(cell.column.columnDef.meta?.class?.td, cell),
+          ],
+          pinned: !!cell.column.getIsPinned(),
+        })"
+        :style="[
+          getColumnStyles(cell.column),
+          resolveValue(cell.column.columnDef.meta?.style?.td, cell),
+        ]"
+      >
+        <slot
+          :name="`${cell.column.id}-cell`"
+          v-bind="cell.getContext()"
+        >
+          <FlexRender
+            :render="cell.column.columnDef.cell"
+            :props="cell.getContext()"
+          />
+        </slot>
+      </td>
+    </tr>
+
+    <tr
+      v-if="row.getIsExpanded()"
+      data-slot="tr"
+      :class="pohon.tr({ class: [pohonProp?.tr] })"
+    >
+      <td
+        :colspan="row.getAllCells().length"
+        data-slot="td"
+        :class="pohon.td({ class: [pohonProp?.td] })"
+      >
+        <slot
+          name="expanded"
+          :row="row"
+        />
+      </td>
+    </tr>
+  </DefineRowTemplate>
+
+  <DefineTableTemplate>
+    <table
+      ref="tableRef"
+      data-slot="base"
+      :class="pohon.base({ class: [pohonProp?.base] })"
+    >
+      <caption
+        v-if="caption || !!slots.caption"
+        data-slot="caption"
+        :class="pohon.caption({ class: [pohonProp?.caption] })"
+      >
+        <slot name="caption">
+          {{ caption }}
+        </slot>
+      </caption>
+
+      <thead
+        data-slot="thead"
+        :class="pohon.thead({ class: [pohonProp?.thead] })"
+      >
+        <tr
+          v-for="headerGroup in tableApi.getHeaderGroups()"
+          :key="headerGroup.id"
+          data-slot="tr"
+          :class="pohon.tr({ class: [pohonProp?.tr] })"
+        >
+          <th
+            v-for="header in headerGroup.headers"
+            :key="header.id"
+            :data-pinned="header.column.getIsPinned()"
+            :scope="header.colSpan > 1 ? 'colgroup' : 'col'"
+            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            data-slot="th"
+            :class="pohon.th({
+              class: [
+                pohonProp?.th,
+                resolveValue(header.column.columnDef.meta?.class?.th, header),
+              ],
+              pinned: !!header.column.getIsPinned(),
+            })"
+            :style="[
+              getColumnStyles(header.column),
+              resolveValue(header.column.columnDef.meta?.style?.th, header),
+            ]"
+          >
+            <slot
+              :name="`${header.id}-header`"
+              v-bind="header.getContext()"
+            >
+              <FlexRender
+                v-if="!header.isPlaceholder"
+                :render="header.column.columnDef.header"
+                :props="header.getContext()"
+              />
+            </slot>
+          </th>
+        </tr>
+
+        <tr
+          data-slot="separator"
+          :class="pohon.separator({ class: [pohonProp?.separator] })"
+        />
+      </thead>
+
+      <tbody
+        data-slot="tbody"
+        :class="pohon.tbody({ class: [pohonProp?.tbody] })"
+      >
+        <slot name="body-top" />
+
+        <template v-if="rows.length">
+          <ReuseRowTemplate
+            v-for="row in topRows"
+            :key="row.id"
+            :row="row"
+          />
+
+          <template v-if="virtualizer">
+            <tr
+              v-if="virtualPaddingTop > 0"
+              :style="{ height: `${virtualPaddingTop}px` }"
+              aria-hidden="true"
+            >
+              <td :colspan="tableApi.getAllLeafColumns().length" />
+            </tr>
+            <template
+              v-for="virtualRow in virtualItems"
+              :key="centerRows[virtualRow.index]?.id ?? `virtual-${virtualRow.index}`"
+            >
+              <ReuseRowTemplate
+                v-if="centerRows[virtualRow.index]"
+                :row="centerRows[virtualRow.index]!"
+                :style="{ height: `${virtualRow.size}px` }"
+              />
+            </template>
+            <tr
+              v-if="virtualPaddingBottom > 0"
+              :style="{ height: `${virtualPaddingBottom}px` }"
+              aria-hidden="true"
+            >
+              <td :colspan="tableApi.getAllLeafColumns().length" />
+            </tr>
+          </template>
+
+          <template v-else>
+            <ReuseRowTemplate
+              v-for="row in centerRows"
+              :key="row.id"
+              :row="row"
+            />
+          </template>
+
+          <ReuseRowTemplate
+            v-for="row in bottomRows"
+            :key="row.id"
+            :row="row"
+          />
+        </template>
+
+        <tr v-else-if="loading && !!slots.loading">
+          <td
+            :colspan="tableApi.getAllLeafColumns().length"
+            data-slot="loading"
+            :class="pohon.loading({ class: pohonProp?.loading })"
+          >
+            <slot name="loading" />
+          </td>
+        </tr>
+
+        <tr v-else>
+          <td
+            :colspan="tableApi.getAllLeafColumns().length"
+            data-slot="empty"
+            :class="pohon.empty({ class: pohonProp?.empty })"
+          >
+            <slot name="empty">
+              {{ empty || t('table.noData') }}
+            </slot>
+          </td>
+        </tr>
+
+        <slot name="body-bottom" />
+      </tbody>
+
+      <tfoot
+        v-if="hasFooter"
+        data-slot="tfoot"
+        :class="pohon.tfoot({ class: [pohonProp?.tfoot] })"
+      >
+        <tr
+          data-slot="separator"
+          :class="pohon.separator({ class: [pohonProp?.separator] })"
+        />
+
+        <tr
+          v-for="footerGroup in tableApi.getFooterGroups()"
+          :key="footerGroup.id"
+          data-slot="tr"
+          :class="pohon.tr({ class: [pohonProp?.tr] })"
+        >
+          <th
+            v-for="header in footerGroup.headers"
+            :key="header.id"
+            :data-pinned="header.column.getIsPinned()"
+            :colspan="header.colSpan > 1 ? header.colSpan : undefined"
+            :rowspan="header.rowSpan > 1 ? header.rowSpan : undefined"
+            data-slot="th"
+            :class="pohon.th({
+              class: [
+                pohonProp?.th,
+                resolveValue(header.column.columnDef.meta?.class?.th, header),
+              ],
+              pinned: !!header.column.getIsPinned(),
+            })"
+            :style="[
+              getColumnStyles(header.column),
+              resolveValue(header.column.columnDef.meta?.style?.th, header),
+            ]"
+          >
+            <slot
+              :name="`${header.id}-footer`"
+              v-bind="header.getContext()"
+            >
+              <FlexRender
+                v-if="!header.isPlaceholder"
+                :render="header.column.columnDef.footer"
+                :props="header.getContext()"
+              />
+            </slot>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </DefineTableTemplate>
+
+  <APrimitive
+    ref="rootRef"
+    :as="as"
+    v-bind="$attrs"
+    data-slot="root"
+    :class="pohon.root({ class: [pohonProp?.root, props.class] })"
+  >
+    <ReuseTableTemplate />
+  </APrimitive>
+</template>

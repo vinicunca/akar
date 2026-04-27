@@ -4,6 +4,8 @@ import { useForwardPropsEmits } from '../shared';
 import ADrawerRoot from './drawer-root.vue';
 import { injectADrawerRootContext } from './drawer.context';
 
+defineOptions({ name: 'ADrawerRootNested' });
+
 const props = defineProps<ADrawerRootProps>();
 const emits = defineEmits<ADrawerRootEmits>();
 

@@ -3,6 +3,8 @@ import type { DrawerHandleProps } from './drawer.controls';
 import { ref } from 'vue';
 import { injectADrawerRootContext } from './drawer.context';
 
+defineOptions({ name: 'ADrawerHandle' });
+
 const props = withDefaults(
   defineProps<DrawerHandleProps>(),
   {

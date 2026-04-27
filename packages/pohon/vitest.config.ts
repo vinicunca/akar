@@ -11,7 +11,7 @@ const vueRouterOverrides = await glob('./src/runtime/vue/overrides/vue-router/*.
 
 export default defineConfig({
   test: {
-    testTimeout: 20000,
+    testTimeout: 5000,
     globals: true,
     silent: true,
     resolveSnapshotPath(path, extension, { config }) {
@@ -76,7 +76,7 @@ export default defineConfig({
                     return '';
                   }
                   renderedComponents.add(componentName);
-                  return `export { default as U${componentName} } from '${file}'`;
+                  return `export { default as P${componentName} } from '${file}'`;
                 }).join('\n');
               }
             },

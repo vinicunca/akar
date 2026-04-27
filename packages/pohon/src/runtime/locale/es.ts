@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Anterior',
     },
     chatPrompt: {
-      placeholder: 'Escribe tu mensaje aquí...',
+      placeholder: 'Escribe tu mensaje aquí…',
     },
     chatPromptSubmit: {
       label: 'Enviar',
+    },
+    chatReasoning: {
+      thinking: 'Pensando…',
+      thought: 'Pensó',
+      thoughtFor: 'Pensó durante {duration}',
     },
     colorMode: {
       dark: 'Oscuro',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Cerrar',
       noData: 'Sin datos',
       noMatch: 'No hay datos coincidentes',
-      placeholder: 'Escribe un comando o busca...',
+      placeholder: 'Escribe un comando o busca…',
     },
     contentSearch: {
       links: 'Enlaces',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Buscar...',
+      label: 'Buscar…',
     },
     contentToc: {
       title: 'En esta página',
+    },
+    dropdownMenu: {
+      noMatch: 'No hay datos coincidentes',
+      search: 'Buscar…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Buscar...',
+      label: 'Buscar…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Colapsar barra lateral',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Decrementar',
       increment: 'Incrementar',
     },
+    listbox: {
+      noData: 'Sin datos',
+      noMatch: 'No hay datos coincidentes',
+      search: 'Buscar…',
+    },
     modal: {
       close: 'Cerrar',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Copiar código al portapapeles',
       },
+      prompt: {
+        copy: 'Copiar prompt',
+        openIn: 'Abrir en {name}',
+      },
+    },
+    sidebar: {
+      close: 'Cerrar',
+      toggle: 'Alternar',
     },
     selectMenu: {
       create: 'Crear "{label}"',
       noData: 'Sin datos',
       noMatch: 'No hay datos coincidentes',
-      search: 'Buscar...',
+      search: 'Buscar…',
     },
     slideover: {
       close: 'Cerrar',

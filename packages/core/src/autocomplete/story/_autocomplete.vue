@@ -25,6 +25,7 @@ const v = ref<string>(props.defaultValue ?? '');
 
 const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
 const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'];
+const chinese = ['苹果', '香蕉', '蓝莓', '葡萄', '菠萝', '西瓜', '草莓', '芒果'];
 
 const open = ref(props.open);
 </script>
@@ -80,6 +81,23 @@ const open = ref(props.open);
           </AAutocompleteLabel>
           <AAutocompleteItem
             v-for="(option, index) in vegetables"
+            :key="index"
+            class="text-grass11 data-[disabled]:text-mauve8 data-[highlighted]:bg-grass9 data-[highlighted]:text-grass1 text-[13px] leading-none pl-[25px] pr-[35px] rounded-[3px] flex h-[25px] select-none items-center relative data-[highlighted]:outline-none data-[disabled]:pointer-events-none"
+            :value="option"
+          >
+            <span>
+              {{ option }}
+            </span>
+          </AAutocompleteItem>
+        </AAutocompleteGroup>
+        <AAutocompleteGroup>
+          <AAutocompleteLabel
+            class="text-mauve11 text-xs leading-[25px] px-[25px]"
+          >
+            中文水果
+          </AAutocompleteLabel>
+          <AAutocompleteItem
+            v-for="(option, index) in chinese"
             :key="index"
             class="text-grass11 data-[disabled]:text-mauve8 data-[highlighted]:bg-grass9 data-[highlighted]:text-grass1 text-[13px] leading-none pl-[25px] pr-[35px] rounded-[3px] flex h-[25px] select-none items-center relative data-[highlighted]:outline-none data-[disabled]:pointer-events-none"
             :value="option"

@@ -1,18 +1,17 @@
 import type { FormInputEvents } from '../../src/module';
-import type { PSwitchProps, PSwitchSlots } from '../../src/runtime/components/switch.vue';
-import theme from '#build/pohon/switch';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PSwitch from '../../src/runtime/components/switch.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/switch';
+import Switch from '../../src/runtime/components/Switch.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 
-describe('switch', () => {
+describe('Switch', () => {
   const sizes = Object.keys(theme.variants.size) as any;
 
-  it.each([
+  renderEach(Switch, [
     // Props
     ['with modelValue', { props: { modelValue: true } }],
     ['with defaultValue', { props: { defaultValue: true } }],
@@ -30,19 +29,19 @@ describe('switch', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ['with color neutral', { props: { color: 'neutral', defaultValue: true } }],
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
+    ['with trueValue/falseValue as string', { props: { trueValue: 'on', falseValue: 'off', defaultValue: 'on' } }],
+    ['with trueValue/falseValue as number', { props: { trueValue: 1, falseValue: 0, defaultValue: 1 } }],
+    ['with trueValue/falseValue unchecked', { props: { trueValue: 'on', falseValue: 'off', defaultValue: 'off' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'inline-flex' } }],
-    ['with ui', { props: { pohon: { wrapper: 'ms-4' } } }],
+    ['with pohon', { props: { pohon: { wrapper: 'ms-4' } } }],
     // Slots
     ['with label slot', { slots: { label: () => 'Label slot' } }],
     ['with description slot', { slots: { label: () => 'Description slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PSwitchProps; slots?: Partial<PSwitchSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PSwitch);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PSwitch, {
+    const wrapper = await mountSuspended(Switch, {
       props: {
         modelValue: true,
         required: true,
@@ -55,17 +54,34 @@ describe('switch', () => {
 
   describe('emits', () => {
     it('update:modelValue event', async () => {
-      const wrapper = mount(PSwitch);
-      const input = wrapper.findComponent({ name: 'SwitchRoot' });
+      const wrapper = mount(Switch);
+      const input = wrapper.findComponent({ name: 'ASwitchRoot' });
       await input.vm.$emit('update:modelValue', true);
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[true]] });
     });
 
     it('change event', async () => {
-      const wrapper = mount(PSwitch);
-      const input = wrapper.findComponent({ name: 'SwitchRoot' });
+      const wrapper = mount(Switch);
+      const input = wrapper.findComponent({ name: 'ASwitchRoot' });
       await input.vm.$emit('update:modelValue', true);
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
+    });
+
+    it('toggle with custom trueValue/falseValue via click', async () => {
+      const wrapper = mount(Switch, {
+        props: { trueValue: 'on', falseValue: 'off', defaultValue: 'off' },
+      });
+      const button = wrapper.find('button');
+
+      await button.trigger('click');
+      await flushPromises();
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['on']);
+      expect(wrapper.emitted('change')).toHaveLength(1);
+
+      await button.trigger('click');
+      await flushPromises();
+      expect(wrapper.emitted('update:modelValue')?.[1]).toEqual(['off']);
+      expect(wrapper.emitted('change')).toHaveLength(2);
     });
   });
 
@@ -88,7 +104,7 @@ describe('switch', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'SwitchRoot' });
+      const input = wrapper.findComponent({ name: 'ASwitchRoot' });
       return {
         wrapper,
         input,

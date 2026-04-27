@@ -77,6 +77,8 @@ import { APopperRoot } from '../popper';
 import { injectATooltipProviderContext } from './tooltip-provider.vue';
 import { TOOLTIP_OPEN } from './utils';
 
+defineOptions({ name: 'ATooltipRoot' });
+
 const props = withDefaults(defineProps<ATooltipRootProps>(), {
   defaultOpen: false,
   open: undefined,

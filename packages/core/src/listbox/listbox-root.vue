@@ -1,11 +1,7 @@
 <script lang="ts">
 import type { APrimitiveProps } from '../primitive';
 import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '../shared/types';
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { usePrimitiveElement } from '../primitive';
-import { APrimitive } from '../primitive';
-import { getFocusIntent } from '../roving-focus/utils';
-import { createContext, findValuesBetween, useDirection, useFormControl, useTypeahead } from '../shared';
+import { createContext } from '../shared';
 
 type ListboxRootContext<T> = {
   modelValue: Ref<T | Array<T> | undefined>;
@@ -28,7 +24,7 @@ type ListboxRootContext<T> = {
 
   onLeave: (event: Event) => void;
   onEnter: (event: Event) => void;
-  changeHighlight: (el: HTMLElement, scrollIntoView?: boolean) => void;
+  changeHighlight: (el: HTMLElement, scrollIntoView?: boolean, focus?: boolean) => void;
   onKeydownNavigation: (event: KeyboardEvent) => void;
   onKeydownEnter: (event: KeyboardEvent) => void;
   onKeydownTypeAhead: (event: KeyboardEvent) => void;
@@ -81,11 +77,18 @@ export type AListboxRootEmits<T = AcceptableValue> = {
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import type { EventHook } from '@vueuse/core';
 import type { Ref } from 'vue';
+import { isBrowser, KEY_CODES } from '@vinicunca/perkakas';
 import { createEventHook, useVModel } from '@vueuse/core';
 import { nextTick, ref, toRefs, watch } from 'vue';
 import { useCollection } from '../collection';
+import { usePrimitiveElement } from '../primitive';
+import { APrimitive } from '../primitive';
+import { getFocusIntent } from '../roving-focus/utils';
+import { findValuesBetween, useDirection, useFormControl, useTypeahead } from '../shared';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 import { compare } from './utils';
+
+defineOptions({ name: 'AListboxRoot' });
 
 const props = withDefaults(defineProps<AListboxRootProps>(), {
   selectionBehavior: 'toggle',
@@ -174,13 +177,13 @@ function getCollectionItem() {
   return getItems().map((i) => i.ref).filter((i) => i.dataset.disabled !== '');
 }
 
-function changeHighlight(el: HTMLElement, scrollIntoView = true) {
+function changeHighlight(el: HTMLElement, scrollIntoView = true, focus?: boolean) {
   if (!el) {
     return;
   }
 
   highlightedElement.value = el;
-  if (focusable.value) {
+  if (focus ?? focusable.value) {
     highlightedElement.value.focus();
   }
   if (scrollIntoView) {
@@ -237,7 +240,10 @@ function onKeydownTypeAhead(event: KeyboardEvent) {
       const values = collection.map((i) => i.value);
       modelValue.value = [...values];
       event.preventDefault();
-      changeHighlight(collection[collection.length - 1].ref);
+      const lastItem = collection.at(-1);
+      if (lastItem) {
+        changeHighlight(lastItem.ref);
+      }
     } else if (!isMetaKey) {
       const el = handleTypeaheadSearch({
         key: event.key,
@@ -343,9 +349,9 @@ function handleMultipleReplace(event: KeyboardEvent, targetEl: HTMLElement) {
     let lastValue = collection.find((i) => i.ref === targetEl)?.value;
 
     if (event.key === KEY_CODES.END) {
-      lastValue = collection[collection.length - 1].value;
+      lastValue = collection.at(-1)?.value;
     } else if (event.key === KEY_CODES.HOME) {
-      lastValue = collection[0].value;
+      lastValue = collection[0]?.value;
     }
 
     if (!lastValue || !firstValue.value) {
@@ -363,6 +369,14 @@ function handleMultipleReplace(event: KeyboardEvent, targetEl: HTMLElement) {
 }
 
 async function highlightSelected(event?: Event) {
+  // highlightSelected is called inside a watch with immediate set to true.
+  // This results in code execution during SSR.
+  // Ensure this code only runs in a browser environment, since it performs
+  // DOM-only side effects (focus, scrollIntoView, synthetic KeyboardEvent).
+  if (!isBrowser) {
+    return;
+  }
+
   await nextTick();
   if (isVirtual.value) {
     // Trigger on nextTick for Virtualizer to be mounted

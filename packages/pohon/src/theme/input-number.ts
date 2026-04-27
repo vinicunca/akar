@@ -16,7 +16,7 @@ export default (options: Required<PohonModuleOptions>) => {
     variants: {
       ...fieldGroupVariantWithRoot,
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
         neutral: '',
       },
       size: {
@@ -48,6 +48,9 @@ export default (options: Required<PohonModuleOptions>) => {
       },
       highlight: {
         true: '',
+      },
+      fixed: {
+        false: '',
       },
       increment: {
         false: '',

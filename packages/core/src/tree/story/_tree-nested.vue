@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import { ATreeItem } from '..';
-
-// eslint-disable-next-line import/no-self-import
 import Tree from './_tree-nested.vue';
 
 interface TreeNode {

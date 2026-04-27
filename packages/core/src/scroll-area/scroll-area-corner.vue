@@ -10,6 +10,8 @@ import { computed } from 'vue';
 import ScrollAreaCornerImpl from './scroll-area-corner-impl.vue';
 import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 
+defineOptions({ name: 'AScrollAreaCorner' });
+
 const props = defineProps<AScrollAreaCornerProps>();
 
 const { forwardRef } = useForwardExpose();

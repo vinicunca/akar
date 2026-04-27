@@ -1,4 +1,4 @@
-import type { DateValue, DayOfWeek } from '@internationalized/date';
+import type { DateValue } from '@internationalized/date';
 import type { DateRange } from '../shared';
 import type { DateGrid } from './types.date';
 import {
@@ -12,6 +12,14 @@ import {
 } from '@internationalized/date';
 import { chunk } from '@vinicunca/perkakas';
 import { getDaysInMonth, getLastFirstDayOfWeek, getNextLastDayOfWeek } from './comparators.date';
+
+/**
+ * TODO: Remove this once `@internationalized/date` exports the `DayOfWeek` type.
+ * It appears that `@internationalized/date` does not export the `DayOfWeek` type in their latest release.
+ * This is a temporary workaround to allow us to use the `DayOfWeek` type in our code.
+ * We should remove this once `@internationalized/date` exports the `DayOfWeek` type.
+ */
+type DayOfWeek = 'sun' | 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat';
 
 export type WeekDayFormat = 'long' | 'narrow' | 'short';
 
@@ -216,6 +224,34 @@ export function createMonths(props: SetMonthProps) {
   }
 
   return months;
+}
+
+/**
+ * Creates a 3x4 grid of months for a given year.
+ */
+export function createMonthGrid(props: CreateSelectProps): DateGrid<DateValue> {
+  const { dateObj } = props;
+  const months = createYear({ dateObj });
+  return { value: dateObj, cells: months, rows: chunk(months, 4) };
+}
+
+/**
+ * Creates a 3x4 grid of years (decade-aligned).
+ * The grid starts from the decade that contains the given date.
+ */
+export function createYearGrid(props: CreateSelectProps & { yearsPerPage?: number; decadeAligned?: boolean }): DateGrid<DateValue> {
+  const { dateObj, yearsPerPage = 12, decadeAligned = true } = props;
+
+  let startYear: number;
+  if (decadeAligned) {
+    startYear = startOfDecade(dateObj).year;
+  } else {
+    startYear = dateObj.year;
+  }
+
+  const years = Array.from({ length: yearsPerPage }, (_, i) => startOfYear(dateObj.set({ year: startYear + i })));
+  const firstYear = years[0];
+  return { value: firstYear, cells: years, rows: chunk(years, 4) };
 }
 
 export function createYearRange({ start, end }: DateRange): Array<DateValue> {

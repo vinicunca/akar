@@ -13,6 +13,8 @@ export interface AContextMenuCheckboxItemProps extends AMenuCheckboxItemProps {}
 import { AMenuCheckboxItem } from '../menu';
 import { useEmitAsProps, useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuCheckboxItem' });
+
 const props = defineProps<AContextMenuCheckboxItemProps>();
 const emits = defineEmits<AContextMenuCheckboxItemEmits>();
 

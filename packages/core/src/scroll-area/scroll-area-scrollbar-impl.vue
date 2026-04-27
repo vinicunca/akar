@@ -20,6 +20,8 @@ import { injectScrollAreaScrollbarVisibleContext } from './scroll-area-scrollbar
 import { injectAScrollAreaScrollbarContext } from './scroll-area-scrollbar.vue';
 import { toInt } from './utils';
 
+defineOptions({ name: 'AScrollAreaScrollbarImpl' });
+
 const props = defineProps<ScrollAreaScrollbarImplProps>();
 const emit = defineEmits<ScrollbarAreaScrollbarImplEmits>();
 const rootContext = injectAScrollAreaRootContext();

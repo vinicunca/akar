@@ -78,6 +78,8 @@ import { APrimitive } from '../primitive';
 import { useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '../shared';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 
+defineOptions({ name: 'ATagsInputRoot' });
+
 const props = withDefaults(
   defineProps<ATagsInputRootProps<T>>(),
   {

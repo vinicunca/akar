@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Nazaj',
     },
     chatPrompt: {
-      placeholder: 'Tukaj napišite svoje sporočilo...',
+      placeholder: 'Tukaj napišite svoje sporočilo…',
     },
     chatPromptSubmit: {
       label: 'Pošlji sporočilo',
+    },
+    chatReasoning: {
+      thinking: 'Razmišlja…',
+      thought: 'Razmislil',
+      thoughtFor: 'Razmišljal {duration}',
     },
     colorMode: {
       dark: 'Temno',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Zapri',
       noData: 'Ni podatkov',
       noMatch: 'Ni ujemanj',
-      placeholder: 'Vpiši ukaz ali išči...',
+      placeholder: 'Vpiši ukaz ali išči…',
     },
     contentSearch: {
       links: 'Povezave',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Išči...',
+      label: 'Išči…',
     },
     contentToc: {
       title: 'Na tej strani',
+    },
+    dropdownMenu: {
+      noMatch: 'Ni ujemanj',
+      search: 'Išči…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Išči...',
+      label: 'Išči…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Strni stransko vrstico',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Zmanjšaj',
       increment: 'Povišaj',
     },
+    listbox: {
+      noData: 'Ni podatkov',
+      noMatch: 'Ni ujemanj',
+      search: 'Išči…',
+    },
     modal: {
       close: 'Zapri',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kopiraj kodo v odložišče',
       },
+      prompt: {
+        copy: 'Kopiraj poziv',
+        openIn: 'Odpri v {name}',
+      },
+    },
+    sidebar: {
+      close: 'Zapri',
+      toggle: 'Preklopi',
     },
     selectMenu: {
       create: 'Ustvari "{label}"',
       noData: 'Ni podatkov',
       noMatch: 'Ni ujemanj',
-      search: 'Išči...',
+      search: 'Išči…',
     },
     slideover: {
       close: 'Zapri',

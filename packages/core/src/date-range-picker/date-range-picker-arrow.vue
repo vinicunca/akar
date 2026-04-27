@@ -6,6 +6,8 @@ export interface ADateRangePickerArrowProps extends APopoverArrowProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangePickerArrow' });
+
 const props = defineProps<ADateRangePickerArrowProps>();
 </script>
 

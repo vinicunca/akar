@@ -30,7 +30,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#content
+# content
 :core-placeholder{class="h-48 m-4"}
 ::
 
@@ -57,7 +57,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#body
+# body
 :core-placeholder{class="h-48"}
 ::
 
@@ -85,7 +85,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#body
+# body
 :core-placeholder{class="h-48"}
 ::
 
@@ -110,7 +110,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#content
+# content
 :core-placeholder{class="min-w-96 min-h-96 size-full m-4"}
 ::
 
@@ -136,7 +136,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#content
+# content
 :core-placeholder{class="min-w-96 min-h-96 size-full m-4"}
 ::
 
@@ -161,7 +161,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#content
+# content
 :core-placeholder{class="h-48 m-4"}
 ::
 
@@ -186,7 +186,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#content
+# content
 :core-placeholder{class="h-48 m-4"}
 ::
 
@@ -211,7 +211,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#content
+# content
 :core-placeholder{class="h-48 m-4"}
 ::
 
@@ -240,7 +240,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#content
+# content
 :core-placeholder{class="h-48 m-4"}
 ::
 
@@ -285,7 +285,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-up"}
 
-#content
+# content
 :core-placeholder{class="h-screen m-4"}
 ::
 

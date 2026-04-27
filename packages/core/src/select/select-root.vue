@@ -74,6 +74,7 @@ import { APopperRoot } from '../popper';
 import BubbleSelect from './bubble-select.vue';
 
 defineOptions({
+  name: 'ASelectRoot',
   inheritAttrs: false,
 });
 
@@ -209,7 +210,7 @@ provideSelectRootContext({
     />
 
     <BubbleSelect
-      v-if="isFormControl"
+      v-if="isFormControl && name"
       :key="nativeSelectKey"
       aria-hidden="true"
       tabindex="-1"

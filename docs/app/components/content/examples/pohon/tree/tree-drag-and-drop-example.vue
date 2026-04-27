@@ -69,7 +69,7 @@ const tree = useTemplateRef<HTMLElement>('tree');
 useSortable(tree, items, {
   animation: 150,
   ghostClass: 'opacity-50',
-  onUpdate: (e: any) => moveItem(e.oldIndex, e.newIndex),
+  onUpdate: (event: any) => moveItem(event.oldIndex, event.newIndex),
 });
 </script>
 

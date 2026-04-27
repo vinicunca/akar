@@ -5,6 +5,8 @@ import { useEmitAsProps, useForwardExpose } from '../shared';
 import DialogContentImpl from './dialog-content-impl.vue';
 import { injectDialogRootContext } from './dialog-root.vue';
 
+defineOptions({ name: 'ADialogContentNonModal' });
+
 const props = defineProps<DialogContentImplProps>();
 const emits = defineEmits<DialogContentImplEmits>();
 

@@ -1,8 +1,5 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import theme from '#build/pohon/button';
-import { BaseMatrix, BaseNavbar, PButton, PSelect } from '#components';
-import { sleep } from '@vinicunca/perkakas';
-import { reactive } from 'vue';
 
 const colors = Object.keys(theme.variants.color);
 const sizes = Object.keys(theme.variants.size);
@@ -15,32 +12,32 @@ const attrs = reactive({
 });
 
 function onClick() {
-  return sleep(5000);
+  return new Promise<void>((res) => {
+    setTimeout(res, 5000);
+  });
 }
 </script>
 
 <template>
-  <BaseNavbar>
+  <Navbar>
     <PSelect
       v-model="attrs.color"
       :items="colors"
       multiple
     />
-
     <PSelect
       v-model="attrs.variant"
       :items="variants"
       multiple
     />
-
     <PSelect
       v-model="attrs.size"
       :items="sizes"
       multiple
     />
-  </BaseNavbar>
+  </Navbar>
 
-  <BaseMatrix
+  <Matrix
     v-slot="props"
     :attrs="attrs"
   >
@@ -83,29 +80,29 @@ function onClick() {
     />
     <PButton
       label="Icon"
-      icon="i-lucide:rocket"
+      icon="i-lucide-rocket"
       v-bind="props"
     />
     <PButton
       label="Icon"
-      icon="i-lucide:chevron-down"
+      icon="i-lucide-chevron-down"
       trailing
       v-bind="props"
     />
     <PButton
       label="Avatar"
-      :avatar="{ src: 'https://github.com/praburangki.png' }"
+      :avatar="{ src: 'https://github.com/benjamincanac.png' }"
       v-bind="props"
     />
     <PButton
-      icon="i-lucide:rocket"
+      icon="i-lucide-rocket"
       v-bind="props"
       square
     />
     <PButton
-      :avatar="{ src: 'https://github.com/praburangki.png' }"
+      :avatar="{ src: 'https://github.com/benjamincanac.png' }"
       v-bind="props"
       square
     />
-  </BaseMatrix>
+  </Matrix>
 </template>

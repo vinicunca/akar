@@ -4,10 +4,21 @@ import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import DismissableLayer from './story/_dismissable-layer.vue';
+import { isLayerExist } from './utils';
 
 const OPEN_LABEL = 'Open';
 const CLOSE_LABEL = 'Close';
 const OUTSIDE_LABEL = 'Outside';
+
+describe('isLayerExist', () => {
+  it('should return false for non-Element targets without throwing', () => {
+    const layer = document.createElement('div');
+    layer.setAttribute('data-dismissable-layer', '');
+
+    expect(isLayerExist({ layerElement: layer, targetElement: document as any })).toBe(false);
+    expect(isLayerExist({ layerElement: layer, targetElement: document.createTextNode('x') as any })).toBe(false);
+  });
+});
 
 describe('given a default DismissableLayer', () => {
   let wrapper: VueWrapper<InstanceType<typeof DismissableLayer>>;

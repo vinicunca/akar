@@ -1,13 +1,13 @@
-import type { PTreeItem, PTreeProps, PTreeSlots } from '../../src/runtime/components/tree.vue';
-import theme from '#build/pohon/tree';
+import type { PTreeItem } from '../../src/runtime/components/Tree.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Tree from '../../src/runtime/components/tree.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/tree';
+import Tree from '../../src/runtime/components/Tree.vue';
+import { renderEach } from '../component-render';
 import { expectEmitPayloadType } from '../utils/types';
 
-describe('tree', () => {
+describe('Tree', () => {
   const sizes = Object.keys(theme.variants.size) as any;
 
   const items: Array<PTreeItem> = [
@@ -30,7 +30,7 @@ describe('tree', () => {
 
   const props = { items };
 
-  it.each([
+  renderEach(Tree, [
     // Props
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
@@ -63,7 +63,7 @@ describe('tree', () => {
     ['with neutral color', { props: { ...props, color: 'neutral' } }],
     ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
-    ['with ui', { props: { ...props, pohon: { link: 'font-bold' } } }],
+    ['with pohon', { props: { ...props, pohon: { link: 'font-bold' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'default slot' } }],
     ['with item-wrapper slot', { props, slots: { 'item-wrapper': () => 'wrapper slot' } }],
@@ -71,10 +71,7 @@ describe('tree', () => {
     ['with item-leading slot', { props, slots: { 'item-leading': () => 'leading slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'trailing slot' } }],
     ['with dynamic slot', { props, slots: { app: () => 'dynamic slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: Partial<PTreeProps>; slots?: Partial<PTreeSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Tree);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Tree, {

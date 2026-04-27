@@ -16,7 +16,7 @@ Use the `icon` component to display an [Icon](/docs/pohon/components/icon) in yo
 ::code-preview
 :icon{name="i-simple-icons:nuxtdotjs"}
 
-#code
+# code
 
 ```mdc
 :icon{name="i-simple-icons:nuxtdotjs"}

@@ -10,6 +10,8 @@ import { useForwardExpose } from '../shared';
 import { injectAAccordionItemContext } from './accordion-item.vue';
 import { injectAAccordionRootContext } from './accordion-root.vue';
 
+defineOptions({ name: 'AAccordionContent' });
+
 const props = defineProps<AAccordionContentProps>();
 
 const rootContext = injectAAccordionRootContext();

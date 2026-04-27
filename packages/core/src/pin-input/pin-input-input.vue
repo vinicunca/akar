@@ -17,6 +17,8 @@ import { APrimitive, usePrimitiveElement } from '../primitive';
 import { getActiveElement, useArrowNavigation } from '../shared';
 import { injectAPinInputRootContext } from './pin-input-root.vue';
 
+defineOptions({ name: 'APinInputInput' });
+
 const props = withDefaults(
   defineProps<APinInputInputProps>(),
   {
@@ -25,12 +27,15 @@ const props = withDefaults(
 );
 
 const context = injectAPinInputRootContext();
-const inputElements = computed(() => Array.from(context.inputElements!.value));
+const inputElements = computed(() => [...context.inputElements!.value]);
 const currentValue = computed(() => context.currentModelValue.value[props.index]);
 
 const disabled = computed(() => props.disabled || context.disabled.value);
 const isOtpMode = computed(() => context.otp.value);
 const isPasswordMode = computed(() => context.mask.value);
+
+const NUMBER_REG = /^\d*$/;
+const NON_NUMBER_REG = /\D/g;
 
 const { primitiveElement, currentElement } = usePrimitiveElement();
 
@@ -42,8 +47,8 @@ function handleInput(event: InputEvent) {
     return;
   }
 
-  if (context.isNumericMode.value && !/^\d*$/.test(target.value)) {
-    target.value = target.value.replace(/\D/g, '');
+  if (context.isNumericMode.value && !NUMBER_REG.test(target.value)) {
+    target.value = target.value.replace(NON_NUMBER_REG, '');
     return;
   }
 
@@ -155,7 +160,10 @@ function handlePaste(event: ClipboardEvent) {
     return;
   }
 
-  const values = clipboardData.getData('text');
+  const rawValues = clipboardData.getData('text');
+  const values = context.isNumericMode.value
+    ? rawValues.replace(NON_NUMBER_REG, '')
+    : rawValues;
   handleMultipleCharacter(values);
 }
 
@@ -166,11 +174,15 @@ function handleMultipleCharacter(values: string) {
   for (let i = initialIndex; i < lastIndex; i++) {
     const input = inputElements.value[i];
     const value = values[i - initialIndex];
-    if (context.isNumericMode.value && !/^\d*$/.test(value)) {
-      continue;
+    if (context.isNumericMode.value) {
+      const num = Number.parseInt(value);
+      if (Number.isNaN(num)) {
+        continue;
+      }
+      tempModelValue[i] = num;
+    } else {
+      tempModelValue[i] = value;
     }
-
-    tempModelValue[i] = value;
     input.focus();
   }
   context.modelValue.value = tempModelValue;

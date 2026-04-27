@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Föregående',
     },
     chatPrompt: {
-      placeholder: 'Skriv ditt meddelande här...',
+      placeholder: 'Skriv ditt meddelande här…',
     },
     chatPromptSubmit: {
       label: 'Skicka',
+    },
+    chatReasoning: {
+      thinking: 'Tänker…',
+      thought: 'Tänkte',
+      thoughtFor: 'Tänkte i {duration}',
     },
     colorMode: {
       dark: 'Mörkt',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Stäng',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      placeholder: 'Skriv ett kommando eller sök...',
+      placeholder: 'Skriv ett kommando eller sök…',
     },
     contentSearch: {
       links: 'Länkar',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Sök...',
+      label: 'Sök…',
     },
     contentToc: {
       title: 'På denna sida',
+    },
+    dropdownMenu: {
+      noMatch: 'Inga matchande data',
+      search: 'Sök…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Sök...',
+      label: 'Sök…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Minimera sidofältet',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Minska',
       increment: 'Öka',
     },
+    listbox: {
+      noData: 'Inga data',
+      noMatch: 'Inga matchande data',
+      search: 'Sök…',
+    },
     modal: {
       close: 'Stäng',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kopiera kod till urklipp',
       },
+      prompt: {
+        copy: 'Kopiera prompt',
+        openIn: 'Öppna i {name}',
+      },
+    },
+    sidebar: {
+      close: 'Stäng',
+      toggle: 'Växla',
     },
     selectMenu: {
       create: 'Skapa "{label}"',
       noData: 'Inga data',
       noMatch: 'Inga matchande data',
-      search: 'Sök...',
+      search: 'Sök…',
     },
     slideover: {
       close: 'Stäng',

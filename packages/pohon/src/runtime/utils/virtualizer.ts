@@ -1,12 +1,13 @@
-import { isNonNullish } from '@vinicunca/perkakas';
+import { isObjectType } from '@vinicunca/perkakas';
 import { getProp } from './';
 
 function itemHasDescription(item: any, descriptionKey: string): boolean {
-  if (typeof item !== 'object' || item === null) {
+  if (!isObjectType(item) || item === null) {
     return false;
   }
-  const value = getProp({ object: item, path: descriptionKey });
-  return isNonNullish(value) && value !== '';
+  const value = getProp(item, descriptionKey);
+
+  return value !== undefined && value !== null && value !== '';
 }
 
 function getSize(size: 'xs' | 'sm' | 'md' | 'lg' | 'xl', hasDescription: boolean): number {
@@ -32,9 +33,11 @@ function getSize(size: 'xs' | 'sm' | 'md' | 'lg' | 'xl', hasDescription: boolean
 /**
  * Get estimate size for virtualizers that checks each item individually
  */
-export default function getEstimateSize(
-  { items, size, descriptionKey, hasDescriptionSlot }:
-  { items: Array<any>; size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; descriptionKey?: string; hasDescriptionSlot?: boolean },
+export function getEstimateSize(
+  items: Array<any>,
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+  descriptionKey?: string,
+  hasDescriptionSlot?: boolean,
 ): (index: number) => number {
   const sizeWithDescription = getSize(size, true);
   const sizeWithoutDescription = getSize(size, false);

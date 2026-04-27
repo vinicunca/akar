@@ -1,0 +1,680 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Listbox > renders with by correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="true" data-state="checked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="itemTrailingIcon"></span></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with class correctly 1`] = `
+"<div dir="ltr" data-slot="root" class="max-h-64">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with defaultValue correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="true" data-state="checked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="itemTrailingIcon"></span></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with descriptionKey correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with disabled correctly 1`] = `
+"<div dir="ltr" data-disabled="" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" disabled="" data-disabled="" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" disabled="" data-disabled="" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" disabled="" data-disabled="" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" disabled="" data-disabled="" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with filter and placeholder correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <div data-slot="root" class="">
+    <!--v-if--><input type="text" placeholder="Filter..." data-slot="input" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="akar-listbox-item-v-0-0-1">
+    <!--v-if-->
+  </div>
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with filter correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <div data-slot="root" class="">
+    <!--v-if--><input type="text" placeholder="Search…" data-slot="input" autocomplete="off" aria-disabled="false" value="" aria-activedescendant="akar-listbox-item-v-0-0-1">
+    <!--v-if-->
+  </div>
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with id correctly 1`] = `
+"<div dir="ltr" id="id" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with item slot correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted="">Item slot</div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item slot</div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item slot</div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item slot</div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with item-description slot correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span><span data-slot="itemDescription" class="">Item description slot</span></span><span data-slot="itemTrailing" class=""><!--v-if--></span></div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span><span data-slot="itemDescription" class="">Item description slot</span></span><span data-slot="itemTrailing" class=""><!--v-if--></span></div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span><span data-slot="itemDescription" class="">Item description slot</span></span><span data-slot="itemTrailing" class=""><!--v-if--></span></div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span><span data-slot="itemDescription" class="">Item description slot</span></span><span data-slot="itemTrailing" class=""><!--v-if--></span></div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with item-label slot correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Item label slot</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Item label slot</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Item label slot</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Item label slot</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with item-leading slot correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted="">Item leading slot<span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item leading slot<span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item leading slot<span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item="">Item leading slot<span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with item-trailing slot correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class="">Item trailing slot<!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class="">Item trailing slot<!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class="">Item trailing slot<!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class="">Item trailing slot<!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with items correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with items with description correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span><span data-slot="itemDescription" class="">Description</span></span><span data-slot="itemTrailing" class=""><!--v-if--></span></div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span><span data-slot="itemDescription" class="">Description</span></span><span data-slot="itemTrailing" class=""><!--v-if--></span></div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span><span data-slot="itemDescription" class="">Description</span></span><span data-slot="itemTrailing" class=""><!--v-if--></span></div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span><span data-slot="itemDescription" class="">Description</span></span><span data-slot="itemTrailing" class=""><!--v-if--></span></div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with labelKey correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">FR</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">DE</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">IT</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">ES</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with loading correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div data-slot="loading" class=""><span class="iconify i-lucide:loader-circle" aria-hidden="true" data-slot="loadingIcon"></span></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with loadingIcon correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div data-slot="loading" class=""><span class="iconify i-lucide:loader" aria-hidden="true" data-slot="loadingIcon"></span></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with modelValue correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="true" data-state="checked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="itemTrailingIcon"></span></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with multiple and modelValue correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="true" data-state="checked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="itemTrailingIcon"></span></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="true" data-state="checked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="itemTrailingIcon"></span></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with multiple correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="true" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with name correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with required correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with selectedIcon correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with size lg correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with size md correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with size sm correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with size xl correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with size xs correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with ui correctly 1`] = `
+"<div dir="ltr" ui="[object Object]" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="false" data-state="unchecked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with valueKey correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="-1" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div role="group" aria-labelledby="akar-listbox-group-v-0-0-0" data-slot="group" class="">
+      <div id="akar-listbox-item-v-0-0-1" data-slot="item" class="" role="option" tabindex="0" aria-selected="true" data-state="checked" data-akar-collection-item="" data-highlighted=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">France</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="itemTrailingIcon"></span></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-2" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Germany</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-3" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Italy</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+      <div id="akar-listbox-item-v-0-0-4" data-slot="item" class="" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:map-pin" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class="">Spain</span>
+        <!--v-if--></span><span data-slot="itemTrailing" class=""><!--v-if--></span>
+      </div>
+    </div>
+  </div>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`Listbox > renders with virtualize correctly 1`] = `
+"<div dir="ltr" data-slot="root">
+  <!--v-if-->
+  <div role="listbox" tabindex="0" aria-orientation="vertical" aria-multiselectable="false" data-orientation="vertical" data-slot="content" class="">
+    <div data-akar-virtualizer="" style="position: relative; width: 100%; height: 128px;"></div>
+  </div>
+  <!--v-if-->
+</div>"
+`;

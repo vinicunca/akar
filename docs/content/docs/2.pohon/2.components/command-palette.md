@@ -102,14 +102,14 @@ Each group contains an `items` array of objects that define the commands. Each i
 - `icon?: string`
 - `avatar?: AvatarProps`
 - `chip?: ChipProps`
-- `kbds?: string[] | KbdProps[]`
+- `kbds?: string[] | PKbdProps[]`
 - `active?: boolean`
 - `loading?: boolean`
 - `disabled?: boolean`
 - [`slot?: string`](#with-custom-slot)
 - `placeholder?: string`
 - `children?: PCommandPaletteItem[]`
-- `onSelect?: (e: Event) => void`
+- `onSelect?: (event: Event) => void`
 - `class?: any`
 - `pohon?: { item?: ClassNameValue, itemLeadingIcon?: ClassNameValue, itemLeadingAvatarSize?: ClassNameValue, itemLeadingAvatar?: ClassNameValue, itemLeadingChipSize?: ClassNameValue, itemLeadingChip?: ClassNameValue, itemLabel?: ClassNameValue, itemLabelPrefix?: ClassNameValue, itemLabelBase?: ClassNameValue, itemLabelSuffix?: ClassNameValue, itemTrailing?: ClassNameValue, itemTrailingKbds?: ClassNameValue, itemTrailingKbdsSize?: ClassNameValue, itemTrailingHighlightedIcon?: ClassNameValue, itemTrailingIcon?: ClassNameValue }`
 
@@ -304,12 +304,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.search` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.search` key.
 :::
@@ -383,12 +383,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.check` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.check` key.
 :::
@@ -430,12 +430,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.chevronRight` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.chevronRight` key.
 :::
@@ -505,12 +505,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.loading` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.loading` key.
 :::
@@ -621,12 +621,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.close` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.close` key.
 :::
@@ -708,12 +708,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.arrowLeft` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.arrowLeft` key.
 :::

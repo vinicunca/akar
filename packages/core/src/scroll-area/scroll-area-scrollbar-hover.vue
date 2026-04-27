@@ -12,6 +12,7 @@ import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 import ScrollAreaScrollbarAuto from './scroll-area-scrollbar-auto.vue';
 
 defineOptions({
+  name: 'AScrollAreaScrollbarHover',
   inheritAttrs: false,
 });
 

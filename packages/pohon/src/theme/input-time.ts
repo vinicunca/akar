@@ -1,5 +1,4 @@
 import type { PohonModuleOptions } from '../module';
-
 import { defuFn } from 'defu';
 import { fieldGroupVariant } from './field-group';
 import input from './input';
@@ -11,7 +10,9 @@ export default (options: Required<PohonModuleOptions>) => {
         root: '',
         base: '',
         segment: '',
+        separatorIcon: '',
       },
+
       variants: {
         ...fieldGroupVariant,
         size: {
@@ -37,8 +38,8 @@ export default (options: Required<PohonModuleOptions>) => {
           },
         },
       },
-      compoundVariants: [
-      ],
+
+      compoundVariants: [],
     },
     input(options),
   );

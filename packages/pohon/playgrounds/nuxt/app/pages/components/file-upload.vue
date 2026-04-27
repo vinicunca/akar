@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from 'pohon-ui';
-import theme from '#build/pohon/file-upload';
-import { reactive, ref } from 'vue';
 import * as z from 'zod';
+import theme from '#build/pohon/file-upload';
 
 const sizes = Object.keys(theme.variants.size);
 const variants = Object.keys(theme.variants.variant);
@@ -68,9 +67,9 @@ const schema = z.object({
     ),
 });
 
-type SchemaType = z.output<typeof schema>;
+type Schema = z.output<typeof schema>;
 
-const state = reactive<Partial<SchemaType>>({
+const state = reactive<Partial<Schema>>({
   avatar: undefined,
 });
 
@@ -81,13 +80,13 @@ function createObjectUrl(file: File): string {
   return URL.createObjectURL(file);
 }
 
-async function onSubmit(event: FormSubmitEvent<SchemaType>) {
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data);
 }
 </script>
 
 <template>
-  <BaseNavbar>
+  <Navbar>
     <PSelect
       v-model="attrs.size"
       :items="sizes"
@@ -109,9 +108,9 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
       :items="positions"
       placeholder="Position"
     />
-  </BaseNavbar>
+  </Navbar>
 
-  <BaseMatrix
+  <Matrix
     v-slot="props"
     :attrs="attrs"
     container-class="w-80"
@@ -133,11 +132,11 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
           v-model="state.avatar"
           accept="image/*"
         >
-          <div class="flex flex-wrap gap-3 items-center">
+          <div class="flex flex-wrap items-center gap-3">
             <PAvatar
               size="lg"
               :src="state.avatar ? createObjectUrl(state.avatar) : undefined"
-              icon="i-lucide:image"
+              icon="i-lucide-image"
             />
 
             <PButton
@@ -149,7 +148,7 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
 
           <p
             v-if="state.avatar"
-            class="text-muted text-xs mt-1.5"
+            class="text-xs text-muted mt-1.5"
           >
             {{ state.avatar.name }}
 
@@ -185,7 +184,7 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
 
     <PFileUpload
       v-model="valueMultiple"
-      icon="i-lucide:image"
+      icon="i-lucide-image"
       label="Drop your images here"
       description="SVG, PNG, JPG or GIF (max. 2MB)"
       multiple
@@ -194,12 +193,12 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
       :layout="layout"
       :position="position"
       v-bind="props"
-      class="min-h-44 w-full"
+      class="w-full min-h-44"
     >
       <template #actions="{ open }">
         <PButton
           label="Select images"
-          icon="i-lucide:upload"
+          icon="i-lucide-upload"
           color="neutral"
           variant="outline"
           :size="props?.size"
@@ -245,5 +244,5 @@ async function onSubmit(event: FormSubmitEvent<SchemaType>) {
         />
       </template>
     </PFileUpload>
-  </BaseMatrix>
+  </Matrix>
 </template>

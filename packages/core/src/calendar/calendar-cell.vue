@@ -12,6 +12,8 @@ export interface ACalendarCellProps extends APrimitiveProps {
 import { APrimitive } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
+defineOptions({ name: 'ACalendarCell' });
+
 withDefaults(defineProps<ACalendarCellProps>(), { as: 'td' });
 const rootContext = injectACalendarRootContext();
 </script>

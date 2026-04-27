@@ -8,6 +8,8 @@ import { APopperAnchor } from '../popper';
 import { APrimitive } from '../primitive';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AComboboxAnchor' });
+
 defineProps<AComboboxAnchorProps>();
 
 const { forwardRef } = useForwardExpose();

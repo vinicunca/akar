@@ -13,6 +13,8 @@ import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 import { injectScrollAreaScrollbarVisibleContext } from './scroll-area-scrollbar-visible.vue';
 import { addUnlinkedScrollListener } from './utils';
 
+defineOptions({ name: 'AScrollAreaThumb' });
+
 const props = defineProps<AScrollAreaThumbProps>();
 
 const rootContext = injectAScrollAreaRootContext();

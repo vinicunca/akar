@@ -3,8 +3,8 @@ import { APinInputInput, APinInputRoot } from 'akar';
 import { ref } from 'vue';
 
 const value = ref<Array<string>>([]);
-function handleComplete(e: Array<string>) {
-  alert(e.join(''));
+function handleComplete(event: Array<string>) {
+  alert(event.join(''));
 }
 </script>
 

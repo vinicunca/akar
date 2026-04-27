@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Ortga',
     },
     chatPrompt: {
-      placeholder: 'Bu yerda savolingizni yozing...',
+      placeholder: 'Bu yerda savolingizni yozing…',
     },
     chatPromptSubmit: {
       label: 'Jo\'natish',
+    },
+    chatReasoning: {
+      thinking: 'O\'ylayapti…',
+      thought: 'O\'yladi',
+      thoughtFor: '{duration} o\'yladi',
     },
     colorMode: {
       dark: 'Qorong\'i',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Yopish',
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      placeholder: 'Buyruq kiriting yoki qidiring...',
+      placeholder: 'Buyruq kiriting yoki qidiring…',
     },
     contentSearch: {
       links: 'Havolalar',
       theme: 'Mavzu',
     },
     contentSearchButton: {
-      label: 'Qidirish...',
+      label: 'Qidirish…',
     },
     contentToc: {
       title: 'Ushbu sahifada',
+    },
+    dropdownMenu: {
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…',
     },
     dashboardSearch: {
       theme: 'Mavzu',
     },
     dashboardSearchButton: {
-      label: 'Qidirish...',
+      label: 'Qidirish…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Yon panelni yig\'ish',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Ayirish',
       increment: 'Qoʻshish',
     },
+    listbox: {
+      noData: 'Maʼlumot yoʻq',
+      noMatch: 'Mos keluvchi natija topilmadi',
+      search: 'Qidirish…',
+    },
     modal: {
       close: 'Yopish',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Koddan buferga nusxa olish',
       },
+      prompt: {
+        copy: 'So\'rovni nusxalash',
+        openIn: '{name}da ochish',
+      },
+    },
+    sidebar: {
+      close: 'Yopish',
+      toggle: 'Almashtirish',
     },
     selectMenu: {
       create: '"{label}" yaratish',
       noData: 'Maʼlumot yoʻq',
       noMatch: 'Mos keluvchi natija topilmadi',
-      search: 'Qidirish...',
+      search: 'Qidirish…',
     },
     slideover: {
       close: 'Yopish',

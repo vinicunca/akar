@@ -7,6 +7,8 @@ export interface ASeparatorProps extends BaseSeparatorProps {}
 <script setup lang="ts">
 import BaseSeparator from '../shared/component/base-separator.vue';
 
+defineOptions({ name: 'ASeparator' });
+
 const props = withDefaults(defineProps<ASeparatorProps>(), {
   orientation: 'horizontal',
 });

@@ -1,0 +1,53 @@
+<script lang="ts">
+import type { PSelectMenuItem, PSelectMenuProps } from '../../../types';
+
+export interface PColorModeSelectProps extends Omit<PSelectMenuProps<Array<PSelectMenuItem>>, 'icon' | 'items' | 'modelValue'> {
+}
+</script>
+
+<script setup lang="ts">
+import { useForwardProps } from 'akar';
+import { computed } from 'vue';
+import { useAppConfig, useColorMode } from '#imports';
+import PSelectMenu from '../../../components/SelectMenu.vue';
+import { useLocale } from '../../../composables/use-locale';
+
+defineOptions({ inheritAttrs: false });
+
+const props = withDefaults(
+  defineProps<PColorModeSelectProps>(),
+  {
+    searchInput: false,
+  },
+);
+
+const { t } = useLocale();
+const colorMode = useColorMode();
+const appConfig = useAppConfig();
+
+const selectMenuProps = useForwardProps(props);
+
+const items = computed(() => [
+  { label: t('colorMode.system'), value: 'system', icon: appConfig.pohon.icons.system },
+  { label: t('colorMode.light'), value: 'light', icon: appConfig.pohon.icons.light },
+  { label: t('colorMode.dark'), value: 'dark', icon: appConfig.pohon.icons.dark },
+]);
+
+const preference = computed({
+  get() {
+    return items.value.find((option) => option.value === colorMode.preference) || items.value[0];
+  },
+  set(option) {
+    colorMode.preference = option!.value;
+  },
+});
+</script>
+
+<template>
+  <PSelectMenu
+    v-model="preference"
+    :icon="preference?.icon"
+    v-bind="{ ...(selectMenuProps as any), ...$attrs }"
+    :items="items"
+  />
+</template>

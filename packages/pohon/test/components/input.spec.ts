@@ -1,19 +1,18 @@
 import type { FormInputEvents } from '../../src/module';
-import type { PInputProps, PInputSlots } from '../../src/runtime/components/input.vue';
-import theme from '#build/pohon/input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
-import { describe, expect, it, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Input from '../../src/runtime/components/input.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/input';
+import Input from '../../src/runtime/components/Input.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 
 describe('Input', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
 
-  it.each([
+  renderEach(Input, [
     // Props
     ['with id', { props: { id: 'id' } }],
     ['with name', { props: { name: 'name' } }],
@@ -41,32 +40,34 @@ describe('Input', () => {
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'absolute' } }],
-    ['with ui', { props: { pohon: { base: 'rounded-full' } } }],
+    ['with pohon', { props: { pohon: { base: 'rounded-full' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PInputProps; slots?: Partial<PInputSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Input);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
-  it.each([
-    ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
-    ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
-    ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
-    ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: '', expected: null }],
-    ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }],
-  ])('%s works', async (_nameOrHtml: string, options: { props?: any; slots?: any }, spec: { input: any; expected: any }) => {
-    const wrapper = mount(Input, {
-      ...options,
-    });
+  renderEach(
+    Input,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .lazy modifier', { props: { modelModifiers: { lazy: true } } }, { input: 'input', expected: 'input' }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: '', expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: '', expected: undefined }],
+    ],
+    '%s works',
+    async (_nameOrHtml, options, spec) => {
+      const wrapper = mount(Input, {
+        ...options,
+      });
 
-    const input = wrapper.find('input');
-    await input.setValue(spec.input);
+      const input = wrapper.find('input');
+      await input.setValue(spec.input);
 
-    expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] });
-  });
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] });
+    },
+  );
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Input, {
@@ -78,7 +79,7 @@ describe('Input', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations();
   });
 
-  test('with .lazy modifier updates on change only', async () => {
+  it('with .lazy modifier updates on change only', async () => {
     const wrapper = mount(Input, {
       props: {
         modelModifiers: { lazy: true },
@@ -94,21 +95,21 @@ describe('Input', () => {
   });
 
   describe('emits', () => {
-    test('update:modelValue event', async () => {
+    it('update:modelValue event', async () => {
       const wrapper = mount(Input);
       const input = wrapper.find('input');
       await input.setValue('bob@dylan.com');
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['bob@dylan.com']] });
     });
 
-    test('change event', async () => {
+    it('change event', async () => {
       const wrapper = mount(Input);
       const input = wrapper.find('input');
       await input.setValue('bob@dylan.com');
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
-    test('blur event', async () => {
+    it('blur event', async () => {
       const wrapper = mount(Input);
       const input = wrapper.find('input');
       await input.trigger('blur');
@@ -145,7 +146,7 @@ describe('Input', () => {
       };
     }
 
-    test('validate on blur works', async () => {
+    it('validate on blur works', async () => {
       const { input, wrapper } = await createForm(['blur']);
       await input.trigger('blur');
       await flushPromises();
@@ -157,7 +158,7 @@ describe('Input', () => {
       expect(wrapper.text()).not.toContain('Error message');
     });
 
-    test('validate on change works', async () => {
+    it('validate on change works', async () => {
       const { input, wrapper } = await createForm(['change']);
       await input.trigger('change');
       await flushPromises();
@@ -169,7 +170,7 @@ describe('Input', () => {
       expect(wrapper.text()).not.toContain('Error message');
     });
 
-    test('validate on input works', async () => {
+    it('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'], true);
       await input.setValue('value');
       await flushPromises();
@@ -180,7 +181,7 @@ describe('Input', () => {
       expect(wrapper.text()).not.toContain('Error message');
     });
 
-    test('validate on input without eager validation works', async () => {
+    it('validate on input without eager validation works', async () => {
       const { input, wrapper } = await createForm(['input']);
 
       await input.setValue('value');

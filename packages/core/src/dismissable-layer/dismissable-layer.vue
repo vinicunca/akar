@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { APrimitiveProps } from '../primitive';
-
 import type {
   FocusOutsideEvent,
   PointerDownOutsideEvent,
@@ -71,6 +70,8 @@ import {
   useFocusOutside,
   usePointerDownOutside,
 } from './utils';
+
+defineOptions({ name: 'ADismissableLayer' });
 
 const props = withDefaults(defineProps<DismissableLayerProps>(), {
   disableOutsidePointerEvents: false,

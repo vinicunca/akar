@@ -13,6 +13,8 @@ export interface ADropdownMenuRadioItemProps extends AMenuRadioItemProps {}
 <script setup lang="ts">
 import { AMenuRadioItem } from '../menu';
 
+defineOptions({ name: 'ADropdownMenuRadioItem' });
+
 const props = defineProps<ADropdownMenuRadioItemProps>();
 const emits = defineEmits<ADropdownMenuRadioItemEmits>();
 

@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Zurück',
     },
     chatPrompt: {
-      placeholder: 'Hier schreiben Sie Ihre Nachricht...',
+      placeholder: 'Hier schreiben Sie Ihre Nachricht…',
     },
     chatPromptSubmit: {
       label: 'Senden',
+    },
+    chatReasoning: {
+      thinking: 'Denkt nach…',
+      thought: 'Nachgedacht',
+      thoughtFor: '{duration} nachgedacht',
     },
     colorMode: {
       dark: 'Dunkel',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Schliessen',
       noData: 'Keine Daten',
       noMatch: 'Nichts gefunden',
-      placeholder: 'Geben Sie einen Befehl ein oder suchen Sie...',
+      placeholder: 'Geben Sie einen Befehl ein oder suchen Sie…',
     },
     contentSearch: {
       links: 'Links',
       theme: 'Thema',
     },
     contentSearchButton: {
-      label: 'Suchen...',
+      label: 'Suchen…',
     },
     contentToc: {
       title: 'Auf dieser Seite',
+    },
+    dropdownMenu: {
+      noMatch: 'Nichts gefunden',
+      search: 'Suchen…',
     },
     dashboardSearch: {
       theme: 'Thema',
     },
     dashboardSearchButton: {
-      label: 'Suchen...',
+      label: 'Suchen…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Seitenleiste einklappen',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Verringern',
       increment: 'Erhöhen',
     },
+    listbox: {
+      noData: 'Keine Daten',
+      noMatch: 'Nichts gefunden',
+      search: 'Suchen…',
+    },
     modal: {
       close: 'Schliessen',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Code in die Zwischenablage kopieren',
       },
+      prompt: {
+        copy: 'Prompt kopieren',
+        openIn: 'In {name} öffnen',
+      },
+    },
+    sidebar: {
+      close: 'Schliessen',
+      toggle: 'Umschalten',
     },
     selectMenu: {
       create: '"{label}" erstellen',
       noData: 'Keine Daten',
       noMatch: 'Nichts gefunden',
-      search: 'Suchen...',
+      search: 'Suchen…',
     },
     slideover: {
       close: 'Schliessen',

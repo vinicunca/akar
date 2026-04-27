@@ -18,6 +18,8 @@ import { ARovingFocusItem } from '../roving-focus';
 import { AToggle } from '../toggle';
 import { injectAToggleGroupRootContext } from './toggle-group-root.vue';
 
+defineOptions({ name: 'AToggleGroupItem' });
+
 const props = withDefaults(defineProps<AToggleGroupItemProps>(), {
   as: 'button',
 });

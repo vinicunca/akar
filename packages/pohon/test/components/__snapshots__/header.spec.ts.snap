@@ -1,13 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`PHeader > renders with as correctly 1`] = `
-"<section data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with as correctly 1`] = `
+"<section data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -18,14 +18,14 @@ exports[`PHeader > renders with as correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with body slot correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with body slot correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -36,14 +36,14 @@ exports[`PHeader > renders with body slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with bottom slot correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with bottom slot correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -54,14 +54,14 @@ exports[`PHeader > renders with bottom slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with class correctly 1`] = `
-"<header class="border-b-0" data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with class correctly 1`] = `
+"<header data-slot="root" class="border-b-0">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -72,14 +72,14 @@ exports[`PHeader > renders with class correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with content slot correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with content slot correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -90,14 +90,14 @@ exports[`PHeader > renders with content slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with default slot correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with default slot correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center">Default slot</div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class="">Default slot</div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -108,14 +108,14 @@ exports[`PHeader > renders with default slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with left slot correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
+exports[`Header > renders with left slot correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
       <!--v-if-->Left slot
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -126,14 +126,14 @@ exports[`PHeader > renders with left slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with mode dialog correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with mode drawer correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Close menu" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Close menu" data-slot="base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -143,60 +143,27 @@ exports[`PHeader > renders with mode dialog correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="" data-pohon="dialog-overlay"></div>
-<div data-dismissable-layer="" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-pohon="dialog-content" tabindex="-1" style="pointer-events: auto;"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0">header.title</h2><p id="akar-dialog-description-v-0-0-1">header.description</p></span>
-  <div class="" data-pohon="header-header">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
-    </div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Close menu" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
-        <!--v-if-->
-        <!--v-if-->
-      </button></div>
-  </div>
-  <div class="" data-pohon="header-body"></div>
-</div>
 
-
-<!--teleport end-->"
-`;
-
-exports[`PHeader > renders with mode drawer correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
-    </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Close menu" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
-        <!--v-if-->
-        <!--v-if-->
-      </button></div>
-  </div>
-</header>
-<!--v-if-->
-<!--teleport start-->
-
-
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0">header.title</h2><p id="akar-dialog-description-v-0-0-1">header.description</p></span>
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0">header.title</h2><p id="akar-dialog-description-v-0-0-1">header.description</p></span>
   <!--v-if-->
-  <div class="" data-pohon="header-body"></div>
+  <div data-slot="body" class=""></div>
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with mode slideover correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with mode modal correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Close menu" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Close menu" data-slot="base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -206,32 +173,73 @@ exports[`PHeader > renders with mode slideover correctly 1`] = `
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" class="" data-pohon="slideover-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-pohon="slideover-content" tabindex="-1"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0">header.title</h2><p id="akar-dialog-description-v-0-0-1">header.description</p></span>
-  <div class="" data-pohon="header-header">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+
+
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-slot="content" tabindex="-1" style="pointer-events: auto;"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0">header.title</h2><p id="akar-dialog-description-v-0-0-1">header.description</p></span>
+  <div data-slot="header" class="">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Close menu" data-pohon="button-base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="right" class=""><button type="button" aria-label="Close menu" data-slot="base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
   </div>
-  <div class="" data-pohon="header-body"></div>
+  <div data-slot="body" class=""></div>
 </div>
 
 
+
+
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with pohon correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="gap-1.5" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with mode slideover correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Close menu" data-slot="base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+</header>
+<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-state="open" style="pointer-events: auto;" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-side="right" data-slot="content" tabindex="-1"><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0">header.title</h2><p id="akar-dialog-description-v-0-0-1">header.description</p></span>
+  <div data-slot="header" class="">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
+    </div>
+    <div data-slot="right" class=""><button type="button" aria-label="Close menu" data-slot="base" class=""><span class="iconify i-lucide:x" aria-hidden="true" data-slot="leadingIcon"></span>
+        <!--v-if-->
+        <!--v-if-->
+      </button></div>
+  </div>
+  <div data-slot="body" class=""></div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`Header > renders with pohon correctly 1`] = `
+"<header data-slot="root">
+  <div class="gap-1.5" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
+    </div>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -242,14 +250,14 @@ exports[`PHeader > renders with pohon correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with right slot correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with right slot correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right">Right slot<button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class="">Right slot<button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -260,14 +268,14 @@ exports[`PHeader > renders with right slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with title correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Documentation" data-pohon="header-title" class="">Documentation</a>
+exports[`Header > renders with title correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Documentation" data-slot="title" class="">Documentation</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -278,14 +286,14 @@ exports[`PHeader > renders with title correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with title slot correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Title slot" data-pohon="header-title" class="">Title slot</a>
+exports[`Header > renders with title slot correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Title slot" data-slot="title" class="">Title slot</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -296,14 +304,14 @@ exports[`PHeader > renders with title slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with to correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/docs" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with to correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/docs" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -314,14 +322,14 @@ exports[`PHeader > renders with to correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with toggle correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with toggle correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -332,14 +340,14 @@ exports[`PHeader > renders with toggle correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with toggle slot correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with toggle slot correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right">Toggle slot</div>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class="">Toggle slot</div>
   </div>
 </header>
 <!--v-if-->
@@ -347,15 +355,15 @@ exports[`PHeader > renders with toggle slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with toggleSide correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+exports[`Header > renders with toggleSide correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
-      </button><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a></div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right">
+      </button><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a></div>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class="">
       <!--v-if-->
     </div>
   </div>
@@ -365,13 +373,13 @@ exports[`PHeader > renders with toggleSide correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders with top slot correctly 1`] = `
-"<header data-pohon="header-root">Top slot<div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders with top slot correctly 1`] = `
+"<header data-slot="root">Top slot<div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right"><button type="button" aria-label="Open menu" data-pohon="button-base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-pohon="button-leading-icon"></span>
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class=""><button type="button" aria-label="Open menu" data-slot="base" class=""><span class="iconify i-lucide:menu" aria-hidden="true" data-slot="leadingIcon"></span>
         <!--v-if-->
         <!--v-if-->
       </button></div>
@@ -382,14 +390,14 @@ exports[`PHeader > renders with top slot correctly 1`] = `
 <!--teleport end-->"
 `;
 
-exports[`PHeader > renders without toggle correctly 1`] = `
-"<header data-pohon="header-root">
-  <div class="" data-pohon="header-container">
-    <div class="" data-pohon="header-left">
-      <!--v-if--><a href="/" aria-label="Pohon" data-pohon="header-title" class="">Pohon</a>
+exports[`Header > renders without toggle correctly 1`] = `
+"<header data-slot="root">
+  <div class="" data-slot="container">
+    <div data-slot="left" class="">
+      <!--v-if--><a href="/" aria-label="Pohon" data-slot="title" class="">Pohon</a>
     </div>
-    <div class="" data-pohon="header-center"></div>
-    <div class="" data-pohon="header-right">
+    <div data-slot="center" class=""></div>
+    <div data-slot="right" class="">
       <!--v-if-->
     </div>
   </div>

@@ -14,6 +14,8 @@ import { useEmitAsProps, useForwardExpose } from '../shared';
 import { AToggleGroupRoot } from '../toggle-group';
 import { injectAToolbarRootContext } from './toolbar-root.vue';
 
+defineOptions({ name: 'AToolbarToggleGroup' });
+
 const props = defineProps<AToolbarToggleGroupProps>();
 const emits = defineEmits<AToolbarToggleGroupEmits>();
 

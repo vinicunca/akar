@@ -6,6 +6,8 @@ export interface ADateRangePickerHeaderProps extends ARangeCalendarHeaderProps {
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangePickerHeader' });
+
 const props = defineProps<ADateRangePickerHeaderProps>();
 </script>
 

@@ -1,18 +1,17 @@
-import type { PProgressProps, PProgressSlots } from '../../src/runtime/components/progress.vue';
-import theme from '#build/pohon/progress';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PProgress from '../../src/runtime/components/progress.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/progress';
+import Progress from '../../src/runtime/components/Progress.vue';
+import { renderEach } from '../component-render';
 
-describe('PProgress', () => {
+describe('Progress', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const orientations = Object.keys(theme.variants.orientation) as any;
   const animations = Object.keys(theme.variants.animation) as any;
   const max = ['Waiting...', 'Cloning...', 'Migrating...', 'Deploying...', 'Done!'];
 
-  it.each([
+  renderEach(Progress, [
     // Props
     ['with modelValue', { props: { modelValue: 50 } }],
     ['with status', { props: { modelValue: 50, status: true } }],
@@ -25,16 +24,13 @@ describe('PProgress', () => {
     ['with color neutral', { props: { color: 'neutral', modelValue: 50 } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { pohon: { base: 'bg-default' } } }],
+    ['with pohon', { props: { pohon: { base: 'bg-default' } } }],
     // Slots
     ['with status slot', { slots: { status: () => 'Status slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PProgressProps; slots?: Partial<PProgressSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PProgress);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PProgress, {
+    const wrapper = await mountSuspended(Progress, {
       props: {
         modelValue: 75,
         status: true,

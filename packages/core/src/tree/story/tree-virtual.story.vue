@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import { countryList } from '../shared/constant';
 import { ATreeItem, ATreeRoot, ATreeVirtualizer } from '..';
+import { countryList } from '../shared/constant';
 
 function groupCountriesByFirstLetter(countries: Array<string>) {
   const grouped = countries.reduce((acc, country) => {

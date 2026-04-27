@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Anterior',
     },
     chatPrompt: {
-      placeholder: 'Scrieți mesajul dvs. aici...',
+      placeholder: 'Scrieți mesajul dvs. aici…',
     },
     chatPromptSubmit: {
       label: 'Trimite',
+    },
+    chatReasoning: {
+      thinking: 'Se gândește…',
+      thought: 'A gândit',
+      thoughtFor: 'A gândit {duration}',
     },
     colorMode: {
       dark: 'Întunecat',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Închide',
       noData: 'Nu există date',
       noMatch: 'Nu există date corespunzătoare',
-      placeholder: 'Tastează o comandă sau caută...',
+      placeholder: 'Tastează o comandă sau caută…',
     },
     contentSearch: {
       links: 'Linkuri',
       theme: 'Temă',
     },
     contentSearchButton: {
-      label: 'Caută...',
+      label: 'Caută…',
     },
     contentToc: {
       title: 'Pe această pagină',
+    },
+    dropdownMenu: {
+      noMatch: 'Nu există date corespunzătoare',
+      search: 'Caută…',
     },
     dashboardSearch: {
       theme: 'Temă',
     },
     dashboardSearchButton: {
-      label: 'Caută...',
+      label: 'Caută…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Restrânge bara laterală',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Scade',
       increment: 'Crește',
     },
+    listbox: {
+      noData: 'Nu există date',
+      noMatch: 'Nu există date corespunzătoare',
+      search: 'Caută…',
+    },
     modal: {
       close: 'Închide',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Copiază codul în clipboard',
       },
+      prompt: {
+        copy: 'Copiază promptul',
+        openIn: 'Deschide în {name}',
+      },
+    },
+    sidebar: {
+      close: 'Închide',
+      toggle: 'Comutare',
     },
     selectMenu: {
       create: 'Creează "{label}"',
       noData: 'Nu există date',
       noMatch: 'Nu există date corespunzătoare',
-      search: 'Caută...',
+      search: 'Caută…',
     },
     slideover: {
       close: 'Închide',

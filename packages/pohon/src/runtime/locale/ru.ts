@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Назад',
     },
     chatPrompt: {
-      placeholder: 'Введите ваше сообщение здесь...',
+      placeholder: 'Введите ваше сообщение здесь…',
     },
     chatPromptSubmit: {
       label: 'Отправить',
+    },
+    chatReasoning: {
+      thinking: 'Размышляет…',
+      thought: 'Размышление завершено',
+      thoughtFor: 'Размышление заняло {duration}',
     },
     colorMode: {
       dark: 'Тёмная',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Закрыть',
       noData: 'Нет данных',
       noMatch: 'Совпадений не найдено',
-      placeholder: 'Введите команду или выполните поиск...',
+      placeholder: 'Введите команду или выполните поиск…',
     },
     contentSearch: {
       links: 'Ссылки',
       theme: 'Тема',
     },
     contentSearchButton: {
-      label: 'Поиск...',
+      label: 'Поиск…',
     },
     contentToc: {
       title: 'На этой странице',
+    },
+    dropdownMenu: {
+      noMatch: 'Совпадений не найдено',
+      search: 'Поиск…',
     },
     dashboardSearch: {
       theme: 'Тема',
     },
     dashboardSearchButton: {
-      label: 'Поиск...',
+      label: 'Поиск…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Свернуть боковую панель',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Уменьшить',
       increment: 'Увеличить',
     },
+    listbox: {
+      noData: 'Нет данных',
+      noMatch: 'Совпадений не найдено',
+      search: 'Поиск…',
+    },
     modal: {
       close: 'Закрыть',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Скопировать код в буфер обмена',
       },
+      prompt: {
+        copy: 'Скопировать промпт',
+        openIn: 'Открыть в {name}',
+      },
+    },
+    sidebar: {
+      close: 'Закрыть',
+      toggle: 'Переключить',
     },
     selectMenu: {
       create: 'Создать "{label}"',
       noData: 'Нет данных',
       noMatch: 'Совпадений не найдено',
-      search: 'Поиск...',
+      search: 'Поиск…',
     },
     slideover: {
       close: 'Закрыть',

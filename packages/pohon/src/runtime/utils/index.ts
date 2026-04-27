@@ -1,15 +1,33 @@
 import type { GetItemKeys } from '../types/utils';
-import { isEmptyish, isFunction, isNullish, isString } from '@vinicunca/perkakas';
+import { isEmptyish, isFunction, isNullish, isObjectType, isString } from '@vinicunca/perkakas';
 import { isEqual } from 'ohash/utils';
 import { joinURL, withLeadingSlash, withTrailingSlash } from 'ufo';
 
+export function pick<Data extends object, Keys extends keyof Data>(data: Data, keys: Array<Keys>): Pick<Data, Keys> {
+  const result = {} as Pick<Data, Keys>;
+
+  for (const key of keys) {
+    result[key] = data[key];
+  }
+
+  return result;
+}
+
+export function omit<Data extends object, Keys extends keyof Data>(data: Data, keys: Array<Keys>): Omit<Data, Keys> {
+  const result = { ...data };
+
+  for (const key of keys) {
+    // eslint-disable-next-line ts/no-dynamic-delete
+    delete result[key];
+  }
+
+  return result as Omit<Data, Keys>;
+}
+
 export function getProp(
-  { object, path, defaultValue }:
-  {
-    object: Record<string, any> | undefined;
-    path: Array<string | number> | string;
-    defaultValue?: any;
-  },
+  object: Record<string, any> | undefined,
+  path: Array<string | number> | string,
+  defaultValue?: any,
 ): any {
   if (isString(path)) {
     path = path.split('.').map((key) => {
@@ -32,8 +50,9 @@ export function getProp(
 }
 
 export function setProp(
-  { object, path, value }:
-  { object: Record<string, any>; path: Array<string | number> | string; value: any },
+  object: Record<string, any>,
+  path: Array<string | number> | string,
+  value: any,
 ): void {
   if (isString(path)) {
     path = path.split('.').map((key) => {
@@ -56,36 +75,12 @@ export function setProp(
   );
 }
 
-export function mergeClasses(appConfigClass?: string | Array<string>, propClass?: string) {
-  if (!appConfigClass && !propClass) {
-    return '';
-  }
-
-  return [
-    ...(Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass]),
-    propClass,
-  ].filter(Boolean);
+export function looseToNumber(val: any): any {
+  const n = Number.parseFloat(val);
+  return Number.isNaN(n) ? val : n;
 }
 
-export function transformPohon(pohon: any, pohonProp?: any) {
-  return Object.entries(pohon)
-    .reduce(
-      (acc, [key, value]) => {
-        acc[key] = typeof value === 'function' ? value({ class: pohonProp?.[key] }) : value;
-        return acc;
-      },
-      { ...(pohonProp || {}) },
-    );
-}
-
-export function isArrayOfArray<A>(item: Array<A> | Array<Array<A>>): item is Array<Array<A>> {
-  return Array.isArray(item[0]);
-}
-
-export function compare<T>(
-  { value, currentValue, comparator }:
-  { value?: T; currentValue?: T; comparator?: string | ((a: T, b: T) => boolean) } = {},
-) {
+export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((a: T, b: T) => boolean)) {
   if (value === undefined || currentValue === undefined) {
     return false;
   }
@@ -99,33 +94,32 @@ export function compare<T>(
   }
 
   if (isString(comparator)) {
-    return getProp({ object: value!, path: comparator }) === getProp({ object: currentValue!, path: comparator });
+    return getProp(value!, comparator) === getProp(currentValue!, comparator);
   }
 
   return isEqual(value, currentValue);
 }
 
 export function getDisplayValue<T extends Array<any>, V>(
-  { items, value, options = {} }: {
-    items: T;
-    value: V | undefined | null;
-    options?: {
-      valueKey?: GetItemKeys<T>;
-      labelKey?: GetItemKeys<T>;
-    };
-  },
+  items: T,
+  value: V | undefined | null,
+  options: {
+    valueKey?: GetItemKeys<T>;
+    labelKey?: GetItemKeys<T>;
+    by?: string | ((a: any, b: any) => boolean);
+  } = {},
 ): string | undefined {
-  const { valueKey, labelKey } = options;
+  const { valueKey, labelKey, by } = options;
 
   const foundItem = items.find((item) => {
-    const itemValue = (typeof item === 'object' && item !== null && valueKey)
-      ? getProp({ object: item, path: valueKey as string })
+    const itemValue = (isObjectType(item) && item !== null && valueKey)
+      ? getProp(item, valueKey as string)
       : item;
-    return compare({ value: itemValue, currentValue: value });
+    return compare(itemValue, value, by);
   });
 
   if (isEmptyish(value) && foundItem) {
-    return labelKey ? getProp({ object: foundItem as Record<string, any>, path: labelKey as string }) : undefined;
+    return labelKey ? getProp(foundItem as Record<string, any>, labelKey as string) : undefined;
   }
 
   if (isEmptyish(value)) {
@@ -138,16 +132,32 @@ export function getDisplayValue<T extends Array<any>, V>(
     return undefined;
   }
 
-  if (typeof source === 'object') {
-    return labelKey ? getProp({ object: source as Record<string, any>, path: labelKey as string }) : undefined;
+  if (isObjectType(source)) {
+    return labelKey ? getProp(source as Record<string, any>, labelKey as string) : undefined;
   }
 
   return String(source);
 }
 
-export function looseToNumber(val: any): any {
-  const n = Number.parseFloat(val);
-  return Number.isNaN(n) ? val : n;
+export function isArrayOfArray<
+  A extends Array<any> | Array<Array<any>>,
+>(item: A): item is A extends Array<infer T>
+  ? T extends Array<any>
+    ? Array<T>
+    : never
+  : never {
+  return Array.isArray(item[0]);
+}
+
+export function mergeClasses(appConfigClass?: string | Array<string>, propClass?: string) {
+  if (!appConfigClass && !propClass) {
+    return '';
+  }
+
+  return [
+    ...(Array.isArray(appConfigClass) ? appConfigClass : [appConfigClass]),
+    propClass,
+  ].filter(Boolean);
 }
 
 export function getSlotChildrenText(children: any) {
@@ -162,6 +172,17 @@ export function getSlotChildrenText(children: any) {
 
     return undefined;
   }).join('');
+}
+
+export function transformPohon(pohon: any, pohonProp?: any) {
+  return Object.entries(pohon)
+    .reduce(
+      (acc, [key, value]) => {
+        acc[key] = typeof value === 'function' ? value({ class: pohonProp?.[key] }) : value;
+        return acc;
+      },
+      { ...(pohonProp || {}) },
+    );
 }
 
 export function resolveBaseURL(path?: string, baseURL?: string): string | undefined {

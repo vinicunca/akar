@@ -18,6 +18,7 @@ export interface AToastViewportProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import type { ComponentPublicInstance } from 'vue';
 import { isString, KEY_CODES } from '@vinicunca/perkakas';
 import { onKeyStroke, unrefElement } from '@vueuse/core';
 import { computed, onMounted, ref, toRefs, watchEffect } from 'vue';
@@ -31,6 +32,7 @@ import { injectAToastProviderContext } from './toast-provider.vue';
 import { VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';
 
 defineOptions({
+  name: 'AToastViewport',
   inheritAttrs: false,
 });
 
@@ -175,8 +177,12 @@ function getSortedTabbableCandidates({ tabbingDirection }: { tabbingDirection: '
   >
     <FocusProxy
       v-if="hasToasts"
-      :ref="(node) => {
-        headFocusProxyRef = unrefElement(node as HTMLElement) as HTMLElement;
+      :ref="(node: Element | ComponentPublicInstance | null) => {
+        if (!node) {
+          return undefined
+        }
+
+        headFocusProxyRef = unrefElement(node as ComponentPublicInstance) as HTMLElement
         return undefined;
       }"
       @focus-from-outside-viewport="() => {
@@ -201,8 +207,11 @@ function getSortedTabbableCandidates({ tabbingDirection }: { tabbingDirection: '
 
     <FocusProxy
       v-if="hasToasts"
-      :ref="(node) => {
-        tailFocusProxyRef = unrefElement(node as HTMLElement) as HTMLElement;
+      :ref="(node: Element | ComponentPublicInstance | null) => {
+        if (!node) {
+          return undefined
+        }
+        tailFocusProxyRef = unrefElement(node as ComponentPublicInstance) as HTMLElement
         return undefined;
       }"
       @focus-from-outside-viewport="() => {

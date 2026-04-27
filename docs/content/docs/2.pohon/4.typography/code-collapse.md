@@ -39,7 +39,7 @@ Wrap your code-block with a `code-collapse` component to display a collapsible c
 
 ::
 
-#code
+# code
 
 ````mdc
 ::code-collapse

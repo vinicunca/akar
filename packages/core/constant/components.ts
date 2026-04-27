@@ -71,6 +71,34 @@ export const components = {
     'ACollapsibleTrigger',
   ] as const,
 
+  colorArea: [
+    'AColorAreaRoot',
+    'AColorAreaArea',
+    'AColorAreaThumb',
+  ] as const,
+
+  colorField: [
+    'AColorFieldRoot',
+    'AColorFieldInput',
+  ] as const,
+
+  colorSlider: [
+    'AColorSliderRoot',
+    'AColorSliderTrack',
+    'AColorSliderThumb',
+  ] as const,
+
+  colorSwatch: [
+    'AColorSwatch',
+  ] as const,
+
+  colorSwatchPicker: [
+    'AColorSwatchPickerRoot',
+    'AColorSwatchPickerItem',
+    'AColorSwatchPickerItemSwatch',
+    'AColorSwatchPickerItemIndicator',
+  ] as const,
+
   combobox: [
     'AComboboxAnchor',
     'AComboboxArrow',
@@ -198,6 +226,7 @@ export const components = {
     'ADropdownMenuCheckboxItem',
     'ADropdownMenuContent',
     'ADropdownMenuGroup',
+    'ADropdownMenuFilter',
     'ADropdownMenuItemIndicator',
     'ADropdownMenuItem',
     'ADropdownMenuLabel',
@@ -247,6 +276,32 @@ export const components = {
     'AListboxItem',
     'AListboxRoot',
     'AListboxVirtualizer',
+  ] as const,
+
+  monthPicker: [
+    'AMonthPickerRoot',
+    'AMonthPickerHeader',
+    'AMonthPickerHeading',
+    'AMonthPickerGrid',
+    'AMonthPickerCell',
+    'AMonthPickerNext',
+    'AMonthPickerPrev',
+    'AMonthPickerGridBody',
+    'AMonthPickerGridRow',
+    'AMonthPickerCellTrigger',
+  ] as const,
+
+  monthRangePicker: [
+    'AMonthRangePickerRoot',
+    'AMonthRangePickerHeader',
+    'AMonthRangePickerHeading',
+    'AMonthRangePickerGrid',
+    'AMonthRangePickerCell',
+    'AMonthRangePickerNext',
+    'AMonthRangePickerPrev',
+    'AMonthRangePickerGridBody',
+    'AMonthRangePickerGridRow',
+    'AMonthRangePickerCellTrigger',
   ] as const,
 
   navigationMenu: [
@@ -465,6 +520,32 @@ export const components = {
 
   visuallyHidden: [
     'AVisuallyHidden',
+  ] as const,
+
+  yearPicker: [
+    'AYearPickerRoot',
+    'AYearPickerHeader',
+    'AYearPickerHeading',
+    'AYearPickerGrid',
+    'AYearPickerCell',
+    'AYearPickerNext',
+    'AYearPickerPrev',
+    'AYearPickerGridBody',
+    'AYearPickerGridRow',
+    'AYearPickerCellTrigger',
+  ] as const,
+
+  yearRangePicker: [
+    'AYearRangePickerRoot',
+    'AYearRangePickerHeader',
+    'AYearRangePickerHeading',
+    'AYearRangePickerGrid',
+    'AYearRangePickerCell',
+    'AYearRangePickerNext',
+    'AYearRangePickerPrev',
+    'AYearRangePickerGridBody',
+    'AYearRangePickerGridRow',
+    'AYearRangePickerCellTrigger',
   ] as const,
 };
 

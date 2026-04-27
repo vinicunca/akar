@@ -19,6 +19,8 @@ import { APrimitive } from '../primitive';
 import { injectASliderRootContext } from './slider-root.vue';
 import { ARROW_KEYS, PAGE_KEYS } from './utils';
 
+defineOptions({ name: 'ASliderImpl' });
+
 const props = withDefaults(defineProps<SliderImplProps>(), {
   as: 'span',
 });

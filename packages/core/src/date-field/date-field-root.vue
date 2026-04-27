@@ -1,17 +1,12 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-
 import type { Ref } from 'vue';
 import type { DateMatcher } from '../date';
 import type { APrimitiveProps } from '../primitive';
 import type { UseDateFormatter } from '../shared';
 import type { DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '../shared/date';
 import type { Direction, FormFieldProps } from '../shared/types';
-import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
-import { hasTime, isDateBefore } from '../date';
-import { createContext, useDateFormatter, useDirection, useLocale } from '../shared';
-import { getDefaultDate, normalizeDateStep } from '../shared/date';
-import { createContent, getSegmentElements, initializeSegmentValues, isSegmentNavigationKey, syncSegmentValues } from '../shared/date';
+import { createContext } from '../shared';
 
 type DateFieldRootContext = {
   locale: Ref<string>;
@@ -38,7 +33,7 @@ export interface ADateFieldRootProps extends APrimitiveProps, FormFieldProps {
   defaultPlaceholder?: DateValue;
   /** The placeholder date, which is used to determine what month to display when no date is selected. This updates as the user navigates the calendar and can be used to programmatically control the calendar view */
   placeholder?: DateValue;
-  /** The controlled checked state of the calendar. Can be bound as `v-model`. */
+  /** The controlled value of the field. Can be bound as `v-model`. */
   modelValue?: DateValue | null;
   /** The hour cycle used for formatting times. Defaults to the local preference */
   hourCycle?: HourCycle;
@@ -80,12 +75,24 @@ export const [
 </script>
 
 <script setup lang="ts">
+import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
+import { hasTime, isDateBefore } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
+import { useDateFormatter, useDirection, useLocale } from '../shared';
+import { getDefaultDate, getInputType, normalizeDateStep, normalizeHourCycle, normalizeInputValue } from '../shared/date';
+import {
+  createContent,
+  getSegmentElements,
+  initializeSegmentValues,
+  isSegmentNavigationKey,
+  syncSegmentValues,
+} from '../shared/date';
 import { AVisuallyHidden } from '../visually-hidden';
 
 defineOptions({
+  name: 'ADateFieldRoot',
   inheritAttrs: false,
 });
 
@@ -117,7 +124,9 @@ const { disabled, readonly, isDateUnavailable: propsIsDateUnavailable, granulari
 const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
 
-const formatter = useDateFormatter(locale.value);
+const formatter = useDateFormatter(locale.value, {
+  hourCycle: normalizeHourCycle(props.hourCycle),
+});
 const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
 const segmentElements = ref<Set<HTMLElement>>(new Set());
 
@@ -260,6 +269,11 @@ const prevFocusableSegment = computed(() => {
   return segmentToFocus;
 });
 
+const inputType = computed(() => getInputType(inferredGranularity.value));
+const inputValue = computed(() => normalizeInputValue(modelValue.value, inferredGranularity.value));
+const inputMaxValue = computed(() => props.maxValue ? normalizeInputValue(props.maxValue, inferredGranularity.value) : undefined);
+const inputMinValue = computed(() => props.minValue ? normalizeInputValue(props.minValue, inferredGranularity.value) : undefined);
+
 function handleKeydown(event: KeyboardEvent) {
   if (!isSegmentNavigationKey(event.key)) {
     return;
@@ -323,15 +337,15 @@ defineExpose({
     <AVisuallyHidden
       :id="id"
       as="input"
-      type="date"
+      :type="inputType"
       feature="focusable"
       tabindex="-1"
-      :value="modelValue ? modelValue.toString() : ''"
+      :value="inputValue"
       :name="name"
       :disabled="disabled"
       :required="required"
-      :min="minValue"
-      :max="maxValue"
+      :min="inputMinValue"
+      :max="inputMaxValue"
       @focus="Array.from(segmentElements)?.[0]?.focus()"
     />
   </APrimitive>

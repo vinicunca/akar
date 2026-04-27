@@ -9,6 +9,8 @@ export interface ADialogTitleProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectDialogRootContext } from './dialog-root.vue';
 
+defineOptions({ name: 'ADialogTitle' });
+
 const props = withDefaults(defineProps<ADialogTitleProps>(), { as: 'h2' });
 const rootContext = injectDialogRootContext();
 useForwardExpose();

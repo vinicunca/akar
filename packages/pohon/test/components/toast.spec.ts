@@ -1,12 +1,11 @@
-import type { PToastProps, PToastSlots } from '../../src/runtime/components/toast.vue';
-import { ClientOnly } from '#components';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
-import Toast from '../../src/runtime/components/toast.vue';
-import Toaster from '../../src/runtime/components/toaster.vue';
-import ComponentRender from '../component-render';
+import { ClientOnly } from '#components';
+import Toast from '../../src/runtime/components/Toast.vue';
+import Toaster from '../../src/runtime/components/Toaster.vue';
+import { renderEach } from '../component-render';
 
 const ToastWrapper = defineComponent({
   components: {
@@ -26,34 +25,31 @@ const ToastWrapper = defineComponent({
 </PToaster>`,
 });
 
-describe('toast', () => {
+describe('Toast', () => {
   const props = { title: 'Toast' };
 
-  it.each([
+  renderEach(ToastWrapper, [
     // Props
     ['with title', { props }],
     ['with description', { props: { ...props, description: 'This is a toast' } }],
     ['with icon', { props: { ...props, icon: 'i-lucide-rocket' } }],
     ['with avatar', { props: { ...props, avatar: { src: 'https://github.com/benjamincanac.png' } } }],
     ['with actions', { props: { ...props, actions: [{ label: 'Action' }] } }],
-    ['with orientation vertical', { props: { ...props, icon: 'i-lucide-rocket', description: 'This is a toast', actions: [{ label: 'Action' }], orientation: 'vertical' as const } }],
-    ['with orientation horizontal', { props: { ...props, icon: 'i-lucide-rocket', description: 'This is a toast', actions: [{ label: 'Action' }], orientation: 'horizontal' as const } }],
+    ['with orientation vertical', { props: { ...props, icon: 'i-lucide-rocket', description: 'This is a toast', actions: [{ label: 'Action' }], orientation: 'vertical' } }],
+    ['with orientation horizontal', { props: { ...props, icon: 'i-lucide-rocket', description: 'This is a toast', actions: [{ label: 'Action' }], orientation: 'horizontal' } }],
     ['without close', { props: { ...props, close: false } }],
     ['with closeIcon', { props: { ...props, closeIcon: 'i-lucide-trash' } }],
-    ['with type', { props: { ...props, type: 'background' as const } }],
-    ['with color neutral', { props: { ...props, color: 'neutral' as const } }],
+    ['with type', { props: { ...props, type: 'background' } }],
+    ['with color neutral', { props: { ...props, color: 'neutral' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'bg-elevated/50' } }],
-    ['with ui', { props: { ...props, pohon: { title: 'font-bold' } } }],
+    ['with pohon', { props: { ...props, pohon: { title: 'font-bold' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with title slot', { props, slots: { title: () => 'Title slot' } }],
     ['with description slot', { props, slots: { description: () => 'Description slot' } }],
     ['with close slot', { props, slots: { close: () => 'Close slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PToastProps; slots?: Partial<PToastSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, ToastWrapper);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ToastWrapper, {

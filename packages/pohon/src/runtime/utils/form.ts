@@ -1,7 +1,7 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec';
 import type { Struct } from 'superstruct';
 import type { FormSchema, ValidateReturnSchema } from '../types/form';
-import { isFunction } from '@vinicunca/perkakas';
+import { isFunction, isObjectType } from '@vinicunca/perkakas';
 
 export function isSuperStructSchema(schema: any): schema is Struct<any, any> {
   return (
@@ -25,7 +25,7 @@ export async function validateStandardSchema(
   if (result.issues) {
     return {
       errors: result.issues?.map((issue) => ({
-        name: issue.path?.map((item) => typeof item === 'object' ? item.key : item).join('.') || '',
+        name: issue.path?.map((item) => isObjectType(item) ? item.key : item).join('.') || '',
         message: issue.message,
       })) || [],
       result: null,
@@ -86,8 +86,9 @@ export function getAtPath<T extends object>(
 }
 
 export function setAtPath<T extends object>(
-  { data, path, value }:
-  { data: T; path: string; value: any },
+  data: T,
+  path: string,
+  value: any,
 ): T {
   if (!path) {
     return Object.assign(data, value);

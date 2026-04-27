@@ -24,6 +24,8 @@ import { useId } from '../shared';
 import { injectRovingFocusGroupContext } from './roving-focus-group.vue';
 import { focusFirst, getFocusIntent, wrapArray } from './utils';
 
+defineOptions({ name: 'ARovingFocusItem' });
+
 const props = withDefaults(defineProps<ARovingFocusItemProps>(), {
   focusable: true,
   as: 'span',

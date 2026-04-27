@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Predchádzajúci',
     },
     chatPrompt: {
-      placeholder: 'Tu napíšte svoje správu...',
+      placeholder: 'Tu napíšte svoje správu…',
     },
     chatPromptSubmit: {
       label: 'Odoslať',
+    },
+    chatReasoning: {
+      thinking: 'Premýšľa…',
+      thought: 'Premýšľal',
+      thoughtFor: 'Premýšľal {duration}',
     },
     colorMode: {
       dark: 'Tmavý',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Zavrieť',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
-      placeholder: 'Zadajte príkaz alebo vyhľadajte...',
+      placeholder: 'Zadajte príkaz alebo vyhľadajte…',
     },
     contentSearch: {
       links: 'Odkazy',
-      theme: 'Téma',
+      theme: 'Farebný režim',
     },
     contentSearchButton: {
-      label: 'Hľadať...',
+      label: 'Hľadať…',
     },
     contentToc: {
       title: 'Na tejto stránke',
     },
+    dropdownMenu: {
+      noMatch: 'Žiadna zhoda',
+      search: 'Hľadať…',
+    },
     dashboardSearch: {
-      theme: 'Téma',
+      theme: 'Farebný režim',
     },
     dashboardSearchButton: {
-      label: 'Hľadať...',
+      label: 'Hľadať…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Zbaliť bočný panel',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Znížiť',
       increment: 'Zvýšiť',
     },
+    listbox: {
+      noData: 'Žiadne dáta',
+      noMatch: 'Žiadna zhoda',
+      search: 'Hľadať…',
+    },
     modal: {
       close: 'Zatvoriť',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kopírovať kód do schránky',
       },
+      prompt: {
+        copy: 'Kopírovať výzvu',
+        openIn: 'Otvoriť v {name}',
+      },
+    },
+    sidebar: {
+      close: 'Zatvoriť',
+      toggle: 'Prepnúť',
     },
     selectMenu: {
       create: 'Vytvoriť "{label}"',
       noData: 'Žiadne dáta',
       noMatch: 'Žiadna zhoda',
-      search: 'Hľadať...',
+      search: 'Hľadať…',
     },
     slideover: {
       close: 'Zatvoriť',

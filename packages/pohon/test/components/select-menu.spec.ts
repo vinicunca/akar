@@ -1,16 +1,15 @@
 import type { FormInputEvents } from '../../src/module';
-import type { PSelectMenuProps, PSelectMenuSlots } from '../../src/runtime/components/select-menu.vue';
-import theme from '#build/pohon/input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PSelectMenu from '../../src/runtime/components/select-menu.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/input';
+import SelectMenu from '../../src/runtime/components/SelectMenu.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 import { expectEmitPayloadType } from '../utils/types';
 
-describe('selectMenu', () => {
+describe('SelectMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
 
@@ -40,13 +39,14 @@ describe('selectMenu', () => {
 
   const props = { open: true, portal: false, items };
 
-  it.each([
+  renderEach(SelectMenu, [
     // Props
     ['with items', { props }],
     ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
-    ['with valueKey', { props: { ...props, valueKey: 'value' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Backlog' } }],
+    ['with by', { props: { ...props, by: 'value', defaultValue: items[0] } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with descriptionKey', { props: { ...props, descriptionKey: 'description' } }],
     ['with multiple', { props: { ...props, multiple: true } }],
@@ -83,7 +83,7 @@ describe('selectMenu', () => {
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with class', { props: { ...props, class: 'rounded-full' } }],
-    ['with ui', { props: { ...props, pohon: { group: 'p-2' } } }],
+    ['with pohon', { props: { ...props, pohon: { group: 'p-2' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
@@ -94,13 +94,31 @@ describe('selectMenu', () => {
     ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with create-item-label slot', { props: { ...props, searchTerm: 'New value', createItem: true }, slots: { 'create-item-label': () => 'Create item slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PSelectMenuProps; slots?: Partial<PSelectMenuSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PSelectMenu);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
+
+  renderEach(
+    SelectMenu,
+    [
+      ['with .trim modifier', { props: { modelModifiers: { trim: true } } }, { input: 'input  ', expected: 'input' }],
+      ['with .number modifier', { props: { modelModifiers: { number: true } } }, { input: '42', expected: 42 }],
+      ['with .nullable modifier', { props: { modelModifiers: { nullable: true } } }, { input: null, expected: null }],
+      ['with .optional modifier', { props: { modelModifiers: { optional: true } } }, { input: undefined, expected: undefined }],
+    ],
+    '%s works',
+    async (_, options, spec) => {
+      const wrapper = mount(SelectMenu, {
+        ...options,
+      });
+
+      const selectMenu = wrapper.findComponent({ name: 'AComboboxRoot' });
+      await selectMenu.setValue(spec.input);
+
+      expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[spec.expected]] });
+    },
+  );
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PSelectMenu, {
+    const wrapper = await mountSuspended(SelectMenu, {
       props: {
         ...props,
         modelValue: items[0],
@@ -120,23 +138,23 @@ describe('selectMenu', () => {
 
   describe('emits', () => {
     it('update:modelValue event', async () => {
-      const wrapper = mount(PSelectMenu, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       await input.setValue('Option 1');
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] });
     });
 
     it('change event', async () => {
-      const wrapper = mount(PSelectMenu, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       await input.setValue('Option 1');
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
     it('blur event', async () => {
-      const wrapper = mount(PSelectMenu, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const wrapper = mount(SelectMenu, { props: { items: ['Option 1', 'Option 2'] } });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       input.vm.$emit('update:open', false);
       expect(wrapper.emitted()).toMatchObject({ blur: [[{ type: 'blur' }]] });
     });
@@ -144,7 +162,7 @@ describe('selectMenu', () => {
 
   describe('it should display correct label', () => {
     it.each([null, undefined, ''])('falsy model value %s should display placeholder', (modelValue) => {
-      const wrapper = mount(PSelectMenu, {
+      const wrapper = mount(SelectMenu, {
         props: {
           items,
           modelValue,
@@ -156,7 +174,7 @@ describe('selectMenu', () => {
     });
 
     it('with string array and string value', () => {
-      const wrapper = mount(PSelectMenu, {
+      const wrapper = mount(SelectMenu, {
         props: {
           items: ['Apple', 'Banana', 'Cherry'],
           modelValue: 'Banana',
@@ -167,7 +185,7 @@ describe('selectMenu', () => {
     });
 
     it('with multiple and empty array value should display placeholder', () => {
-      const wrapper = mount(PSelectMenu, {
+      const wrapper = mount(SelectMenu, {
         props: {
           items,
           multiple: true,
@@ -179,7 +197,7 @@ describe('selectMenu', () => {
     });
 
     it('with falsy modelValue and options items contain falsy', () => {
-      const wrapper = mount(PSelectMenu, {
+      const wrapper = mount(SelectMenu, {
         props: {
           items: [
             {
@@ -221,7 +239,7 @@ describe('selectMenu', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'ComboboxRoot' });
+      const input = wrapper.findComponent({ name: 'AComboboxRoot' });
       return {
         wrapper,
         input,
@@ -256,65 +274,65 @@ describe('selectMenu', () => {
 
     it('should have the correct types', () => {
       // with object item
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: 'bar' }],
       })).toEqualTypeOf<[{ label: string; value: string }]>();
 
       // with object item and multiple
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: 1 }],
         multiple: true,
       })).toEqualTypeOf<[Array<{ label: string; value: number }>]>();
 
       // with object item and valueKey
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: 'bar' }],
         valueKey: 'value',
       })).toEqualTypeOf<[string]>();
 
       // with object item and multiple and valueKey
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: 1 }],
         multiple: true,
         valueKey: 'value',
       })).toEqualTypeOf<[Array<number>]>();
 
       // with object item and object valueKey
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [{ label: 'foo', value: { id: 1, name: 'bar' } }],
         valueKey: 'value',
       })).toEqualTypeOf<[{ id: number; name: string }]>();
 
       // with string item
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: ['foo'],
       })).toEqualTypeOf<[string]>();
 
       // with string item and multiple
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: ['foo'],
         multiple: true,
       })).toEqualTypeOf<[Array<string>]>();
 
       // with groups
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [['foo']],
       })).toEqualTypeOf<[string]>();
 
       // with groups and multiple
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [['foo']],
         multiple: true,
       })).toEqualTypeOf<[Array<string>]>();
 
       // with groups, multiple and mixed types
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
         multiple: true,
       })).toEqualTypeOf<[Array<string | number | { value: string } | { value: number }>]>();
 
       // with groups, multiple, mixed types and valueKey
-      expectEmitPayloadType('update:modelValue', () => PSelectMenu({
+      expectEmitPayloadType('update:modelValue', () => SelectMenu({
         items: [['foo', { value: 1 }], [{ value: 'bar' }, 2]],
         multiple: true,
         valueKey: 'value',

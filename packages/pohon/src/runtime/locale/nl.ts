@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Vorige',
     },
     chatPrompt: {
-      placeholder: 'Schrijf hier je bericht...',
+      placeholder: 'Schrijf hier je bericht…',
     },
     chatPromptSubmit: {
       label: 'Versturen',
+    },
+    chatReasoning: {
+      thinking: 'Aan het denken…',
+      thought: 'Nagedacht',
+      thoughtFor: '{duration} nagedacht',
     },
     colorMode: {
       dark: 'Donker',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Sluiten',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      placeholder: 'Typ een commando of zoek...',
+      placeholder: 'Typ een commando of zoek…',
     },
     contentSearch: {
       links: 'Links',
       theme: 'Thema',
     },
     contentSearchButton: {
-      label: 'Zoeken...',
+      label: 'Zoeken…',
     },
     contentToc: {
       title: 'Op deze pagina',
+    },
+    dropdownMenu: {
+      noMatch: 'Geen overeenkomende gegevens',
+      search: 'Zoeken…',
     },
     dashboardSearch: {
       theme: 'Thema',
     },
     dashboardSearchButton: {
-      label: 'Zoeken...',
+      label: 'Zoeken…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Zijbalk invouwen',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Verlagen',
       increment: 'Verhogen',
     },
+    listbox: {
+      noData: 'Geen gegevens',
+      noMatch: 'Geen overeenkomende gegevens',
+      search: 'Zoeken…',
+    },
     modal: {
       close: 'Sluiten',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Code naar klembord kopiëren',
       },
+      prompt: {
+        copy: 'Prompt kopiëren',
+        openIn: 'Openen in {name}',
+      },
+    },
+    sidebar: {
+      close: 'Sluiten',
+      toggle: 'Schakelen',
     },
     selectMenu: {
       create: '"{label}" creëren',
       noData: 'Geen gegevens',
       noMatch: 'Geen overeenkomende gegevens',
-      search: 'Zoeken...',
+      search: 'Zoeken…',
     },
     slideover: {
       close: 'Sluiten',

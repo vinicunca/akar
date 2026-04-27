@@ -10,6 +10,8 @@ import { ADialogClose } from '../dialog';
 import { useForwardExpose } from '../shared';
 import { injectAAlertDialogContentContext } from './alert-dialog-content.vue';
 
+defineOptions({ name: 'AAlertDialogCancel' });
+
 const props = withDefaults(
   defineProps<AAlertDialogCancelProps>(),
   { as: 'button' },

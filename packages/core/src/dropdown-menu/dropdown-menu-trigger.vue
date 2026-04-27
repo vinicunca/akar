@@ -17,6 +17,8 @@ import {
 } from '../primitive';
 import { injectADropdownMenuRootContext } from './dropdown-menu-root.vue';
 
+defineOptions({ name: 'ADropdownMenuTrigger' });
+
 const props = withDefaults(defineProps<ADropdownMenuTriggerProps>(), {
   as: 'button',
 });

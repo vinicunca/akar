@@ -3,6 +3,8 @@ import type { DateValue } from '@internationalized/date';
 import { ADateFieldRoot } from '..';
 import { injectADatePickerRootContext } from './date-picker-root.vue';
 
+defineOptions({ name: 'ADatePickerField' });
+
 const rootContext = injectADatePickerRootContext();
 
 function handleUpdateModelValue(date: DateValue | undefined) {

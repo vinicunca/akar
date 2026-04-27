@@ -7,6 +7,8 @@ export interface ASelectIconProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ASelectIcon' });
+
 withDefaults(defineProps<ASelectIconProps>(), {
   as: 'span',
 });

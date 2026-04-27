@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'पिछला',
     },
     chatPrompt: {
-      placeholder: 'यहाँ आपका संदेश लिखें...',
+      placeholder: 'यहाँ आपका संदेश लिखें…',
     },
     chatPromptSubmit: {
       label: 'भेजें',
+    },
+    chatReasoning: {
+      thinking: 'सोच रहा है…',
+      thought: 'सोचा',
+      thoughtFor: '{duration} सोचा',
     },
     colorMode: {
       dark: 'गहरा',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'बंद करें',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      placeholder: 'एक आदेश या खोज टाइप करें...',
+      placeholder: 'एक आदेश या खोज टाइप करें…',
     },
     contentSearch: {
       links: 'लिंक्स',
       theme: 'थीम',
     },
     contentSearchButton: {
-      label: 'खोजें...',
+      label: 'खोजें…',
     },
     contentToc: {
       title: 'इस पृष्ठ पर',
+    },
+    dropdownMenu: {
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…',
     },
     dashboardSearch: {
       theme: 'थीम',
     },
     dashboardSearchButton: {
-      label: 'खोजें...',
+      label: 'खोजें…',
     },
     dashboardSidebarCollapse: {
       collapse: 'साइडबार संकुचित करें',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'घटाना',
       increment: 'बढ़ाना',
     },
+    listbox: {
+      noData: 'कोई डेटा नहीं',
+      noMatch: 'कोई मेल खाता डेटा नहीं',
+      search: 'खोजें…',
+    },
     modal: {
       close: 'बंद करें',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'कोड को क्लिपबोर्ड पर कॉपी करें',
       },
+      prompt: {
+        copy: 'प्रॉम्प्ट कॉपी करें',
+        openIn: '{name} में खोलें',
+      },
+    },
+    sidebar: {
+      close: 'बंद करें',
+      toggle: 'टॉगल करें',
     },
     selectMenu: {
       create: '"{label}" बनाएँ',
       noData: 'कोई डेटा नहीं',
       noMatch: 'कोई मेल खाता डेटा नहीं',
-      search: 'खोजें...',
+      search: 'खोजें…',
     },
     slideover: {
       close: 'बंद करें',

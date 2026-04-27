@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Előző',
     },
     chatPrompt: {
-      placeholder: 'Írd be a kérdésedet itt...',
+      placeholder: 'Írd be a kérdésedet itt…',
     },
     chatPromptSubmit: {
       label: 'Küldés',
+    },
+    chatReasoning: {
+      thinking: 'Gondolkodik…',
+      thought: 'Gondolkodott',
+      thoughtFor: '{duration} gondolkodott',
     },
     colorMode: {
       dark: 'Sötét',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Bezárás',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      placeholder: 'Írjon be egy parancsot vagy keressen...',
+      placeholder: 'Írjon be egy parancsot vagy keressen…',
     },
     contentSearch: {
       links: 'Linkek',
       theme: 'Téma',
     },
     contentSearchButton: {
-      label: 'Keresés...',
+      label: 'Keresés…',
     },
     contentToc: {
       title: 'Ezen az oldalon',
+    },
+    dropdownMenu: {
+      noMatch: 'Nincs találat',
+      search: 'Keresés…',
     },
     dashboardSearch: {
       theme: 'Téma',
     },
     dashboardSearchButton: {
-      label: 'Keresés...',
+      label: 'Keresés…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Oldalsáv összecsukása',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Csökkent',
       increment: 'Növel',
     },
+    listbox: {
+      noData: 'Nincs adat',
+      noMatch: 'Nincs találat',
+      search: 'Keresés…',
+    },
     modal: {
       close: 'Bezárás',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kód másolása a vágólapra',
       },
+      prompt: {
+        copy: 'Prompt másolása',
+        openIn: 'Megnyitás: {name}',
+      },
+    },
+    sidebar: {
+      close: 'Bezárás',
+      toggle: 'Váltás',
     },
     selectMenu: {
       create: '"{label}" létrehozása',
       noData: 'Nincs adat',
       noMatch: 'Nincs találat',
-      search: 'Keresés...',
+      search: 'Keresés…',
     },
     slideover: {
       close: 'Bezárás',

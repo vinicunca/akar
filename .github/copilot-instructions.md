@@ -151,7 +151,7 @@ describe('given ComponentName', () => {
 ## Important File Locations
 
 - Component constants: `packages/core/constant/components.ts`
-- Primitive base: `packages/core/src/primitive/primitive.ts`
+- APrimitive base: `packages/core/src/primitive/primitive.ts`
 - Pohon module entry: `packages/pohon/src/module.ts`
 - Docs config: `docs/nuxt.config.ts`
 - Root scripts: `package.json` (workspace root)

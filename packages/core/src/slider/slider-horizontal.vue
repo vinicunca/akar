@@ -6,6 +6,8 @@ import SliderImpl from './slider-impl.vue';
 import { injectASliderRootContext } from './slider-root.vue';
 import { BACK_KEYS, linearScale, provideSliderOrientationContext } from './utils';
 
+defineOptions({ name: 'ASliderHorizontal' });
+
 interface SliderHorizontalProps extends SliderOrientationPrivateProps {
   dir?: Direction;
 }

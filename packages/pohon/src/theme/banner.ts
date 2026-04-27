@@ -1,38 +1,39 @@
 import type { PohonModuleOptions } from '../module';
 
-export default (options: Required<PohonModuleOptions>) => ({
-  slots: {
-    root: '',
-    container: '',
-    left: '',
-    center: '',
-    right: '',
-    icon: '',
-    title: '',
-    actions: '',
-    close: '',
-  },
-
-  variants: {
-    color: {
-      ...Object.fromEntries((options.theme.colors || []).map((color: string) => [
-        color,
-        {
+export default (options: Required<PohonModuleOptions>) => {
+  return {
+    slots: {
+      root: '',
+      container: '',
+      left: '',
+      center: '',
+      right: '',
+      icon: '',
+      title: '',
+      actions: '',
+      close: '',
+    },
+    variants: {
+      color: {
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [
+          color,
+          {
+            root: '',
+          },
+        ])),
+        neutral: {
           root: '',
         },
-      ])),
-      neutral: {
-        root: '',
+      },
+      to: {
+        true: '',
       },
     },
-    to: {
-      true: '',
+
+    compoundVariants: [],
+
+    defaultVariants: {
+      color: 'primary',
     },
-  },
-
-  compoundVariants: [],
-
-  defaultVariants: {
-    color: 'primary',
-  },
-});
+  };
+};

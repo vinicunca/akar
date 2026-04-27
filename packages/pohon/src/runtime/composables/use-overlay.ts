@@ -63,10 +63,13 @@ type OpenedOverlay<T extends Component> = Omit<OverlayInstance<T>, 'open' | 'clo
   result: Promise<CloseEventArgType<ComponentEmit<T>>>;
 } & Promise<CloseEventArgType<ComponentEmit<T>>>;
 
-function useOverlay_() {
+function _useOverlay() {
   const overlays = shallowReactive<Array<Overlay>>([]);
 
-  function create<T extends Component>(component: T, _options?: OverlayOptions<ComponentProps<T>>): OverlayInstance<T> {
+  function create<T extends Component>(
+    component: T,
+    _options?: OverlayOptions<ComponentProps<T>>,
+  ): OverlayInstance<T> {
     const { props, defaultOpen, destroyOnClose } = _options || {};
 
     const options = reactive<Overlay>({
@@ -89,7 +92,10 @@ function useOverlay_() {
     };
   }
 
-  function open<T extends Component>(id: symbol, props?: ComponentProps<T>): OpenedOverlay<T> {
+  function open<T extends Component>(
+    id: symbol,
+    props?: ComponentProps<T>,
+  ): OpenedOverlay<T> {
     const overlay = getOverlay(id);
 
     // If props are provided, merge them with the original props, otherwise use the original props
@@ -176,4 +182,4 @@ function useOverlay_() {
   };
 }
 
-export const useOverlay = /* @__PURE__ */ createSharedComposable(useOverlay_);
+export const useOverlay = /* @__PURE__ */ createSharedComposable(_useOverlay);

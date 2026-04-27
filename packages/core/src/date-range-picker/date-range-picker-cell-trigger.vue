@@ -8,6 +8,8 @@ export interface ADateRangePickerCellTriggerProps extends ARangeCalendarCellTrig
 <script setup lang="ts">
 import { ARangeCalendarCellTrigger } from '..';
 
+defineOptions({ name: 'ADateRangePickerCellTrigger' });
+
 const props = defineProps<ADateRangePickerCellTriggerProps>();
 
 defineSlots<RangeCalendarCellTriggerSlot>();

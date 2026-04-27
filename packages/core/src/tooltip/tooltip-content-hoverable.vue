@@ -5,6 +5,8 @@ import TooltipContentImpl from './tooltip-content-impl.vue';
 import { injectATooltipProviderContext } from './tooltip-provider.vue';
 import { injectATooltipRootContext } from './tooltip-root.vue';
 
+defineOptions({ name: 'ATooltipContentHoverable' });
+
 const props = defineProps<TooltipContentImplProps>();
 const forwardedProps = useForwardProps(props);
 const { forwardRef, currentElement } = useForwardExpose();

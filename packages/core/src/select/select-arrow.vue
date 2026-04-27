@@ -8,6 +8,8 @@ export interface ASelectArrowProps extends APopperArrowProps {}
 import { APopperArrow } from '../popper';
 import { injectSelectContentContext, SelectContentDefaultContextValue } from './select-content-impl.vue';
 
+defineOptions({ name: 'ASelectArrow' });
+
 const props = withDefaults(defineProps<ASelectArrowProps>(), {
   width: 10,
   height: 5,

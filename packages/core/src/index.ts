@@ -6,6 +6,11 @@ export * from './alert-dialog';
 export * from './calendar';
 export * from './checkbox';
 export * from './collapsible';
+export * from './color-area';
+export * from './color-field';
+export * from './color-slider';
+export * from './color-swatch';
+export * from './color-swatch-picker';
 export * from './combobox';
 export * from './context-menu';
 export * from './config-provider';
@@ -22,6 +27,8 @@ export * from './focus-scope';
 export * from './hover-card';
 export * from './label';
 export * from './listbox';
+export * from './month-picker';
+export * from './month-range-picker';
 export * from './navigation-menu';
 export * from './number-field';
 export * from './pagination';
@@ -44,6 +51,7 @@ export * from './switch';
 export * from './tabs';
 export * from './tags-input';
 export * from './time-field';
+export * from './time-range-field';
 export * from './toast';
 export * from './toggle';
 export * from './toggle-group';
@@ -52,6 +60,8 @@ export * from './tooltip';
 export * from './tree';
 export * from './viewport';
 export { AVisuallyHidden, type AVisuallyHiddenProps } from './visually-hidden';
+export * from './year-picker';
+export * from './year-range-picker';
 
 export {
   createContext,
@@ -73,9 +83,47 @@ export {
   useStateMachine,
 } from './shared';
 
+// Color utilities
+export {
+  type Color,
+  type ColorChannel,
+  type ColorFormat,
+  type ColorSpace,
+  colorToHex,
+  colorToHsb,
+  colorToHsl,
+  colorToRgb,
+  colorToString,
+  convertToHsb,
+  convertToHsl,
+  convertToRgb,
+  getAreaBackgroundStyle,
+  getAreaGradient,
+  getChannelName,
+  getChannelRange,
+  getChannelValue,
+  getSliderBackgroundStyle,
+  getSliderGradient,
+  type HsbColor,
+  type HslColor,
+  isValidColor,
+  normalizeColor,
+  parseColor,
+  type RgbColor,
+  setChannelValue,
+  setChannelValues,
+} from './shared/color';
+
 export {
   type AcceptableValue,
+  type DataOrientation,
+  type Direction,
+  type FormFieldProps,
   type GenericComponentInstance,
+  type ScrollBodyOption,
+  type SingleOrMultipleProps,
+  type SingleOrMultipleType,
+  type StringOrNumber,
 } from './shared/types';
 
 export {

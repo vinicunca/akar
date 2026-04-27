@@ -7,6 +7,8 @@ export interface AMenuPortalProps extends ATeleportProps {}
 <script setup lang="ts">
 import { ATeleport } from '../teleport';
 
+defineOptions({ name: 'AMenuPortal' });
+
 const props = defineProps<AMenuPortalProps>();
 </script>
 

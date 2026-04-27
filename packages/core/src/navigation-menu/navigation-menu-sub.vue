@@ -30,6 +30,8 @@ import { APrimitive } from '../primitive';
 import { useForwardExpose } from '../shared';
 import { injectANavigationMenuContext, provideNavigationMenuContext } from './navigation-menu-root.vue';
 
+defineOptions({ name: 'ANavigationMenuSub' });
+
 const props = withDefaults(
   defineProps<ANavigationMenuSubProps>(),
   {

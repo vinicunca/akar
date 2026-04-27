@@ -30,10 +30,15 @@ export default defineLocale<PMessages>({
       prev: 'ئالدىنقى بەت',
     },
     chatPrompt: {
-      placeholder: 'خەت كىرگۈزۈڭ...',
+      placeholder: 'خەت كىرگۈزۈڭ…',
     },
     chatPromptSubmit: {
       label: 'يوللاش',
+    },
+    chatReasoning: {
+      thinking: 'ئويلاۋاتىدۇ…',
+      thought: 'ئويلاندى',
+      thoughtFor: '{duration} ئويلاندى',
     },
     colorMode: {
       dark: 'قاراڭغۇ',
@@ -47,7 +52,7 @@ export default defineLocale<PMessages>({
       close: 'تاقاش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ...',
+      placeholder: 'بۇيرۇق كىرگۈزۈڭ ياكى ئىزدەڭ…',
     },
     contentSearch: {
       links: 'ئۇلانمىلار',
@@ -58,6 +63,10 @@ export default defineLocale<PMessages>({
     },
     contentToc: {
       title: 'مەزمۇن',
+    },
+    dropdownMenu: {
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…',
     },
     dashboardSearch: {
       theme: 'تېما',
@@ -92,6 +101,11 @@ export default defineLocale<PMessages>({
       decrement: 'ئازايتىش',
       increment: 'كۆپەيتىش',
     },
+    listbox: {
+      noData: 'سانلىق مەلۇمات يوق',
+      noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
+      search: 'ئىزدەش…',
+    },
     modal: {
       close: 'تاقاش',
     },
@@ -112,12 +126,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'كۆچۈرۈش',
       },
+      prompt: {
+        copy: 'كۆچۈرۈش',
+        openIn: '{name} دا ئېچىش',
+      },
+    },
+    sidebar: {
+      close: 'تاقاش',
+      toggle: 'ئالماشتۇرۇش',
     },
     selectMenu: {
       create: '"{label}" نى قۇرۇش',
       noData: 'سانلىق مەلۇمات يوق',
       noMatch: 'ماس كېلىدىغان سانلىق مەلۇمات يوق',
-      search: 'ئىزدەش...',
+      search: 'ئىزدەش…',
     },
     slideover: {
       close: 'تاقاش',

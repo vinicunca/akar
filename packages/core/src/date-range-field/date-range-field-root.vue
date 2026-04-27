@@ -1,29 +1,12 @@
 <script lang="ts">
 import type { DateValue } from '@internationalized/date';
-
 import type { Ref } from 'vue';
 import type { DateMatcher } from '../date';
 import type { APrimitiveProps } from '../primitive';
 import type { UseDateFormatter } from '../shared';
 import type { DateRange, DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '../shared/date';
 import type { Direction, FormFieldProps } from '../shared/types';
-import { KEY_CODES } from '@vinicunca/perkakas';
-import {
-  areAllDaysBetweenValid,
-  hasTime,
-  isDateBefore,
-  isDateBeforeOrSame,
-} from '../date';
-import { createContext, useDateFormatter, useDirection, useLocale } from '../shared';
-import {
-  createContent,
-  getDefaultDate,
-  getSegmentElements,
-  initializeSegmentValues,
-  isSegmentNavigationKey,
-  normalizeDateStep,
-  syncSegmentValues,
-} from '../shared/date';
+import { createContext } from '../shared';
 
 export type DateRangeType = 'end' | 'start';
 
@@ -53,7 +36,7 @@ export interface ADateRangeFieldRootProps extends APrimitiveProps, FormFieldProp
   defaultPlaceholder?: DateValue;
   /** The placeholder date, which is used to determine what month to display when no date is selected. This updates as the user navigates the calendar and can be used to programmatically control the calendar view */
   placeholder?: DateValue;
-  /** The controlled checked state of the calendar. Can be bound as `v-model`. */
+  /** The controlled value of the field. Can be bound as `v-model`. */
   modelValue?: DateRange | null;
   /** The hour cycle used for formatting times. Defaults to the local preference */
   hourCycle?: HourCycle;
@@ -95,12 +78,31 @@ export const [
 </script>
 
 <script setup lang="ts">
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
+import {
+  areAllDaysBetweenValid,
+  hasTime,
+  isDateBefore,
+  isDateBeforeOrSame,
+} from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
+import { useDateFormatter, useDirection, useLocale } from '../shared';
+import {
+  createContent,
+  getDefaultDate,
+  getSegmentElements,
+  initializeSegmentValues,
+  isSegmentNavigationKey,
+  normalizeDateStep,
+  normalizeHourCycle,
+  syncSegmentValues,
+} from '../shared/date';
 import { AVisuallyHidden } from '../visually-hidden';
 
 defineOptions({
+  name: 'ADateRangeFieldRoot',
   inheritAttrs: false,
 });
 
@@ -127,7 +129,9 @@ const {
 const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
 
-const formatter = useDateFormatter(locale.value);
+const formatter = useDateFormatter(locale.value, {
+  hourCycle: normalizeHourCycle(props.hourCycle),
+});
 const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
 const segmentElements = ref<Set<HTMLElement>>(new Set());
 

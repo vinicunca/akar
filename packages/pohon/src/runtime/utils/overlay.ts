@@ -15,6 +15,8 @@ export interface PointerDownOutsideOptions {
  *
  * Note: Akar already handles dismissable layer checks internally via `isLayerExist`,
  * so we don't need to check for `[data-dismissable-layer]` here.
+ *
+ * @see https://akar.vinicunca.dev/docs/components/dialog#disable-close-on-interaction-outside
  */
 export function pointerDownOutside(event: PointerDownOutsideEvent, options: PointerDownOutsideOptions = {}) {
   const originalEvent = event.detail.originalEvent;
@@ -30,7 +32,7 @@ export function pointerDownOutside(event: PointerDownOutsideEvent, options: Poin
   }
 
   // Scrollable mode: prevent closing when clicking on scrollbar
-  // FIXME: This is a workaround to prevent the overlay from closing when clicking on the scrollbar https://akar.vinicunca.dev/docs/components/dialog#scrollable-overlay but it's not working on Mac OS.
+  // TODO: This is a workaround to prevent the overlay from closing when clicking on the scrollbar https://dev.vinicunca.dev/docs/components/dialog#scrollable-overlay but it's not working on Mac OS.
   if (options.scrollable) {
     if (originalEvent.offsetX > target.clientWidth || originalEvent.offsetY > target.clientHeight) {
       event.preventDefault();

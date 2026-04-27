@@ -8,6 +8,8 @@ export interface AToastDescriptionProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AToastDescription' });
+
 const props = defineProps<AToastDescriptionProps>();
 useForwardExpose();
 </script>

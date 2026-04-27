@@ -4,6 +4,8 @@ import { useForwardPropsEmits } from '../shared';
 import MenuContentImpl from './menu-content-impl.vue';
 import { injectAMenuContext } from './menu-root.vue';
 
+defineOptions({ name: 'AMenuRootContentNonModal' });
+
 const props = defineProps<MenuRootContentNonModalProps>();
 const emits = defineEmits<MenuRootContentModalEmits>();
 const forwarded = useForwardPropsEmits(props, emits);

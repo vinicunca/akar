@@ -1,5 +1,3 @@
-import type { PFormProps, PFormSlots } from '../../src/runtime/components/form.vue';
-import { PForm } from '#components';
 import { flushPromises } from '@vue/test-utils';
 import Joi from 'joi';
 import { nonempty, object, refine, string } from 'superstruct';
@@ -9,17 +7,15 @@ import { axe } from 'vitest-axe';
 import { nextTick, watch } from 'vue';
 import * as yup from 'yup';
 import * as z from 'zod';
-import ComponentRender from '../component-render';
+import PForm from '../../src/runtime/components/Form.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 
-describe('form', () => {
-  it.each([
+describe('Form', () => {
+  renderEach(PForm, [
     ['with state', { props: { state: {} } }],
     ['with default slot', { props: { state: {} }, slots: { default: () => 'Form slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props: PFormProps<any>; slots?: Partial<PFormSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PForm);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await renderForm({
@@ -29,100 +25,105 @@ describe('form', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations();
   });
 
-  it.each([
-    ['zod', {
-      schema: z.object({
-        email: z.string(),
-        password: z.string().min(8, 'Must be at least 8 characters'),
-      }),
-    }],
-    ['yup', {
-      schema: yup.object({
-        email: yup.string(),
-        password: yup.string().min(8, 'Must be at least 8 characters'),
-      }),
-    }],
-    ['joi', {
-      schema: Joi.object({
-        email: Joi.string(),
-        password: Joi.string().min(8).messages({
-          'string.min': 'Must be at least {#limit} characters',
+  renderEach(
+    PForm,
+    [
+      ['zod', {
+        schema: z.object({
+          email: z.string(),
+          password: z.string().min(8, 'Must be at least 8 characters'),
         }),
-      }),
-    }],
-    ['valibot', {
-      schema: valibot.object({
-        email: valibot.string(),
-        password: valibot.pipe(valibot.string(), valibot.minLength(8, 'Must be at least 8 characters')),
-      }),
-    }],
-    ['superstruct', {
-      schema: object({
-        email: nonempty(string()),
-        password: refine(string(), 'Password', (value) => {
-          if (value.length >= 8) {
-            return true;
+      }],
+      ['yup', {
+        schema: yup.object({
+          email: yup.string(),
+          password: yup.string().min(8, 'Must be at least 8 characters'),
+        }),
+      }],
+      ['joi', {
+        schema: Joi.object({
+          email: Joi.string(),
+          password: Joi.string().min(8).messages({
+            'string.min': 'Must be at least {#limit} characters',
+          }),
+        }),
+      }],
+      ['valibot', {
+        schema: valibot.object({
+          email: valibot.string(),
+          password: valibot.pipe(valibot.string(), valibot.minLength(8, 'Must be at least 8 characters')),
+        }),
+      }],
+      ['superstruct', {
+        schema: object({
+          email: nonempty(string()),
+          password: refine(string(), 'Password', (value) => {
+            if (value.length >= 8) {
+              return true;
+            }
+            return 'Must be at least 8 characters';
+          }),
+        }),
+      }],
+      ['custom', {
+        async validate(state: any) {
+          const errs = [];
+          if (!state.email) {
+            errs.push({ name: 'email', message: 'Email is required' });
           }
-          return 'Must be at least 8 characters';
-        }),
-      }),
-    }],
-    ['custom', {
-      async validate(state: any) {
-        const errs = [];
-        if (!state.email) {
-          errs.push({ name: 'email', message: 'Email is required' });
-        }
-        if (state.password?.length < 8) {
-          errs.push({
-            name: 'password',
-            message: 'Must be at least 8 characters',
-          });
-        }
+          if (state.password?.length < 8) {
+            errs.push({
+              name: 'password',
+              message: 'Must be at least 8 characters',
+            });
+          }
 
-        return errs;
-      },
-    }],
-  ])('%s validation works', async (_nameOrHtml: string, options: Partial<PFormProps<any>>) => {
-    const onSubmit = vi.fn();
+          return errs;
+        },
+      }],
+    ],
+    '%s validation works',
+    async (_, options) => {
+      const onSubmit = vi.fn();
 
-    const wrapper = await renderForm({
-      fixture: 'form-basic',
-      props: { ...options, onSubmit },
-    });
+      const wrapper = await renderForm({
+        fixture: 'form-basic',
+        props: { ...options, onSubmit },
+      });
 
-    const form = wrapper.find('form');
-    const email = wrapper.find('#email');
-    const password = wrapper.find('#password');
+      const form = wrapper.find('form');
+      const email = wrapper.find('#email');
+      const password = wrapper.find('#password');
 
-    await email.setValue('bob@dylan.com');
-    await password.setValue('short');
+      await email.setValue('bob@dylan.com');
+      await password.setValue('short');
 
-    await form.trigger('submit.prevent');
-    await flushPromises();
+      await form.trigger('submit.prevent');
+      await flushPromises();
 
-    const formComponent = wrapper.findComponent({ name: 'PForm' });
-    // @ts-expect-error object is possibly undefined
-    expect(formComponent.emitted('error')[0][0].errors).toMatchObject([
-      {
-        id: 'password',
-        name: 'password',
-        message: 'Must be at least 8 characters',
-      },
-    ]);
+      const formComponent = wrapper.findComponent({ name: 'Form' });
+      // @ts-expect-error object is possibly undefined
+      expect(formComponent.emitted('error')[0][0].errors).toMatchObject([
+        {
+          id: 'password',
+          name: 'password',
+          message: 'Must be at least 8 characters',
+        },
+      ]);
 
-    expect(wrapper.html()).toMatchSnapshot('with error');
+      expect(wrapper.html()).toMatchSnapshot('with error');
 
-    await password.setValue('validpassword');
-    await form.trigger('submit.prevent');
-    await flushPromises();
+      await password.setValue('validpassword');
+      await form.trigger('submit.prevent');
+      await flushPromises();
 
-    expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
-      data: { email: 'bob@dylan.com', password: 'validpassword' },
-    }));
+      expect(onSubmit).toHaveBeenCalledWith(expect.objectContaining({
+        data: { email: 'bob@dylan.com', password: 'validpassword' },
+      }));
 
-    expect(wrapper.html()).toMatchSnapshot('without error');
-  });
+      expect(wrapper.html()).toMatchSnapshot('without error');
+    },
+  );
 
   describe('api', async () => {
     let wrapper: any;
@@ -471,7 +472,6 @@ describe('form', () => {
       expect(onError).toHaveBeenCalledTimes(0);
     });
   });
-
   describe('nested API operations', async () => {
     let wrapper: any;
     let form: any;

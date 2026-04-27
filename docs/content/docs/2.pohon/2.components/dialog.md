@@ -30,7 +30,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle"}
 
-#content
+# content
 :core-placeholder{class="h-48 m-4"}
 ::
 
@@ -57,7 +57,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :core-placeholder{class="h-48"}
 ::
 
@@ -85,7 +85,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :core-placeholder{class="h-48"}
 ::
 
@@ -120,7 +120,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :core-placeholder{class="h-48"}
 ::
 
@@ -152,17 +152,17 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :core-placeholder{class="h-48"}
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.close` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.close` key.
 :::
@@ -192,7 +192,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :core-placeholder{class="h-48"}
 ::
 
@@ -224,7 +224,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :core-placeholder{class="h-48"}
 ::
 
@@ -261,7 +261,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :core-placeholder{class="h-48"}
 ::
 
@@ -290,7 +290,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :core-placeholder{class="h-full"}
 ::
 

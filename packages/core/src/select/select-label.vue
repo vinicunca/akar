@@ -10,6 +10,8 @@ export interface ASelectLabelProps extends APrimitiveProps {
 import { APrimitive } from '../primitive';
 import { injectASelectGroupContext } from './select-group.vue';
 
+defineOptions({ name: 'ASelectLabel' });
+
 const props = withDefaults(defineProps<ASelectLabelProps>(), {
   as: 'div',
 });

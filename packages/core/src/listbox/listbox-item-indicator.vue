@@ -9,6 +9,8 @@ export interface AListboxItemIndicatorProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAListboxItemContext } from './listbox-item.vue';
 
+defineOptions({ name: 'AListboxItemIndicator' });
+
 const props = withDefaults(defineProps<AListboxItemIndicatorProps>(), {
   as: 'span',
 });

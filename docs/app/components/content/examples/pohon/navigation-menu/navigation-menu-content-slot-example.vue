@@ -13,7 +13,7 @@ const items = [
       },
       {
         label: 'Colors',
-        description: 'Choose a primary and a neutral color from your Tailwind CSS theme.',
+        description: 'Choose a primary and a neutral color from your UnoCSS theme.',
       },
       {
         label: 'Theme',

@@ -1,40 +1,31 @@
 <script setup lang="ts">
-import theme from '#build/pohon/card';
-import { reactive } from 'vue';
+import theme from '#build/pohon/card'
 
-const variants = Object.keys(theme.variants.variant);
+const variants = Object.keys(theme.variants.variant)
 
 const attrs = reactive({
-  variant: [theme.defaultVariants.variant],
-});
+  variant: [theme.defaultVariants.variant]
+})
 </script>
 
 <template>
-  <BaseNavbar>
-    <PSelect
-      v-model="attrs.variant"
-      :items="variants"
-      multiple
-    />
-  </BaseNavbar>
+  <Navbar>
+    <PSelect v-model="attrs.variant" :items="variants" multiple />
+  </Navbar>
 
-  <BaseMatrix
-    v-slot="props"
-    :attrs="attrs"
-  >
+  <Matrix v-slot="props" :attrs="attrs">
     <PCard
+      title="Card title"
+      description="A short description for the card."
       v-bind="props"
+      :ui="{ footer: 'flex justify-end' }"
       class="w-80"
     >
-      <template #header>
-        <BasePlaceholder class="h-8" />
-      </template>
-
-      <BasePlaceholder class="h-24" />
+      <Placeholder class="h-24" />
 
       <template #footer>
-        <BasePlaceholder class="h-8" />
+        <PButton label="Save" color="neutral" />
       </template>
     </PCard>
-  </BaseMatrix>
+  </Matrix>
 </template>

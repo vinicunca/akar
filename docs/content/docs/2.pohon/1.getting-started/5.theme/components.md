@@ -147,12 +147,12 @@ export default {
 ```
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/installation/nuxt#themedefaultvariants"}
 You can use the `theme.defaultVariants` option in your `nuxt.config.ts` to override the default values for `size` and `color` for all components at once.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/installation/vue#themedefaultvariants"}
 You can use the `theme.defaultVariants` option in your `vite.config.ts` to override the default values for `size` and `color` for all components at once.
 :::
@@ -222,16 +222,16 @@ You can explore the theme for each component in two ways:
 ### Global config
 
 ::docs-framework-only
-#nuxt
+# nuxt
 You can override the theme of components globally inside your `app.config.ts` by using the exact same structure as the theme object.
-#vue
+# vue
 You can override the theme of components globally inside your `vite.config.ts` by using the exact same structure as the theme object.
 ::
 
 You can customize the [`slots`](#slots), [`variants`](#variants), [`compoundVariants`](#compound-variants) and [`defaultVariants`](#default-variants) of a component to change the default theme of a component:
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::div
 ```ts [app.config.ts]
 export default defineAppConfig({
@@ -262,7 +262,7 @@ export default defineAppConfig({
 ```
 :::
 
-#vue
+# vue
 :::div
 ```ts [vite.config.ts]
 import vue from '@vitejs/plugin-vue';

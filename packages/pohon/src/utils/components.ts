@@ -81,10 +81,10 @@ export async function detectUsedComponents(
   }
 
   // Pattern to match:
-  // - <UButton in templates
-  // - UButton in script (imports, usage)
-  // - <LazyUButton (lazy components)
-  // - LazyUButton in script
+  // - <PButton in templates
+  // - PButton in script (imports, usage)
+  // - <LazyPButton (lazy components)
+  // - LazyPButton in script
   const componentPattern = new RegExp(`<(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)|\\b(?:Lazy)?${prefix}([A-Z][a-zA-Z]+)\\b`, 'g');
 
   // Scan all source files for component usage across all layers

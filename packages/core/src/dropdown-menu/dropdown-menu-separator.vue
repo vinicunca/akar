@@ -8,6 +8,8 @@ export interface ADropdownMenuSeparatorProps extends AMenuSeparatorProps {}
 <script setup lang="ts">
 import { AMenuSeparator } from '../menu';
 
+defineOptions({ name: 'ADropdownMenuSeparator' });
+
 const props = defineProps<ADropdownMenuSeparatorProps>();
 useForwardExpose();
 </script>

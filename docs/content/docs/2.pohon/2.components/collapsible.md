@@ -34,7 +34,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-down" block}
 
-#content
+# content
 :core-placeholder{class="h-48"}
 ::
 
@@ -62,7 +62,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-down" block}
 
-#content
+# content
 :core-placeholder{class="h-48"}
 ::
 
@@ -94,7 +94,7 @@ slots:
 
 :p-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide:chevron-down" block}
 
-#content
+# content
 :core-placeholder{class="h-48"}
 ::
 

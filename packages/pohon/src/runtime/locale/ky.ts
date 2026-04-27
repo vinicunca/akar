@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Алдыңкы',
     },
     chatPrompt: {
-      placeholder: 'Бул жерге билдирүүңүздү жазыңыз...',
+      placeholder: 'Бул жерге билдирүүңүздү жазыңыз…',
     },
     chatPromptSubmit: {
       label: 'Билдирүү жөнөтүү',
+    },
+    chatReasoning: {
+      thinking: 'Ойлонуда…',
+      thought: 'Ойлонду',
+      thoughtFor: '{duration} ойлонду',
     },
     colorMode: {
       dark: 'Караңгы',
@@ -53,16 +58,20 @@ export default defineLocale<PMessages>({
       theme: 'Тема',
     },
     contentSearchButton: {
-      label: 'Издөө...',
+      label: 'Издөө…',
     },
     contentToc: {
       title: 'Бул бетте',
+    },
+    dropdownMenu: {
+      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      search: 'Издөө…',
     },
     dashboardSearch: {
       theme: 'Тема',
     },
     dashboardSearchButton: {
-      label: 'Издөө...',
+      label: 'Издөө…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Каптал тилкесин жыйноо',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Азайтуу',
       increment: 'Кошуу',
     },
+    listbox: {
+      noData: 'Маалымат жок',
+      noMatch: 'Сүйлөшкөн маалыматтар жок',
+      search: 'Издөө…',
+    },
     modal: {
       close: 'Жабуу',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Кодду алмашуу буферине көчүрүү',
       },
+      prompt: {
+        copy: 'Суроону көчүрүү',
+        openIn: '{name} ичинде ачуу',
+      },
+    },
+    sidebar: {
+      close: 'Жабуу',
+      toggle: 'Которуу',
     },
     selectMenu: {
       create: '"{label}" жасоо',
       noData: 'Маалымат жок',
       noMatch: 'Сүйлөшкөн маалыматтар жок',
-      search: 'Издөө...',
+      search: 'Издөө…',
     },
     slideover: {
       close: 'Жабуу',

@@ -6,6 +6,8 @@ export interface ADatePickerHeadCellProps extends ACalendarHeadCellProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADatePickerHeadCell' });
+
 const props = defineProps<ADatePickerHeadCellProps>();
 </script>
 

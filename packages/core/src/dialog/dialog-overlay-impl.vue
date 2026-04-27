@@ -10,6 +10,8 @@ import { useForwardExpose } from '../shared';
 import { useBodyScrollLock } from '../shared/use-body-scroll-lock';
 import { injectDialogRootContext } from './dialog-root.vue';
 
+defineOptions({ name: 'ADialogOverlayImpl' });
+
 defineProps<DialogOverlayImplProps>();
 const rootContext = injectDialogRootContext();
 

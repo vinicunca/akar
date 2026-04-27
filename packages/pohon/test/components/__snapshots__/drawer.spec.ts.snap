@@ -1,35 +1,36 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`drawer > renders with body slot correctly 1`] = `
+exports[`Drawer > renders with body slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->
-  <div class="" data-pohon="drawer-container">
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0"></h2><p id="akar-dialog-description-v-0-0-1"></p></span>
+  <div data-slot="container" class="">
     <!--v-if-->
-    <div class="" data-pohon="drawer-body">Body slot</div>
+    <div data-slot="body" class="">Body slot</div>
     <!--v-if-->
   </div>
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with class correctly 1`] = `
+exports[`Drawer > renders with class correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1" class="bg-elevated">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->
-  <div class="" data-pohon="drawer-container">
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1" class="bg-elevated">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0"></h2><p id="akar-dialog-description-v-0-0-1"></p></span>
+  <div data-slot="container" class="">
     <!--v-if-->
     <!--v-if-->
     <!--v-if-->
@@ -37,34 +38,36 @@ exports[`drawer > renders with class correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with content slot correctly 1`] = `
+exports[`Drawer > renders with content slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->Content slot
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0"></h2><p id="akar-dialog-description-v-0-0-1"></p></span>Content slot
 </div>
+
 
 
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with default slot correctly 1`] = `
+exports[`Drawer > renders with default slot correctly 1`] = `
 "Default slot
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="akar-dialog-content-v-0-0-0" role="dialog" aria-describedby="akar-dialog-description-v-0-0-2" aria-labelledby="akar-dialog-title-v-0-0-1" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->
-  <div class="" data-pohon="drawer-container">
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="akar-dialog-content-v-0-0-0" role="dialog" aria-describedby="akar-dialog-description-v-0-0-2" aria-labelledby="akar-dialog-title-v-0-0-1" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-1"></h2><p id="akar-dialog-description-v-0-0-2"></p></span>
+  <div data-slot="container" class="">
     <!--v-if-->
     <!--v-if-->
     <!--v-if-->
@@ -72,22 +75,24 @@ exports[`drawer > renders with default slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with description correctly 1`] = `
+exports[`Drawer > renders with description correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -95,22 +100,23 @@ exports[`drawer > renders with description correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with description slot correctly 1`] = `
+exports[`Drawer > renders with description slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0"></h2><!--v-if--></span>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
       <!--v-if-->
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description slot</p>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description slot</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -118,22 +124,24 @@ exports[`drawer > renders with description slot correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with direction bottom correctly 1`] = `
+exports[`Drawer > renders with direction bottom correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -141,22 +149,24 @@ exports[`drawer > renders with direction bottom correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with direction bottom inset correctly 1`] = `
+exports[`Drawer > renders with direction bottom inset correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -164,22 +174,24 @@ exports[`drawer > renders with direction bottom inset correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with direction left correctly 1`] = `
+exports[`Drawer > renders with direction left correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="left" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="left" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -187,22 +199,24 @@ exports[`drawer > renders with direction left correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with direction left inset correctly 1`] = `
+exports[`Drawer > renders with direction left inset correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="left" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="left" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -210,22 +224,24 @@ exports[`drawer > renders with direction left inset correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with direction right correctly 1`] = `
+exports[`Drawer > renders with direction right correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="right" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="right" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -233,22 +249,24 @@ exports[`drawer > renders with direction right correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with direction right inset correctly 1`] = `
+exports[`Drawer > renders with direction right inset correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="right" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="right" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -256,22 +274,24 @@ exports[`drawer > renders with direction right inset correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with direction top correctly 1`] = `
+exports[`Drawer > renders with direction top correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="top" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="top" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -279,22 +299,24 @@ exports[`drawer > renders with direction top correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with direction top inset correctly 1`] = `
+exports[`Drawer > renders with direction top inset correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="top" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="top" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -302,61 +324,85 @@ exports[`drawer > renders with direction top inset correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with footer slot correctly 1`] = `
+exports[`Drawer > renders with footer slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->
-  <div class="" data-pohon="drawer-container">
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0"></h2><p id="akar-dialog-description-v-0-0-1"></p></span>
+  <div data-slot="container" class="">
     <!--v-if-->
     <!--v-if-->
-    <div class="" data-pohon="drawer-footer">Footer slot</div>
+    <div data-slot="footer" class="">Footer slot</div>
   </div>
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with header slot correctly 1`] = `
+exports[`Drawer > renders with header slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">Header slot</div>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0"></h2><p id="akar-dialog-description-v-0-0-1"></p></span>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">Header slot</div>
     <!--v-if-->
     <!--v-if-->
   </div>
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with title correctly 1`] = `
+exports[`Drawer > renders with pohon correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="--akar-snap-point-height: 0; pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class="w-20"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><h2 id="akar-dialog-title-v-0-0-0"></h2><p id="akar-dialog-description-v-0-0-1"></p></span>
+  <div data-slot="container" class="">
+    <!--v-if-->
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+</div>
+
+
+
+<!--teleport end-->"
+`;
+
+exports[`Drawer > renders with title correctly 1`] = `
+"<!--v-if-->
+<!--teleport start-->
+
+
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="--akar-snap-point-height: 0; pointer-events: auto;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><!--v-if--><p id="akar-dialog-description-v-0-0-1"></p></span>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -365,21 +411,22 @@ exports[`drawer > renders with title correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders with title slot correctly 1`] = `
+exports[`Drawer > renders with title slot correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title slot</h2>
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div><span aria-hidden="true" style="position: absolute; border: 0px; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; word-wrap: normal; top: -1px; left: -1px;"><!--v-if--><p id="akar-dialog-description-v-0-0-1"></p></span>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title slot</h2>
       <!--v-if-->
     </div>
     <!--v-if-->
@@ -388,42 +435,24 @@ exports[`drawer > renders with title slot correctly 1`] = `
 </div>
 
 
-<!--teleport end-->"
-`;
-
-exports[`drawer > renders with ui correctly 1`] = `
-"<!--v-if-->
-<!--teleport start-->
-
-
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="w-20" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
-  <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <!--v-if-->
-    <!--v-if-->
-    <!--v-if-->
-  </div>
-</div>
-
 
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders without handle correctly 1`] = `
+exports[`Drawer > renders without handle correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
 
 
-<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" class="" data-pohon="drawer-overlay"></div>
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
+
+<div data-state="open" style="pointer-events: auto;" data-akar-overlay="" data-akar-snap-points="false" data-akar-snap-points-overlay="true" data-slot="overlay" class=""></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
   <!--v-if-->
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
@@ -431,27 +460,30 @@ exports[`drawer > renders without handle correctly 1`] = `
 </div>
 
 
+
 <!--teleport end-->"
 `;
 
-exports[`drawer > renders without overlay correctly 1`] = `
+exports[`Drawer > renders without overlay correctly 1`] = `
 "<!--v-if-->
 <!--teleport start-->
+
 
 
 <!--v-if-->
-<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-pohon="drawer-content" tabindex="-1">
-  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" class="" data-pohon="drawer-handle"><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
+<div data-dismissable-layer="" style="pointer-events: auto; --akar-snap-point-height: 0;" id="" role="dialog" aria-describedby="akar-dialog-description-v-0-0-1" aria-labelledby="akar-dialog-title-v-0-0-0" data-state="open" data-akar-drawer="" data-akar-drawer-direction="bottom" data-akar-delayed-snap-points="false" data-akar-snap-points="false" data-slot="content" tabindex="-1">
+  <div data-akar-drawer-visible="true" data-akar-handle="" aria-hidden="true" data-slot="handle" class=""><span data-akar-handle-hitarea="" aria-hidden="true"></span></div>
   <!--v-if-->
-  <div class="" data-pohon="drawer-container">
-    <div class="" data-pohon="drawer-header">
-      <h2 id="akar-dialog-title-v-0-0-0" class="" data-pohon="drawer-title">Title</h2>
-      <p id="akar-dialog-description-v-0-0-1" class="" data-pohon="drawer-description">Description</p>
+  <div data-slot="container" class="">
+    <div data-slot="header" class="">
+      <h2 id="akar-dialog-title-v-0-0-0" data-slot="title" class="">Title</h2>
+      <p id="akar-dialog-description-v-0-0-1" data-slot="description" class="">Description</p>
     </div>
     <!--v-if-->
     <!--v-if-->
   </div>
 </div>
+
 
 
 <!--teleport end-->"

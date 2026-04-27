@@ -5,6 +5,7 @@ import { provideSelectContentContext, SelectContentDefaultContextValue } from '.
 import { provideSelectRootContext } from './select-root.vue';
 
 defineOptions({
+  name: 'ASelectProvider',
   inheritAttrs: false,
 });
 

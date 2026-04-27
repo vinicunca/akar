@@ -1,4 +1,5 @@
 import type { ClassValue, UvCompoundVariants, UvDefaultVariants, UvVariants } from 'unocss-variants';
+
 /**
  * Defines the AppConfig object based on the unocss-variants configuration.
  */
@@ -40,11 +41,11 @@ type ComponentSlots<T extends { slots?: Record<string, any> }> = Id<{
 }>;
 
 type ComponentPohon<T extends { slots?: Record<string, any> }> = Id<{
-  [K in keyof Required<T['slots']>]: (props?: Record<string, any>) => string
+  [K in keyof Required<T['slots']>]: (props?: Record<string, any>) => string | undefined
 }>;
 
 type GetComponentAppConfig<A, U extends string, K extends string>
-  = A extends Record<U, Record<K, any>> ? A[U][K] : object;
+  = A extends Record<U, Record<K, any>> ? A[U][K] : {};
 
 type ComponentAppConfig<
   T,

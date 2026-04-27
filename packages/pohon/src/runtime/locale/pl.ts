@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Poprzedni',
     },
     chatPrompt: {
-      placeholder: 'Tutaj wpisz swoją wiadomość...',
+      placeholder: 'Tutaj wpisz swoją wiadomość…',
     },
     chatPromptSubmit: {
       label: 'Wyślij',
+    },
+    chatReasoning: {
+      thinking: 'Myśli…',
+      thought: 'Myślenie zakończone',
+      thoughtFor: 'Myślenie zajęło {duration}',
     },
     colorMode: {
       dark: 'Ciemny',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Zamknij',
       noData: 'Brak danych',
       noMatch: 'Brak pasujących danych',
-      placeholder: 'Wpisz polecenie lub wyszukaj...',
+      placeholder: 'Wpisz polecenie lub wyszukaj…',
     },
     contentSearch: {
       links: 'Linki',
       theme: 'Motyw',
     },
     contentSearchButton: {
-      label: 'Szukaj...',
+      label: 'Szukaj…',
     },
     contentToc: {
       title: 'Na tej stronie',
+    },
+    dropdownMenu: {
+      noMatch: 'Brak pasujących danych',
+      search: 'Szukaj…',
     },
     dashboardSearch: {
       theme: 'Motyw',
     },
     dashboardSearchButton: {
-      label: 'Szukaj...',
+      label: 'Szukaj…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Zwiń pasek boczny',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Zmniejsz',
       increment: 'Zwiększ',
     },
+    listbox: {
+      noData: 'Brak danych',
+      noMatch: 'Brak pasujących danych',
+      search: 'Szukaj…',
+    },
     modal: {
       close: 'Zamknij',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kopiuj kod do schowka',
       },
+      prompt: {
+        copy: 'Kopiuj prompt',
+        openIn: 'Otwórz w {name}',
+      },
+    },
+    sidebar: {
+      close: 'Zamknij',
+      toggle: 'Przełącz',
     },
     selectMenu: {
       create: 'Utwórz "{label}"',
       noData: 'Brak danych',
       noMatch: 'Brak pasujących danych',
-      search: 'Szukaj...',
+      search: 'Szukaj…',
     },
     slideover: {
       close: 'Zamknij',

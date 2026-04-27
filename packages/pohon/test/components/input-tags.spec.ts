@@ -1,16 +1,15 @@
-import type { PInputTagsProps, PInputTagsSlots } from '../../src/runtime/components/input-tags.vue';
-import theme from '#build/pohon/input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PInputTags from '../../src/runtime/components/input-tags.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/input';
+import InputTags from '../../src/runtime/components/InputTags.vue';
+import { renderEach } from '../component-render';
 
-describe('inputTags', () => {
+describe('InputTags', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
 
-  it.each([
+  renderEach(InputTags, [
     // Props
     ['with modelValue', { props: { modelValue: ['test'] } }],
     ['with defaultValue', { props: { defaultValue: ['test'] } }],
@@ -28,7 +27,7 @@ describe('inputTags', () => {
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: '' } }],
-    ['with ui', { props: { pohon: {} } }],
+    ['with pohon', { props: { pohon: {} } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { variant, color: 'neutral' } }]),
@@ -38,13 +37,10 @@ describe('inputTags', () => {
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
     ['with item-text slot', { slots: { 'item-text': () => 'Item Text slot' } }],
     ['with item-delete slot', { slots: { 'item-delete': () => 'Item Delete slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PInputTagsProps; slots?: Partial<PInputTagsSlots>; attrs?: Record<string, unknown> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PInputTags);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PInputTags, {
+    const wrapper = await mountSuspended(InputTags, {
       props: {
         modelValue: ['tag1', 'tag2'],
         placeholder: 'Add tags...',

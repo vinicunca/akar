@@ -24,6 +24,8 @@ import { APrimitive } from '../primitive';
 import { injectAAvatarRootContext } from './avatar-root.vue';
 import { useImageLoadingStatus } from './utils';
 
+defineOptions({ name: 'AAvatarImage' });
+
 const props = withDefaults(
   defineProps<AAvatarImageProps>(),
   { as: 'img' },

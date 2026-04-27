@@ -301,8 +301,8 @@ function randomize() {
           onUpdateChecked(checked: boolean) {
             table?.tableApi?.getColumn(column.id)?.toggleVisibility(!!checked)
           },
-          onSelect(e: Event) {
-            e.preventDefault()
+          onSelect(event: Event) {
+            event.preventDefault()
           },
         }))"
         :content="{ align: 'end' }"
@@ -330,7 +330,7 @@ function randomize() {
       </template>
     </PTable>
 
-    <div class="color-text-muted text-sm px-4 py-3.5">
+    <div class="text-sm color-text-muted px-4 py-3.5">
       {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
       {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
     </div>

@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'ย้อนกลับ',
     },
     chatPrompt: {
-      placeholder: 'กรุณาป้อนข้อความของคุณที่นี่...',
+      placeholder: 'กรุณาป้อนข้อความของคุณที่นี่…',
     },
     chatPromptSubmit: {
       label: 'ส่ง',
+    },
+    chatReasoning: {
+      thinking: 'กำลังคิด…',
+      thought: 'คิดแล้ว',
+      thoughtFor: 'คิดเป็นเวลา {duration}',
     },
     colorMode: {
       dark: 'มืด',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'ปิด',
       noData: 'ไม่มีข้อมูล',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      placeholder: 'พิมพ์คำสั่งหรือค้นหา...',
+      placeholder: 'พิมพ์คำสั่งหรือค้นหา…',
     },
     contentSearch: {
       links: 'ลิงก์',
       theme: 'ธีม',
     },
     contentSearchButton: {
-      label: 'ค้นหา...',
+      label: 'ค้นหา…',
     },
     contentToc: {
       title: 'ในหน้านี้',
+    },
+    dropdownMenu: {
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      search: 'ค้นหา…',
     },
     dashboardSearch: {
       theme: 'ธีม',
     },
     dashboardSearchButton: {
-      label: 'ค้นหา...',
+      label: 'ค้นหา…',
     },
     dashboardSidebarCollapse: {
       collapse: 'ย่อแถบด้านข้าง',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'ลด',
       increment: 'เพิ่ม',
     },
+    listbox: {
+      noData: 'ไม่มีข้อมูล',
+      noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
+      search: 'ค้นหา…',
+    },
     modal: {
       close: 'ปิด',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'คัดลอกโค้ดไปยังคลิปบอร์ด',
       },
+      prompt: {
+        copy: 'คัดลอกพรอมต์',
+        openIn: 'เปิดใน {name}',
+      },
+    },
+    sidebar: {
+      close: 'ปิด',
+      toggle: 'สลับ',
     },
     selectMenu: {
       create: 'สร้าง "{label}"',
       noData: 'ไม่มีข้อมูล',
       noMatch: 'ไม่พบข้อมูลที่ตรงกัน',
-      search: 'ค้นหา...',
+      search: 'ค้นหา…',
     },
     slideover: {
       close: 'ปิด',

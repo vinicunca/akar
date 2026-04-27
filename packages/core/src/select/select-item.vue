@@ -55,6 +55,8 @@ import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectASelectRootContext } from './select-root.vue';
 import { SELECTION_KEYS, valueComparator } from './utils';
 
+defineOptions({ name: 'ASelectItem' });
+
 const props = defineProps<ASelectItemProps>();
 const emits = defineEmits<ASelectItemEmits<T>>();
 

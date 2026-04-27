@@ -88,6 +88,8 @@ import { ARovingFocusGroup } from '../roving-focus';
 import { MAP_KEY_TO_FOCUS_INTENT } from '../roving-focus/utils';
 import { flatten } from './utils';
 
+defineOptions({ name: 'ATreeRoot' });
+
 const props = withDefaults(
   defineProps<ATreeRootProps<T, U, M>>(),
   {

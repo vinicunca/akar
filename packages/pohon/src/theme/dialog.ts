@@ -25,5 +25,22 @@ export default {
         content: '',
       },
     },
+    overlay: {
+      true: {
+        overlay: '',
+      },
+    },
+    scrollable: {
+      true: {
+        overlay: '',
+        content: '',
+      },
+      false: {
+        content: '',
+        body: '',
+      },
+    },
   },
+
+  compoundVariants: [],
 };

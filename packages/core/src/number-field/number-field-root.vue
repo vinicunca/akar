@@ -74,6 +74,7 @@ import { AVisuallyHiddenInput } from '../visually-hidden';
 import { handleDecimalOperation, useNumberFormatter, useNumberParser } from './utils';
 
 defineOptions({
+  name: 'ANumberFieldRoot',
   inheritAttrs: false,
 });
 
@@ -297,6 +298,7 @@ provideNumberFieldRootContext({
     <slot
       :model-value="modelValue"
       :text-value="textValue"
+      :readonly="readonly"
     />
 
     <AVisuallyHiddenInput

@@ -34,6 +34,8 @@ import { useVModel } from '@vueuse/core';
 import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AToggle' });
+
 const props = withDefaults(defineProps<AToggleProps>(), {
   modelValue: undefined,
   disabled: false,

@@ -20,6 +20,8 @@ import { computed } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
+defineOptions({ name: 'ACalendarPrev' });
+
 const props = withDefaults(defineProps<ACalendarPrevProps>(), { as: 'button', step: 'month' });
 
 defineSlots<CalendarPrevSlot>();
@@ -29,6 +31,13 @@ const disabled = computed(() =>
 );
 
 const rootContext = injectACalendarRootContext();
+
+function handleClick() {
+  if (disabled.value) {
+    return;
+  }
+  rootContext.prevPage(props.prevPage);
+}
 </script>
 
 <template>
@@ -36,11 +45,11 @@ const rootContext = injectACalendarRootContext();
     aria-label="Previous page"
     :as="props.as"
     :as-child="props.asChild"
-    :type="as === 'button' ? 'button' : undefined"
+    :type="props.as === 'button' ? 'button' : undefined"
     :aria-disabled="disabled || undefined"
     :data-disabled="disabled || undefined"
     :disabled="disabled"
-    @click="rootContext.prevPage(props.prevPage)"
+    @click="handleClick"
   >
     <slot :disabled>
       Prev page

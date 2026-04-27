@@ -2,7 +2,7 @@
   "name": "akar-ui-monorepo",
   "type": "module",
   "version": "1.11.0",
-  "packageManager": "pnpm@10.29.2",
+  "packageManager": "pnpm@10.33.0",
   "license": "MIT",
   "repository": "vinicunca/akar",
   "workspaces": [
@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "story:dev": "pnpm --filter histoire story:dev --open",
+    "build:plugins": "pnpm run --filter plugins build",
     "build": "pnpm run --filter akar build && pnpm run --filter plugins build && pnpm run --filter pohon-ui build",
     "build:docs": "pnpm run --filter docs build",
     "start": "node docs/.output/server/index.mjs",
@@ -28,21 +29,28 @@
     "ci:publish": "changeset publish"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "catalog:base",
-    "@changesets/cli": "catalog:base",
-    "@commitlint/cli": "catalog:base",
-    "@commitlint/config-conventional": "catalog:base",
-    "@vinicunca/eslint-config": "catalog:base",
-    "eslint": "catalog:base",
-    "lint-staged": "catalog:base",
-    "simple-git-hooks": "catalog:base",
-    "tsx": "catalog:base",
-    "typescript": "catalog:base"
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.30.0",
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "@vinicunca/eslint-config": "5.0.0",
+    "eslint": "^10.2.1",
+    "lint-staged": "^16.4.0",
+    "simple-git-hooks": "^2.13.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "resolutions": {
+    "@nuxt/kit": "^4.4.2",
+    "c12": "^3.3.2",
+    "nitropack": "^2.13.0",
+    "pohon-ui": "workspace:*",
+    "unplugin": "^3.0.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",

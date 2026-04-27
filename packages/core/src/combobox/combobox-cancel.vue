@@ -9,6 +9,8 @@ import { APrimitive } from '../primitive';
 import { useForwardExpose } from '../shared';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
+defineOptions({ name: 'AComboboxCancel' });
+
 const props = withDefaults(
   defineProps<AComboboxCancelProps>(),
   {

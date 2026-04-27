@@ -1,29 +1,25 @@
-import type { PFooterProps, PFooterSlots } from '../../src/runtime/components/footer.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PFooter from '../../src/runtime/components/footer.vue';
-import ComponentRender from '../component-render';
+import Footer from '../../src/runtime/components/Footer.vue';
+import { renderEach } from '../component-render';
 
-describe('pFooter', () => {
-  it.each([
+describe('Footer', () => {
+  renderEach(Footer, [
     // Props
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'relative' } }],
-    ['with ui', { props: { pohon: { container: 'lg:gap-x-1.5' } } }],
+    ['with pohon', { props: { pohon: { container: 'lg:gap-x-1.5' } } }],
     // Slots
     ['with left slot', { slots: { left: () => 'Left slot' } }],
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with right slot', { slots: { right: () => 'Right slot' } }],
     ['with top slot', { slots: { top: () => 'Top slot' } }],
     ['with bottom slot', { slots: { bottom: () => 'Bottom slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PFooterProps; slots?: Partial<PFooterSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PFooter);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PFooter, {
+    const wrapper = await mountSuspended(Footer, {
       slots: {
         default: () => 'Default slot',
         left: () => 'Left slot',

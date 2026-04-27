@@ -7,6 +7,8 @@ export interface AHoverCardPortalProps extends ATeleportProps {}
 <script setup lang="ts">
 import { ATeleport } from '../teleport';
 
+defineOptions({ name: 'AHoverCardPortal' });
+
 const props = defineProps<AHoverCardPortalProps>();
 </script>
 

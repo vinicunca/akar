@@ -1,18 +1,17 @@
 import type { FormInputEvents } from '../../src/module';
-import type { PSliderProps } from '../../src/runtime/components/slider.vue';
-import theme from '#build/pohon/slider';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PSlider from '../../src/runtime/components/slider.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/slider';
+import Slider from '../../src/runtime/components/Slider.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 
-describe('slider', () => {
+describe('Slider', () => {
   const sizes = Object.keys(theme.variants.size) as any;
 
-  it.each([
+  renderEach(Slider, [
     // Props
     ['with modelValue', { props: { modelValue: 10 } }],
     ['with defaultValue', { props: { defaultValue: 10 } }],
@@ -20,7 +19,7 @@ describe('slider', () => {
     ['with name', { props: { name: 'custom-name' } }],
     ['with disabled', { props: { disabled: true } }],
     ['with inverted', { props: { inverted: true } }],
-    ['with orientation vertical', { props: { orientation: 'vertical' as const } }],
+    ['with orientation vertical', { props: { orientation: 'vertical' } }],
     ['with min max step', { props: { min: 4, max: 12, step: 2 } }],
     ['with min steps between thumbs', { props: { defaultValue: [0, 30], minStepsBetweenThumbs: 30 } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
@@ -28,46 +27,33 @@ describe('slider', () => {
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-48' } }],
-    ['with ui', { props: { pohon: { track: 'bg-elevated' } } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PSliderProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, PSlider);
-    expect(html).toMatchSnapshot();
-  });
+    ['with pohon', { props: { pohon: { track: 'bg-elevated' } } }],
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PSlider, {
+    const wrapper = await mountSuspended(Slider, {
       props: {
         modelValue: 10,
 
       },
     });
-    expect(await axe(wrapper.element, {
-      rules: {
-        // "ARIA input fields must have an accessible name (aria-input-field-name)"
-
-        // Fix any of the following:
-        //   aria-label attribute does not exist or is empty
-        //   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty
-        //   Element has no title attribute
-        'aria-input-field-name': { enabled: false },
-      },
-    })).toHaveNoViolations();
+    expect(await axe(wrapper.element)).toHaveNoViolations();
   });
 
   describe('emits', () => {
     it('update:modelValue event', async () => {
-      const wrapper = mount(PSlider);
+      const wrapper = mount(Slider);
 
-      const input = wrapper.findComponent({ name: 'SliderRoot' });
+      const input = wrapper.findComponent({ name: 'ASliderRoot' });
       input.vm.$emit('update:modelValue', 1);
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[1], [1]] });
     });
 
     it('change event', async () => {
-      const wrapper = mount(PSlider);
+      const wrapper = mount(Slider);
 
-      const input = wrapper.findComponent({ name: 'SliderRoot' });
+      const input = wrapper.findComponent({ name: 'ASliderRoot' });
       input.vm.$emit('valueCommit');
 
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
@@ -93,7 +79,7 @@ describe('slider', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'SliderRoot' });
+      const input = wrapper.findComponent({ name: 'ASliderRoot' });
       return {
         wrapper,
         input,

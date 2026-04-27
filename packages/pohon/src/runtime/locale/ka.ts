@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'წინა',
     },
     chatPrompt: {
-      placeholder: 'დაწერეთ თქვენი მესიჯი აქ...',
+      placeholder: 'დაწერეთ თქვენი მესიჯი აქ…',
     },
     chatPromptSubmit: {
       label: 'შეტყობინების გაგზავნა',
+    },
+    chatReasoning: {
+      thinking: 'ფიქრობს…',
+      thought: 'იფიქრა',
+      thoughtFor: '{duration} ფიქრობდა',
     },
     colorMode: {
       dark: 'ბნელი',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'დახურვა',
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      placeholder: 'ჩაწერეთ ბრძანება ან ძიება...',
+      placeholder: 'ჩაწერეთ ბრძანება ან ძიება…',
     },
     contentSearch: {
       links: 'ბმულები',
       theme: 'თემა',
     },
     contentSearchButton: {
-      label: 'ძიება...',
+      label: 'ძიება…',
     },
     contentToc: {
       title: 'ამ გვერდზე',
+    },
+    dropdownMenu: {
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…',
     },
     dashboardSearch: {
       theme: 'თემა',
     },
     dashboardSearchButton: {
-      label: 'ძიება...',
+      label: 'ძიება…',
     },
     dashboardSidebarCollapse: {
       collapse: 'გვერდითი ზოლის ჩაკეცვა',
@@ -93,6 +102,11 @@ export default defineLocale<PMessages>({
       decrement: 'დაკლება',
       increment: 'დამატება',
     },
+    listbox: {
+      noData: 'მონაცემები არ არის',
+      noMatch: 'შესატყვისი მონაცემები არ არის',
+      search: 'ძიება…',
+    },
     modal: {
       close: 'დახურვა',
     },
@@ -113,12 +127,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'კოდის კოპირება ბუფერში',
       },
+      prompt: {
+        copy: 'მოთხოვნის კოპირება',
+        openIn: 'გახსნა {name}-ში',
+      },
+    },
+    sidebar: {
+      close: 'დახურვა',
+      toggle: 'გადართვა',
     },
     selectMenu: {
       create: 'დაამატე "{label}"', // "Create" translates as "შექმნა", but since we are simply adding new choice, creating sounds wrong, thus I chose to use "დაამატე", meaning "add".
       noData: 'მონაცემები არ არის',
       noMatch: 'შესატყვისი მონაცემები არ არის',
-      search: 'ძიება...',
+      search: 'ძიება…',
     },
     slideover: {
       close: 'დახურვა',

@@ -6,6 +6,8 @@ export interface ADatePickerGridBodyProps extends ACalendarGridBodyProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADatePickerGridBody' });
+
 const props = defineProps<ADatePickerGridBodyProps>();
 </script>
 

@@ -17,6 +17,8 @@ import { useForwardExpose, useId } from '../shared';
 import { injectATooltipProviderContext } from './tooltip-provider.vue';
 import { injectATooltipRootContext } from './tooltip-root.vue';
 
+defineOptions({ name: 'ATooltipTrigger' });
+
 const props = withDefaults(
   defineProps<ATooltipTriggerProps>(),
   {

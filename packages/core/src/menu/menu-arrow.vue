@@ -7,6 +7,8 @@ export interface AMenuArrowProps extends APopperArrowProps {}
 <script setup lang="ts">
 import { APopperArrow } from '../popper';
 
+defineOptions({ name: 'AMenuArrow' });
+
 const props = defineProps<AMenuArrowProps>();
 </script>
 

@@ -1,7 +1,7 @@
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
-import { computed, defineComponent, Fragment, h, ref } from 'vue';
-
+import { computed, defineComponent, Fragment, h, ref, watchPostEffect } from 'vue';
+import { APrimitive } from '../primitive';
 import { useForwardExpose } from './use-forward-expose';
 
 describe('useForwardRef', async () => {
@@ -292,5 +292,32 @@ describe('useForwardRef', async () => {
     parentRef.value?.increment();
     expect(parentRef.value?.count).toBe(1);
     expect(parentRef.value?.$el).toBeInstanceOf(HTMLButtonElement);
+  });
+
+  it('should update currentElement when as-child conditional child swaps', async () => {
+    const toggle = ref(true);
+    let renderNode: string | undefined;
+
+    mount(defineComponent({
+      setup() {
+        const { forwardRef, currentElement } = useForwardExpose();
+        watchPostEffect(() => {
+          renderNode = currentElement.value?.nodeName.toLowerCase();
+        });
+        return () => {
+          const showButton = toggle.value;
+          return h(APrimitive, { ref: forwardRef, asChild: true }, {
+            default: () => [showButton ? h('button') : h('span')],
+          });
+        };
+      },
+    }));
+
+    await flushPromises();
+    expect(renderNode).toBe('button');
+
+    toggle.value = !toggle.value;
+    await flushPromises();
+    expect(renderNode).toBe('span');
   });
 });

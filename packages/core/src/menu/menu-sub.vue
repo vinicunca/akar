@@ -34,6 +34,8 @@ import {
 import { APopperRoot } from '../popper';
 import { injectAMenuContext, provideMenuContext } from './menu-root.vue';
 
+defineOptions({ name: 'AMenuSub' });
+
 const props = withDefaults(defineProps<AMenuSubProps>(), {
   open: undefined,
 });

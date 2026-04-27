@@ -24,6 +24,8 @@ export interface AComboboxItemProps<T = AcceptableValue> extends AListboxItemPro
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import { AListboxItem } from '../listbox';
 
+defineOptions({ name: 'AComboboxItem' });
+
 const props = defineProps<AComboboxItemProps<T>>();
 const emits = defineEmits<AComboboxItemEmits<T>>();
 
@@ -70,6 +72,8 @@ function handleSelect(event: SelectEvent<T>) {
     event.preventDefault();
     rootContext.onOpenChange(false);
     rootContext.modelValue.value = props.value;
+  } else if (rootContext.multiple.value) {
+    rootContext.inputElement.value?.focus();
   }
 }
 

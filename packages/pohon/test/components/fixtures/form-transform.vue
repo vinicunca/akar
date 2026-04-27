@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { PForm, PFormField, PInput } from '#components';
 import { reactive, useTemplateRef } from 'vue';
+import { PForm, PFormField, PInput } from '#components';
 
 const state = reactive<any>({});
 const form = useTemplateRef('form');

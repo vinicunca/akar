@@ -1,15 +1,14 @@
 import type { AppConfig } from '@nuxt/schema';
-import type { PNavigationMenuProps, PNavigationMenuSlots } from '../../src/runtime/components/navigation-menu.vue';
 import type { ComponentConfig } from '../../src/runtime/types/uv';
-import theme from '#build/pohon/navigation-menu';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PNavigationMenu from '../../src/runtime/components/navigation-menu.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/navigation-menu';
+import PNavigationMenu from '../../src/runtime/components/NavigationMenu.vue';
+import { renderEach } from '../component-render';
 import { expectSlotProps } from '../utils/types';
 
-type TypeNavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>;
+type NavigationMenu = ComponentConfig<typeof theme, AppConfig, 'navigationMenu'>;
 
 describe('NavigationMenu', () => {
   const variants = Object.keys(theme.variants.variant) as any;
@@ -28,7 +27,7 @@ describe('NavigationMenu', () => {
         icon: 'i-lucide-house',
       }, {
         label: 'Installation',
-        description: 'Learn how to install and configure Pohon UI in your application.',
+        description: 'Learn how to install and configure Pohon in your application.',
         icon: 'i-lucide-cloud-download',
       }, {
         label: 'Theming',
@@ -54,7 +53,7 @@ describe('NavigationMenu', () => {
         description: 'Display a modal within your application.',
         to: '/components/modal',
       }, {
-        label: 'PNavigationMenu',
+        label: 'NavigationMenu',
         icon: 'i-lucide-file',
         description: 'Display a list of links.',
         to: '/components/navigation-menu',
@@ -78,7 +77,7 @@ describe('NavigationMenu', () => {
     [{
       label: 'GitHub',
       icon: 'i-simple-icons-github',
-      to: 'https://github.com/nuxt/ui',
+      to: 'https://github.com/vinicunca/pohon',
       target: '_blank',
     }, {
       label: 'Help',
@@ -89,7 +88,7 @@ describe('NavigationMenu', () => {
 
   const props = { items };
 
-  it.each([
+  renderEach(PNavigationMenu, [
     // Props
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: 'item-0' } }],
@@ -97,14 +96,15 @@ describe('NavigationMenu', () => {
     ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Documentation' } }],
     ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with arrow', { props: { ...props, arrow: true, modelValue: 'item-0' } }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const, modelValue: 'item-0' } }],
-    ['with orientation vertical and collapsed', { props: { ...props, orientation: 'vertical' as const, modelValue: 'item-0', collapsed: true } }],
-    ['with content orientation vertical', { props: { ...props, contentOrientation: 'vertical' as const, modelValue: 'item-0' } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical', modelValue: 'item-0' } }],
+    ['with orientation vertical and collapsed', { props: { ...props, orientation: 'vertical', modelValue: 'item-0', collapsed: true } }],
+    ['with content orientation vertical', { props: { ...props, contentOrientation: 'vertical', modelValue: 'item-0' } }],
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant} highlight`, { props: { ...props, variant, highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight`, { props: { ...props, variant, color: 'neutral', highlight: true } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant} highlight neutral`, { props: { ...props, variant, color: 'neutral', highlight: true, highlightColor: 'neutral' } }]),
+    ['with chip', { props: { items: [[{ label: 'Guide', icon: 'i-lucide-book-open', chip: true }, { label: 'Components', icon: 'i-lucide-box', chip: { color: 'error' } }]] } }],
     ['with trailingIcon', { props: { ...props, trailingIcon: 'i-lucide-plus' } }],
     ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
     ['without externalIcon', { props: { ...props, externalIcon: false } }],
@@ -118,10 +118,7 @@ describe('NavigationMenu', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PNavigationMenuProps; slots?: Partial<PNavigationMenuSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PNavigationMenu);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(PNavigationMenu, {
@@ -138,21 +135,21 @@ describe('NavigationMenu', () => {
     // normal
     expectSlotProps('item', () => PNavigationMenu({
       items: [{ label: 'foo', value: 'bar' }],
-    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active?: boolean; pohon: TypeNavigationMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active: boolean; pohon: NavigationMenu['pohon'] }>();
 
     // groups
     expectSlotProps('item', () => PNavigationMenu({
       items: [[{ label: 'foo', value: 'bar' }]],
-    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active?: boolean; pohon: TypeNavigationMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active: boolean; pohon: NavigationMenu['pohon'] }>();
 
     // custom
     expectSlotProps('item', () => PNavigationMenu({
       items: [{ label: 'foo', value: 'bar', custom: 'nice' }],
-    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active?: boolean; pohon: TypeNavigationMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active: boolean; pohon: NavigationMenu['pohon'] }>();
 
     // custom + groups
     expectSlotProps('item', () => PNavigationMenu({
       items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]],
-    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active?: boolean; pohon: TypeNavigationMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active: boolean; pohon: NavigationMenu['pohon'] }>();
   });
 });

@@ -9,6 +9,8 @@ export interface ToastAnnounceExcludeProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AToastAnnounceExclude' });
+
 defineProps<ToastAnnounceExcludeProps>();
 </script>
 

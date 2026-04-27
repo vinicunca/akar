@@ -1,12 +1,11 @@
-import type { PColorPickerProps } from '../../src/runtime/components/color-picker.vue';
-import theme from '#build/pohon/color-picker';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import ColorPicker from '../../src/runtime/components/color-picker.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/color-picker';
+import ColorPicker from '../../src/runtime/components/ColorPicker.vue';
+import { renderEach } from '../component-render';
 
-describe('colorPicker', () => {
+describe('ColorPicker', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const formats = [
     ['hex', '#00C16A'],
@@ -16,18 +15,15 @@ describe('colorPicker', () => {
     ['cmyk', 'cmyk(100%, 0%, 45.08%, 24.31%)'],
   ];
 
-  it.each([
+  renderEach(ColorPicker, [
     // Props
     ['with disabled', { props: { disabled: true } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { size } }]),
     ...formats.map((format) => [`with format ${format[0]}`, { props: { format: format[0], defaultValue: format[1] } }]),
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-96' } }],
-    ['with ui', { props: { pohon: { picker: 'gap-8' } } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PColorPickerProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, ColorPicker);
-    expect(html).toMatchSnapshot();
-  });
+    ['with pohon', { props: { pohon: { picker: 'gap-8' } } }],
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ColorPicker);

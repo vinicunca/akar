@@ -26,6 +26,8 @@ import { useFormControl, useForwardExpose } from '../shared';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 import { handleSelect } from './utils';
 
+defineOptions({ name: 'ARadio' });
+
 const props = withDefaults(defineProps<RadioProps>(), {
   disabled: false,
   checked: undefined,

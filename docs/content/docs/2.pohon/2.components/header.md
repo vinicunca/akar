@@ -66,7 +66,7 @@ slots:
 class: 'akar:px-0 akar:pt-0'
 ---
 
-#title
+# title
 :base-logo{class="h-6 w-auto"}
 ::
 
@@ -104,7 +104,7 @@ slots:
     </NuxtLink>
 ---
 
-#left
+# left
 ::nuxt-link{to="/docs/pohon"}
 :base-logo{class="h-6 w-auto"}
 ::

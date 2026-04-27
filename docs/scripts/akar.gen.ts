@@ -178,7 +178,7 @@ function generateDependencies(componentPath: string) {
     traverse(result, {
       ImportDeclaration: (path) => {
         const value = path.node.source.value.split('/').at(-1);
-        if (value && value.match(/^[A-Z]/) && !value.includes('vue')) {
+        if (value && /^[A-Z]/.test(value) && !value.includes('vue')) {
           const prev = depTree.get(dir) ?? [];
           depTree.set(dir, [...new Set([...prev, value])]);
         }

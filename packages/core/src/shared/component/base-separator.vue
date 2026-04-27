@@ -21,6 +21,8 @@ export interface BaseSeparatorProps extends APrimitiveProps {
 import { computed } from 'vue';
 import { APrimitive } from '../../primitive';
 
+defineOptions({ name: 'ABaseSeparator' });
+
 const props = withDefaults(defineProps<BaseSeparatorProps>(), {
   orientation: 'horizontal',
 });

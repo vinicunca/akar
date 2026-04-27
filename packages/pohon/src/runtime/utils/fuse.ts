@@ -1,7 +1,31 @@
 import type { FuseResult, FuseResultMatch } from 'fuse.js';
 import type { GetItemKeys } from '../types/utils';
 
-function truncateHTMLFromStart(html: string, maxLength: number) {
+const htmlEscapes: Record<string, string> = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  '\'': '&#39;',
+};
+
+function escapeHtml(str: string): string {
+  return str.replace(/[&<>"']/g, (char) => htmlEscapes[char]!);
+}
+
+// Check if string is already HTML-escaped to avoid double-escaping
+function isAlreadyEscaped(str: string): boolean {
+  return /&(?:amp|lt|gt|quot|#39);/.test(str);
+}
+
+function sanitize(str: string): string {
+  if (isAlreadyEscaped(str)) {
+    return str;
+  }
+  return escapeHtml(str);
+}
+
+function truncateHtmlFromStart(html: string, maxLength: number) {
   let truncated = '';
   let totalLength = 0;
   let insideTag = false;
@@ -34,13 +58,10 @@ function truncateHTMLFromStart(html: string, maxLength: number) {
 }
 
 export function highlight<T>(
-  { item, searchTerm, forceKey, omitKeys }:
-  {
-    item: T & { matches?: FuseResult<T>['matches'] };
-    searchTerm: string;
-    forceKey?: GetItemKeys<T>;
-    omitKeys?: Array<GetItemKeys<T>>;
-  },
+  item: T & { matches?: FuseResult<T>['matches'] },
+  searchTerm: string,
+  forceKey?: GetItemKeys<T>,
+  omitKeys?: Array<GetItemKeys<T>>,
 ) {
   function generateHighlightedText(value: FuseResultMatch['value'], indices: FuseResultMatch['indices'] = []) {
     value = value || '';
@@ -57,20 +78,20 @@ export function highlight<T>(
       const isMatched = (lastIndiceNextIndex - region[0]) >= searchTerm.length;
 
       content += [
-        value.substring(nextUnhighlightedRegionStartingIndex, region[0]),
+        sanitize(value.substring(nextUnhighlightedRegionStartingIndex, region[0])),
         isMatched && '<mark>',
-        value.substring(region[0], lastIndiceNextIndex),
+        sanitize(value.substring(region[0], lastIndiceNextIndex)),
         isMatched && '</mark>',
       ].filter(Boolean).join('');
 
       nextUnhighlightedRegionStartingIndex = lastIndiceNextIndex;
     });
 
-    content += value.substring(nextUnhighlightedRegionStartingIndex);
+    content += sanitize(value.substring(nextUnhighlightedRegionStartingIndex));
 
     const markIndex = content.indexOf('<mark>');
     if (markIndex !== -1) {
-      content = truncateHTMLFromStart(content, content.length - markIndex);
+      content = truncateHtmlFromStart(content, content.length - markIndex);
     }
 
     return content;

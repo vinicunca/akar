@@ -8,6 +8,8 @@ export interface AEditableEditTriggerProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectAEditableRootContext } from './editable-root.vue';
 
+defineOptions({ name: 'AEditableEditTrigger' });
+
 const props = withDefaults(defineProps<AEditableEditTriggerProps>(), { as: 'button' });
 
 const context = injectAEditableRootContext();

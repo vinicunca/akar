@@ -1,14 +1,13 @@
-import type { PDialogProps, PDialogSlots } from '../../src/runtime/components/dialog.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Modal from '../../src/runtime/components/dialog.vue';
-import ComponentRender from '../component-render';
+import Dialog from '../../src/runtime/components/Dialog.vue';
+import { renderEach } from '../component-render';
 
-describe('Modal', () => {
+describe('Dialog', () => {
   const props = { open: true, portal: false };
 
-  it.each([
+  renderEach(Dialog, [
     // Props
     ['with open', { props }],
     ['with title', { props: { ...props, title: 'Title' } }],
@@ -22,7 +21,7 @@ describe('Modal', () => {
     ['without close', { props: { ...props, close: false, title: 'Title', description: 'Description' } }],
     ['with closeIcon', { props: { ...props, closeIcon: 'i-lucide-trash' } }],
     ['with class', { props: { ...props, class: 'bg-elevated' } }],
-    ['with ui', { props: { ...props, pohon: { close: 'end-2' } } }],
+    ['with pohon', { props: { ...props, pohon: { close: 'end-2' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
@@ -33,17 +32,14 @@ describe('Modal', () => {
     ['with close slot', { props, slots: { close: () => 'Close slot' } }],
     ['with body slot', { props, slots: { body: () => 'Body slot' } }],
     ['with footer slot', { props, slots: { footer: () => 'Footer slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PDialogProps; slots?: Partial<PDialogSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Modal);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(Modal, {
+    const wrapper = await mountSuspended(Dialog, {
       props: {
         open: true,
         portal: false,
-        title: 'Modal Title',
+        title: 'Dialog Title',
         description: 'This is a modal description',
       },
     });

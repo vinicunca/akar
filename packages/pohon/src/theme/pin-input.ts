@@ -33,11 +33,14 @@ export default (options: Required<PohonModuleOptions>) => {
         none: '',
       },
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
         neutral: '',
       },
       highlight: {
         true: '',
+      },
+      fixed: {
+        false: '',
       },
     },
 

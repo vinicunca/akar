@@ -19,10 +19,12 @@ export interface AMenuSubContentProps extends Omit<MenuContentImplProps, 'align'
 <script setup lang="ts">
 import { APresence } from '../presence';
 import { useForwardExpose, useForwardPropsEmits, useId } from '../shared';
-import MenuContentImpl from './menu-content-impl.vue';
+import MenuContentImpl, { injectMenuContentContext } from './menu-content-impl.vue';
 import { injectAMenuContext, injectAMenuRootContext } from './menu-root.vue';
 import { injectMenuSubContext } from './menu-sub.vue';
 import { SUB_CLOSE_KEYS } from './utils';
+
+defineOptions({ name: 'AMenuSubContent' });
 
 const props = withDefaults(defineProps<AMenuSubContentProps>(), {
   prioritizePosition: true,
@@ -34,6 +36,7 @@ const forwarded = useForwardPropsEmits(props, emits);
 const menuContext = injectAMenuContext();
 const rootContext = injectAMenuRootContext();
 const menuSubContext = injectMenuSubContext();
+const parentContentContext = injectMenuContentContext();
 
 const { forwardRef, currentElement: subContentElement } = useForwardExpose();
 
@@ -62,7 +65,10 @@ menuSubContext.contentId ||= useId(undefined, 'akar-menu-sub-content');
           if (event.defaultPrevented) return;
           // We prevent closing when the trigger is focused to avoid triggering a re-open animation
           // on pointer interaction.
-          if (event.target !== menuSubContext.trigger.value)
+          // Also check if focus is moving to the parent content's filter to avoid closing when
+          // hovering between submenu and parent menu
+          const isMovingToParentContent = parentContentContext.filterElement.value?.contains(event.target as Node);
+          if (event.target !== menuSubContext.trigger.value && !isMovingToParentContent)
             menuContext.onOpenChange(false);
         }
       "
@@ -80,7 +86,14 @@ menuSubContext.contentId ||= useId(undefined, 'akar-menu-sub-content');
         if (isKeyDownInside && isCloseKey) {
           menuContext.onOpenChange(false);
           // We focus manually because we prevented it in `onCloseAutoFocus`
-          menuSubContext.trigger.value?.focus();
+          if (parentContentContext.filterElement.value) {
+            parentContentContext.filterElement.value.focus();
+            parentContentContext.highlightedElement.value = menuSubContext.trigger.value;
+            menuSubContext.trigger.value?.scrollIntoView({ block: 'nearest' });
+          }
+          else {
+            menuSubContext.trigger.value?.focus();
+          }
           // prevent window from scrolling
           event.preventDefault();
         }

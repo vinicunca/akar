@@ -1,10 +1,9 @@
-import type { PCarouselProps, PCarouselSlots } from '../../src/runtime/components/carousel.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
-import Carousel from '../../src/runtime/components/carousel.vue';
-import ComponentRender from '../component-render';
+import Carousel from '../../src/runtime/components/Carousel.vue';
+import { renderEach } from '../component-render';
 
 const CarouselWrapper = defineComponent({
   components: {
@@ -15,7 +14,7 @@ const CarouselWrapper = defineComponent({
 </PCarousel>`,
 });
 
-describe('carousel', () => {
+describe('Carousel', () => {
   const items = [
     { src: 'https://picsum.photos/600/600?random=1', alt: 'Image 1' },
     { src: 'https://picsum.photos/600/600?random=2', alt: 'Image 2' },
@@ -27,23 +26,20 @@ describe('carousel', () => {
 
   const props = { items };
 
-  it.each([
+  renderEach(CarouselWrapper, [
     // Props
     ['with items', { props }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' } }],
     ['with arrows', { props: { ...props, arrows: true } }],
-    ['with prev', { props: { ...props, arrows: true, prev: { color: 'primary' as const } } }],
+    ['with prev', { props: { ...props, arrows: true, prev: { color: 'primary' } } }],
     ['with prevIcon', { props: { ...props, arrows: true, prevIcon: 'i-lucide-arrow-left' } }],
-    ['with next', { props: { ...props, arrows: true, next: { color: 'primary' as const } } }],
+    ['with next', { props: { ...props, arrows: true, next: { color: 'primary' } } }],
     ['with nextIcon', { props: { ...props, arrows: true, nextIcon: 'i-lucide-arrow-right' } }],
     ['with dots', { props: { ...props, dots: true } }],
     ['with as', { props: { ...props, as: 'nav' } }],
     ['with class', { props: { ...props, class: 'w-full max-w-xs' } }],
-    ['with ui', { props: { ...props, pohon: { viewport: 'h-[320px]' } } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PCarouselProps; slots?: Partial<PCarouselSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, CarouselWrapper);
-    expect(html).toMatchSnapshot();
-  });
+    ['with pohon', { props: { ...props, pohon: { viewport: 'h-[320px]' } } }],
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(CarouselWrapper, {

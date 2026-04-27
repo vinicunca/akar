@@ -5,6 +5,8 @@ import { ref } from 'vue';
 import { AVisuallyHidden } from '../visually-hidden';
 import { injectAToastProviderContext } from './toast-provider.vue';
 
+defineOptions({ name: 'AToastAnnounce' });
+
 const providerContext = injectAToastProviderContext();
 
 const isAnnounced = useTimeout(1000);

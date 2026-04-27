@@ -9,6 +9,8 @@ export type SelectScrollButtonImplEmits = {
   autoScroll: [];
 };
 
+defineOptions({ name: 'ASelectScrollButtonImpl' });
+
 const emits = defineEmits<SelectScrollButtonImplEmits>();
 const { getItems } = useCollection();
 

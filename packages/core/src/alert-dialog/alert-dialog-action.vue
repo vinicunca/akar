@@ -8,6 +8,8 @@ export interface AAlertDialogActionProps extends ADialogCloseProps {}
 import { ADialogClose } from '../dialog';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AAlertDialogAction' });
+
 const props = withDefaults(
   defineProps<AAlertDialogActionProps>(),
   { as: 'button' },

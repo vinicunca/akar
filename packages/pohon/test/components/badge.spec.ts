@@ -1,16 +1,15 @@
-import type { PBadgeProps, PBadgeSlots } from '../../src/runtime/components/badge.vue';
-import theme from '#build/pohon/badge';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Badge from '../../src/runtime/components/badge.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/badge';
+import Badge from '../../src/runtime/components/Badge.vue';
+import { renderEach } from '../component-render';
 
-describe('badge', () => {
+describe('Badge', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
 
-  it.each([
+  renderEach(Badge, [
     // Props
     ['with label', { props: { label: 'Badge' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { label: 'Badge', size } }]),
@@ -27,15 +26,12 @@ describe('badge', () => {
     ['with square', { props: { label: 'Badge', square: true } }],
     ['with as', { props: { label: 'Badge', as: 'div' } }],
     ['with class', { props: { label: 'Badge', class: 'rounded-full font-bold' } }],
-    ['with ui', { props: { label: 'Badge', pohon: { label: 'font-bold' } } }],
+    ['with pohon', { props: { label: 'Badge', pohon: { label: 'font-bold' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with leading slot', { slots: { leading: () => 'Leading slot' } }],
     ['with trailing slot', { slots: { trailing: () => 'Trailing slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PBadgeProps; slots?: Partial<PBadgeSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Badge);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Badge, {

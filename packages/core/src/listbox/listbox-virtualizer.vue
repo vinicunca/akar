@@ -27,6 +27,8 @@ import { getNextMatch } from '../shared/use-typeahead';
 import { injectAListboxRootContext } from './listbox-root.vue';
 import { compare, queryCheckedElement } from './utils';
 
+defineOptions({ name: 'AListboxVirtualizer' });
+
 const props = defineProps<AListboxVirtualizerProps<T>>();
 
 defineSlots<{
@@ -94,7 +96,7 @@ const virtualizedItems = computed(() => virtualizer.value.getVirtualItems().map(
   })[0];
 
   const targetNode = defaultNode.type === Fragment && Array.isArray(defaultNode.children)
-    ? defaultNode.children[0] as VNode
+    ? defaultNode.children.find((child) => typeof (child as VNode).type !== 'symbol') as VNode
     : defaultNode;
 
   return {

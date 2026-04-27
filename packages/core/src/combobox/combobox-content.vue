@@ -17,6 +17,8 @@ import { useForwardExpose, useForwardPropsEmits, useId } from '../shared';
 import ComboboxContentImpl from './combobox-content-impl.vue';
 import { injectAComboboxRootContext } from './combobox-root.vue';
 
+defineOptions({ name: 'AComboboxContent' });
+
 const props = defineProps<AComboboxContentProps>();
 const emits = defineEmits<AComboboxContentEmits>();
 const forwarded = useForwardPropsEmits(props, emits);

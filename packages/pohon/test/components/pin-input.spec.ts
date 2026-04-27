@@ -1,19 +1,18 @@
 import type { FormInputEvents } from '../../src/module';
-import type { PPinInputProps } from '../../src/runtime/components/pin-input.vue';
-import theme from '#build/pohon/pin-input';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PPinInput from '../../src/runtime/components/pin-input.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/pin-input';
+import PinInput from '../../src/runtime/components/PinInput.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 
-describe('pinInput', () => {
+describe('PinInput', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
 
-  it.each([
+  renderEach(PinInput, [
     // Props
     ['with modelValue', { props: { modelValue: ['1'] } }],
     ['with defaultValue', { props: { defaultValue: ['1'] } }],
@@ -34,30 +33,27 @@ describe('pinInput', () => {
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'span' } }],
     ['with class', { props: { class: 'absolute' } }],
-    ['with ui', { props: { pohon: { base: 'rounded-full' } } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PPinInputProps }) => {
-    const html = await ComponentRender(nameOrHtml, options, PPinInput);
-    expect(html).toMatchSnapshot();
-  });
+    ['with pohon', { props: { pohon: { base: 'rounded-full' } } }],
+  ]);
 
   describe('emits', () => {
     it('update:modelValue event', async () => {
-      const wrapper = mount(PPinInput);
-      const input = wrapper.findComponent({ name: 'PinInputRoot' });
+      const wrapper = mount(PinInput);
+      const input = wrapper.findComponent({ name: 'APinInputRoot' });
       await input.vm.$emit('update:modelValue', ['1', '2', '3']);
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [[['1', '2', '3']]] });
     });
 
     it('change event', async () => {
-      const wrapper = mount(PPinInput);
-      const input = wrapper.findComponent({ name: 'PinInputRoot' });
+      const wrapper = mount(PinInput);
+      const input = wrapper.findComponent({ name: 'APinInputRoot' });
       await input.vm.$emit('complete', ['1', '2', '3', '4', '5']);
       await flushPromises();
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
     });
 
     it('blur event', async () => {
-      const wrapper = mount(PPinInput);
+      const wrapper = mount(PinInput);
       const lastPin = wrapper.find('input[aria-label="pin input 5 of 0"]');
       lastPin.trigger('blur');
       await flushPromises();
@@ -85,7 +81,7 @@ describe('pinInput', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'PinInputRoot' });
+      const input = wrapper.findComponent({ name: 'APinInputRoot' });
       return {
         wrapper,
         input,
@@ -133,7 +129,7 @@ describe('pinInput', () => {
   });
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PPinInput, {
+    const wrapper = await mountSuspended(PinInput, {
       props: {
         length: 4,
         placeholder: '*',

@@ -1,82 +1,63 @@
 <script setup lang="ts">
-const items = [
-  {
-    label: 'Figma Kit',
-    to: 'https://go.nuxt.com/figma-ui',
-    target: '_blank',
-  },
-  {
-    label: 'Playground',
-    to: 'https://stackblitz.com/edit/nuxt-ui',
-    target: '_blank',
-  },
-  {
-    label: 'Releases',
-    to: 'https://github.com/nuxt/ui/releases',
-    target: '_blank',
-  },
-];
+const items = [{
+  label: 'Figma Kit',
+  to: 'https://go.nuxt.com/figma-ui',
+  target: '_blank'
+}, {
+  label: 'Playground',
+  to: 'https://stackblitz.com/edit/nuxt-ui',
+  target: '_blank'
+}, {
+  label: 'Releases',
+  to: 'https://github.com/nuxt/ui/releases',
+  target: '_blank'
+}]
 
-const columns = [
-  {
-    label: 'Community',
-    children: [{
-      label: 'Nuxters',
-      to: 'https://nuxters.nuxt.com',
-      target: '_blank',
-    }, {
-      label: 'Video Courses',
-      to: 'https://masteringnuxt.com/nuxt3?ref=nuxt',
-      target: '_blank',
-    }, {
-      label: 'Nuxt on GitHub',
-      to: 'https://github.com/nuxt',
-      target: '_blank',
-    }],
-  },
-  {
-    label: 'Solutions',
-    children: [{
-      label: 'Nuxt Content',
-      to: 'https://content.nuxt.com/',
-      target: '_blank',
-    }, {
-      label: 'Nuxt Image',
-      to: 'https://image.nuxt.com/',
-      target: '_blank',
-    }, {
-      label: 'Pohon UI',
-      to: 'https://akar.vinicunca.dev/',
-      target: '_blank',
-    }],
-  },
-];
+const columns = [{
+  label: 'Community',
+  children: [{
+    label: 'Nuxters',
+    to: 'https://nuxters.nuxt.com',
+    target: '_blank'
+  }, {
+    label: 'Video Courses',
+    to: 'https://masteringnuxt.com/nuxt3?ref=nuxt',
+    target: '_blank'
+  }, {
+    label: 'Nuxt on GitHub',
+    to: 'https://github.com/nuxt',
+    target: '_blank'
+  }]
+}, {
+  label: 'Solutions',
+  children: [{
+    label: 'Nuxt Content',
+    to: 'https://content.nuxt.com/',
+    target: '_blank'
+  }, {
+    label: 'Nuxt Image',
+    to: 'https://image.nuxt.com/',
+    target: '_blank'
+  }, {
+    label: 'Nuxt UI',
+    to: 'https://ui.nuxt.com/',
+    target: '_blank'
+  }]
+}]
 </script>
 
 <template>
-  <BaseNavbar />
+  <Navbar />
 
-  <PFooter class="border-t border-border min-h-0 w-full divide-divide divide-y">
+  <PFooter class="w-full border-t border-default divide-y divide-default min-h-0">
     <template #top>
       <PContainer>
         <PFooterColumns :columns="columns">
           <template #right>
-            <PFormField
-              name="email"
-              label="Subscribe to our newsletter"
-              size="lg"
-            >
-              <PInput
-                type="email"
-                class="w-full"
-              >
+            <PFormField name="email" label="Subscribe to our newsletter" size="lg">
+              <PInput type="email" class="w-full">
                 <template #trailing>
-                  <PButton
-                    type="submit"
-                    size="xs"
-                    color="neutral"
-                    label="Subscribe"
-                  />
+                  <PButton type="submit" size="xs" color="neutral" label="Subscribe" />
                 </template>
               </PInput>
             </PFormField>
@@ -91,14 +72,11 @@ const columns = [
       </p>
     </template>
 
-    <PNavigationMenu
-      :items="items"
-      variant="link"
-    />
+    <PNavigationMenu :items="items" variant="link" />
 
     <template #right>
       <PButton
-        icon="i-simple-icons:discord"
+        icon="i-simple-icons-discord"
         color="neutral"
         variant="ghost"
         to="https://go.nuxt.com/discord"
@@ -106,7 +84,7 @@ const columns = [
         aria-label="Discord"
       />
       <PButton
-        icon="i-simple-icons:x"
+        icon="i-simple-icons-x"
         color="neutral"
         variant="ghost"
         to="https://go.nuxt.com/x"
@@ -114,7 +92,7 @@ const columns = [
         aria-label="X"
       />
       <PButton
-        icon="i-simple-icons:github"
+        icon="i-simple-icons-github"
         color="neutral"
         variant="ghost"
         to="https://github.com/nuxt/nuxt"

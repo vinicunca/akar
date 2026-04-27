@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Sebelum',
     },
     chatPrompt: {
-      placeholder: 'Taip mesej anda di sini...',
+      placeholder: 'Taip mesej anda di sini…',
     },
     chatPromptSubmit: {
       label: 'Hantar mesej',
+    },
+    chatReasoning: {
+      thinking: 'Berfikir…',
+      thought: 'Telah berfikir',
+      thoughtFor: 'Berfikir selama {duration}',
     },
     colorMode: {
       dark: 'Gelap',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Tutup',
       noData: 'Tiada data',
       noMatch: 'Tiada data yang sepadan',
-      placeholder: 'Taip arahan atau carian...',
+      placeholder: 'Taip arahan atau carian…',
     },
     contentSearch: {
       links: 'Pautan',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Cari...',
+      label: 'Cari…',
     },
     contentToc: {
       title: 'Di halaman ini',
+    },
+    dropdownMenu: {
+      noMatch: 'Tiada data yang sepadan',
+      search: 'Cari…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Cari...',
+      label: 'Cari…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Runtuhkan bar sisi',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Kurangkan',
       increment: 'Naikkan',
     },
+    listbox: {
+      noData: 'Tiada data',
+      noMatch: 'Tiada data yang sepadan',
+      search: 'Cari…',
+    },
     modal: {
       close: 'Tutup',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Salin kod ke papan klip',
       },
+      prompt: {
+        copy: 'Salin gesaan',
+        openIn: 'Buka dalam {name}',
+      },
+    },
+    sidebar: {
+      close: 'Tutup',
+      toggle: 'Togol',
     },
     selectMenu: {
       create: 'Cipta "{label}"',
       noData: 'Tiada data',
       noMatch: 'Tiada data yang sepadan',
-      search: 'Cari...',
+      search: 'Cari…',
     },
     slideover: {
       close: 'Tutup',

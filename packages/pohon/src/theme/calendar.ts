@@ -12,13 +12,15 @@ export default (options: Required<PohonModuleOptions>) => {
       gridWeekDaysRow: '',
       gridBody: '',
       headCell: '',
+      headCellWeek: '',
       cell: '',
       cellTrigger: '',
+      cellWeek: '',
     },
 
     variants: {
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [
           color,
           {
             headCell: '',
@@ -40,34 +42,50 @@ export default (options: Required<PohonModuleOptions>) => {
         xs: {
           heading: '',
           cell: '',
+          cellWeek: '',
           headCell: '',
+          headCellWeek: '',
           cellTrigger: '',
           body: '',
         },
         sm: {
           heading: '',
           headCell: '',
+          headCellWeek: '',
+          cellWeek: '',
           cell: '',
           cellTrigger: '',
         },
         md: {
           heading: '',
           headCell: '',
+          headCellWeek: '',
+          cellWeek: '',
           cell: '',
           cellTrigger: '',
         },
         lg: {
           heading: '',
           headCell: '',
+          headCellWeek: '',
           cellTrigger: '',
         },
         xl: {
           heading: '',
           headCell: '',
+          headCellWeek: '',
           cellTrigger: '',
         },
       },
+      weekNumbers: {
+        true: {
+          gridRow: '',
+          gridWeekDaysRow: '',
+        },
+      },
     },
+
+    compoundVariants: [],
 
     defaultVariants: {
       size: 'md',

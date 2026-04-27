@@ -72,6 +72,7 @@ import { useVModel } from '@vueuse/core';
 import { APrimitive } from '../primitive';
 
 defineOptions({
+  name: 'APinInputRoot',
   inheritAttrs: false,
 });
 

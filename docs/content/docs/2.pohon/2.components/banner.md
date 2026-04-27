@@ -72,11 +72,15 @@ iframe:
 overflowHidden: true
 name: 'banner-example'
 ---
-#code
+# code
 
 ```vue
 <template>
-  <PBanner id="example" title="This is a closable banner." close />
+  <PBanner
+    id="example"
+    title="This is a closable banner."
+    close
+  />
 </template>
 ```
 
@@ -100,7 +104,7 @@ props:
   title: 'This is a closable banner with a custom close icon.'
   closeIcon: 'i-lucide:x-circle'
 ---
-#code
+# code
 
 ```vue
 <template>
@@ -115,12 +119,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.close` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.close` key.
 :::
@@ -187,7 +191,10 @@ Use the Banner component in your `app.vue` or in a layout:
 ```vue [app.vue]{3}
 <template>
   <PApp>
-    <PBanner icon="i-lucide:construction" title="Pohon UI v4 has been released!" />
+    <PBanner
+      icon="i-lucide:construction"
+      title="Pohon UI v4 has been released!"
+    />
 
     <PHeader />
 

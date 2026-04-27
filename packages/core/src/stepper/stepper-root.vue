@@ -48,6 +48,8 @@ export const [
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'AStepperRoot' });
+
 const props = withDefaults(
   defineProps<AStepperRootProps>(),
   {

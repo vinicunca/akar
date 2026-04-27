@@ -84,6 +84,8 @@ import { useVModel } from '@vueuse/core';
 import { computed, nextTick, watch } from 'vue';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AProgressRoot' });
+
 const props = withDefaults(defineProps<AProgressRootProps>(), {
   max: DEFAULT_MAX,
   getValueLabel: (value: number | null | undefined, max: number) =>

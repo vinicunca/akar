@@ -30,8 +30,12 @@ export function useGraceArea(
 
   function handleCreateGraceArea(
     { event, hoverTarget }:
-    { event: PointerEvent; hoverTarget: HTMLElement },
+    { event: PointerEvent; hoverTarget: HTMLElement | undefined },
   ) {
+    if (!hoverTarget) {
+      return;
+    }
+
     const currentTarget = event.currentTarget as HTMLElement;
     const exitPoint = { x: event.clientX, y: event.clientY };
     const exitSide = getExitSideFromRect({
@@ -48,9 +52,9 @@ export function useGraceArea(
   watchEffect((cleanupFn) => {
     if (triggerElement.value && containerElement.value) {
       const handleTriggerLeave = (event: PointerEvent) =>
-        handleCreateGraceArea({ event, hoverTarget: containerElement.value! });
+        handleCreateGraceArea({ event, hoverTarget: containerElement.value });
       const handleContentLeave = (event: PointerEvent) =>
-        handleCreateGraceArea({ event, hoverTarget: triggerElement.value! });
+        handleCreateGraceArea({ event, hoverTarget: triggerElement.value });
 
       triggerElement.value.addEventListener('pointerleave', handleTriggerLeave);
       containerElement.value.addEventListener('pointerleave', handleContentLeave);

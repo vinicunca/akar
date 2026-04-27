@@ -1,8 +1,5 @@
 <script lang="ts">
 import type { APrimitiveProps } from '../primitive';
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { useCollection } from '../collection';
-import { useForwardExpose } from '../shared';
 
 export interface ANavigationMenuTriggerProps extends APrimitiveProps {
   /** When `true`, prevents the user from interacting with item */
@@ -11,15 +8,20 @@ export interface ANavigationMenuTriggerProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import type { ComponentPublicInstance } from 'vue';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { refAutoReset, unrefElement } from '@vueuse/core';
 import { computed, onMounted, ref } from 'vue';
+import { useCollection } from '../collection';
 import { APrimitive } from '../primitive';
+import { useForwardExpose } from '../shared';
 import { AVisuallyHidden } from '../visually-hidden';
 import { injectANavigationMenuItemContext } from './navigation-menu-item.vue';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 import { getOpenState, makeContentId, makeTriggerId } from './utils';
 
 defineOptions({
+  name: 'ANavigationMenuTrigger',
   inheritAttrs: false,
 });
 
@@ -127,7 +129,11 @@ function handleKeydown(event: KeyboardEvent) {
   }
 }
 
-function setFocusProxyRef(node: unknown) {
+function setFocusProxyRef(node: Element | ComponentPublicInstance | null) {
+  if (!node) {
+    return undefined;
+  }
+
   // @ts-expect-error unrefElement expect MaybeRef, but also support Vnode
   itemContext.focusProxyRef.value = unrefElement(node);
   return undefined;

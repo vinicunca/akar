@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Précédent',
     },
     chatPrompt: {
-      placeholder: 'Écrivez votre message ici...',
+      placeholder: 'Écrivez votre message ici…',
     },
     chatPromptSubmit: {
       label: 'Envoyer',
+    },
+    chatReasoning: {
+      thinking: 'Réflexion en cours…',
+      thought: 'Réflexion',
+      thoughtFor: 'Réflexion pendant {duration}',
     },
     colorMode: {
       dark: 'Sombre',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Fermer',
       noData: 'Aucune donnée',
       noMatch: 'Aucune donnée correspondante',
-      placeholder: 'Tapez une commande ou recherchez...',
+      placeholder: 'Tapez une commande ou recherchez…',
     },
     contentSearch: {
       links: 'Liens',
       theme: 'Thème',
     },
     contentSearchButton: {
-      label: 'Rechercher...',
+      label: 'Rechercher…',
     },
     contentToc: {
       title: 'Sur cette page',
+    },
+    dropdownMenu: {
+      noMatch: 'Aucune donnée correspondante',
+      search: 'Rechercher…',
     },
     dashboardSearch: {
       theme: 'Thème',
     },
     dashboardSearchButton: {
-      label: 'Rechercher...',
+      label: 'Rechercher…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Replier la barre latérale',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Diminuer',
       increment: 'Augmenter',
     },
+    listbox: {
+      noData: 'Aucune donnée',
+      noMatch: 'Aucune donnée correspondante',
+      search: 'Rechercher…',
+    },
     modal: {
       close: 'Fermer',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Copier le code dans le presse-papiers',
       },
+      prompt: {
+        copy: 'Copier le prompt',
+        openIn: 'Ouvrir dans {name}',
+      },
+    },
+    sidebar: {
+      close: 'Fermer',
+      toggle: 'Basculer',
     },
     selectMenu: {
       create: 'Créer "{label}"',
       noData: 'Aucune donnée',
       noMatch: 'Aucune donnée correspondante',
-      search: 'Rechercher...',
+      search: 'Rechercher…',
     },
     slideover: {
       close: 'Fermer',

@@ -7,6 +7,8 @@ export interface ADropdownMenuPortalProps extends AMenuPortalProps {}
 <script setup lang="ts">
 import { AMenuPortal } from '../menu';
 
+defineOptions({ name: 'ADropdownMenuPortal' });
+
 const props = defineProps<ADropdownMenuPortalProps>();
 </script>
 

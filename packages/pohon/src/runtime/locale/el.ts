@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Προηγούμενο',
     },
     chatPrompt: {
-      placeholder: 'Εδώ γράψτε το μήνυμά σας...',
+      placeholder: 'Εδώ γράψτε το μήνυμά σας…',
     },
     chatPromptSubmit: {
       label: 'Αποστολή',
+    },
+    chatReasoning: {
+      thinking: 'Σκέφτεται…',
+      thought: 'Σκέφτηκε',
+      thoughtFor: 'Σκέφτηκε για {duration}',
     },
     colorMode: {
       dark: 'Σκοτεινό',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Κλείσιμο',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε...',
+      placeholder: 'Πληκτρολογήστε μια εντολή ή αναζητήστε…',
     },
     contentSearch: {
       links: 'Σύνδεσμοι',
       theme: 'Θέμα',
     },
     contentSearchButton: {
-      label: 'Αναζήτηση...',
+      label: 'Αναζήτηση…',
     },
     contentToc: {
       title: 'Σε αυτή τη σελίδα',
+    },
+    dropdownMenu: {
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…',
     },
     dashboardSearch: {
       theme: 'Θέμα',
     },
     dashboardSearchButton: {
-      label: 'Αναζήτηση...',
+      label: 'Αναζήτηση…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Σύμπτυξη πλευρικής μπάρας',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Μείωση',
       increment: 'Αύξηση',
     },
+    listbox: {
+      noData: 'Δεν υπάρχουν δεδομένα',
+      noMatch: 'Δεν βρέθηκαν δεδομένα',
+      search: 'Αναζήτηση…',
+    },
     modal: {
       close: 'Κλείσιμο',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Αντιγραφή κώδικα στο πρόχειρο',
       },
+      prompt: {
+        copy: 'Αντιγραφή εντολής',
+        openIn: 'Άνοιγμα σε {name}',
+      },
+    },
+    sidebar: {
+      close: 'Κλείσιμο',
+      toggle: 'Εναλλαγή',
     },
     selectMenu: {
       create: 'Δημιουργία "{label}"',
       noData: 'Δεν υπάρχουν δεδομένα',
       noMatch: 'Δεν βρέθηκαν δεδομένα',
-      search: 'Αναζήτηση...',
+      search: 'Αναζήτηση…',
     },
     slideover: {
       close: 'Κλείσιμο',

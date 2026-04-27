@@ -6,6 +6,8 @@ export interface ADateRangePickerCellProps extends ARangeCalendarCellProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangePickerCell' });
+
 const props = defineProps<ADateRangePickerCellProps>();
 </script>
 

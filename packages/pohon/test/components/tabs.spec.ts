@@ -1,10 +1,9 @@
-import type { PTabsProps, PTabsSlots } from '../../src/runtime/components/tabs.vue';
-import theme from '#build/pohon/tabs';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Tabs from '../../src/runtime/components/tabs.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/tabs';
+import Tabs from '../../src/runtime/components/Tabs.vue';
+import { renderEach } from '../component-render';
 
 describe('Tabs', () => {
   const variants = Object.keys(theme.variants.variant) as any;
@@ -31,13 +30,14 @@ describe('Tabs', () => {
 
   const props = { items };
 
-  it.each([
+  renderEach(Tabs, [
     // Props
     ['with items', { props }],
-    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
-    ['with orientation vertical', { props: { ...props, orientation: 'vertical' as const } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Tab1' } }],
+    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
+    ['with orientation vertical', { props: { ...props, orientation: 'vertical' } }],
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ...variants.map((variant: string) => [`with primary variant ${variant}`, { props: { ...props, variant } }]),
     ...variants.map((variant: string) => [`with neutral variant ${variant}`, { props: { ...props, variant, color: 'neutral' } }]),
@@ -45,17 +45,14 @@ describe('Tabs', () => {
     ['with unmountOnHide', { props: { ...props, unmountOnHide: false } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'w-96' } }],
-    ['with ui', { props: { ...props, pohon: { content: 'w-full ring ring-default' } } }],
+    ['with pohon', { props: { ...props, pohon: { content: 'w-full ring ring-default' } } }],
     // Slots
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with trailing slot', { props, slots: { trailing: () => 'Trailing slot' } }],
     ['with content slot', { props, slots: { content: () => 'Content slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PTabsProps; slots?: Partial<PTabsSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Tabs);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Tabs, {

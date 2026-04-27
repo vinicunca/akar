@@ -6,6 +6,8 @@ export interface ADatePickerInputProps extends ADateFieldInputProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADatePickerInput' });
+
 const props = defineProps<ADatePickerInputProps>();
 </script>
 

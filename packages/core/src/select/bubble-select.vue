@@ -3,6 +3,8 @@ import { ref, watch } from 'vue';
 import { AVisuallyHidden } from '../visually-hidden';
 import { injectASelectRootContext } from './select-root.vue';
 
+defineOptions({ name: 'ABubbleSelect' });
+
 interface BubbleSelectProps {
   autocomplete?: string;
   autofocus?: boolean;

@@ -10,6 +10,8 @@ import { APrimitive } from '../primitive';
 import ToastAnnounceExclude from './toast-announce-exclude.vue';
 import { injectToastRootContext } from './toast-root-impl.vue';
 
+defineOptions({ name: 'AToastClose' });
+
 const props = withDefaults(defineProps<AToastCloseProps>(), {
   as: 'button',
 });

@@ -88,13 +88,13 @@ Use the `items` prop as an array of objects with the following properties:
 - `label?: string`
 - `icon?: string`
 - `avatar?: AvatarProps`
-- `kbds?: string[] | KbdProps[]`
+- `kbds?: string[] | PKbdProps[]`
 - [`type?: "link" | "label" | "separator" | "checkbox"`](#with-checkbox-items)
 - [`color?: "error" | "primary" | "secondary" | "success" | "info" | "warning" | "neutral"`](#with-color-items)
 - [`checked?: boolean`](#with-checkbox-items)
 - `disabled?: boolean`
 - [`slot?: string`](#with-custom-slot)
-- `onSelect?: (e: Event) => void`
+- `onSelect?: (event: Event) => void`
 - [`onUpdateChecked?: (checked: boolean) => void`](#with-checkbox-items)
 - `children?: PContextMenuItem[] | PContextMenuItem[][]`
 - `class?: any`

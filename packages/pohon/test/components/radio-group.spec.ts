@@ -1,15 +1,14 @@
 import type { FormInputEvents } from '../../src/module';
-import type { PRadioGroupProps, PRadioGroupSlots } from '../../src/runtime/components/radio-group.vue';
-import theme from '#build/pohon/radio-group';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PRadioGroup from '../../src/runtime/components/radio-group.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/radio-group';
+import RadioGroup from '../../src/runtime/components/RadioGroup.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 
-describe('radioGroup', () => {
+describe('RadioGroup', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
   const indicators = Object.keys(theme.variants.indicator) as any;
@@ -22,11 +21,11 @@ describe('radioGroup', () => {
 
   const props = { items };
 
-  it.each([
+  renderEach(RadioGroup, [
     ['with items', { props }],
     ['with modelValue', { props: { ...props, modelValue: '1' } }],
     ['with defaultValue', { props: { ...props, defaultValue: '1' } }],
-    ['with valueKey', { props: { ...props, valueKey: 'label' } }],
+    ['with valueKey', { props: { ...props, valueKey: 'label', defaultValue: 'Option 1' } }],
     ['with labelKey', { props: { ...props, labelKey: 'value' } }],
     ['with descriptionKey', { props: { ...props, descriptionKey: 'value' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
@@ -40,18 +39,15 @@ describe('radioGroup', () => {
     ['with ariaLabel', { props, attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
-    ['with ui', { props: { ...props, pohon: { wrapper: 'ms-4' } } }],
+    ['with pohon', { props: { ...props, pohon: { wrapper: 'ms-4' } } }],
     // Slots
     ['with legend slot', { props, slots: { label: () => 'Legend slot' } }],
     ['with label slot', { props, slots: { label: () => 'Label slot' } }],
     ['with description slot', { props, slots: { label: () => 'Description slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PRadioGroupProps; slots?: Partial<PRadioGroupSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PRadioGroup);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PRadioGroup, {
+    const wrapper = await mountSuspended(RadioGroup, {
       props,
     });
     expect(await axe(wrapper.element)).toHaveNoViolations();
@@ -59,17 +55,17 @@ describe('radioGroup', () => {
 
   describe('emits', () => {
     it('update:modelValue event', async () => {
-      const wrapper = mount(PRadioGroup, { props: { items: ['Option 1', 'Option 2'] } });
-      const input = wrapper.findComponent({ name: 'RadioGroupRoot' });
+      const wrapper = mount(RadioGroup, { props: { items: ['Option 1', 'Option 2'] } });
+      const input = wrapper.findComponent({ name: 'ARadioGroupRoot' });
       await input.setValue('Option 1');
 
       expect(wrapper.emitted()).toMatchObject({ 'update:modelValue': [['Option 1']] });
     });
 
     it('change event', async () => {
-      const wrapper = mount(PRadioGroup, { props: { items: ['Option 1', 'Option 2'] } });
+      const wrapper = mount(RadioGroup, { props: { items: ['Option 1', 'Option 2'] } });
 
-      const input = wrapper.findComponent({ name: 'RadioGroupRoot' });
+      const input = wrapper.findComponent({ name: 'ARadioGroupRoot' });
       await input.setValue('Option 1');
 
       expect(wrapper.emitted()).toMatchObject({ change: [[{ type: 'change' }]] });
@@ -98,7 +94,7 @@ describe('radioGroup', () => {
         </PFormField>
         `,
       });
-      const input = wrapper.findComponent({ name: 'RadioGroupRoot' });
+      const input = wrapper.findComponent({ name: 'ARadioGroupRoot' });
       return {
         wrapper,
         input,

@@ -42,6 +42,7 @@ export default (options: Required<PohonModuleOptions>) => {
 
         size: {
           xs: {
+            base: '',
             label: '',
             item: '',
             itemLeadingIcon: '',
@@ -52,6 +53,7 @@ export default (options: Required<PohonModuleOptions>) => {
             empty: '',
           },
           sm: {
+            base: '',
             label: '',
             item: '',
             itemLeadingIcon: '',
@@ -62,6 +64,7 @@ export default (options: Required<PohonModuleOptions>) => {
             empty: '',
           },
           md: {
+            base: '',
             label: '',
             item: '',
             itemLeadingIcon: '',
@@ -72,6 +75,7 @@ export default (options: Required<PohonModuleOptions>) => {
             empty: '',
           },
           lg: {
+            base: '',
             label: '',
             item: '',
             itemLeadingIcon: '',
@@ -82,6 +86,7 @@ export default (options: Required<PohonModuleOptions>) => {
             empty: '',
           },
           xl: {
+            base: '',
             label: '',
             item: '',
             itemLeadingIcon: '',
@@ -92,10 +97,21 @@ export default (options: Required<PohonModuleOptions>) => {
             empty: '',
           },
         },
+        position: {
+          'popper': {
+            content: '',
+          },
+          'item-aligned': {
+            content: '',
+          },
+        },
       },
 
       compoundVariants: [],
 
+      defaultVariants: {
+        position: 'popper',
+      },
     },
     input(options),
   );

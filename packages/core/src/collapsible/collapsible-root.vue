@@ -38,6 +38,8 @@ export const [
 import { useVModel } from '@vueuse/core';
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ACollapsibleRoot' });
+
 const props = withDefaults(
   defineProps<ACollapsibleRootProps>(),
   {

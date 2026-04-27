@@ -11,6 +11,7 @@ import { APrimitive } from '../primitive';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 
 defineOptions({
+  name: 'ANavigationMenuList',
   inheritAttrs: false,
 });
 

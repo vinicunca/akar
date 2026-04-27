@@ -9,6 +9,8 @@ import { useForwardExpose } from '../shared';
 import BaseSeparator from '../shared/component/base-separator.vue';
 import { injectAToolbarRootContext } from './toolbar-root.vue';
 
+defineOptions({ name: 'AToolbarSeparator' });
+
 const props = defineProps<AToolbarSeparatorProps>();
 
 const rootContext = injectAToolbarRootContext();

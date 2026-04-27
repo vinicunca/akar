@@ -17,6 +17,7 @@ import { APrimitive } from '../primitive';
 import { injectAScrollAreaRootContext } from './scroll-area-root.vue';
 
 defineOptions({
+  name: 'AScrollAreaViewport',
   inheritAttrs: false,
 });
 

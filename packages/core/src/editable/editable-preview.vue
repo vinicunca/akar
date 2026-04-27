@@ -9,6 +9,8 @@ export interface AEditablePreviewProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AEditablePreview' });
+
 const props = withDefaults(defineProps<AEditablePreviewProps>(), { as: 'span' });
 
 const context = injectAEditableRootContext();

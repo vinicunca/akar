@@ -13,6 +13,8 @@ export interface ADropdownMenuRadioGroupProps extends AMenuRadioGroupProps {}
 import { AMenuRadioGroup } from '../menu';
 import { useEmitAsProps, useForwardExpose } from '../shared';
 
+defineOptions({ name: 'ADropdownMenuRadioGroup' });
+
 const props = defineProps<AMenuRadioGroupProps>();
 const emits = defineEmits<AMenuRadioGroupEmits>();
 

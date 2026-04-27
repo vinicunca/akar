@@ -32,6 +32,7 @@ export {
 
 export {
   default as ASelectItem,
+  type ASelectItemEmits,
   type ASelectItemProps,
   type SelectEvent as ASelectItemSelectEvent,
   injectASelectItemContext,

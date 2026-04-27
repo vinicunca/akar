@@ -1,13 +1,11 @@
-/* eslint-disable sonar/no-nested-conditional, sonar/no-nested-functions, no-nested-ternary, no-console */
 import type { FormInputEvents } from '../../src/module';
-import type { PFileUploadProps, PFileUploadSlots } from '../../src/runtime/components/file-upload.vue';
-import theme from '#build/pohon/file-upload';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
-import FileUpload from '../../src/runtime/components/file-upload.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/file-upload';
+import FileUpload from '../../src/runtime/components/FileUpload.vue';
+import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 
 // Mock URL.createObjectURL to return deterministic blob URLs
@@ -34,7 +32,7 @@ async function setFilesOnInput(input: any, files: Array<File>) {
   await input.trigger('change');
 }
 
-describe('fileUpload', () => {
+describe('FileUpload', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
   const layouts = Object.keys(theme.variants.layout) as any;
@@ -44,7 +42,7 @@ describe('fileUpload', () => {
 
   const props = { modelValue };
 
-  it.each([
+  renderEach(FileUpload, [
     // Props
     ['with modelValue', { props }],
     ['with id', { props: { id: 'id' } }],
@@ -67,6 +65,7 @@ describe('fileUpload', () => {
     ['without dropzone', { props: { dropzone: false } }],
     ['without interactive', { props: { interactive: false } }],
     ['without preview', { props: { ...props, preview: false } }],
+    ['without preview with multiple', { props: { ...props, preview: false, multiple: true } }],
     ['with required', { props: { required: true } }],
     ['with disabled', { props: { disabled: true } }],
     ['with fileIcon', { props: { ...props, fileIcon: 'i-lucide-house' } }],
@@ -75,7 +74,7 @@ describe('fileUpload', () => {
     ['with ariaLabel', { attrs: { 'aria-label': 'Aria label' } }],
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'w-full gap-4' } }],
-    ['with ui', { props: { pohon: { base: 'rounded-xl' } } }],
+    ['with pohon', { props: { pohon: { base: 'rounded-xl' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with leading slot', { props, slots: { leading: () => 'Leading slot' } }],
@@ -90,10 +89,7 @@ describe('fileUpload', () => {
     ['with file-name slot', { props, slots: { 'file-name': () => 'File name slot' } }],
     ['with file-size slot', { props, slots: { 'file-size': () => 'File size slot' } }],
     ['with file-trailing slot', { props, slots: { 'file-trailing': () => 'File trailing slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PFileUploadProps; slots?: Partial<PFileUploadSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, FileUpload);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(FileUpload, {
@@ -110,7 +106,26 @@ describe('fileUpload', () => {
     expect(await axe(wrapper.element)).toHaveNoViolations();
   });
 
-  describe.skip('emits', () => {
+  it('reactively changes multiple and accept attributes', async () => {
+    const wrapper = await mountSuspended(FileUpload, {
+      props: {
+        multiple: false,
+        accept: 'image/*',
+      },
+    });
+
+    const input = wrapper.find('input[type="file"]');
+
+    expect(input.attributes('accept')).toBe('image/*');
+    expect(input.attributes('multiple')).toBeUndefined();
+
+    await wrapper.setProps({ multiple: true, accept: 'application/pdf' });
+
+    expect(input.attributes('accept')).toBe('application/pdf');
+    expect(input.attributes('multiple')).toBe('');
+  });
+
+  describe('emits', () => {
     it('update:modelValue event', async () => {
       const wrapper = mount(FileUpload);
       const input = wrapper.find('input');
@@ -118,6 +133,12 @@ describe('fileUpload', () => {
       const file2 = new File(['bar'], 'file2.txt', { type: 'text/plain' });
       await setFilesOnInput(input, [file1, file2]);
       expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+    });
+
+    it('update:modelValue emits null when removing a single file', async () => {
+      const wrapper = mount(FileUpload, { props });
+      await wrapper.find('button').trigger('click');
+      expect(wrapper.emitted('update:modelValue')?.at(-1)?.[0]).toBeNull();
     });
 
     it('change event', async () => {
@@ -130,18 +151,20 @@ describe('fileUpload', () => {
     });
   });
 
-  describe.skip('form integration', async () => {
+  describe('form integration', async () => {
     async function createForm(validateOn?: Array<FormInputEvents>) {
       const wrapper = await renderForm({
         props: {
           validateOn,
           validateOnInputDelay: 0,
           async validate(state: any) {
+            // eslint-disable-next-line no-nested-ternary, sonar/no-nested-conditional
             const files = Array.isArray(state.value) ? state.value : state.value ? [state.value] : [];
             if (!files.length || files.some((f: any) => f.name !== 'valid')) {
               return [{ name: 'value', message: 'Error message' }];
             }
 
+            // eslint-disable-next-line no-console
             console.log('valid');
             return [];
           },

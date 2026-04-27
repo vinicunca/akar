@@ -4,11 +4,10 @@ import type { Ref } from 'vue';
 import { Icon } from '@iconify/vue';
 import { getLocalTimeZone, today } from '@internationalized/date';
 import { ref } from 'vue';
-import CalendarPopover from '../calendar/story/_calendar-popover.vue';
-
-import { createDecade, createYear, toDate } from '../date';
-import { useDateFormatter } from '../../shared';
 import { ARangeCalendarCell, ARangeCalendarCellTrigger, ARangeCalendarGrid, ARangeCalendarGridBody, ARangeCalendarGridHead, ARangeCalendarGridRow, ARangeCalendarHeadCell, ARangeCalendarHeader, ARangeCalendarHeading, ARangeCalendarNext, ARangeCalendarPrev, ARangeCalendarRoot } from '..';
+import { useDateFormatter } from '../../shared';
+import CalendarPopover from '../calendar/story/_calendar-popover.vue';
+import { createDecade, createYear, toDate } from '../date';
 
 const placeholder = ref(today(getLocalTimeZone())) as Ref<DateValue>;
 const formatter = useDateFormatter('en');

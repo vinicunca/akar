@@ -1,60 +1,24 @@
-/* eslint-disable sonar/no-nested-functions */
+/* eslint-disable sonar/no-nested-template-literals, no-restricted-syntax, sonar/no-nested-functions, node/prefer-global/process */
 import type { Resolver } from '@nuxt/kit';
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema';
 import type { PohonModuleOptions } from './module';
-import process from 'node:process';
 import { fileURLToPath } from 'node:url';
-import { addTemplate, addTypeTemplate, hasNuxtModule, updateTemplates } from '@nuxt/kit';
+import {
+  addTemplate,
+  addTypeTemplate,
+  hasNuxtModule,
+} from '@nuxt/kit';
 import { toKebabCase } from '@vinicunca/perkakas';
+import { genExport } from 'knitwork';
 import * as theme from './theme';
 import * as themeContent from './theme/content';
 import * as themeProse from './theme/prose';
 import { applyDefaultVariants } from './utils/theme';
 
-export function addPohonTemplates(
-  { options, nuxt, resolve }:
-  {
-    options: PohonModuleOptions;
-    nuxt: Nuxt;
-    resolve: Resolver['resolve'];
-  },
-) {
-  const templates = getPohonTemplates({
-    options,
-    pohon: nuxt.options.appConfig.pohon,
-    nuxt,
-  });
-
-  for (const template of templates) {
-    if (template.filename!.endsWith('.d.ts')) {
-      addTypeTemplate(template as NuxtTypeTemplate);
-    } else {
-      addTemplate(template);
-    }
-  }
-
-  nuxt.hook('prepare:types', ({ references }) => {
-    references.push({
-      path: resolve('./runtime/types/app.config.d.ts'),
-    });
-  });
-
-  if (options.experimental?.componentDetection && nuxt.options.dev) {
-    nuxt.hook('builder:watch', async (_, path) => {
-      if (/\.(?:vue|ts|js|tsx|jsx)$/.test(path)) {
-        await updateTemplates({ filter: (template) => template.filename === 'ui.css' });
-      }
-    });
-  }
-}
-
-export function getPohonTemplates(
-  { options, pohon, nuxt}:
-  {
-    options: PohonModuleOptions;
-    pohon: Nuxt['options']['appConfig']['pohon'];
-    nuxt?: Nuxt;
-  },
+export function getTemplates(
+  options: PohonModuleOptions,
+  pohonConfig: Record<string, any>,
+  nuxt?: Nuxt,
 ) {
   const templates: Array<NuxtTemplate> = [];
 
@@ -64,13 +28,12 @@ export function getPohonTemplates(
   const isDev = process.argv.includes('--pohonDev');
 
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
-    for (const component of Object.keys(theme)) {
+    for (const component in theme) {
       templates.push({
-        // eslint-disable-next-line sonar/no-nested-template-literals
         filename: `pohon/${path ? `${path}/` : ''}${toKebabCase(component)}.ts`,
         write: true,
         getContents: async () => {
-          const template = theme[component];
+          const template = (theme as any)[component];
           let result = typeof template === 'function' ? template(options) : template;
 
           // Override default variants from nuxt.config.ts
@@ -94,18 +57,17 @@ export function getPohonTemplates(
           }
 
           function generateVariantDeclarations(variants: Array<string>) {
-            return variants.filter((variant) => json.includes(`as typeof ${variant}`))
-              .map((variant) => {
-                const keys = Object.keys(result.variants[variant]);
-                return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const;`;
-              });
+            return variants.filter((variant) => json.includes(`as typeof ${variant}`)).map((variant) => {
+              const keys = Object.keys(result.variants[variant]);
+              return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`;
+            });
           }
 
           // For local development, import directly from theme
           if (isDev) {
-            // eslint-disable-next-line sonar/no-nested-template-literals
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${toKebabCase(component)}`, import.meta.url));
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url));
+            const defaultVariantsJson = JSON.stringify(options.theme?.defaultVariants) ?? 'undefined';
 
             return [
               `import template from ${JSON.stringify(templatePath)}`,
@@ -113,7 +75,7 @@ export function getPohonTemplates(
               ...generateVariantDeclarations(variants),
               `const options = ${JSON.stringify(options, null, 2)}`,
               'let result = typeof template === \'function\' ? (template as Function)(options) : template',
-              'result = applyDefaultVariants(result, options.theme?.defaultVariants)',
+              `result = applyDefaultVariants(result, ${defaultVariantsJson})`,
               `const theme = ${json}`,
               'export default result as typeof theme',
             ].join('\n\n');
@@ -129,11 +91,7 @@ export function getPohonTemplates(
     }
   }
 
-  if (
-    !!nuxt && (
-      (hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content)
-    )
-  ) {
+  if (options.prose || options.mdc || options.content || (!!nuxt && (hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')))) {
     hasProse = true;
 
     const path = 'prose';
@@ -147,7 +105,7 @@ export function getPohonTemplates(
     });
   }
 
-  if (!!nuxt && (hasNuxtModule('@nuxt/content') || options.content)) {
+  if (options.content || (!!nuxt && hasNuxtModule('@nuxt/content'))) {
     hasContent = true;
 
     writeThemeTemplate(themeContent, 'content');
@@ -168,17 +126,17 @@ export function getPohonTemplates(
   templates.push({
     filename: 'types/pohon.d.ts',
     getContents: () => {
-      const iconKeys = Object.keys(pohon?.icons || {});
+      const iconKeys = Object.keys(pohonConfig?.icons || {});
       const iconUnion = iconKeys.length ? iconKeys.map((i) => JSON.stringify(i)).join(' | ') : 'string';
 
       return `import * as pohon from '#build/pohon';
 import type { UvConfig } from 'pohon-ui';
 import type { colors } from 'unocss/preset-mini';
 
-type IconsConfig = Record<${iconUnion} | (string & {}), string>;
+type IconsConfig = Record<${iconUnion} | (string & {}), string>
 
-type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone';
-type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {});
+type NeutralColor = 'slate' | 'gray' | 'zinc' | 'neutral' | 'stone' | 'taupe' | 'mauve' | 'mist' | 'olive'
+type Color = Exclude<keyof typeof colors, 'inherit' | 'current' | 'transparent' | 'black' | 'white' | NeutralColor> | (string & {})
 
 type AppConfigPohon = {
   colors?: {
@@ -203,5 +161,39 @@ export {};
     },
   });
 
+  templates.push({
+    filename: 'pohon-image-component.ts',
+    write: true,
+    getContents: ({ app }) => {
+      const image = app?.components?.find((c) => c.pascalName === 'NuxtImg' && !/nuxt(?:-nightly)?\/dist\/app/.test(c.filePath));
+
+      return image ? genExport(image.filePath, [{ name: image.export, as: 'default' }]) : 'export default "img";';
+    },
+  });
+
   return templates;
+}
+
+export function addTemplates(
+  options: PohonModuleOptions,
+  nuxt: Nuxt,
+  resolve: Resolver['resolve'],
+) {
+  const templates = getTemplates(
+    options,
+    nuxt.options.appConfig.pohon,
+    nuxt,
+  );
+
+  for (const template of templates) {
+    if (template.filename!.endsWith('.d.ts')) {
+      addTypeTemplate(template as NuxtTypeTemplate);
+    } else {
+      addTemplate(template);
+    }
+  }
+
+  nuxt.hook('prepare:types', ({ references }) => {
+    references.push({ path: resolve('./runtime/types/app.config.d.ts') });
+  });
 }

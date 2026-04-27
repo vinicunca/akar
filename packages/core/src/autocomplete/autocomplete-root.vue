@@ -71,6 +71,8 @@ import { AListboxRoot } from '../listbox';
 import { APopperRoot } from '../popper';
 import { usePrimitiveElement } from '../primitive';
 
+defineOptions({ name: 'AAutocompleteRoot' });
+
 const props = withDefaults(
   defineProps<AAutocompleteRootProps>(),
   {
@@ -146,7 +148,6 @@ async function onOpenChange(val: boolean) {
     isUserInputted.value = false;
     filterSearch.value = '';
     setTimeout(() => {
-      // eslint-disable-next-line sonar/no-gratuitous-expressions
       if (!val && props.resetSearchTermOnBlur) {
         resetSearchTerm.trigger();
       }

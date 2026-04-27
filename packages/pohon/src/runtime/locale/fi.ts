@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Edellinen',
     },
     chatPrompt: {
-      placeholder: 'Kirjoita viestisi tähän...',
+      placeholder: 'Kirjoita viestisi tähän…',
     },
     chatPromptSubmit: {
       label: 'Lähetä',
+    },
+    chatReasoning: {
+      thinking: 'Ajattelee…',
+      thought: 'Ajatteli',
+      thoughtFor: 'Ajatteli {duration}',
     },
     colorMode: {
       dark: 'Tumma',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Sulje',
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      placeholder: 'Kirjoita komento tai hae...',
+      placeholder: 'Kirjoita komento tai hae…',
     },
     contentSearch: {
       links: 'Linkit',
       theme: 'Teema',
     },
     contentSearchButton: {
-      label: 'Hae...',
+      label: 'Hae…',
     },
     contentToc: {
       title: 'Tällä sivulla',
+    },
+    dropdownMenu: {
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…',
     },
     dashboardSearch: {
       theme: 'Teema',
     },
     dashboardSearchButton: {
-      label: 'Hae...',
+      label: 'Hae…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Supista sivupalkki',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Vähennä',
       increment: 'Kasvata',
     },
+    listbox: {
+      noData: 'Ei tietoja',
+      noMatch: 'Ei vastaavia tietoja',
+      search: 'Hae…',
+    },
     modal: {
       close: 'Sulje',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kopioi koodi leikepöydälle',
       },
+      prompt: {
+        copy: 'Kopioi kehote',
+        openIn: 'Avaa sovelluksessa {name}',
+      },
+    },
+    sidebar: {
+      close: 'Sulje',
+      toggle: 'Vaihda',
     },
     selectMenu: {
       create: 'Luo "{label}"',
       noData: 'Ei tietoja',
       noMatch: 'Ei vastaavia tietoja',
-      search: 'Hae...',
+      search: 'Hae…',
     },
     slideover: {
       close: 'Sulje',

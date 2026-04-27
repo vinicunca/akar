@@ -43,6 +43,8 @@ import { toDate } from '../date';
 import { APrimitive, usePrimitiveElement } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
+defineOptions({ name: 'ACalendarCellTrigger' });
+
 const props = withDefaults(defineProps<ACalendarCellTriggerProps>(), {
   as: 'div',
 });
@@ -120,23 +122,22 @@ function handleArrowKey(event: KeyboardEvent) {
 
   event.preventDefault();
   event.stopPropagation();
-  const parentElement = rootContext.parentElement.value!;
 
+  const parentElement = rootContext.parentElement.value!;
   const indexIncrementation = 7;
   const sign = rootContext.dir.value === 'rtl' ? -1 : 1;
-
-  switch (event.key) {
-    case KEY_CODES.ARROW_DOWN:
-      shiftFocus(props.day, indexIncrementation);
+  switch (event.code) {
+    case KEY_CODES.ARROW_RIGHT:
+      shiftFocus(props.day, sign);
       break;
     case KEY_CODES.ARROW_LEFT:
       shiftFocus(props.day, -sign);
       break;
-    case KEY_CODES.ARROW_RIGHT:
-      shiftFocus(props.day, sign);
-      break;
     case KEY_CODES.ARROW_UP:
       shiftFocus(props.day, -indexIncrementation);
+      break;
+    case KEY_CODES.ARROW_DOWN:
+      shiftFocus(props.day, indexIncrementation);
       break;
     case KEY_CODES.ENTER:
     case KEY_CODES.SPACE:
@@ -149,7 +150,9 @@ function handleArrowKey(event: KeyboardEvent) {
     if (
       (
         rootContext.minValue.value && candidateDayValue.compare(rootContext.minValue.value) < 0
-      ) || (rootContext.maxValue.value && candidateDayValue.compare(rootContext.maxValue.value) > 0)
+      ) || (
+        rootContext.maxValue.value && candidateDayValue.compare(rootContext.maxValue.value) > 0
+      )
     ) {
       return;
     }
@@ -186,7 +189,8 @@ function handleArrowKey(event: KeyboardEvent) {
 <template>
   <APrimitive
     ref="primitiveElement"
-    v-bind="props"
+    :as="props.as"
+    :as-child="props.asChild"
     role="button"
     :aria-label="labelText"
     data-akar-calendar-cell-trigger

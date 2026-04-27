@@ -3,6 +3,8 @@ import APopperAnchor from './popper-anchor.vue';
 import APopperArrow from './popper-arrow.vue';
 import APopperContent from './popper-content.vue';
 import APopperRoot from './popper-root.vue';
+
+defineOptions({ name: 'APopper' });
 </script>
 
 <template>

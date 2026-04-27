@@ -1,6 +1,6 @@
-import type * as theme from '#build/pohon';
 import type { ClassValue } from 'unocss-variants';
 import type { ComputedRef } from 'vue';
+import type * as theme from '#build/pohon';
 import type { UvConfig } from '../types/uv';
 import { createContext } from 'akar';
 import defu from 'defu';
@@ -43,7 +43,7 @@ export function useComponentPohon(name: string, props: { pohon?: any }): Compute
   const { pohon } = injectThemeContext({ pohon: computed(() => ({})) });
 
   return computed(() => {
-    const themeOverrides = (getProp({ object: pohon.value, path: name as string }) || {});
+    const themeOverrides = (getProp(pohon.value, name as string) || {});
 
     return defu(props.pohon ?? {}, themeOverrides);
   });

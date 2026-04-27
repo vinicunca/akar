@@ -8,6 +8,8 @@ export interface AComboboxSeparatorProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'AComboboxSeparator' });
+
 const props = defineProps<AComboboxSeparatorProps>();
 useForwardExpose();
 </script>

@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from 'pohon-ui';
-import { reactive, ref } from 'vue';
 import * as z from 'zod';
-import FormExampleElements from '../../../../../../../docs/app/components/content/examples/pohon/form/form-example-elements.vue';
-import FormExampleNestedList from '../../../../../../../docs/app/components/content/examples/pohon/form/form-example-nested-list.vue';
-import FormExampleNested from '../../../../../../../docs/app/components/content/examples/pohon/form/form-example-nested.vue';
+// import FormExampleElements from '../../../../../docs/app/components/content/examples/form/form-example-elements.vue';
+// import FormExampleNestedList from '../../../../../docs/app/components/content/examples/form/form-example-nested-list.vue';
+// import FormExampleNested from '../../../../../docs/app/components/content/examples/form/form-example-nested.vue';
 
 const schema = z.object({
   email: z.email(),
@@ -25,14 +24,14 @@ const disabled = ref(false);
 </script>
 
 <template>
-  <BaseNavbar />
+  <Navbar />
 
-  <div class="mt-16 pb-8 flex flex-col gap-8 min-h-0">
+  <div class="flex flex-col gap-8 min-h-0 mt-16 pb-8">
     <div class="flex gap-4">
       <PForm
         :state="state"
         :schema="schema"
-        class="flex flex-col gap-4 w-60"
+        class="gap-4 flex flex-col w-60"
         @submit="onSubmit"
       >
         <PFormField
@@ -72,11 +71,11 @@ const disabled = ref(false);
       <FormExampleNestedList />
     </div>
 
-    <div class="border border-border rounded-lg">
-      <div class="px-4 py-2 flex gap-4 items-center">
+    <div class="border border-default rounded-lg">
+      <div class="py-2 px-4 flex gap-4 items-center">
         <PFormField
           label="Validate on"
-          class="flex gap-2 items-center"
+          class="flex items-center gap-2"
         >
           <PSelectMenu
             v-model="validateOn"
@@ -94,7 +93,7 @@ const disabled = ref(false);
       <FormExampleElements
         :validate-on="validateOn"
         :disabled="disabled"
-        class="p-4 border-t border-border"
+        class="border-t border-default p-4"
       />
     </div>
   </div>

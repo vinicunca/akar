@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { GenericComponentInstance } from '../shared/types';
 import type { AComboboxRoot } from '..';
+import type { GenericComponentInstance } from '../shared/types';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 import {

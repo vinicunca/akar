@@ -41,9 +41,9 @@ Use the Footer component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{32-67}
 <script setup lang="ts">
-import type { PNavigationMenuItem } from 'pohon-ui'
+import type { PNavigationMenuItem } from 'pohon-ui';
 
-const items: PNavigationMenuItem[] = [{
+const items: Array<PNavigationMenuItem> = [{
   label: 'Figma Kit',
   to: 'https://go.vinicunca.dev/figma-ui',
   target: '_blank'
@@ -55,7 +55,7 @@ const items: PNavigationMenuItem[] = [{
   label: 'Releases',
   to: 'https://github.com/vinicunca/akar/releases',
   target: '_blank'
-}]
+}];
 </script>
 
 <template>
@@ -68,7 +68,11 @@ const items: PNavigationMenuItem[] = [{
       </NuxtLayout>
     </PMain>
 
-    <PSeparator icon="i-simple-icons:nuxtdotjs" type="dashed" class="h-px" />
+    <PSeparator
+      icon="i-simple-icons:nuxtdotjs"
+      type="dashed"
+      class="h-px"
+    />
 
     <PFooter>
       <template #left>
@@ -77,7 +81,10 @@ const items: PNavigationMenuItem[] = [{
         </p>
       </template>
 
-      <PNavigationMenu :items="items" variant="link" />
+      <PNavigationMenu
+        :items="items"
+        variant="link"
+      />
 
       <template #right>
         <PButton

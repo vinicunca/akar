@@ -1,0 +1,36 @@
+---
+"akar": minor
+"pohon-ui": minor
+---
+
+- feat(DropdownMenu): add filter component
+- feat(Checkbox/Switch): add support for custom true/false values
+- fix(useForwardExpose): sync currentElement on DOM update
+- fix(Calendar): parity + docs regen
+- feat: color components
+- feat: new TimeRangeField Component
+- fix(Toast): resolve accessibility issues flagged by axe-core
+- fix(DismissableLayer): guard against non-Element targets in isLayerExist
+- fix(useBodyScrollLock): prevent permanent scroll lock on rapid toggle
+- fix(useHideOthers): edge case with useHideOthers when nested in a native popover
+- fix(Splitter): emit correct units for pixel-sized panels in events
+- chore(Menu): add aria-labelledby to MenuGroup
+- fix(Combobox): close content when focus moves outside with openOnFocus
+- fix(Calendar): add role="application" to fix NVDA keyboard navigation
+- fix(Splitter): nested px group ignores defaultSize & percentage drift
+- fix(useHideOthers): handle browsers without :popover-open support (Safari 18)
+- fix(PinInput): paste only numeric text in numeric mode
+- fix(Combobox): prevent addOnBlur from adding raw input when selecting item
+- fix(useGraceArea): add nil guard for hover target in grace area creation
+- fix(Autocomplete): add IME composition input handling
+- fix(FocusScope): don't move focus if DOM mutation occurred before any nodes had focus
+- fix(tooltip,hovercard): close when scrollable ancestor is scrolled
+- fix(Listbox): restore highlightOnHover behavior
+- fix(useForwardProps): return Partial<T> to correctly type optional boolean props
+- fix(Select): normalize hidden control
+- fix(DateField): fixed direct incorrect passing of date values to input element
+- chore(deps): update vue (major)
+- fix(TimeField,DateField): avoid changing focus prematurely with previous segment value of 0
+- fix(ListboxVirtualizer): ignore non-element VNodes in slot children
+- fix(TimeField): change focus after pressing 0 more than once on hour segment with 12 hour locales
+- fix(MonthPicker, YearPicker): preserve day/month when selecting

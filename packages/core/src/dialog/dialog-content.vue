@@ -22,6 +22,8 @@ import DialogContentModal from './dialog-content-modal.vue';
 import DialogContentNonModal from './dialog-content-non-modal.vue';
 import { injectDialogRootContext } from './dialog-root.vue';
 
+defineOptions({ name: 'ADialogContent' });
+
 const props = defineProps<ADialogContentProps>();
 const emits = defineEmits<ADialogContentEmits>();
 

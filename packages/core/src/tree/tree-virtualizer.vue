@@ -23,6 +23,8 @@ import { getActiveElement } from '../shared';
 import { getNextMatch } from '../shared/use-typeahead';
 import { injectATreeRootContext } from './tree-root.vue';
 
+defineOptions({ name: 'ATreeVirtualizer' });
+
 const props = defineProps<ATreeVirtualizerProps>();
 
 defineSlots<{

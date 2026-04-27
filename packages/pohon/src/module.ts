@@ -1,15 +1,17 @@
 import type { HookResult } from '@nuxt/schema';
+import type { ModuleDependencies } from 'nuxt/schema';
 import {
   addComponentsDir,
+  addImports,
   addImportsDir,
   createResolver,
   defineNuxtModule,
   hasNuxtModule,
-  installModule,
 } from '@nuxt/kit';
 import { defu } from 'defu';
 import { name, version } from '../package.json';
-import { addPohonTemplates } from './templates';
+import { publicComposables } from './imports';
+import { addTemplates } from './templates';
 import { DEFAULT_OPTIONS, getDefaultPohonConfig, resolveColors } from './utils/defaults';
 
 export type * from './runtime/types';
@@ -28,20 +30,20 @@ export interface PohonModuleOptions {
   /**
    * Enable or disable `@nuxt/fonts` module
    * @defaultValue `true`
-   * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#fonts
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#fonts
    */
   fonts?: boolean;
 
   /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
-   * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#colormode
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#colormode
    */
   colorMode?: boolean;
 
   /**
    * Customize how the theme is generated
-   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/theme
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/theme/design-system
    */
   theme?: {
     /**
@@ -51,6 +53,10 @@ export interface PohonModuleOptions {
      */
     colors?: Array<Color>;
 
+    /**
+     * The default variants to use for components
+     * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#themedefaultvariants
+     */
     defaultVariants?: {
       /**
        * The default color variant to use for components
@@ -69,13 +75,23 @@ export interface PohonModuleOptions {
   /**
    * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
    * @defaultValue false
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#prose
+   */
+  prose?: boolean;
+
+  /**
+   * @deprecated Use `prose` instead
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#mdc
    */
   mdc?: boolean;
+
   /**
    * Force the import of content & prose components even if `@nuxt/content` is not installed
    * @defaultValue false
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#content
    */
   content?: boolean;
+
   /**
    * Experimental features
    */
@@ -97,7 +113,7 @@ declare module '#app' {
   interface RuntimeNuxtHooks {
     'dashboard:search:toggle': () => HookResult;
     'dashboard:sidebar:toggle': () => HookResult;
-    'dashboard:sidebar:collapsed': (value: boolean) => HookResult;
+    'dashboard:sidebar:collapse': (value: boolean) => HookResult;
   }
 }
 
@@ -105,119 +121,48 @@ export default defineNuxtModule<PohonModuleOptions>({
   meta: {
     name,
     version,
-    docs: 'https://akar.vinicunca.dev/pohon/overview/getting-started',
-    configKey: 'pohon',
+    docs: 'https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt',
+    configKey: 'ui',
     compatibility: {
-      nuxt: '>=4.0.0',
+      nuxt: '>=4.1.0',
     },
   },
 
   defaults: DEFAULT_OPTIONS,
 
-  async setup(options, nuxt) {
-    const { resolve } = createResolver(import.meta.url);
-
-    options.theme = options.theme || {};
-    options.theme.colors = resolveColors(options.theme.colors);
-
-    nuxt.options.pohon = options;
-
-    nuxt.options.alias['#pohon'] = resolve('./runtime');
-
-    nuxt.options.appConfig.pohon = defu(
-      nuxt.options.appConfig.pohon ?? {},
-      getDefaultPohonConfig(options.theme),
-    );
-
-    /**
-     * This is to remove the data-pohon data attributes from all components
-     * so that we can reduce the amount of dom that is being generated in production build.
-     */
-    if (!nuxt.options.build && !nuxt.options.test) {
-      nuxt.hook('vite:extendConfig', (config: any) => {
-        config.vue = config.vue || {};
-        config.vue.template = config.vue.template || {};
-        config.vue.template.compilerOptions = config.vue.template.compilerOptions || {};
-        config.vue.template.compilerOptions.nodeTransforms = config.vue.template.compilerOptions.nodeTransforms || [];
-
-        config.vue.template.compilerOptions.nodeTransforms.push((node: any) => {
-          if (node.type === 1) {
-            if (node.props) {
-              for (let i = node.props.length - 1; i >= 0; i--) {
-                const prop = node.props[i];
-                if (prop.type === 6 && prop.name === 'data-pohon') {
-                  node.props.splice(i, 1);
-                }
-              }
-            }
-          }
-        });
-      });
-    }
-
-    // Isolate root node from portaled components
-    nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {};
-    nuxt.options.app.rootAttrs.class = [
-      nuxt.options.app.rootAttrs.class,
-      'isolate',
-    ].filter(Boolean).join(' ');
-
-    async function registerModule(
-      { name, key, options = {} }:
-      { name: string; key: string; options?: Record<string, any> },
-    ) {
-      if (!hasNuxtModule(name)) {
-        await installModule(name, defu(
-          (nuxt.options as any)[key],
-          options,
-        ));
-      } else {
-        (nuxt.options as any)[key] = defu(
-          (nuxt.options as any)[key],
-          options,
-        );
-      }
-    }
-
-    await registerModule({
-      name: '@nuxt/icon',
-      key: 'icon',
-      options: {
-        cssLayer: 'components',
+  moduleDependencies(nuxt): ModuleDependencies {
+    const userPohonOptions = nuxt.options.pohon || {};
+    return {
+      '@nuxt/icon': {
+        defaults: {
+          cssLayer: 'base',
+        },
       },
-    });
-
-    if (options.fonts) {
-      await registerModule({
-        name: '@nuxt/fonts',
-        key: 'fonts',
-        options: {
+      ...userPohonOptions.fonts !== false && {
+        '@nuxt/fonts': {
           defaults: {
-            weights: [400, 500, 600, 700],
+            defaults: {
+              weights: [400, 500, 600, 700],
+            },
           },
         },
-      });
-    }
-
-    if (options.colorMode) {
-      await registerModule({
-        name: '@nuxtjs/color-mode',
-        key: 'colorMode',
-        options: {
-          classSuffix: '',
-          disableTransition: true,
+      },
+      ...userPohonOptions.colorMode !== false && {
+        '@nuxtjs/color-mode': {
+          defaults: {
+            classSuffix: '',
+            disableTransition: true,
+          },
         },
-      });
-    }
-
-    if ((hasNuxtModule('@nuxtjs/mdc') || options.mdc) || (hasNuxtModule('@nuxt/content') || options.content)) {
-      nuxt.options.mdc = defu(
-        nuxt.options.mdc,
-        {
+      },
+      '@nuxtjs/mdc': {
+        optional: !userPohonOptions.mdc && !userPohonOptions.content,
+        defaults: {
           highlight: {
             theme: {
-              default: 'one-dark-pro',
-              dark: 'one-dark-pro',
+              light: 'material-theme-lighter',
+              default: 'material-theme',
+              dark: 'material-theme-palenight',
             },
           },
           components: {
@@ -240,6 +185,7 @@ export default defineNuxtModule<PohonModuleOptions>({
               'icon': 'ProseIcon',
               'kbd': 'ProseKbd',
               'note': 'ProseNote',
+              'prompt': 'ProsePrompt',
               'steps': 'ProseSteps',
               'tabs': 'ProseTabs',
               'tabs-item': 'ProseTabsItem',
@@ -248,8 +194,35 @@ export default defineNuxtModule<PohonModuleOptions>({
             },
           },
         },
-      );
+      },
+    };
+  },
 
+  async setup(options, nuxt) {
+    const { resolve } = createResolver(import.meta.url);
+
+    options.theme = options.theme || {};
+    options.theme.colors = resolveColors(options.theme.colors);
+
+    nuxt.options.pohon = options;
+
+    nuxt.options.alias['#pohon'] = resolve('./runtime');
+
+    nuxt.options.appConfig.pohon = defu(
+      nuxt.options.appConfig.pohon || {},
+      getDefaultPohonConfig(options.theme),
+    );
+
+    nuxt.options.build.transpile.push('akar');
+
+    // Isolate root node from portaled components
+    nuxt.options.app.rootAttrs = nuxt.options.app.rootAttrs || {};
+    nuxt.options.app.rootAttrs.class = [
+      nuxt.options.app.rootAttrs.class,
+      'isolate',
+    ].filter(Boolean).join(' ');
+
+    if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,
@@ -258,7 +231,7 @@ export default defineNuxtModule<PohonModuleOptions>({
       });
     }
 
-    if ((hasNuxtModule('@nuxt/content') || options.content)) {
+    if (options.content || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
         path: resolve('./runtime/components/content'),
         pathPrefix: false,
@@ -266,12 +239,15 @@ export default defineNuxtModule<PohonModuleOptions>({
       });
     }
 
-    if (hasNuxtModule('@nuxtjs/color-mode')) {
+    if (options.colorMode || hasNuxtModule('@nuxtjs/color-mode')) {
       addComponentsDir({
         path: resolve('./runtime/components/color-mode'),
         pathPrefix: false,
         prefix: options.prefix,
       });
+    } else {
+      // Stub `useColorMode` composable used in `DashboardSearch` and `ContentSearch` components
+      addImportsDir(resolve('./runtime/composables/color-mode'));
     }
 
     addComponentsDir({
@@ -281,8 +257,12 @@ export default defineNuxtModule<PohonModuleOptions>({
       ignore: ['color-mode/**', 'content/**', 'prose/**'],
     });
 
-    addImportsDir(resolve('./runtime/composables'));
+    addImports(
+      Object.entries(publicComposables).flatMap(([file, exports]) =>
+        exports.map((name) => ({ name, from: resolve(`./runtime/composables/${file}`) })),
+      ),
+    );
 
-    addPohonTemplates({ options, nuxt, resolve });
+    addTemplates(options, nuxt, resolve);
   },
 });

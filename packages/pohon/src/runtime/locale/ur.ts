@@ -35,6 +35,11 @@ export default defineLocale<PMessages>({
     chatPromptSubmit: {
       label: 'پیغام بھیجیں',
     },
+    chatReasoning: {
+      thinking: 'سوچ رہا ہے…',
+      thought: 'سوچا',
+      thoughtFor: '{duration} سوچا',
+    },
     colorMode: {
       dark: 'تاریک',
       light: 'روشن',
@@ -47,23 +52,27 @@ export default defineLocale<PMessages>({
       close: 'بند کریں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں...',
+      placeholder: 'کمانڈ ٹائپ کریں یا تلاش کریں…',
     },
     contentSearch: {
       links: 'لنکس',
       theme: 'تھیم',
     },
     contentSearchButton: {
-      label: 'تلاش کریں...',
+      label: 'تلاش کریں…',
     },
     contentToc: {
       title: 'اس صفحے پر',
+    },
+    dropdownMenu: {
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      search: 'تلاش کریں…',
     },
     dashboardSearch: {
       theme: 'تھیم',
     },
     dashboardSearchButton: {
-      label: 'تلاش کریں...',
+      label: 'تلاش کریں…',
     },
     dashboardSidebarCollapse: {
       collapse: 'سائیڈ بار کو سکیڑیں',
@@ -92,6 +101,11 @@ export default defineLocale<PMessages>({
       decrement: 'کمی',
       increment: 'اضافہ',
     },
+    listbox: {
+      noData: 'کوئی ڈیٹا نہیں',
+      noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
+      search: 'تلاش کریں…',
+    },
     modal: {
       close: 'بند کریں',
     },
@@ -112,12 +126,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'کوڈ کاپی کریں',
       },
+      prompt: {
+        copy: 'پرامپٹ کاپی کریں',
+        openIn: '{name} میں کھولیں',
+      },
+    },
+    sidebar: {
+      close: 'بند کریں',
+      toggle: 'ٹوگل کریں',
     },
     selectMenu: {
       create: '"{label}" بنائیں',
       noData: 'کوئی ڈیٹا نہیں',
       noMatch: 'کوئی ملتا جلتا ڈیٹا نہیں ملا',
-      search: 'تلاش کریں...',
+      search: 'تلاش کریں…',
     },
     slideover: {
       close: 'بند کریں',

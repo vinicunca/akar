@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Қаблӣ',
     },
     chatPrompt: {
-      placeholder: 'Пайём ворид кунед...',
+      placeholder: 'Пайём ворид кунед…',
     },
     chatPromptSubmit: {
       label: 'Фиристодан',
+    },
+    chatReasoning: {
+      thinking: 'Фикр мекунад…',
+      thought: 'Фикр кард',
+      thoughtFor: '{duration} фикр кард',
     },
     colorMode: {
       dark: 'Торик',
@@ -46,7 +51,7 @@ export default defineLocale<PMessages>({
       close: 'Бастан',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед...',
+      placeholder: 'Фармонро нависед ё ҷустуҷӯ кунед…',
     },
     contentSearch: {
       links: 'Пайвандҳо',
@@ -57,6 +62,10 @@ export default defineLocale<PMessages>({
     },
     contentToc: {
       title: 'Мундариҷа',
+    },
+    dropdownMenu: {
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      search: 'Ҷустуҷӯ…',
     },
     dashboardSearch: {
       theme: 'Мавзӯъ',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Кам кардан',
       increment: 'Зиёд кардан',
     },
+    listbox: {
+      noData: 'Маълумот нест',
+      noMatch: 'Маълумоти мувофиқ ёфт нашуд',
+      search: 'Ҷустуҷӯ…',
+    },
     modal: {
       close: 'Бастан',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Нусха бардоштан',
       },
+      prompt: {
+        copy: 'Нусхабардории дархост',
+        openIn: 'Кушодан дар {name}',
+      },
+    },
+    sidebar: {
+      close: 'Бастан',
+      toggle: 'Иваз кардан',
     },
     selectMenu: {
       create: '"{label}" созед',
       noData: 'Маълумот нест',
       noMatch: 'Маълумоти мувофиқ ёфт нашуд',
-      search: 'Ҷустуҷӯ...',
+      search: 'Ҷустуҷӯ…',
     },
     slideover: {
       close: 'Бастан',

@@ -5,9 +5,11 @@ export interface SelectPopperPositionProps extends APopperContentProps {}
 </script>
 
 <script setup lang="ts">
-import { APopperContent } from '../popper';
 import { useForwardProps } from '..';
+import { APopperContent } from '../popper';
 import { CONTENT_MARGIN } from './utils';
+
+defineOptions({ name: 'ASelectPopperPosition' });
 
 const props = withDefaults(defineProps<SelectPopperPositionProps>(), {
   align: 'start',

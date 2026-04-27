@@ -18,6 +18,8 @@ import { ARovingFocusItem } from '../roving-focus';
 import { injectATabsRootContext } from './tabs-root.vue';
 import { makeContentId, makeTriggerId } from './utils';
 
+defineOptions({ name: 'ATabsTrigger' });
+
 const props = withDefaults(defineProps<ATabsTriggerProps>(), {
   disabled: false,
   as: 'button',

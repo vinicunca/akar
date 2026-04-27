@@ -7,12 +7,14 @@ export interface AAutocompleteInputProps extends AListboxFilterProps {}
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { nextTick, onMounted, watch } from 'vue';
+import { nextTick, onMounted, ref, watch } from 'vue';
 import { injectAComboboxRootContext } from '../combobox/combobox-root.vue';
 import { AListboxFilter } from '../listbox';
 import { injectAListboxRootContext } from '../listbox/listbox-root.vue';
 import { usePrimitiveElement } from '../primitive';
 import { injectAAutocompleteRootContext } from './autocomplete-root.vue';
+
+defineOptions({ name: 'AAutocompleteInput' });
 
 const props = withDefaults(
   defineProps<AAutocompleteInputProps>(),
@@ -46,27 +48,53 @@ onMounted(() => {
   }
 });
 
-function handleKeyDown(ev: KeyboardEvent) {
+const isComposing = ref(false);
+
+function onCompositionStart() {
+  isComposing.value = true;
+}
+
+function onCompositionEnd() {
+  nextTick(() => {
+    isComposing.value = false;
+    const el = currentElement.value as HTMLInputElement;
+    if (el) {
+      processInputValue(el.value);
+    }
+  });
+}
+
+function handleKeyDown(_ev: KeyboardEvent) {
+  if (isComposing.value) {
+    return;
+  }
+
   if (!rootContext.open.value) {
     rootContext.onOpenChange(true);
   }
 }
 
-function handleInput(event: InputEvent) {
-  const target = event.target as HTMLInputElement;
+function processInputValue(value: string) {
   if (!rootContext.open.value) {
     rootContext.onOpenChange(true);
     nextTick(() => {
-      if (target.value) {
-        rootContext.filterSearch.value = target.value;
+      if (value) {
+        rootContext.filterSearch.value = value;
         listboxContext.highlightFirstItem();
       }
     });
   } else {
-    rootContext.filterSearch.value = target.value;
+    rootContext.filterSearch.value = value;
   }
   // Autocomplete-specific: update root's modelValue with the typed text
-  autocompleteContext.modelValue.value = target.value;
+  autocompleteContext.modelValue.value = value;
+}
+
+function handleInput(event: InputEvent) {
+  if (isComposing.value) {
+    return;
+  }
+  processInputValue((event.target as HTMLInputElement).value);
 }
 
 function handleFocus() {
@@ -118,6 +146,8 @@ watch(rootContext.filterState, (_newValue, oldValue) => {
     @input="handleInput"
     @keydown.down.up.prevent="handleKeyDown"
     @focus="handleFocus"
+    @compositionstart="onCompositionStart"
+    @compositionend="onCompositionEnd"
   >
     <slot />
   </AListboxFilter>

@@ -1,0 +1,53 @@
+<script lang="ts">
+import type { AppConfig } from '@nuxt/schema';
+import type { VNode } from 'vue';
+import type { ComponentConfig } from '../../types/uv';
+import theme from '#build/pohon/prose/h-1';
+
+type ProseH1 = ComponentConfig<typeof theme, AppConfig, 'h1', 'pohon.prose'>;
+
+export interface ProseH1Props {
+  id?: string;
+  class?: any;
+  pohon?: ProseH1['slots'];
+}
+
+export interface ProseH1Slots {
+  default: (props?: {}) => Array<VNode>;
+}
+</script>
+
+<script setup lang="ts">
+import { isObjectType } from '@vinicunca/perkakas';
+import { computed } from 'vue';
+import { useAppConfig, useRuntimeConfig } from '#imports';
+import { useComponentPohon } from '../../composables/use-component-pohon';
+import { uv } from '../../utils/uv';
+
+const props = defineProps<ProseH1Props>();
+defineSlots<ProseH1Slots>();
+
+const appConfig = useAppConfig() as ProseH1['AppConfig'];
+const pohonProp = useComponentPohon('prose.h1', props);
+const { headings } = useRuntimeConfig().public?.mdc || {};
+
+const pohon = computed(() => uv({ extend: uv(theme), ...(appConfig.pohon?.prose?.h1 || {}) })());
+
+const generate = computed(() => props.id && isObjectType(headings?.anchorLinks) && headings.anchorLinks.h1);
+</script>
+
+<template>
+  <h1
+    :id="id"
+    :class="pohon.base({ class: [pohonProp?.base, props.class] })"
+  >
+    <a
+      v-if="id && generate"
+      :href="`#${id}`"
+      :class="pohon.link({ class: pohonProp?.link })"
+    >
+      <slot />
+    </a>
+    <slot v-else />
+  </h1>
+</template>

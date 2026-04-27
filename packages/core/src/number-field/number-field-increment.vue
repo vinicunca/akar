@@ -12,6 +12,8 @@ export interface ANumberFieldIncrementProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APrimitive, usePrimitiveElement } from '../primitive';
 
+defineOptions({ name: 'ANumberFieldIncrement' });
+
 const props = withDefaults(defineProps<ANumberFieldIncrementProps>(), {
   as: 'button',
 });

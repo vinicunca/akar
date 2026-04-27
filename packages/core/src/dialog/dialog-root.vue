@@ -41,6 +41,7 @@ import { useVModel } from '@vueuse/core';
 import { ref, toRefs } from 'vue';
 
 defineOptions({
+  name: 'ADialogRoot',
   inheritAttrs: false,
 });
 

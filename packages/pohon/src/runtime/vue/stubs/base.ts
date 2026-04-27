@@ -1,9 +1,9 @@
-import type { NuxtApp } from '#app';
 import type { Ref, Plugin as VuePlugin } from 'vue';
-import appConfig from '#build/app.config';
+import type { NuxtApp } from '#app';
 import { useColorMode as useColorModeVueUse } from '@vueuse/core';
 import { createHooks } from 'hookable';
 import { onScopeDispose, ref } from 'vue';
+import appConfig from '#build/app.config';
 
 export { defineLocale } from '../../composables/define-locale';
 

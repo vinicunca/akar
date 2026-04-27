@@ -1,5 +1,6 @@
 export default {
   base: '',
+
   variants: {
     level: {
       2: '',
@@ -7,6 +8,7 @@ export default {
       4: '',
     },
   },
+
   defaultVariants: {
     level: '3',
   },

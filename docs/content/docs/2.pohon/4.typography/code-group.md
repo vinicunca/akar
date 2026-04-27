@@ -31,7 +31,7 @@ bun add pohon-ui
 
 :::
 
-#code
+# code
 
 ````mdc
 ::code-group

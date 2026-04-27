@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Anterior',
     },
     chatPrompt: {
-      placeholder: 'Escriu el teu missatge aquí...',
+      placeholder: 'Escriu el teu missatge aquí…',
     },
     chatPromptSubmit: {
       label: 'Enviar',
+    },
+    chatReasoning: {
+      thinking: 'Pensant…',
+      thought: 'Ha pensat',
+      thoughtFor: 'Ha pensat durant {duration}',
     },
     colorMode: {
       dark: 'Fosc',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Tancar',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      placeholder: 'Escriu una ordre o cerca...',
+      placeholder: 'Escriu una ordre o cerca…',
     },
     contentSearch: {
       links: 'Enllaços',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Cercar...',
+      label: 'Cercar…',
     },
     contentToc: {
       title: 'En aquesta pàgina',
+    },
+    dropdownMenu: {
+      noMatch: 'No hi ha dades coincidents',
+      search: 'Cerca…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Cercar...',
+      label: 'Cercar…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Contraure barra lateral',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Decrementar',
       increment: 'Incrementar',
     },
+    listbox: {
+      noData: 'Sense dades',
+      noMatch: 'No hi ha dades coincidents',
+      search: 'Cerca…',
+    },
     modal: {
       close: 'Tancar',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Copiar codi al portapapers',
       },
+      prompt: {
+        copy: 'Copiar instrucció',
+        openIn: 'Obrir a {name}',
+      },
+    },
+    sidebar: {
+      close: 'Tancar',
+      toggle: 'Canviar',
     },
     selectMenu: {
       create: 'Crear "{label}"',
       noData: 'Sense dades',
       noMatch: 'No hi ha dades coincidents',
-      search: 'Cerca...',
+      search: 'Cerca…',
     },
     slideover: {
       close: 'Tancar',

@@ -30,10 +30,15 @@ export default defineLocale<PMessages>({
       prev: 'הקודם',
     },
     chatPrompt: {
-      placeholder: 'כתוב את ההודעה שלך כאן...',
+      placeholder: 'כתוב את ההודעה שלך כאן…',
     },
     chatPromptSubmit: {
       label: 'שלח',
+    },
+    chatReasoning: {
+      thinking: 'חושב…',
+      thought: 'חשב',
+      thoughtFor: 'חשב במשך {duration}',
     },
     colorMode: {
       dark: 'כהה',
@@ -47,23 +52,27 @@ export default defineLocale<PMessages>({
       close: 'סגור',
       noData: 'אין נתונים זמינים',
       noMatch: 'לא נמצאה התאמה',
-      placeholder: 'הקלד פקודה...',
+      placeholder: 'הקלד פקודה…',
     },
     contentSearch: {
       links: 'קישורים',
       theme: 'ערכת נושא',
     },
     contentSearchButton: {
-      label: 'חיפוש...',
+      label: 'חיפוש…',
     },
     contentToc: {
       title: 'בדף זה',
+    },
+    dropdownMenu: {
+      noMatch: 'לא נמצאה התאמה',
+      search: 'חפש…',
     },
     dashboardSearch: {
       theme: 'ערכת נושא',
     },
     dashboardSearchButton: {
-      label: 'חיפוש...',
+      label: 'חיפוש…',
     },
     dashboardSidebarCollapse: {
       collapse: 'כווץ סרגל צד',
@@ -92,6 +101,11 @@ export default defineLocale<PMessages>({
       decrement: 'הפחת',
       increment: 'הוסף',
     },
+    listbox: {
+      noData: 'אין נתונים',
+      noMatch: 'לא נמצאה התאמה',
+      search: 'חפש…',
+    },
     modal: {
       close: 'סגור',
     },
@@ -112,12 +126,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'העתק קוד ללוח',
       },
+      prompt: {
+        copy: 'העתק הנחיה',
+        openIn: 'פתח ב-{name}',
+      },
+    },
+    sidebar: {
+      close: 'סגור',
+      toggle: 'החלף',
     },
     selectMenu: {
       create: 'צור "{label}"',
       noData: 'אין נתונים',
       noMatch: 'לא נמצאה התאמה',
-      search: 'חפש...',
+      search: 'חפש…',
     },
     slideover: {
       close: 'סגור',

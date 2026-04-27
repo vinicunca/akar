@@ -20,6 +20,8 @@ export const [
 <script setup lang="ts">
 import { AListboxGroup } from '../listbox';
 
+defineOptions({ name: 'AComboboxGroup' });
+
 const props = defineProps<AComboboxGroupProps>();
 const id = useId(undefined, 'akar-combobox-group');
 const rootContext = injectAComboboxRootContext();

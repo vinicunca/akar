@@ -1,7 +1,8 @@
 import type { Ref } from 'vue';
-import { useCookie, useLocale } from '#imports';
 import { useStorage } from '@vueuse/core';
 import { computed, isRef, ref, unref, watch } from 'vue';
+import { useCookie } from '#imports';
+import { useLocale } from './use-locale';
 
 export interface UseResizableProps {
   /**
@@ -77,18 +78,10 @@ export interface UseResizableReturn {
   collapse: (value?: boolean) => void;
 }
 
-interface StorageType {
-  size: number;
-  collapsed: boolean;
-}
-
 export function useResizable(
-  { key, options = {}, collapsed = ref(false) }:
-  {
-    key: string;
-    options?: Ref<UseResizableProps> | UseResizableProps;
-    collapsed?: Ref<boolean>;
-  },
+  key: string,
+  options: Ref<UseResizableProps> | UseResizableProps = {},
+  { collapsed = ref(false) }: { collapsed?: Ref<boolean> } = {},
 ): UseResizableReturn {
   const el = ref<HTMLElement | null>(null);
   const opts = computed(() => ({
@@ -106,6 +99,11 @@ export function useResizable(
   }));
 
   const { dir } = useLocale();
+
+  interface StorageType {
+    size: number;
+    collapsed: boolean;
+  }
 
   const defaultStorageValue = {
     size: opts.value.defaultSize,
@@ -134,7 +132,6 @@ export function useResizable(
       if (isRef(collapsed)) {
         collapsed.value = value;
       }
-
       storageData.value.collapsed = value;
     },
   });
@@ -153,8 +150,9 @@ export function useResizable(
   const isDragging = ref(false);
 
   function onMouseMove(
-    { event, initialPos, initialSize }:
-    { event: MouseEvent; initialPos: number; initialSize: number },
+    event: MouseEvent,
+    initialPos: number,
+    initialSize: number,
   ): void {
     if (!el.value || !opts.value.resizable) {
       return;
@@ -219,7 +217,7 @@ export function useResizable(
     isDragging.value = true;
 
     function handleMouseMove(event: MouseEvent) {
-      onMouseMove({ event, initialPos: initialX, initialSize: initialWidth });
+      onMouseMove(event, initialX, initialWidth);
     }
 
     function handleMouseUp() {
@@ -233,8 +231,9 @@ export function useResizable(
   }
 
   function onTouchMove(
-    { event, initialPos, initialSize }:
-    { event: TouchEvent; initialPos: number; initialSize: number },
+    event: TouchEvent,
+    initialPos: number,
+    initialSize: number,
   ): void {
     if (!el.value || !opts.value.resizable || !event.touches[0]) {
       return;
@@ -299,7 +298,7 @@ export function useResizable(
     isDragging.value = true;
 
     function handleTouchMove(event: TouchEvent) {
-      onTouchMove({ event, initialPos: initialX, initialSize: initialWidth });
+      onTouchMove(event, initialX, initialWidth);
     }
 
     function handleTouchEnd() {

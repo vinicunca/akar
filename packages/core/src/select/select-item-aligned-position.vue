@@ -26,6 +26,7 @@ import { injectASelectRootContext } from './select-root.vue';
 import { CONTENT_MARGIN } from './utils';
 
 defineOptions({
+  name: 'ASelectItemAlignedPosition',
   inheritAttrs: false,
 });
 

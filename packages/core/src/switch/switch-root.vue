@@ -1,77 +1,100 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import type { APrimitiveProps } from '../primitive';
 import type { FormFieldProps } from '../shared/types';
 import { createContext, useFormControl, useForwardExpose } from '../shared';
 
-export interface ASwitchRootProps extends APrimitiveProps, FormFieldProps {
+export interface ASwitchRootProps<T = boolean> extends APrimitiveProps, FormFieldProps {
   /** The state of the switch when it is initially rendered. Use when you do not need to control its state. */
-  defaultValue?: boolean;
+  defaultValue?: T;
   /** The controlled state of the switch. Can be bind as `v-model`. */
-  modelValue?: boolean | null;
+  modelValue?: T | null;
   /** When `true`, prevents the user from interacting with the switch. */
   disabled?: boolean;
   id?: string;
   /** The value given as data when submitted with a `name`. */
   value?: string;
+  /**
+   * The value used when the switch is on. Defaults to `true`.
+   */
+  trueValue?: T;
+  /**
+   * The value used when the switch is off. Defaults to `false`.
+   */
+  falseValue?: T;
 }
 
-export type ASwitchRootEmits = {
+export type ASwitchRootEmits<T = boolean> = {
   /** Event handler called when the value of the switch changes. */
-  'update:modelValue': [payload: boolean];
+  'update:modelValue': [payload: T];
 };
 
 export interface SwitchRootContext {
-  modelValue?: Ref<boolean>;
+  checked?: ComputedRef<boolean>;
   toggleCheck: () => void;
   disabled: Ref<boolean>;
 }
 
-export const [injectASwitchRootContext, provideSwitchRootContext]
-  = createContext<SwitchRootContext>('ASwitchRoot');
+export const [
+  injectASwitchRootContext,
+  provideASwitchRootContext,
+] = createContext<SwitchRootContext>('ASwitchRoot');
 </script>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T = boolean">
 import { useVModel } from '@vueuse/core';
 import { computed, toRefs } from 'vue';
 import { APrimitive } from '../primitive';
 import { AVisuallyHiddenInput } from '../visually-hidden';
 
-const props = withDefaults(defineProps<ASwitchRootProps>(), {
+defineOptions({ name: 'ASwitchRoot' });
+
+const props = withDefaults(defineProps<ASwitchRootProps<T>>(), {
   as: 'button',
   modelValue: undefined,
   value: 'on',
+  trueValue: (() => true) as unknown as undefined,
+  falseValue: (() => false) as unknown as undefined,
 });
-const emit = defineEmits<ASwitchRootEmits>();
+const emit = defineEmits<ASwitchRootEmits<T>>();
 
 defineSlots<{
   default?: (props: {
     /** Current value */
     modelValue: typeof modelValue.value;
+    /** Whether the switch is checked */
+    checked: typeof checked.value;
   }) => any;
 }>();
 
 const { disabled } = toRefs(props);
 
-const modelValue = useVModel(props, 'modelValue', emit, {
-  defaultValue: props.defaultValue,
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<boolean>;
+const modelValue = useVModel(
+  props as any,
+  'modelValue',
+  emit as any,
+  {
+    defaultValue: props.defaultValue ?? props.falseValue,
+    passive: (props.modelValue === undefined) as false,
+  },
+) as Ref<T>;
+
+const checked = computed(() => modelValue.value === props.trueValue);
 
 function toggleCheck() {
   if (disabled.value) {
     return;
   }
 
-  modelValue.value = !modelValue.value;
+  modelValue.value = checked.value ? props.falseValue as T : props.trueValue as T;
 }
 
 const { forwardRef, currentElement } = useForwardExpose();
 const isFormControl = useFormControl(currentElement);
 const ariaLabel = computed(() => props.id && currentElement.value ? (document.querySelector(`[for="${props.id}"]`) as HTMLLabelElement)?.textContent : undefined);
 
-provideSwitchRootContext({
-  modelValue,
+provideASwitchRootContext({
+  checked,
   toggleCheck,
   disabled,
 });
@@ -86,9 +109,9 @@ provideSwitchRootContext({
     :type="as === 'button' ? 'button' : undefined"
     :value="value"
     :aria-label="$attrs['aria-label'] || ariaLabel"
-    :aria-checked="modelValue"
+    :aria-checked="checked"
     :aria-required="required"
-    :data-state="modelValue ? 'checked' : 'unchecked'"
+    :data-state="checked ? 'checked' : 'unchecked'"
     :data-disabled="disabled ? '' : undefined"
     :as-child="asChild"
     :as="as"
@@ -96,7 +119,10 @@ provideSwitchRootContext({
     @click="toggleCheck"
     @keydown.enter.prevent="toggleCheck"
   >
-    <slot :model-value="modelValue" />
+    <slot
+      :model-value="modelValue"
+      :checked="checked"
+    />
 
     <AVisuallyHiddenInput
       v-if="isFormControl && name"
@@ -105,7 +131,7 @@ provideSwitchRootContext({
       :disabled="disabled"
       :required="required"
       :value="value"
-      :checked="!!modelValue"
+      :checked="checked"
     />
   </APrimitive>
 </template>

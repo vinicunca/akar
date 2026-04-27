@@ -8,10 +8,10 @@ export default (options: Required<PohonModuleOptions>) => {
       slots: {
         input: '',
         focusScope: '',
-        content: '',
+        viewport: '',
+        content: (content: string) => [content, ''],
         trailingClear: '',
       },
-
       variants: {
         virtualize: {
           true: {

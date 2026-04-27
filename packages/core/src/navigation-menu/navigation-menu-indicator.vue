@@ -19,6 +19,7 @@ import { useForwardExpose } from '../shared';
 import { injectANavigationMenuContext } from './navigation-menu-root.vue';
 
 defineOptions({
+  name: 'ANavigationMenuIndicator',
   inheritAttrs: false,
 });
 

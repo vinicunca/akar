@@ -1,24 +1,20 @@
-import type { PMainProps, PMainSlots } from '../../src/runtime/components/main.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PMain from '../../src/runtime/components/main.vue';
-import ComponentRender from '../component-render';
+import Main from '../../src/runtime/components/Main.vue';
+import { renderEach } from '../component-render';
 
-describe('PMain', () => {
-  it.each([
+describe('Main', () => {
+  renderEach(Main, [
     // Props
-    ['with as', { props: { as: 'main' } }],
+    ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'min-h-full' } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PMainProps; slots?: Partial<PMainSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PMain);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PMain, {
+    const wrapper = await mountSuspended(Main, {
       slots: {
         default: () => 'Default slot',
       },

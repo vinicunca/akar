@@ -40,7 +40,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
           icon: 'i-lucide:swatch-book'
-          description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+          description: 'Choose a primary and a neutral color from your UnoCSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
@@ -117,7 +117,7 @@ Use the `items` prop as an array of objects with the following properties:
 - `value?: string`
 - `disabled?: boolean`
 - [`slot?: string`](#with-custom-slot)
-- `onSelect?: (e: Event) => void`
+- `onSelect?: (event: Event) => void`
 - `children?: NavigationMenuChildItem[]`
 - `class?: any`
 - `pohon?: { linkLeadingAvatarSize?: ClassNameValue, linkLeadingAvatar?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkLabelExternalIcon?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingBadgeSize?: ClassNameValue, linkTrailingBadge?: ClassNameValue, linkTrailingIcon?: ClassNameValue, label?: ClassNameValue, link?: ClassNameValue, content?: ClassNameValue, childList?: ClassNameValue, childLabel?: ClassNameValue, childItem?: ClassNameValue, childLink?: ClassNameValue, childLinkIcon?: ClassNameValue, childLinkWrapper?: ClassNameValue, childLinkLabel?: ClassNameValue, childLinkLabelExternalIcon?: ClassNameValue, childLinkDescription?: ClassNameValue }`
@@ -151,7 +151,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
           icon: 'i-lucide:swatch-book'
-          description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+          description: 'Choose a primary and a neutral color from your UnoCSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
@@ -222,7 +222,7 @@ Each item can take a `children` array of objects with the following properties t
 - `label: string`
 - `description?: string`
 - `icon?: string`
-- `onSelect?: (e: Event) => void`
+- `onSelect?: (event: Event) => void`
 - `class?: any`
 
 ::
@@ -264,7 +264,7 @@ props:
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
             icon: 'i-lucide:swatch-book'
-            description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+            description: 'Choose a primary and a neutral color from your UnoCSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
@@ -377,7 +377,7 @@ props:
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
             icon: 'i-lucide:swatch-book'
-            description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+            description: 'Choose a primary and a neutral color from your UnoCSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
@@ -472,7 +472,7 @@ props:
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
             icon: 'i-lucide:swatch-book'
-            description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+            description: 'Choose a primary and a neutral color from your UnoCSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
@@ -653,7 +653,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
           icon: 'i-lucide:swatch-book'
-          description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+          description: 'Choose a primary and a neutral color from your UnoCSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
@@ -707,12 +707,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.chevronDown` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.chevronDown` key.
 :::
@@ -751,7 +751,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
           icon: 'i-lucide:swatch-book'
-          description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+          description: 'Choose a primary and a neutral color from your UnoCSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
@@ -918,7 +918,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
         - label: 'Colors'
           icon: 'i-lucide:swatch-book'
-          description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+          description: 'Choose a primary and a neutral color from your UnoCSS theme.'
         - label: 'Theme'
           icon: 'i-lucide:cog'
           description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
@@ -1019,7 +1019,7 @@ props:
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
             icon: 'i-lucide:swatch-book'
-            description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+            description: 'Choose a primary and a neutral color from your UnoCSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'
@@ -1124,7 +1124,7 @@ props:
             description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
           - label: 'Colors'
             icon: 'i-lucide:swatch-book'
-            description: 'Choose a primary and a neutral color from your Tailwind CSS theme.'
+            description: 'Choose a primary and a neutral color from your UnoCSS theme.'
           - label: 'Theme'
             icon: 'i-lucide:cog'
             description: 'You can customize components by using the `class` / `pohon` props or in your app.config.ts.'

@@ -18,12 +18,6 @@ export default (options: Required<PohonModuleOptions>) => {
     },
 
     variants: {
-      virtualize: {
-        false: {
-          base: '',
-          tbody: '',
-        },
-      },
       pinned: {
         true: {
           th: '',
@@ -54,7 +48,7 @@ export default (options: Required<PohonModuleOptions>) => {
         'elastic': '',
       },
       loadingColor: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
         neutral: '',
       },
     },

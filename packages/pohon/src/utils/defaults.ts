@@ -37,6 +37,6 @@ export const DEFAULT_OPTIONS = {
       size: undefined,
     },
   },
-  mdc: false,
+  prose: false,
   content: false,
 };

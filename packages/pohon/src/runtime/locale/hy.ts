@@ -34,6 +34,11 @@ export default defineLocale<PMessages>({
     chatPromptSubmit: {
       label: 'Շարունակել',
     },
+    chatReasoning: {
+      thinking: 'Մտածում է…',
+      thought: 'Մտածեց',
+      thoughtFor: 'Մտածեց {duration}',
+    },
     colorMode: {
       dark: 'Մուգ',
       light: 'Լուսավոր',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Փակել',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      placeholder: 'Մուտքագրեք հրաման կամ որոնեք...',
+      placeholder: 'Մուտքագրեք հրաման կամ որոնեք…',
     },
     contentSearch: {
       links: 'Հղումներ',
       theme: 'Թեմա',
     },
     contentSearchButton: {
-      label: 'Որոնել...',
+      label: 'Որոնել…',
     },
     contentToc: {
       title: 'Այս էջում',
+    },
+    dropdownMenu: {
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…',
     },
     dashboardSearch: {
       theme: 'Թեմա',
     },
     dashboardSearchButton: {
-      label: 'Որոնել...',
+      label: 'Որոնել…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Կոլապսել կողային վահանակը',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Պակասեցնել',
       increment: 'Ավելացնել',
     },
+    listbox: {
+      noData: 'Տվյալներ չկան',
+      noMatch: 'Համընկնումներ չեն գտնվել',
+      search: 'Որոնում…',
+    },
     modal: {
       close: 'Փակել',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Պատճենել կոդը սեղմատախտակին',
       },
+      prompt: {
+        copy: 'Պատճենել հարցումը',
+        openIn: 'Բացել {name}-ում',
+      },
+    },
+    sidebar: {
+      close: 'Փակել',
+      toggle: 'Փոխարկել',
     },
     selectMenu: {
       create: 'Ստեղծել "{label}"',
       noData: 'Տվյալներ չկան',
       noMatch: 'Համընկնումներ չեն գտնվել',
-      search: 'Որոնում...',
+      search: 'Որոնում…',
     },
     slideover: {
       close: 'Փակել',

@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Önceki',
     },
     chatPrompt: {
-      placeholder: 'Buraya mesajınızı yazın...',
+      placeholder: 'Buraya mesajınızı yazın…',
     },
     chatPromptSubmit: {
       label: 'Gönder',
+    },
+    chatReasoning: {
+      thinking: 'Düşünüyor…',
+      thought: 'Düşündü',
+      thoughtFor: '{duration} düşündü',
     },
     colorMode: {
       dark: 'Koyu',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Kapat',
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      placeholder: 'Bir komut yazın veya arama yapın...',
+      placeholder: 'Bir komut yazın veya arama yapın…',
     },
     contentSearch: {
       links: 'Bağlantılar',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Ara...',
+      label: 'Ara…',
     },
     contentToc: {
       title: 'Bu sayfada',
+    },
+    dropdownMenu: {
+      noMatch: 'Eşleşen veri yok',
+      search: 'Ara…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Ara...',
+      label: 'Ara…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Kenar çubuğunu daralt',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Azalt',
       increment: 'Arttır',
     },
+    listbox: {
+      noData: 'Veri yok',
+      noMatch: 'Eşleşen veri yok',
+      search: 'Ara…',
+    },
     modal: {
       close: 'Kapat',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kodu panoya kopyala',
       },
+      prompt: {
+        copy: 'İstemi kopyala',
+        openIn: '{name} içinde aç',
+      },
+    },
+    sidebar: {
+      close: 'Kapat',
+      toggle: 'Değiştir',
     },
     selectMenu: {
       create: '"{label}" oluştur',
       noData: 'Veri yok',
       noMatch: 'Eşleşen veri yok',
-      search: 'Ara...',
+      search: 'Ara…',
     },
     slideover: {
       close: 'Kapat',

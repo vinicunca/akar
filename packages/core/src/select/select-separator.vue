@@ -7,6 +7,8 @@ export interface ASelectSeparatorProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ASelectSeparator' });
+
 const props = defineProps<ASelectSeparatorProps>();
 </script>
 

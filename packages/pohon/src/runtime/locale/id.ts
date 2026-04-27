@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Sebelumnya',
     },
     chatPrompt: {
-      placeholder: 'Tulis pesan Anda di sini...',
+      placeholder: 'Tulis pesan Anda di sini…',
     },
     chatPromptSubmit: {
       label: 'Kirim',
+    },
+    chatReasoning: {
+      thinking: 'Berpikir…',
+      thought: 'Telah berpikir',
+      thoughtFor: 'Berpikir selama {duration}',
     },
     colorMode: {
       dark: 'Gelap',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Tutup',
       noData: 'Tidak ada data',
       noMatch: 'Tidak ada data yang cocok',
-      placeholder: 'Ketik perintah atau cari...',
+      placeholder: 'Ketik perintah atau cari…',
     },
     contentSearch: {
       links: 'Tautan',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Cari...',
+      label: 'Cari…',
     },
     contentToc: {
       title: 'Pada halaman ini',
+    },
+    dropdownMenu: {
+      noMatch: 'Tidak ada data yang cocok',
+      search: 'Cari…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Cari...',
+      label: 'Cari…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Ciutkan sidebar',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Kurangi',
       increment: 'Tambah',
     },
+    listbox: {
+      noData: 'Tidak ada data',
+      noMatch: 'Tidak ada data yang cocok',
+      search: 'Cari…',
+    },
     modal: {
       close: 'Tutup',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Salin kode ke clipboard',
       },
+      prompt: {
+        copy: 'Salin prompt',
+        openIn: 'Buka di {name}',
+      },
+    },
+    sidebar: {
+      close: 'Tutup',
+      toggle: 'Alihkan',
     },
     selectMenu: {
       create: 'Buat "{label}"',
       noData: 'Tidak ada data',
       noMatch: 'Tidak ada data yang cocok',
-      search: 'Cari...',
+      search: 'Cari…',
     },
     slideover: {
       close: 'Tutup',

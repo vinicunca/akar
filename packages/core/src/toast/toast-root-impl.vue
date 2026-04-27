@@ -57,6 +57,7 @@ import { injectAToastProviderContext } from './toast-provider.vue';
 import { getAnnounceTextContent, handleAndDispatchCustomEvent, isDeltaInDirection, TOAST_SWIPE_CANCEL, TOAST_SWIPE_END, TOAST_SWIPE_MOVE, TOAST_SWIPE_START, VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';
 
 defineOptions({
+  name: 'AToastRootImpl',
   inheritAttrs: false,
 });
 
@@ -85,7 +86,7 @@ const closeTimerRef = ref(0);
 const remainingTime = ref(duration.value);
 
 const remainingRaf = useRafFn(() => {
-  const elapsedTime = new Date().getTime() - closeTimerStartTimeRef.value;
+  const elapsedTime = Date.now() - closeTimerStartTimeRef.value;
   remainingTime.value = Math.max(closeTimerRemainingTimeRef.value - elapsedTime, 0);
 }, { fpsLimit: 60 });
 
@@ -100,7 +101,7 @@ function startTimer(duration: number) {
     return;
   }
   window.clearTimeout(closeTimerRef.value);
-  closeTimerStartTimeRef.value = new Date().getTime();
+  closeTimerStartTimeRef.value = Date.now();
   closeTimerRef.value = window.setTimeout(handleClose, duration);
 }
 
@@ -139,7 +140,7 @@ watchEffect((cleanupFn) => {
       emits('resume');
     };
     const handlePause = () => {
-      const elapsedTime = new Date().getTime() - closeTimerStartTimeRef.value;
+      const elapsedTime = Date.now() - closeTimerStartTimeRef.value;
       closeTimerRemainingTimeRef.value = closeTimerRemainingTimeRef.value - elapsedTime;
       window.clearTimeout(closeTimerRef.value);
       remainingRaf.pause();
@@ -189,7 +190,6 @@ provideToastRootContext({ onClose: handleClose });
     v-if="announceTextContent"
     role="alert"
     :aria-live="type === 'foreground' ? 'assertive' : 'polite'"
-    aria-atomic="true"
   >
     {{ announceTextContent }}
   </ToastAnnounce>
@@ -201,9 +201,6 @@ provideToastRootContext({ onClose: handleClose });
     <ACollectionItem>
       <APrimitive
         :ref="forwardRef"
-        role="alert"
-        aria-live="off"
-        aria-atomic="true"
         tabindex="0"
         v-bind="$attrs"
         :as="as"

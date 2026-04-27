@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Trước',
     },
     chatPrompt: {
-      placeholder: 'Nhập tin nhắn của bạn ở đây...',
+      placeholder: 'Nhập tin nhắn của bạn ở đây…',
     },
     chatPromptSubmit: {
       label: 'Gửi',
+    },
+    chatReasoning: {
+      thinking: 'Đang suy nghĩ…',
+      thought: 'Đã suy nghĩ',
+      thoughtFor: 'Đã suy nghĩ {duration}',
     },
     colorMode: {
       dark: 'Tối',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Đóng',
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      placeholder: 'Nhập lệnh hoặc tìm kiếm...',
+      placeholder: 'Nhập lệnh hoặc tìm kiếm…',
     },
     contentSearch: {
       links: 'Liên kết',
       theme: 'Chủ đề',
     },
     contentSearchButton: {
-      label: 'Tìm kiếm...',
+      label: 'Tìm kiếm…',
     },
     contentToc: {
       title: 'Trong trang này',
+    },
+    dropdownMenu: {
+      noMatch: 'Không có kết quả phù hợp',
+      search: 'Tìm kiếm…',
     },
     dashboardSearch: {
       theme: 'Chủ đề',
     },
     dashboardSearchButton: {
-      label: 'Tìm kiếm...',
+      label: 'Tìm kiếm…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Thu gọn thanh bên',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Giảm',
       increment: 'Tăng',
     },
+    listbox: {
+      noData: 'Không có dữ liệu',
+      noMatch: 'Không có kết quả phù hợp',
+      search: 'Tìm kiếm…',
+    },
     modal: {
       close: 'Đóng',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Sao chép mã vào bộ nhớ tạm',
       },
+      prompt: {
+        copy: 'Sao chép lệnh',
+        openIn: 'Mở trong {name}',
+      },
+    },
+    sidebar: {
+      close: 'Đóng',
+      toggle: 'Chuyển đổi',
     },
     selectMenu: {
       create: 'Tạo "{label}"',
       noData: 'Không có dữ liệu',
       noMatch: 'Không có kết quả phù hợp',
-      search: 'Tìm kiếm...',
+      search: 'Tìm kiếm…',
     },
     slideover: {
       close: 'Đóng',

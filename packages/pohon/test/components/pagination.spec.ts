@@ -1,18 +1,17 @@
-import type { PPaginationProps, PPaginationSlots } from '../../src/runtime/components/pagination.vue';
-import theme from '#build/pohon/button';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PPagination from '../../src/runtime/components/pagination.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/button';
+import Pagination from '../../src/runtime/components/Pagination.vue';
+import { renderEach } from '../component-render';
 
-describe('PPagination', () => {
+describe('Pagination', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const variants = Object.keys(theme.variants.variant) as any;
 
   const props = { total: 100 };
 
-  it.each([
+  renderEach(Pagination, [
     // Props
     ['with total', { props }],
     ['with defaultPage', { props: { ...props, defaultPage: 2 } }],
@@ -34,7 +33,7 @@ describe('PPagination', () => {
     ...variants.map((activeVariant: string) => [`with neutral active variant ${activeVariant}`, { props: { ...props, activeVariant, color: 'neutral' } }]),
     ['with as', { props: { ...props, as: 'div' } }],
     ['with class', { props: { ...props, class: 'relative' } }],
-    ['with ui', { props: { ...props, pohon: { list: 'gap-3', first: 'rounded-full', prev: 'rounded-full', item: 'rounded-full', next: 'rounded-full', last: 'rounded-full' } } }],
+    ['with pohon', { props: { ...props, pohon: { list: 'gap-3', first: 'rounded-full', prev: 'rounded-full', item: 'rounded-full', next: 'rounded-full', last: 'rounded-full' } } }],
     // Slots
     ['with first slot', { props, slots: { first: () => 'First slot' } }],
     ['with prev slot', { props, slots: { prev: () => 'Prev slot' } }],
@@ -42,13 +41,10 @@ describe('PPagination', () => {
     ['with last slot', { props, slots: { last: () => 'Last slot' } }],
     ['with ellipsis slot', { props: { ...props, siblingCount: 1, showEdges: true, page: 5 }, slots: { ellipsis: () => 'Ellipsis slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PPaginationProps; slots?: Partial<PPaginationSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PPagination);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
-    const wrapper = await mountSuspended(PPagination, {
+    const wrapper = await mountSuspended(Pagination, {
       props: {
         total: 100,
         page: 5,

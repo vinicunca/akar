@@ -43,7 +43,7 @@ pnpm run dev
 
 ::
 
-#code
+# code
 
 ````mdc
 ::steps{level="4"}

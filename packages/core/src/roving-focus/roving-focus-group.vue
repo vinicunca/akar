@@ -54,6 +54,8 @@ import { useCollection } from '../collection';
 import { APrimitive } from '../primitive';
 import { ENTRY_FOCUS, EVENT_OPTIONS, focusFirst } from './utils';
 
+defineOptions({ name: 'ARovingFocusGroup' });
+
 const props = withDefaults(defineProps<ARovingFocusGroupProps>(), {
   loop: false,
   orientation: undefined,

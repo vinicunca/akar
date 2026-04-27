@@ -10,6 +10,8 @@ import { computed } from 'vue';
 import { useCollection } from '../collection';
 import SliderThumbImpl from './slider-thumb-impl.vue';
 
+defineOptions({ name: 'ASliderThumb' });
+
 const props = withDefaults(
   defineProps<ASliderThumbProps>(),
   {

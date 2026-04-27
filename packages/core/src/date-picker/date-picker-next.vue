@@ -1,12 +1,14 @@
 <script lang="ts">
-import type { CalendarNextSlot } from '../calendar/calendar-next.vue';
 import type { ACalendarNextProps } from '..';
+import type { CalendarNextSlot } from '../calendar/calendar-next.vue';
 import { ACalendarNext } from '..';
 
 export interface ADatePickerNextProps extends ACalendarNextProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADatePickerNext' });
+
 const props = defineProps<ADatePickerNextProps>();
 
 defineSlots<CalendarNextSlot>();

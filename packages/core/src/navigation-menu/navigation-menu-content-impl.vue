@@ -30,6 +30,8 @@ import {
   makeTriggerId,
 } from './utils';
 
+defineOptions({ name: 'ANavigationMenuContentImpl' });
+
 const props = defineProps<NavigationMenuContentImplProps>();
 const emits = defineEmits<NavigationMenuContentImplEmits>();
 

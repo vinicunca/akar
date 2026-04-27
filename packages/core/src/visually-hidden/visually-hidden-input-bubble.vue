@@ -16,6 +16,7 @@ import { usePrimitiveElement } from '../primitive';
 import AVisuallyHidden from './visually-hidden.vue';
 
 defineOptions({
+  name: 'AVisuallyHiddenInputBubble',
   inheritAttrs: false,
 });
 

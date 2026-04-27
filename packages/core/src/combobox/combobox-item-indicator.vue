@@ -7,6 +7,8 @@ export interface AComboboxItemIndicatorProps extends AListboxItemIndicatorProps 
 <script setup lang="ts">
 import { AListboxItemIndicator } from '../listbox';
 
+defineOptions({ name: 'AComboboxItemIndicator' });
+
 const props = withDefaults(defineProps<AComboboxItemIndicatorProps>(), {
   as: 'span',
 });

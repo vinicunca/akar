@@ -10,8 +10,8 @@ export default defineLocale<PMessages>({
       close: 'داخستن',
     },
     authForm: {
-      hidePassword: 'شاردنەوەی وشەی نهێنی',
-      showPassword: 'پیشاندانی وشەی نهێنی',
+      hidePassword: 'شاردنەوەی تێپەڕەوشە',
+      showPassword: 'پیشاندانی تێپەڕەوشە',
       submit: 'بەردەوام بە',
     },
     banner: {
@@ -26,14 +26,19 @@ export default defineLocale<PMessages>({
     carousel: {
       dots: 'سلایدێک هەڵبژێرە بۆ پیشاندان',
       goto: 'بڕۆ بۆ سلایدی {slide}',
-      next: 'داهاتوو',
-      prev: 'پێشووی',
+      next: 'دواتر',
+      prev: 'پێشتر',
     },
     chatPrompt: {
-      placeholder: 'هەڵەیەک لەسەر چاپەکەت بنووسە...',
+      placeholder: 'نامەکەت لێرە بنوسە…',
     },
     chatPromptSubmit: {
-      label: 'پێچەوە',
+      label: 'ناردن',
+    },
+    chatReasoning: {
+      thinking: 'بیرکردنەوە…',
+      thought: 'بیری کردەوە',
+      thoughtFor: 'بە ماوەی {duration} بیری کردەوە',
     },
     colorMode: {
       dark: 'تاریک',
@@ -47,31 +52,35 @@ export default defineLocale<PMessages>({
       close: 'داخستن',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      placeholder: 'فەرمانێک بنووسە یان بگەڕێ...',
+      placeholder: 'فەرمانێک بنووسە یان بگەڕێ…',
     },
     contentSearch: {
       links: 'بەستەرەکان',
       theme: 'ڕووکار',
     },
     contentSearchButton: {
-      label: 'گەڕان...',
+      label: 'گەڕان…',
     },
     contentToc: {
       title: 'لەم پەڕەیەدا',
+    },
+    dropdownMenu: {
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      search: 'گەڕان…',
     },
     dashboardSearch: {
       theme: 'ڕووکار',
     },
     dashboardSearchButton: {
-      label: 'گەڕان...',
+      label: 'گەڕان…',
     },
     dashboardSidebarCollapse: {
       collapse: 'داخستنی لای تەنیشت',
       expand: 'فراوانکردنی لای تەنیشت',
     },
     dashboardSidebarToggle: {
-      close: 'داخستنی لای تەنیشت',
-      open: 'کردنەوەی لای تەنیشت',
+      close: 'داخستنی لاتەنیشت',
+      open: 'کردنەوەی لاتەنیشت',
     },
     error: {
       clear: 'گەڕانەوە بۆ سەرەتا',
@@ -84,7 +93,7 @@ export default defineLocale<PMessages>({
       open: 'کردنەوەی پێڕست',
     },
     inputMenu: {
-      create: '"{label}" دروستکردنی',
+      create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
     },
@@ -92,11 +101,16 @@ export default defineLocale<PMessages>({
       decrement: 'کەمکردنەوە',
       increment: 'زیادکردن',
     },
+    listbox: {
+      noData: 'هیچ داتایەک نییە',
+      noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
+      search: 'گەڕان…',
+    },
     modal: {
       close: 'داخستن',
     },
     pricingTable: {
-      caption: 'ڕێچووی پەیکەردان',
+      caption: 'بەراورکردنی پلانی نرخدانان',
     },
     prose: {
       codeCollapse: {
@@ -112,12 +126,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'لەبەرگرتنەوەی کۆد',
       },
+      prompt: {
+        copy: 'لەبەرگرتنەوەی فەرمان',
+        openIn: 'کردنەوە لە {name}',
+      },
+    },
+    sidebar: {
+      close: 'داخستن',
+      toggle: 'گۆڕین',
     },
     selectMenu: {
-      create: '"{label}" دروستکردنی',
+      create: '"{label}" زیادکردنی',
       noData: 'هیچ داتایەک نییە',
       noMatch: 'هیچ ئەنجامێک نەدۆزرایەوە',
-      search: 'گەڕان...',
+      search: 'گەڕان…',
     },
     slideover: {
       close: 'داخستن',

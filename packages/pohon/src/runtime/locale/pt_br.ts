@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Anterior',
     },
     chatPrompt: {
-      placeholder: 'Escreva sua mensagem aqui...',
+      placeholder: 'Escreva sua mensagem aqui…',
     },
     chatPromptSubmit: {
       label: 'Enviar',
+    },
+    chatReasoning: {
+      thinking: 'Pensando…',
+      thought: 'Pensou',
+      thoughtFor: 'Pensou por {duration}',
     },
     colorMode: {
       dark: 'Escuro',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Fechar',
       noData: 'Nenhum dado',
       noMatch: 'Nenhum dado correspondente',
-      placeholder: 'Digite um comando ou pesquise...',
+      placeholder: 'Digite um comando ou pesquise…',
     },
     contentSearch: {
       links: 'Links',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Pesquisar...',
+      label: 'Pesquisar…',
     },
     contentToc: {
       title: 'Nesta página',
+    },
+    dropdownMenu: {
+      noMatch: 'Nenhum dado correspondente',
+      search: 'Pesquisar…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Pesquisar...',
+      label: 'Pesquisar…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Recolher barra lateral',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Decrementar',
       increment: 'Incrementar',
     },
+    listbox: {
+      noData: 'Nenhum dado',
+      noMatch: 'Nenhum dado correspondente',
+      search: 'Pesquisar…',
+    },
     modal: {
       close: 'Fechar',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Copiar código para a área de transferência',
       },
+      prompt: {
+        copy: 'Copiar prompt',
+        openIn: 'Abrir no {name}',
+      },
+    },
+    sidebar: {
+      close: 'Fechar',
+      toggle: 'Alternar',
     },
     selectMenu: {
       create: 'Criar "{label}"',
       noData: 'Nenhum dado',
       noMatch: 'Nenhum dado correspondente',
-      search: 'Pesquisar...',
+      search: 'Pesquisar…',
     },
     slideover: {
       close: 'Fechar',

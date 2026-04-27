@@ -6,6 +6,8 @@ export interface ADateRangePickerGridProps extends ARangeCalendarGridProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangePickerGrid' });
+
 const props = defineProps<ADateRangePickerGridProps>();
 </script>
 

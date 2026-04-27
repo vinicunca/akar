@@ -11,6 +11,8 @@ import { APopperAnchor } from '../popper';
 import { APrimitive } from '../primitive';
 import { injectAPopoverRootContext } from './popover-root.vue';
 
+defineOptions({ name: 'APopoverTrigger' });
+
 const props = withDefaults(defineProps<APopoverTriggerProps>(), {
   as: 'button',
 });

@@ -19,6 +19,8 @@ import HoverCardContentImpl from './hover-card-content-impl.vue';
 import { injectAHoverCardRootContext } from './hover-card-root.vue';
 import { excludeTouch } from './utils';
 
+defineOptions({ name: 'AHoverCardContent' });
+
 const props = defineProps<AHoverCardContentProps>();
 const emits = defineEmits<AHoverCardContentEmits>();
 const forwarded = useForwardPropsEmits(props, emits);

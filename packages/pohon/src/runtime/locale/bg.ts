@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Назад',
     },
     chatPrompt: {
-      placeholder: 'Въведете съобщение...',
+      placeholder: 'Въведете съобщение…',
     },
     chatPromptSubmit: {
       label: 'Изпрати',
+    },
+    chatReasoning: {
+      thinking: 'Мисли…',
+      thought: 'Помисли',
+      thoughtFor: 'Мислил {duration}',
     },
     colorMode: {
       dark: 'Тъмно',
@@ -46,7 +51,7 @@ export default defineLocale<PMessages>({
       close: 'Затворете',
       noData: 'Няма данни',
       noMatch: 'Няма съвпадение на данни',
-      placeholder: 'Въведете команда или потърсете...',
+      placeholder: 'Въведете команда или потърсете…',
     },
     contentSearch: {
       links: 'Връзки',
@@ -57,6 +62,10 @@ export default defineLocale<PMessages>({
     },
     contentToc: {
       title: 'Съдържание',
+    },
+    dropdownMenu: {
+      noMatch: 'Няма съвпадение на данни',
+      search: 'Потърсете…',
     },
     dashboardSearch: {
       theme: 'Тема',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Намаляване',
       increment: 'Увеличаване',
     },
+    listbox: {
+      noData: 'Няма данни',
+      noMatch: 'Няма съвпадение на данни',
+      search: 'Потърсете…',
+    },
     modal: {
       close: 'Затворете',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Копирай кода в клипборда',
       },
+      prompt: {
+        copy: 'Копирай подсказката',
+        openIn: 'Отвори в {name}',
+      },
+    },
+    sidebar: {
+      close: 'Затворете',
+      toggle: 'Превключване',
     },
     selectMenu: {
       create: 'Създайте "{label}"',
       noData: 'Няма данни',
       noMatch: 'Няма съвпадение на данни',
-      search: 'Потърсете...',
+      search: 'Потърсете…',
     },
     slideover: {
       close: 'Затворете',

@@ -1,4 +1,8 @@
-import type { PFormFieldProps, PFormFieldSlots } from '../../src/runtime/components/form-field.vue';
+import type { PFormFieldProps } from '../../src/runtime/components/FormField.vue';
+import { mountSuspended } from '@nuxt/test-utils/runtime';
+import { describe, expect, it, vi } from 'vitest';
+import { axe } from 'vitest-axe';
+import { defineComponent } from 'vue';
 import theme from '#build/pohon/form-field';
 import {
   PCheckbox,
@@ -15,26 +19,9 @@ import {
   PSwitch,
   PTextarea,
 } from '#components';
-import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { describe, expect, it, vi } from 'vitest';
-import { axe } from 'vitest-axe';
-import { defineComponent } from 'vue';
-import ComponentRender from '../component-render';
+import { renderEach } from '../component-render';
 
-const inputComponents = [
-  PInput,
-  PRadioGroup,
-  PTextarea,
-  PCheckbox,
-  PSelect,
-  PSelectMenu,
-  PInputMenu,
-  PInputNumber,
-  PSwitch,
-  PSlider,
-  PPinInput,
-  PFileUpload,
-];
+const inputComponents = [PInput, PRadioGroup, PTextarea, PCheckbox, PSelect, PSelectMenu, PInputMenu, PInputNumber, PSwitch, PSlider, PPinInput, PFileUpload];
 
 async function renderFormField(options: {
   props: Partial<PFormFieldProps>;
@@ -72,11 +59,11 @@ const FormFieldWrapper = defineComponent({
 </PFormField>`,
 });
 
-describe('formField', () => {
+describe('FormField', () => {
   const sizes = Object.keys(theme.variants.size) as any;
   const orientations = Object.keys(theme.variants.orientation) as any;
 
-  it.each([
+  renderEach(FormFieldWrapper, [
     // Props
     ['with label and description', { props: { label: 'Username', description: 'Enter your username' } }],
     ['with required', { props: { label: 'Username', required: true } }],
@@ -87,7 +74,7 @@ describe('formField', () => {
     ...orientations.map((orientation: string) => [`with orientation ${orientation}`, { props: { label: 'Username', description: 'Enter your username', orientation } }]),
     ['with as', { props: { as: 'section' } }],
     ['with class', { props: { class: 'relative' } }],
-    ['with ui', { props: { pohon: { label: 'text-highlighted' } } }],
+    ['with pohon', { props: { pohon: { label: 'text-highlighted' } } }],
     // Slots
     ['with default slot', { slots: { default: () => 'Default slot' } }],
     ['with label slot', { slots: { label: () => 'Label slot' } }],
@@ -95,10 +82,7 @@ describe('formField', () => {
     ['with error slot', { slots: { error: () => 'Error slot' } }],
     ['with hint slot', { slots: { hint: () => 'Hint slot' } }],
     ['with help slot', { slots: { help: () => 'Help slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PFormFieldProps; slots?: Partial<PFormFieldSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, FormFieldWrapper);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(FormFieldWrapper, {
@@ -124,7 +108,7 @@ describe('formField', () => {
       };
     });
 
-    if (name === 'RadioGroup') {
+    if (inputComponent === PRadioGroup) {
       it('unbinds label for', async () => {
         const wrapper = await renderFormField({
           props: { label: 'Label' },
@@ -140,7 +124,7 @@ describe('formField', () => {
           props: { label: 'Label' },
           inputComponent,
         });
-        const label = wrapper.find('label');
+        const label = wrapper.find('label[for=v-0-0]');
         expect(label.exists()).toBe(true);
 
         const input = wrapper.find('[id=v-0-0]');

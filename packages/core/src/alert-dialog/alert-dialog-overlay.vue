@@ -8,6 +8,8 @@ export interface AAlertDialogOverlayProps extends ADialogOverlayProps {}
 import { ADialogOverlay } from '../dialog';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AAlertDialogOverlay' });
+
 const props = defineProps<AAlertDialogOverlayProps>();
 
 useForwardExpose();

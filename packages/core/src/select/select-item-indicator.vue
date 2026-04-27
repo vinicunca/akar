@@ -8,6 +8,8 @@ export interface ASelectItemIndicatorProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectASelectItemContext } from './select-item.vue';
 
+defineOptions({ name: 'ASelectItemIndicator' });
+
 const props = withDefaults(defineProps<ASelectItemIndicatorProps>(), {
   as: 'span',
 });

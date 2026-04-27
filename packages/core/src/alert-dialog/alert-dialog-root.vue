@@ -12,6 +12,8 @@ export interface AAlertDialogProps extends Omit<ADialogRootProps, 'modal'> {}
 import { ADialogRoot } from '../dialog';
 import { useForwardExpose, useForwardPropsEmits } from '../shared';
 
+defineOptions({ name: 'AAlertDialogRoot' });
+
 const props = defineProps<AAlertDialogProps>();
 const emits = defineEmits<AAlertDialogEmits>();
 

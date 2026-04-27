@@ -5,9 +5,9 @@ export default vinicuncaESLint(
     formatters: {
       css: true,
     },
-    unocss: {
-      configPath: './docs/uno.config.ts',
-    },
+    // unocss: {
+    //   configPath: './docs/uno.config.ts',
+    // },
     vue: true,
     pnpm: true,
   },
@@ -19,10 +19,13 @@ export default vinicuncaESLint(
       'sonar/no-invariant-returns': 'off',
       'sonar/use-type-alias': 'off',
       'sonar/no-hardcoded-passwords': 'off',
+      'sonar/no-empty-test-file': 'off',
       'ts/no-empty-object-type': ['error', {
         allowObjectTypes: 'always',
         allowInterfaces: 'always',
       }],
+      // TODO: Remove this once tsdown is upstream with rolldown
+      'pnpm/json-enforce-catalog': 'off',
     },
   },
 

@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import { computed, ref, watch } from 'vue';
-import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, AComboboxTrigger, AComboboxViewport } from '../combobox';
-import { useFilter } from '../../shared';
-
 import { ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot } from '..';
+import { useFilter } from '../../shared';
+import { AComboboxAnchor, AComboboxContent, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxRoot, AComboboxTrigger, AComboboxViewport } from '../combobox';
 
 const { contains } = useFilter({ sensitivity: 'base' });
 

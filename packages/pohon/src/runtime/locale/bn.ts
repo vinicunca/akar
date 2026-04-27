@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'পূর্ববর্তী',
     },
     chatPrompt: {
-      placeholder: 'এখানে আপনার বার্তা লিখুন...',
+      placeholder: 'এখানে আপনার বার্তা লিখুন…',
     },
     chatPromptSubmit: {
       label: 'প্রেরণ করুন',
+    },
+    chatReasoning: {
+      thinking: 'ভাবছে…',
+      thought: 'ভেবেছে',
+      thoughtFor: '{duration} ভেবেছে',
     },
     colorMode: {
       dark: 'গাঢ়',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'বন্ধ করুন',
       noData: 'কোন তথ্য নেই',
       noMatch: 'কোন মিল পাওয়া যায়নি',
-      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন...',
+      placeholder: 'কমান্ড টাইপ করুন বা অনুসন্ধান করুন…',
     },
     contentSearch: {
       links: 'লিংকসমূহ',
       theme: 'থিম',
     },
     contentSearchButton: {
-      label: 'অনুসন্ধান করুন...',
+      label: 'অনুসন্ধান করুন…',
     },
     contentToc: {
       title: 'এই পৃষ্ঠায়',
+    },
+    dropdownMenu: {
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      search: 'অনুসন্ধান করুন…',
     },
     dashboardSearch: {
       theme: 'থিম',
     },
     dashboardSearchButton: {
-      label: 'অনুসন্ধান করুন...',
+      label: 'অনুসন্ধান করুন…',
     },
     dashboardSidebarCollapse: {
       collapse: 'সাইডবার সংকুচিত করুন',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'হ্রাস করুন',
       increment: 'বৃদ্ধি করুন',
     },
+    listbox: {
+      noData: 'কোন তথ্য নেই',
+      noMatch: 'কোন মিল পাওয়া যায়নি',
+      search: 'অনুসন্ধান করুন…',
+    },
     modal: {
       close: 'বন্ধ করুন',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'কোড ক্লিপবোর্ডে কপি করুন',
       },
+      prompt: {
+        copy: 'প্রম্পট কপি করুন',
+        openIn: '{name}-এ খুলুন',
+      },
+    },
+    sidebar: {
+      close: 'বন্ধ করুন',
+      toggle: 'টগল করুন',
     },
     selectMenu: {
       create: '"{label}" তৈরি করুন',
       noData: 'কোন তথ্য নেই',
       noMatch: 'কোন মিল পাওয়া যায়নি',
-      search: 'অনুসন্ধান করুন...',
+      search: 'অনুসন্ধান করুন…',
     },
     slideover: {
       close: 'বন্ধ করুন',

@@ -1,19 +1,19 @@
 import type { AppConfig } from '@nuxt/schema';
-import type { PContextMenuProps, PContextMenuSlots } from '../../src/runtime/components/context-menu.vue';
 import type { ComponentConfig } from '../../src/runtime/types/uv';
-import theme from '#build/pohon/context-menu';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent, h } from 'vue';
-import ContextMenu from '../../src/runtime/components/context-menu.vue';
+import theme from '#build/pohon/context-menu';
+import PContextMenu from '../../src/runtime/components/ContextMenu.vue';
+import { renderEach } from '../component-render';
 import { expectSlotProps } from '../utils/types';
 
-type TypeContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>;
+type ContextMenu = ComponentConfig<typeof theme, AppConfig, 'contextMenu'>;
 
 const ContextMenuWrapper = defineComponent({
   components: {
-    PContextMenu: ContextMenu as any,
+    PContextMenu: PContextMenu as any,
   },
   inheritAttrs: false,
   template: `<PContextMenu v-bind="$attrs">
@@ -25,7 +25,7 @@ const ContextMenuWrapper = defineComponent({
 </PContextMenu>`,
 });
 
-describe('contextMenu', () => {
+describe('ContextMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any;
 
   const items = [
@@ -81,7 +81,7 @@ describe('contextMenu', () => {
     [{
       label: 'GitHub',
       icon: 'i-simple-icons-github',
-      to: 'https://github.com/nuxt/ui',
+      to: 'https://github.com/vinicunca/pohon',
       target: '_blank',
     }],
   ];
@@ -115,33 +115,37 @@ describe('contextMenu', () => {
 
   const props = { portal: false, items };
 
-  it.each([
+  renderEach(
+    ContextMenuWrapper,
+    [
     // Props
-    ['with items', { props }],
-    ['with items with description', { props: { ...props, items: itemsWithDescription } }],
-    ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
-    ['with descriptionKey', { props: { ...props, items: itemsWithDescription, descriptionKey: 'label' } }],
-    ['with disabled', { props: { ...props, disabled: true } }],
-    ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
-    ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
-    ['without externalIcon', { props: { ...props, externalIcon: false } }],
-    ['with class', { props: { ...props, class: 'min-w-96' } }],
-    ['with ui', { props: { ...props, pohon: { itemLeadingIcon: 'size-4' } } }],
-    // Slots
-    ['with default slot', { props, slots: { default: () => h('span', 'Default slot') } }],
-    ['with item slot', { props, slots: { item: () => 'Item slot' } }],
-    ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
-    ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
-    ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
-    ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
-    ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PContextMenuProps; slots?: Partial<PContextMenuSlots> }) => {
-    const wrapper = await mountSuspended(ContextMenuWrapper, options as any);
+      ['with items', { props }],
+      ['with items with description', { props: { ...props, items: itemsWithDescription } }],
+      ['with labelKey', { props: { ...props, labelKey: 'icon' } }],
+      ['with descriptionKey', { props: { ...props, items: itemsWithDescription, descriptionKey: 'label' } }],
+      ['with disabled', { props: { ...props, disabled: true } }],
+      ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
+      ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
+      ['without externalIcon', { props: { ...props, externalIcon: false } }],
+      ['with class', { props: { ...props, class: 'min-w-96' } }],
+      ['with pohon', { props: { ...props, pohon: { itemLeadingIcon: 'size-4' } } }],
+      // Slots
+      ['with default slot', { props, slots: { default: () => h('span', 'Default slot') } }],
+      ['with item slot', { props, slots: { item: () => 'Item slot' } }],
+      ['with item-leading slot', { props, slots: { 'item-leading': () => 'Item leading slot' } }],
+      ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
+      ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
+      ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
+      ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ],
+    async (_, options) => {
+      const wrapper = await mountSuspended(ContextMenuWrapper, options);
 
-    await wrapper.find('span').trigger('click.right');
+      await wrapper.find('span').trigger('click.right');
 
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+      expect(wrapper.html()).toMatchSnapshot();
+    },
+  );
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(ContextMenuWrapper, {
@@ -155,23 +159,23 @@ describe('contextMenu', () => {
 
   it('should have the correct types', () => {
     // normal
-    expectSlotProps('item', () => ContextMenu({
+    expectSlotProps('item', () => PContextMenu({
       items: [{ label: 'foo', value: 'bar' }],
-    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active?: boolean; pohon: TypeContextMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active: boolean; pohon: ContextMenu['pohon'] }>();
 
     // groups
-    expectSlotProps('item', () => ContextMenu({
+    expectSlotProps('item', () => PContextMenu({
       items: [[{ label: 'foo', value: 'bar' }]],
-    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active?: boolean; pohon: TypeContextMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active: boolean; pohon: ContextMenu['pohon'] }>();
 
     // custom
-    expectSlotProps('item', () => ContextMenu({
+    expectSlotProps('item', () => PContextMenu({
       items: [{ label: 'foo', value: 'bar', custom: 'nice' }],
-    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active?: boolean; pohon: TypeContextMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active: boolean; pohon: ContextMenu['pohon'] }>();
 
     // custom + groups
-    expectSlotProps('item', () => ContextMenu({
+    expectSlotProps('item', () => PContextMenu({
       items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]],
-    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active?: boolean; pohon: TypeContextMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active: boolean; pohon: ContextMenu['pohon'] }>();
   });
 });

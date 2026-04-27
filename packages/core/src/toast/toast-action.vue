@@ -17,6 +17,8 @@ import { useForwardExpose } from '../shared';
 import ToastAnnounceExclude from './toast-announce-exclude.vue';
 import AToastClose from './toast-close.vue';
 
+defineOptions({ name: 'AToastAction' });
+
 const props = defineProps<AToastActionProps>();
 
 if (!props.altText) {

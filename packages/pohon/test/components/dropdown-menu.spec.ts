@@ -1,20 +1,20 @@
 import type { AppConfig } from '@nuxt/schema';
-import type { PDropdownMenuProps, PDropdownMenuSlots } from '../../src/runtime/components/dropdown-menu.vue';
+import type { PDropdownMenuItem } from '../../src/runtime/components/DropdownMenu.vue';
 import type { ComponentConfig } from '../../src/runtime/types/uv';
-import theme from '#build/pohon/dropdown-menu';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PDropdownMenu from '../../src/runtime/components/dropdown-menu.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/dropdown-menu';
+import PDropdownMenu from '../../src/runtime/components/DropdownMenu.vue';
+import { renderEach } from '../component-render';
 import { expectSlotProps } from '../utils/types';
 
 type DropdownMenu = ComponentConfig<typeof theme, AppConfig, 'dropdownMenu'>;
 
-describe('dropdownMenu', () => {
+describe('DropdownMenu', () => {
   const sizes = Object.keys(theme.variants.size) as any;
 
-  const items = [
+  const items: Array<Array<PDropdownMenuItem>> = [
     [{
       label: 'My account',
       avatar: {
@@ -73,7 +73,7 @@ describe('dropdownMenu', () => {
     [{
       label: 'GitHub',
       icon: 'i-simple-icons-github',
-      to: 'https://github.com/nuxt/ui',
+      to: 'https://github.com/vinicunca/pohon',
       target: '_blank',
     }, {
       label: 'Support',
@@ -97,7 +97,7 @@ describe('dropdownMenu', () => {
     }],
   ];
 
-  const itemsWithDescription = [
+  const itemsWithDescription: Array<Array<PDropdownMenuItem>> = [
     [{
       label: 'My account',
       description: 'Account settings',
@@ -121,7 +121,7 @@ describe('dropdownMenu', () => {
 
   const props = { open: true, portal: false, items };
 
-  it.each([
+  renderEach(PDropdownMenu, [
     // Props
     ['with items', { props }],
     ['with items with description', { props: { ...props, items: itemsWithDescription } }],
@@ -132,8 +132,10 @@ describe('dropdownMenu', () => {
     ...sizes.map((size: string) => [`with size ${size}`, { props: { ...props, size } }]),
     ['with externalIcon', { props: { ...props, externalIcon: 'i-lucide-external-link' } }],
     ['without externalIcon', { props: { ...props, externalIcon: false } }],
+    ['with filter', { props: { ...props, filter: true } }],
+    ['with filter and searchTerm', { props: { ...props, filter: true, searchTerm: 'No match value' } }],
     ['with class', { props: { ...props, class: 'min-w-96' } }],
-    ['with ui', { props: { ...props, pohon: { itemLeadingIcon: 'size-4' } } }],
+    ['with pohon', { props: { ...props, pohon: { itemLeadingIcon: 'size-4' } } }],
     // Slots
     ['with default slot', { props, slots: { default: () => 'Default slot' } }],
     ['with item slot', { props, slots: { item: () => 'Item slot' } }],
@@ -142,10 +144,7 @@ describe('dropdownMenu', () => {
     ['with item-description slot', { props: { ...props, items: itemsWithDescription }, slots: { 'item-description': () => 'Item description slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PDropdownMenuProps; slots?: Partial<PDropdownMenuSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, PDropdownMenu);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(PDropdownMenu, {
@@ -167,21 +166,21 @@ describe('dropdownMenu', () => {
     // normal
     expectSlotProps('item', () => PDropdownMenu({
       items: [{ label: 'foo', value: 'bar' }],
-    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active?: boolean; pohon: DropdownMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active: boolean; pohon: DropdownMenu['pohon'] }>();
 
     // groups
     expectSlotProps('item', () => PDropdownMenu({
       items: [[{ label: 'foo', value: 'bar' }]],
-    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active?: boolean; pohon: DropdownMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string }; index: number; active: boolean; pohon: DropdownMenu['pohon'] }>();
 
     // custom
     expectSlotProps('item', () => PDropdownMenu({
       items: [{ label: 'foo', value: 'bar', custom: 'nice' }],
-    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active?: boolean; pohon: DropdownMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active: boolean; pohon: DropdownMenu['pohon'] }>();
 
     // custom + groups
     expectSlotProps('item', () => PDropdownMenu({
       items: [[{ label: 'foo', value: 'bar', custom: 'nice' }]],
-    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active?: boolean; pohon: DropdownMenu['pohon'] }>();
+    })).toEqualTypeOf<{ item: { label: string; value: string; custom: string }; index: number; active: boolean; pohon: DropdownMenu['pohon'] }>();
   });
 });

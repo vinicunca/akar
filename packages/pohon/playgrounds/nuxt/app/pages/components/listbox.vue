@@ -1,60 +1,58 @@
 <script setup lang="ts">
-import { AListboxContent, AListboxGroup, AListboxGroupLabel, AListboxItem, AListboxItemIndicator, AListboxRoot } from 'akar';
+import type { ListboxItem } from 'pohon-ui'
+import theme from '#build/pohon/listbox'
 
-const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
-const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'];
+const sizes = Object.keys(theme.variants.size)
+
+const attrs = reactive({
+  size: [theme.defaultVariants.size]
+})
+
+const value = ref()
+
+const filter = ref(true)
+const disabled = ref(false)
+const loading = ref(false)
+const multiple = ref(false)
+const virtualize = ref(false)
+
+const virtualItems = Array.from({ length: 1000 }, (_, i) => ({
+  id: i + 1,
+  label: `Item ${i + 1}`,
+  description: `Description for item ${i + 1}`
+}))
+
+const fruits = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'].map(f => ({ label: f }))
+const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'].map(v => ({ label: v }))
+
+const items = [
+  [{ label: 'Fruits', type: 'label' as const }, ...fruits],
+  [{ label: 'Vegetables', type: 'label' as const }, ...vegetables]
+] satisfies ListboxItem[]
 </script>
 
 <template>
-  <AListboxRoot class="inline-flex items-center relative">
-    <AListboxContent class="rounded-md bg-background flex flex-col w-48 pointer-events-auto ring ring-ring shadow-lg">
-      <AListboxGroup class="p-1 isolate">
-        <AListboxGroupLabel class="text-xs color-text-highlighted font-semibold p-1.5 gap-1.5">
-          Fruits
-        </AListboxGroupLabel>
-        <AListboxItem
-          v-for="i in fruits"
-          :key="i"
-          :value="i"
-          class="text-sm color-text p-1.5 outline-none flex gap-1.5 w-full cursor-pointer select-none transition-colors-280 items-start relative before:(rounded-md content-empty transition-colors-280 inset-px absolute -z-1) hover:not-[[data-disabled]]:color-text-highlighted hover:not-[[data-disabled]]:before:bg-background-elevated/50"
-        >
-          <span class="flex flex-1 flex-col min-w-0">
-            {{ i }}
-          </span>
+  <Navbar>
+    <PSwitch v-model="filter" label="Filter" />
+    <PSwitch v-model="disabled" label="Disabled" />
+    <PSwitch v-model="loading" label="Loading" />
+    <PSwitch v-model="multiple" label="Multiple" />
+    <PSwitch v-model="virtualize" label="Virtualize" />
+    <PSelect v-model="attrs.size" :items="sizes" placeholder="Size" multiple />
+  </Navbar>
 
-          <span class="ms-auto inline-flex gap-1.5 items-center">
-            <AListboxItemIndicator
-              as-child
-            >
-              <i class="i-lucide:check shrink-0 size-5" />
-            </AListboxItemIndicator>
-          </span>
-        </AListboxItem>
-      </AListboxGroup>
-
-      <AListboxGroup class="mt-2">
-        <AListboxGroupLabel class="text-xs color-text-highlighted font-semibold p-1.5 gap-1.5">
-          Vegetables
-        </AListboxGroupLabel>
-        <AListboxItem
-          v-for="i in vegetables"
-          :key="i"
-          :value="i"
-          class="text-sm color-text p-1.5 outline-none flex gap-1.5 w-full cursor-pointer select-none transition-colors-280 items-start relative before:(rounded-md content-empty transition-colors-280 inset-px absolute -z-1) hover:not-[[data-disabled]]:color-text-highlighted hover:not-[[data-disabled]]:before:bg-background-elevated/50"
-        >
-          <span class="flex flex-1 flex-col min-w-0">
-            {{ i }}
-          </span>
-
-          <span class="ms-auto inline-flex gap-1.5 items-center">
-            <AListboxItemIndicator
-              as-child
-            >
-              <i class="i-lucide:check shrink-0 size-5" />
-            </AListboxItemIndicator>
-          </span>
-        </AListboxItem>
-      </AListboxGroup>
-    </AListboxContent>
-  </AListboxRoot>
+  <Matrix v-slot="props" :attrs="attrs" container-class="w-48">
+    <PListbox
+      v-model="value"
+      autofocus
+      :items="virtualize ? virtualItems : items"
+      :filter="filter"
+      :disabled="disabled"
+      :loading="loading"
+      :multiple="multiple"
+      :virtualize="virtualize"
+      v-bind="props"
+      class="w-full"
+    />
+  </Matrix>
 </template>

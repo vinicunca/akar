@@ -1,33 +1,33 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`checkboxGroup > renders with ariaLabel correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root" aria-label="Aria label">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with ariaLabel correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root" aria-label="Aria label">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -36,34 +36,34 @@ exports[`checkboxGroup > renders with ariaLabel correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with as correctly 1`] = `
-"<section tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with as correctly 1`] = `
+"<section tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -72,34 +72,34 @@ exports[`checkboxGroup > renders with as correctly 1`] = `
 </section>"
 `;
 
-exports[`checkboxGroup > renders with class correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" class="absolute" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with class correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root" class="absolute">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -108,33 +108,33 @@ exports[`checkboxGroup > renders with class correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with defaultValue correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with defaultValue correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -143,35 +143,35 @@ exports[`checkboxGroup > renders with defaultValue correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with description correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with description correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
-        <p class="" data-pohon="checkbox-description">Description 0</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
+        <p data-slot="description" class="">Description 0</p>
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
-        <p class="" data-pohon="checkbox-description">Description 1</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
+        <p data-slot="description" class="">Description 1</p>
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
-        <p class="" data-pohon="checkbox-description">Description 2</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
+        <p data-slot="description" class="">Description 2</p>
       </div>
     </div>
   </fieldset>
@@ -179,35 +179,35 @@ exports[`checkboxGroup > renders with description correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with description slot correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with description slot correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
-        <p class="" data-pohon="checkbox-description">Description slot</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
+        <p data-slot="description" class="">Description slot</p>
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
-        <p class="" data-pohon="checkbox-description">Description slot</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
+        <p data-slot="description" class="">Description slot</p>
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
-        <p class="" data-pohon="checkbox-description">Description slot</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
+        <p data-slot="description" class="">Description slot</p>
       </div>
     </div>
   </fieldset>
@@ -215,35 +215,35 @@ exports[`checkboxGroup > renders with description slot correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with descriptionKey correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with descriptionKey correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
-        <p class="" data-pohon="checkbox-description">1</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
+        <p data-slot="description" class="">1</p>
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
-        <p class="" data-pohon="checkbox-description">2</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
+        <p data-slot="description" class="">2</p>
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
-        <p class="" data-pohon="checkbox-description">3</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
+        <p data-slot="description" class="">3</p>
       </div>
     </div>
   </fieldset>
@@ -251,34 +251,34 @@ exports[`checkboxGroup > renders with descriptionKey correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with disabled correctly 1`] = `
-"<div tabindex="-1" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with disabled correctly 1`] = `
+"<div tabindex="-1" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-disabled="" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-disabled="" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-disabled="" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-disabled="" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" disabled="" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -287,33 +287,33 @@ exports[`checkboxGroup > renders with disabled correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with horizontal variant card correctly 1`] = `
-"<div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
-    <!--v-if--><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="horizontal" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+exports[`CheckboxGroup > renders with horizontal variant card correctly 1`] = `
+"<div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:1" data-slot="label" class="">Option 1</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="horizontal" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:2" data-slot="label" class="">Option 2</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="horizontal" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:3" data-slot="label" class="">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -322,33 +322,33 @@ exports[`checkboxGroup > renders with horizontal variant card correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with horizontal variant list correctly 1`] = `
-"<div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with horizontal variant list correctly 1`] = `
+"<div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="horizontal" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="horizontal" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="horizontal" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -357,33 +357,33 @@ exports[`checkboxGroup > renders with horizontal variant list correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with horizontal variant table correctly 1`] = `
-"<div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
-    <!--v-if--><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="horizontal" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+exports[`CheckboxGroup > renders with horizontal variant table correctly 1`] = `
+"<div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:1" data-slot="label" class="">Option 1</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="horizontal" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:2" data-slot="label" class="">Option 2</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="horizontal" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="horizontal" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:3" data-slot="label" class="">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -392,33 +392,33 @@ exports[`checkboxGroup > renders with horizontal variant table correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with indicator end correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with indicator end correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -427,33 +427,33 @@ exports[`checkboxGroup > renders with indicator end correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with indicator hidden correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with indicator hidden correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -462,33 +462,33 @@ exports[`checkboxGroup > renders with indicator hidden correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with indicator start correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with indicator start correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -497,34 +497,34 @@ exports[`checkboxGroup > renders with indicator start correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with items correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with items correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -533,34 +533,34 @@ exports[`checkboxGroup > renders with items correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with label slot correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with label slot correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Label slot</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Label slot</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Label slot</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Label slot</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Label slot</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Label slot</label>
         <!--v-if-->
       </div>
     </div>
@@ -569,70 +569,34 @@ exports[`checkboxGroup > renders with label slot correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with labelKey correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with labelKey correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">3</label>
-        <!--v-if-->
-      </div>
-    </div>
-  </fieldset>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`checkboxGroup > renders with legend slot correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
-    <legend class="" data-pohon="checkbox-group-legend">Legend slot</legend>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
-          <!---->
-          <!--v-if-->
-        </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
-        <!--v-if-->
-      </div>
-    </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
-          <!---->
-          <!--v-if-->
-        </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
-        <!--v-if-->
-      </div>
-    </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
-          <!---->
-          <!--v-if-->
-        </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">3</label>
         <!--v-if-->
       </div>
     </div>
@@ -641,33 +605,69 @@ exports[`checkboxGroup > renders with legend slot correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with modelValue correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with legend slot correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <legend data-slot="legend" class="">Legend slot</legend>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with modelValue correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -676,33 +676,33 @@ exports[`checkboxGroup > renders with modelValue correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with neutral variant card correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
-    <!--v-if--><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+exports[`CheckboxGroup > renders with neutral variant card correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:1" data-slot="label" class="">Option 1</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:2" data-slot="label" class="">Option 2</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:3" data-slot="label" class="">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -711,33 +711,33 @@ exports[`checkboxGroup > renders with neutral variant card correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with neutral variant list correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with neutral variant list correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -746,33 +746,33 @@ exports[`checkboxGroup > renders with neutral variant list correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with neutral variant table correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
-    <!--v-if--><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+exports[`CheckboxGroup > renders with neutral variant table correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:1" data-slot="label" class="">Option 1</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:2" data-slot="label" class="">Option 2</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:3" data-slot="label" class="">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -781,33 +781,69 @@ exports[`checkboxGroup > renders with neutral variant table correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with primary variant card correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
-    <!--v-if--><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
-          <!--v-if-->
-        </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</p>
-        <!--v-if-->
-      </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+exports[`CheckboxGroup > renders with pohon correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset" class="gap-x-4">
+    <!--v-if-->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="text-red">Option 1</label>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</p>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="text-red">Option 2</label>
+        <!--v-if-->
+      </div>
+    </div>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="text-red">Option 3</label>
+        <!--v-if-->
+      </div>
+    </div>
+  </fieldset>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`CheckboxGroup > renders with primary variant card correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:1" data-slot="label" class="">Option 1</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:2" data-slot="label" class="">Option 2</p>
+        <!--v-if-->
+      </div>
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+          <!---->
+          <!--v-if-->
+        </button></div>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:3" data-slot="label" class="">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -816,33 +852,33 @@ exports[`checkboxGroup > renders with primary variant card correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with primary variant list correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with primary variant list correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -851,33 +887,33 @@ exports[`checkboxGroup > renders with primary variant list correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with primary variant table correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
-    <!--v-if--><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+exports[`CheckboxGroup > renders with primary variant table correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <!--v-if--><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:1" data-slot="label" class="">Option 1</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:2" data-slot="label" class="">Option 2</p>
         <!--v-if-->
       </div>
-    </label><label class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    </label><label data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper">
-        <p for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</p>
+      <div data-slot="wrapper" class="">
+        <p for="v-0-0:3" data-slot="label" class="">Option 3</p>
         <!--v-if-->
       </div>
     </label>
@@ -886,34 +922,34 @@ exports[`checkboxGroup > renders with primary variant table correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with required correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
-    <legend class="" data-pohon="checkbox-group-legend">Legend</legend>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+exports[`CheckboxGroup > renders with required correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
+    <legend data-slot="legend" class="">Legend</legend>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -922,33 +958,33 @@ exports[`checkboxGroup > renders with required correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with size lg correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with size lg correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -957,33 +993,33 @@ exports[`checkboxGroup > renders with size lg correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with size md correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with size md correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -992,33 +1028,33 @@ exports[`checkboxGroup > renders with size md correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with size sm correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with size sm correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -1027,33 +1063,33 @@ exports[`checkboxGroup > renders with size sm correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with size xl correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with size xl correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -1062,33 +1098,33 @@ exports[`checkboxGroup > renders with size xl correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with size xs correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with size xs correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" class="" data-pohon="checkbox-indicator"><span class="iconify i-lucide:check" aria-hidden="true" data-pohon="checkbox-icon"></span></span>
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>
@@ -1097,70 +1133,33 @@ exports[`checkboxGroup > renders with size xs correctly 1`] = `
 </div>"
 `;
 
-exports[`checkboxGroup > renders with ui correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset class="gap-x-4" data-pohon="checkbox-group-fieldset">
+exports[`CheckboxGroup > renders with valueKey correctly 1`] = `
+"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-slot="root">
+  <fieldset data-slot="fieldset">
     <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
-          <!---->
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:Option 1" role="checkbox" type="button" aria-checked="true" aria-required="false" data-state="checked" data-akar-collection-item=""><span data-state="checked" style="pointer-events: none;" data-slot="indicator" class=""><span class="iconify i-lucide:check" aria-hidden="true" data-slot="icon"></span></span>
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:1" class="text-red" data-pohon="checkbox-label">Option 1</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:Option 1" data-slot="label" class="">Option 1</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:Option 2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:2" class="text-red" data-pohon="checkbox-label">Option 2</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:Option 2" data-slot="label" class="">Option 2</label>
         <!--v-if-->
       </div>
     </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
+    <div data-slot="root" class="">
+      <div data-slot="container" class=""><button tabindex="-1" data-orientation="vertical" data-slot="base" id="v-0-0:Option 3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
           <!---->
           <!--v-if-->
         </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:3" class="text-red" data-pohon="checkbox-label">Option 3</label>
-        <!--v-if-->
-      </div>
-    </div>
-  </fieldset>
-  <!--v-if-->
-</div>"
-`;
-
-exports[`checkboxGroup > renders with valueKey correctly 1`] = `
-"<div tabindex="0" data-orientation="vertical" dir="ltr" style="outline-color: none; outline-style: none; outline-width: initial;" id="v-0-0" data-pohon="checkbox-group-root">
-  <fieldset data-pohon="checkbox-group-fieldset">
-    <!--v-if-->
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:Option 1" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
-          <!---->
-          <!--v-if-->
-        </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:Option 1" class="" data-pohon="checkbox-label">Option 1</label>
-        <!--v-if-->
-      </div>
-    </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:Option 2" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
-          <!---->
-          <!--v-if-->
-        </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:Option 2" class="" data-pohon="checkbox-label">Option 2</label>
-        <!--v-if-->
-      </div>
-    </div>
-    <div class="" data-pohon="checkbox-root">
-      <div class="" data-pohon="checkbox-container"><button tabindex="-1" data-orientation="vertical" data-pohon="checkbox-base" id="v-0-0:Option 3" role="checkbox" type="button" aria-checked="false" aria-required="false" data-state="unchecked" data-akar-collection-item="">
-          <!---->
-          <!--v-if-->
-        </button></div>
-      <div class="" data-pohon="checkbox-wrapper"><label for="v-0-0:Option 3" class="" data-pohon="checkbox-label">Option 3</label>
+      <div data-slot="wrapper" class=""><label for="v-0-0:Option 3" data-slot="label" class="">Option 3</label>
         <!--v-if-->
       </div>
     </div>

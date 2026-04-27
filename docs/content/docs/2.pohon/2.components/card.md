@@ -46,13 +46,13 @@ slots:
     <CorePlaceholder class="h-8" />
 ---
 
-#header
+# header
 :core-placeholder{class="h-8"}
 
-#default
+# default
 :core-placeholder{class="h-32"}
 
-#footer
+# footer
 :core-placeholder{class="h-8"}
 ::
 

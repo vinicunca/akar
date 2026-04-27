@@ -20,9 +20,10 @@ export interface AContextMenuContentProps
 <script setup lang="ts">
 import { ref } from 'vue';
 import { AMenuContent } from '../menu';
-
 import { useForwardExpose, useForwardPropsEmits } from '../shared';
 import { injectAContextMenuRootContext } from './context-menu-root.vue';
+
+defineOptions({ name: 'AContextMenuContent' });
 
 const props = withDefaults(
   defineProps<AContextMenuContentProps>(),

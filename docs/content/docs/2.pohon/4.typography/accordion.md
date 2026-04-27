@@ -35,7 +35,7 @@ Yes! Pohon UI is used in production by thousands of applications with extensive 
 
 :::
 
-#code
+# code
 
 ```mdc
 ::accordion

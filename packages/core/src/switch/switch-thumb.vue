@@ -9,6 +9,8 @@ export interface ASwitchThumbProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectASwitchRootContext } from './switch-root.vue';
 
+defineOptions({ name: 'ASwitchThumb' });
+
 withDefaults(defineProps<ASwitchThumbProps>(), { as: 'span' });
 
 const rootContext = injectASwitchRootContext();
@@ -18,7 +20,7 @@ useForwardExpose();
 
 <template>
   <APrimitive
-    :data-state="rootContext.modelValue?.value ? 'checked' : 'unchecked'"
+    :data-state="rootContext.checked?.value ? 'checked' : 'unchecked'"
     :data-disabled="rootContext.disabled.value ? '' : undefined"
     :as-child="asChild"
     :as="as"

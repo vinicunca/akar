@@ -29,12 +29,12 @@ Wrap your entire application with the App component in your `app.vue` file:
 ```
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/i18n/nuxt#locale"}
 Learn how to use the `locale` prop to change the locale of your app.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/i18n/vue#locale"}
 Learn how to use the `locale` prop to change the locale of your app.
 :::

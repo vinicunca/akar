@@ -68,6 +68,8 @@ import { computed, onMounted, onUnmounted, watch } from 'vue';
 import { APrimitive } from '../primitive';
 import { injectPanelGroupContext } from './splitter-group.vue';
 
+defineOptions({ name: 'ASplitterPanel' });
+
 const props = defineProps<ASplitterPanelProps>();
 const emits = defineEmits<ASplitterPanelEmits>();
 

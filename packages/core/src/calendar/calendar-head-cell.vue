@@ -7,6 +7,8 @@ export interface ACalendarHeadCellProps extends APrimitiveProps {}
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ACalendarHeadCell' });
+
 const props = withDefaults(defineProps<ACalendarHeadCellProps>(), { as: 'th' });
 </script>
 

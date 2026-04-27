@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Forrige',
     },
     chatPrompt: {
-      placeholder: 'Skriv din melding her...',
+      placeholder: 'Skriv din melding her…',
     },
     chatPromptSubmit: {
       label: 'Send',
+    },
+    chatReasoning: {
+      thinking: 'Tenker…',
+      thought: 'Tenkte',
+      thoughtFor: 'Tenkte i {duration}',
     },
     colorMode: {
       dark: 'Mørk',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Lukk',
       noData: 'Ingen data',
       noMatch: 'Ingen samsvarende data',
-      placeholder: 'Skriv inn en kommando eller søk...',
+      placeholder: 'Skriv inn en kommando eller søk…',
     },
     contentSearch: {
       links: 'Lenker',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Søk...',
+      label: 'Søk…',
     },
     contentToc: {
       title: 'På denne siden',
+    },
+    dropdownMenu: {
+      noMatch: 'Ingen samsvarende data',
+      search: 'Søk…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Søk...',
+      label: 'Søk…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Skjul sidepanel',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Reduser',
       increment: 'Øk',
     },
+    listbox: {
+      noData: 'Ingen data',
+      noMatch: 'Ingen samsvarende data',
+      search: 'Søk…',
+    },
     modal: {
       close: 'Lukk',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kopier kode til utklippstavle',
       },
+      prompt: {
+        copy: 'Kopier ledetekst',
+        openIn: 'Åpne i {name}',
+      },
+    },
+    sidebar: {
+      close: 'Lukk',
+      toggle: 'Veksle',
     },
     selectMenu: {
       create: 'Opprett "{label}"',
       noData: 'Ingen data',
       noMatch: 'Ingen samsvarende data',
-      search: 'Søk...',
+      search: 'Søk…',
     },
     slideover: {
       close: 'Lukk',

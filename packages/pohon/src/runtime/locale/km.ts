@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'មុន',
     },
     chatPrompt: {
-      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ...',
+      placeholder: 'សួរស្រឡាញ់មួយបីនេះមានប្រភេទបានទាមទារទេ…',
     },
     chatPromptSubmit: {
       label: 'សាក់',
+    },
+    chatReasoning: {
+      thinking: 'កំពុងគិត…',
+      thought: 'គិតរួចហើយ',
+      thoughtFor: 'គិតរយៈពេល {duration}',
     },
     colorMode: {
       dark: 'ងងឹត',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'បិទ',
       noData: 'មិនមានទិន្នន័យ',
       noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
-      placeholder: 'វាយពាក្យបញ្ជា ឬស្វែងរក...',
+      placeholder: 'វាយពាក្យបញ្ជា ឬស្វែងរក…',
     },
     contentSearch: {
       links: 'តំណភ្ជាប់',
       theme: 'រូបរាង',
     },
     contentSearchButton: {
-      label: 'ស្វែងរក...',
+      label: 'ស្វែងរក…',
     },
     contentToc: {
       title: 'នៅលើទំព័រនេះ',
+    },
+    dropdownMenu: {
+      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
+      search: 'ស្វែងរក…',
     },
     dashboardSearch: {
       theme: 'រូបរាង',
     },
     dashboardSearchButton: {
-      label: 'ស្វែងរក...',
+      label: 'ស្វែងរក…',
     },
     dashboardSidebarCollapse: {
       collapse: 'បង្រួមបារចំហៀង',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'បន្ថយ',
       increment: 'បង្កើន',
     },
+    listbox: {
+      noData: 'មិនមានទិន្នន័យ',
+      noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
+      search: 'ស្វែងរក…',
+    },
     modal: {
       close: 'បិទ',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'ចម្លងកូដទៅក្ដារតម្បៀតខ្ទាស់',
       },
+      prompt: {
+        copy: 'ចម្លងការបញ្ជា',
+        openIn: 'បើកក្នុង {name}',
+      },
+    },
+    sidebar: {
+      close: 'បិទ',
+      toggle: 'បិទ/បើក',
     },
     selectMenu: {
       create: 'បង្កើត "{label}"',
       noData: 'មិនមានទិន្នន័យ',
       noMatch: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
-      search: 'ស្វែងរក...',
+      search: 'ស្វែងរក…',
     },
     slideover: {
       close: 'បិទ',

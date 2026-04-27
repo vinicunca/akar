@@ -11,6 +11,8 @@ import { APrimitive } from '../primitive';
 import { ARovingFocusItem } from '../roving-focus';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AToolbarButton' });
+
 const props = withDefaults(defineProps<AToolbarButtonProps>(), { as: 'button' });
 const { forwardRef } = useForwardExpose();
 </script>

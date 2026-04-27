@@ -59,6 +59,7 @@ import { ref, toRefs } from 'vue';
 import { useCollection } from '../collection';
 
 defineOptions({
+  name: 'AToastProvider',
   inheritAttrs: false,
 });
 

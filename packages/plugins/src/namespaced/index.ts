@@ -1,4 +1,4 @@
-import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger, AAutocompleteAnchor, AAutocompleteArrow, AAutocompleteCancel, AAutocompleteContent, AAutocompleteEmpty, AAutocompleteGroup, AAutocompleteInput, AAutocompleteItem, AAutocompleteItemIndicator, AAutocompleteLabel, AAutocompletePortal, AAutocompleteRoot, AAutocompleteSeparator, AAutocompleteTrigger, AAutocompleteViewport, AAutocompleteVirtualizer, AAvatarFallback, AAvatarImage, AAvatarRoot, ACalendarCell, ACalendarCellTrigger, ACalendarGrid, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot, ACheckboxGroupRoot, ACheckboxIndicator, ACheckboxRoot, ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger, AComboboxAnchor, AComboboxArrow, AComboboxCancel, AComboboxContent, AComboboxEmpty, AComboboxGroup, AComboboxInput, AComboboxItem, AComboboxItemIndicator, AComboboxLabel, AComboboxPortal, AComboboxRoot, AComboboxSeparator, AComboboxTrigger, AComboboxViewport, AComboboxVirtualizer, AContextMenuArrow, AContextMenuCheckboxItem, AContextMenuContent, AContextMenuGroup, AContextMenuItem, AContextMenuItemIndicator, AContextMenuLabel, AContextMenuPortal, AContextMenuRadioGroup, AContextMenuRadioItem, AContextMenuRoot, AContextMenuSeparator, AContextMenuSub, AContextMenuSubContent, AContextMenuSubTrigger, AContextMenuTrigger, ADateFieldInput, ADateFieldRoot, ADatePickerAnchor, ADatePickerArrow, ADatePickerCalendar, ADatePickerCell, ADatePickerCellTrigger, ADatePickerClose, ADatePickerContent, ADatePickerField, ADatePickerGrid, ADatePickerGridBody, ADatePickerGridHead, ADatePickerGridRow, ADatePickerHeadCell, ADatePickerHeader, ADatePickerHeading, ADatePickerInput, ADatePickerNext, ADatePickerPrev, ADatePickerRoot, ADatePickerTrigger, ADateRangeFieldInput, ADateRangeFieldRoot, ADateRangePickerAnchor, ADateRangePickerArrow, ADateRangePickerCalendar, ADateRangePickerCell, ADateRangePickerCellTrigger, ADateRangePickerClose, ADateRangePickerContent, ADateRangePickerField, ADateRangePickerGrid, ADateRangePickerGridBody, ADateRangePickerGridHead, ADateRangePickerGridRow, ADateRangePickerHeadCell, ADateRangePickerHeader, ADateRangePickerHeading, ADateRangePickerInput, ADateRangePickerNext, ADateRangePickerPrev, ADateRangePickerRoot, ADateRangePickerTrigger, ADialogClose, ADialogContent, ADialogDescription, ADialogOverlay, ADialogPortal, ADialogRoot, ADialogTitle, ADialogTrigger, ADropdownMenuArrow, ADropdownMenuCheckboxItem, ADropdownMenuContent, ADropdownMenuGroup, ADropdownMenuItem, ADropdownMenuItemIndicator, ADropdownMenuLabel, ADropdownMenuPortal, ADropdownMenuRadioGroup, ADropdownMenuRadioItem, ADropdownMenuRoot, ADropdownMenuSeparator, ADropdownMenuSub, ADropdownMenuSubContent, ADropdownMenuSubTrigger, ADropdownMenuTrigger, AEditableArea, AEditableCancelTrigger, AEditableEditTrigger, AEditableInput, AEditablePreview, AEditableRoot, AEditableSubmitTrigger, AHoverCardArrow, AHoverCardContent, AHoverCardPortal, AHoverCardRoot, AHoverCardTrigger, ALabel, AListboxContent, AListboxFilter, AListboxGroup, AListboxGroupLabel, AListboxItem, AListboxItemIndicator, AListboxRoot, AListboxVirtualizer, ANavigationMenuContent, ANavigationMenuIndicator, ANavigationMenuItem, ANavigationMenuLink, ANavigationMenuList, ANavigationMenuRoot, ANavigationMenuSub, ANavigationMenuTrigger, ANavigationMenuViewport, ANumberFieldDecrement, ANumberFieldIncrement, ANumberFieldInput, ANumberFieldRoot, APaginationEllipsis, APaginationFirst, APaginationLast, APaginationList, APaginationListItem, APaginationNext, APaginationPrev, APaginationRoot, APinInputInput, APinInputRoot, APopoverAnchor, APopoverArrow, APopoverClose, APopoverContent, APopoverPortal, APopoverRoot, APopoverTrigger, APresence, AProgressIndicator, AProgressRoot, ARadioGroupIndicator, ARadioGroupItem, ARadioGroupRoot, ARangeCalendarCell, ARangeCalendarCellTrigger, ARangeCalendarGrid, ARangeCalendarGridBody, ARangeCalendarGridHead, ARangeCalendarGridRow, ARangeCalendarHeadCell, ARangeCalendarHeader, ARangeCalendarHeading, ARangeCalendarNext, ARangeCalendarPrev, ARangeCalendarRoot, AScrollAreaCorner, AScrollAreaRoot, AScrollAreaScrollbar, AScrollAreaThumb, AScrollAreaViewport, ASelectArrow, ASelectContent, ASelectGroup, ASelectIcon, ASelectItem, ASelectItemIndicator, ASelectItemText, ASelectLabel, ASelectPortal, ASelectRoot, ASelectScrollDownButton, ASelectScrollUpButton, ASelectSeparator, ASelectTrigger, ASelectValue, ASelectViewport, ASeparator, ASliderRange, ASliderRoot, ASliderThumb, ASliderTrack, ASplitterGroup, ASplitterPanel, ASplitterResizeHandle, AStepperDescription, AStepperIndicator, AStepperItem, AStepperRoot, AStepperSeparator, AStepperTitle, AStepperTrigger, ASwitchRoot, ASwitchThumb, ATabsContent, ATabsIndicator, ATabsList, ATabsRoot, ATabsTrigger, ATagsInputClear, ATagsInputInput, ATagsInputItem, ATagsInputItemDelete, ATagsInputItemText, ATagsInputRoot, ATimeFieldInput, ATimeFieldRoot, AToastAction, AToastClose, AToastDescription, AToastPortal, AToastProvider, AToastRoot, AToastTitle, AToastViewport, AToggle, AToggleGroupItem, AToggleGroupRoot, ATooltipArrow, ATooltipContent, ATooltipPortal, ATooltipProvider, ATooltipRoot, ATooltipTrigger, ATreeItem, ATreeRoot, ATreeVirtualizer, AViewport } from 'akar';
+import { AAccordionContent, AAccordionHeader, AAccordionItem, AAccordionRoot, AAccordionTrigger, AAlertDialogRoot, AAlertDialogTrigger, AAlertDialogPortal, AAlertDialogContent, AAlertDialogOverlay, AAlertDialogCancel, AAlertDialogTitle, AAlertDialogDescription, AAlertDialogAction, AAutocompleteRoot, AAutocompleteInput, AAutocompleteAnchor, AAutocompleteEmpty, AAutocompleteTrigger, AAutocompleteCancel, AAutocompleteGroup, AAutocompleteLabel, AAutocompleteContent, AAutocompleteViewport, AAutocompleteVirtualizer, AAutocompleteItem, AAutocompleteItemIndicator, AAutocompleteSeparator, AAutocompleteArrow, AAutocompletePortal, AAvatarFallback, AAvatarImage, AAvatarRoot, ACalendarCellTrigger, ACalendarCell, ACalendarGridBody, ACalendarGridHead, ACalendarGridRow, ACalendarGrid, ACalendarHeadCell, ACalendarHeader, ACalendarHeading, ACalendarNext, ACalendarPrev, ACalendarRoot, ACheckboxGroupRoot, ACheckboxIndicator, ACheckboxRoot, ACollapsibleContent, ACollapsibleRoot, ACollapsibleTrigger, AColorAreaRoot, AColorAreaArea, AColorAreaThumb, AColorFieldRoot, AColorFieldInput, AColorSliderRoot, AColorSliderTrack, AColorSliderThumb, AColorSwatch, AColorSwatchPickerRoot, AColorSwatchPickerItem, AColorSwatchPickerItemSwatch, AColorSwatchPickerItemIndicator, AComboboxAnchor, AComboboxArrow, AComboboxCancel, AComboboxContent, AComboboxEmpty, AComboboxGroup, AComboboxInput, AComboboxItemIndicator, AComboboxItem, AComboboxLabel, AComboboxPortal, AComboboxRoot, AComboboxSeparator, AComboboxTrigger, AComboboxViewport, AComboboxVirtualizer, AContextMenuArrow, AContextMenuCheckboxItem, AContextMenuContent, AContextMenuGroup, AContextMenuItemIndicator, AContextMenuItem, AContextMenuLabel, AContextMenuPortal, AContextMenuRadioGroup, AContextMenuRadioItem, AContextMenuRoot, AContextMenuSeparator, AContextMenuSubContent, AContextMenuSubTrigger, AContextMenuSub, AContextMenuTrigger, ADateFieldInput, ADateFieldRoot, ADatePickerAnchor, ADatePickerArrow, ADatePickerCalendar, ADatePickerCellTrigger, ADatePickerCell, ADatePickerClose, ADatePickerContent, ADatePickerField, ADatePickerGridBody, ADatePickerGridHead, ADatePickerGridRow, ADatePickerGrid, ADatePickerHeadCell, ADatePickerHeader, ADatePickerHeading, ADatePickerInput, ADatePickerNext, ADatePickerPrev, ADatePickerRoot, ADatePickerTrigger, ADateRangeFieldInput, ADateRangeFieldRoot, ADateRangePickerAnchor, ADateRangePickerArrow, ADateRangePickerCalendar, ADateRangePickerCellTrigger, ADateRangePickerCell, ADateRangePickerClose, ADateRangePickerContent, ADateRangePickerField, ADateRangePickerGridBody, ADateRangePickerGridHead, ADateRangePickerGridRow, ADateRangePickerGrid, ADateRangePickerHeadCell, ADateRangePickerHeader, ADateRangePickerHeading, ADateRangePickerInput, ADateRangePickerNext, ADateRangePickerPrev, ADateRangePickerRoot, ADateRangePickerTrigger, ADialogClose, ADialogContent, ADialogDescription, ADialogOverlay, ADialogPortal, ADialogRoot, ADialogTitle, ADialogTrigger, ADrawerContent, ADrawerHandle, ADrawerOverlay, ADrawerRoot, ADrawerRootNested, ADrawerClose, ADrawerDescription, ADrawerPortal, ADrawerTitle, ADrawerTrigger, ADropdownMenuArrow, ADropdownMenuCheckboxItem, ADropdownMenuContent, ADropdownMenuGroup, ADropdownMenuFilter, ADropdownMenuItemIndicator, ADropdownMenuItem, ADropdownMenuLabel, ADropdownMenuPortal, ADropdownMenuRadioGroup, ADropdownMenuRadioItem, ADropdownMenuRoot, ADropdownMenuSeparator, ADropdownMenuSubContent, ADropdownMenuSubTrigger, ADropdownMenuSub, ADropdownMenuTrigger, AEditableArea, AEditableCancelTrigger, AEditableEditTrigger, AEditableInput, AEditablePreview, AEditableRoot, AEditableSubmitTrigger, AFocusScope, AHoverCardArrow, AHoverCardContent, AHoverCardPortal, AHoverCardRoot, AHoverCardTrigger, ALabel, AListboxContent, AListboxFilter, AListboxGroupLabel, AListboxGroup, AListboxItemIndicator, AListboxItem, AListboxRoot, AListboxVirtualizer, AMonthPickerRoot, AMonthPickerHeader, AMonthPickerHeading, AMonthPickerGrid, AMonthPickerCell, AMonthPickerNext, AMonthPickerPrev, AMonthPickerGridBody, AMonthPickerGridRow, AMonthPickerCellTrigger, AMonthRangePickerRoot, AMonthRangePickerHeader, AMonthRangePickerHeading, AMonthRangePickerGrid, AMonthRangePickerCell, AMonthRangePickerNext, AMonthRangePickerPrev, AMonthRangePickerGridBody, AMonthRangePickerGridRow, AMonthRangePickerCellTrigger, ANavigationMenuContent, ANavigationMenuIndicator, ANavigationMenuItem, ANavigationMenuLink, ANavigationMenuList, ANavigationMenuRoot, ANavigationMenuSub, ANavigationMenuTrigger, ANavigationMenuViewport, ANumberFieldDecrement, ANumberFieldIncrement, ANumberFieldInput, ANumberFieldRoot, APaginationEllipsis, APaginationFirst, APaginationLast, APaginationListItem, APaginationList, APaginationNext, APaginationPrev, APaginationRoot, APinInputInput, APinInputRoot, APopoverAnchor, APopoverArrow, APopoverClose, APopoverContent, APopoverPortal, APopoverRoot, APopoverTrigger, APresence, AProgressIndicator, AProgressRoot, ARadioGroupIndicator, ARadioGroupItem, ARadioGroupRoot, ARangeCalendarCellTrigger, ARangeCalendarCell, ARangeCalendarGridBody, ARangeCalendarGridHead, ARangeCalendarGridRow, ARangeCalendarGrid, ARangeCalendarHeadCell, ARangeCalendarHeader, ARangeCalendarHeading, ARangeCalendarNext, ARangeCalendarPrev, ARangeCalendarRoot, ARovingFocusGroup, ARovingFocusItem, AScrollAreaCorner, AScrollAreaRoot, AScrollAreaScrollbar, AScrollAreaThumb, AScrollAreaViewport, ASelectArrow, ASelectContent, ASelectGroup, ASelectIcon, ASelectItemIndicator, ASelectItemText, ASelectItem, ASelectLabel, ASelectPortal, ASelectRoot, ASelectScrollDownButton, ASelectScrollUpButton, ASelectSeparator, ASelectTrigger, ASelectValue, ASelectViewport, ASeparator, ASliderRange, ASliderRoot, ASliderThumb, ASliderTrack, ASplitterGroup, ASplitterPanel, ASplitterResizeHandle, AStepperDescription, AStepperIndicator, AStepperItem, AStepperRoot, AStepperSeparator, AStepperTitle, AStepperTrigger, ASwitchRoot, ASwitchThumb, ATabsContent, ATabsIndicator, ATabsList, ATabsRoot, ATabsTrigger, ATagsInputClear, ATagsInputInput, ATagsInputItemDelete, ATagsInputItemText, ATagsInputItem, ATagsInputRoot, ATimeFieldInput, ATimeFieldRoot, AToastAction, AToastClose, AToastDescription, AToastPortal, AToastProvider, AToastRoot, AToastTitle, AToastViewport, AToggle, AToggleGroupItem, AToggleGroupRoot, AToolbarRoot, AToolbarButton, AToolbarLink, AToolbarToggleGroup, AToolbarToggleItem, AToolbarSeparator, ATooltipArrow, ATooltipContent, ATooltipPortal, ATooltipProvider, ATooltipRoot, ATooltipTrigger, ATreeItem, ATreeRoot, ATreeVirtualizer, AViewport, AYearPickerRoot, AYearPickerHeader, AYearPickerHeading, AYearPickerGrid, AYearPickerCell, AYearPickerNext, AYearPickerPrev, AYearPickerGridBody, AYearPickerGridRow, AYearPickerCellTrigger, AYearRangePickerRoot, AYearRangePickerHeader, AYearRangePickerHeading, AYearRangePickerGrid, AYearRangePickerCell, AYearRangePickerNext, AYearRangePickerPrev, AYearRangePickerGridBody, AYearRangePickerGridRow, AYearRangePickerCellTrigger } from 'akar';
 
 export const AAccordion = {
   Content: AAccordionContent,
@@ -12,6 +12,28 @@ export const AAccordion = {
   Item: typeof AAccordionItem;
   Root: typeof AAccordionRoot;
   Trigger: typeof AAccordionTrigger;
+};
+
+export const AAlertDialog = {
+  Root: AAlertDialogRoot,
+  Trigger: AAlertDialogTrigger,
+  Portal: AAlertDialogPortal,
+  Content: AAlertDialogContent,
+  Overlay: AAlertDialogOverlay,
+  Cancel: AAlertDialogCancel,
+  Title: AAlertDialogTitle,
+  Description: AAlertDialogDescription,
+  Action: AAlertDialogAction,
+} as {
+  Root: typeof AAlertDialogRoot;
+  Trigger: typeof AAlertDialogTrigger;
+  Portal: typeof AAlertDialogPortal;
+  Content: typeof AAlertDialogContent;
+  Overlay: typeof AAlertDialogOverlay;
+  Cancel: typeof AAlertDialogCancel;
+  Title: typeof AAlertDialogTitle;
+  Description: typeof AAlertDialogDescription;
+  Action: typeof AAlertDialogAction;
 };
 
 export const AAutocomplete = {
@@ -106,6 +128,48 @@ export const ACollapsible = {
   Content: typeof ACollapsibleContent;
   Root: typeof ACollapsibleRoot;
   Trigger: typeof ACollapsibleTrigger;
+};
+
+export const AColorArea = {
+  Root: AColorAreaRoot,
+  Area: AColorAreaArea,
+  Thumb: AColorAreaThumb,
+} as {
+  Root: typeof AColorAreaRoot;
+  Area: typeof AColorAreaArea;
+  Thumb: typeof AColorAreaThumb;
+};
+
+export const AColorField = {
+  Root: AColorFieldRoot,
+  Input: AColorFieldInput,
+} as {
+  Root: typeof AColorFieldRoot;
+  Input: typeof AColorFieldInput;
+};
+
+export const AColorSlider = {
+  Root: AColorSliderRoot,
+  Track: AColorSliderTrack,
+  Thumb: AColorSliderThumb,
+} as {
+  Root: typeof AColorSliderRoot;
+  Track: typeof AColorSliderTrack;
+  Thumb: typeof AColorSliderThumb;
+};
+
+export { AColorSwatch };
+
+export const AColorSwatchPicker = {
+  Root: AColorSwatchPickerRoot,
+  Item: AColorSwatchPickerItem,
+  ItemSwatch: AColorSwatchPickerItemSwatch,
+  ItemIndicator: AColorSwatchPickerItemIndicator,
+} as {
+  Root: typeof AColorSwatchPickerRoot;
+  Item: typeof AColorSwatchPickerItem;
+  ItemSwatch: typeof AColorSwatchPickerItemSwatch;
+  ItemIndicator: typeof AColorSwatchPickerItemIndicator;
 };
 
 export const ACombobox = {
@@ -304,11 +368,36 @@ export const ADialog = {
   Trigger: typeof ADialogTrigger;
 };
 
+export const ADrawer = {
+  Content: ADrawerContent,
+  Handle: ADrawerHandle,
+  Overlay: ADrawerOverlay,
+  Root: ADrawerRoot,
+  RootNested: ADrawerRootNested,
+  Close: ADrawerClose,
+  Description: ADrawerDescription,
+  Portal: ADrawerPortal,
+  Title: ADrawerTitle,
+  Trigger: ADrawerTrigger,
+} as {
+  Content: typeof ADrawerContent;
+  Handle: typeof ADrawerHandle;
+  Overlay: typeof ADrawerOverlay;
+  Root: typeof ADrawerRoot;
+  RootNested: typeof ADrawerRootNested;
+  Close: typeof ADrawerClose;
+  Description: typeof ADrawerDescription;
+  Portal: typeof ADrawerPortal;
+  Title: typeof ADrawerTitle;
+  Trigger: typeof ADrawerTrigger;
+};
+
 export const ADropdownMenu = {
   Arrow: ADropdownMenuArrow,
   CheckboxItem: ADropdownMenuCheckboxItem,
   Content: ADropdownMenuContent,
   Group: ADropdownMenuGroup,
+  Filter: ADropdownMenuFilter,
   ItemIndicator: ADropdownMenuItemIndicator,
   Item: ADropdownMenuItem,
   Label: ADropdownMenuLabel,
@@ -326,6 +415,7 @@ export const ADropdownMenu = {
   CheckboxItem: typeof ADropdownMenuCheckboxItem;
   Content: typeof ADropdownMenuContent;
   Group: typeof ADropdownMenuGroup;
+  Filter: typeof ADropdownMenuFilter;
   ItemIndicator: typeof ADropdownMenuItemIndicator;
   Item: typeof ADropdownMenuItem;
   Label: typeof ADropdownMenuLabel;
@@ -357,6 +447,8 @@ export const AEditable = {
   Root: typeof AEditableRoot;
   SubmitTrigger: typeof AEditableSubmitTrigger;
 };
+
+export { AFocusScope };
 
 export const AHoverCard = {
   Arrow: AHoverCardArrow,
@@ -394,23 +486,71 @@ export const AListbox = {
   Virtualizer: typeof AListboxVirtualizer;
 };
 
+export const AMonthPicker = {
+  Root: AMonthPickerRoot,
+  Header: AMonthPickerHeader,
+  Heading: AMonthPickerHeading,
+  Grid: AMonthPickerGrid,
+  Cell: AMonthPickerCell,
+  Next: AMonthPickerNext,
+  Prev: AMonthPickerPrev,
+  GridBody: AMonthPickerGridBody,
+  GridRow: AMonthPickerGridRow,
+  CellTrigger: AMonthPickerCellTrigger,
+} as {
+  Root: typeof AMonthPickerRoot;
+  Header: typeof AMonthPickerHeader;
+  Heading: typeof AMonthPickerHeading;
+  Grid: typeof AMonthPickerGrid;
+  Cell: typeof AMonthPickerCell;
+  Next: typeof AMonthPickerNext;
+  Prev: typeof AMonthPickerPrev;
+  GridBody: typeof AMonthPickerGridBody;
+  GridRow: typeof AMonthPickerGridRow;
+  CellTrigger: typeof AMonthPickerCellTrigger;
+};
+
+export const AMonthRangePicker = {
+  Root: AMonthRangePickerRoot,
+  Header: AMonthRangePickerHeader,
+  Heading: AMonthRangePickerHeading,
+  Grid: AMonthRangePickerGrid,
+  Cell: AMonthRangePickerCell,
+  Next: AMonthRangePickerNext,
+  Prev: AMonthRangePickerPrev,
+  GridBody: AMonthRangePickerGridBody,
+  GridRow: AMonthRangePickerGridRow,
+  CellTrigger: AMonthRangePickerCellTrigger,
+} as {
+  Root: typeof AMonthRangePickerRoot;
+  Header: typeof AMonthRangePickerHeader;
+  Heading: typeof AMonthRangePickerHeading;
+  Grid: typeof AMonthRangePickerGrid;
+  Cell: typeof AMonthRangePickerCell;
+  Next: typeof AMonthRangePickerNext;
+  Prev: typeof AMonthRangePickerPrev;
+  GridBody: typeof AMonthRangePickerGridBody;
+  GridRow: typeof AMonthRangePickerGridRow;
+  CellTrigger: typeof AMonthRangePickerCellTrigger;
+};
+
 export const ANavigationMenu = {
-  Root: ANavigationMenuRoot,
   Content: ANavigationMenuContent,
   Indicator: ANavigationMenuIndicator,
   Item: ANavigationMenuItem,
   Link: ANavigationMenuLink,
   List: ANavigationMenuList,
+  Root: ANavigationMenuRoot,
   Sub: ANavigationMenuSub,
   Trigger: ANavigationMenuTrigger,
   Viewport: ANavigationMenuViewport,
 } as {
-  Root: typeof ANavigationMenuRoot;
   Content: typeof ANavigationMenuContent;
   Indicator: typeof ANavigationMenuIndicator;
   Item: typeof ANavigationMenuItem;
   Link: typeof ANavigationMenuLink;
   List: typeof ANavigationMenuList;
+  Root: typeof ANavigationMenuRoot;
   Sub: typeof ANavigationMenuSub;
   Trigger: typeof ANavigationMenuTrigger;
   Viewport: typeof ANavigationMenuViewport;
@@ -520,6 +660,14 @@ export const ARangeCalendar = {
   Next: typeof ARangeCalendarNext;
   Prev: typeof ARangeCalendarPrev;
   Root: typeof ARangeCalendarRoot;
+};
+
+export const ARovingFocus = {
+  Group: ARovingFocusGroup,
+  Item: ARovingFocusItem,
+} as {
+  Group: typeof ARovingFocusGroup;
+  Item: typeof ARovingFocusItem;
 };
 
 export const AScrollArea = {
@@ -690,6 +838,22 @@ export const AToggleGroup = {
   Root: typeof AToggleGroupRoot;
 };
 
+export const AToolbar = {
+  Root: AToolbarRoot,
+  Button: AToolbarButton,
+  Link: AToolbarLink,
+  ToggleGroup: AToolbarToggleGroup,
+  ToggleItem: AToolbarToggleItem,
+  Separator: AToolbarSeparator,
+} as {
+  Root: typeof AToolbarRoot;
+  Button: typeof AToolbarButton;
+  Link: typeof AToolbarLink;
+  ToggleGroup: typeof AToolbarToggleGroup;
+  ToggleItem: typeof AToolbarToggleItem;
+  Separator: typeof AToolbarSeparator;
+};
+
 export const ATooltip = {
   Arrow: ATooltipArrow,
   Content: ATooltipContent,
@@ -717,3 +881,51 @@ export const ATree = {
 };
 
 export { AViewport };
+
+export const AYearPicker = {
+  Root: AYearPickerRoot,
+  Header: AYearPickerHeader,
+  Heading: AYearPickerHeading,
+  Grid: AYearPickerGrid,
+  Cell: AYearPickerCell,
+  Next: AYearPickerNext,
+  Prev: AYearPickerPrev,
+  GridBody: AYearPickerGridBody,
+  GridRow: AYearPickerGridRow,
+  CellTrigger: AYearPickerCellTrigger,
+} as {
+  Root: typeof AYearPickerRoot;
+  Header: typeof AYearPickerHeader;
+  Heading: typeof AYearPickerHeading;
+  Grid: typeof AYearPickerGrid;
+  Cell: typeof AYearPickerCell;
+  Next: typeof AYearPickerNext;
+  Prev: typeof AYearPickerPrev;
+  GridBody: typeof AYearPickerGridBody;
+  GridRow: typeof AYearPickerGridRow;
+  CellTrigger: typeof AYearPickerCellTrigger;
+};
+
+export const AYearRangePicker = {
+  Root: AYearRangePickerRoot,
+  Header: AYearRangePickerHeader,
+  Heading: AYearRangePickerHeading,
+  Grid: AYearRangePickerGrid,
+  Cell: AYearRangePickerCell,
+  Next: AYearRangePickerNext,
+  Prev: AYearRangePickerPrev,
+  GridBody: AYearRangePickerGridBody,
+  GridRow: AYearRangePickerGridRow,
+  CellTrigger: AYearRangePickerCellTrigger,
+} as {
+  Root: typeof AYearRangePickerRoot;
+  Header: typeof AYearRangePickerHeader;
+  Heading: typeof AYearRangePickerHeading;
+  Grid: typeof AYearRangePickerGrid;
+  Cell: typeof AYearRangePickerCell;
+  Next: typeof AYearRangePickerNext;
+  Prev: typeof AYearRangePickerPrev;
+  GridBody: typeof AYearRangePickerGridBody;
+  GridRow: typeof AYearRangePickerGridRow;
+  CellTrigger: typeof AYearRangePickerCellTrigger;
+};

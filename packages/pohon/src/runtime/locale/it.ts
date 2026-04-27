@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Precedente',
     },
     chatPrompt: {
-      placeholder: 'Scrivi il tuo messaggio qui...',
+      placeholder: 'Scrivi il tuo messaggio qui…',
     },
     chatPromptSubmit: {
       label: 'Invia',
+    },
+    chatReasoning: {
+      thinking: 'Pensando…',
+      thought: 'Ha pensato',
+      thoughtFor: 'Ha pensato per {duration}',
     },
     colorMode: {
       dark: 'Scuro',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Chiudi',
       noData: 'Nessun dato',
       noMatch: 'Nessun dato corrispondente',
-      placeholder: 'Digita un comando o cerca...',
+      placeholder: 'Digita un comando o cerca…',
     },
     contentSearch: {
       links: 'Collegamenti',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Cerca...',
+      label: 'Cerca…',
     },
     contentToc: {
       title: 'In questa pagina',
+    },
+    dropdownMenu: {
+      noMatch: 'Nessun dato corrispondente',
+      search: 'Cerca…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Cerca...',
+      label: 'Cerca…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Comprimi barra laterale',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Diminuisci',
       increment: 'Aumenta',
     },
+    listbox: {
+      noData: 'Nessun dato',
+      noMatch: 'Nessun dato corrispondente',
+      search: 'Cerca…',
+    },
     modal: {
       close: 'Chiudi',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Copia codice negli appunti',
       },
+      prompt: {
+        copy: 'Copia prompt',
+        openIn: 'Apri in {name}',
+      },
+    },
+    sidebar: {
+      close: 'Chiudi',
+      toggle: 'Alterna',
     },
     selectMenu: {
       create: 'Crea "{label}"',
       noData: 'Nessun dato',
       noMatch: 'Nessun dato corrispondente',
-      search: 'Cerca...',
+      search: 'Cerca…',
     },
     slideover: {
       close: 'Chiudi',

@@ -8,6 +8,7 @@ export default (options: Required<PohonModuleOptions>) => ({
       neutral: '',
     },
   },
+
   defaultVariants: {
     color: 'neutral',
   },

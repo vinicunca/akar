@@ -59,8 +59,8 @@ Use the `items` prop as an array of objects with the following properties:
 - `disabled?: boolean`
 - `slot?: string`
 - `children?: TreeItem[]`
-- `onToggle?: (e: TreeItemToggleEvent<TreeItem>) => void`
-- `onSelect?: (e: TreeItemSelectEvent<TreeItem>) => void`
+- `onToggle?: (event: TreeItemToggleEvent<TreeItem>) => void`
+- `onSelect?: (event: TreeItemSelectEvent<TreeItem>) => void`
 - `class?: any`
 - `pohon?: { item?: ClassNameValue, itemWithChildren?: ClassNameValue, link?: ClassNameValue, linkLeadingIcon?: ClassNameValue, linkLabel?: ClassNameValue, linkTrailing?: ClassNameValue, linkTrailingIcon?: ClassNameValue, listWithChildren?: ClassNameValue }`
 
@@ -325,12 +325,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `pohon.icons.chevronDown` key.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `pohon.icons.chevronDown` key.
 :::
@@ -380,12 +380,12 @@ props:
 ::
 
 ::docs-framework-only
-#nuxt
+# nuxt
 :::tip{to="/docs/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize these icons globally in your `app.config.ts` under `pohon.icons.folder` and `pohon.icons.folderOpen` keys.
 :::
 
-#vue
+# vue
 :::tip{to="/docs/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize these icons globally in your `vite.config.ts` under `pohon.icons.folder` and `pohon.icons.folderOpen` keys.
 :::

@@ -17,8 +17,8 @@ const items = computed<Array<PContextMenuItem>>(() => [{
   onUpdateChecked(checked: boolean) {
     showSidebar.value = checked;
   },
-  onSelect(e: Event) {
-    e.preventDefault();
+  onSelect(event: Event) {
+    event.preventDefault();
   },
 }, {
   label: 'Show Toolbar',

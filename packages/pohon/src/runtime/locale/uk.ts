@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Назад',
     },
     chatPrompt: {
-      placeholder: 'Введіть ваше повідомлення тут...',
+      placeholder: 'Введіть ваше повідомлення тут…',
     },
     chatPromptSubmit: {
       label: 'Відправити',
+    },
+    chatReasoning: {
+      thinking: 'Думає…',
+      thought: 'Подумав',
+      thoughtFor: 'Думав {duration}',
     },
     colorMode: {
       dark: 'Темна',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Закрити',
       noData: 'Немає даних',
       noMatch: 'Збігів не знайдено',
-      placeholder: 'Введіть команду або шукайте...',
+      placeholder: 'Введіть команду або шукайте…',
     },
     contentSearch: {
       links: 'Посилання',
       theme: 'Тема',
     },
     contentSearchButton: {
-      label: 'Пошук...',
+      label: 'Пошук…',
     },
     contentToc: {
       title: 'На цій сторінці',
+    },
+    dropdownMenu: {
+      noMatch: 'Збігів не знайдено',
+      search: 'Пошук…',
     },
     dashboardSearch: {
       theme: 'Тема',
     },
     dashboardSearchButton: {
-      label: 'Пошук...',
+      label: 'Пошук…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Згорнути бічну панель',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Зменшити',
       increment: 'Збільшити',
     },
+    listbox: {
+      noData: 'Немає даних',
+      noMatch: 'Збігів не знайдено',
+      search: 'Пошук…',
+    },
     modal: {
       close: 'Закрити',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Копіювати код у буфер обміну',
       },
+      prompt: {
+        copy: 'Копіювати запит',
+        openIn: 'Відкрити у {name}',
+      },
+    },
+    sidebar: {
+      close: 'Закрити',
+      toggle: 'Перемикнути',
     },
     selectMenu: {
       create: 'Створити "{label}"',
       noData: 'Немає даних',
       noMatch: 'Збігів не знайдено',
-      search: 'Пошук...',
+      search: 'Пошук…',
     },
     slideover: {
       close: 'Закрити',

@@ -8,6 +8,8 @@ import { CLOSE_THRESHOLD, SCROLL_LOCK_TIMEOUT, TRANSITIONS } from './drawer.cons
 import { provideADrawerRootContext } from './drawer.context.ts';
 import { useDrawer } from './drawer.controls';
 
+defineOptions({ name: 'ADrawerRoot' });
+
 const props = withDefaults(
   defineProps<ADrawerRootProps>(),
   {

@@ -2,6 +2,8 @@
 import { AVisuallyHidden } from '../visually-hidden';
 import { injectAToastProviderContext } from './toast-provider.vue';
 
+defineOptions({ name: 'AFocusProxy' });
+
 const emits = defineEmits<{
   focusFromOutsideViewport: [void];
 }>();
@@ -11,7 +13,6 @@ const providerContext = injectAToastProviderContext();
 
 <template>
   <AVisuallyHidden
-    aria-hidden="true"
     tabindex="0"
     style="position: fixed"
     @focus="(event: FocusEvent) => {

@@ -27,6 +27,8 @@ export interface ArrowProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APrimitive } from '../../primitive';
 
+defineOptions({ name: 'AArrow' });
+
 const props = withDefaults(defineProps<ArrowProps>(), {
   width: 10,
   height: 5,

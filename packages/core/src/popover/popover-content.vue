@@ -22,6 +22,8 @@ import PopoverContentModal from './popover-content-modal.vue';
 import PopoverContentNonModal from './popover-content-non-modal.vue';
 import { injectAPopoverRootContext } from './popover-root.vue';
 
+defineOptions({ name: 'APopoverContent' });
+
 const props = defineProps<APopoverContentProps>();
 const emits = defineEmits<APopoverContentEmits>();
 

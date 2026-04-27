@@ -1,43 +1,84 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { toKebabCase } from '@vinicunca/perkakas';
 
-const TARGET_DIR = '/Users/praburangki/Dev/@vinicunca/akar/docs/app/components/content/examples/pohon/table';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-function toKebabCase(str) {
-  return str
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
-    .toLowerCase();
+const SOURCE_DIR = path.resolve(__dirname, '../packages/pohon');
+const TARGET_FOLDERS = [
+  'test',
+];
+
+function isSameInode(a, b) {
+  try {
+    const sa = fs.statSync(a);
+    const sb = fs.statSync(b);
+    return sa.ino === sb.ino && sa.dev === sb.dev;
+  } catch {
+    return false;
+  }
 }
 
-function renameFiles() {
-  if (!fs.existsSync(TARGET_DIR)) {
-    console.error(`Directory not found: ${TARGET_DIR}`);
-    return;
+function renameEntry(oldPath) {
+  const parentPath = path.dirname(oldPath);
+  const oldName = path.basename(oldPath);
+  const newName = toKebabCase(oldName);
+
+  if (!newName || oldName === newName) {
+    return oldPath;
   }
 
-  const files = fs.readdirSync(TARGET_DIR);
-
-  files.forEach((file) => {
-    const oldPath = path.join(TARGET_DIR, file);
-    if (!fs.statSync(oldPath).isFile()) {
-      return;
+  const newPath = path.join(parentPath, newName);
+  if (fs.existsSync(newPath)) {
+    if (!isSameInode(oldPath, newPath)) {
+      throw new Error(`Cannot rename "${oldPath}" because "${newPath}" already exists.`);
     }
+    // Case-only rename on a case-insensitive volume: rename via a temp path first.
+    const tempPath = path.join(parentPath, `.__kebab_rename_${process.pid}_${Date.now()}_${oldName}`);
+    fs.renameSync(oldPath, tempPath);
+    fs.renameSync(tempPath, newPath);
+    console.log(`Renamed: ${oldPath} -> ${newPath}`);
+    return newPath;
+  }
 
-    const ext = path.extname(file);
-    const basename = path.basename(file, ext);
-
-    const newBasename = toKebabCase(basename);
-    const newFile = `${newBasename}${ext}`;
-    const newPath = path.join(TARGET_DIR, newFile);
-
-    if (file !== newFile) {
-      console.log(`Renaming: ${file} -> ${newFile}`);
-      fs.renameSync(oldPath, newPath);
-    } else {
-      console.log(`Skipping: ${file} (already kebab-case)`);
-    }
-  });
+  fs.renameSync(oldPath, newPath);
+  console.log(`Renamed: ${oldPath} -> ${newPath}`);
+  return newPath;
 }
 
-renameFiles();
+function renameTreeDeep(targetPath) {
+  const entries = fs.readdirSync(targetPath, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const oldEntryPath = path.join(targetPath, entry.name);
+
+    if (entry.isDirectory()) {
+      renameTreeDeep(oldEntryPath);
+      renameEntry(oldEntryPath);
+      continue;
+    }
+
+    renameEntry(oldEntryPath);
+  }
+}
+
+function run() {
+  if (!fs.existsSync(SOURCE_DIR)) {
+    throw new Error(`Source directory does not exist: ${SOURCE_DIR}`);
+  }
+
+  for (const folderName of TARGET_FOLDERS) {
+    const folderPath = path.join(SOURCE_DIR, folderName);
+    if (!fs.existsSync(folderPath)) {
+      console.log(`Skipped missing folder: ${folderPath}`);
+      continue;
+    }
+
+    renameTreeDeep(folderPath);
+    renameEntry(folderPath);
+  }
+}
+
+run();

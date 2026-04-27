@@ -11,6 +11,7 @@ export default (options: Required<PohonModuleOptions>) => {
       linkLeadingIcon: '',
       linkLeadingAvatar: '',
       linkLeadingAvatarSize: '',
+      linkLeadingChipSize: '',
       linkTrailing: '',
       linkTrailingBadge: '',
       linkTrailingBadgeSize: '',
@@ -33,10 +34,9 @@ export default (options: Required<PohonModuleOptions>) => {
       indicator: '',
       arrow: '',
     },
-
     variants: {
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [
           color,
           {
             link: '',
@@ -49,7 +49,7 @@ export default (options: Required<PohonModuleOptions>) => {
         },
       },
       highlightColor: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [color, ''])),
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, ''])),
         neutral: '',
       },
       variant: {
@@ -104,21 +104,14 @@ export default (options: Required<PohonModuleOptions>) => {
         true: '',
       },
       level: {
-        true: {
-          item: '',
-          itemWithChildren: '',
-        },
-      },
-      childActive: {
         true: '',
       },
       collapsed: {
-        true: {
-          item: '',
-          link: '',
-        },
+        true: '',
       },
     },
+
+    compoundVariants: [],
 
     defaultVariants: {
       color: 'primary',

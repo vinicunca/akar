@@ -8,6 +8,8 @@ export interface ADropdownMenuLabelProps extends AMenuLabelProps {}
 <script setup lang="ts">
 import { AMenuLabel } from '../menu';
 
+defineOptions({ name: 'ADropdownMenuLabel' });
+
 const props = defineProps<ADropdownMenuLabelProps>();
 useForwardExpose();
 </script>

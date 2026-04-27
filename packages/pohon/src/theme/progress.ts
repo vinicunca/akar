@@ -19,7 +19,7 @@ export default (options: Required<PohonModuleOptions>) => {
         'elastic': '',
       },
       color: {
-        ...Object.fromEntries((options.theme.colors || []).map((color) => [color, {
+        ...Object.fromEntries((options.theme.colors || []).map((color: string) => [color, {
           indicator: '',
           steps: '',
         }])),

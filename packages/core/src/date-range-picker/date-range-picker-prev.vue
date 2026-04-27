@@ -1,12 +1,14 @@
 <script lang="ts">
-import type { RangeCalendarPrevSlot } from '../range-calendar/range-calendar-prev.vue';
 import type { ARangeCalendarPrevProps } from '..';
+import type { RangeCalendarPrevSlot } from '../range-calendar/range-calendar-prev.vue';
 import { ARangeCalendarPrev } from '..';
 
 export interface ADateRangePickerPrevProps extends ARangeCalendarPrevProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangePickerPrev' });
+
 const props = defineProps<ADateRangePickerPrevProps>();
 
 defineSlots<RangeCalendarPrevSlot>();

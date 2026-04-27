@@ -1,13 +1,24 @@
 export default {
   slots: {
-    dialog: '',
+    modal: '',
     input: '',
   },
   variants: {
     fullscreen: {
       false: {
-        dialog: '',
+        modal: '',
       },
     },
+    size: {
+      xs: {},
+      sm: {},
+      md: {},
+      lg: {},
+      xl: {},
+    },
+  },
+
+  defaultVariants: {
+    size: 'md',
   },
 };

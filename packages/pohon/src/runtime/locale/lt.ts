@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Atgal',
     },
     chatPrompt: {
-      placeholder: 'Įveskite savo žinutę čia...',
+      placeholder: 'Įveskite savo žinutę čia…',
     },
     chatPromptSubmit: {
       label: 'Siųsti žinutę',
+    },
+    chatReasoning: {
+      thinking: 'Mąsto…',
+      thought: 'Pamąstė',
+      thoughtFor: 'Mąstė {duration}',
     },
     colorMode: {
       dark: 'Tamsus',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Uždaryti',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      placeholder: 'Įveskite komandą arba ieškokite...',
+      placeholder: 'Įveskite komandą arba ieškokite…',
     },
     contentSearch: {
       links: 'Nuorodos',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Ieškoti...',
+      label: 'Ieškoti…',
     },
     contentToc: {
       title: 'Šiame puslapyje',
+    },
+    dropdownMenu: {
+      noMatch: 'Nėra atitinkančių duomenų',
+      search: 'Ieškoti…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Ieškoti...',
+      label: 'Ieškoti…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Suskleisti šoninę juostą',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Sumažinti',
       increment: 'Padidinti',
     },
+    listbox: {
+      noData: 'Nėra duomenų',
+      noMatch: 'Nėra atitinkančių duomenų',
+      search: 'Ieškoti…',
+    },
     modal: {
       close: 'Uždaryti',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kopijuoti kodą į iškarpinę',
       },
+      prompt: {
+        copy: 'Kopijuoti užklausą',
+        openIn: 'Atidaryti {name}',
+      },
+    },
+    sidebar: {
+      close: 'Uždaryti',
+      toggle: 'Perjungti',
     },
     selectMenu: {
       create: 'Sukurti „{label}"',
       noData: 'Nėra duomenų',
       noMatch: 'Nėra atitinkančių duomenų',
-      search: 'Ieškoti...',
+      search: 'Ieškoti…',
     },
     slideover: {
       close: 'Uždaryti',

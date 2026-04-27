@@ -1,7 +1,7 @@
 import type { MaybeRef, Ref } from 'vue';
 import type { PDirection, PLocale } from '../types/locale';
 import { computed, isRef, ref, unref } from 'vue';
-import { getProp } from './index';
+import { getProp } from '.';
 
 export type TranslatorOption = Record<string, string | number>;
 export type Translator = (path: string, option?: TranslatorOption) => string;
@@ -18,7 +18,7 @@ export function buildTranslator<M>(locale: MaybeRef<PLocale<M>>): Translator {
 }
 
 export function translate<M>(path: string, option: undefined | TranslatorOption, locale: PLocale<M>): string {
-  const prop: string = getProp({ object: locale, path: `messages.${path}`, defaultValue: path });
+  const prop: string = getProp(locale, `messages.${path}`, path);
 
   return prop.replace(
     /\{(\w+)\}/g,

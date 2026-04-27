@@ -8,6 +8,8 @@ export interface ACalendarHeadingProps extends APrimitiveProps {}
 import { APrimitive } from '../primitive';
 import { injectACalendarRootContext } from './calendar-root.vue';
 
+defineOptions({ name: 'ACalendarHeading' });
+
 const props = withDefaults(defineProps<ACalendarHeadingProps>(), { as: 'div' });
 
 defineSlots<{

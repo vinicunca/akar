@@ -15,6 +15,8 @@ export interface ADatePickerContentEmits extends APopoverContentEmits {}
 import { computed } from 'vue';
 import { handleCalendarInitialFocus } from '../shared/date';
 
+defineOptions({ name: 'ADatePickerContent' });
+
 const props = defineProps<ADatePickerContentProps>();
 const emits = defineEmits<ADatePickerContentEmits>();
 

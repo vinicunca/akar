@@ -31,6 +31,8 @@ export interface AStepperItemProps extends APrimitiveProps {
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'AStepperItem' });
+
 const props = withDefaults(defineProps<AStepperItemProps>(), {
   completed: false,
   disabled: false,

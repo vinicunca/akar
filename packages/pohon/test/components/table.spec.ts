@@ -1,15 +1,15 @@
-import type { PTableColumn, PTableProps, PTableRow, PTableSlots } from '../../src/runtime/components/table.vue';
-import theme from '#build/pohon/table';
-import { PBadge, PButton, PCheckbox, PDropdownMenu } from '#components';
+import type { PTableColumn, PTableRow } from '../../src/runtime/components/Table.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { computed, h, ref } from 'vue';
-import Table from '../../src/runtime/components/table.vue';
-import ComponentRender from '../component-render';
+import theme from '#build/pohon/table';
+import { PBadge, PButton, PCheckbox, PDropdownMenu } from '#components';
+import Table from '../../src/runtime/components/Table.vue';
+import { renderEach } from '../component-render';
 
-describe('table', () => {
+describe('Table', () => {
   const loadingColors = Object.keys(theme.variants.loadingColor) as any;
   const loadingAnimations = Object.keys(theme.variants.loadingAnimation) as any;
 
@@ -40,151 +40,133 @@ describe('table', () => {
     email: 'carmella@hotmail.com',
   }];
 
-  const columns: Array<PTableColumn<typeof data[number]>> = [
-    {
-      id: 'select',
-      header: ({ table }) => h(PCheckbox, {
-        'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
-        'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => table.toggleAllPageRowsSelected(!!value),
-        'label': 'Select all',
-      }),
-      cell: ({ row }) => h(PCheckbox, {
-        'modelValue': row.getIsSelected(),
-        'onUpdate:modelValue': (value: boolean | 'indeterminate' | undefined) => row.toggleSelected(!!value),
-        'aria-label': 'Select row',
-      }),
-      enableSorting: false,
-      enableHiding: false,
+  const columns: Array<PTableColumn<typeof data[number]>> = [{
+    id: 'select',
+    header: ({ table }) => h(PCheckbox<boolean>, {
+      'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
+      'onUpdate:modelValue': (value) => table.toggleAllPageRowsSelected(!!value),
+      'label': 'Select all',
+    }),
+    cell: ({ row }) => h(PCheckbox<boolean>, {
+      'modelValue': row.getIsSelected(),
+      'onUpdate:modelValue': (value) => row.toggleSelected(!!value),
+      'aria-label': 'Select row',
+    }),
+    enableSorting: false,
+    enableHiding: false,
+  }, {
+    accessorKey: 'id',
+    header: '#',
+    cell: ({ row }) => `#${row.getValue('id')}`,
+  }, {
+    accessorKey: 'date',
+    header: 'Date',
+    cell: ({ row }) => {
+      return new Date(row.getValue('date')).toLocaleString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      });
     },
-    {
-      accessorKey: 'id',
-      header: '#',
-      cell: ({ row }) => `#${row.getValue('id')}`,
-    },
-    {
-      accessorKey: 'date',
-      header: 'Date',
-      cell: ({ row }) => {
-        return new Date(row.getValue('date')).toLocaleString('en-US', {
-          day: 'numeric',
-          month: 'short',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
-        });
-      },
-    },
-    {
-      accessorKey: 'status',
-      header: 'Status',
-      cell: ({ row }) => {
-        const color = ({
-          paid: 'success' as const,
-          failed: 'error' as const,
-          refunded: 'neutral' as const,
-        })[row.getValue('status') as string];
+  }, {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => {
+      const color = ({
+        paid: 'success',
+        failed: 'error',
+        refunded: 'neutral',
+      } as const)[row.getValue('status') as string];
 
-        return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'));
+      return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'));
+    },
+  }, {
+    accessorKey: 'email',
+    header: ({ column }) => {
+      const isSorted = column.getIsSorted();
+
+      return h(PButton, {
+        color: 'neutral',
+        variant: 'ghost',
+        label: 'Email',
+        // eslint-disable-next-line no-nested-ternary, sonar/no-nested-conditional
+        icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
+        class: '-mx-2.5',
+        onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
+      });
+    },
+    meta: {
+      class: {
+        td: 'lowercase',
       },
     },
-    {
-      accessorKey: 'email',
-      header: ({ column }) => {
-        const isSorted = column.getIsSorted();
-
-        return h(PButton, {
-          color: 'neutral',
-          variant: 'ghost',
-          label: 'Email',
-          icon: isSorted ? (isSorted === 'asc' ? 'i-lucide-arrow-up-narrow-wide' : 'i-lucide-arrow-down-wide-narrow') : 'i-lucide-arrow-up-down',
-          class: '-mx-2.5',
-          onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
-        });
+  }, {
+    accessorKey: 'amount',
+    header: 'Amount',
+    meta: {
+      class: {
+        th: 'text-right',
+        td: 'text-right font-medium',
       },
-      meta: {
-        class: {
-          td: 'lowercase',
+    },
+    footer: ({ column }) => {
+      const total = column.getFacetedRowModel().rows.reduce((acc: number, row: PTableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0);
+      const formatted = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(total);
+      return `Total: ${formatted}`;
+    },
+    cell: ({ row }) => {
+      const amount = Number.parseFloat(row.getValue('amount'));
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(amount);
+    },
+  }, {
+    id: 'actions',
+    enableHiding: false,
+    meta: {
+      class: {
+        td: 'text-right',
+      },
+    },
+    cell: ({ row }) => {
+      const items = [{
+        type: 'label',
+        label: 'Actions',
+      }, {
+        label: 'Copy payment ID',
+      }, {
+        label: row.getIsExpanded() ? 'Collapse' : 'Expand',
+      }, {
+        type: 'separator',
+      }, {
+        label: 'View customer',
+      }, {
+        label: 'View payment details',
+      }];
+
+      return h<any>(PDropdownMenu, {
+        content: {
+          align: 'end',
         },
-      },
+        items,
+      }, () => h(PButton, {
+        'icon': 'i-lucide-ellipsis-vertical',
+        'color': 'neutral',
+        'variant': 'ghost',
+        'aria-label': 'Actions',
+      }));
     },
-    {
-      accessorKey: 'amount',
-      header: 'Amount',
-      meta: {
-        class: {
-          th: 'text-right',
-          td: 'text-right font-medium',
-        },
-      },
-      footer: ({ column }) => {
-        const total = column.getFacetedRowModel().rows.reduce((acc: number, row: PTableRow<typeof data[number]>) => acc + Number.parseFloat(row.getValue('amount')), 0);
-
-        const formatted = new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'EUR',
-        }).format(total);
-
-        return `Total: ${formatted}`;
-      },
-      cell: ({ row }) => {
-        const amount = Number.parseFloat(row.getValue('amount'));
-
-        return new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'EUR',
-        }).format(amount);
-      },
-    },
-    {
-      id: 'actions',
-      enableHiding: false,
-      meta: {
-        class: {
-          td: 'text-right',
-        },
-      },
-      cell: ({ row }) => {
-        const items = [
-          {
-            type: 'label',
-            label: 'Actions',
-          },
-          {
-            label: 'Copy payment ID',
-          },
-          {
-            label: row.getIsExpanded() ? 'Collapse' : 'Expand',
-          },
-          {
-            type: 'separator',
-          },
-          {
-            label: 'View customer',
-          },
-          {
-            label: 'View payment details',
-          },
-        ];
-
-        return h<any>(PDropdownMenu, {
-          content: {
-            align: 'end',
-          },
-          items,
-        }, () => h(PButton, {
-          'icon': 'i-lucide-ellipsis-vertical',
-          'color': 'neutral',
-          'variant': 'ghost',
-          'class': 'ml-auto',
-          'aria-label': 'Actions',
-        }));
-      },
-    },
-  ];
+  }];
 
   const props = { data };
 
-  it.each([
+  renderEach(Table, [
     // Props
     ['with data', { props }],
     ['without data', {}],
@@ -198,9 +180,12 @@ describe('table', () => {
     ['with meta prop', { props: { ...props, meta: { class: { tr: 'custom-row-class' }, style: { tr: { backgroundColor: 'lightgray' } } } } }],
     ['with meta field on columns', { props: { ...props, columns: columns.map((c) => ({ ...c, meta: { class: { th: 'custom-heading-class', td: 'custom-cell-class' }, style: { th: { backgroundColor: 'black' }, td: { backgroundColor: 'lightgray' } } } })) } }],
     ['with virtualize', { props: { ...props, virtualize: true } }],
+    ['with virtualize and sticky', { props: { ...props, columns, virtualize: true, sticky: true } }],
+    ['with row pinning', { props: { ...props, rowPinning: { top: ['2'], bottom: ['3'] } } }],
+    ['with row pinning and virtualization', { props: { ...props, virtualize: true, rowPinning: { top: ['2'], bottom: ['3'] } } }],
     ['with as', { props: { ...props, as: 'section' } }],
     ['with class', { props: { ...props, class: 'absolute' } }],
-    ['with ui', { props: { ...props, pohon: { base: 'table-auto' } } }],
+    ['with pohon', { props: { ...props, pohon: { base: 'table-auto' } } }],
     // Slots
     ['with header slot', { props, slots: { 'id-header': () => 'ID Header slot' } }],
     ['with cell slot', { props, slots: { 'id-cell': () => 'ID Cell slot' } }],
@@ -210,10 +195,7 @@ describe('table', () => {
     ['with caption slot', { props, slots: { caption: () => 'Caption slot' } }],
     ['with body-top slot', { props, slots: { 'body-top': () => 'Body top slot' } }],
     ['with body-bottom slot', { props, slots: { 'body-bottom': () => 'Body bottom slot' } }],
-  ])('renders %s correctly', async (nameOrHtml: string, options: { props?: PTableProps; slots?: Partial<PTableSlots> }) => {
-    const html = await ComponentRender(nameOrHtml, options, Table);
-    expect(html).toMatchSnapshot();
-  });
+  ]);
 
   it('passes accessibility tests', async () => {
     const wrapper = await mountSuspended(Table, {

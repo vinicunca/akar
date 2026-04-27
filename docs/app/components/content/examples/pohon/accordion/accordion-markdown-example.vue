@@ -11,9 +11,9 @@ const items = [
     content: 'Yes! While optimized for Nuxt, Pohon UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/pohon/getting-started/installation/vue) to get started.',
   },
   {
-    label: 'Will Pohon UI work with other CSS frameworks like Tailwind CSS?',
+    label: 'Will Pohon UI work with other CSS frameworks like UnoCSS?',
     icon: 'i-lucide:circle-help',
-    content: 'No. Pohon UI is designed exclusively for UnoCSS. Tailwind CSS support would require significant architecture changes due to different class naming conventions.',
+    content: 'No. Pohon UI is designed exclusively for UnoCSS. UnoCSS support would require significant architecture changes due to different class naming conventions.',
   },
   {
     label: 'How does Pohon UI handle accessibility?',

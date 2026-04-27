@@ -9,6 +9,8 @@ import { APrimitive } from '../primitive';
 import { useForwardExpose } from '../shared';
 import { injectACollapsibleRootContext } from './collapsible-root.vue';
 
+defineOptions({ name: 'ACollapsibleTrigger' });
+
 const props = withDefaults(
   defineProps<ACollapsibleTriggerProps>(),
   {

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ASliderRootEmits, ASliderRootProps } from '..';
 import { ref } from 'vue';
-import { useForwardPropsEmits } from '../../shared';
 import { ASliderRange, ASliderRoot, ASliderThumb, ASliderTrack } from '..';
+import { useForwardPropsEmits } from '../../shared';
 
 const props = withDefaults(
   defineProps<ASliderRootProps>(),

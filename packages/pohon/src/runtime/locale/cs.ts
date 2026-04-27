@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Předchozí',
     },
     chatPrompt: {
-      placeholder: 'Zde napište svůj text...',
+      placeholder: 'Zde napište svůj text…',
     },
     chatPromptSubmit: {
       label: 'Odeslat',
+    },
+    chatReasoning: {
+      thinking: 'Přemýšlí…',
+      thought: 'Přemýšlel',
+      thoughtFor: 'Přemýšlel {duration}',
     },
     colorMode: {
       dark: 'Tmavý',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Zavřít',
       noData: 'Žádná data',
       noMatch: 'Žádná shoda',
-      placeholder: 'Zadejte příkaz nebo hledejte...',
+      placeholder: 'Zadejte příkaz nebo hledejte…',
     },
     contentSearch: {
       links: 'Odkazy',
-      theme: 'Téma',
+      theme: 'Barevný režim',
     },
     contentSearchButton: {
-      label: 'Hledat...',
+      label: 'Hledat…',
     },
     contentToc: {
       title: 'Na této stránce',
     },
+    dropdownMenu: {
+      noMatch: 'Žádná shoda',
+      search: 'Hledat…',
+    },
     dashboardSearch: {
-      theme: 'Téma',
+      theme: 'Barevný režim',
     },
     dashboardSearchButton: {
-      label: 'Hledat...',
+      label: 'Hledat…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Sbalit postranní panel',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Snížit',
       increment: 'Zvýšit',
     },
+    listbox: {
+      noData: 'Žádná data',
+      noMatch: 'Žádná shoda',
+      search: 'Hledat…',
+    },
     modal: {
       close: 'Zavřít',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kopírovat kód do schránky',
       },
+      prompt: {
+        copy: 'Kopírovat prompt',
+        openIn: 'Otevřít v {name}',
+      },
+    },
+    sidebar: {
+      close: 'Zavřít',
+      toggle: 'Přepnout',
     },
     selectMenu: {
       create: 'Vytvořit "{label}"',
       noData: 'Žádná data',
       noMatch: 'Žádná shoda',
-      search: 'Hledat...',
+      search: 'Hledat…',
     },
     slideover: {
       close: 'Zavřít',

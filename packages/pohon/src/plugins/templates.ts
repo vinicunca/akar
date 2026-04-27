@@ -4,14 +4,14 @@ import type { UnpluginOptions } from 'unplugin';
 import type { PohonOptions } from '../unplugin';
 import fs from 'node:fs';
 import path from 'node:path';
-import { getPohonTemplates } from '../templates';
+import { getTemplates } from '../templates';
 
 /**
  * This plugin is responsible for getting the generated virtual templates and
  * making them available to the Vue build.
  */
 export default function TemplatePlugin(options: PohonOptions, appConfig: Record<string, any>) {
-  const templates = getPohonTemplates({ options, pohon: appConfig.pohon });
+  const templates = getTemplates(options, appConfig.pohon);
   const templateKeys = new Set(templates.map((t) => `#build/${t.filename}`));
 
   async function writeTemplates(root: string) {
@@ -33,7 +33,7 @@ export default function TemplatePlugin(options: PohonOptions, appConfig: Record<
   }
 
   return {
-    name: 'pohon:templates',
+    name: 'nuxt:pohon:templates',
     enforce: 'pre',
     vite: {
       async config(config) {

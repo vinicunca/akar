@@ -1,7 +1,7 @@
 import type { MaybeRefOrGetter } from 'vue';
 import type { PAvatarProps, PIconProps } from '../types';
-import { useAppConfig } from '#imports';
 import { computed, toValue } from 'vue';
+import { useAppConfig } from '#imports';
 
 export interface UseComponentIconsProps {
   /**
@@ -40,17 +40,8 @@ export function useComponentIcons(componentProps: MaybeRefOrGetter<UseComponentI
 
   const props = computed(() => toValue(componentProps));
 
-  const isLeading = computed(() =>
-    (props.value.icon && props.value.leading)
-    || (props.value.icon && !props.value.trailing)
-    || (props.value.loading && !props.value.trailing)
-    || !!props.value.leadingIcon,
-  );
-  const isTrailing = computed(() =>
-    (props.value.icon && props.value.trailing)
-    || (props.value.loading && props.value.trailing)
-    || !!props.value.trailingIcon,
-  );
+  const isLeading = computed(() => (props.value.icon && props.value.leading) || (props.value.icon && !props.value.trailing) || (props.value.loading && !props.value.trailing) || !!props.value.leadingIcon);
+  const isTrailing = computed(() => (props.value.icon && props.value.trailing) || (props.value.loading && props.value.trailing) || !!props.value.trailingIcon);
 
   const leadingIconName = computed(() => {
     if (props.value.loading) {

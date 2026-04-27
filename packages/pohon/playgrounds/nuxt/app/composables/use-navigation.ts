@@ -1,16 +1,23 @@
-import { toSentenceCase } from '@vinicunca/perkakas';
+import { upperName } from '../utils';
 
 const components = [
   'accordion',
   'alert',
+  'auth-form',
   'avatar',
   'badge',
   'banner',
+  'blog-post',
   'breadcrumb',
   'button',
   'calendar',
   'card',
   'carousel',
+  'chat-reasoning',
+  'chat-shimmer',
+  'chat-tool',
+  'changelog-version',
+  'changelog-versions',
   'checkbox-group',
   'checkbox',
   'chip',
@@ -18,11 +25,13 @@ const components = [
   'color-mode',
   'color-picker',
   'command-palette',
+  'content/content-navigation',
+  'content/content-surround',
+  'content/content-toc',
   'context-menu',
-  'dialog',
   'drawer',
   'dropdown-menu',
-  'editable',
+  'editor',
   'empty',
   'error',
   'field-group',
@@ -42,10 +51,22 @@ const components = [
   'listbox',
   'locale',
   'marquee',
+  'modal',
   'navigation-menu',
+  'page-anchors',
+  'page-card',
+  'page-cta',
+  'page-feature',
+  'page-header',
+  'page-hero',
+  'page-links',
+  'page-logos',
+  'page-section',
   'pagination',
   'pin-input',
   'popover',
+  'pricing-plan',
+  'pricing-table',
   'progress',
   'radio-group',
   'scroll-area',
@@ -53,10 +74,10 @@ const components = [
   'select',
   'separator',
   'shortcuts',
+  'sidebar',
   'skeleton',
   'slideover',
   'slider',
-  'splitter',
   'stepper',
   'switch',
   'table',
@@ -64,23 +85,46 @@ const components = [
   'textarea',
   'timeline',
   'toast',
-  'toggle-group',
   'tooltip',
   'tree',
+  'user',
 ].map((component) => ({
-  label: toSentenceCase(component.split('/').pop() as string),
-  icon: 'i-lucide:box',
+  label: upperName(component.split('/').pop() as string),
+  icon: 'i-lucide-box',
   to: `/components/${component}`,
 }));
 
 export function useNavigation() {
-  const items = [
-    { label: 'Home', icon: 'i-lucide:home', to: '/' },
-    // { label: 'Chat', icon: 'i-lucide:message-circle', to: '/chat' },
-  ];
+  const appConfig = useAppConfig();
+
+  const items = [{ label: 'Home', icon: 'i-lucide-home', to: '/' }, { label: 'Chat', icon: 'i-lucide-message-circle', to: '/chat' }];
+  const groups = computed(() => [
+    { id: 'links', items },
+    { id: 'components', label: 'Components', items: components },
+    {
+      id: 'dir',
+      label: 'Direction',
+      items: [{
+        label: 'LTR',
+        icon: 'i-lucide-arrow-right',
+        active: appConfig.dir === 'ltr',
+        onSelect: () => {
+          appConfig.dir = 'ltr';
+        },
+      }, {
+        label: 'RTL',
+        icon: 'i-lucide-arrow-left',
+        active: appConfig.dir === 'rtl',
+        onSelect: () => {
+          appConfig.dir = 'rtl';
+        },
+      }],
+    },
+  ]);
 
   return {
-    items,
     components,
+    groups,
+    items,
   };
 }

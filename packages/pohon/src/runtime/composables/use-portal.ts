@@ -8,9 +8,7 @@ export function usePortal(portal: Ref<string | HTMLElement | boolean | undefined
   const globalPortal = inject(portalTargetInjectionKey, undefined);
 
   const value = computed(() =>
-    portal.value === true
-      ? globalPortal?.value
-      : portal.value,
+    portal.value === true ? globalPortal?.value : portal.value,
   );
 
   const disabled = computed(() => isBoolean(value.value) ? !value.value : false);

@@ -31,9 +31,9 @@ const items: Array<PTreeItem> = [
 
 const value = ref<(typeof items)>([]);
 
-function onSelect(e: ATreeItemSelectEvent<PTreeItem>) {
-  if (e.detail.originalEvent.type === 'click') {
-    e.preventDefault();
+function onSelect(event: ATreeItemSelectEvent<PTreeItem>) {
+  if (event.detail.originalEvent.type === 'click') {
+    event.preventDefault();
   }
 }
 </script>

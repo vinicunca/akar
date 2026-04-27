@@ -98,6 +98,8 @@ import SelectItemAlignedPosition from './select-item-aligned-position.vue';
 import SelectPopperPosition from './select-popper-position.vue';
 import { injectASelectRootContext } from './select-root.vue';
 
+defineOptions({ name: 'ASelectContentImpl' });
+
 const props = withDefaults(defineProps<SelectContentImplProps>(), {
   align: 'start',
   position: 'item-aligned',
@@ -312,8 +314,9 @@ provideSelectContentContext({
           v-bind="{ ...$attrs, ...forwardedProps }"
           :id="rootContext.contentId"
           :ref="
-            (vnode) => {
-              const el = unrefElement(vnode as ComponentPublicInstance) as HTMLElement | undefined;
+            (vnode: Element | ComponentPublicInstance | null) => {
+              if (!vnode) return undefined
+              const el = unrefElement(vnode as ComponentPublicInstance) as HTMLElement | undefined
               // special case for PopperContent
               if (el?.hasAttribute('data-akar-popper-content-wrapper')) {
                 content = el.firstElementChild as HTMLElement;

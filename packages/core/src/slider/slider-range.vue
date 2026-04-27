@@ -11,6 +11,8 @@ import { APrimitive } from '../primitive';
 import { injectASliderRootContext } from './slider-root.vue';
 import { convertValueToPercentage, injectSliderOrientationContext } from './utils';
 
+defineOptions({ name: 'ASliderRange' });
+
 withDefaults(defineProps<ASliderRangeProps>(), { as: 'span' });
 const rootContext = injectASliderRootContext();
 const orientation = injectSliderOrientationContext();

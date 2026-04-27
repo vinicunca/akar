@@ -8,7 +8,6 @@ export default {
     track: '',
     trackThumb: '',
   },
-
   variants: {
     size: {
       xs: {

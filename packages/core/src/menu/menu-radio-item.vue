@@ -22,6 +22,8 @@ import AMenuItem from './menu-item.vue';
 import { injectMenuRadioGroupContext } from './menu-radio-group.vue';
 import { getCheckedState } from './utils';
 
+defineOptions({ name: 'AMenuRadioItem' });
+
 const props = defineProps<AMenuRadioItemProps>();
 const emits = defineEmits<AMenuRadioItemEmits>();
 

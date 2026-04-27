@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import theme from '#build/pohon/form-field';
-import { reactive } from 'vue';
+import theme from '#build/pohon/form-field'
 
-const sizes = Object.keys(theme.variants.size);
+const sizes = Object.keys(theme.variants.size)
+const orientations = Object.keys(theme.variants.orientation)
 
 const attrs = reactive({
   size: [theme.defaultVariants.size],
-});
+  orientation: [theme.defaultVariants.orientation]
+})
 
 const feedbacks = [
   {},
@@ -14,35 +15,21 @@ const feedbacks = [
   { description: 'This is a description' },
   { error: 'This is an error' },
   { hint: 'This is a hint' },
-  { help: 'Help! I need somebody!' },
-];
+  { help: 'Help! I need somebody!' }
+]
 </script>
 
 <template>
-  <BaseNavbar>
-    <PSelect
-      v-model="attrs.size"
-      :items="sizes"
-      placeholder="Size"
-      multiple
-    />
-  </BaseNavbar>
+  <Navbar>
+    <PSelect v-model="attrs.size" :items="sizes" placeholder="Size" multiple />
+    <PSelect v-model="attrs.orientation" :items="orientations" placeholder="Orientation" multiple />
+  </Navbar>
 
-  <BaseMatrix
-    v-slot="props"
-    :attrs="attrs"
-  >
-    <template
-      v-for="(feedback, index) in feedbacks"
-      :key="index"
-    >
-      <PFormField
-        label="Email"
-        name="email"
-        v-bind="{ ...feedback, ...props }"
-      >
+  <Matrix v-slot="props" :attrs="attrs">
+    <template v-for="(feedback, index) in feedbacks" :key="index">
+      <PFormField label="Email" name="email" v-bind="{ ...feedback, ...props }" class="data-[orientation=horizontal]:w-full">
         <PInput placeholder="john@lennon.com" />
       </PFormField>
     </template>
-  </BaseMatrix>
+  </Matrix>
 </template>

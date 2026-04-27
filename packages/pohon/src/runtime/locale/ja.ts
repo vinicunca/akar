@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: '前へ',
     },
     chatPrompt: {
-      placeholder: 'ここにメッセージを入力してください...',
+      placeholder: 'ここにメッセージを入力してください…',
     },
     chatPromptSubmit: {
       label: '送信',
+    },
+    chatReasoning: {
+      thinking: '考えています…',
+      thought: '考えました',
+      thoughtFor: '{duration}考えました',
     },
     colorMode: {
       dark: 'ダーク',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: '閉じる',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      placeholder: 'コマンドを入力するか検索...',
+      placeholder: 'コマンドを入力するか検索…',
     },
     contentSearch: {
       links: 'リンク',
       theme: 'テーマ',
     },
     contentSearchButton: {
-      label: '検索...',
+      label: '検索…',
     },
     contentToc: {
       title: 'このページ内',
+    },
+    dropdownMenu: {
+      noMatch: '一致するデータがありません',
+      search: '検索…',
     },
     dashboardSearch: {
       theme: 'テーマ',
     },
     dashboardSearchButton: {
-      label: '検索...',
+      label: '検索…',
     },
     dashboardSidebarCollapse: {
       collapse: 'サイドバーを折りたたむ',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: '減らす',
       increment: '増やす',
     },
+    listbox: {
+      noData: 'データがありません',
+      noMatch: '一致するデータがありません',
+      search: '検索…',
+    },
     modal: {
       close: '閉じる',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'コードをクリップボードにコピー',
       },
+      prompt: {
+        copy: 'プロンプトをコピー',
+        openIn: '{name}で開く',
+      },
+    },
+    sidebar: {
+      close: '閉じる',
+      toggle: '切り替え',
     },
     selectMenu: {
       create: '"{label}"を作成',
       noData: 'データがありません',
       noMatch: '一致するデータがありません',
-      search: '検索...',
+      search: '検索…',
     },
     slideover: {
       close: '閉じる',

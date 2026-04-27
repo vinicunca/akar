@@ -11,6 +11,8 @@ export interface ALabelProps extends APrimitiveProps {
 <script setup lang="ts">
 import { APrimitive } from '../primitive';
 
+defineOptions({ name: 'ALabel' });
+
 const props = withDefaults(
   defineProps<ALabelProps>(),
   {

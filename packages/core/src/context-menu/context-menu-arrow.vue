@@ -8,6 +8,8 @@ export interface AContextMenuArrowProps extends AMenuArrowProps {}
 import { AMenuArrow } from '../menu';
 import { useForwardExpose } from '../shared';
 
+defineOptions({ name: 'AContextMenuArrow' });
+
 const props = withDefaults(
   defineProps<AContextMenuArrowProps>(),
   {

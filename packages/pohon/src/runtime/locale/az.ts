@@ -29,10 +29,15 @@ export default defineLocale<PMessages>({
       prev: 'Əvvəlki',
     },
     chatPrompt: {
-      placeholder: 'Buraya mesajınızı yazın...',
+      placeholder: 'Buraya mesajınızı yazın…',
     },
     chatPromptSubmit: {
       label: 'Göndər',
+    },
+    chatReasoning: {
+      thinking: 'Düşünür…',
+      thought: 'Düşündü',
+      thoughtFor: '{duration} düşündü',
     },
     colorMode: {
       dark: 'Qaranlıq',
@@ -46,23 +51,27 @@ export default defineLocale<PMessages>({
       close: 'Bağla',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      placeholder: 'Əmr daxil edin və ya axtarın...',
+      placeholder: 'Əmr daxil edin və ya axtarın…',
     },
     contentSearch: {
       links: 'Bağlantılar',
       theme: 'Tema',
     },
     contentSearchButton: {
-      label: 'Axtar...',
+      label: 'Axtar…',
     },
     contentToc: {
       title: 'Bu səhifədə',
+    },
+    dropdownMenu: {
+      noMatch: 'Uyğun məlumat tapılmadı',
+      search: 'Axtar…',
     },
     dashboardSearch: {
       theme: 'Tema',
     },
     dashboardSearchButton: {
-      label: 'Axtar...',
+      label: 'Axtar…',
     },
     dashboardSidebarCollapse: {
       collapse: 'Yan paneli daralt',
@@ -91,6 +100,11 @@ export default defineLocale<PMessages>({
       decrement: 'Azalt',
       increment: 'Artır',
     },
+    listbox: {
+      noData: 'Məlumat yoxdur',
+      noMatch: 'Uyğun məlumat tapılmadı',
+      search: 'Axtar…',
+    },
     modal: {
       close: 'Bağla',
     },
@@ -111,12 +125,20 @@ export default defineLocale<PMessages>({
       pre: {
         copy: 'Kodu buferə kopyala',
       },
+      prompt: {
+        copy: 'Təlimatı kopyala',
+        openIn: '{name} ilə aç',
+      },
+    },
+    sidebar: {
+      close: 'Bağla',
+      toggle: 'Dəyişdir',
     },
     selectMenu: {
       create: '"{label}" yarat',
       noData: 'Məlumat yoxdur',
       noMatch: 'Uyğun məlumat tapılmadı',
-      search: 'Axtar...',
+      search: 'Axtar…',
     },
     slideover: {
       close: 'Bağla',

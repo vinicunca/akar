@@ -14,6 +14,8 @@ import { useForwardExpose } from '../shared';
 import { injectARatingItemContext } from './rating-item.vue';
 import { injectARatingRootContext } from './rating-root.vue';
 
+defineOptions({ name: 'ARatingItemIndicator' });
+
 const props = defineProps<ARatingItemProps>();
 
 const rootContext = injectARatingRootContext();

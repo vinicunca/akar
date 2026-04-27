@@ -7,6 +7,8 @@ export interface ADateRangePickerTriggerProps extends APopoverTriggerProps {}
 </script>
 
 <script setup lang="ts">
+defineOptions({ name: 'ADateRangePickerTrigger' });
+
 const props = defineProps<ADateRangePickerTriggerProps>();
 const rootContext = injectADateRangePickerRootContext();
 </script>

@@ -9,6 +9,8 @@ import { useForwardExpose } from '../shared';
 import { AToggleGroupItem } from '../toggle-group';
 import ToolbarButton from './toolbar-button.vue';
 
+defineOptions({ name: 'AToolbarToggleItem' });
+
 const props = defineProps<AToolbarToggleItemProps>();
 const { forwardRef } = useForwardExpose();
 </script>

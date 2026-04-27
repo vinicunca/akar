@@ -20,6 +20,8 @@ import { injectSelectContentContext } from './select-content-impl.vue';
 import { injectSelectItemAlignedPositionContext } from './select-item-aligned-position.vue';
 import { CONTENT_MARGIN } from './utils';
 
+defineOptions({ name: 'ASelectViewport' });
+
 const props = defineProps<ASelectViewportProps>();
 const { nonce: propNonce } = toRefs(props);
 const nonce = useNonce(propNonce);
