@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PageList from '../../src/runtime/components/page-list.vue';
+import PageList from '../../src/runtime/components/PageList.vue';
 import { renderEach } from '../component-render';
 
 describe('PageList', () => {

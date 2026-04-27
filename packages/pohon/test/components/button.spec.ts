@@ -5,7 +5,7 @@ import { axe } from 'vitest-axe';
 import { ref } from 'vue';
 import theme from '#build/pohon/button';
 import { PForm } from '#components';
-import Button from '../../src/runtime/components/button.vue';
+import Button from '../../src/runtime/components/Button.vue';
 import { renderEach } from '../component-render';
 
 describe('Button', () => {

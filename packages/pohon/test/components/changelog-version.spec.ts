@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import ChangelogVersion from '../../src/runtime/components/changelog-version.vue';
+import ChangelogVersion from '../../src/runtime/components/ChangelogVersion.vue';
 import { renderEach } from '../component-render';
 
 describe('ChangelogVersion', () => {

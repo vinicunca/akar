@@ -2,7 +2,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/button';
-import Pagination from '../../src/runtime/components/pagination.vue';
+import Pagination from '../../src/runtime/components/Pagination.vue';
 import { renderEach } from '../component-render';
 
 describe('Pagination', () => {

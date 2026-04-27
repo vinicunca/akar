@@ -4,7 +4,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/navigation-menu';
-import PNavigationMenu from '../../src/runtime/components/navigation-menu.vue';
+import PNavigationMenu from '../../src/runtime/components/NavigationMenu.vue';
 import { renderEach } from '../component-render';
 import { expectSlotProps } from '../utils/types';
 

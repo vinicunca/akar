@@ -2,7 +2,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/chip';
-import Chip from '../../src/runtime/components/chip.vue';
+import Chip from '../../src/runtime/components/Chip.vue';
 import { renderEach } from '../component-render';
 
 describe('Chip', () => {

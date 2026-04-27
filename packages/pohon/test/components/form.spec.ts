@@ -7,7 +7,7 @@ import { axe } from 'vitest-axe';
 import { nextTick, watch } from 'vue';
 import * as yup from 'yup';
 import * as z from 'zod';
-import PForm from '../../src/runtime/components/form.vue';
+import PForm from '../../src/runtime/components/Form.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 

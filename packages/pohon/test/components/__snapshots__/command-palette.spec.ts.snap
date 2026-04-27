@@ -752,7 +752,7 @@ exports[`CommandPalette > renders with groups with description correctly 1`] = `
         <div id="akar-listbox-group-v-0-0-4" data-slot="label" class="">Recent Files</div><button type="button" data-slot="item" id="akar-listbox-item-v-0-0-5" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:file-code" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class=""><!--v-if--><span data-slot="itemLabelBase" class="">index.vue</span>
           <!--v-if--></span><span data-slot="itemDescription" class="">/src/pages/index.vue</span></span><span data-slot="itemTrailing" class=""><!--v-if--><!--v-if--></span>
         </button><button type="button" data-slot="item" id="akar-listbox-item-v-0-0-6" role="option" tabindex="-1" aria-selected="false" data-state="unchecked" data-akar-collection-item=""><span class="iconify i-lucide:file-code" aria-hidden="true" data-slot="itemLeadingIcon"></span><span data-slot="itemWrapper" class=""><span data-slot="itemLabel" class=""><!--v-if--><span data-slot="itemLabelBase" class="">app.vue</span>
-          <!--v-if--></span><span data-slot="itemDescription" class="">/app.vue</span></span><span data-slot="itemTrailing" class=""><!--v-if--><!--v-if--></span>
+          <!--v-if--></span><span data-slot="itemDescription" class="">/App.vue</span></span><span data-slot="itemTrailing" class=""><!--v-if--><!--v-if--></span>
         </button>
       </div>
     </div>

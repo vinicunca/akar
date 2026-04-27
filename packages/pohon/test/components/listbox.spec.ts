@@ -4,7 +4,7 @@ import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/listbox';
-import Listbox from '../../src/runtime/components/listbox.vue';
+import Listbox from '../../src/runtime/components/Listbox.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 import { expectEmitPayloadType } from '../utils/types';

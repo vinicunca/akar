@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import ScrollArea from '../../src/runtime/components/scroll-area.vue';
+import ScrollArea from '../../src/runtime/components/ScrollArea.vue';
 import { renderEach } from '../component-render';
 
 describe('ScrollArea', () => {

@@ -4,7 +4,7 @@ import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/textarea';
-import Textarea from '../../src/runtime/components/textarea.vue';
+import Textarea from '../../src/runtime/components/Textarea.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 

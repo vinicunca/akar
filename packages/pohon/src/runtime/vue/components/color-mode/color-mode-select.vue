@@ -9,7 +9,7 @@ export interface PColorModeSelectProps extends Omit<PSelectMenuProps<Array<PSele
 import { useForwardProps } from 'akar';
 import { computed } from 'vue';
 import { useAppConfig, useColorMode } from '#imports';
-import PSelectMenu from '../../../components/select-menu.vue';
+import PSelectMenu from '../../../components/SelectMenu.vue';
 import { useLocale } from '../../../composables/use-locale';
 
 defineOptions({ inheritAttrs: false });

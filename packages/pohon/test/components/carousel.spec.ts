@@ -2,7 +2,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
-import Carousel from '../../src/runtime/components/carousel.vue';
+import Carousel from '../../src/runtime/components/Carousel.vue';
 import { renderEach } from '../component-render';
 
 const CarouselWrapper = defineComponent({

@@ -4,12 +4,6 @@ import { capitalize, toCamelCase } from '@vinicunca/perkakas';
 import { join } from 'pathe';
 import { globSync } from 'tinyglobby';
 
-export function getComponentName(file: string): string {
-  const componentFile = file.split('/').pop()?.replace(/\.vue$/, '');
-
-  return capitalize(toCamelCase(componentFile ?? ''));
-}
-
 /**
  * Build a dependency graph of components by scanning their source files
  */
@@ -24,7 +18,7 @@ async function buildComponentDependencyGraph(componentDir: string, componentPatt
   for (const componentFile of componentFiles) {
     try {
       const content = await readFile(componentFile, 'utf-8');
-      const componentName = getComponentName(componentFile);
+      const componentName = capitalize(toCamelCase(componentFile.split('/').pop()!.replace('.vue', '')));
       const dependencies = new Set<string>();
 
       const matches = content.matchAll(componentPattern);

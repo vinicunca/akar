@@ -3,7 +3,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { afterAll, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/input-date';
-import InputDate from '../../src/runtime/components/input-date.vue';
+import InputDate from '../../src/runtime/components/InputDate.vue';
 import { renderEach } from '../component-render';
 
 describe('InputDate', () => {

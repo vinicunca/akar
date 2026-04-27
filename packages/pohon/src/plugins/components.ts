@@ -6,7 +6,6 @@ import { join, normalize } from 'pathe';
 import { globSync } from 'tinyglobby';
 import AutoImportComponents from 'unplugin-vue-components';
 import { runtimeDir } from '../unplugin';
-import { getComponentName } from '../utils/components';
 import { resolveRouterMode } from '../utils/router';
 
 interface ComponentSource {
@@ -17,9 +16,9 @@ interface ComponentSource {
 
 function createComponentSource(cwd: string, prefix: string, ignore: Array<string> = []): ComponentSource {
   const files = globSync('**/*.vue', { cwd, ignore: ignore.filter(Boolean) as Array<string> });
-  const names = new Set(files.map((c) => `${prefix}${getComponentName(c)}`));
+  const names = new Set(files.map((c) => `${prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`));
   const paths = new Map(files.map((c) => {
-    const componentName = `${prefix}${getComponentName(c)}`;
+    const componentName = `${prefix}${c.split('/').pop()?.replace(/\.vue$/, '')}`;
     return [componentName, c] as const;
   }));
 

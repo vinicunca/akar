@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PFooterColumns from '../../src/runtime/components/footer-columns.vue';
+import PFooterColumns from '../../src/runtime/components/FooterColumns.vue';
 import { renderEach } from '../component-render';
 
 describe('FooterColumns', () => {

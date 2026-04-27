@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PageGrid from '../../src/runtime/components/page-grid.vue';
+import PageGrid from '../../src/runtime/components/PageGrid.vue';
 import { renderEach } from '../component-render';
 
 describe('PageGrid', () => {

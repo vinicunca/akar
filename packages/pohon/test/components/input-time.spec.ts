@@ -3,7 +3,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { afterAll, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/input-time';
-import InputTime from '../../src/runtime/components/input-time.vue';
+import InputTime from '../../src/runtime/components/InputTime.vue';
 import { renderEach } from '../component-render';
 
 describe('InputTime', () => {

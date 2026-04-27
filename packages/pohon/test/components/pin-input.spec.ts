@@ -4,7 +4,7 @@ import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/pin-input';
-import PinInput from '../../src/runtime/components/pin-input.vue';
+import PinInput from '../../src/runtime/components/PinInput.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 

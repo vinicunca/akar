@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import themeCheckbox from '#build/pohon/checkbox';
 import theme from '#build/pohon/checkbox-group';
-import CheckboxGroup from '../../src/runtime/components/checkbox-group.vue';
+import CheckboxGroup from '../../src/runtime/components/CheckboxGroup.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 

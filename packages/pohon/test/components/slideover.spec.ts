@@ -2,7 +2,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/slideover';
-import Slideover from '../../src/runtime/components/slideover.vue';
+import Slideover from '../../src/runtime/components/Slideover.vue';
 import { renderEach } from '../component-render';
 
 describe('Slideover', () => {

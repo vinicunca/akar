@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import ChatTool from '../../src/runtime/components/chat-tool.vue';
+import ChatTool from '../../src/runtime/components/ChatTool.vue';
 import { renderEach } from '../component-render';
 
 describe('ChatTool', () => {

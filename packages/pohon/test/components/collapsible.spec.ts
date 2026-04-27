@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Collapsible from '../../src/runtime/components/collapsible.vue';
+import Collapsible from '../../src/runtime/components/Collapsible.vue';
 import { renderEach } from '../component-render';
 
 describe('Collapsible', () => {

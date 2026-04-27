@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Accordion from '../../src/runtime/components/accordion.vue';
+import Accordion from '../../src/runtime/components/Accordion.vue';
 import { renderEach } from '../component-render';
 
 describe('Accordion', () => {

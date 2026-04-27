@@ -1,8 +1,8 @@
-import type { PPricingTableSection, PPricingTableTier } from '../../src/runtime/components/pricing-table.vue';
+import type { PPricingTableSection, PPricingTableTier } from '../../src/runtime/components/PricingTable.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PricingTable from '../../src/runtime/components/pricing-table.vue';
+import PricingTable from '../../src/runtime/components/PricingTable.vue';
 import { renderEach } from '../component-render';
 
 describe('PricingTable', () => {

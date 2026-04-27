@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import ChatPalette from '../../src/runtime/components/chat-palette.vue';
+import ChatPalette from '../../src/runtime/components/ChatPalette.vue';
 import { renderEach } from '../component-render';
 
 describe('ChatPalette', () => {

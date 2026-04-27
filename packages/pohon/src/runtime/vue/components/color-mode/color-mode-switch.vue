@@ -9,7 +9,7 @@ export interface ColorModeSwitchProps extends Omit<PSwitchProps, 'checkedIcon' |
 import { useForwardProps } from 'akar';
 import { computed } from 'vue';
 import { useAppConfig, useColorMode } from '#imports';
-import PSwitch from '../../../components/switch.vue';
+import PSwitch from '../../../components/Switch.vue';
 import { useLocale } from '../../../composables/use-locale';
 
 defineOptions({ inheritAttrs: false });

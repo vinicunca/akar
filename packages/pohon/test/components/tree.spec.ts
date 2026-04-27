@@ -1,9 +1,9 @@
-import type { PTreeItem } from '../../src/runtime/components/tree.vue';
+import type { PTreeItem } from '../../src/runtime/components/Tree.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/tree';
-import Tree from '../../src/runtime/components/tree.vue';
+import Tree from '../../src/runtime/components/Tree.vue';
 import { renderEach } from '../component-render';
 import { expectEmitPayloadType } from '../utils/types';
 

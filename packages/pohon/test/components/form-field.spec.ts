@@ -1,4 +1,4 @@
-import type { PFormFieldProps } from '../../src/runtime/components/form-field.vue';
+import type { PFormFieldProps } from '../../src/runtime/components/FormField.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';

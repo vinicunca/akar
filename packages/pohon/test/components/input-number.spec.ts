@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { reactive } from 'vue';
 import theme from '#build/pohon/input-number';
-import InputNumber from '../../src/runtime/components/input-number.vue';
+import InputNumber from '../../src/runtime/components/InputNumber.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 

@@ -1,7 +1,7 @@
 import type { SuggestionOptions } from '@tiptap/suggestion';
-import type { PEditorEmojiMenuProps } from '../../src/runtime/components/editor-emoji-menu.vue';
-import type { PEditorMentionMenuProps } from '../../src/runtime/components/editor-mention-menu.vue';
-import type { PEditorSuggestionMenuProps } from '../../src/runtime/components/editor-suggestion-menu.vue';
+import type { PEditorEmojiMenuProps } from '../../src/runtime/components/EditorEmojiMenu.vue';
+import type { PEditorMentionMenuProps } from '../../src/runtime/components/EditorMentionMenu.vue';
+import type { PEditorSuggestionMenuProps } from '../../src/runtime/components/EditorSuggestionMenu.vue';
 import type { EditorMenuOptions } from '../../src/runtime/composables/use-editor-menu';
 import { PluginKey } from '@tiptap/pm/state';
 import { beforeEach, describe, expect, expectTypeOf, it, vi } from 'vitest';

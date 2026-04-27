@@ -4,7 +4,7 @@ import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/slider';
-import Slider from '../../src/runtime/components/slider.vue';
+import Slider from '../../src/runtime/components/Slider.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 

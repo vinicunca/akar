@@ -76,7 +76,7 @@ import { defu } from 'defu';
 import { hasProtocol } from 'ufo';
 import { computed, inject } from 'vue';
 import { useAppConfig } from '#imports';
-import PLinkBase from '../../../components/link-base.vue';
+import PLinkBase from '../../../components/LinkBase.vue';
 import { mergeClasses } from '../../../utils';
 import { uv } from '../../../utils/uv';
 

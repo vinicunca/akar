@@ -5,9 +5,9 @@ export default vinicuncaESLint(
     formatters: {
       css: true,
     },
-    unocss: {
-      configPath: './docs/uno.config.ts',
-    },
+    // unocss: {
+    //   configPath: './docs/uno.config.ts',
+    // },
     vue: true,
     pnpm: true,
   },

@@ -1,5 +1,5 @@
 import type { Reactive } from 'vue';
-import type { PFormProps } from '../../src/runtime/components/form.vue';
+import type { PFormProps } from '../../src/runtime/components/Form.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { reactive } from 'vue';
 import {

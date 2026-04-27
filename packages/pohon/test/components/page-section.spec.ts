@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PageSection from '../../src/runtime/components/page-section.vue';
+import PageSection from '../../src/runtime/components/PageSection.vue';
 import { renderEach } from '../component-render';
 
 describe('PageSection', () => {

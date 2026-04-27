@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
 import theme from '#build/pohon/avatar-group';
-import AvatarGroup from '../../src/runtime/components/avatar-group.vue';
-import Avatar from '../../src/runtime/components/avatar.vue';
+import AvatarGroup from '../../src/runtime/components/AvatarGroup.vue';
+import Avatar from '../../src/runtime/components/Avatar.vue';
 import { renderEach } from '../component-render';
 
 const AvatarGroupWrapper = defineComponent({

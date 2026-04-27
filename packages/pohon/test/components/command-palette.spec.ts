@@ -2,7 +2,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/command-palette';
-import CommandPalette from '../../src/runtime/components/command-palette.vue';
+import CommandPalette from '../../src/runtime/components/CommandPalette.vue';
 import { renderEach } from '../component-render';
 
 describe('CommandPalette', () => {
@@ -94,7 +94,7 @@ describe('CommandPalette', () => {
       icon: 'i-lucide-file-code',
     }, {
       label: 'app.vue',
-      description: '/app.vue',
+      description: '/App.vue',
       icon: 'i-lucide-file-code',
     }],
   }];

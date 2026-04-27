@@ -1,8 +1,7 @@
-/* eslint-disable sonar/no-nested-functions */
+/* eslint-disable sonar/no-nested-template-literals, no-restricted-syntax, sonar/no-nested-functions, node/prefer-global/process */
 import type { Resolver } from '@nuxt/kit';
 import type { Nuxt, NuxtTemplate, NuxtTypeTemplate } from '@nuxt/schema';
 import type { PohonModuleOptions } from './module';
-import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import {
   addTemplate,
@@ -29,10 +28,8 @@ export function getTemplates(
   const isDev = process.argv.includes('--pohonDev');
 
   function writeThemeTemplate(theme: Record<string, any>, path?: string) {
-    // eslint-disable-next-line no-restricted-syntax
     for (const component in theme) {
       templates.push({
-        // eslint-disable-next-line sonar/no-nested-template-literals
         filename: `pohon/${path ? `${path}/` : ''}${toKebabCase(component)}.ts`,
         write: true,
         getContents: async () => {
@@ -60,16 +57,14 @@ export function getTemplates(
           }
 
           function generateVariantDeclarations(variants: Array<string>) {
-            return variants.filter((variant) => json.includes(`as typeof ${variant}`))
-              .map((variant) => {
-                const keys = Object.keys(result.variants[variant]);
-                return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const;`;
-              });
+            return variants.filter((variant) => json.includes(`as typeof ${variant}`)).map((variant) => {
+              const keys = Object.keys(result.variants[variant]);
+              return `const ${variant} = ${JSON.stringify(keys, null, 2)} as const`;
+            });
           }
 
           // For local development, import directly from theme
           if (isDev) {
-            // eslint-disable-next-line sonar/no-nested-template-literals
             const templatePath = fileURLToPath(new URL(`./theme/${path ? `${path}/` : ''}${toKebabCase(component)}`, import.meta.url));
             const themeUtilsPath = fileURLToPath(new URL('./utils/theme', import.meta.url));
             const defaultVariantsJson = JSON.stringify(options.theme?.defaultVariants) ?? 'undefined';
@@ -96,9 +91,7 @@ export function getTemplates(
     }
   }
 
-  if (
-    options.prose || options.content || (!!nuxt && (hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')))
-  ) {
+  if (options.prose || options.mdc || options.content || (!!nuxt && (hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')))) {
     hasProse = true;
 
     const path = 'prose';

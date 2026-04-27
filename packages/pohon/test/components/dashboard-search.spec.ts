@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
 import theme from '#build/pohon/dashboard-search';
-import DashboardGroup from '../../src/runtime/components/dashboard-group.vue';
-import DashboardSearch from '../../src/runtime/components/dashboard-search.vue';
+import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue';
+import DashboardSearch from '../../src/runtime/components/DashboardSearch.vue';
 import { renderEach } from '../component-render';
 
 const DashboardWrapper = defineComponent({

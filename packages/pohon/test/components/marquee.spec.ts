@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Marquee from '../../src/runtime/components/marquee.vue';
+import Marquee from '../../src/runtime/components/Marquee.vue';
 import { renderEach } from '../component-render';
 
 describe('Marquee', () => {

@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
 import { ClientOnly } from '#components';
-import Toast from '../../src/runtime/components/toast.vue';
-import Toaster from '../../src/runtime/components/toaster.vue';
+import Toast from '../../src/runtime/components/Toast.vue';
+import Toaster from '../../src/runtime/components/Toaster.vue';
 import { renderEach } from '../component-render';
 
 const ToastWrapper = defineComponent({

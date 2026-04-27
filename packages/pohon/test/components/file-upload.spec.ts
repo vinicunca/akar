@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/file-upload';
-import FileUpload from '../../src/runtime/components/file-upload.vue';
+import FileUpload from '../../src/runtime/components/FileUpload.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 

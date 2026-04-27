@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import DashboardSearchButton from '../../src/runtime/components/dashboard-search-button.vue';
+import DashboardSearchButton from '../../src/runtime/components/DashboardSearchButton.vue';
 import { renderEach } from '../component-render';
 
 describe('DashboardSearchButton', () => {

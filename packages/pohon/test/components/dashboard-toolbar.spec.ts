@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import DashboardToolbar from '../../src/runtime/components/dashboard-toolbar.vue';
+import DashboardToolbar from '../../src/runtime/components/DashboardToolbar.vue';
 import { renderEach } from '../component-render';
 
 describe('DashboardToolbar', () => {

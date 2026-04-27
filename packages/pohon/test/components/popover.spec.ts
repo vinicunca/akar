@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Popover from '../../src/runtime/components/popover.vue';
+import Popover from '../../src/runtime/components/Popover.vue';
 import { renderEach } from '../component-render';
 
 describe('Popover', () => {

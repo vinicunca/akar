@@ -1,5 +1,5 @@
 import type { ComputedRef, InjectionKey } from 'vue';
-import type { PFieldGroupProps } from '../components/field-group.vue';
+import type { PFieldGroupProps } from '../components/FieldGroup.vue';
 import type { GetObjectField } from '../types/utils';
 import { computed, defineComponent, inject, provide } from 'vue';
 

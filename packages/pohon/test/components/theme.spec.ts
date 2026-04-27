@@ -1,12 +1,12 @@
-import type { PThemeProps, PThemeSlots } from '../../src/runtime/components/theme.vue';
+import type { PThemeProps, PThemeSlots } from '../../src/runtime/components/Theme.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { h, nextTick, ref } from 'vue';
-import Alert from '../../src/runtime/components/alert.vue';
-import Badge from '../../src/runtime/components/badge.vue';
-import Button from '../../src/runtime/components/button.vue';
-import Input from '../../src/runtime/components/input.vue';
-import Theme from '../../src/runtime/components/theme.vue';
+import Alert from '../../src/runtime/components/Alert.vue';
+import Badge from '../../src/runtime/components/Badge.vue';
+import Button from '../../src/runtime/components/Button.vue';
+import Input from '../../src/runtime/components/Input.vue';
+import Theme from '../../src/runtime/components/Theme.vue';
 import { componentRender, renderEach } from '../component-render';
 
 interface CaseOptions { props?: PThemeProps; slots?: PThemeSlots }

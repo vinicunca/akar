@@ -2,7 +2,7 @@ import type { Editor } from '@tiptap/vue-3';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
-import EditorToolbar from '../../src/runtime/components/editor-toolbar.vue';
+import EditorToolbar from '../../src/runtime/components/EditorToolbar.vue';
 import { renderEach } from '../component-render';
 
 describe('EditorToolbar', () => {

@@ -2,7 +2,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/stepper';
-import Stepper from '../../src/runtime/components/stepper.vue';
+import Stepper from '../../src/runtime/components/Stepper.vue';
 import { renderEach } from '../component-render';
 
 describe('Stepper', () => {

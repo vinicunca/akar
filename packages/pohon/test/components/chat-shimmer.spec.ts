@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import ChatShimmer from '../../src/runtime/components/chat-shimmer.vue';
+import ChatShimmer from '../../src/runtime/components/ChatShimmer.vue';
 import { renderEach } from '../component-render';
 
 describe('ChatShimmer', () => {

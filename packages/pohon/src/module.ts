@@ -30,20 +30,20 @@ export interface PohonModuleOptions {
   /**
    * Enable or disable `@nuxt/fonts` module
    * @defaultValue `true`
-   * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#fonts
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#fonts
    */
   fonts?: boolean;
 
   /**
    * Enable or disable `@nuxtjs/color-mode` module
    * @defaultValue `true`
-   * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#colormode
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#colormode
    */
   colorMode?: boolean;
 
   /**
    * Customize how the theme is generated
-   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/theme
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/theme/design-system
    */
   theme?: {
     /**
@@ -55,7 +55,7 @@ export interface PohonModuleOptions {
 
     /**
      * The default variants to use for components
-     * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#themedefaultvariants
+     * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#themedefaultvariants
      */
     defaultVariants?: {
       /**
@@ -75,14 +75,20 @@ export interface PohonModuleOptions {
   /**
    * Force the import of prose components even if `@nuxtjs/mdc` or `@nuxt/content` are not installed
    * @defaultValue false
-   * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#prose
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#prose
    */
   prose?: boolean;
 
   /**
+   * @deprecated Use `prose` instead
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#mdc
+   */
+  mdc?: boolean;
+
+  /**
    * Force the import of content & prose components even if `@nuxt/content` is not installed
    * @defaultValue false
-   * @see https://akar.vinicunca.dev/pohon/getting-started/installation/nuxt#content
+   * @see https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt#content
    */
   content?: boolean;
 
@@ -115,8 +121,8 @@ export default defineNuxtModule<PohonModuleOptions>({
   meta: {
     name,
     version,
-    docs: 'https://akar.vinicunca.dev/pohon/overview/getting-started',
-    configKey: 'pohon',
+    docs: 'https://akar.vinicunca.dev/pohon/overview/getting-started/installation/nuxt',
+    configKey: 'ui',
     compatibility: {
       nuxt: '>=4.1.0',
     },
@@ -150,7 +156,7 @@ export default defineNuxtModule<PohonModuleOptions>({
         },
       },
       '@nuxtjs/mdc': {
-        optional: !userPohonOptions.prose && !userPohonOptions.content,
+        optional: !userPohonOptions.mdc && !userPohonOptions.content,
         defaults: {
           highlight: {
             theme: {
@@ -216,7 +222,7 @@ export default defineNuxtModule<PohonModuleOptions>({
       'isolate',
     ].filter(Boolean).join(' ');
 
-    if (options.prose || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
+    if (options.prose || options.mdc || options.content || hasNuxtModule('@nuxtjs/mdc') || hasNuxtModule('@nuxt/content')) {
       addComponentsDir({
         path: resolve('./runtime/components/prose'),
         pathPrefix: false,

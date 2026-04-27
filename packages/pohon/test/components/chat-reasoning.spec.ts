@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
-import ChatReasoning from '../../src/runtime/components/chat-reasoning.vue';
+import ChatReasoning from '../../src/runtime/components/ChatReasoning.vue';
 import { renderEach } from '../component-render';
 
 describe('ChatReasoning', () => {

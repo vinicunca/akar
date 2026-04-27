@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import DashboardGroup from '../../src/runtime/components/dashboard-group.vue';
+import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue';
 import { renderEach } from '../component-render';
 
 describe('DashboardGroup', () => {

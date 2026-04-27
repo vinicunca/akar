@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Breadcrumb from '../../src/runtime/components/breadcrumb.vue';
+import Breadcrumb from '../../src/runtime/components/Breadcrumb.vue';
 import { renderEach } from '../component-render';
 
 describe('Breadcrumb', () => {

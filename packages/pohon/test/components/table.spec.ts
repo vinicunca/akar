@@ -1,4 +1,4 @@
-import type { PTableColumn, PTableRow } from '../../src/runtime/components/table.vue';
+import type { PTableColumn, PTableRow } from '../../src/runtime/components/Table.vue';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { flushPromises } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
@@ -6,7 +6,7 @@ import { axe } from 'vitest-axe';
 import { computed, h, ref } from 'vue';
 import theme from '#build/pohon/table';
 import { PBadge, PButton, PCheckbox, PDropdownMenu } from '#components';
-import Table from '../../src/runtime/components/table.vue';
+import Table from '../../src/runtime/components/Table.vue';
 import { renderEach } from '../component-render';
 
 describe('Table', () => {

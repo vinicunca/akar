@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PricingPlans from '../../src/runtime/components/pricing-plans.vue';
+import PricingPlans from '../../src/runtime/components/PricingPlans.vue';
 import { renderEach } from '../component-render';
 
 describe('PricingPlans', () => {

@@ -1,7 +1,7 @@
 import pohon from 'pohon-ui/vue-plugin';
 import { createApp, ref } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import App from './app.vue';
+import App from './App.vue';
 
 import './assets/css/main.css';
 

@@ -4,7 +4,7 @@ import { flushPromises, mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/input';
-import Input from '../../src/runtime/components/input.vue';
+import Input from '../../src/runtime/components/Input.vue';
 import { renderEach } from '../component-render';
 import { renderForm } from '../utils/form';
 

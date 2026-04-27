@@ -128,7 +128,7 @@
     "dev:vue": "pnpm --filter './playgrounds/vue' dev -- --pohonDev",
     "dev:vue:build": "pnpm --filter './playgrounds/vue' build",
     "dev:prepare:ori": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && nuxt prepare ../../docs",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt && pnpm dev:vue:build",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxt prepare playgrounds/nuxt",
     "repl": "pnpm --filter './playgrounds/repl' dev",
     "repl:bundle": "pnpm --filter './playgrounds/repl' bundle",
     "repl:build": "pnpm --filter './playgrounds/repl' build",

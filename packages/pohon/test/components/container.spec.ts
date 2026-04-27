@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Container from '../../src/runtime/components/container.vue';
+import Container from '../../src/runtime/components/Container.vue';
 import { renderEach } from '../component-render';
 
 describe('Container', () => {

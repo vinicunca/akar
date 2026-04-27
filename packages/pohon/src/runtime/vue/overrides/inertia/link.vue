@@ -79,7 +79,7 @@ import { computed } from 'vue';
 import { useAppConfig } from '#imports';
 import { mergeClasses } from '../../../utils';
 import { uv } from '../../../utils/uv';
-import PLinkBase from './link-base.vue';
+import PLinkBase from './LinkBase.vue';
 
 defineOptions({ inheritAttrs: false });
 

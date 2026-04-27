@@ -3,7 +3,7 @@ import { ATooltipProvider } from 'akar';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
-import Tooltip from '../../src/runtime/components/tooltip.vue';
+import Tooltip from '../../src/runtime/components/Tooltip.vue';
 import { renderEach } from '../component-render';
 
 const TooltipWrapper = defineComponent({

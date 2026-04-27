@@ -2,7 +2,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/drawer';
-import Drawer from '../../src/runtime/components/drawer.vue';
+import Drawer from '../../src/runtime/components/Drawer.vue';
 import { renderEach } from '../component-render';
 
 describe('Drawer', () => {

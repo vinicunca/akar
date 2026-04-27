@@ -2,8 +2,8 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent } from 'vue';
-import DashboardGroup from '../../src/runtime/components/dashboard-group.vue';
-import DashboardSidebarToggle from '../../src/runtime/components/dashboard-sidebar-toggle.vue';
+import DashboardGroup from '../../src/runtime/components/DashboardGroup.vue';
+import DashboardSidebarToggle from '../../src/runtime/components/DashboardSidebarToggle.vue';
 import { renderEach } from '../component-render';
 
 const DashboardWrapper = defineComponent({

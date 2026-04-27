@@ -2,7 +2,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/card';
-import Card from '../../src/runtime/components/card.vue';
+import Card from '../../src/runtime/components/Card.vue';
 import { renderEach } from '../component-render';
 
 describe('Card', () => {

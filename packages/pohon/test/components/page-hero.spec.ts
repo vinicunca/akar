@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PageHero from '../../src/runtime/components/page-hero.vue';
+import PageHero from '../../src/runtime/components/PageHero.vue';
 import { renderEach } from '../component-render';
 
 describe('PageHero', () => {

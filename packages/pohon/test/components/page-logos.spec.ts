@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PageLogos from '../../src/runtime/components/page-logos.vue';
+import PageLogos from '../../src/runtime/components/PageLogos.vue';
 import { renderEach } from '../component-render';
 
 describe('PageLogos', () => {

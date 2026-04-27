@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import PageAnchors from '../../src/runtime/components/page-anchors.vue';
+import PageAnchors from '../../src/runtime/components/PageAnchors.vue';
 import { renderEach } from '../component-render';
 
 describe('PageAnchors', () => {

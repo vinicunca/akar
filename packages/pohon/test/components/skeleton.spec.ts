@@ -1,7 +1,7 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import Skeleton from '../../src/runtime/components/skeleton.vue';
+import Skeleton from '../../src/runtime/components/Skeleton.vue';
 import { renderEach } from '../component-render';
 
 describe('Skeleton', () => {

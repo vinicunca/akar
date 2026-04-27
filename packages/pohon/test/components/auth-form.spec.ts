@@ -1,9 +1,9 @@
-import type { PAuthFormProps } from '../../src/runtime/components/auth-form.vue';
+import type { PAuthFormProps } from '../../src/runtime/components/AuthForm.vue';
 import type { FormSchema } from '../../src/runtime/types/form';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import AuthForm from '../../src/runtime/components/auth-form.vue';
+import AuthForm from '../../src/runtime/components/AuthForm.vue';
 import { renderEach } from '../component-render';
 
 describe('AuthForm', () => {

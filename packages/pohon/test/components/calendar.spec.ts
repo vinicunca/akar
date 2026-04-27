@@ -3,7 +3,7 @@ import { mountSuspended } from '@nuxt/test-utils/runtime';
 import { afterAll, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import theme from '#build/pohon/calendar';
-import Calendar from '../../src/runtime/components/calendar.vue';
+import Calendar from '../../src/runtime/components/Calendar.vue';
 import { renderEach } from '../component-render';
 
 describe('Calendar', () => {
