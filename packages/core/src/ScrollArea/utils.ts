@@ -1,5 +1,5 @@
 import type { Direction, Sizes } from './types';
-import { clamp } from '@/shared';
+import { clamp } from '@vinicunca/perkakas';
 
 // https://github.com/tmcw-up-for-adoption/simple-linear-scale/blob/master/index.js
 function linearScale(
@@ -65,8 +65,7 @@ export function getThumbOffsetFromScroll(
     = dir === 'ltr' ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
   const scrollWithoutMomentum = clamp(
     scrollPos,
-    scrollClampRange[0],
-    scrollClampRange[1],
+    { min: scrollClampRange[0], max: scrollClampRange[1] },
   );
   const interpolate = linearScale([0, maxScrollPos], [0, maxThumbPos]);
   return interpolate(scrollWithoutMomentum);

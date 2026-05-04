@@ -1,4 +1,6 @@
+/* eslint-disable sonar/regex-complexity */
 import type { Color, HSBColor, HSLColor, RGBColor } from './types';
+import { isString } from '@vinicunca/perkakas';
 
 const HEX3_RE = /^[0-9A-F]{3}$/i;
 const HEX6_RE = /^[0-9A-F]{6}$/i;
@@ -127,7 +129,7 @@ function parseHsb(hsb: string): HSBColor {
  * If already a Color, returns it. If a string, parses it.
  */
 export function normalizeColor(value: string | Color): Color {
-  if (typeof value === 'string') {
+  if (isString(value)) {
     return parseColor(value);
   }
   return value;

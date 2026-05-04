@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
+import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { computed, onMounted, onUnmounted } from 'vue';
-import { getActiveElement, useArrowNavigation, useForwardExpose, useKbd } from '@/shared';
+import { getActiveElement, useArrowNavigation, useForwardExpose } from '@/shared';
 
 export interface StepperTriggerProps extends PrimitiveProps {
 }
@@ -19,7 +20,6 @@ withDefaults(defineProps<StepperTriggerProps>(), {
 const rootContext = injectStepperRootContext();
 const itemContext = injectStepperItemContext();
 
-const kbd = useKbd();
 const stepperItems = computed(() => Array.from(rootContext.totalStepperItems.value));
 
 function handleMouseDown(event: MouseEvent) {
@@ -51,11 +51,11 @@ function handleKeyDown(event: KeyboardEvent) {
     return;
   }
 
-  if ((event.key === kbd.ENTER || event.key === kbd.SPACE) && !event.ctrlKey && !event.shiftKey) {
+  if ((event.key === KEY_CODES.ENTER || event.key === ' ') && !event.ctrlKey && !event.shiftKey) {
     rootContext.changeModelValue(itemContext.step.value);
   }
 
-  if ([kbd.ARROW_LEFT, kbd.ARROW_RIGHT, kbd.ARROW_UP, kbd.ARROW_DOWN].includes(event.key)) {
+  if (isIncludedIn(event.key, [KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_RIGHT, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN])) {
     useArrowNavigation(event, getActiveElement() as HTMLElement, undefined, {
       itemsArray: stepperItems.value,
       focus: true,

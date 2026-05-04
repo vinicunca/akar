@@ -2,7 +2,6 @@
 import type { DateValue } from '@internationalized/date';
 import type { PrimitiveProps } from '@/Primitive';
 import {
-
   getLocalTimeZone,
   isSameDay,
   isSameMonth,
@@ -10,7 +9,6 @@ import {
 } from '@internationalized/date';
 import { computed, nextTick } from 'vue';
 import { toDate } from '@/date';
-import { useKbd } from '@/shared';
 
 export interface CalendarCellTriggerProps extends PrimitiveProps {
   /** The date value provided to the cell trigger */
@@ -40,6 +38,7 @@ export interface CalendarCellTriggerSlot {
 </script>
 
 <script setup lang="ts">
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
 import { injectCalendarRootContext } from './CalendarRoot.vue';
 
@@ -49,10 +48,9 @@ const props = withDefaults(defineProps<CalendarCellTriggerProps>(), {
 
 defineSlots<CalendarCellTriggerSlot>();
 
-const kbd = useKbd();
 const rootContext = injectCalendarRootContext();
 
-const { primitiveElement, currentElement } = usePrimitiveElement();
+const { primitiveElement } = usePrimitiveElement();
 
 const dayValue = computed(() => props.day.day.toLocaleString(rootContext.locale.value));
 
@@ -124,20 +122,20 @@ function handleArrowKey(e: KeyboardEvent) {
   const indexIncrementation = 7;
   const sign = rootContext.dir.value === 'rtl' ? -1 : 1;
   switch (e.code) {
-    case kbd.ARROW_RIGHT:
+    case KEY_CODES.ARROW_RIGHT:
       shiftFocus(props.day, sign);
       break;
-    case kbd.ARROW_LEFT:
+    case KEY_CODES.ARROW_LEFT:
       shiftFocus(props.day, -sign);
       break;
-    case kbd.ARROW_UP:
+    case KEY_CODES.ARROW_UP:
       shiftFocus(props.day, -indexIncrementation);
       break;
-    case kbd.ARROW_DOWN:
+    case KEY_CODES.ARROW_DOWN:
       shiftFocus(props.day, indexIncrementation);
       break;
-    case kbd.ENTER:
-    case kbd.SPACE_CODE:
+    case KEY_CODES.ENTER:
+    case KEY_CODES.SPACE:
       changeDate(props.day);
   }
 

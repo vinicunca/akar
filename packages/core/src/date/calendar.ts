@@ -6,8 +6,8 @@ import type { DateValue, DayOfWeek } from '@internationalized/date';
 import type { Grid } from './types';
 import type { DateRange } from '@/shared';
 import { CalendarDate, endOfMonth, endOfYear, getDayOfWeek, startOfMonth, startOfWeek, startOfYear } from '@internationalized/date';
+import { chunk } from '@vinicunca/perkakas';
 import { getDaysInMonth, getLastFirstDayOfWeek, getNextLastDayOfWeek } from './comparators';
-import { chunk } from './utils';
 
 export type WeekDayFormat = 'narrow' | 'short' | 'long';
 

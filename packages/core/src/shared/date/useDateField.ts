@@ -5,9 +5,10 @@ import type { Formatter } from '@/shared';
 import {
   DateFormatter,
 } from '@internationalized/date';
+import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import { getDaysInMonth, toDate } from '@/date';
-import { snapValueToStep, useKbd } from '@/shared';
+import { snapValueToStep } from '@/shared';
 import { isAcceptableSegmentKey, isNumberString, isSegmentNavigationKey } from './segment';
 
 type MinuteSecondIncrementProps = {
@@ -201,6 +202,7 @@ function dayPeriodSegmentAttrs(props: SegmentAttrProps) {
 
   const valueMin = 0;
   const valueMax = 12;
+  // eslint-disable-next-line no-nested-ternary
   const valueNow = segmentValues.hour ? (segmentValues.hour > 12 ? segmentValues.hour - 12 : segmentValues.hour) : 0;
   const valueText = segmentValues.dayPeriod ?? 'AM';
 
@@ -301,11 +303,9 @@ export type UseDateFieldProps = {
 };
 
 export function useDateField(props: UseDateFieldProps) {
-  const kbd = useKbd();
-
   function minuteSecondIncrementation({ e, part, dateRef, prevValue }: MinuteSecondIncrementProps): number {
     const step = props.step.value[part] ?? 1;
-    const sign = e.key === kbd.ARROW_UP ? step : -step;
+    const sign = e.key === KEY_CODES.ARROW_UP ? step : -step;
     const min = 0;
     const max = 59;
 
@@ -333,7 +333,7 @@ export function useDateField(props: UseDateFieldProps) {
   }
   function dateTimeValueIncrementation({ e, part, dateRef, prevValue }: DateTimeValueIncrementation): number {
     const step = props.step.value[part] ?? 1;
-    const sign = e.key === kbd.ARROW_UP ? step : -step;
+    const sign = e.key === KEY_CODES.ARROW_UP ? step : -step;
 
     if (prevValue === null) {
       return dateRef[part as keyof Omit<DateFields, 'era'>];
@@ -651,7 +651,7 @@ export function useDateField(props: UseDateFieldProps) {
 
     const prevValue = props.segmentValues.value.day;
 
-    if (e.key === kbd.ARROW_DOWN || e.key === kbd.ARROW_UP) {
+    if (e.key === KEY_CODES.ARROW_DOWN || e.key === KEY_CODES.ARROW_UP) {
       props.segmentValues.value.day = dateTimeValueIncrementation({ e, part: 'day', dateRef: props.placeholder.value, prevValue });
       return;
     }
@@ -675,7 +675,7 @@ export function useDateField(props: UseDateFieldProps) {
       }
     }
 
-    if (e.key === kbd.BACKSPACE) {
+    if (e.key === KEY_CODES.BACKSPACE) {
       props.hasLeftFocus.value = false;
       props.segmentValues.value.day = deleteValue(prevValue);
     }
@@ -688,7 +688,7 @@ export function useDateField(props: UseDateFieldProps) {
 
     const prevValue = props.segmentValues.value.month;
 
-    if (e.key === kbd.ARROW_DOWN || e.key === kbd.ARROW_UP) {
+    if (e.key === KEY_CODES.ARROW_DOWN || e.key === KEY_CODES.ARROW_UP) {
       props.segmentValues.value.month = dateTimeValueIncrementation({ e, part: 'month', dateRef: props.placeholder.value, prevValue });
       return;
     }
@@ -704,7 +704,7 @@ export function useDateField(props: UseDateFieldProps) {
       }
     }
 
-    if (e.key === kbd.BACKSPACE) {
+    if (e.key === KEY_CODES.BACKSPACE) {
       props.hasLeftFocus.value = false;
       props.segmentValues.value.month = deleteValue(prevValue);
     }
@@ -717,7 +717,7 @@ export function useDateField(props: UseDateFieldProps) {
 
     const prevValue = props.segmentValues.value.year;
 
-    if (e.key === kbd.ARROW_DOWN || e.key === kbd.ARROW_UP) {
+    if (e.key === KEY_CODES.ARROW_DOWN || e.key === KEY_CODES.ARROW_UP) {
       props.segmentValues.value.year = dateTimeValueIncrementation({ e, part: 'year', dateRef: props.placeholder.value, prevValue });
       return;
     }
@@ -733,7 +733,7 @@ export function useDateField(props: UseDateFieldProps) {
       }
     }
 
-    if (e.key === kbd.BACKSPACE) {
+    if (e.key === KEY_CODES.BACKSPACE) {
       props.hasLeftFocus.value = false;
       props.segmentValues.value.year = deleteValue(prevValue);
     }
@@ -752,7 +752,7 @@ export function useDateField(props: UseDateFieldProps) {
 
     const prevValue = props.segmentValues.value.hour;
 
-    if (e.key === kbd.ARROW_UP || e.key === kbd.ARROW_DOWN) {
+    if (e.key === KEY_CODES.ARROW_UP || e.key === KEY_CODES.ARROW_DOWN) {
       const newHour = dateTimeValueIncrementation({ e, part: 'hour', dateRef: props.placeholder.value, prevValue });
       props.segmentValues.value.hour = newHour;
 
@@ -776,6 +776,7 @@ export function useDateField(props: UseDateFieldProps) {
       if (is12Hour && prevValue !== null) {
         // 12 AM/PM should be treated as 0 internally even if it doesn't match the display
         // otherwise repeatedly typing 0 will not advance to the next segment
+        // eslint-disable-next-line no-nested-ternary
         displayPrev = prevValue % 12 === 0 ? 0 : (prevValue > 12 ? prevValue - 12 : prevValue);
       }
 
@@ -799,7 +800,7 @@ export function useDateField(props: UseDateFieldProps) {
       }
     }
 
-    if (e.key === kbd.BACKSPACE) {
+    if (e.key === KEY_CODES.BACKSPACE) {
       props.hasLeftFocus.value = false;
       props.segmentValues.value.hour = deleteValue(prevValue);
     }
@@ -814,7 +815,7 @@ export function useDateField(props: UseDateFieldProps) {
 
     const prevValue = props.segmentValues.value.minute;
 
-    if (e.key === kbd.ARROW_UP || e.key === kbd.ARROW_DOWN) {
+    if (e.key === KEY_CODES.ARROW_UP || e.key === KEY_CODES.ARROW_DOWN) {
       props.segmentValues.value.minute = minuteSecondIncrementation({ e, part: 'minute', dateRef: props.placeholder.value, prevValue });
     }
 
@@ -830,7 +831,7 @@ export function useDateField(props: UseDateFieldProps) {
       }
     }
 
-    if (e.key === kbd.BACKSPACE) {
+    if (e.key === KEY_CODES.BACKSPACE) {
       props.hasLeftFocus.value = false;
       props.segmentValues.value.minute = deleteValue(prevValue);
     }
@@ -845,7 +846,7 @@ export function useDateField(props: UseDateFieldProps) {
 
     const prevValue = props.segmentValues.value.second;
 
-    if (e.key === kbd.ARROW_UP || e.key === kbd.ARROW_DOWN) {
+    if (e.key === KEY_CODES.ARROW_UP || e.key === KEY_CODES.ARROW_DOWN) {
       props.segmentValues.value.second = minuteSecondIncrementation({ e, part: 'second', dateRef: props.placeholder.value, prevValue });
     }
 
@@ -860,7 +861,7 @@ export function useDateField(props: UseDateFieldProps) {
       }
     }
 
-    if (e.key === kbd.BACKSPACE) {
+    if (e.key === KEY_CODES.BACKSPACE) {
       props.hasLeftFocus.value = false;
       props.segmentValues.value.second = deleteValue(prevValue);
     }
@@ -871,7 +872,7 @@ export function useDateField(props: UseDateFieldProps) {
       return;
     }
 
-    if (e.key === kbd.ARROW_UP || e.key === kbd.ARROW_DOWN) {
+    if (e.key === KEY_CODES.ARROW_UP || e.key === KEY_CODES.ARROW_DOWN) {
       if (props.segmentValues.value.dayPeriod === 'AM') {
         props.segmentValues.value.dayPeriod = 'PM';
         props.segmentValues.value.hour = props.segmentValues.value.hour! + 12;
@@ -907,7 +908,7 @@ export function useDateField(props: UseDateFieldProps) {
     if (disabled || readonly) {
       return;
     }
-    if (e.key !== kbd.TAB) {
+    if (e.key !== KEY_CODES.TAB) {
       e.preventDefault();
     }
     const segmentKeydownHandlers = {
@@ -923,7 +924,12 @@ export function useDateField(props: UseDateFieldProps) {
 
     segmentKeydownHandlers[props.part as keyof typeof segmentKeydownHandlers](e);
 
-    if (![kbd.ARROW_LEFT, kbd.ARROW_RIGHT].includes(e.key) && e.key !== kbd.TAB && e.key !== kbd.SHIFT && isAcceptableSegmentKey(e.key)) {
+    if (
+      !isIncludedIn(e.key, [KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_RIGHT])
+      && e.key !== KEY_CODES.TAB
+      && e.key !== KEY_CODES.SHIFT
+      && isAcceptableSegmentKey(e.key)
+    ) {
       if (Object.values(props.segmentValues.value).every((item) => item !== null)) {
         const updateObject = { ...props.segmentValues.value as Record<AnyExceptLiteral, number> };
 

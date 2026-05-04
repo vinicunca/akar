@@ -53,6 +53,7 @@ export const [injectToastProviderContext, provideToastProviderContext]
 </script>
 
 <script setup lang="ts">
+import { isString } from '@vinicunca/perkakas';
 import { ref, toRefs } from 'vue';
 
 defineOptions({
@@ -73,7 +74,7 @@ const toastCount = ref(0);
 const isFocusedToastEscapeKeyDownRef = ref(false);
 const isClosePausedRef = ref(false);
 
-if (props.label && typeof props.label === 'string' && !props.label.trim()) {
+if (props.label && isString(props.label) && !props.label.trim()) {
   const error = 'Invalid prop `label` supplied to `ToastProvider`. Expected non-empty `string`.';
   throw new Error(error);
 }

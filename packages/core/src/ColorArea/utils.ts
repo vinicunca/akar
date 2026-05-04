@@ -1,4 +1,4 @@
-import { clamp } from '@/shared';
+import { clamp } from '@vinicunca/perkakas';
 
 // https://github.com/tmcw-up-for-adoption/simple-linear-scale/blob/master/index.js
 export function linearScale(input: readonly [number, number], output: readonly [number, number]) {
@@ -18,7 +18,7 @@ export function convertValueToPercentage(value: number, min: number, max: number
   const maxSteps = max - min;
   const percentPerStep = 100 / maxSteps;
   const percentage = percentPerStep * (value - min);
-  return clamp(percentage, 0, 100);
+  return clamp(percentage, { min: 0, max: 100 });
 }
 
 export function getThumbPosition(percentage: number): string {

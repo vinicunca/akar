@@ -3,6 +3,7 @@ import type { Ref } from 'vue';
 import type { Grid, Matcher } from '@/date';
 import type { DateFormatterOptions } from '@/shared/useDateFormatter';
 import { endOfMonth } from '@internationalized/date';
+import { isFunction } from '@vinicunca/perkakas';
 import { computed, ref, watch } from 'vue';
 import { createMonthGrid, isAfter, isBefore, isSameYearMonth, toDate } from '@/date';
 import { useDateFormatter } from '@/shared';
@@ -71,7 +72,7 @@ export function useMonthPicker(props: UseMonthPickerProps) {
   const formatter = useDateFormatter(props.locale.value);
 
   const resolveMatcher = (matcher?: Matcher | Ref<Matcher | undefined>) =>
-    typeof matcher === 'function' ? matcher : matcher?.value;
+    isFunction(matcher) ? matcher : matcher?.value;
 
   const headingFormatOptions = computed(() => {
     const options: DateFormatterOptions = {
@@ -101,10 +102,7 @@ export function useMonthPicker(props: UseMonthPickerProps) {
   }
 
   const isMonthUnavailable = (date: DateValue) => {
-    if (resolveMatcher(props.isMonthUnavailable)?.(date)) {
-      return true;
-    }
-    return false;
+    return Boolean(resolveMatcher(props.isMonthUnavailable)?.(date));
   };
 
   const isNextButtonDisabled = (nextPageFunc?: (date: DateValue) => DateValue) => {

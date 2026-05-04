@@ -1,9 +1,10 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
+import { clamp } from '@vinicunca/perkakas';
 import { useResizeObserver } from '@vueuse/core';
 import { useCollection } from '@/Collection';
-import { clamp, createContext, useForwardExpose } from '@/shared';
+import { createContext, useForwardExpose } from '@/shared';
 
 interface SelectItemAlignedPositionContext {
   contentWrapper?: Ref<HTMLElement | undefined>;
@@ -72,7 +73,7 @@ function position() {
       const minContentWidth = triggerRect.width + leftDelta;
       const contentWidth = Math.max(minContentWidth, contentRect.width);
       const rightEdge = window.innerWidth - CONTENT_MARGIN;
-      const clampedLeft = clamp(left, CONTENT_MARGIN, Math.max(CONTENT_MARGIN, rightEdge - contentWidth));
+      const clampedLeft = clamp(left, { min: CONTENT_MARGIN, max: Math.max(CONTENT_MARGIN, rightEdge - contentWidth) });
 
       contentWrapperElement.value.style.minWidth = `${minContentWidth}px`;
       contentWrapperElement.value.style.left = `${clampedLeft}px`;
@@ -85,8 +86,7 @@ function position() {
       const leftEdge = window.innerWidth - CONTENT_MARGIN;
       const clampedRight = clamp(
         right,
-        CONTENT_MARGIN,
-        Math.max(CONTENT_MARGIN, leftEdge - contentWidth),
+        { min: CONTENT_MARGIN, max: Math.max(CONTENT_MARGIN, leftEdge - contentWidth) },
       );
 
       contentWrapperElement.value.style.minWidth = `${minContentWidth}px`;
@@ -188,7 +188,9 @@ function position() {
 
     // we don't want the initial scroll position adjustment to trigger "expand on scroll"
     // so we explicitly turn it on only after they've registered.
-    requestAnimationFrame(() => (shouldExpandOnScrollRef.value = true));
+    requestAnimationFrame(() => {
+      shouldExpandOnScrollRef.value = true;
+    });
   }
 }
 

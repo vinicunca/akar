@@ -2,9 +2,9 @@
 import type { DateValue } from '@internationalized/date';
 import type { PrimitiveProps } from '@/Primitive';
 import { endOfMonth, getLocalTimeZone, toCalendar, today } from '@internationalized/date';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
 import { isMonthBetweenInclusive, isSameYearMonth, toDate } from '@/date';
-import { useKbd } from '@/shared';
 
 export interface MonthRangePickerCellTriggerProps extends PrimitiveProps {
   /** The date value provided to the cell trigger */
@@ -45,7 +45,6 @@ const props = withDefaults(defineProps<MonthRangePickerCellTriggerProps>(), { as
 
 defineSlots<MonthRangePickerCellTriggerSlot>();
 
-const kbd = useKbd();
 const rootContext = injectMonthRangePickerRootContext();
 
 const { primitiveElement } = usePrimitiveElement();
@@ -170,26 +169,26 @@ function handleArrowKey(e: KeyboardEvent) {
   const sign = rootContext.dir.value === 'rtl' ? -1 : 1;
 
   switch (e.code) {
-    case kbd.ARROW_RIGHT:
+    case KEY_CODES.ARROW_RIGHT:
       shiftFocus(props.month, sign);
       break;
-    case kbd.ARROW_LEFT:
+    case KEY_CODES.ARROW_LEFT:
       shiftFocus(props.month, -sign);
       break;
-    case kbd.ARROW_UP:
+    case KEY_CODES.ARROW_UP:
       shiftFocus(props.month, -4);
       break;
-    case kbd.ARROW_DOWN:
+    case KEY_CODES.ARROW_DOWN:
       shiftFocus(props.month, 4);
       break;
-    case kbd.PAGE_UP:
+    case KEY_CODES.PAGE_UP:
       shiftFocusYear(-1);
       break;
-    case kbd.PAGE_DOWN:
+    case KEY_CODES.PAGE_DOWN:
       shiftFocusYear(1);
       break;
-    case kbd.ENTER:
-    case kbd.SPACE_CODE:
+    case KEY_CODES.ENTER:
+    case KEY_CODES.SPACE:
       changeMonth(e, props.month);
   }
 

@@ -69,6 +69,7 @@ export const [injectTagsInputRootContext, provideTagsInputRootContext]
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableInputValue = string">
+import { isFunction } from '@vinicunca/perkakas';
 import { useFocusWithin, useVModel } from '@vueuse/core';
 import { useCollection } from '@/Collection';
 import { Primitive } from '@/Primitive';
@@ -126,7 +127,7 @@ provideTagsInputRootContext({
 
     // Check if the value is an object and if the convertValue function is provided. We don't check this a type level because the use
     // of `TagsInputInput` is optional.
-    if ((modelValueIsObject || defaultValueIsObject) && typeof props.convertValue !== 'function') {
+    if ((modelValueIsObject || defaultValueIsObject) && !isFunction(props.convertValue)) {
       throw new Error('You must provide a `convertValue` function when using objects as values.');
     }
     const payload = props.convertValue ? props.convertValue(_payload) : _payload as T;
@@ -194,9 +195,8 @@ provideTagsInputRootContext({
         if (isArrowLeft && !selectedElement.value) {
           selectedElement.value = lastTag;
           event.preventDefault();
-        }
-        // if you press ArrowRight on last tag, you deselect
-        else if (isArrowRight && lastTag && selectedElement.value === lastTag) {
+        } else if (isArrowRight && lastTag && selectedElement.value === lastTag) {
+          // if you press ArrowRight on last tag, you deselect
           selectedElement.value = undefined;
           event.preventDefault();
         } else if (selectedElement.value) {

@@ -1,5 +1,6 @@
 import type { ComputedRef } from 'vue';
-import { clamp, createContext } from '@/shared';
+import { clamp } from '@vinicunca/perkakas';
+import { createContext } from '@/shared';
 
 export interface SliderOrientationPrivateProps {
   min: number;
@@ -26,7 +27,7 @@ export function convertValueToPercentage(value: number, min: number, max: number
   const maxSteps = max - min;
   const percentPerStep = 100 / maxSteps;
   const percentage = percentPerStep * (value - min);
-  return clamp(percentage, 0, 100);
+  return clamp(percentage, { min: 0, max: 100 });
 }
 
 /**

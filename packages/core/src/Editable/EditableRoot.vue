@@ -73,6 +73,7 @@ export const [injectEditableRootContext, provideEditableRootContext]
 
 <script setup lang="ts">
 import type { Ref } from 'vue';
+import { isString } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs, watch } from 'vue';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
@@ -142,7 +143,7 @@ const { primitiveElement, currentElement } = usePrimitiveElement();
 const isFormControl = useFormControl(currentElement);
 
 const placeholder = computed(() => {
-  return typeof propPlaceholder.value === 'string' ? { edit: propPlaceholder.value, preview: propPlaceholder.value } : propPlaceholder.value;
+  return isString(propPlaceholder.value) ? { edit: propPlaceholder.value, preview: propPlaceholder.value } : propPlaceholder.value;
 });
 
 const inputValue = ref(modelValue.value);

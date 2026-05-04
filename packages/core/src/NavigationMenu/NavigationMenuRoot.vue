@@ -3,6 +3,7 @@ import type { Ref } from 'vue';
 
 import type { Direction, Orientation } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
+import { isString } from '@vinicunca/perkakas';
 import { useCollection } from '@/Collection';
 import { createContext, useDirection, useForwardExpose, useId } from '@/shared';
 import { EVENT_ROOT_CONTENT_DISMISS } from './utils';
@@ -152,7 +153,7 @@ const computedDelay = computed(() => {
 
 const debouncedFn = useDebounceFn((val?: string) => {
   // passing `undefined` meant to reset the debounce timer
-  if (typeof val === 'string') {
+  if (isString(val)) {
     previousValue.value = modelValue.value;
     modelValue.value = val;
   }

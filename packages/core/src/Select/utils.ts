@@ -1,5 +1,5 @@
 import type { AcceptableValue } from '@/shared/types';
-import { isEqual } from 'ohash';
+import { isDeepEqual, isFunction, isString } from '@vinicunca/perkakas';
 
 export const OPEN_KEYS = [' ', 'Enter', 'ArrowUp', 'ArrowDown'];
 export const SELECTION_KEYS = [' ', 'Enter'];
@@ -20,19 +20,19 @@ export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((
     return false;
   }
 
-  if (typeof value === 'string') {
+  if (isString(value)) {
     return value === currentValue;
   }
 
-  if (typeof comparator === 'function') {
+  if (isFunction(comparator)) {
     return comparator(value, currentValue);
   }
 
-  if (typeof comparator === 'string') {
+  if (isString(comparator)) {
     return value?.[comparator as keyof T] === currentValue?.[comparator as keyof T];
   }
 
-  return isEqual(value, currentValue);
+  return isDeepEqual(value, currentValue);
 }
 
 export function shouldShowPlaceholder(value?: AcceptableValue | Array<AcceptableValue>): boolean {

@@ -31,8 +31,9 @@ export type SplitterResizeHandleEmits = {
 <script setup lang="ts">
 import type { PointerHitAreaMargins, ResizeHandlerAction } from './utils/registry';
 import type { ResizeEvent, ResizeHandler } from './utils/types';
+import { isBrowser } from '@vinicunca/perkakas';
 import { Primitive } from '@/Primitive';
-import { isBrowser, useForwardExpose, useId } from '@/shared';
+import { useForwardExpose, useId } from '@/shared';
 import { injectPanelGroupContext } from './SplitterGroup.vue';
 import { assert } from './utils/assert';
 import { registerResizeHandle } from './utils/registry';

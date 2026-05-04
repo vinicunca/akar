@@ -46,6 +46,7 @@ export const [injectToastRootContext, provideToastRootContext]
 </script>
 
 <script setup lang="ts">
+import { isNumber } from '@vinicunca/perkakas';
 import { onKeyStroke, useRafFn } from '@vueuse/core';
 import { computed, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
 import { Primitive } from '@/Primitive';
@@ -71,7 +72,7 @@ const providerContext = injectToastProviderContext();
 const pointerStartRef = ref<{ x: number; y: number } | null>(null);
 const swipeDeltaRef = ref<{ x: number; y: number } | null>(null);
 const duration = computed(
-  () => typeof props.duration === 'number'
+  () => isNumber(props.duration)
     ? props.duration
     : providerContext.duration.value,
 );

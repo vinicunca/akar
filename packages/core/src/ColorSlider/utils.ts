@@ -1,15 +1,15 @@
-import { clamp } from '@/shared';
+import { clamp, KEY_CODES } from '@vinicunca/perkakas';
 
-export const PAGE_KEYS = ['PageUp', 'PageDown'];
-export const ARROW_KEYS = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+export const PAGE_KEYS = [KEY_CODES.PAGE_UP, KEY_CODES.PAGE_DOWN];
+export const ARROW_KEYS = [KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_RIGHT];
 
 export type SlideDirection = 'from-left' | 'from-right' | 'from-bottom' | 'from-top';
 
 export const BACK_KEYS: Record<SlideDirection, Array<string>> = {
-  'from-left': ['Home', 'PageDown', 'ArrowDown', 'ArrowLeft'],
-  'from-right': ['Home', 'PageDown', 'ArrowDown', 'ArrowRight'],
-  'from-bottom': ['Home', 'PageDown', 'ArrowDown', 'ArrowLeft'],
-  'from-top': ['Home', 'PageUp', 'ArrowUp', 'ArrowLeft'],
+  'from-left': [KEY_CODES.HOME, KEY_CODES.PAGE_DOWN, KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_LEFT],
+  'from-right': [KEY_CODES.HOME, KEY_CODES.PAGE_DOWN, KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_RIGHT],
+  'from-bottom': [KEY_CODES.HOME, KEY_CODES.PAGE_DOWN, KEY_CODES.ARROW_DOWN, KEY_CODES.ARROW_LEFT],
+  'from-top': [KEY_CODES.HOME, KEY_CODES.PAGE_UP, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_LEFT],
 };
 
 // https://github.com/tmcw-up-for-adoption/simple-linear-scale/blob/master/index.js
@@ -30,7 +30,7 @@ export function convertValueToPercentage(value: number, min: number, max: number
   const maxSteps = max - min;
   const percentPerStep = 100 / maxSteps;
   const percentage = percentPerStep * (value - min);
-  return clamp(percentage, 0, 100);
+  return clamp(percentage, { min: 0, max: 100 });
 }
 
 export function getThumbPosition(percentage: number, orientation: 'horizontal' | 'vertical'): string {

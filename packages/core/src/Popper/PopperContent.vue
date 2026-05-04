@@ -199,6 +199,7 @@ import {
   size,
   useFloating,
 } from '@floating-ui/vue';
+import { isNumber } from '@vinicunca/perkakas';
 import { computedEager } from '@vueuse/core';
 import { computed, ref, watchEffect, watchPostEffect } from 'vue';
 import {
@@ -237,7 +238,7 @@ const desiredPlacement = computed(
 );
 
 const collisionPadding = computed(() => {
-  return typeof props.collisionPadding === 'number'
+  return isNumber(props.collisionPadding)
     ? props.collisionPadding
     : { top: 0, right: 0, bottom: 0, left: 0, ...props.collisionPadding };
 });
@@ -326,7 +327,7 @@ const computedMiddleware = computedEager(() => {
 // If provided custom reference, it will overwrite the default anchor element
 const reference = computed(() => props.reference ?? rootContext.anchor.value);
 
-const { floatingStyles, placement, isPositioned, middlewareData, update } = useFloating(
+const { floatingStyles, placement, isPositioned, middlewareData } = useFloating(
   reference,
   floatingRef,
   {
@@ -373,7 +374,9 @@ const arrowY = computed(() => middlewareData.value.arrow?.y ?? 0);
 
 providePopperContentContext({
   placedSide,
-  onArrowChange: (element) => arrow.value = element,
+  onArrowChange: (element) => {
+    arrow.value = element;
+  },
   arrowX,
   arrowY,
   shouldHideArrow,

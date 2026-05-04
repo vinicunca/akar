@@ -1,9 +1,10 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '@/shared/types';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { usePrimitiveElement } from '@/Primitive';
 import { getFocusIntent } from '@/RovingFocus/utils';
-import { createContext, findValuesBetween, useDirection, useFormControl, useKbd, useTypeahead } from '@/shared';
+import { createContext, findValuesBetween, useDirection, useFormControl, useTypeahead } from '@/shared';
 import { Primitive } from '..';
 
 type ListboxRootContext<T> = {
@@ -102,7 +103,6 @@ const { multiple, highlightOnHover, orientation, disabled, selectionBehavior, di
 const { getItems } = useCollection<{ value: T }>({ isProvider: true });
 const { handleTypeaheadSearch } = useTypeahead();
 const { primitiveElement, currentElement } = usePrimitiveElement();
-const kbd = useKbd();
 const dir = useDirection(propDir);
 
 const isFormControl = useFormControl(currentElement);
@@ -316,9 +316,9 @@ function handleMultipleReplace(event: KeyboardEvent, targetEl: HTMLElement) {
     const collection = getItems().filter((i) => i.ref.dataset.disabled !== '');
     let lastValue = collection.find((i) => i.ref === targetEl)?.value;
 
-    if (event.key === kbd.END) {
+    if (event.key === KEY_CODES.END) {
       lastValue = collection.at(-1)?.value;
-    } else if (event.key === kbd.HOME) {
+    } else if (event.key === KEY_CODES.HOME) {
       lastValue = collection[0]?.value;
     }
 

@@ -4,13 +4,14 @@ import type {
   PointerDownOutsideEvent,
 } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
+import { isNullish } from '@vinicunca/perkakas';
 import {
   computed,
   nextTick,
   reactive,
   watchEffect,
 } from 'vue';
-import { isNullish, useForwardExpose } from '@/shared';
+import { useForwardExpose } from '@/shared';
 
 export interface DismissableLayerProps extends PrimitiveProps {
   /**

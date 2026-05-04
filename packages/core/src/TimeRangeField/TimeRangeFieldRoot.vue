@@ -10,7 +10,7 @@ import type { TimeRange } from '@/shared/date/types';
 import type { Direction, FormFieldProps } from '@/shared/types';
 import { getLocalTimeZone, Time, toCalendarDateTime, today } from '@internationalized/date';
 import { areAllDaysBetweenValid, isBefore, isBeforeOrSame } from '@/date';
-import { createContext, isNullish, useDateFormatter, useDirection, useKbd, useLocale } from '@/shared';
+import { createContext, useDateFormatter, useDirection, useLocale } from '@/shared';
 import {
   createContent,
   getDefaultTime,
@@ -19,11 +19,8 @@ import {
   isSegmentNavigationKey,
   normalizeDateStep,
   normalizeHourCycle,
-
   syncSegmentValues,
-
   syncTimeSegmentValues,
-
 } from '@/shared/date';
 
 type TimeRangeFieldRootContext = {
@@ -99,6 +96,7 @@ function convertValue(value: TimeValue, date: DateValue = today(getLocalTimeZone
 </script>
 
 <script setup lang="ts">
+import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
@@ -144,7 +142,9 @@ const convertedMinValue = computed(() => minValue.value ? convertValue(minValue.
 const convertedMaxValue = computed(() => maxValue.value ? convertValue(maxValue.value) : undefined);
 
 onMounted(() => {
-  getTimeFieldSegmentElements(parentElement.value).forEach((item) => segmentElements.value.add(item as HTMLElement));
+  getTimeFieldSegmentElements(parentElement.value).forEach((item) => {
+    segmentElements.value.add(item as HTMLElement);
+  });
 });
 
 const modelValue = useVModel(props, 'modelValue', emits, {
@@ -354,9 +354,8 @@ watch(convertedModelValue, (_modelValue) => {
 watch([convertedStartValue, locale], ([_startValue]) => {
   if (_startValue !== undefined) {
     startSegmentValues.value = { ...syncSegmentValues({ value: _startValue, formatter }) };
-  }
-  // If segment has null value, means that user modified it, thus do not reset the segmentValues
-  else if (Object.values(startSegmentValues.value).every((value) => value !== null) && _startValue === undefined) {
+  } else if (Object.values(startSegmentValues.value).every((value) => value !== null) && _startValue === undefined) {
+    // If segment has null value, means that user modified it, thus do not reset the segmentValues
     startSegmentValues.value = { ...initialSegments };
   }
 });
@@ -368,7 +367,9 @@ watch(locale, (value) => {
     // Get the focusable elements again on the next tick
     nextTick(() => {
       segmentElements.value.clear();
-      getTimeFieldSegmentElements(parentElement.value).forEach((item) => segmentElements.value.add(item as HTMLElement));
+      getTimeFieldSegmentElements(parentElement.value).forEach((item) => {
+        segmentElements.value.add(item as HTMLElement);
+      });
     });
   }
 });
@@ -382,9 +383,8 @@ watch(convertedModelValue, (_modelValue) => {
 watch([convertedEndValue, locale], ([_endValue]) => {
   if (_endValue !== undefined) {
     endSegmentValues.value = { ...syncSegmentValues({ value: _endValue, formatter }) };
-  }
-  // If segment has null value, means that user modified it, thus do not reset the segmentValues
-  else if (Object.values(endSegmentValues.value).every((value) => value !== null) && _endValue === undefined) {
+  } else if (Object.values(endSegmentValues.value).every((value) => value !== null) && _endValue === undefined) {
+    // If segment has null value, means that user modified it, thus do not reset the segmentValues
     endSegmentValues.value = { ...initialSegments };
   }
 });
@@ -416,16 +416,14 @@ const prevFocusableSegment = computed(() => {
   return segmentToFocus;
 });
 
-const kbd = useKbd();
-
 function handleKeydown(e: KeyboardEvent) {
   if (!isSegmentNavigationKey(e.key)) {
     return;
   }
-  if (e.key === kbd.ARROW_LEFT) {
+  if (e.key === KEY_CODES.ARROW_LEFT) {
     prevFocusableSegment.value?.focus();
   }
-  if (e.key === kbd.ARROW_RIGHT) {
+  if (e.key === KEY_CODES.ARROW_RIGHT) {
     nextFocusableSegment.value?.focus();
   }
 }

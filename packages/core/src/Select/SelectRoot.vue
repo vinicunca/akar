@@ -2,7 +2,7 @@
 import type { Ref } from 'vue';
 import type { AcceptableValue, Direction, FormFieldProps } from '@/shared/types';
 import { useCollection } from '@/Collection';
-import { createContext, isNullish, useDirection, useFormControl } from '@/shared';
+import { createContext, useDirection, useFormControl } from '@/shared';
 import { compare, valueComparator } from './utils';
 
 export interface SelectRootProps<T = AcceptableValue> extends FormFieldProps {
@@ -63,6 +63,7 @@ interface SelectOption { value: any; disabled?: boolean; textContent: string }
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
+import { isNullish } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs } from 'vue';
 import { PopperRoot } from '@/Popper';

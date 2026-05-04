@@ -1,14 +1,13 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
-import { useKbd } from '@/shared';
 import { handleSubmit } from '@/test';
 import Listbox from './story/_Listbox.vue';
 
 describe('given default Listbox', () => {
-  const kbd = useKbd();
   let wrapper: VueWrapper<InstanceType<typeof Listbox>>;
   let content: DOMWrapper<Element>;
   let items: Array<DOMWrapper<Element>>;
@@ -55,7 +54,7 @@ describe('given default Listbox', () => {
 
     describe('after pressing `Enter`', async () => {
       beforeEach(async () => {
-        await content.trigger('keydown', { key: kbd.ENTER });
+        await content.trigger('keydown', { key: KEY_CODES.ENTER });
       });
 
       it('should select the highlighted item', () => {
@@ -70,7 +69,7 @@ describe('given default Listbox', () => {
       });
 
       it('should deselect after pressing `Enter`', async () => {
-        await content.trigger('keydown', { key: kbd.ENTER });
+        await content.trigger('keydown', { key: KEY_CODES.ENTER });
         const item = items[0];
         expect(item.attributes('data-highlighted')).toBe('');
         expect(item.attributes('aria-selected')).toBe('false');
@@ -79,9 +78,9 @@ describe('given default Listbox', () => {
 
       describe('after selecting other item and press `Enter`', async () => {
         beforeEach(async () => {
-          await content.trigger('keydown', { key: kbd.ARROW_DOWN });
-          await content.trigger('keydown', { key: kbd.ARROW_DOWN });
-          await content.trigger('keydown', { key: kbd.ENTER });
+          await content.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
+          await content.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
+          await content.trigger('keydown', { key: KEY_CODES.ENTER });
         });
 
         it('should select the third item', () => {
@@ -132,7 +131,6 @@ describe('given default Listbox', () => {
 });
 
 describe('given multiple `true` Listbox', () => {
-  const kbd = useKbd();
   let wrapper: VueWrapper<InstanceType<typeof Listbox>>;
   let content: DOMWrapper<Element>;
   let items: Array<DOMWrapper<Element>>;
@@ -151,14 +149,14 @@ describe('given multiple `true` Listbox', () => {
   });
 
   it('should select multiple items', async () => {
-    await content.trigger('keydown', { key: kbd.ENTER });
-    await content.trigger('keydown', { key: kbd.ARROW_DOWN });
-    await content.trigger('keydown', { key: kbd.ENTER });
-    await content.trigger('keydown', { key: kbd.ARROW_DOWN });
-    await content.trigger('keydown', { key: kbd.ENTER });
-    await content.trigger('keydown', { key: kbd.ARROW_DOWN });
-    await content.trigger('keydown', { key: kbd.ARROW_DOWN });
-    await content.trigger('keydown', { key: kbd.ENTER });
+    await content.trigger('keydown', { key: KEY_CODES.ENTER });
+    await content.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
+    await content.trigger('keydown', { key: KEY_CODES.ENTER });
+    await content.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
+    await content.trigger('keydown', { key: KEY_CODES.ENTER });
+    await content.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
+    await content.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
+    await content.trigger('keydown', { key: KEY_CODES.ENTER });
 
     expect(items[0].attributes('aria-selected')).toBe('true');
     expect(items[1].attributes('aria-selected')).toBe('true');
@@ -168,11 +166,11 @@ describe('given multiple `true` Listbox', () => {
   });
 
   it('should emit `update:modelValue` event', async () => {
-    await content.trigger('keydown', { key: kbd.ENTER });
-    await content.trigger('keydown', { key: kbd.ARROW_DOWN });
-    await content.trigger('keydown', { key: kbd.ENTER });
-    await content.trigger('keydown', { key: kbd.ARROW_UP });
-    await content.trigger('keydown', { key: kbd.ENTER });
+    await content.trigger('keydown', { key: KEY_CODES.ENTER });
+    await content.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
+    await content.trigger('keydown', { key: KEY_CODES.ENTER });
+    await content.trigger('keydown', { key: KEY_CODES.ARROW_UP });
+    await content.trigger('keydown', { key: KEY_CODES.ENTER });
     expect(wrapper.emitted('update:modelValue')).toEqual([
       [[items[0].text()]],
       [[items[0].text(), items[1].text()]],
@@ -202,9 +200,9 @@ describe('given multiple `true` Listbox', () => {
     });
 
     it('should emit `update:modelValue` event', async () => {
-      await content.trigger('keydown', { key: kbd.ENTER });
-      await content.trigger('keydown', { key: kbd.ARROW_DOWN });
-      await content.trigger('keydown', { key: kbd.ENTER });
+      await content.trigger('keydown', { key: KEY_CODES.ENTER });
+      await content.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
+      await content.trigger('keydown', { key: KEY_CODES.ENTER });
       expect(wrapper.emitted('update:modelValue')).toEqual([
         [[items[0].text()]],
         [[items[0].text()]], // there's a bug here, it shouldn't emit the same value twice
@@ -214,7 +212,7 @@ describe('given multiple `true` Listbox', () => {
 
     describe('when keypress Shift + ArrowDown', () => {
       it('should select the next item', async () => {
-        await content.trigger('keydown.shift', { key: kbd.ARROW_DOWN });
+        await content.trigger('keydown.shift', { key: KEY_CODES.ARROW_DOWN });
         expect(items[0].attributes('aria-selected')).toBe('true');
         expect(items[1].attributes('aria-selected')).toBe('true');
         expect(items[2].attributes('aria-selected')).toBe('false');
@@ -222,7 +220,7 @@ describe('given multiple `true` Listbox', () => {
 
       it('should select more items', async () => {
         for (let i = 0; i <= 10; i++) {
-          await content.trigger('keydown.shift', { key: kbd.ARROW_DOWN });
+          await content.trigger('keydown.shift', { key: KEY_CODES.ARROW_DOWN });
         }
         for (let i = 0; i <= 10; i++) {
           expect(items[i].attributes('aria-selected')).toBe('true');
@@ -233,7 +231,6 @@ describe('given multiple `true` Listbox', () => {
 });
 
 describe('given horizontal Listbox', () => {
-  const kbd = useKbd();
   let wrapper: VueWrapper<InstanceType<typeof Listbox>>;
   let content: DOMWrapper<Element>;
   let items: Array<DOMWrapper<Element>>;
@@ -279,7 +276,7 @@ describe('given horizontal Listbox', () => {
 
     describe('after pressing `Enter`', async () => {
       beforeEach(async () => {
-        await content.trigger('keydown', { key: kbd.ENTER });
+        await content.trigger('keydown', { key: KEY_CODES.ENTER });
       });
 
       it('should select the highlighted item', () => {
@@ -294,7 +291,7 @@ describe('given horizontal Listbox', () => {
       });
 
       it('should deselect after pressing `Enter`', async () => {
-        await content.trigger('keydown', { key: kbd.ENTER });
+        await content.trigger('keydown', { key: KEY_CODES.ENTER });
         const item = items[0];
         expect(item.attributes('data-highlighted')).toBe('');
         expect(item.attributes('aria-selected')).toBe('false');
@@ -303,9 +300,9 @@ describe('given horizontal Listbox', () => {
 
       describe('after selecting other item and press `Enter`', async () => {
         beforeEach(async () => {
-          await content.trigger('keydown', { key: kbd.ARROW_RIGHT });
-          await content.trigger('keydown', { key: kbd.ARROW_RIGHT });
-          await content.trigger('keydown', { key: kbd.ENTER });
+          await content.trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
+          await content.trigger('keydown', { key: KEY_CODES.ARROW_RIGHT });
+          await content.trigger('keydown', { key: KEY_CODES.ENTER });
         });
 
         it('should select the third item', () => {

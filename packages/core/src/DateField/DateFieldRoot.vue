@@ -7,7 +7,7 @@ import type { DateStep, Formatter } from '@/shared';
 import type { Granularity, HourCycle, SegmentPart, SegmentValueObj } from '@/shared/date';
 import type { Direction, FormFieldProps } from '@/shared/types';
 import { hasTime, isBefore } from '@/date';
-import { createContext, isNullish, useDateFormatter, useDirection, useKbd, useLocale } from '@/shared';
+import { createContext, useDateFormatter, useDirection, useLocale } from '@/shared';
 import {
   createContent,
   getDefaultDate,
@@ -86,6 +86,7 @@ export const [injectDateFieldRootContext, provideDateFieldRootContext]
 </script>
 
 <script setup lang="ts">
+import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
@@ -203,7 +204,9 @@ watch(locale, (value) => {
     // Get the focusable elements again on the next tick
     nextTick(() => {
       segmentElements.value.clear();
-      getSegmentElements(parentElement.value).forEach((item) => segmentElements.value.add(item as HTMLElement));
+      getSegmentElements(parentElement.value).forEach((item) => {
+        segmentElements.value.add(item as HTMLElement);
+      });
     });
   }
 });
@@ -217,9 +220,8 @@ watch(modelValue, (_modelValue) => {
 watch([modelValue, locale], ([_modelValue]) => {
   if (!isNullish(_modelValue)) {
     segmentValues.value = { ...syncSegmentValues({ value: _modelValue, formatter }) };
-  }
-  // If segment has null value, means that user modified it, thus do not reset the segmentValues
-  else if (Object.values(segmentValues.value).every((value) => value !== null) && isNullish(_modelValue)) {
+  } else if (Object.values(segmentValues.value).every((value) => value !== null) && isNullish(_modelValue)) {
+    // If segment has null value, means that user modified it, thus do not reset the segmentValues
     segmentValues.value = { ...initialSegments };
   }
 });
@@ -257,16 +259,14 @@ const inputValue = computed(() => normalizeInputValue(modelValue.value, inferred
 const inputMaxValue = computed(() => props.maxValue ? normalizeInputValue(props.maxValue, inferredGranularity.value) : undefined);
 const inputMinValue = computed(() => props.minValue ? normalizeInputValue(props.minValue, inferredGranularity.value) : undefined);
 
-const kbd = useKbd();
-
 function handleKeydown(e: KeyboardEvent) {
   if (!isSegmentNavigationKey(e.key)) {
     return;
   }
-  if (e.key === kbd.ARROW_LEFT) {
+  if (e.key === KEY_CODES.ARROW_LEFT) {
     prevFocusableSegment.value?.focus();
   }
-  if (e.key === kbd.ARROW_RIGHT) {
+  if (e.key === KEY_CODES.ARROW_RIGHT) {
     nextFocusableSegment.value?.focus();
   }
 }

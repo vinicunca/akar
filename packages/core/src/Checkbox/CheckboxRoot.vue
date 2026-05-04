@@ -3,8 +3,9 @@ import type { Ref } from 'vue';
 import type { CheckedState } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
 import type { AcceptableValue, FormFieldProps } from '@/shared/types';
+import { isDeepEqual, isNullish } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
-import { createContext, isNullish, isValueEqualOrExist, useFormControl, useForwardExpose } from '@/shared';
+import { createContext, isValueEqualOrExist, useFormControl, useForwardExpose } from '@/shared';
 import { injectCheckboxGroupRootContext } from './CheckboxGroupRoot.vue';
 
 export interface CheckboxRootProps<T = boolean> extends PrimitiveProps, FormFieldProps {
@@ -46,7 +47,6 @@ export const [injectCheckboxRootContext, provideCheckboxRootContext]
 </script>
 
 <script setup lang="ts" generic="T = boolean">
-import { isEqual } from 'ohash';
 import { computed } from 'vue';
 import { Primitive } from '@/Primitive';
 import { RovingFocusItem } from '@/RovingFocus';
@@ -86,7 +86,7 @@ const modelValue = useVModel(props as any, 'modelValue', emits as any, {
 
 const disabled = computed(() => checkboxGroupContext?.disabled.value || props.disabled);
 
-const isChecked = computed(() => isEqual(modelValue.value, props.trueValue));
+const isChecked = computed(() => isDeepEqual(modelValue.value, props.trueValue));
 
 const checkboxState = computed<CheckedState>(() => {
   if (!isNullish(checkboxGroupContext?.modelValue.value)) {
@@ -103,7 +103,7 @@ function handleClick() {
   if (!isNullish(checkboxGroupContext?.modelValue.value)) {
     const modelValueArray = [...(checkboxGroupContext.modelValue.value || [])];
     if (isValueEqualOrExist(modelValueArray, props.value)) {
-      const index = modelValueArray.findIndex((i) => isEqual(i, props.value));
+      const index = modelValueArray.findIndex((i) => isDeepEqual(i, props.value));
       modelValueArray.splice(index, 1);
     } else {
       modelValueArray.push(props.value);

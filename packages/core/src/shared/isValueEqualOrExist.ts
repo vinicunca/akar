@@ -1,5 +1,4 @@
-import { isEqual } from 'ohash';
-import { isNullish } from './nullish';
+import { isDeepEqual, isNullish } from '@vinicunca/perkakas';
 
 /**
  * The function `isValueEqualOrExist` checks if a value is equal to or exists in another value or
@@ -15,8 +14,8 @@ export function isValueEqualOrExist<T>(base: T | Array<T> | undefined, current: 
     return false;
   }
   if (Array.isArray(base)) {
-    return base.some((val) => isEqual(val, current));
+    return base.some((val) => isDeepEqual(val, current));
   } else {
-    return isEqual(base, current);
+    return isDeepEqual(base, current);
   }
 }

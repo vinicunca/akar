@@ -16,6 +16,7 @@ export interface ColorSwatchProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import { isString } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import { Primitive } from '@/Primitive';
 import { colorToString, getColorContrast, getColorName, normalizeColor } from '@/shared/color';
@@ -26,7 +27,7 @@ const colorString = computed(() => {
   if (!props.color) {
     return '';
   }
-  if (typeof props.color === 'string') {
+  if (isString(props.color)) {
     return props.color;
   }
   return colorToString(props.color, 'hex');

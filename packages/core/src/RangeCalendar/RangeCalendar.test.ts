@@ -235,7 +235,7 @@ describe('rangeCalendar', () => {
     expect(startValue).toBeInTheDocument();
     expect(endValue).not.toBeInTheDocument();
 
-    await user.keyboard(kbd.ESCAPE);
+    await user.keyboard(kbd.ESC);
 
     startValue = calendar.querySelector('[data-selection-start]');
     endValue = calendar.querySelector('[data-selection-end]');

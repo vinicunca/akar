@@ -1,5 +1,7 @@
 // reference https://github.com/chakra-ui/zag/blob/main/packages/machines/pagination/src/pagination.utils.ts
 
+import { isNumber } from '@vinicunca/perkakas';
+
 type Pages = Array<{ type: 'ellipsis' } | { type: 'page'; value: number }>;
 
 function range(start: number, end: number) {
@@ -9,7 +11,7 @@ function range(start: number, end: number) {
 
 export function transform(items: Array<string | number>): Pages {
   return items.map((value) => {
-    if (typeof value === 'number') {
+    if (isNumber(value)) {
       return { type: 'page', value };
     }
     return { type: 'ellipsis' };

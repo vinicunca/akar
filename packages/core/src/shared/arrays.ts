@@ -1,4 +1,4 @@
-import { isEqual } from 'ohash';
+import { isDeepEqual } from '@vinicunca/perkakas';
 
 /**
  * The function `areEqual` compares two arrays and returns true if they are equal in length and have
@@ -24,26 +24,6 @@ export function areEqual(arrayA: Array<any>, arrayB: Array<any>): boolean {
 }
 
 /**
- * Splits an array into chunks of a given size.
- * @param arr The array to split.
- * @param size The size of each chunk.
- * @returns An array of arrays, where each sub-array has `size` elements from the original array.
- * @example ```ts
- * const arr = [1, 2, 3, 4, 5, 6, 7, 8];
- * const chunks = chunk(arr, 3);
- * // chunks = [[1, 2, 3], [4, 5, 6], [7, 8]]
- * ```
- */
-export function chunk<T>(arr: Array<T>, size: number): Array<Array<T>> {
-  const result = [];
-  for (let i = 0; i < arr.length; i += size) {
-    result.push(arr.slice(i, i + size));
-  }
-
-  return result;
-}
-
-/**
  * The function `findValuesBetween` takes an array and two values, then returns a subarray containing
  * elements between the first occurrence of the start value and the first occurrence of the end value
  * in the array.
@@ -58,8 +38,8 @@ export function chunk<T>(arr: Array<T>, size: number): Array<Array<T>> {
  * found in the input array, an empty array is returned.
  */
 export function findValuesBetween<T>(array: Array<T>, start: T, end: T) {
-  const startIndex = array.findIndex((i) => isEqual(i, start));
-  const endIndex = array.findIndex((i) => isEqual(i, end));
+  const startIndex = array.findIndex((i) => isDeepEqual(i, start));
+  const endIndex = array.findIndex((i) => isDeepEqual(i, end));
   if (startIndex === -1 || endIndex === -1) {
     return [];
   }

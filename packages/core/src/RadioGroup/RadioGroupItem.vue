@@ -19,8 +19,8 @@ export const [injectRadioGroupItemContext, provideRadiogroupItemContext]
 </script>
 
 <script setup lang="ts">
+import { isDeepEqual } from '@vinicunca/perkakas';
 import { useEventListener } from '@vueuse/core';
-import { isEqual } from 'ohash';
 import { computed, ref } from 'vue';
 import { RovingFocusItem } from '@/RovingFocus';
 import Radio from './Radio.vue';
@@ -54,7 +54,7 @@ const rootContext = injectRadioGroupRootContext();
 
 const disabled = computed(() => rootContext.disabled.value || props.disabled);
 const required = computed(() => rootContext.required.value || props.required);
-const checked = computed(() => isEqual(rootContext.modelValue?.value, props.value));
+const checked = computed(() => isDeepEqual(rootContext.modelValue?.value, props.value));
 
 provideRadiogroupItemContext({ disabled, checked });
 

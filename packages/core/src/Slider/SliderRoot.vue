@@ -2,8 +2,9 @@
 import type { ComputedRef, Ref } from 'vue';
 import type { DataOrientation, Direction, FormFieldProps } from '../shared/types';
 import type { PrimitiveProps } from '@/Primitive';
+import { clamp } from '@vinicunca/perkakas';
 import { useCollection } from '@/Collection';
-import { clamp, createContext, useDirection, useFormControl, useForwardExpose } from '@/shared';
+import { createContext, useDirection, useFormControl, useForwardExpose } from '@/shared';
 
 type ThumbAlignment = 'contain' | 'overflow';
 
@@ -137,7 +138,7 @@ function handleSlideEnd() {
 function updateValues(value: number, atIndex: number, { commit } = { commit: false }) {
   const decimalCount = getDecimalCount(step.value);
   const snapToStep = roundValue(Math.round((value - min.value) / step.value) * step.value + min.value, decimalCount);
-  const nextValue = clamp(snapToStep, min.value, max.value);
+  const nextValue = clamp(snapToStep, { min: min.value, max: max.value });
 
   const nextValues = getNextSortedValues(currentModelValue.value, nextValue, atIndex);
 

@@ -3,6 +3,7 @@ import type { Ref } from 'vue';
 import type { Grid, Matcher } from '@/date';
 import type { DateFormatterOptions } from '@/shared/useDateFormatter';
 import { endOfYear, startOfYear } from '@internationalized/date';
+import { isFunction } from '@vinicunca/perkakas';
 import { computed, ref, watch } from 'vue';
 import { createYearGrid, isAfter, isBefore, isSameYear, toDate } from '@/date';
 import { useDateFormatter } from '@/shared';
@@ -72,7 +73,7 @@ export function useYearPicker(props: UseYearPickerProps) {
   const formatter = useDateFormatter(props.locale.value);
 
   const resolveMatcher = (matcher?: Matcher | Ref<Matcher | undefined>) =>
-    typeof matcher === 'function' ? matcher : matcher?.value;
+    isFunction(matcher) ? matcher : matcher?.value;
 
   const headingFormatOptions = computed(() => {
     const options: DateFormatterOptions = {
@@ -105,10 +106,7 @@ export function useYearPicker(props: UseYearPickerProps) {
   }
 
   const isYearUnavailable = (date: DateValue) => {
-    if (resolveMatcher(props.isYearUnavailable)?.(date)) {
-      return true;
-    }
-    return false;
+    return Boolean(resolveMatcher(props.isYearUnavailable)?.(date));
   };
 
   const isNextButtonDisabled = (nextPageFunc?: (date: DateValue) => DateValue) => {

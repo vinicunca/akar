@@ -1,5 +1,5 @@
 import type { PanelData } from '../SplitterPanel.vue';
-import { isBrowser } from '@/shared';
+import { isBrowser } from '@vinicunca/perkakas';
 
 export function getPanelElement(
   id: string,

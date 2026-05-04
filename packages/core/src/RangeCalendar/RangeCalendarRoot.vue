@@ -7,12 +7,12 @@ import type { Formatter } from '@/shared';
 import type { DateRange } from '@/shared/date';
 import type { Direction } from '@/shared/types';
 import { isEqualDay } from '@internationalized/date';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { useCalendar } from '@/Calendar/useCalendar';
 import { getWeekStartsOn, isBefore } from '@/date';
 import {
   createContext,
   useDirection,
-  useKbd,
   useLocale,
 } from '@/shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '@/shared/date';
@@ -378,9 +378,8 @@ watch([startValue, endValue], ([_startValue, _endValue]) => {
   }
 });
 
-const kbd = useKbd();
 useEventListener(parentElement, 'keydown', (ev) => {
-  if (ev.key === kbd.ESCAPE && isEditing.value) {
+  if (ev.key === KEY_CODES.ESC && isEditing.value) {
     // Abort start and end selection
     startValue.value = validModelValue.value.start?.copy();
     endValue.value = validModelValue.value.end?.copy();

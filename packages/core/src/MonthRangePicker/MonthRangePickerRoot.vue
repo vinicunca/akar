@@ -6,9 +6,10 @@ import type { PrimitiveProps } from '@/Primitive';
 import type { Formatter } from '@/shared';
 import type { DateRange } from '@/shared/date';
 import type { Direction } from '@/shared/types';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { compareYearMonth, isSameYearMonth } from '@/date';
 import { useMonthPicker } from '@/MonthPicker/useMonthPicker';
-import { createContext, useDirection, useId, useKbd, useLocale } from '@/shared';
+import { createContext, useDirection, useId, useLocale } from '@/shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '@/shared/date';
 import { useRangeMonthPickerState } from './useRangeMonthPicker';
 
@@ -305,9 +306,8 @@ watch([startValue, endValue], ([_startValue, _endValue]) => {
   }
 });
 
-const kbd = useKbd();
 useEventListener(parentElement, 'keydown', (ev) => {
-  if (ev.key === kbd.ESCAPE && isEditing.value) {
+  if (ev.key === KEY_CODES.ESC && isEditing.value) {
     startValue.value = validModelValue.value.start?.copy();
     endValue.value = validModelValue.value.end?.copy();
   }

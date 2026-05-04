@@ -6,8 +6,9 @@ import type { Formatter } from '@/shared';
 import type { DateStep, HourCycle, SegmentPart, SegmentValueObj, TimeValue } from '@/shared/date';
 import type { Direction, FormFieldProps } from '@/shared/types';
 import { getLocalTimeZone, isEqualDay, Time, toCalendarDateTime, today } from '@internationalized/date';
+import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { isBefore } from '@/date';
-import { createContext, isNullish, useDateFormatter, useDirection, useKbd, useLocale } from '@/shared';
+import { createContext, useDateFormatter, useDirection, useLocale } from '@/shared';
 import {
   createContent,
   getDefaultTime,
@@ -138,7 +139,9 @@ const convertedMinValue = computed(() => minValue.value ? convertValue(minValue.
 const convertedMaxValue = computed(() => maxValue.value ? convertValue(maxValue.value) : undefined);
 
 onMounted(() => {
-  getTimeFieldSegmentElements(parentElement.value).forEach((item) => segmentElements.value.add(item as HTMLElement));
+  getTimeFieldSegmentElements(parentElement.value).forEach((item) => {
+    segmentElements.value.add(item as HTMLElement);
+  });
 });
 
 const modelValue = useVModel(props, 'modelValue', emits, {
@@ -233,6 +236,7 @@ const segmentContents = computed(() => {
       if (segment.part === 'hour' && 'hour' in segmentValues.value) {
         const hour = segmentValues.value.hour;
         if (hour !== null) {
+          // eslint-disable-next-line no-nested-ternary
           const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
           return { ...segment, value: displayHour.toString() };
         }
@@ -253,7 +257,9 @@ watch(locale, (value) => {
     // Get the focusable elements again on the next tick
     nextTick(() => {
       segmentElements.value.clear();
-      getTimeFieldSegmentElements(parentElement.value).forEach((item) => segmentElements.value.add(item as HTMLElement));
+      getTimeFieldSegmentElements(parentElement.value).forEach((item) => {
+        segmentElements.value.add(item as HTMLElement);
+      });
     });
   }
 });
@@ -267,9 +273,8 @@ watch(convertedModelValue, (_modelValue) => {
 watch([convertedModelValue, locale], ([_modelValue]) => {
   if (!isNullish(_modelValue)) {
     segmentValues.value = { ...syncTimeSegmentValues({ value: _modelValue, formatter }) };
-  }
-  // If segment has null value, means that user modified it, thus do not reset the segmentValues
-  else if (Object.values(segmentValues.value).every((value) => value !== null) && isNullish(_modelValue)) {
+  } else if (Object.values(segmentValues.value).every((value) => value !== null) && isNullish(_modelValue)) {
+    // If segment has null value, means that user modified it, thus do not reset the segmentValues
     segmentValues.value = { ...initialSegments };
   }
 });
@@ -302,16 +307,14 @@ const prevFocusableSegment = computed(() => {
   return segmentToFocus;
 });
 
-const kbd = useKbd();
-
 function handleKeydown(e: KeyboardEvent) {
   if (!isSegmentNavigationKey(e.key)) {
     return;
   }
-  if (e.key === kbd.ARROW_LEFT) {
+  if (e.key === KEY_CODES.ARROW_LEFT) {
     prevFocusableSegment.value?.focus();
   }
-  if (e.key === kbd.ARROW_RIGHT) {
+  if (e.key === KEY_CODES.ARROW_RIGHT) {
     nextFocusableSegment.value?.focus();
   }
 }

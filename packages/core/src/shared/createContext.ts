@@ -1,4 +1,5 @@
 import type { InjectionKey } from 'vue';
+import { isString } from '@vinicunca/perkakas';
 import { inject, provide } from 'vue';
 
 /**
@@ -13,7 +14,7 @@ export function createContext<ContextValue>(
   contextName?: string,
 ) {
   const symbolDescription
-    = typeof providerComponentName === 'string' && !contextName
+    = isString(providerComponentName) && !contextName
       ? `${providerComponentName}Context`
       : contextName;
 

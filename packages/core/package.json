@@ -12,7 +12,7 @@
   "homepage": " https://github.com/vinicunca/akar",
   "repository": {
     "type": "git",
-    "url": "git+ https://github.com/vinicunca/akar.git"
+    "url": "git+https://github.com/vinicunca/akar.git"
   },
   "bugs": {
     "url": " https://github.com/vinicunca/akar/issues"
@@ -92,11 +92,11 @@
     "@internationalized/date": "^3.5.0",
     "@internationalized/number": "^3.5.0",
     "@tanstack/vue-virtual": "^3.12.0",
+    "@vinicunca/perkakas": "^1.14.0",
     "@vueuse/core": "^14.1.0",
     "@vueuse/shared": "^14.1.0",
     "aria-hidden": "^1.2.4",
-    "defu": "^6.1.5",
-    "ohash": "^2.0.11"
+    "defu": "^6.1.5"
   },
   "devDependencies": {
     "@iconify/vue": "^4.3.0",

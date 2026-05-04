@@ -1,4 +1,5 @@
 import type { ImgHTMLAttributes, Ref } from 'vue';
+import { isString } from '@vinicunca/perkakas';
 import { isClient } from '@vueuse/shared';
 import { computed, onMounted, onUnmounted, ref, watchEffect } from 'vue';
 
@@ -58,7 +59,7 @@ export function useImageLoadingStatus(src: Ref<string>, { referrerPolicy, crossO
       if (referrerPolicy?.value) {
         img.referrerPolicy = referrerPolicy.value;
       }
-      if (typeof crossOrigin?.value === 'string') {
+      if (isString(crossOrigin?.value)) {
         img.crossOrigin = crossOrigin.value;
       }
 

@@ -7,15 +7,13 @@ export interface EditableInputProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick, onMounted, watch } from 'vue';
-import { useKbd } from '@/shared';
 import { injectEditableRootContext } from './EditableRoot.vue';
 
 const props = withDefaults(defineProps<EditableInputProps>(), {
   as: 'input',
 });
-
-const kbd = useKbd();
 
 const context = injectEditableRootContext();
 
@@ -47,7 +45,7 @@ watch(context.isEditing, (value) => {
 });
 
 function handleSubmitKeyDown(event: KeyboardEvent) {
-  if ((context.submitMode.value === 'enter' || context.submitMode.value === 'both') && event.key === kbd.ENTER && !event.shiftKey && !event.metaKey && !event.isComposing) {
+  if ((context.submitMode.value === 'enter' || context.submitMode.value === 'both') && event.key === KEY_CODES.ENTER && !event.shiftKey && !event.metaKey && !event.isComposing) {
     context.submit();
   }
 }

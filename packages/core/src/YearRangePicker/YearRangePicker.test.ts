@@ -191,7 +191,7 @@ describe('year range picker', () => {
     const selectedYears = getSelectedYears(picker);
     expect(selectedYears).toHaveLength(1);
 
-    await user.keyboard(kbd.ESCAPE);
+    await user.keyboard(kbd.ESC);
 
     startValue = picker.querySelector('[data-selection-start]');
     endValue = picker.querySelector('[data-selection-end]');

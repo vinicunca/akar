@@ -196,7 +196,7 @@ describe('month range picker', () => {
     const selectedMonths = getSelectedMonths(picker);
     expect(selectedMonths).toHaveLength(1);
 
-    await user.keyboard(kbd.ESCAPE);
+    await user.keyboard(kbd.ESC);
 
     startValue = picker.querySelector('[data-selection-start]');
     endValue = picker.querySelector('[data-selection-end]');
@@ -222,7 +222,7 @@ describe('month range picker', () => {
     await user.click(getByTestId('month-2'));
     expect(getSelectedMonths(picker)).toHaveLength(1);
 
-    await user.keyboard(kbd.ESCAPE);
+    await user.keyboard(kbd.ESC);
 
     startValue = picker.querySelector('[data-selection-start]');
     endValue = picker.querySelector('[data-selection-end]');

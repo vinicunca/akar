@@ -8,6 +8,7 @@ export interface TabsIndicatorProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
+import { isNumber } from '@vinicunca/perkakas';
 import { useResizeObserver } from '@vueuse/core';
 import { Primitive } from '@/Primitive';
 
@@ -61,7 +62,7 @@ function updateIndicatorStyle() {
 
 <template>
   <Primitive
-    v-if="typeof indicatorStyle.size === 'number'"
+    v-if="isNumber(indicatorStyle.size)"
     v-bind="props"
     :style="{
       '--akar-tabs-indicator-size': `${indicatorStyle.size}px`,

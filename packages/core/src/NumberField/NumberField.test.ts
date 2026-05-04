@@ -1,10 +1,10 @@
 import type { NumberFieldRootProps } from './NumberFieldRoot.vue';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render } from '@testing-library/vue';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { useKbd } from '@/shared';
 import { handleSubmit } from '@/test';
 import NumberField from './story/_NumberField.vue';
 
@@ -20,7 +20,6 @@ function setup(props?: NumberFieldRootProps) {
   return { ...returned, user, root, input, label, increment, decrement };
 }
 
-const kbd = useKbd();
 describe('numberField', () => {
   beforeEach(() => {
     // @ts-expect-error aXe throwing error complaining getComputedStyle
@@ -94,13 +93,13 @@ describe('numberField', () => {
   it('should increase and decrease based on keyboard navigation on input', async () => {
     const { input } = setup({ defaultValue: 0, min: 0, max: 10 });
 
-    await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
     expect(input.value).toBe('1');
-    await fireEvent.keyDown(input, { key: kbd.ARROW_DOWN });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_DOWN });
     expect(input.value).toBe('0');
-    await fireEvent.keyDown(input, { key: kbd.END });
+    await fireEvent.keyDown(input, { key: KEY_CODES.END });
     expect(input.value).toBe('10');
-    await fireEvent.keyDown(input, { key: kbd.HOME });
+    await fireEvent.keyDown(input, { key: KEY_CODES.HOME });
     expect(input.value).toBe('0');
   });
 
@@ -109,9 +108,9 @@ describe('numberField', () => {
 
     expect(root.getAttribute('data-disabled')).toBe('');
     expect(input.getAttribute('data-disabled')).toBe('');
-    await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
     expect(input.value).toBe('0');
-    await fireEvent.keyDown(input, { key: kbd.ARROW_DOWN });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_DOWN });
     expect(input.value).toBe('0');
     await userEvent.click(increment);
     expect(input.value).toBe('0');
@@ -124,9 +123,9 @@ describe('numberField', () => {
 
     expect(root.getAttribute('data-readonly')).toBe('');
     expect(input.getAttribute('data-readonly')).toBe('');
-    await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
     expect(input.value).toBe('0');
-    await fireEvent.keyDown(input, { key: kbd.ARROW_DOWN });
+    await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_DOWN });
     expect(input.value).toBe('0');
     await userEvent.click(increment);
     expect(input.value).toBe('0');
@@ -266,11 +265,11 @@ describe('numberField', () => {
       const { input } = setup({ min: 2, step: 3 });
 
       expect(input.value).toBe('');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
       expect(input.value).toBe('2');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
       expect(input.value).toBe('5');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP });
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP });
       expect(input.value).toBe('8');
     });
 
@@ -278,15 +277,15 @@ describe('numberField', () => {
       const { input } = setup({ min: 2, max: 21, step: 3, stepSnapping: true });
 
       expect(input.value).toBe('');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 2
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 5
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 8
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 11
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 14
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 17
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 20
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 2
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 5
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 8
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 11
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 14
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 17
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 20
       expect(input.value).toBe('20');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 20 (max snapped to step)
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 20 (max snapped to step)
       expect(input.value).toBe('20');
     });
 
@@ -294,10 +293,10 @@ describe('numberField', () => {
       const { input } = setup({ min: 17, max: 21, step: 3, stepSnapping: false });
 
       expect(input.value).toBe('');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 17
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 20
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 17
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 20
       expect(input.value).toBe('20');
-      await fireEvent.keyDown(input, { key: kbd.ARROW_UP }); // 21 (max not snapped to step)
+      await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 21 (max not snapped to step)
       expect(input.value).toBe('21');
     });
   });
@@ -338,7 +337,7 @@ describe('numberField', () => {
 
       input.value = '7';
       expect(input.value).toBe('7');
-      await fireEvent.keyDown(input, { key: kbd.ENTER });
+      await fireEvent.keyDown(input, { key: KEY_CODES.ENTER });
       expect(input.value).toBe('EUR 7.00');
     });
   });

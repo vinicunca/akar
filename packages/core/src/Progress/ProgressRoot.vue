@@ -1,7 +1,8 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
-import { createContext, isNullish, useForwardExpose } from '@/shared';
+import { isNullish, isNumber } from '@vinicunca/perkakas';
+import { createContext, useForwardExpose } from '@/shared';
 
 export type ProgressRootEmits = {
   /** Event handler called when the progress value changes */
@@ -39,8 +40,6 @@ export const [injectProgressRootContext, provideProgressRootContext]
   = createContext<ProgressRootContext>('ProgressRoot');
 
 export type ProgressState = 'indeterminate' | 'loading' | 'complete';
-
-const isNumber = (v: any): v is number => typeof v === 'number';
 
 function validateValue(value: any, max: number): number | null {
   const isValidValueError

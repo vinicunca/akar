@@ -16,6 +16,7 @@ import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual';
 import type { Ref, VNode } from 'vue';
 import type { AcceptableValue } from '@/shared/types';
 import { useVirtualizer } from '@tanstack/vue-virtual';
+import { isFunction } from '@vinicunca/perkakas';
 import { useParentElement } from '@vueuse/core';
 import { refAutoReset } from '@vueuse/shared';
 import { cloneVNode, computed, Fragment, useSlots } from 'vue';
@@ -72,7 +73,7 @@ const virtualizer = useVirtualizer(
       return rootContext.orientation.value === 'horizontal';
     },
     estimateSize(index) {
-      if (typeof props.estimateSize === 'function') {
+      if (isFunction(props.estimateSize)) {
         return props.estimateSize(index);
       }
 

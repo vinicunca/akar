@@ -12,7 +12,7 @@ import {
   isBefore,
   isBeforeOrSame,
 } from '@/date';
-import { createContext, useDateFormatter, useDirection, useKbd, useLocale } from '@/shared';
+import { createContext, useDateFormatter, useDirection, useLocale } from '@/shared';
 import {
   createContent,
   getDefaultDate,
@@ -21,7 +21,6 @@ import {
   isSegmentNavigationKey,
   normalizeDateStep,
   normalizeHourCycle,
-
   syncSegmentValues,
 } from '@/shared/date';
 
@@ -93,6 +92,7 @@ export const [injectDateRangeFieldRootContext, provideDateRangeFieldRootContext]
 </script>
 
 <script setup lang="ts">
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
@@ -289,9 +289,8 @@ watch(modelValue, (_modelValue) => {
 watch([startValue, locale], ([_startValue]) => {
   if (_startValue !== undefined) {
     startSegmentValues.value = { ...syncSegmentValues({ value: _startValue, formatter }) };
-  }
-  // If segment has null value, means that user modified it, thus do not reset the segmentValues
-  else if (Object.values(startSegmentValues.value).every((value) => value !== null) && _startValue === undefined) {
+  } else if (Object.values(startSegmentValues.value).every((value) => value !== null) && _startValue === undefined) {
+    // If segment has null value, means that user modified it, thus do not reset the segmentValues
     startSegmentValues.value = { ...initialSegments };
   }
 });
@@ -319,9 +318,8 @@ watch(modelValue, (_modelValue) => {
 watch([endValue, locale], ([_endValue]) => {
   if (_endValue !== undefined) {
     endSegmentValues.value = { ...syncSegmentValues({ value: _endValue, formatter }) };
-  }
-  // If segment has null value, means that user modified it, thus do not reset the segmentValues
-  else if (Object.values(endSegmentValues.value).every((value) => value !== null) && _endValue === undefined) {
+  } else if (Object.values(endSegmentValues.value).every((value) => value !== null) && _endValue === undefined) {
+    // If segment has null value, means that user modified it, thus do not reset the segmentValues
     endSegmentValues.value = { ...initialSegments };
   }
 });
@@ -353,16 +351,14 @@ const prevFocusableSegment = computed(() => {
   return segmentToFocus;
 });
 
-const kbd = useKbd();
-
 function handleKeydown(e: KeyboardEvent) {
   if (!isSegmentNavigationKey(e.key)) {
     return;
   }
-  if (e.key === kbd.ARROW_LEFT) {
+  if (e.key === KEY_CODES.ARROW_LEFT) {
     prevFocusableSegment.value?.focus();
   }
-  if (e.key === kbd.ARROW_RIGHT) {
+  if (e.key === KEY_CODES.ARROW_RIGHT) {
     nextFocusableSegment.value?.focus();
   }
 }

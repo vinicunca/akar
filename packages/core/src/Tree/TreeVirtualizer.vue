@@ -14,6 +14,7 @@ import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual';
 import type { Ref } from 'vue';
 import type { FlattenedItem } from './TreeRoot.vue';
 import { useVirtualizer } from '@tanstack/vue-virtual';
+import { isFunction } from '@vinicunca/perkakas';
 import { refAutoReset, useParentElement } from '@vueuse/core';
 import { cloneVNode, computed, nextTick, useSlots } from 'vue';
 import { useCollection } from '@/Collection';
@@ -88,7 +89,7 @@ const virtualizer = useVirtualizer(
       return index + rootContext.getKey(rootContext.expandedItems.value[index].value);
     },
     estimateSize(index) {
-      if (typeof props.estimateSize === 'function') {
+      if (isFunction(props.estimateSize)) {
         return props.estimateSize(index);
       }
 

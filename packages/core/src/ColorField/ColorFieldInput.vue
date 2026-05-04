@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
+import { KEY_CODES } from '@vinicunca/perkakas';
 
 const ALLOWED_INPUT_RE = /[\d.-]/;
 
@@ -50,31 +51,31 @@ function handleWheel(event: WheelEvent) {
 
 function handleKeydown(event: KeyboardEvent) {
   switch (event.key) {
-    case 'ArrowUp':
+    case KEY_CODES.ARROW_UP:
       event.preventDefault();
       rootContext.increment();
       break;
-    case 'ArrowDown':
+    case KEY_CODES.ARROW_DOWN:
       event.preventDefault();
       rootContext.decrement();
       break;
-    case 'PageUp':
+    case KEY_CODES.PAGE_UP:
       event.preventDefault();
       rootContext.incrementPage();
       break;
-    case 'PageDown':
+    case KEY_CODES.PAGE_DOWN:
       event.preventDefault();
       rootContext.decrementPage();
       break;
-    case 'Home':
+    case KEY_CODES.HOME:
       event.preventDefault();
       rootContext.decrementToMin();
       break;
-    case 'End':
+    case KEY_CODES.END:
       event.preventDefault();
       rootContext.incrementToMax();
       break;
-    case 'Enter':
+    case KEY_CODES.ENTER:
       event.preventDefault();
       rootContext.commit();
       break;
@@ -115,8 +116,8 @@ function handleBeforeInput(event: InputEvent) {
 
 <template>
   <Primitive
-    :as-child="asChild"
-    :as="as"
+    :as-child="props.asChild"
+    :as="props.as"
     :type="inputType"
     :inputmode="inputMode"
     :value="rootContext.inputValue.value"

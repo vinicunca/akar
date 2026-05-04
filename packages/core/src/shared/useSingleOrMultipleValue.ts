@@ -1,7 +1,7 @@
 import type { Ref } from 'vue';
 import type { AcceptableValue, SingleOrMultipleProps } from './types';
+import { isDeepEqual } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
-import { isEqual } from 'ohash';
 import { computed } from 'vue';
 import { isValueEqualOrExist } from './isValueEqualOrExist';
 
@@ -55,11 +55,11 @@ export function useSingleOrMultipleValue<P extends SingleOrMultipleProps, Name e
 
   function changeModelValue(value: AcceptableValue) {
     if (type.value === 'single') {
-      modelValue.value = isEqual(value, modelValue.value) ? undefined : value;
+      modelValue.value = isDeepEqual(value, modelValue.value) ? undefined : value;
     } else {
       const modelValueArray = Array.isArray(modelValue.value) ? [...(modelValue.value as Array<AcceptableValue> || [])] : [modelValue.value].filter(Boolean);
       if (isValueEqualOrExist(modelValueArray, value)) {
-        const index = modelValueArray.findIndex((i) => isEqual(i, value));
+        const index = modelValueArray.findIndex((i) => isDeepEqual(i, value));
         modelValueArray.splice(index, 1);
       } else {
         modelValueArray.push(value);

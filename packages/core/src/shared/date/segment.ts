@@ -1,14 +1,11 @@
-import { useKbd } from '@/shared';
+import { KEY_CODES } from '@vinicunca/perkakas';
 
 export function isSegmentNavigationKey(key: string) {
-  const kbd = useKbd();
-  if (key === kbd.ARROW_RIGHT || key === kbd.ARROW_LEFT) {
-    return true;
-  }
-  return false;
+  return key === KEY_CODES.ARROW_RIGHT || key === KEY_CODES.ARROW_LEFT;
 }
 
 export function isNumberString(value: string) {
+  // eslint-disable-next-line sonar/prefer-single-boolean-return
   if (Number.isNaN(Number.parseInt(value))) {
     return false;
   }
@@ -16,15 +13,14 @@ export function isNumberString(value: string) {
 }
 
 export function isAcceptableSegmentKey(key: string) {
-  const kbd = useKbd();
   const acceptableSegmentKeys = [
-    kbd.ENTER,
-    kbd.ARROW_UP,
-    kbd.ARROW_DOWN,
-    kbd.ARROW_LEFT,
-    kbd.ARROW_RIGHT,
-    kbd.BACKSPACE,
-    kbd.SPACE,
+    KEY_CODES.ENTER,
+    KEY_CODES.ARROW_UP,
+    KEY_CODES.ARROW_DOWN,
+    KEY_CODES.ARROW_LEFT,
+    KEY_CODES.ARROW_RIGHT,
+    KEY_CODES.BACKSPACE,
+    ' ',
     'a',
     'A',
     'p',

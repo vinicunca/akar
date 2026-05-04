@@ -21,6 +21,7 @@ export interface ToastViewportProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import { isString } from '@vinicunca/perkakas';
 import { onKeyStroke, unrefElement } from '@vueuse/core';
 import { computed, onMounted, ref, toRefs, watchEffect } from 'vue';
 import { DismissableLayerBranch } from '@/DismissableLayer';
@@ -165,7 +166,7 @@ function getSortedTabbableCandidates({ tabbingDirection }: { tabbingDirection: '
 <template>
   <DismissableLayerBranch
     role="region"
-    :aria-label="typeof label === 'string' ? label.replace('{hotkey}', hotkeyMessage) : label(hotkeyMessage)"
+    :aria-label="isString(label) ? label.replace('{hotkey}', hotkeyMessage) : label(hotkeyMessage)"
     tabindex="-1"
     :style="{
       // incase list has size when empty (e.g. padding), we remove pointer events so

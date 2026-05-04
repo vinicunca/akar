@@ -4,7 +4,7 @@ import type { PrimitiveProps } from '@/Primitive';
 import type { FormFieldProps } from '@/shared/types';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs } from 'vue';
-import { clamp, createContext, isNullish, snapValueToStep, useFormControl, useLocale } from '@/shared';
+import { createContext, snapValueToStep, useFormControl, useLocale } from '@/shared';
 
 export interface NumberFieldRootProps extends PrimitiveProps, FormFieldProps {
   defaultValue?: number;
@@ -65,6 +65,7 @@ export const [injectNumberFieldRootContext, provideNumberFieldRootContext] = cre
 </script>
 
 <script setup lang="ts">
+import { clamp, isNullish } from '@vinicunca/perkakas';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
 import { handleDecimalOperation, useNumberFormatter, useNumberParser } from './utils';
@@ -177,7 +178,7 @@ function clampInputValue(val: number) {
   // Clamp to min and max, round to the nearest step, and round to specified number of digits
   let clampedValue: number;
   if (step.value === undefined || isNaN(step.value) || !stepSnapping.value) {
-    clampedValue = clamp(val, min.value, max.value);
+    clampedValue = clamp(val, { min: min.value, max: max.value });
   } else {
     clampedValue = snapValueToStep(val, min.value, max.value, step.value);
   }
@@ -209,7 +210,9 @@ provideNumberFieldRootContext({
   handleMinMaxValue,
   inputMode,
   inputEl,
-  onInputElement: (el) => inputEl.value = el,
+  onInputElement: (el) => {
+    inputEl.value = el;
+  },
   textValue,
   readonly,
   validate,

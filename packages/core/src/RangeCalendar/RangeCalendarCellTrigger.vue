@@ -8,9 +8,9 @@ import {
   isSameMonth,
   isToday,
 } from '@internationalized/date';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
 import { isBetweenInclusive, toDate } from '@/date';
-import { useKbd } from '@/shared';
 
 export interface RangeCalendarCellTriggerProps extends PrimitiveProps {
   day: DateValue;
@@ -57,9 +57,7 @@ defineSlots<RangeCalendarCellTriggerSlot>();
 
 const rootContext = injectRangeCalendarRootContext();
 
-const kbd = useKbd();
-
-const { primitiveElement, currentElement } = usePrimitiveElement();
+const { primitiveElement } = usePrimitiveElement();
 
 const labelText = computed(() => rootContext.formatter.custom(toDate(props.day), {
   weekday: 'long',
@@ -196,20 +194,20 @@ function handleArrowKey(e: KeyboardEvent) {
   const indexIncrementation = 7;
   const sign = rootContext.dir.value === 'rtl' ? -1 : 1;
   switch (e.code) {
-    case kbd.ARROW_RIGHT:
+    case KEY_CODES.ARROW_RIGHT:
       shiftFocus(props.day, sign);
       break;
-    case kbd.ARROW_LEFT:
+    case KEY_CODES.ARROW_LEFT:
       shiftFocus(props.day, -sign);
       break;
-    case kbd.ARROW_UP:
+    case KEY_CODES.ARROW_UP:
       shiftFocus(props.day, -indexIncrementation);
       break;
-    case kbd.ARROW_DOWN:
+    case KEY_CODES.ARROW_DOWN:
       shiftFocus(props.day, indexIncrementation);
       break;
-    case kbd.ENTER:
-    case kbd.SPACE_CODE:
+    case KEY_CODES.ENTER:
+    case KEY_CODES.SPACE:
       changeDate(e, props.day);
   }
 
