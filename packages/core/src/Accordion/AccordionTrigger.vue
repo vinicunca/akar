@@ -15,7 +15,7 @@ const props = defineProps<AccordionTriggerProps>();
 const rootContext = injectAccordionRootContext();
 const itemContext = injectAccordionItemContext();
 
-itemContext.triggerId ||= useId(undefined, 'reka-accordion-trigger');
+itemContext.triggerId ||= useId(undefined, 'akar-accordion-trigger');
 function changeItem() {
   const triggerDisabled = rootContext.isSingle.value && itemContext.open.value && !rootContext.collapsible;
   if (itemContext.disabled.value || triggerDisabled) {
@@ -30,7 +30,7 @@ function changeItem() {
   <CollapsibleTrigger
     :id="itemContext.triggerId"
     :ref="itemContext.currentRef"
-    data-reka-collection-item
+    data-akar-collection-item
     :as="props.as"
     :as-child="props.asChild"
     :aria-disabled="itemContext.disabled.value || undefined"

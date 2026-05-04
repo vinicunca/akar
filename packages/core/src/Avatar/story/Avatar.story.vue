@@ -64,7 +64,7 @@ function rotateIndex() {
       >
         <AvatarImage
           class="h-full w-full rounded-[inherit] object-cover"
-          src="https://reka-ui.com/og.jpg"
+          src="https://akar.vinicunca.dev/og.jpg"
           alt="Pedro Duarte"
         />
         <AvatarFallback

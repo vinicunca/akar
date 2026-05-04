@@ -29,8 +29,8 @@ useForwardExpose();
     :data-disabled="itemContext.dataDisabled.value"
     :data-orientation="rootContext.orientation"
     style="
-      --reka-accordion-content-width: var(--reka-collapsible-content-width);
-      --reka-accordion-content-height: var(--reka-collapsible-content-height);
+      --akar-accordion-content-width: var(--akar-collapsible-content-width);
+      --akar-accordion-content-height: var(--akar-collapsible-content-height);
     "
     @content-found="rootContext.changeModelValue(itemContext.value.value)"
   >

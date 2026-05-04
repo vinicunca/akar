@@ -40,6 +40,9 @@ export default vinicuncaESLint(
       'regexp/no-super-linear-backtracking': 'off',
       'markdown/heading-increment': 'off',
       'markdown/no-multiple-h1': 'off',
+      'no-await-in-loop': 'off',
+      'sonar/no-dead-store': 'off',
+      'sonar/no-nested-conditional': 'off',
     },
   },
   {
