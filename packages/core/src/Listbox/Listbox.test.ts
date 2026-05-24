@@ -3,8 +3,9 @@ import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { afterAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
-import { nextTick } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import { handleSubmit } from '@/test';
+import { ListboxItem, ListboxRoot } from '.';
 import Listbox from './story/_Listbox.vue';
 
 describe('given default Listbox', () => {
@@ -315,6 +316,44 @@ describe('given horizontal Listbox', () => {
         });
       });
     });
+  });
+});
+
+// `v-memo` on ListboxItem must invalidate when `disabled` (or
+// `rootContext.focusable.value`) changes, otherwise `data-disabled` / `disabled`
+// attributes go stale and the item still participates in keyboard navigation.
+describe('given ListboxItem with reactive `disabled` prop', () => {
+  it('should update DOM attributes when `disabled` toggles without highlight/selection change', async () => {
+    const isDisabled = ref(false);
+    const ReactiveDisabledListbox = defineComponent({
+      setup() {
+        return () =>
+          h(ListboxRoot, null, {
+            default: () => [
+              h(ListboxItem, { value: { id: 1 }, disabled: isDisabled.value }, () => 'toggleable'),
+              h(ListboxItem, { value: { id: 2 } }, () => 'other'),
+            ],
+          });
+      },
+    });
+
+    const wrapper = mount(ReactiveDisabledListbox, { attachTo: document.body });
+    const items = wrapper.findAll('[role=option]');
+
+    expect(items[0].attributes('data-disabled')).toBeUndefined();
+    expect(items[0].attributes('disabled')).toBeUndefined();
+
+    isDisabled.value = true;
+    await nextTick();
+
+    expect(items[0].attributes('data-disabled')).toBe('');
+    expect(items[0].attributes('disabled')).toBe('');
+
+    isDisabled.value = false;
+    await nextTick();
+
+    expect(items[0].attributes('data-disabled')).toBeUndefined();
+    expect(items[0].attributes('disabled')).toBeUndefined();
   });
 });
 
