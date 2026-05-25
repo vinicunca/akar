@@ -22,6 +22,7 @@ export default vinicuncaESLint(
   },
   {
     rules: {
+      'pnpm/yaml-enforce-settings': 'off',
       'ts/no-non-null-asserted-optional-chain': 'off',
       'ts/ban-ts-comment': 'warn',
       'ts/consistent-type-definitions': 'off',
