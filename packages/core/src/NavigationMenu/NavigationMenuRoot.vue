@@ -141,12 +141,13 @@ const { delayDuration, skipDelayDuration, dir: propDir, disableClickTrigger, dis
 const dir = useDirection(propDir);
 
 const isDelaySkipped = refAutoReset(false, skipDelayDuration);
+const skipNextClose = ref(false);
 const computedDelay = computed(() => {
   const isOpen = modelValue.value !== '';
   if (isOpen || isDelaySkipped.value) {
     return 150;
-  } // 150ms for user to switch trigger or move into content view
-  else {
+  } else {
+    // 150ms for user to switch trigger or move into content view
     return delayDuration.value;
   }
 });
@@ -154,8 +155,17 @@ const computedDelay = computed(() => {
 const debouncedFn = useDebounceFn((val?: string) => {
   // passing `undefined` meant to reset the debounce timer
   if (isString(val)) {
+    if (val === '' && skipNextClose.value) {
+      skipNextClose.value = false;
+      return;
+    }
+
     previousValue.value = modelValue.value;
     modelValue.value = val;
+
+    if (val === '') {
+      isDelaySkipped.value = true;
+    }
   }
 }, computedDelay);
 
@@ -193,10 +203,16 @@ provideNavigationMenuContext({
     viewport.value = val;
   },
   onTriggerEnter: (val) => {
-    debouncedFn(val);
+    if (modelValue.value !== '') {
+      skipNextClose.value = true;
+      previousValue.value = modelValue.value;
+      modelValue.value = val;
+    } else {
+      debouncedFn(val);
+    }
   },
   onTriggerLeave: () => {
-    isDelaySkipped.value = true;
+    skipNextClose.value = false;
     debouncedFn('');
   },
   onContentEnter: () => {
@@ -204,6 +220,7 @@ provideNavigationMenuContext({
   },
   onContentLeave: () => {
     if (!props.disablePointerLeaveClose) {
+      skipNextClose.value = false;
       debouncedFn('');
     }
   },
