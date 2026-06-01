@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import { useForwardExpose } from '@/shared';
 import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
 import ScrollAreaScrollbarImpl from './ScrollAreaScrollbarImpl.vue';
@@ -15,6 +15,12 @@ onMounted(() => {
   if (scrollbarElement.value) {
     rootContext.onScrollbarYChange(scrollbarElement.value);
   }
+});
+
+// Clear the registration on unmount so consumers (e.g. ScrollAreaCorner) don't
+// hold a stale reference once the scrollbar is removed (e.g. between hover cycles).
+onUnmounted(() => {
+  rootContext.onScrollbarYChange(null);
 });
 
 const sizes = computed(() => scrollbarVisibleContext.sizes.value);

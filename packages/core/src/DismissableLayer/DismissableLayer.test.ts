@@ -1,8 +1,8 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { fireEvent } from '@testing-library/vue';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { sleep } from '@/test';
 import DismissableLayer from './story/_DismissableLayer.vue';
 import { isLayerExist } from './utils';
 

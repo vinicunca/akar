@@ -1,12 +1,12 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/vue';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { useDebounceFn } from '@vueuse/core';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
-import { sleep } from '@/test';
 import NavigationMenuUnmountOnHideFalse from './__test__/NavigationMenuUnmountOnHideFalse.vue';
 import NavigationMenuItem from './NavigationMenuItem.vue';
 import NavigationMenu from './story/_NavigationMenu.vue';

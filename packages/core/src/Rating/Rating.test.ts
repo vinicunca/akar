@@ -1,9 +1,9 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { fireEvent } from '@testing-library/vue';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { sleep } from '@/test';
 import Rating from './story/_Rating.vue';
 
 describe('given a default Rating', () => {
