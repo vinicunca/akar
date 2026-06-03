@@ -7,11 +7,12 @@ export interface AutocompleteInputProps extends ListboxFilterProps {}
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { nextTick, onMounted, ref, watch } from 'vue';
+import { nextTick, onMounted, watch } from 'vue';
 import { injectComboboxRootContext } from '@/Combobox/ComboboxRoot.vue';
 import { ListboxFilter } from '@/Listbox';
 import { injectListboxRootContext } from '@/Listbox/ListboxRoot.vue';
 import { usePrimitiveElement } from '@/Primitive';
+import { useComposing } from '@/shared';
 import { injectAutocompleteRootContext } from './AutocompleteRoot.vue';
 
 const props = withDefaults(defineProps<AutocompleteInputProps>(), {
@@ -38,24 +39,19 @@ onMounted(() => {
   }
 });
 
-const isComposing = ref(false);
-function onCompositionStart() {
-  isComposing.value = true;
-}
-function onCompositionEnd() {
-  nextTick(() => {
-    isComposing.value = false;
-    const el = currentElement.value as HTMLInputElement;
-    if (el) {
-      processInputValue(el.value);
-    }
-  });
-}
+const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing((event) => {
+  const el = event.target as HTMLInputElement;
+  if (el) {
+    processInputValue(el.value);
+  }
+});
 
-function handleKeyDown(_ev: KeyboardEvent) {
+function handleKeyDown(ev: KeyboardEvent) {
   if (isComposing.value) {
     return;
   }
+
+  ev.preventDefault();
   if (!rootContext.open.value) {
     rootContext.onOpenChange(true);
   }
@@ -131,10 +127,10 @@ watch(rootContext.filterState, (_newValue, oldValue) => {
     autocomplete="off"
     @click="handleClick"
     @input="handleInput"
-    @keydown.down.up.prevent="handleKeyDown"
+    @keydown.down.up="handleKeyDown"
     @focus="handleFocus"
-    @compositionstart="onCompositionStart"
-    @compositionend="onCompositionEnd"
+    @compositionstart="handleCompositionStart"
+    @compositionend="handleCompositionEnd"
   >
     <slot />
   </ListboxFilter>

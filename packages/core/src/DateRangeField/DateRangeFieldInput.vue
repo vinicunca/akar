@@ -27,6 +27,9 @@ const {
   handleSegmentClick,
   handleSegmentKeydown,
   attributes,
+  handleSegmentBeforeInput,
+  handleSegmentCompositionStart,
+  handleSegmentCompositionEnd,
 } = useDateField({
   hasLeftFocus,
   lastKeyZero,
@@ -63,6 +66,9 @@ const isInvalid = computed(() => rootContext.isInvalid.value);
     v-on="part !== 'literal' ? {
       mousedown: handleSegmentClick,
       keydown: handleSegmentKeydown,
+      beforeinput: handleSegmentBeforeInput,
+      compositionstart: handleSegmentCompositionStart,
+      compositionend: handleSegmentCompositionEnd,
       focusout: () => { hasLeftFocus = true },
       focusin: (e: FocusEvent) => {
         rootContext.setFocusedElement(e.target as HTMLElement)

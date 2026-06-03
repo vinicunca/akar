@@ -260,6 +260,11 @@ const inputMaxValue = computed(() => props.maxValue ? normalizeInputValue(props.
 const inputMinValue = computed(() => props.minValue ? normalizeInputValue(props.minValue, inferredGranularity.value) : undefined);
 
 function handleKeydown(e: KeyboardEvent) {
+  // Don't navigate between segments mid-composition, arrow keys are used for IME candidate navigation
+  if (e.isComposing) {
+    return;
+  }
+
   if (!isSegmentNavigationKey(e.key)) {
     return;
   }

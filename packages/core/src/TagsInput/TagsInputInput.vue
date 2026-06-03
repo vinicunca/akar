@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
 
 export interface TagsInputInputProps extends PrimitiveProps {
   /** The placeholder character to use for empty tags input. */
@@ -13,8 +12,9 @@ export interface TagsInputInputProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from 'vue';
+import { nextTick, onMounted } from 'vue';
 import { Primitive } from '@/Primitive';
+import { useComposing, useForwardExpose } from '@/shared';
 import { injectTagsInputRootContext } from './TagsInputRoot.vue';
 
 const props = withDefaults(defineProps<TagsInputInputProps>(), {
@@ -60,15 +60,7 @@ function handleTab(event: Event) {
   handleCustomKeydown(event);
 }
 
-const isComposing = ref(false);
-function onCompositionStart() {
-  isComposing.value = true;
-}
-function onCompositionEnd() {
-  nextTick(() => {
-    isComposing.value = false;
-  });
-}
+const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing();
 async function handleCustomKeydown(event: Event) {
   if (isComposing.value) {
     return;
@@ -94,6 +86,10 @@ async function handleCustomKeydown(event: Event) {
 }
 
 function handleInput(event: InputEvent) {
+  if (isComposing.value) {
+    return;
+  }
+
   context.isInvalidInput.value = false;
   if (event.data === null) {
     return;
@@ -115,6 +111,15 @@ function handleInput(event: InputEvent) {
       target.value = '';
     }
   }
+}
+
+function handleInputKeydown(event: KeyboardEvent) {
+  // `isComposing` stays true until the tick after `compositionend`, so arrow/backspace
+  // tag navigation is skipped even when the commit keydown reports `event.isComposing === false`.
+  if (isComposing.value) {
+    return;
+  }
+  context.onInputKeydown(event);
 }
 
 function handlePaste(event: ClipboardEvent) {
@@ -173,9 +178,9 @@ onMounted(() => {
     @keydown.enter="handleCustomKeydown"
     @keydown.tab="handleTab"
     @blur="handleBlur"
-    @keydown="context.onInputKeydown"
-    @compositionstart="onCompositionStart"
-    @compositionend="onCompositionEnd"
+    @keydown="handleInputKeydown"
+    @compositionstart="handleCompositionStart"
+    @compositionend="handleCompositionEnd"
     @paste="handlePaste"
   >
     <slot />

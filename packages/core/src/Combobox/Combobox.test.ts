@@ -1,9 +1,10 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { nextTick } from 'vue';
-import { handleSubmit, sleep } from '@/test';
+import { handleSubmit } from '@/test';
 import Combobox from './story/_Combobox.vue';
 import ComboboxObject from './story/_ComboboxObject.vue';
 import ComboboxTagsInput from './story/_ComboboxTagsInput.vue';
@@ -494,6 +495,54 @@ describe('given combobox handleBlur with deferred close', () => {
     expect(wrapper.find('[role=group]').exists()).toBe(false);
 
     externalButton.remove();
+  });
+});
+
+describe('handle IME composition', () => {
+  let wrapper: VueWrapper<InstanceType<typeof Combobox>>;
+  let input: DOMWrapper<HTMLInputElement>;
+  window.HTMLElement.prototype.releasePointerCapture = vi.fn();
+  window.HTMLElement.prototype.hasPointerCapture = vi.fn();
+  window.HTMLElement.prototype.scrollIntoView = vi.fn();
+  globalThis.ResizeObserver = class ResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+
+  beforeEach(() => {
+    // @ts-expect-error aXe throwing error complaining getComputedStyle
+    window.getComputedStyle = () => ({
+      animationName: '',
+    });
+    document.body.innerHTML = '';
+    wrapper = mount(Combobox, { attachTo: document.body });
+    input = wrapper.find('input');
+  });
+
+  it('should not update filter during IME composition', async () => {
+    await input.trigger('compositionstart');
+    input.element.value = 'xiang';
+    await input.trigger('input');
+    await nextTick();
+
+    const content = wrapper.find('[role=listbox]');
+    expect(content.exists()).toBe(false);
+  });
+
+  it('should update filter after composition ends', async () => {
+    await input.trigger('compositionstart');
+    input.element.value = 'zzzzz';
+    await input.trigger('input');
+    await nextTick();
+
+    input.element.value = 'zzzzz';
+    await input.trigger('compositionend');
+    await nextTick();
+
+    const content = wrapper.find('[role=listbox]');
+    expect(content.exists()).toBe(true);
+    expect(content.attributes('data-empty')).toBeDefined();
   });
 });
 

@@ -1,11 +1,5 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useVModel } from '@vueuse/core';
-import { computed, onMounted, onUnmounted, ref, watch, watchSyncEffect } from 'vue';
-import { injectMenuContentContext } from '@/Menu/MenuContentImpl.vue';
-import { injectMenuRootContext } from '@/Menu/MenuRoot.vue';
-import { injectMenuSubContext } from '@/Menu/MenuSub.vue';
-import { Primitive, usePrimitiveElement } from '@/Primitive';
 
 export interface DropdownMenuFilterProps extends PrimitiveProps {
   /** The controlled value of the filter. Can be binded with v-model. */
@@ -22,6 +16,14 @@ export type DropdownMenuFilterEmits = {
 </script>
 
 <script setup lang="ts">
+import { useVModel } from '@vueuse/core';
+import { computed, onMounted, onUnmounted, ref, watch, watchSyncEffect } from 'vue';
+import { injectMenuContentContext } from '@/Menu/MenuContentImpl.vue';
+import { injectMenuRootContext } from '@/Menu/MenuRoot.vue';
+import { injectMenuSubContext } from '@/Menu/MenuSub.vue';
+import { Primitive, usePrimitiveElement } from '@/Primitive';
+import { useComposing } from '@/shared';
+
 const props = withDefaults(defineProps<DropdownMenuFilterProps>(), {
   as: 'input',
 });
@@ -52,7 +54,9 @@ const { primitiveElement, currentElement } = usePrimitiveElement();
 const disabled = computed(() => props.disabled || false);
 
 const activedescendant = ref<string | undefined>();
-watchSyncEffect(() => activedescendant.value = contentContext.highlightedElement.value?.id);
+watchSyncEffect(() => {
+  activedescendant.value = contentContext.highlightedElement.value?.id;
+});
 
 onMounted(() => {
   contentContext.onFilterElementChange(currentElement.value);
@@ -73,13 +77,25 @@ onUnmounted(() => {
   contentContext.searchRef.value = '';
 });
 
+const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing((event) => {
+  const el = event.target as HTMLInputElement;
+  if (el) {
+    modelValue.value = el.value;
+    contentContext.searchRef.value = el.value;
+  }
+});
+
 function handleInput(event: InputEvent) {
   if (disabled.value) {
     return;
   }
+
+  if (isComposing.value) {
+    return;
+  }
+
   const target = event.target as HTMLInputElement;
   modelValue.value = target.value;
-  // Update the menu's search ref to help with filtering
   contentContext.searchRef.value = target.value;
 }
 
@@ -87,15 +103,23 @@ function handleKeyDown(event: KeyboardEvent) {
   if (disabled.value) {
     return;
   }
+
+  // During composition the keys belong to the IME (candidate navigation/commit).
+  // Stop them from bubbling to the menu content's keydown handler (which would
+  // navigate/typeahead) without calling preventDefault, so the IME still works.
+  if (isComposing.value) {
+    event.stopPropagation();
+    return;
+  }
+
   if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
     event.preventDefault();
     contentContext.onKeydownNavigation(event);
   } else if (event.key === 'Enter') {
     event.preventDefault();
     contentContext.onKeydownEnter(event);
-  }
-  // Prevent Escape from bubbling to avoid closing the menu when clearing the filter
-  else if (event.key === 'Escape' && modelValue.value) {
+  } else if (event.key === 'Escape' && modelValue.value) {
+    // Prevent Escape from bubbling to avoid closing the menu when clearing the filter
     event.stopPropagation();
     modelValue.value = '';
     contentContext.searchRef.value = '';
@@ -117,6 +141,8 @@ function handleKeyDown(event: KeyboardEvent) {
     role="searchbox"
     @input="handleInput"
     @keydown="handleKeyDown"
+    @compositionstart="handleCompositionStart"
+    @compositionend="handleCompositionEnd"
   >
     <slot :model-value="modelValue" />
   </Primitive>
