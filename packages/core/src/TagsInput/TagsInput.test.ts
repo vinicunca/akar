@@ -322,7 +322,7 @@ describe('given a TagsInput with objects', async () => {
       await input.trigger('input', { data: ',' });
       await nextTick();
 
-      const tags = wrapper.findAll('[data-reka-collection-item]');
+      const tags = wrapper.findAll('[data-akar-collection-item]');
       expect(tags.length).toBe(1);
       expect(input.element.value).toBe(',');
     });
@@ -336,7 +336,7 @@ describe('given a TagsInput with objects', async () => {
       await input.trigger('input', { data: ',' });
       await nextTick();
 
-      expect(wrapper.findAll('[data-reka-collection-item]').length).toBe(1);
+      expect(wrapper.findAll('[data-akar-collection-item]').length).toBe(1);
 
       await input.trigger('compositionend');
       await nextTick();
@@ -345,7 +345,7 @@ describe('given a TagsInput with objects', async () => {
       await input.trigger('input', { data: ',' });
       await nextTick();
 
-      const tags = wrapper.findAll('[data-reka-collection-item]');
+      const tags = wrapper.findAll('[data-akar-collection-item]');
       expect(tags.length).toBe(2);
       expect(tags[1].text()).toBe('hello');
     });

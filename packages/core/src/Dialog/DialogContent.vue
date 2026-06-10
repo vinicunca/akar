@@ -22,7 +22,16 @@ import DialogContentModal from './DialogContentModal.vue';
 import DialogContentNonModal from './DialogContentNonModal.vue';
 import { injectDialogRootContext } from './DialogRoot.vue';
 
-const props = defineProps<DialogContentProps>();
+const props = withDefaults(
+  defineProps<DialogContentProps>(),
+  {
+    // Keep `undefined` (instead of Vue's boolean coercion to `false`) so the
+    // modal/non-modal child can apply its own default. This lets a modal
+    // `DialogContent` stay locked by default while still honoring an explicit
+    // `:disable-outside-pointer-events="false"`.
+    disableOutsidePointerEvents: undefined,
+  },
+);
 const emits = defineEmits<DialogContentEmits>();
 
 const rootContext = injectDialogRootContext();
