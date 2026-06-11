@@ -14,6 +14,8 @@ export interface SelectRootProps<T = AcceptableValue> extends FormFieldProps {
   defaultValue?: T | Array<T>;
   /** The controlled value of the Select. Can be bind as `v-model`. */
   modelValue?: T | Array<T>;
+  /** The value of the hidden native select option when the model value is nullish. */
+  nullableValue?: string;
   /** Use this to compare objects by a particular field, or pass your own comparison function for complete control over how objects are compared. */
   by?: string | ((a: T, b: T) => boolean);
   /** The reading direction of the combobox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode. */
@@ -73,10 +75,14 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<SelectRootProps<T>>(), {
-  modelValue: undefined,
-  open: undefined,
-});
+const props = withDefaults(
+  defineProps<SelectRootProps<T>>(),
+  {
+    modelValue: undefined,
+    open: undefined,
+    nullableValue: '',
+  },
+);
 const emits = defineEmits<SelectRootEmits<T>>();
 
 defineSlots<{
@@ -215,7 +221,7 @@ provideSelectRootContext({
     >
       <option
         v-if="isNullish(modelValue)"
-        value=""
+        :value="nullableValue"
       />
       <option
         v-for="option in Array.from(optionsSet)"
