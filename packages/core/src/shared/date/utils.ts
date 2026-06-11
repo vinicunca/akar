@@ -65,7 +65,7 @@ export function handleCalendarInitialFocus(calendar: HTMLElement) {
     return today.focus();
   }
 
-  const firstDay = calendar.querySelector<HTMLElement>('[data-akar-calendar-day]');
+  const firstDay = calendar.querySelector<HTMLElement>('[data-value]:not([data-outside-view]):not([data-disabled])');
   if (firstDay) {
     return firstDay.focus();
   }
