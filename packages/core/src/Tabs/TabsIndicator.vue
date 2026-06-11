@@ -23,10 +23,12 @@ const isMounted = useMounted();
 
 interface IndicatorStyle {
   size: number | null;
+  thickness: number | null;
   position: number | null;
 }
 const indicatorStyle = ref<IndicatorStyle>({
   size: null,
+  thickness: null,
   position: null,
 });
 const tabs = ref<Array<HTMLElement>>([]);
@@ -52,11 +54,13 @@ function updateIndicatorStyle() {
     indicatorStyle.value = {
       size: activeTab.offsetWidth,
       position: activeTab.offsetLeft,
+      thickness: activeTab.offsetHeight,
     };
   } else {
     indicatorStyle.value = {
       size: activeTab.offsetHeight,
       position: activeTab.offsetTop,
+      thickness: activeTab.offsetWidth,
     };
   }
 }
@@ -69,6 +73,7 @@ function updateIndicatorStyle() {
     :style="{
       '--akar-tabs-indicator-size': `${indicatorStyle.size}px`,
       '--akar-tabs-indicator-position': `${indicatorStyle.position}px`,
+      '--akar-tabs-indicator-thickness': `${indicatorStyle.thickness}px`,
     }"
   >
     <slot />
