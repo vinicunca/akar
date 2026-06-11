@@ -1,7 +1,7 @@
 {
   "name": "plugins",
   "type": "module",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Nuxt module for Radix Vue",
   "license": "MIT",
   "keywords": [
