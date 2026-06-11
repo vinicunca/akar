@@ -32,6 +32,7 @@ type DateFieldRootContext = {
   formatter: Formatter;
   hourCycle: HourCycle;
   step: Ref<DateStep>;
+  stepSnapping: Ref<boolean>;
   segmentValues: Ref<SegmentValueObj>;
   segmentContents: Ref<Array<{ part: SegmentPart; value: string }>>;
   elements: Ref<Set<HTMLElement>>;
@@ -52,6 +53,8 @@ export interface DateFieldRootProps extends PrimitiveProps, FormFieldProps {
   hourCycle?: HourCycle;
   /** The stepping interval for the time fields. Defaults to `1`. */
   step?: DateStep;
+  /** Whether to enforce snapping the time value to the nearest step increment after input. Defaults to `false`. */
+  stepSnapping?: boolean;
   /** The granularity to use for formatting times. Defaults to day if a CalendarDate is provided, otherwise defaults to minute. The field will render segments for each part of the date up to and including the specified granularity */
   granularity?: Granularity;
   /** Whether or not to hide the time zone segment of the field */
@@ -96,14 +99,20 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<DateFieldRootProps>(), {
-  defaultValue: undefined,
-  disabled: false,
-  readonly: false,
-  placeholder: undefined,
-  isDateUnavailable: undefined,
-});
+const props = withDefaults(
+  defineProps<DateFieldRootProps>(),
+  {
+    defaultValue: undefined,
+    disabled: false,
+    readonly: false,
+    placeholder: undefined,
+    isDateUnavailable: undefined,
+    stepSnapping: false,
+  },
+);
+
 const emits = defineEmits<DateFieldRootEmits>();
+
 defineSlots<{
   default?: (props: {
     /** The current date of the field */
@@ -115,7 +124,7 @@ defineSlots<{
   }) => any;
 }>();
 
-const { disabled, readonly, isDateUnavailable: propsIsDateUnavailable, granularity, defaultValue, dir: propDir, locale: propLocale } = toRefs(props);
+const { disabled, readonly, isDateUnavailable: propsIsDateUnavailable, granularity, defaultValue, stepSnapping, dir: propDir, locale: propLocale } = toRefs(props);
 const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
 
@@ -290,6 +299,7 @@ provideDateFieldRootContext({
   hourCycle: props.hourCycle,
   step,
   readonly,
+  stepSnapping,
   segmentValues,
   isInvalid,
   segmentContents: editableSegmentContents,

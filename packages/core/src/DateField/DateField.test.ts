@@ -679,6 +679,190 @@ describe('dateField', async () => {
     const timeZone = getByTestId('timeZoneName');
     expect(timeZone).toHaveTextContent(thisTimeZone('2023-10-12T12:30:00Z'));
   });
+
+  describe('stepSnapping', () => {
+    function setupStepSnappingTest({
+      step,
+      stepSnapping,
+      modelValue = new CalendarDateTime(1980, 1, 20, 12, 0, 0, 0),
+      hourCycle,
+    }: {
+      step: DateFieldRootProps['step'];
+      stepSnapping: boolean;
+      modelValue?: DateValue;
+      hourCycle?: DateFieldRootProps['hourCycle'];
+    }) {
+      let rerender: ReturnType<typeof setup>['rerender'];
+      const returned = setup({
+        dateFieldProps: {
+          modelValue,
+          granularity: 'second',
+          hourCycle,
+          step,
+          stepSnapping,
+        },
+        emits: {
+          'onUpdate:modelValue': (data: DateValue) => {
+            return rerender({
+              dateFieldProps: {
+                modelValue: data,
+                granularity: 'second',
+                hourCycle,
+                step,
+                stepSnapping,
+              },
+            });
+          },
+        },
+      });
+      rerender = returned.rerender;
+      return returned;
+    }
+
+    it('snaps typed minute value to nearest step', async () => {
+      const { user, getByTestId } = setupStepSnappingTest({
+        step: { minute: 15 },
+        stepSnapping: true,
+      });
+
+      const minute = getByTestId('minute');
+      await user.click(minute);
+      await user.keyboard('{2}{3}');
+      await user.click(getByTestId('second'));
+
+      expect(minute).toHaveTextContent('30');
+    });
+
+    it('does not change typed minute value already on the step boundary', async () => {
+      const { user, getByTestId } = setupStepSnappingTest({
+        step: { minute: 15 },
+        stepSnapping: true,
+      });
+
+      const minute = getByTestId('minute');
+      await user.click(minute);
+      await user.keyboard('{1}{5}');
+      await user.click(getByTestId('second'));
+
+      expect(minute).toHaveTextContent('15');
+    });
+
+    it('snaps typed minute value using custom step', async () => {
+      const { user, getByTestId } = setupStepSnappingTest({
+        step: { minute: 10 },
+        stepSnapping: true,
+      });
+
+      const minute = getByTestId('minute');
+      await user.click(minute);
+      await user.keyboard('{2}{6}');
+      await user.click(getByTestId('second'));
+
+      expect(minute).toHaveTextContent('30');
+    });
+
+    it('snaps typed minute value down to the nearest step', async () => {
+      const { user, getByTestId, rerender } = setup({
+        dateFieldProps: {
+          modelValue: new CalendarDateTime(1980, 1, 20, 12, 0, 0, 0),
+          granularity: 'second',
+          step: { minute: 15 },
+          stepSnapping: true,
+        },
+        emits: {
+          'onUpdate:modelValue': (data: DateValue) => {
+            return rerender({
+              dateFieldProps: {
+                modelValue: data,
+                granularity: 'second',
+                step: { minute: 15 },
+                stepSnapping: true,
+              },
+            });
+          },
+        },
+      });
+
+      const minute = getByTestId('minute');
+      await user.click(minute);
+      await user.keyboard('{0}{7}');
+      await user.click(getByTestId('second'));
+
+      expect(minute).toHaveTextContent('0');
+    });
+
+    it('does not snap typed minute value when step is 1', async () => {
+      const { user, getByTestId } = setupStepSnappingTest({
+        step: { minute: 1 },
+        stepSnapping: true,
+      });
+
+      const minute = getByTestId('minute');
+      await user.click(minute);
+      await user.keyboard('{2}{3}');
+      await user.click(getByTestId('second'));
+
+      expect(minute).toHaveTextContent('23');
+    });
+
+    it('snaps typed minute value to nearest non-divisor step', async () => {
+      const { user, getByTestId } = setupStepSnappingTest({
+        step: { minute: 7 },
+        stepSnapping: true,
+      });
+
+      const minute = getByTestId('minute');
+      await user.click(minute);
+      await user.keyboard('{2}{3}');
+      await user.click(getByTestId('second'));
+
+      expect(minute).toHaveTextContent('21');
+    });
+
+    it('snaps typed hour value to nearest step', async () => {
+      const { user, getByTestId } = setupStepSnappingTest({
+        modelValue: new CalendarDateTime(1980, 1, 20, 0, 0, 0, 0),
+        hourCycle: 24,
+        step: { hour: 4 },
+        stepSnapping: true,
+      });
+
+      const hour = getByTestId('hour');
+      await user.click(hour);
+      await user.keyboard('{1}{0}');
+      await user.click(getByTestId('minute'));
+
+      expect(hour).toHaveTextContent('12');
+    });
+
+    it('snaps typed second value to nearest step', async () => {
+      const { user, getByTestId } = setupStepSnappingTest({
+        step: { second: 7 },
+        stepSnapping: true,
+      });
+
+      const second = getByTestId('second');
+      await user.click(second);
+      await user.keyboard('{1}{0}');
+      await user.click(getByTestId('minute'));
+
+      expect(second).toHaveTextContent('7');
+    });
+
+    it('does not snap typed values when stepSnapping is false', async () => {
+      const { user, getByTestId } = setupStepSnappingTest({
+        step: { minute: 15 },
+        stepSnapping: false,
+      });
+
+      const minute = getByTestId('minute');
+      await user.click(minute);
+      await user.keyboard('{2}{3}');
+      await user.click(getByTestId('second'));
+
+      expect(minute).toHaveTextContent('23');
+    });
+  });
 });
 
 describe('handle IME composition', () => {
