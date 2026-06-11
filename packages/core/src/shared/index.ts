@@ -14,7 +14,7 @@ export { useBodyScrollLock } from './useBodyScrollLock';
 export { useComposing } from './useComposing';
 export { type Formatter, useDateFormatter } from './useDateFormatter';
 export { useDirection } from './useDirection';
-export { useEmitAsProps } from './useEmitAsProps';
+export { type EmitAsProps, useEmitAsProps } from './useEmitAsProps';
 export { useFilter } from './useFilter';
 export { useFocusGuards } from './useFocusGuards';
 export { useFormControl } from './useFormControl';
