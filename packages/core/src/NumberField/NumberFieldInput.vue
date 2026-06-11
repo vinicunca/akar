@@ -18,7 +18,6 @@ const props = withDefaults(defineProps<NumberFieldInputProps>(), {
 
 const { primitiveElement, currentElement } = usePrimitiveElement();
 const rootContext = injectNumberFieldRootContext();
-
 const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing();
 
 function handleKeydown(event: KeyboardEvent) {
@@ -126,6 +125,7 @@ function handleChange() {
     @keydown="handleKeydown"
     @wheel="handleWheelEvent"
     @beforeinput="(event: InputEvent) => {
+      if (event.isComposing) return
       const target = event.target as HTMLInputElement
       let nextValue
         = target.value.slice(0, target.selectionStart ?? undefined)

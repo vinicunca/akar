@@ -43,6 +43,62 @@ describe('given default ScrollArea', () => {
   });
 });
 
+describe('given prop:type="always" ScrollArea', () => {
+  let wrapper: VueWrapper<InstanceType<typeof ScrollArea>>;
+
+  beforeEach(() => {
+    wrapper = mount(ScrollArea, { attachTo: document.body, props: { type: 'always' } });
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 500 });
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 500 });
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, value: 2000 });
+    Object.defineProperty(HTMLElement.prototype, 'scrollWidth', { configurable: true, value: 2000 });
+  });
+
+  it('should pass axe accessibility tests', async () => {
+    expect(await axe(wrapper.element)).toHaveNoViolations();
+  });
+
+  it('should render content and scrollbar', () => {
+    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.html()).toContain('data-orientation="vertical"');
+  });
+});
+
+describe('given prop:type="scroll" ScrollArea', () => {
+  let wrapper: VueWrapper<InstanceType<typeof ScrollArea>>;
+
+  beforeEach(() => {
+    wrapper = mount(ScrollArea, { attachTo: document.body, props: { type: 'scroll' } });
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 500 });
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 500 });
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, value: 2000 });
+    Object.defineProperty(HTMLElement.prototype, 'scrollWidth', { configurable: true, value: 2000 });
+    Object.defineProperty(HTMLElement.prototype, 'scrollTop', { configurable: true, value: 20 });
+  });
+
+  it('should pass axe accessibility tests', async () => {
+    expect(await axe(wrapper.element)).toHaveNoViolations();
+  });
+
+  it('should render content and scrollbar', () => {
+    expect(wrapper.html()).toMatchSnapshot();
+    expect(wrapper.html()).not.toContain('data-orientation="vertical"');
+  });
+
+  describe('on scroll', () => {
+    beforeEach(async () => {
+      Object.defineProperty(HTMLElement.prototype, 'scrollTop', { configurable: true, value: 40 });
+      await wrapper.find('[data-akar-scroll-area-viewport]').trigger('scroll');
+      await sleep(10);
+    });
+
+    it('should render scrollbar', () => {
+      expect(wrapper.html()).toContain('data-orientation="vertical"');
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
+});
+
 describe('given prop:type="hover" ScrollArea with both scrollbars and a corner', () => {
   // ScrollAreaCornerImpl sizes itself from a ResizeObserver bound to the
   // scrollbar elements. jsdom has no ResizeObserver, so provide a minimal mock
@@ -106,65 +162,9 @@ describe('given prop:type="hover" ScrollArea with both scrollbars and a corner',
     await sleep(700);
     expect(wrapper.find('[data-testid="corner-content"]').exists()).toBe(false);
 
-    // 2nd cycle: enter again -> corner must re-appear
+    // 2nd cycle: enter again -> corner must re-appear (regression)
     await wrapper.trigger('pointerenter');
     await sleep(100);
     expect(wrapper.find('[data-testid="corner-content"]').exists()).toBe(true);
-  });
-});
-
-describe('given prop:type="always" ScrollArea', () => {
-  let wrapper: VueWrapper<InstanceType<typeof ScrollArea>>;
-
-  beforeEach(() => {
-    wrapper = mount(ScrollArea, { attachTo: document.body, props: { type: 'always' } });
-    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 500 });
-    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 500 });
-    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, value: 2000 });
-    Object.defineProperty(HTMLElement.prototype, 'scrollWidth', { configurable: true, value: 2000 });
-  });
-
-  it('should pass axe accessibility tests', async () => {
-    expect(await axe(wrapper.element)).toHaveNoViolations();
-  });
-
-  it('should render content and scrollbar', () => {
-    expect(wrapper.html()).toMatchSnapshot();
-    expect(wrapper.html()).toContain('data-orientation="vertical"');
-  });
-});
-
-describe('given prop:type="scroll" ScrollArea', () => {
-  let wrapper: VueWrapper<InstanceType<typeof ScrollArea>>;
-
-  beforeEach(() => {
-    wrapper = mount(ScrollArea, { attachTo: document.body, props: { type: 'scroll' } });
-    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 500 });
-    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 500 });
-    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, value: 2000 });
-    Object.defineProperty(HTMLElement.prototype, 'scrollWidth', { configurable: true, value: 2000 });
-    Object.defineProperty(HTMLElement.prototype, 'scrollTop', { configurable: true, value: 20 });
-  });
-
-  it('should pass axe accessibility tests', async () => {
-    expect(await axe(wrapper.element)).toHaveNoViolations();
-  });
-
-  it('should render content and scrollbar', () => {
-    expect(wrapper.html()).toMatchSnapshot();
-    expect(wrapper.html()).not.toContain('data-orientation="vertical"');
-  });
-
-  describe('on scroll', () => {
-    beforeEach(async () => {
-      Object.defineProperty(HTMLElement.prototype, 'scrollTop', { configurable: true, value: 40 });
-      await wrapper.find('[data-akar-scroll-area-viewport]').trigger('scroll');
-      await sleep(10);
-    });
-
-    it('should render scrollbar', () => {
-      expect(wrapper.html()).toContain('data-orientation="vertical"');
-      expect(wrapper.html()).toMatchSnapshot();
-    });
   });
 });
