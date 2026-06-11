@@ -144,6 +144,9 @@ function isEventTargetWithinCombobox(target: EventTarget | null) {
           v-bind="{ ...$attrs, ...forwardedProps }"
           :id="rootContext.contentId"
           :ref="forwardRef"
+          :memo-dependencies="position === 'popper'
+            ? [rootContext.filterSearch.value, rootContext.filterState.value]
+            : undefined"
           :data-state="rootContext.open.value ? 'open' : 'closed'"
           :data-empty="isEmpty ? '' : undefined"
           :style="{

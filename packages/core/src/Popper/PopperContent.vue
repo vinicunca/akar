@@ -33,6 +33,10 @@ export const PopperContentPropsDefaultValue = {
 
 export interface PopperContentProps extends PrimitiveProps {
   /**
+   * Reactive dependencies that should invalidate the memoized content subtree.
+   */
+  memoDependencies?: Array<unknown>;
+  /**
    * The preferred side of the trigger to render against when open.
    * Will be reversed when collisions occur and avoidCollisions
    * is enabled.
@@ -407,10 +411,37 @@ providePopperContentContext({
     }"
   >
     <Primitive
+      v-if="props.memoDependencies"
+      :ref="forwardRef"
+      v-memo="[
+        props.asChild,
+        props.as,
+        placedSide,
+        placedAlign,
+        isPositioned,
+        ...Object.values($attrs),
+        ...props.memoDependencies,
+      ]"
+      v-bind="$attrs"
+      :as-child="props.asChild"
+      :as="props.as"
+      :data-side="placedSide"
+      :data-align="placedAlign"
+      :style="{
+        // if the PopperContent hasn't been placed yet (not all measurements done)
+        // we prevent animations so that users's animation don't kick in too early referring wrong sides
+        animation: !isPositioned ? 'none' : undefined,
+      }"
+    >
+      <slot />
+    </Primitive>
+
+    <Primitive
+      v-else
       :ref="forwardRef"
       v-bind="$attrs"
       :as-child="props.asChild"
-      :as="as"
+      :as="props.as"
       :data-side="placedSide"
       :data-align="placedAlign"
       :style="{

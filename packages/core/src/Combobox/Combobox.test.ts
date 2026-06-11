@@ -1,10 +1,12 @@
+/* eslint-disable sonar/no-nested-functions */
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
-import { nextTick } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import { handleSubmit } from '@/test';
+import { ComboboxAnchor, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '.';
 import Combobox from './story/_Combobox.vue';
 import ComboboxObject from './story/_ComboboxObject.vue';
 import ComboboxTagsInput from './story/_ComboboxTagsInput.vue';
@@ -659,5 +661,97 @@ describe('given Combobox with TagsInput and addOnBlur', () => {
 
     // Input should be refocused so subsequent blur can trigger addOnBlur
     expect(document.activeElement).toBe(input.element);
+  });
+});
+
+describe('comboboxContent with popper positioning', () => {
+  const getSlotRenderCount = vi.fn(() => ({ value: 0 }));
+
+  const PopperCombobox = defineComponent({
+    setup() {
+      const modelValue = ref('');
+      const slotRenderCount = getSlotRenderCount();
+      const options = Array.from({ length: 60 }, (_, index) => `Option ${index}`);
+
+      return () => h(ComboboxRoot, {
+        'modelValue': modelValue.value,
+        'onUpdate:modelValue': (value: string) => {
+          modelValue.value = value;
+        },
+      }, {
+        default: () => [
+          h(ComboboxAnchor, null, {
+            default: () => [
+              h(ComboboxInput),
+              h(ComboboxTrigger, null, { default: () => 'Open' }),
+            ],
+          }),
+          h(ComboboxContent, { position: 'popper' }, {
+            default: () => {
+              slotRenderCount.value += 1;
+              return h(ComboboxViewport, null, {
+                default: () => options.map((option) => h(ComboboxItem, { key: option, value: option }, { default: () => option })),
+              });
+            },
+          }),
+        ],
+      });
+    },
+  });
+
+  beforeEach(() => {
+    document.body.innerHTML = '';
+    getSlotRenderCount.mockClear();
+    globalThis.ResizeObserver = class ResizeObserver {
+      private callback: ResizeObserverCallback;
+
+      constructor(callback: ResizeObserverCallback) {
+        this.callback = callback;
+      }
+
+      observe(target: Element) {
+        this.callback([{ target } as ResizeObserverEntry], this);
+        this.callback([{ target } as ResizeObserverEntry], this);
+      }
+
+      unobserve() {}
+      disconnect() {}
+    };
+  });
+
+  it('does not rerender option slot content after popper position updates', async () => {
+    const slotRenderCount = { value: 0 };
+    getSlotRenderCount.mockReturnValue(slotRenderCount);
+
+    const wrapper = mount(PopperCombobox, { attachTo: document.body });
+
+    await wrapper.find('button').trigger('click');
+    await nextTick();
+
+    expect(slotRenderCount.value).toBe(3);
+
+    await sleep(0);
+    await nextTick();
+
+    expect(slotRenderCount.value).toBe(4);
+  });
+
+  it('updates visible options when filtering while popper content is open', async () => {
+    const slotRenderCount = { value: 0 };
+    getSlotRenderCount.mockReturnValue(slotRenderCount);
+
+    const wrapper = mount(PopperCombobox, { attachTo: document.body });
+
+    await wrapper.find('button').trigger('click');
+    await nextTick();
+
+    expect(wrapper.text()).toContain('Option 1');
+    expect(wrapper.text()).toContain('Option 59');
+
+    await wrapper.find('input').setValue('Option 59');
+    await nextTick();
+
+    expect(wrapper.text()).toContain('Option 59');
+    expect(wrapper.text()).not.toContain('Option 1');
   });
 });
