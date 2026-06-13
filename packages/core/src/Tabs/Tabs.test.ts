@@ -1,4 +1,3 @@
-/* eslint-disable sonar/no-nested-functions */
 import type { VueWrapper } from '@vue/test-utils';
 import { renderToString } from '@vue/server-renderer';
 import { flushPromises, mount } from '@vue/test-utils';

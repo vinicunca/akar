@@ -52,7 +52,6 @@ declare const looseEmit: LooseEmit;
 // useEmitAsProps — loose signature stays accepted (backwards compatibility)
 {
   const result = useEmitAsProps(looseEmit);
-  // eslint-disable-next-line sonar/void-use
   void result;
 }
 

@@ -1,4 +1,3 @@
-/* eslint-disable sonar/no-nested-functions */
 import type { VueWrapper } from '@vue/test-utils';
 import { findByText, fireEvent } from '@testing-library/vue';
 import { KEY_CODES } from '@vinicunca/perkakas';

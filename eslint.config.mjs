@@ -44,6 +44,8 @@ export default vinicuncaESLint(
       'no-await-in-loop': 'off',
       'sonar/no-dead-store': 'off',
       'sonar/no-nested-conditional': 'off',
+      'sonar/no-nested-functions': 'off',
+      'sonar/void-use': 'off',
     },
   },
   {

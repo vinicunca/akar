@@ -1,4 +1,3 @@
-/* eslint-disable sonar/no-nested-functions */
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
