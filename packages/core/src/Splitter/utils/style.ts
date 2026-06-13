@@ -86,7 +86,7 @@ export function setGlobalCursorStyle(
     document.head.appendChild(styleElement);
   }
 
-  styleElement.innerHTML = `*{cursor: ${style}!important;}`;
+  styleElement.textContent = `*{cursor: ${style}!important;}`;
 }
 
 // the % of the group's overall space this panel should occupy.
