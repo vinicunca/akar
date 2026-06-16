@@ -1,7 +1,7 @@
 {
   "name": "akar-monorepo",
   "type": "module",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "private": true,
   "packageManager": "pnpm@11.3.0",
   "license": "MIT",
