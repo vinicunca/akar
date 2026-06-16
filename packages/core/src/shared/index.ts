@@ -8,7 +8,6 @@ export { isValidVNodeElement } from './isValidVNodeElement';
 export { isValueEqualOrExist } from './isValueEqualOrExist';
 export { onFocusOutside } from './onFocusOutside';
 export { renderSlotFragments } from './renderSlotFragments';
-export { trapFocus } from './trap-focus';
 export { useArrowNavigation } from './useArrowNavigation';
 export { useBodyScrollLock } from './useBodyScrollLock';
 export { useComposing } from './useComposing';

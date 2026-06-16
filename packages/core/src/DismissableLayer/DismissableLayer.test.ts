@@ -3,7 +3,7 @@ import { fireEvent } from '@testing-library/vue';
 import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { defineComponent, h, ref } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import { DismissableLayer as DismissableLayerPrimitive } from '.';
 import DismissableLayer from './story/_DismissableLayer.vue';
 import { isLayerExist } from './utils';
@@ -191,5 +191,94 @@ describe('given a default DismissableLayer', () => {
         expect(document.body.innerHTML).toContain(CLOSE_LABEL);
       });
     });
+  });
+});
+
+describe('given a mounted DismissableLayer toggling disableOutsidePointerEvents', () => {
+  beforeEach(() => {
+    document.body.innerHTML = '';
+    document.body.style.pointerEvents = '';
+  });
+
+  // Regression: with `unmountOnHide: false` the layer stays mounted while
+  // `disableOutsidePointerEvents` toggles `true` -> `false`. The body pointer-events
+  // must be restored even though the component is never unmounted.
+  it('should restore body pointer-events when toggled off while staying mounted', async () => {
+    const wrapper = mount(DismissableLayerPrimitive, {
+      attachTo: document.body,
+      props: { disableOutsidePointerEvents: true },
+    });
+    await nextTick();
+
+    expect(document.body.style.pointerEvents).toBe('none');
+
+    await wrapper.setProps({ disableOutsidePointerEvents: false });
+    await nextTick();
+
+    expect(document.body.style.pointerEvents).toBe('');
+  });
+
+  it('should keep body locked while another layer still disables pointer events', async () => {
+    const first = mount(DismissableLayerPrimitive, {
+      attachTo: document.body,
+      props: { disableOutsidePointerEvents: true },
+    });
+    const second = mount(DismissableLayerPrimitive, {
+      attachTo: document.body,
+      props: { disableOutsidePointerEvents: true },
+    });
+    await nextTick();
+
+    expect(document.body.style.pointerEvents).toBe('none');
+
+    // Close the second (topmost) layer without unmounting it.
+    await second.setProps({ disableOutsidePointerEvents: false });
+    await nextTick();
+
+    // First layer is still open, so the body stays locked.
+    expect(document.body.style.pointerEvents).toBe('none');
+
+    await first.setProps({ disableOutsidePointerEvents: false });
+    await nextTick();
+
+    expect(document.body.style.pointerEvents).toBe('');
+  });
+});
+
+describe('given a not-present DismissableLayer (e.g. unmountOnHide hidden)', () => {
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  // Regression: a layer kept mounted while hidden (`present: false`) is out of
+  // the layer stack, so its `index` is `-1`. With no visible layer present,
+  // `-1 === size - 1` would otherwise make it look like the highest layer and
+  // emit `escapeKeyDown` / `dismiss` for a dialog that is already closed.
+  it('should not emit escapeKeyDown or dismiss on Escape while not present', async () => {
+    const wrapper = mount(DismissableLayerPrimitive, {
+      attachTo: document.body,
+      props: { present: false },
+    });
+    await nextTick();
+
+    await fireEvent.keyDown(document, { key: 'Escape' });
+    await nextTick();
+
+    expect(wrapper.emitted('escapeKeyDown')).toBeUndefined();
+    expect(wrapper.emitted('dismiss')).toBeUndefined();
+  });
+
+  it('should emit escapeKeyDown and dismiss on Escape once present', async () => {
+    const wrapper = mount(DismissableLayerPrimitive, {
+      attachTo: document.body,
+      props: { present: true },
+    });
+    await nextTick();
+
+    await fireEvent.keyDown(document, { key: 'Escape' });
+    await nextTick();
+
+    expect(wrapper.emitted('escapeKeyDown')?.length).toBe(1);
+    expect(wrapper.emitted('dismiss')?.length).toBe(1);
   });
 });
