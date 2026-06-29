@@ -873,7 +873,9 @@ function isPanelCollapsed(panelData: PanelData) {
     const constraints = panelConstraintsArray?.[panelIndex] ?? panelData.constraints;
     return constraints.defaultSize === constraints.collapsedSize;
   } else {
-    return panelSize === collapsedSize;
+    // Fuzzy compare: px sizeUnit converts constraints px→% and renormalizes the
+    // layout, so panelSize drifts from collapsedSize by a float epsilon.
+    return fuzzyCompareNumbers(panelSize, collapsedSize) <= 0;
   }
 }
 
@@ -898,7 +900,7 @@ function isPanelExpanded(panelData: PanelData) {
     `Panel size not found for panel "${panelData.id}"`,
   );
 
-  return !collapsible || panelSize > collapsedSize;
+  return !collapsible || fuzzyCompareNumbers(panelSize, collapsedSize) > 0;
 }
 
 providePanelGroupContext({

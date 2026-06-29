@@ -156,6 +156,14 @@ export function usePresence(
   onUnmounted(() => {
     watcher();
     stateWatcher();
+    if (node.value) {
+      node.value.removeEventListener('animationstart', handleAnimationStart);
+      node.value.removeEventListener('animationcancel', handleAnimationEnd);
+      node.value.removeEventListener('animationend', handleAnimationEnd);
+    }
+    if (timeoutId !== undefined) {
+      ownerWindow?.clearTimeout(timeoutId);
+    }
   });
 
   const isPresent = computed(() =>
