@@ -2,7 +2,7 @@
 import type { ComputedRef } from 'vue';
 import type { RadioProps } from './Radio.vue';
 import type { SelectEvent } from './utils';
-import { createContext, useForwardExpose } from '@/shared';
+import { createContext, useForwardExpose, useForwardScopeId } from '@/shared';
 
 export interface RadioGroupItemProps extends Omit<RadioProps, 'checked'> {}
 export type RadioGroupItemEmits = {
@@ -86,6 +86,11 @@ function handleFocus() {
     }
   }, 0);
 }
+
+// `RadioGroupItem` sets `inheritAttrs: false` and wraps the multi-root `Radio`, so the
+// parent's scoped-style id is not auto-forwarded; pass it through manually so consumer
+// `<style scoped>` keeps working.
+const scopeIdAttrs = useForwardScopeId();
 </script>
 
 <template>
@@ -97,7 +102,7 @@ function handleFocus() {
     :active="checked"
   >
     <Radio
-      v-bind="{ ...$attrs, ...props }"
+      v-bind="{ ...scopeIdAttrs, ...$attrs, ...props }"
       :ref="forwardRef"
       :checked="checked"
       :required="required"
