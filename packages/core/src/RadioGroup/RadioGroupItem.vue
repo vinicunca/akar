@@ -30,10 +30,13 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<RadioGroupItemProps>(), {
-  disabled: false,
-  as: 'button',
-});
+const props = withDefaults(
+  defineProps<RadioGroupItemProps>(),
+  {
+    disabled: false,
+    as: 'button',
+  },
+);
 
 const emits = defineEmits<RadioGroupItemEmits>();
 
@@ -66,6 +69,7 @@ useEventListener('keydown', (event) => {
     isArrowKeyPressed.value = true;
   }
 });
+
 useEventListener('keyup', () => {
   isArrowKeyPressed.value = false;
 });
