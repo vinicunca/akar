@@ -3,7 +3,7 @@ name: Publish Docs
 on:
   push:
     paths:
-      - 'docs/**'
+      - "docs/**"
 
 jobs:
   publish:
@@ -14,7 +14,7 @@ jobs:
     name: Publish to Cloudflare Pages
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup (Install node & pnpm)
         uses: ./.github/actions/setup
@@ -41,4 +41,4 @@ jobs:
           branch: main
           # Optional: Change the working directory
           workingDirectory: docs
-          wranglerVersion: '3'
+          wranglerVersion: "3"
