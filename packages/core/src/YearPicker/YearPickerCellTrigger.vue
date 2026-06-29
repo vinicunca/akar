@@ -88,6 +88,13 @@ function handleArrowKey(e: KeyboardEvent) {
   if (isDisabled.value) {
     return;
   }
+
+  // Modifier combos on Enter/Space (e.g. Ctrl+Enter) are not handled by the cell —
+  // let them bubble so parent listeners can react (e.g. submit a form).
+  if ((e.code === KEY_CODES.ENTER || e.code === KEY_CODES.SPACE) && (e.ctrlKey || e.metaKey || e.altKey)) {
+    return;
+  }
+
   e.preventDefault();
   e.stopPropagation();
   const parentElement = rootContext.parentElement.value!;
@@ -211,7 +218,6 @@ function handleArrowKey(e: KeyboardEvent) {
     :tabindex="isFocusedYear ? 0 : isDisabled ? undefined : -1"
     @click="handleClick"
     @keydown.up.down.left.right.space.enter.page-up.page-down="handleArrowKey"
-    @keydown.enter.prevent
   >
     <slot
       :year-value="yearValue"
