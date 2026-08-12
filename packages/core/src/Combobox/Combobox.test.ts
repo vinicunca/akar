@@ -709,6 +709,60 @@ describe('handle IME composition', () => {
     expect(content.exists()).toBe(true);
     expect(content.attributes('data-empty')).toBeDefined();
   });
+
+  it('should not update filter during plain-text composition off Android (desktop Pinyin preedit)', async () => {
+    await input.trigger('compositionstart');
+    input.element.dispatchEvent(new CompositionEvent('compositionupdate', { data: 'xiang', bubbles: true }));
+    input.element.value = 'xiang';
+    await input.trigger('input');
+    await nextTick();
+
+    expect(wrapper.find('[role=listbox]').exists()).toBe(false);
+  });
+
+  describe('on Android soft keyboard', () => {
+    beforeEach(() => {
+      Object.defineProperty(window.navigator, 'userAgent', {
+        value: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
+        configurable: true,
+      });
+    });
+
+    afterEach(() => {
+      delete (window.navigator as { userAgent?: string }).userAgent;
+    });
+
+    it('should update filter live during plain-text (autocorrect) composition', async () => {
+      await input.trigger('compositionstart');
+      input.element.dispatchEvent(new CompositionEvent('compositionupdate', { data: 'zzzzz', bubbles: true }));
+      input.element.value = 'zzzzz';
+      await input.trigger('input');
+      await nextTick();
+      await nextTick();
+
+      const content = wrapper.find('[role=listbox]');
+      expect(content.exists()).toBe(true);
+      expect(content.attributes('data-empty')).toBeDefined();
+    });
+
+    it('should not update filter during CJK IME composition until compositionend', async () => {
+      await input.trigger('compositionstart');
+      input.element.dispatchEvent(new CompositionEvent('compositionupdate', { data: 'かんじ', bubbles: true }));
+      input.element.value = 'かんじ';
+      await input.trigger('input');
+      await nextTick();
+
+      expect(wrapper.find('[role=listbox]').exists()).toBe(false);
+
+      await input.trigger('compositionend');
+      await nextTick();
+      await nextTick();
+
+      const content = wrapper.find('[role=listbox]');
+      expect(content.exists()).toBe(true);
+      expect(content.attributes('data-empty')).toBeDefined();
+    });
+  });
 });
 
 describe('given Combobox with TagsInput and addOnBlur', () => {

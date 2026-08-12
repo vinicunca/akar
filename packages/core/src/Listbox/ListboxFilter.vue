@@ -65,7 +65,7 @@ onUnmounted(() => {
   rootContext.focusable.value = true;
 });
 
-const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing((event) => {
+const { isComposing, shouldDeferInput, handleCompositionStart, handleCompositionUpdate, handleCompositionEnd } = useComposing((event) => {
   modelValue.value = (event.target as HTMLInputElement).value;
   rootContext.onCompositionEnd();
   rootContext.highlightFirstItem();
@@ -77,7 +77,7 @@ function onCompositionStart() {
 }
 
 function handleInput(event: InputEvent) {
-  if (isComposing.value) {
+  if (shouldDeferInput.value) {
     return;
   }
   modelValue.value = (event.target as HTMLInputElement).value;
@@ -117,6 +117,7 @@ function handleKeydownEnter(event: KeyboardEvent) {
     @keydown.enter="handleKeydownEnter"
     @input="handleInput"
     @compositionstart="onCompositionStart"
+    @compositionupdate="handleCompositionUpdate"
     @compositionend="handleCompositionEnd"
   >
     <slot :model-value="modelValue" />
