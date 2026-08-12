@@ -148,8 +148,7 @@ describe('focusScope', () => {
     });
   });
 
-  // https://github.com/unovue/reka-ui/issues/2550
-  describe('given a FocusScope with SelectTrigger inside Dialog (#2550)', () => {
+  describe('given a FocusScope with SelectTrigger inside Dialog', () => {
     const DialogWithSelect = defineComponent({
       components: { DialogRoot, DialogTrigger, DialogContent, DialogTitle, SelectRoot, SelectTrigger, SelectValue, SelectContent, SelectItem },
       template: `
