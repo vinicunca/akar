@@ -30,7 +30,7 @@
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@vinicunca/eslint-config": "^5.0.0",
-    "bumpp": "^11.0.1",
+    "bumpp": "^12.1.1",
     "eslint": "^10.2.0",
     "lint-staged": "^16.4.0",
     "simple-git-hooks": "^2.13.1",
