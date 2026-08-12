@@ -136,6 +136,7 @@ watchEffect((cleanupFn) => {
       remainingRaf.resume();
       emits('resume');
     };
+
     const handlePause = () => {
       const elapsedTime = Date.now() - closeTimerStartTimeRef.value;
       closeTimerRemainingTimeRef.value = closeTimerRemainingTimeRef.value - elapsedTime;
@@ -143,12 +144,14 @@ watchEffect((cleanupFn) => {
       remainingRaf.pause();
       emits('pause');
     };
+
     viewport.addEventListener(VIEWPORT_PAUSE, handlePause);
     viewport.addEventListener(VIEWPORT_RESUME, handleResume);
-    return () => {
+
+    cleanupFn(() => {
       viewport.removeEventListener(VIEWPORT_PAUSE, handlePause);
       viewport.removeEventListener(VIEWPORT_RESUME, handleResume);
-    };
+    });
   }
 });
 
