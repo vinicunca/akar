@@ -74,7 +74,7 @@ const NonModalUnmountOnHideDialogTest = defineComponent({
 </DialogRoot>`,
 });
 
-// Reproduces https://github.com/unovue/reka-ui/issues/2660 — the content is
+// The content is
 // nested *inside* the overlay (a common centering pattern), so pointerdown
 // events from controls in the content bubble up to the overlay.
 const NestedContentDialogTest = defineComponent({

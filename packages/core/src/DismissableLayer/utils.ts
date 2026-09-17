@@ -43,7 +43,11 @@ export function isLayerExist(layerElement: HTMLElement, targetElement: HTMLEleme
     layerElement.ownerDocument.querySelectorAll('[data-dismissable-layer]'),
   );
 
-  return targetLayer && (mainLayer === targetLayer || nodeList.indexOf(mainLayer) < nodeList.indexOf(targetLayer));
+  if (targetLayer && (mainLayer === targetLayer || nodeList.indexOf(mainLayer) < nodeList.indexOf(targetLayer))) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**

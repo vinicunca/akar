@@ -32,6 +32,7 @@
     "@vinicunca/eslint-config": "^5.7.1",
     "bumpp": "^12.1.1",
     "eslint": "^10.10.0",
+    "eslint-plugin-sonarjs": "^4.2.1",
     "lint-staged": "^16.4.0",
     "simple-git-hooks": "^2.13.1",
     "tsx": "^4.20.3",

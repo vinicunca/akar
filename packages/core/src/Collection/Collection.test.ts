@@ -106,7 +106,7 @@ describe('useCollection', () => {
 
     // Sanity-check ordering reflects actual DOM order.
     const rendered = Array.from(
-      document.querySelectorAll('[data-reka-collection-item]'),
+      document.querySelectorAll('[data-akar-collection-item]'),
     ).map((el) => (el as HTMLElement).dataset.testid);
     expect(getItems().map((i) => i.value)).toEqual(rendered);
 
