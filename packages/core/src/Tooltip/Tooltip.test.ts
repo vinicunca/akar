@@ -1,6 +1,6 @@
 import type { VueWrapper } from '@vue/test-utils';
 import { flushPromises, mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent, ref } from 'vue';
 import { injectPopperRootContext } from '@/Popper';
