@@ -8,7 +8,7 @@
  * is `*.test.{ts,js}`) nor bundled (nothing imports it). A regression in the emit
  * type inference therefore fails the build.
  */
-import type { ComputedRef } from 'vue';
+import type { ComputedRef, EmitFn } from 'vue';
 import type { EmitAsProps } from './useEmitAsProps';
 import { useEmitAsProps } from './useEmitAsProps';
 import { useForwardPropsEmits } from './useForwardPropsEmits';
@@ -31,6 +31,14 @@ declare const singleEmit: SingleEmit;
 // The loose signature used internally by some components must stay assignable
 type LooseEmit = (name: string, ...args: Array<any>) => void;
 declare const looseEmit: LooseEmit;
+
+// `defineEmits<{ foo: [void] }>()` declares a required trailing `void` argument. TypeScript infers such
+// parameters as optional, which used to break overload walking
+type VoidEmit = EmitFn<{ contentFound: [void] }>;
+declare const voidEmit: VoidEmit;
+
+type MixedVoidEmit = EmitFn<{ 'contentFound': [void]; 'update:modelValue': [value: string]; 'change': [value: number, extra: void] }>;
+declare const mixedVoidEmit: MixedVoidEmit;
 
 // useEmitAsProps — overloaded emit maps each event to its `onXxx` handler prop
 {
@@ -55,12 +63,37 @@ declare const looseEmit: LooseEmit;
   void result;
 }
 
+// useEmitAsProps — emits with `[void]` arguments resolve without TS2589 and keep every event
+{
+  const result = useEmitAsProps(voidEmit);
+  type Result = typeof result;
+  type _keys = Expect<Equal<keyof Result, 'onContentFound'>>;
+  type _args = Expect<Equal<Parameters<NonNullable<Result['onContentFound']>>, [args_0?: void]>>;
+}
+{
+  const result = useEmitAsProps(mixedVoidEmit);
+  type Result = typeof result;
+  type _keys = Expect<Equal<keyof Result, 'onContentFound' | 'onUpdate:modelValue' | 'onChange'>>;
+  type _update = Expect<Equal<Parameters<NonNullable<Result['onUpdate:modelValue']>>, [value: string]>>;
+  type _change = Expect<Equal<Parameters<NonNullable<Result['onChange']>>, [value: number, extra?: void]>>;
+}
+
 // EmitAsProps utility — emit signature to handler props
 type _emitAsProps = Expect<Equal<keyof EmitAsProps<OverloadedEmit>, 'onUpdate:modelValue' | 'onChange'>>;
 
 // useForwardPropsEmits — fixtures
 interface DemoProps { foo: string; bar: boolean }
 declare const props: DemoProps;
+
+// With a `[void]` emit and an omitted prop
+declare const delegatedProps: Omit<DemoProps & { class?: string }, 'class'>;
+{
+  const forwarded = useForwardPropsEmits(delegatedProps, voidEmit);
+  type Value = typeof forwarded extends ComputedRef<infer V> ? V : never;
+  type _prop = Expect<Equal<Value['foo'], string>>;
+  type _emit = Expect<Equal<Parameters<NonNullable<Value['onContentFound']>>, [args_0?: void]>>;
+  type _noClass = Expect<Equal<Extract<keyof Value, 'class'>, never>>;
+}
 
 // With emit: forwarded props AND emit-as-props are both present and typed
 {
