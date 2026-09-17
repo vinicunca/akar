@@ -223,8 +223,7 @@ function updateModelValueAt(index: number, value: string) {
     const num = +value;
 
     if (value === '' || isNaN(num)) {
-      // eslint-disable-next-line ts/no-dynamic-delete
-      delete tempModelValue[index];
+      tempModelValue[index] = undefined;
     } else {
       tempModelValue[index] = num;
     }
