@@ -14,7 +14,13 @@ import { useEmitAsProps, useForwardExpose, useHideOthers } from '@/shared';
 import DrawerContentImpl from './DrawerContentImpl.vue';
 import { injectDrawerRootContext } from './DrawerRoot.vue';
 
-const props = defineProps<DrawerContentProps>();
+const props = withDefaults(
+  defineProps<DrawerContentProps>(),
+  {
+    initialFocus: true,
+    finalFocus: true,
+  },
+);
 const emits = defineEmits<DrawerContentEmits>();
 
 const rootContext = injectDrawerRootContext();
@@ -33,12 +39,22 @@ const shouldTrapFocus = computed(() => (isFullModal.value || isTrapFocusOnly.val
 const shouldHideOthers = computed(() => isFullModal.value ? currentElement.value : undefined);
 useHideOthers(shouldHideOthers);
 
+function finalFocusElement() {
+  if (props.finalFocus === false) {
+    return undefined;
+  }
+  if (props.finalFocus instanceof HTMLElement) {
+    return props.finalFocus;
+  }
+  return rootContext.triggerElement.value;
+}
+
 // Non-modal handlers defined as named functions so the refs are accessed via
 // `.value` explicitly and the reads/writes are unambiguous.
 function onCloseAutoFocusNonModal(e: Event) {
   if (!e.defaultPrevented) {
     if (!hasInteractedOutside.value) {
-      rootContext.triggerElement.value?.focus();
+      finalFocusElement()?.focus();
     }
     e.preventDefault();
   }
@@ -74,7 +90,7 @@ function onInteractOutsideNonModal(e: any) {
       @close-auto-focus="(e: Event) => {
         if (!e.defaultPrevented) {
           e.preventDefault()
-          rootContext.triggerElement.value?.focus()
+          finalFocusElement()?.focus()
         }
       }"
       @pointer-down-outside="(e: any) => {
