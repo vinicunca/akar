@@ -40,6 +40,15 @@ type ListboxRootContext<T> = {
 export const [injectListboxRootContext, provideListboxRootContext]
   = createContext<ListboxRootContext<AcceptableValue>>('ListboxRoot');
 
+/** Controls highlight scrolling while a parent composite is being positioned. */
+type ListboxHighlightScrollContext = {
+  suppressHighlightScroll: Readonly<Ref<boolean>>;
+  onHighlightScrollRequest: (scroll: (() => void) | undefined) => void;
+};
+
+export const [injectListboxHighlightScrollContext, provideListboxHighlightScrollContext]
+  = createContext<ListboxHighlightScrollContext>('ListboxHighlightScroll');
+
 export interface ListboxRootProps<T = AcceptableValue> extends PrimitiveProps, FormFieldProps {
   /** The controlled value of the listbox. Can be binded with `v-model`. */
   modelValue?: T | Array<T>;
@@ -105,6 +114,14 @@ const { handleTypeaheadSearch } = useTypeahead();
 const { primitiveElement, currentElement } = usePrimitiveElement();
 const dir = useDirection(propDir);
 
+const highlightScrollContext = injectListboxHighlightScrollContext(null);
+
+// Prevent nested Listbox roots from inheriting this root's scroll coordination.
+provideListboxHighlightScrollContext({
+  suppressHighlightScroll: ref(false),
+  onHighlightScrollRequest: () => {},
+});
+
 const isFormControl = useFormControl(currentElement);
 
 const firstValue = ref<T>();
@@ -162,10 +179,25 @@ function changeHighlight(el: HTMLElement, scrollIntoView = true, focus?: boolean
   }
 
   highlightedElement.value = el;
+  const suppressHighlightScroll = highlightScrollContext?.suppressHighlightScroll.value ?? false;
   if (focus ?? focusable.value) {
-    highlightedElement.value.focus();
+    if (suppressHighlightScroll) {
+      highlightedElement.value.focus({ preventScroll: true });
+    } else {
+      highlightedElement.value.focus();
+    }
   }
-  if (scrollIntoView) {
+
+  if (suppressHighlightScroll) {
+    highlightScrollContext?.onHighlightScrollRequest(scrollIntoView
+      ? () => {
+          const element = highlightedElement.value;
+          if (element?.isConnected) {
+            element.scrollIntoView({ block: 'nearest' });
+          }
+        }
+      : undefined);
+  } else if (scrollIntoView) {
     highlightedElement.value.scrollIntoView({ block: 'nearest' });
   }
 

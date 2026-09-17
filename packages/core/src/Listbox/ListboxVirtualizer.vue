@@ -136,10 +136,9 @@ rootContext.virtualFocusHook.on(({ event, scroll }) => {
     requestAnimationFrame(() => {
       const item = queryCheckedElement(parentEl.value);
       if (item) {
-        rootContext.changeHighlight(item, scroll, scroll ? undefined : false);
-        if (event) {
-          item?.focus();
-        }
+        // eslint-disable-next-line no-nested-ternary
+        const focus = event ? true : scroll ? undefined : false;
+        rootContext.changeHighlight(item, scroll, focus);
       }
     });
   } else if (scroll) {
