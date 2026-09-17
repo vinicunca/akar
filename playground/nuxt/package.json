@@ -9,8 +9,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@internationalized/date": "^3.7.0",
-    "@internationalized/number": "^3.6.0",
+    "@internationalized/date": "^3.12.4",
+    "@internationalized/number": "^3.6.8",
     "akar": "file:../../packages/core"
   },
   "devDependencies": {
@@ -19,6 +19,6 @@
     "@nuxtjs/tailwindcss": "^6.13.1",
     "@radix-ui/colors": "^3.0.0",
     "@types/node": "^22.13.5",
-    "nuxt": "^3.21.10"
+    "nuxt": "^4.5.2"
   }
 }
