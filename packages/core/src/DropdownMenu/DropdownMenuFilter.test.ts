@@ -1,6 +1,6 @@
 import type { VueWrapper } from '@vue/test-utils';
 import { mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { nextTick } from 'vue';
 import DropdownMenuWithFilter from './story/_DropdownMenuWithFilter.vue';
 
@@ -16,6 +16,10 @@ describe('given DropdownMenu with Filter', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
     wrapper = mount(DropdownMenuWithFilter, { attachTo: document.body });
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
   });
 
   it('should render trigger button', () => {
