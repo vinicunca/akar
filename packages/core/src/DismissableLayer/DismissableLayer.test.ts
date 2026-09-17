@@ -23,7 +23,7 @@ describe('isLayerExist', () => {
     expect(isLayerExist(layer, document.createTextNode('x') as any)).toBe(false);
   });
 
-  it('should treat the layer root and its unmarked descendants as inside (#2803)', () => {
+  it('should treat the layer root and its unmarked descendants as inside', () => {
     // Mirrors `FocusScope > DismissableLayer > PopperContent` rendered `asChild`:
     // the layer root is the popper wrapper, `[data-dismissable-layer]` lands on
     // the content element inside it.

@@ -18,6 +18,17 @@ export function isLayerExist(layerElement: HTMLElement, targetElement: HTMLEleme
     return false;
   }
 
+  // Anything inside the layer's own root element is inside the layer. The root
+  // can differ from the `[data-dismissable-layer]` element when the layer is
+  // rendered `asChild` into a component whose root is not the element that
+  // receives its attrs (e.g. `PopperContent`'s wrapper `div`). `FocusScope`
+  // resolves the same root as its container and may focus it as a fallback
+  // when the content has no tabbable children; that focus must not read as
+  // focus-outside and dismiss the layer it belongs to.
+  if (layerElement.contains(targetElement)) {
+    return true;
+  }
+
   const targetLayer = targetElement.closest(
     '[data-dismissable-layer]',
   );
