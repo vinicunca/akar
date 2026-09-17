@@ -454,7 +454,6 @@ describe('given horizontal Listbox', () => {
   });
 });
 
-// Regression test for https://github.com/unovue/reka-ui/issues/2644
 // `v-memo` on ListboxItem must invalidate when `disabled` (or
 // `rootContext.focusable.value`) changes, otherwise `data-disabled` / `disabled`
 // attributes go stale and the item still participates in keyboard navigation.

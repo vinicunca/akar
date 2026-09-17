@@ -56,7 +56,7 @@ describe('given default Popover', () => {
   });
 });
 
-describe('given a Popover whose content has no tabbable children (#2803)', () => {
+describe('given a Popover whose content has no tabbable children', () => {
   it('should stay open when focus lands on the FocusScope container', async () => {
     const openLog: Array<boolean> = [];
     const Harness = defineComponent({
@@ -84,7 +84,7 @@ describe('given a Popover whose content has no tabbable children (#2803)', () =>
     // that container. jsdom refuses to focus a `tabindex`-less div, so mimic
     // the resulting `focusin` (happy-dom / real browsers with a focusable
     // wrapper would fire it natively).
-    const focusScopeContainer = document.querySelector('[data-reka-popper-content-wrapper]')!;
+    const focusScopeContainer = document.querySelector('[data-akar-popper-content-wrapper]')!;
     expect(focusScopeContainer.querySelector('[data-dismissable-layer]')).not.toBeNull();
     focusScopeContainer.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
     await flushPromises();

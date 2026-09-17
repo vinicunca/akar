@@ -625,7 +625,7 @@ describe('given Combobox with TagsInput and addOnBlur', () => {
     await nextTick();
 
     // "Apple" should be added as tag, NOT the raw text "a"
-    const tags = wrapper.findAll('[data-reka-collection-item]');
+    const tags = wrapper.findAll('[data-akar-collection-item]');
     const tagTexts = tags.map((t) => t.text());
     expect(tagTexts).toContain('Apple');
     expect(tagTexts).not.toContain('a');
