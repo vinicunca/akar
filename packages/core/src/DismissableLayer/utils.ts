@@ -32,11 +32,7 @@ export function isLayerExist(layerElement: HTMLElement, targetElement: HTMLEleme
     layerElement.ownerDocument.querySelectorAll('[data-dismissable-layer]'),
   );
 
-  if (targetLayer && (mainLayer === targetLayer || nodeList.indexOf(mainLayer) < nodeList.indexOf(targetLayer))) {
-    return true;
-  } else {
-    return false;
-  }
+  return targetLayer && (mainLayer === targetLayer || nodeList.indexOf(mainLayer) < nodeList.indexOf(targetLayer));
 }
 
 /**
@@ -67,6 +63,11 @@ export function usePointerDownOutside(
       }
 
       if (isLayerExist(element.value, target)) {
+        // A touch `pointerdown` outside arms a one-shot `click` listener that
+        // never fires when the tap becomes a scroll/drag. Drop it here so the
+        // next tap inside a layer cannot trigger the stale dismissal (mirrors
+        // Radix's inside-tree branch, radix-ui/primitives#2171).
+        ownerDocument.removeEventListener('click', handleClickRef.value);
         isPointerInsideDOMTree.value = false;
         return;
       }
