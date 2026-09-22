@@ -20,7 +20,8 @@ type SyncTimeSegmentValuesProps = {
 export function syncTimeSegmentValues(props: SyncTimeSegmentValuesProps) {
   return Object.fromEntries(TIME_SEGMENT_PARTS.map((part) => {
     if (part === 'dayPeriod') {
-      return [part, props.formatter.dayPeriod(toDate(props.value))];
+      const timeZone = isZonedDateTime(props.value) ? props.value.timeZone : undefined;
+      return [part, props.formatter.dayPeriod(toDate(props.value), timeZone)];
     }
     return [part, props.value[part as keyof DateValue]];
   })) as SegmentValueObj;
