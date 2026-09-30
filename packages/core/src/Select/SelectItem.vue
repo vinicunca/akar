@@ -54,6 +54,12 @@ import { SELECTION_KEYS, valueComparator } from './utils';
 
 const props = defineProps<SelectItemProps>();
 const emits = defineEmits<SelectItemEmits<T>>();
+defineSlots<{
+  default?: (props: {
+    /** Whether the item is currently selected */
+    selected: boolean;
+  }) => any;
+}>();
 const { disabled } = toRefs(props);
 
 const rootContext = injectSelectRootContext();
@@ -187,7 +193,7 @@ provideSelectItemContext({
       @pointerleave="handlePointerLeave"
       @keydown="handleKeyDown"
     >
-      <slot />
+      <slot :selected="isSelected" />
     </Primitive>
   </CollectionItem>
 </template>
