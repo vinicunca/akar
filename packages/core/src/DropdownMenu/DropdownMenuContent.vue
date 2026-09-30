@@ -4,7 +4,7 @@ import type {
   MenuContentProps,
 } from '@/Menu';
 
-export type DropdownMenuContentEmits = MenuContentEmits;
+export type DropdownMenuContentEmits = Omit<MenuContentEmits, 'entryFocus'>;
 
 export interface DropdownMenuContentProps extends MenuContentProps {}
 </script>
@@ -14,6 +14,10 @@ import { ref } from 'vue';
 import { MenuContent } from '@/Menu';
 import { useForwardExpose, useForwardPropsEmits, useId } from '@/shared';
 import { injectDropdownMenuRootContext } from './DropdownMenuRoot.vue';
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const props = defineProps<DropdownMenuContentProps>();
 const emits = defineEmits<DropdownMenuContentEmits>();
@@ -44,7 +48,6 @@ rootContext.contentId ||= useId(undefined, 'akar-dropdown-menu-content');
 
 <template>
   <MenuContent
-    v-bind="forwarded"
     :id="rootContext.contentId"
     :aria-labelledby="rootContext?.triggerId"
     :style="{
@@ -58,6 +61,7 @@ rootContext.contentId ||= useId(undefined, 'akar-dropdown-menu-content');
       '--akar-dropdown-menu-trigger-height':
         'var(--akar-popper-anchor-height)',
     }"
+    v-bind="{ ...forwarded, ...omitEntryFocusListener($attrs) }"
     @close-auto-focus="handleCloseAutoFocus"
     @interact-outside="(event) => {
       if (event.defaultPrevented) return
