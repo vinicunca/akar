@@ -244,6 +244,7 @@ provideComboboxRootContext({
   openOnFocus,
   openOnClick,
   resetModelValueOnClear: ref(true),
+  unmountOnHide: ref(true),
 });
 
 // Provide autocomplete-specific context
