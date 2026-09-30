@@ -3,12 +3,9 @@
   "type": "module",
   "version": "2.0.18",
   "private": true,
-  "packageManager": "pnpm@11.3.0",
+  "packageManager": "pnpm@12.8.1",
   "license": "MIT",
   "repository": "vinicunca/akar",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "story:dev": "pnpm --filter histoire story:dev --open",
     "build": "pnpm run --filter akar build && pnpm run --filter plugins build",
