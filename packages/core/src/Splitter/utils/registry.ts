@@ -108,6 +108,12 @@ function handlePointerMove(event: ResizeEvent) {
   if (!isPointerDown) {
     const { target } = event;
 
+    // Ignore trailing mousemove events targeting an iframe while the pointer
+    // is entering it; these can otherwise cause a spurious resize update.
+    if (isIframeElement(target)) {
+      return;
+    }
+
     // Recalculate intersecting handles whenever the pointer moves, except if it has already been pressed
     // at that point, the handles may not move with the pointer (depending on constraints)
     // but the same set of active handles should be locked until the pointer is released
