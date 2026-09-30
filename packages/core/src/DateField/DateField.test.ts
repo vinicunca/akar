@@ -394,6 +394,24 @@ describe('dateField', async () => {
     expect(year).toHaveTextContent('yyyy');
   });
 
+  it('syncs a same-day time zone change from `modelValue`', async () => {
+    const emitted: Array<DateValue> = [];
+    const { getByTestId, user, rerender } = setup({
+      dateFieldProps: { modelValue: zonedDateTime },
+      emits: { 'onUpdate:modelValue': (data) => emitted.push(data) },
+    });
+    expect(getByTestId('timeZoneName')).toHaveTextContent('EST');
+
+    await rerender({
+      dateFieldProps: { modelValue: toZoned(calendarDateTime, 'Asia/Tokyo') },
+    });
+    expect(getByTestId('timeZoneName')).toHaveTextContent('GMT+9');
+
+    await user.click(getByTestId('minute'));
+    await user.keyboard(kbd.ARROW_UP);
+    expect(emitted.at(-1)).toMatchObject({ timeZone: 'Asia/Tokyo', minute: 31 });
+  });
+
   it('prevents interaction when `disabled`', async () => {
     const { user, getByTestId, day, month, year } = setup({
       dateFieldProps: {
@@ -430,7 +448,7 @@ describe('dateField', async () => {
       expect(segment).toHaveFocus();
       await user.keyboard(kbd.ARROW_UP);
       expect(segment).toHaveTextContent(
-        String(zonedDateTime[segment.getAttribute('data-akar-date-field-segment') as keyof TimeFields | keyof DateFields]),
+        String(zonedDateTime[segment.getAttribute('data-reka-date-field-segment') as keyof TimeFields | keyof DateFields]),
       );
     }
   });
@@ -1227,6 +1245,8 @@ describe('useDateField – characterization tests (coverage gaps)', () => {
  * Locales whose formatted day period is not `AM`/`PM` used to fall through to
  * the `AM` token, so an afternoon value rendered as AM and editing the hour
  * converted it to the morning.
+ *
+ * @see https://github.com/unovue/reka-ui/issues/2956
  */
 describe('dayPeriod across locales', () => {
   const afternoon = new CalendarDateTime(2024, 1, 20, 15, 30);
