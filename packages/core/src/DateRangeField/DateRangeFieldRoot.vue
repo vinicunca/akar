@@ -6,6 +6,7 @@ import type { PrimitiveProps } from '@/Primitive';
 import type { Formatter } from '@/shared';
 import type { DateRange, DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '@/shared/date';
 import type { Direction, FormFieldProps } from '@/shared/types';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import {
   areAllDaysBetweenValid,
   hasTime,
@@ -22,6 +23,7 @@ import {
   normalizeDateStep,
   normalizeHourCycle,
   syncSegmentValues,
+  useSegmentNavigation,
 } from '@/shared/date';
 
 export type DateRangeType = 'start' | 'end';
@@ -92,7 +94,6 @@ export const [injectDateRangeFieldRootContext, provideDateRangeFieldRootContext]
 </script>
 
 <script setup lang="ts">
-import { KEY_CODES } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
@@ -326,29 +327,11 @@ watch([endValue, locale], ([_endValue]) => {
 
 const currentFocusedElement = ref<HTMLElement | null>(null);
 
-const currentSegmentIndex = computed(() => Array.from(segmentElements.value).findIndex((el) =>
-  el.getAttribute('data-akar-date-field-segment') === currentFocusedElement.value?.getAttribute('data-akar-date-field-segment')
-  && el.getAttribute('data-akar-date-range-field-segment-type') === currentFocusedElement.value?.getAttribute('data-akar-date-range-field-segment-type')));
-
-const nextFocusableSegment = computed(() => {
-  const sign = dir.value === 'rtl' ? -1 : 1;
-  const nextCondition = sign < 0 ? currentSegmentIndex.value < 0 : currentSegmentIndex.value > segmentElements.value.size - 1;
-  if (nextCondition) {
-    return null;
-  }
-  const segmentToFocus = Array.from(segmentElements.value)[currentSegmentIndex.value + sign];
-  return segmentToFocus;
-});
-
-const prevFocusableSegment = computed(() => {
-  const sign = dir.value === 'rtl' ? -1 : 1;
-  const prevCondition = sign > 0 ? currentSegmentIndex.value < 0 : currentSegmentIndex.value > segmentElements.value.size - 1;
-  if (prevCondition) {
-    return null;
-  }
-
-  const segmentToFocus = Array.from(segmentElements.value)[currentSegmentIndex.value - sign];
-  return segmentToFocus;
+const { nextFocusableSegment, prevFocusableSegment, focusNext } = useSegmentNavigation({
+  segmentElements,
+  currentFocusedElement,
+  dir,
+  segmentAttributes: ['data-akar-date-field-segment', 'data-akar-date-range-field-segment-type'],
 });
 
 function handleKeydown(e: KeyboardEvent) {
@@ -388,12 +371,7 @@ provideDateRangeFieldRootContext({
   segmentContents: editableSegmentContents,
   elements: segmentElements,
   setFocusedElement,
-  focusNext() {
-    // Auto-advance follows the segments' DOM order (the locale's format
-    // order) regardless of writing direction; only arrow-key navigation is
-    // direction-aware via nextFocusableSegment/prevFocusableSegment.
-    Array.from(segmentElements.value)[currentSegmentIndex.value + 1]?.focus();
-  },
+  focusNext,
 });
 
 defineExpose({

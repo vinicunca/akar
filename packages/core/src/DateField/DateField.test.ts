@@ -448,7 +448,7 @@ describe('dateField', async () => {
       expect(segment).toHaveFocus();
       await user.keyboard(kbd.ARROW_UP);
       expect(segment).toHaveTextContent(
-        String(zonedDateTime[segment.getAttribute('data-reka-date-field-segment') as keyof TimeFields | keyof DateFields]),
+        String(zonedDateTime[segment.getAttribute('data-akar-date-field-segment') as keyof TimeFields | keyof DateFields]),
       );
     }
   });
@@ -1245,8 +1245,6 @@ describe('useDateField – characterization tests (coverage gaps)', () => {
  * Locales whose formatted day period is not `AM`/`PM` used to fall through to
  * the `AM` token, so an afternoon value rendered as AM and editing the hour
  * converted it to the morning.
- *
- * @see https://github.com/unovue/reka-ui/issues/2956
  */
 describe('dayPeriod across locales', () => {
   const afternoon = new CalendarDateTime(2024, 1, 20, 15, 30);

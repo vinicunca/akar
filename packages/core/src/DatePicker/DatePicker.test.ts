@@ -256,7 +256,7 @@ describe('datePicker', async () => {
 
     await user.click(trigger);
     const calendar = getByTestId('calendar');
-    const targetCell = calendar.querySelector('div[data-reka-calendar-cell-trigger]:not([data-outside-view])')!;
+    const targetCell = calendar.querySelector('div[data-akar-calendar-cell-trigger]:not([data-outside-view])')!;
 
     await user.click(targetCell);
     expect(calendar.querySelector('[data-selected]')).toBeInTheDocument();
