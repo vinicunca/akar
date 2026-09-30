@@ -7,9 +7,9 @@ import { MenubarContent, MenubarItem, MenubarMenu, MenubarRoot, MenubarTrigger }
 import { MenuAnchor, MenuContent, MenuItem, MenuRoot } from '.';
 
 globalThis.ResizeObserver = class ResizeObserver {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
+  observe() { }
+  unobserve() { }
+  disconnect() { }
 };
 
 const CONTENT_ATTRS = `

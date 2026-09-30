@@ -12,6 +12,7 @@ export interface DropdownMenuContentProps extends MenuContentProps {}
 <script setup lang="ts">
 import { ref } from 'vue';
 import { MenuContent } from '@/Menu';
+import { omitEntryFocusListener } from '@/Menu/utils';
 import { useForwardExpose, useForwardPropsEmits, useId } from '@/shared';
 import { injectDropdownMenuRootContext } from './DropdownMenuRoot.vue';
 

@@ -29,11 +29,21 @@ export function isIndeterminate(
 }
 
 export function getCheckedState(checked: CheckedState) {
+  // eslint-disable-next-line no-nested-ternary
   return isIndeterminate(checked)
     ? 'indeterminate'
     : checked
       ? 'checked'
       : 'unchecked';
+}
+
+/**
+ * `entryFocus` is internal to the menu content wrappers (DropdownMenu, ContextMenu, Menubar),
+ * so drop a consumer's `@entry-focus` listener instead of letting it fall through to `MenuContent`.
+ */
+export function omitEntryFocusListener(attrs: Record<string, unknown>) {
+  const { onEntryFocus: _, onEntryFocusOnce: __, ...rest } = attrs;
+  return rest;
 }
 
 export function focusFirst(candidates: Array<HTMLElement>) {
