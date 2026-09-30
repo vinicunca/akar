@@ -26,17 +26,9 @@ const isActive = computed(() => {
 });
 
 const isVisible = computed(() => {
-  // Guard nullish equality: on SSR both activeElement and currentElement are
-  // undefined, so a raw === would treat every indicator as focused and cause
-  // a hydration mismatch for fractional steps (opacity 1 on server, 0 on client).
-  const isFocused = activeElement.value != null
-    && activeElement.value === currentElement.value;
-
-  return isFocused
-    || rootContext.step.value === 1
-    || props.step % 1 === 0
-    || props.step === rootContext.hoveredRating.value
-    || props.step === rootContext.modelValue.value;
+  // `currentElement` is unset on the server and before mount, where `activeElement` can also be `undefined`
+  const isFocused = !!currentElement.value && activeElement.value === currentElement.value;
+  return isFocused || rootContext.step.value === 1 || props.step % 1 === 0 || props.step === rootContext.hoveredRating.value || props.step === rootContext.modelValue.value;
 });
 
 function handleMouseEnter() {
