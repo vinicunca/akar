@@ -2,7 +2,14 @@
 import type { MenuItemImplProps } from './MenuItemImpl.vue';
 import type { Side } from './utils';
 
-export interface MenuSubTriggerProps extends MenuItemImplProps {}
+export interface MenuSubTriggerProps extends MenuItemImplProps {
+  /**
+   * Time in milliseconds to keep a submenu open while the pointer moves from
+   * its trigger to the submenu.
+   * @defaultValue 300
+   */
+  graceDuration?: number;
+}
 </script>
 
 <script setup lang="ts">
@@ -16,7 +23,9 @@ import { injectMenuContext, injectMenuRootContext } from './MenuRoot.vue';
 import { injectMenuSubContext } from './MenuSub.vue';
 import { getOpenState, isMouseEvent, SUB_OPEN_KEYS } from './utils';
 
-const props = defineProps<MenuSubTriggerProps>();
+const props = withDefaults(defineProps<MenuSubTriggerProps>(), {
+  graceDuration: 300,
+});
 
 const menuContext = injectMenuContext();
 const rootContext = injectMenuRootContext();
@@ -75,8 +84,6 @@ async function handlePointerLeave(event: PointerEvent) {
 
   const contentRect = menuContext.content.value?.getBoundingClientRect();
   if (contentRect?.width) {
-    // TODO (Radix UI): make sure to update this when we change positioning logic
-    // https://github.com/radix-ui/primitives/blob/main/packages/react/menu/src/Menu.tsx#L1088
     const side = menuContext.content.value?.dataset.side as Side;
 
     const rightSide = side === 'right';
@@ -100,7 +107,7 @@ async function handlePointerLeave(event: PointerEvent) {
     window.clearTimeout(contentContext.pointerGraceTimerRef.value);
     contentContext.pointerGraceTimerRef.value = window.setTimeout(
       () => contentContext.onPointerGraceIntentChange(null),
-      300,
+      props.graceDuration,
     );
   } else {
     const defaultPrevented = contentContext.onTriggerLeave(event);
