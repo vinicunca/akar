@@ -3,6 +3,7 @@ import type { Ref } from 'vue';
 import type { CheckedState } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
 import type { AcceptableValue, FormFieldProps } from '@/shared/types';
+import { useVModel } from '@vueuse/core';
 import { createContext, isValueEqualOrExist, useFormControl, useForwardExpose, useForwardScopeId } from '@/shared';
 import { injectCheckboxGroupRootContext } from './CheckboxGroupRoot.vue';
 
@@ -46,7 +47,6 @@ export const [injectCheckboxRootContext, provideCheckboxRootContext]
 
 <script setup lang="ts" generic="T = boolean">
 import { isDeepEqual, isNullish } from '@vinicunca/perkakas';
-import { useVModel } from '@vueuse/core';
 import { computed, onBeforeUnmount, onMounted, useAttrs, watch } from 'vue';
 import { injectFieldRootContext } from '@/Field';
 import { Primitive } from '@/Primitive';
@@ -85,15 +85,10 @@ const checkboxGroupContext = injectCheckboxGroupRootContext(null);
 // is inert — and byte-for-byte identical to before — when there is no Field.
 const fieldContext = injectFieldRootContext(null);
 
-const modelValue = useVModel(
-  props as any,
-  'modelValue',
-  emits as any,
-  {
-    defaultValue: props.defaultValue ?? props.falseValue,
-    passive: (props.modelValue === undefined) as false,
-  },
-) as Ref<T | 'indeterminate'>;
+const modelValue = useVModel(props as any, 'modelValue', emits as any, {
+  defaultValue: props.defaultValue ?? props.falseValue,
+  passive: (props.modelValue === undefined) as false,
+}) as Ref<T | 'indeterminate'>;
 
 // An unchecked checkbox can't be added once its group has reached `max`.
 const isGroupMaxReached = computed(() => {
