@@ -52,26 +52,45 @@ function handleBlur(event: FocusEvent) {
   }
 }
 
-function handleTab(event: Event) {
+function handleTab(event: KeyboardEvent) {
   if (!context.addOnTab.value) {
     return;
   }
 
-  handleCustomKeydown(event);
+  return handleCustomKeydown(event);
 }
 
 const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing();
-async function handleCustomKeydown(event: Event) {
+function handleEnter(event: KeyboardEvent) {
+  return handleCustomKeydown(event, { preventImplicitSubmit: true });
+}
+
+async function handleCustomKeydown(event: KeyboardEvent, { preventImplicitSubmit = false } = {}) {
   if (isComposing.value) {
     return;
   }
+
+  // Detect consumer listeners that prevent the key after this handler runs.
+  // `defaultPrevented` alone cannot distinguish their call from our own
+  // synchronous cancellation of a form's implicit Enter submission.
+  let isPreventedByOthers = event.defaultPrevented;
+  const nativePreventDefault = event.preventDefault.bind(event);
+  event.preventDefault = () => {
+    isPreventedByOthers = true;
+    nativePreventDefault();
+  };
+
+  const target = event.target as HTMLInputElement;
+  if (preventImplicitSubmit && target.value && !isPreventedByOthers) {
+    nativePreventDefault();
+  }
+
   await nextTick();
   // if keydown 'Enter' or `Tab` was prevented, we let user handle updating the value themselves
-  if (event.defaultPrevented) {
+  if (isPreventedByOthers) {
     return;
   }
 
-  const target = event.target as HTMLInputElement;
   if (!target.value) {
     return;
   }
@@ -80,9 +99,6 @@ async function handleCustomKeydown(event: Event) {
   if (isAdded) {
     target.value = '';
   }
-
-  // prevent reloading when using inside of form
-  event.preventDefault();
 }
 
 function handleInput(event: InputEvent) {
@@ -175,7 +191,7 @@ onMounted(() => {
     :disabled="context.disabled.value"
     :data-invalid="context.isInvalidInput.value ? '' : undefined"
     @input="handleInput"
-    @keydown.enter="handleCustomKeydown"
+    @keydown.enter="handleEnter"
     @keydown.tab="handleTab"
     @blur="handleBlur"
     @keydown="handleInputKeydown"
