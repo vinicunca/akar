@@ -79,6 +79,7 @@
     "watch": "tsdown --watch",
     "type-check": "vue-tsc -p tsconfig.check.json --noEmit",
     "test": "vitest",
+    "test:run": "vitest run",
     "test-update": "vitest -u",
     "pub:release": "npm publish --access public --provenance",
     "size": "size-limit"
