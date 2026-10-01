@@ -13,8 +13,19 @@ export const CONTEXT_UPDATE = 'dismissableLayer.update';
 export const POINTER_DOWN_OUTSIDE = 'dismissableLayer.pointerDownOutside';
 export const FOCUS_OUTSIDE = 'dismissableLayer.focusOutside';
 
+function isElement(node: unknown): node is Element {
+  if (typeof node !== 'object' || node === null) {
+    return false;
+  }
+  // Compare against the node's own window too, so elements from another
+  // realm (e.g. a layer rendered inside an iframe) are recognized
+  const ownerWindow = (node as Node).ownerDocument?.defaultView;
+  return (typeof Element !== 'undefined' && node instanceof Element)
+    || (!!ownerWindow && node instanceof ownerWindow.Element);
+}
+
 export function isLayerExist(layerElement: HTMLElement, targetElement: HTMLElement) {
-  if (!(targetElement instanceof Element)) {
+  if (!isElement(targetElement)) {
     return false;
   }
 
@@ -60,9 +71,6 @@ export function usePointerDownOutside(
   element?: Ref<HTMLElement | undefined>,
   enabled: MaybeRefOrGetter<boolean> = true,
 ) {
-  const ownerDocument: Document
-    = element?.value?.ownerDocument ?? globalThis?.document;
-
   const isPointerInsideDOMTree = ref(false);
   const handleClickRef = ref(() => {});
 
@@ -70,6 +78,11 @@ export function usePointerDownOutside(
     if (!isClient || !toValue(enabled)) {
       return;
     }
+    // Resolved inside the effect so it tracks `element`: the layer is usually
+    // not mounted yet when this composable runs, and listening on the global
+    // `document` would miss events from a layer rendered inside an iframe.
+    const ownerDocument: Document
+      = element?.value?.ownerDocument ?? globalThis?.document;
     const handlePointerDown = async (event: PointerEvent) => {
       const target = event.target as HTMLElement | undefined;
 
@@ -169,14 +182,14 @@ export function useFocusOutside(
   element?: Ref<HTMLElement | undefined>,
   enabled: MaybeRefOrGetter<boolean> = true,
 ) {
-  const ownerDocument: Document
-    = element?.value?.ownerDocument ?? globalThis?.document;
-
   const isFocusInsideDOMTree = ref(false);
   watchEffect((cleanupFn) => {
     if (!isClient || !toValue(enabled)) {
       return;
     }
+    // See `usePointerDownOutside`: resolved inside the effect to track `element`.
+    const ownerDocument: Document
+      = element?.value?.ownerDocument ?? globalThis?.document;
     const handleFocus = async (event: FocusEvent) => {
       if (!element?.value) {
         return;
