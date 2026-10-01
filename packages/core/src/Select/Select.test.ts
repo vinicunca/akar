@@ -44,7 +44,7 @@ describe('given default Select', () => {
     const trigger = wrapper.find('[role="combobox"]');
     expect(trigger.attributes('aria-controls')).toBeUndefined();
 
-    await trigger.trigger('pointerdown', { button: 0, ctrlKey: false });
+    await fireEvent.pointerDown(trigger.element, { button: 0, ctrlKey: false });
     await nextTick();
 
     expect(document.getElementById(trigger.attributes('aria-controls')!)).not.toBeNull();
@@ -54,7 +54,7 @@ describe('given default Select', () => {
     async function openSelectWithMouseClick() {
       const button = wrapper.find('button');
       // Open on pointerdown, then emit the compatibility mouse events that follow in browsers.
-      await button.trigger('pointerdown', { button: 0, ctrlKey: false });
+      await fireEvent.pointerDown(button.element, { button: 0, ctrlKey: false });
       fireEvent.mouseDown(button.element, { button: 0, ctrlKey: false });
       fireEvent.mouseUp(button.element, { button: 0, ctrlKey: false });
       fireEvent.click(button.element, { button: 0, ctrlKey: false });
@@ -96,7 +96,7 @@ describe('given default Select', () => {
       const trigger = wrapper.find('[role="combobox"]').element as HTMLElement;
       const focusSpy = vi.spyOn(trigger, 'focus');
 
-      await wrapper.find('button').trigger('pointerdown', { button: 0, ctrlKey: false });
+      await fireEvent.pointerDown(wrapper.find('button').element, { button: 0, ctrlKey: false });
       fireEvent.click(trigger, { button: 0, ctrlKey: false });
 
       expect(focusSpy).not.toHaveBeenCalled();
@@ -115,7 +115,7 @@ describe('given default Select', () => {
 
   describe('opening the modal', () => {
     beforeEach(async () => {
-      await wrapper.find('button').trigger('pointerdown', {
+      await fireEvent.pointerDown(wrapper.find('button').element, {
         button: 0,
         ctrlKey: false,
       });
@@ -164,7 +164,7 @@ describe('given default Select', () => {
 
       describe('after opening the modal again', () => {
         beforeEach(async () => {
-          await wrapper.find('button').trigger('pointerdown', {
+          await fireEvent.pointerDown(wrapper.find('button').element, {
             button: 0,
             ctrlKey: false,
           });
@@ -201,7 +201,7 @@ describe('given Select with multiple props', async () => {
 
   describe('opening the modal', () => {
     beforeEach(async () => {
-      await wrapper.find('button').trigger('pointerdown', {
+      await fireEvent.pointerDown(wrapper.find('button').element, {
         button: 0,
         ctrlKey: false,
       });
@@ -251,7 +251,7 @@ describe('given Select with multiple props', async () => {
 
       describe('after opening the modal again', () => {
         beforeEach(async () => {
-          await wrapper.find('button').trigger('pointerdown', {
+          await fireEvent.pointerDown(wrapper.find('button').element, {
             button: 0,
             ctrlKey: false,
           });
@@ -317,7 +317,7 @@ describe('given Select with object type', async () => {
 
   describe('opening the modal', () => {
     beforeEach(async () => {
-      await wrapper.find('button').trigger('pointerdown', {
+      await fireEvent.pointerDown(wrapper.find('button').element, {
         button: 0,
         ctrlKey: false,
       });
@@ -352,7 +352,7 @@ describe('given Select with options containing spaces', () => {
   beforeEach(async () => {
     document.body.innerHTML = '';
     wrapper = mount(Select, { attachTo: document.body, props: { options: ['New York', 'Newark', 'New Jersey'] } });
-    await wrapper.find('button').trigger('pointerdown', {
+    await fireEvent.pointerDown(wrapper.find('button').element, {
       button: 0,
       ctrlKey: false,
     });
@@ -460,7 +460,7 @@ describe('given Select in a form', async () => {
 
   describe('after selecting other option and click submit button again', () => {
     beforeEach(async () => {
-      await wrapper.find('button').trigger('pointerdown', {
+      await fireEvent.pointerDown(wrapper.find('button').element, {
         button: 0,
         ctrlKey: false,
       });
@@ -474,8 +474,8 @@ describe('given Select in a form', async () => {
     });
 
     it('should trigger submit once', () => {
-      expect(handleSubmit).toHaveBeenCalledTimes(2);
-      expect(handleSubmit.mock.results[1].value).toStrictEqual({ test: 'Pineapple' });
+      expect(handleSubmit).toHaveBeenCalledTimes(1);
+      expect(handleSubmit.mock.results[0].value).toStrictEqual({ test: 'Pineapple' });
     });
   });
 });

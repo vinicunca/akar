@@ -1,5 +1,5 @@
 import type { VueWrapper } from '@vue/test-utils';
-import { findByRole } from '@testing-library/vue';
+import { findByRole, fireEvent } from '@testing-library/vue';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -30,7 +30,7 @@ describe('given default Menubar', () => {
 
   describe('after opening the dropdown', () => {
     beforeEach(async () => {
-      await wrapper.find('button').trigger('pointerdown', {
+      await fireEvent.pointerDown(wrapper.find('button').element, {
         button: 0,
         ctrlKey: false,
       });
@@ -68,7 +68,9 @@ describe('given MenubarTrigger with consumer event listeners', () => {
     const wrapper = mount(defineComponent({
       setup: () => () => h(MenubarRoot, {
         'modelValue': value.value,
-        'onUpdate:modelValue': (next: string) => { value.value = next; },
+        'onUpdate:modelValue': (next: string) => {
+          value.value = next;
+        },
       }, () => h(MenubarMenu, { value: 'file' }, () => [
         h(MenubarTrigger, triggerListeners, () => 'File'),
         h(MenubarPortal, () => h(MenubarContent, () => h(MenubarItem, () => 'New'))),
@@ -91,13 +93,13 @@ describe('given MenubarTrigger with consumer event listeners', () => {
 
   it('should open on pointerdown', async () => {
     const { value, trigger } = mountMenubar();
-    await trigger.trigger('pointerdown', { button: 0, ctrlKey: false });
+    await fireEvent.pointerDown(trigger.element, { button: 0, ctrlKey: false });
     expect(value.value).toBe('file');
   });
 
   it('should not open on pointerdown when the consumer prevents default', async () => {
     const { value, trigger } = mountMenubar({ onPointerdown: (event) => event.preventDefault() });
-    await trigger.trigger('pointerdown', { button: 0, ctrlKey: false });
+    await fireEvent.pointerDown(trigger.element, { button: 0, ctrlKey: false });
     expect(value.value).toBe('');
   });
 });

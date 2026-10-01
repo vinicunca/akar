@@ -15,6 +15,7 @@
     "docs:build": "pnpm --filter docs docs:build",
     "docs:gen": "pnpm --filter docs docs:gen",
     "docs:contributors": "pnpm --filter docs docs:contributors",
+    "docs:meta": "node scripts/docs-meta.mjs",
     "prepare": "pnpm simple-git-hooks",
     "test": "pnpm --filter akar test",
     "test-update": "pnpm --filter akar test-update",
@@ -33,7 +34,8 @@
     "lint-staged": "^16.4.0",
     "simple-git-hooks": "^2.13.1",
     "tsx": "^4.20.3",
-    "typescript": "5.8.3"
+    "typescript": "5.8.3",
+    "vue-component-meta": "3.3.11"
   },
   "commitlint": {
     "extends": [

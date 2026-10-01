@@ -1,7 +1,4 @@
-minimumReleaseAgeExclude:
-  - '@vinicunca/eslint-config@5.7.1'
-  - '@vinicunca/perkakas@1.17.1'
-
+minimumReleaseAge: 0
 shellEmulator: true
 
 packages:

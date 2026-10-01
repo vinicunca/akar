@@ -2,6 +2,16 @@ import { describe, expect, it, vi } from 'vitest';
 import { ref } from 'vue';
 import { useNonce } from './useNonce';
 
+vi.mock('@/ConfigProvider/ConfigProvider.vue', async () => {
+  return {
+    injectConfigProviderContext: () => {
+      return {
+        nonce: ref('global-nonce'),
+      };
+    },
+  };
+});
+
 describe('useNonce', () => {
   vi.mock('@/ConfigProvider/ConfigProvider.vue', async () => {
     return {
