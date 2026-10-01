@@ -21,9 +21,8 @@ export interface ToastViewportProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { isString } from '@vinicunca/perkakas';
 import { onKeyStroke, unrefElement } from '@vueuse/core';
-import { computed, onMounted, ref, toRefs, watchEffect } from 'vue';
+import { computed, onMounted, ref, toRefs, watch, watchEffect } from 'vue';
 import { DismissableLayerBranch } from '@/DismissableLayer';
 import { focusFirst, getTabbableCandidates } from '@/FocusScope/utils';
 import { Primitive } from '@/Primitive';
@@ -61,6 +60,24 @@ onMounted(() => {
   providerContext.onViewportChange(currentElement.value);
 });
 
+// Collapse only once closing toasts have finished animating, so the stack does not
+// shift under the pointer while a toast is dismissed.
+const pendingPointerLeave = ref(false);
+watch([pendingPointerLeave, providerContext.closingCount], ([pending, closingCount]) => {
+  if (pending && closingCount === 0) {
+    providerContext.hovering.value = false;
+    pendingPointerLeave.value = false;
+  }
+});
+
+watch(hasToasts, (value) => {
+  if (!value) {
+    providerContext.hovering.value = false;
+    providerContext.focused.value = false;
+    pendingPointerLeave.value = false;
+  }
+});
+
 watchEffect((cleanupFn) => {
   const viewport = currentElement.value;
   if (hasToasts.value && viewport) {
@@ -83,15 +100,26 @@ watchEffect((cleanupFn) => {
     const handleFocusOutResume = (event: FocusEvent) => {
       const isFocusMovingOutside = !viewport.contains(event.relatedTarget as HTMLElement);
       if (isFocusMovingOutside) {
+        providerContext.focused.value = false;
         handleResume();
       }
     };
 
     const handlePointerLeaveResume = () => {
+      pendingPointerLeave.value = true;
       const isFocusInside = viewport.contains(getActiveElement());
       if (!isFocusInside) {
         handleResume();
       }
+    };
+
+    const handlePointerMoveExpand = () => {
+      pendingPointerLeave.value = false;
+      providerContext.hovering.value = true;
+    };
+
+    const handleFocusInExpand = () => {
+      providerContext.focused.value = true;
     };
 
     // We programmatically manage tabbing as we are unable to influence
@@ -130,8 +158,10 @@ watchEffect((cleanupFn) => {
     };
 
     viewport.addEventListener('focusin', handlePause);
+    viewport.addEventListener('focusin', handleFocusInExpand);
     viewport.addEventListener('focusout', handleFocusOutResume);
     viewport.addEventListener('pointermove', handlePause);
+    viewport.addEventListener('pointermove', handlePointerMoveExpand);
     viewport.addEventListener('pointerleave', handlePointerLeaveResume);
     viewport.addEventListener('keydown', handleKeyDown);
     window.addEventListener('blur', handlePause);
@@ -139,8 +169,10 @@ watchEffect((cleanupFn) => {
 
     cleanupFn(() => {
       viewport.removeEventListener('focusin', handlePause);
+      viewport.removeEventListener('focusin', handleFocusInExpand);
       viewport.removeEventListener('focusout', handleFocusOutResume);
       viewport.removeEventListener('pointermove', handlePause);
+      viewport.removeEventListener('pointermove', handlePointerMoveExpand);
       viewport.removeEventListener('pointerleave', handlePointerLeaveResume);
       viewport.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('blur', handlePause);
@@ -166,7 +198,7 @@ function getSortedTabbableCandidates({ tabbingDirection }: { tabbingDirection: '
 <template>
   <DismissableLayerBranch
     role="region"
-    :aria-label="isString(label) ? label.replace('{hotkey}', hotkeyMessage) : label(hotkeyMessage)"
+    :aria-label="typeof label === 'string' ? label.replace('{hotkey}', hotkeyMessage) : label(hotkeyMessage)"
     tabindex="-1"
     :style="{
       // incase list has size when empty (e.g. padding), we remove pointer events so
@@ -194,6 +226,12 @@ function getSortedTabbableCandidates({ tabbingDirection }: { tabbingDirection: '
         tabindex="-1"
         :as="as"
         :as-child="asChild"
+        :data-expanded="providerContext.expanded.value ? '' : undefined"
+        :style="{
+          '--akar-toast-frontmost-height': providerContext.frontmostHeight.value
+            ? `${providerContext.frontmostHeight.value}px`
+            : undefined,
+        }"
         v-bind="$attrs"
       >
         <slot />

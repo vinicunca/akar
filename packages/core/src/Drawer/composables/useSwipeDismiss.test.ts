@@ -685,7 +685,7 @@ describe('useSwipeDismiss — interactive start targets', () => {
           h('button', { 'data-testid': 'button' }, 'Button'),
           h('label', { 'data-testid': 'label' }, [h('input', { type: 'checkbox' })]),
           h('input', { 'type': 'range', 'data-testid': 'range' }),
-          h('div', { 'data-reka-swipe-ignore': '', 'data-testid': 'ignored' }, [h('span', 'Ignored')]),
+          h('div', { 'data-akar-swipe-ignore': '', 'data-testid': 'ignored' }, [h('span', 'Ignored')]),
           h('p', { 'data-testid': 'text' }, 'Text'),
         ]);
       },

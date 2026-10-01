@@ -8,7 +8,7 @@ export interface ToastActionProps extends ToastCloseProps {
    * @example <ToastAction altText="Goto account settings to upgrade">Upgrade</ToastAction>
    * @example <ToastAction altText="Undo (Alt+U)">Undo</ToastAction>
    */
-  altText: string;
+  altText?: string;
   /**
    * Whether the action should close the toast when clicked.
    *
@@ -19,6 +19,7 @@ export interface ToastActionProps extends ToastCloseProps {
 </script>
 
 <script setup lang="ts">
+import { computed, useSlots } from 'vue';
 import { Primitive } from '@/Primitive';
 import { useForwardExpose } from '@/shared';
 import ToastAnnounceExclude from './ToastAnnounceExclude.vue';
@@ -32,17 +33,31 @@ const props = withDefaults(
   },
 );
 
-if (!props.altText) {
+const rootContext = injectToastRootContext();
+const { forwardRef } = useForwardExpose();
+
+const slots = useSlots();
+
+const actionProps = computed(() => rootContext.toast.value?.actionProps);
+// A managed toast without `actionProps` renders no action, unless slot content is given.
+const isRendered = computed(() => !!slots.default || !rootContext.toast.value || !!actionProps.value);
+const altText = computed(() => props.altText ?? actionProps.value?.altText);
+
+if (isRendered.value && !altText.value) {
   throw new Error('Missing prop `altText` expected on `ToastAction`');
 }
 
-const rootContext = injectToastRootContext();
-const { forwardRef } = useForwardExpose();
+function handleClick(event: MouseEvent) {
+  actionProps.value?.onClick?.(event);
+  if (actionProps.value?.closeOnClick ?? props.closeOnClick) {
+    rootContext.onClose();
+  }
+}
 </script>
 
 <template>
   <ToastAnnounceExclude
-    v-if="altText"
+    v-if="isRendered && altText"
     :alt-text="altText"
     as-child
   >
@@ -51,9 +66,9 @@ const { forwardRef } = useForwardExpose();
       :as="as"
       :as-child="asChild"
       :type="as === 'button' ? 'button' : undefined"
-      @click="closeOnClick ? rootContext.onClose() : undefined"
+      @click="handleClick"
     >
-      <slot />
+      <slot>{{ actionProps?.label }}</slot>
     </Primitive>
   </ToastAnnounceExclude>
 </template>
