@@ -16,10 +16,11 @@ export interface RovingFocusItemProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import { useEventListener } from '@vueuse/core';
 import { computed, nextTick, onMounted, onUnmounted, watch } from 'vue';
 import { useCollection } from '@/Collection';
 import { Primitive } from '@/Primitive';
-import { useId } from '@/shared';
+import { useForwardExpose, useId } from '@/shared';
 import { injectRovingFocusGroupContext } from './RovingFocusGroup.vue';
 import { focusFirst, getFocusIntent, wrapArray } from './utils';
 
@@ -64,6 +65,10 @@ watch(
 );
 
 function handleKeydown(event: KeyboardEvent) {
+  if (event.defaultPrevented) {
+    return;
+  }
+
   if (event.key === 'Tab' && event.shiftKey) {
     context.onItemShiftTab();
     return;
@@ -104,11 +109,18 @@ function handleKeydown(event: KeyboardEvent) {
     nextTick(() => focusFirst(candidateNodes));
   }
 }
+// Bound natively after mount rather than via `@keydown` so it runs after the
+// item's own handlers. An `asChild` item (e.g. a `DropdownMenuTrigger` inside a
+// `ToolbarButton`) or a consumer can then claim a key with `preventDefault()`,
+// matching Radix, where the wrapped child's handler runs first.
+const { forwardRef, currentElement } = useForwardExpose();
+useEventListener(currentElement, 'keydown', handleKeydown);
 </script>
 
 <template>
   <CollectionItem>
     <Primitive
+      :ref="forwardRef"
       :tabindex="isCurrentTabStop ? 0 : -1"
       :data-orientation="context.orientation.value"
       :data-active="active ? '' : undefined"
@@ -125,7 +137,6 @@ function handleKeydown(event: KeyboardEvent) {
         }
       "
       @focus="context.onItemFocus(id)"
-      @keydown="handleKeydown"
     >
       <slot />
     </Primitive>
