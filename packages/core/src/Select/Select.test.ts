@@ -1,11 +1,12 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import { fireEvent } from '@testing-library/vue';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent, h, nextTick, ref } from 'vue';
 import { handleSubmit } from '@/test';
-import { SelectContent, SelectItem, SelectItemIndicator, SelectItemText, SelectRoot, SelectViewport } from '.';
+import { SelectContent, SelectItem, SelectItemIndicator, SelectItemText, SelectPortal, SelectRoot, SelectTrigger, SelectValue, SelectViewport } from '.';
 import SelectUnmountCleanup from './__test__/SelectUnmountCleanup.vue';
 import Select from './story/_SelectTest.vue';
 
@@ -541,5 +542,163 @@ describe('given SelectItem slot props and SelectItemIndicator', () => {
     expect(b.getAttribute('data-state')).toBe('unchecked');
     expect(a.hasAttribute('forcemount')).toBe(false);
     expect(a.getAttribute('aria-hidden')).toBe('true');
+  });
+});
+
+describe('given Select with `loop`', () => {
+  function setup(props: { loop?: boolean; position?: 'item-aligned' | 'popper' }) {
+    const wrapper = mount(defineComponent({
+      setup() {
+        return () => h(SelectRoot, { open: true }, () =>
+          h(SelectContent, props, () => h(SelectViewport, () => ['a', 'b', 'c'].map((value) =>
+            h(SelectItem, { value }, () => h(SelectItemText, () => value)),
+          ))));
+      },
+    }), { attachTo: document.body });
+    return { wrapper, items: () => [...document.querySelectorAll<HTMLElement>('[role=option]')] };
+  }
+
+  async function press(key: string) {
+    fireEvent.keyDown(document.activeElement!, { key });
+    await new Promise((resolve) => {
+      setTimeout(resolve);
+    });
+  }
+
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it.each(['item-aligned', 'popper'] as const)('should wrap around the boundary items (%s)', async (position) => {
+    const { items } = setup({ loop: true, position });
+    await nextTick();
+    const [first, , last] = items();
+
+    first.focus();
+    await press(KEY_CODES.ARROW_UP);
+    expect(document.activeElement).toBe(last);
+
+    await press(KEY_CODES.ARROW_DOWN);
+    expect(document.activeElement).toBe(first);
+  });
+
+  it('should stay on the boundary items without `loop`', async () => {
+    const { items } = setup({});
+    await nextTick();
+    const [first, , last] = items();
+
+    first.focus();
+    await press(KEY_CODES.ARROW_UP);
+    expect(document.activeElement).toBe(first);
+
+    last.focus();
+    await press(KEY_CODES.ARROW_DOWN);
+    expect(document.activeElement).toBe(last);
+  });
+
+  it('should not forward `loop` to the popper content element', async () => {
+    setup({ loop: true, position: 'popper' });
+    await nextTick();
+    expect(document.querySelector('[loop]')).toBeNull();
+  });
+});
+
+describe('given SelectTrigger with consumer event listeners', () => {
+  function mountSelect(triggerListeners: Record<string, (event: Event) => void> = {}) {
+    document.body.innerHTML = '';
+    const open = ref(false);
+    const wrapper = mount(defineComponent({
+      setup: () => () => h(SelectRoot, {
+        'open': open.value,
+        'onUpdate:open': (value: boolean) => {
+          open.value = value;
+        },
+      }, () => [
+        h(SelectTrigger, triggerListeners, () => h(SelectValue, { placeholder: 'Pick one' })),
+        h(SelectPortal, () => h(SelectContent, () => h(SelectViewport, () => [
+          h(SelectItem, { value: 'apple' }, () => h(SelectItemText, () => 'Apple')),
+        ]))),
+      ]),
+    }), { attachTo: document.body });
+    const trigger = wrapper.find('[role="combobox"]').element as HTMLElement;
+    return { open, trigger };
+  }
+
+  // jsdom has no `PointerEvent`, so `fireEvent` drops `button`/`pointerType`.
+  function dispatchPointer(target: HTMLElement, type: string, pointerType: string) {
+    const event = new MouseEvent(type, { bubbles: true, cancelable: true, button: 0 });
+    Object.defineProperty(event, 'pointerType', { value: pointerType });
+    target.dispatchEvent(event);
+    return nextTick();
+  }
+
+  it.each(['Enter', ' ', 'ArrowDown'])('should open on %j keydown', async (key) => {
+    const { open, trigger } = mountSelect();
+    await fireEvent.keyDown(trigger, { key });
+    expect(open.value).toBe(true);
+  });
+
+  it.each(['Enter', ' ', 'ArrowDown'])('should not open on %j keydown when the consumer prevents default', async (key) => {
+    const { open, trigger } = mountSelect({ onKeydown: (event) => event.preventDefault() });
+    await fireEvent.keyDown(trigger, { key });
+    expect(open.value).toBe(false);
+  });
+
+  it('should open on mouse pointerdown', async () => {
+    const { open, trigger } = mountSelect();
+    await dispatchPointer(trigger, 'pointerdown', 'mouse');
+    expect(open.value).toBe(true);
+  });
+
+  it('should not open on mouse pointerdown when the consumer prevents default', async () => {
+    const { open, trigger } = mountSelect({ onPointerdown: (event) => event.preventDefault() });
+    await dispatchPointer(trigger, 'pointerdown', 'mouse');
+    expect(open.value).toBe(false);
+  });
+
+  it('should not open on touch pointerup when the consumer prevents default', async () => {
+    const { open, trigger } = mountSelect({ onPointerup: (event) => event.preventDefault() });
+    await dispatchPointer(trigger, 'pointerup', 'touch');
+    expect(open.value).toBe(false);
+  });
+
+  it('should still open on touch pointerup', async () => {
+    const { open, trigger } = mountSelect();
+    await dispatchPointer(trigger, 'pointerup', 'touch');
+    expect(open.value).toBe(true);
+  });
+
+  it('should keep the trigger from taking focus on mousedown', async () => {
+    const { trigger } = mountSelect();
+    const event = new MouseEvent('mousedown', { bubbles: true, cancelable: true, button: 0 });
+    trigger.dispatchEvent(event);
+    expect(event.defaultPrevented).toBe(true);
+  });
+
+  it('should run consumer mousedown listeners before its own', async () => {
+    let preventedWhenConsumerRan: boolean | undefined;
+    const { trigger } = mountSelect({
+      onMousedown: (event) => {
+        preventedWhenConsumerRan = event.defaultPrevented;
+      },
+    });
+    trigger.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, button: 0 }));
+    expect(preventedWhenConsumerRan).toBe(false);
+  });
+
+  it('should not focus the trigger on click when the consumer prevents default', async () => {
+    const { trigger } = mountSelect({ onClick: (event) => event.preventDefault() });
+    const focusSpy = vi.spyOn(trigger, 'focus');
+    trigger.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 }));
+    expect(focusSpy).not.toHaveBeenCalled();
+    focusSpy.mockRestore();
+  });
+
+  it('should open on Space after a non-printable key', async () => {
+    const { open, trigger } = mountSelect();
+    await fireEvent.keyDown(trigger, { key: 'ArrowLeft' });
+    await fireEvent.keyDown(trigger, { key: 'Shift' });
+    await fireEvent.keyDown(trigger, { key: ' ' });
+    expect(open.value).toBe(true);
   });
 });

@@ -15,6 +15,7 @@ type ListboxRootContext<T> = {
   dir: Ref<Direction>;
   disabled: Ref<boolean>;
   highlightOnHover: Ref<boolean>;
+  loop: Ref<boolean>;
   highlightedElement: Ref<HTMLElement | null>;
   isVirtual: Ref<boolean>;
   virtualFocusHook: EventHook<{ event?: Event; scroll: boolean }>;
@@ -69,6 +70,8 @@ export interface ListboxRootProps<T = AcceptableValue> extends PrimitiveProps, F
   selectionBehavior?: 'toggle' | 'replace';
   /** When `true`, hover over item will trigger highlight */
   highlightOnHover?: boolean;
+  /** When `true`, keyboard navigation will loop from last item to first, and vice versa. */
+  loop?: boolean;
   /** Use this to compare objects by a particular field, or pass your own comparison function for complete control over how objects are compared. */
   by?: string | ((a: T, b: T) => boolean);
 }
@@ -108,7 +111,7 @@ defineSlots<{
   }) => any;
 }>();
 
-const { multiple, highlightOnHover, orientation, disabled, selectionBehavior, dir: propDir } = toRefs(props);
+const { multiple, highlightOnHover, loop, orientation, disabled, selectionBehavior, dir: propDir } = toRefs(props);
 const { getItems, getItem } = useCollection<{ value: T }>({ isProvider: true });
 const { handleTypeaheadSearch } = useTypeahead();
 const { primitiveElement, currentElement } = usePrimitiveElement();
@@ -310,6 +313,20 @@ function onEnter(event: Event) {
   }
 }
 
+function isAtVirtualBoundary(intent: 'prev' | 'next') {
+  // A virtualized list only renders a window of items. Only wrap when that
+  // window reaches the end of the full options list; any rendered items past
+  // the highlighted one are disabled.
+  const rendered = getItems(true).map((i) => i.ref);
+  const edge = intent === 'next' ? rendered.at(-1) : rendered[0];
+  if (!edge) {
+    return false;
+  }
+  const position = Number(edge.getAttribute('aria-posinset'));
+  const size = Number(edge.getAttribute('aria-setsize'));
+  return intent === 'next' ? position === size : position === 1;
+}
+
 function onKeydownNavigation(event: KeyboardEvent) {
   const intent = getFocusIntent(event, orientation.value, dir.value);
   if (!intent) {
@@ -326,7 +343,17 @@ function onKeydownNavigation(event: KeyboardEvent) {
       }
 
       const currentIndex = collection.indexOf(highlightedElement.value);
-      collection = collection.slice(currentIndex + 1);
+      const shouldLoop = loop.value && currentIndex === collection.length - 1;
+      if (shouldLoop && isVirtual.value) {
+        if (isAtVirtualBoundary(intent)) {
+          // Let the virtualizer scroll to and highlight the opposite end.
+          const key = intent === 'next' ? KEY_CODES.HOME : KEY_CODES.END;
+          return virtualKeydownHook.trigger(new KeyboardEvent('keydown', { key, shiftKey: event.shiftKey }));
+        }
+        collection = [];
+      } else {
+        collection = shouldLoop ? collection.slice(0, 1) : collection.slice(currentIndex + 1);
+      }
     }
     handleMultipleReplace(event, collection[0]);
   }
@@ -437,6 +464,7 @@ provideListboxRootContext({
   dir,
   disabled,
   highlightOnHover,
+  loop,
   highlightedElement,
   isVirtual,
   virtualFocusHook,
