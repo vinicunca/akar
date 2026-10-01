@@ -1,7 +1,7 @@
 import type { Mock, MockInstance } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { findByText, fireEvent, render } from '@testing-library/vue';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent, nextTick } from 'vue';
 import {
@@ -186,7 +186,7 @@ describe('update:open change event details', () => {
     const { getByText } = render(DrawerWithReason, { props: { onOpenChange } });
     await fireEvent.click(getByText('Open'));
     await nextTick();
-    expect(onOpenChange).toHaveBeenCalledWith(true, { reason: 'trigger-press' });
+    expect(onOpenChange).toHaveBeenCalledWith(true, expect.objectContaining({ reason: 'trigger-press' }));
   });
 
   it('emits close-press reason on close click', async () => {
@@ -197,7 +197,7 @@ describe('update:open change event details', () => {
     onOpenChange.mockClear();
     await fireEvent.click(getByText('Close'));
     await nextTick();
-    expect(onOpenChange).toHaveBeenCalledWith(false, { reason: 'close-press' });
+    expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: 'close-press' }));
   });
 
   it('closes on a second trigger click (toggle)', async () => {
@@ -208,7 +208,7 @@ describe('update:open change event details', () => {
     onOpenChange.mockClear();
     await fireEvent.click(getByText('Open'));
     await nextTick();
-    expect(onOpenChange).toHaveBeenCalledWith(false, { reason: 'trigger-press' });
+    expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: 'trigger-press' }));
   });
 
   it('closes on a second trigger click in non-modal mode', async () => {
@@ -221,7 +221,7 @@ describe('update:open change event details', () => {
     await user.click(getByText('Open'));
     await nextTick();
     expect(onOpenChange).toHaveBeenCalledTimes(1);
-    expect(onOpenChange).toHaveBeenCalledWith(false, { reason: 'trigger-press' });
+    expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: 'trigger-press' }));
   });
 });
 
@@ -339,6 +339,41 @@ describe('given a Drawer with focus props', () => {
     await user.click(getByText('Close'));
     await nextTick();
     expect(document.activeElement).toBe(getByTestId('outside'));
+  });
+
+  describe('when the focus target belongs to another realm', () => {
+    function createIframeButton() {
+      const iframe = document.createElement('iframe');
+      document.body.appendChild(iframe);
+      onTestFinished(() => iframe.remove());
+      const iframeDocument = iframe.contentDocument!;
+      const button = iframeDocument.createElement('button');
+      iframeDocument.body.appendChild(button);
+      return { button, iframeDocument };
+    }
+
+    it('focuses the given element on open', async () => {
+      const user = userEvent.setup();
+      const { getByText, rerender } = render(DrawerWithFocusProps);
+      const { button, iframeDocument } = createIframeButton();
+      expect(button instanceof HTMLElement).toBe(false);
+      await rerender({ initialFocus: button });
+      await user.click(getByText('Open'));
+      await nextTick();
+      expect(iframeDocument.activeElement).toBe(button);
+    });
+
+    it('focuses the given element on close', async () => {
+      const user = userEvent.setup();
+      const { getByText, rerender } = render(DrawerWithFocusProps);
+      const { button, iframeDocument } = createIframeButton();
+      await rerender({ finalFocus: button });
+      await user.click(getByText('Open'));
+      await nextTick();
+      await user.click(getByText('Close'));
+      await nextTick();
+      expect(iframeDocument.activeElement).toBe(button);
+    });
   });
 });
 

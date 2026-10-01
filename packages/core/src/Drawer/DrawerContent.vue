@@ -10,7 +10,7 @@ export interface DrawerContentProps extends Omit<DrawerContentImplProps, 'trapFo
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { Presence } from '@/Presence';
-import { useEmitAsProps, useForwardExpose, useHideOthers } from '@/shared';
+import { isHTMLElement, useEmitAsProps, useForwardExpose, useHideOthers } from '@/shared';
 import DrawerContentImpl from './DrawerContentImpl.vue';
 import { injectDrawerRootContext } from './DrawerRoot.vue';
 
@@ -43,7 +43,7 @@ function finalFocusElement() {
   if (props.finalFocus === false) {
     return undefined;
   }
-  if (props.finalFocus instanceof HTMLElement) {
+  if (isHTMLElement(props.finalFocus)) {
     return props.finalFocus;
   }
   return rootContext.triggerElement.value;

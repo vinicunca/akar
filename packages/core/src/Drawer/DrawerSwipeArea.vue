@@ -11,7 +11,7 @@ export interface DrawerSwipeAreaProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, nextTick } from 'vue';
 import { Primitive } from '@/Primitive';
 import { useForwardExpose } from '@/shared';
 import { useSwipeDismiss } from './composables/useSwipeDismiss';
@@ -45,7 +45,7 @@ const enabled = computed(() => !props.disabled && !rootContext.open.value);
 // the initial value only and ignore prop/state updates.
 const directions = computed<Array<SwipeDirection>>(() => [openDirection.value]);
 
-useSwipeDismiss({
+const { restore: restoreSwipe } = useSwipeDismiss({
   enabled,
   elementRef: currentElement,
   directions,
@@ -54,7 +54,14 @@ useSwipeDismiss({
     y: DRAWER_CSS_VARS.swipeMovementY,
   },
   onDismiss() {
-    rootContext.onOpenChange(true, 'swipe');
+    if (!rootContext.onOpenChange(true, 'swipe')) {
+      return false;
+    }
+    nextTick(() => {
+      if (!rootContext.open.value) {
+        restoreSwipe();
+      }
+    });
   },
   onSwipingChange(swiping) {
     rootContext.onNestedSwipingChange(swiping);
