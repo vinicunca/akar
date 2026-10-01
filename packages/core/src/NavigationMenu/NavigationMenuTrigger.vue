@@ -58,7 +58,7 @@ function handlePointerEnter() {
 }
 
 function handlePointerMove(ev: PointerEvent) {
-  if (menuContext.disableHoverTrigger.value) {
+  if (ev.defaultPrevented || menuContext.disableHoverTrigger.value) {
     return;
   }
 
@@ -92,6 +92,9 @@ function handlePointerLeave(ev: PointerEvent) {
 }
 
 function handleClick(event: MouseEvent | PointerEvent) {
+  if (event.defaultPrevented) {
+    return;
+  }
   if (
     (!('pointerType' in event) || event.pointerType === 'mouse')
     && menuContext.disableClickTrigger.value
@@ -114,6 +117,9 @@ function handleClick(event: MouseEvent | PointerEvent) {
 }
 
 function handleKeydown(ev: KeyboardEvent) {
+  if (ev.defaultPrevented) {
+    return;
+  }
   const verticalEntryKey = menuContext.dir.value === 'rtl' ? 'ArrowLeft' : 'ArrowRight';
   const entryKey = { horizontal: 'ArrowDown', vertical: verticalEntryKey }[
     menuContext.orientation
@@ -175,7 +181,6 @@ function handleVisuallyHiddenFocus(ev: FocusEvent) {
   <template v-if="open">
     <VisuallyHidden
       :ref="setFocusProxyRef"
-      aria-hidden="true"
       :tabindex="0"
       @focus="handleVisuallyHiddenFocus"
     />
