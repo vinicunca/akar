@@ -2,10 +2,10 @@
   "name": "plugins",
   "type": "module",
   "version": "2.0.20",
-  "description": "Nuxt module for Radix Vue",
+  "private": true,
+  "description": "Nuxt module for Akar",
   "license": "MIT",
   "keywords": [
-    "radix",
     "akar",
     "nuxt-module",
     "nuxt",

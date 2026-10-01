@@ -1,52 +1,32 @@
-# .github/workflows/release.yml
-
 name: Release
-
-permissions:
-  contents: write
 
 on:
   push:
     tags:
       - "v*"
-  workflow_dispatch:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 18.x
-
-      - run: npx changelogithub
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-  npm:
-    runs-on: ubuntu-latest
-    environment: npm
+    uses: vinicunca/workflows/.github/workflows/release.yml@v1
+    with:
+      publish: true
+      build: pnpm build
     permissions:
+      contents: write
       id-token: write
-      contents: read
 
+  notify-docs:
+    needs: release
+    if: startsWith(github.ref, 'refs/tags/v2.0.')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Setup (Install node & pnpm)
-        uses: ./.github/actions/setup
-
-      - name: Build Packages
-        run: pnpm build
-
-      # Must publish from repo root for provenance to work with OIDC
-      - name: Publish to npm
-        run: npm publish ./packages/core --access public --provenance
+      - name: Request tagged docs import
+        if: env.GH_TOKEN != ''
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          jq -n --arg package akar --arg tag "$RELEASE_TAG" \
+            '{event_type: "docs-package-release", client_payload: {package: $package, tag: $tag}}' \
+            | gh api repos/vinicunca/docs/dispatches --method POST --input -
