@@ -1,18 +1,16 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 import { useForwardExpose } from '@/shared';
-import { injectToastRootContext } from './ToastRootImpl.vue';
 
 export interface ToastDescriptionProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
 import { Primitive } from '@/Primitive';
+import { injectToastRootContext } from './ToastRootImpl.vue';
 
 const props = defineProps<ToastDescriptionProps>();
-
 useForwardExpose();
-
 const rootContext = injectToastRootContext(null);
 </script>
 
@@ -23,6 +21,5 @@ const rootContext = injectToastRootContext(null);
     v-bind="props"
   >
     <slot>{{ rootContext?.toast.value?.description }}</slot>
-    <slot />
   </Primitive>
 </template>

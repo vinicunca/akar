@@ -5,6 +5,8 @@ export interface ToastActionProps extends ToastCloseProps {
   /**
    * A short description for an alternate way to carry out the action. For screen reader users
    * who will not be able to navigate to the button easily/quickly.
+   *
+   * A rendered action requires `altText`, unless the toast passed to `ToastRoot` has `actionProps.altText`.
    * @example <ToastAction altText="Goto account settings to upgrade">Upgrade</ToastAction>
    * @example <ToastAction altText="Undo (Alt+U)">Undo</ToastAction>
    */
@@ -25,17 +27,13 @@ import { useForwardExpose } from '@/shared';
 import ToastAnnounceExclude from './ToastAnnounceExclude.vue';
 import { injectToastRootContext } from './ToastRootImpl.vue';
 
-const props = withDefaults(
-  defineProps<ToastActionProps>(),
-  {
-    as: 'button',
-    closeOnClick: true,
-  },
-);
+const props = withDefaults(defineProps<ToastActionProps>(), {
+  as: 'button',
+  closeOnClick: true,
+});
 
 const rootContext = injectToastRootContext();
 const { forwardRef } = useForwardExpose();
-
 const slots = useSlots();
 
 const actionProps = computed(() => rootContext.toast.value?.actionProps);

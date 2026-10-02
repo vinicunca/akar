@@ -13,16 +13,6 @@ vi.mock('@/ConfigProvider/ConfigProvider.vue', async () => {
 });
 
 describe('useNonce', () => {
-  vi.mock('@/ConfigProvider/ConfigProvider.vue', async () => {
-    return {
-      injectConfigProviderContext: () => {
-        return {
-          nonce: ref('global-nonce'),
-        };
-      },
-    };
-  });
-
   it('should return global nonce value from ConfigProvider', () => {
     const nonce = useNonce();
     expect(nonce.value).toBe('global-nonce');

@@ -439,7 +439,7 @@ describe('given Select in a form', async () => {
 
   describe('after selecting option and clicking submit button', () => {
     beforeEach(async () => {
-      await wrapper.find('button').trigger('pointerdown', {
+      await fireEvent.pointerDown(wrapper.find('button').element, {
         button: 0,
         ctrlKey: false,
       });

@@ -112,7 +112,7 @@ function startTimer(duration: number) {
 function handleClose(event?: PointerEvent) {
   const isNonPointerEvent = event?.pointerType === '';
 
-  // reka: update to only perform focus when user focus via keyboard
+  // akar: update to only perform focus when user focus via keyboard
   // focus viewport if focus is within toast to read the remaining toast
   // count to SR users and ensure focus isn't lost
   const isFocusInToast = currentElement.value?.contains(getActiveElement());
@@ -269,9 +269,9 @@ provideToastRootContext({ onClose: handleClose, toast: toRef(props, 'toast') });
         :inert="stack.limited || undefined"
         :style="{
           ...(providerContext.disableSwipe.value ? undefined : { userSelect: 'none', touchAction: 'none' }),
-          '--reka-toast-index': stack.index,
-          '--reka-toast-offset-y': `${stack.offsetY}px`,
-          '--reka-toast-height': stackEntry.height ? `${stackEntry.height}px` : undefined,
+          '--akar-toast-index': stack.index,
+          '--akar-toast-offset-y': `${stack.offsetY}px`,
+          '--akar-toast-height': stackEntry.height ? `${stackEntry.height}px` : undefined,
         }"
         @pointerdown.left="(event: PointerEvent) => {
           if (providerContext.disableSwipe.value) return;

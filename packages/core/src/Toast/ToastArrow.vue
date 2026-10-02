@@ -27,7 +27,6 @@ const props = withDefaults(defineProps<ToastArrowProps>(), {
   height: 5,
   as: 'svg',
 });
-
 useForwardExpose();
 </script>
 

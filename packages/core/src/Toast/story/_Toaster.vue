@@ -48,14 +48,14 @@ const { toasts } = useToastManager();
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   box-shadow: 0 6px 20px rgb(0 0 0 / 0.12);
-  height: var(--reka-toast-frontmost-height);
-  transform: translateY(calc(var(--reka-toast-index) * -12px)) scale(calc(1 - var(--reka-toast-index) * 0.05));
-  z-index: calc(1000 - var(--reka-toast-index));
+  height: var(--akar-toast-frontmost-height);
+  transform: translateY(calc(var(--akar-toast-index) * -12px)) scale(calc(1 - var(--akar-toast-index) * 0.05));
+  z-index: calc(1000 - var(--akar-toast-index));
   transition: transform 300ms, opacity 300ms, height 300ms;
 }
 .stack-viewport[data-expanded] .stack-toast {
-  height: var(--reka-toast-height);
-  transform: translateY(calc(var(--reka-toast-offset-y) * -1 - var(--reka-toast-index) * 12px));
+  height: var(--akar-toast-height);
+  transform: translateY(calc(var(--akar-toast-offset-y) * -1 - var(--akar-toast-index) * 12px));
 }
 .stack-toast[data-limited] {
   opacity: 0;

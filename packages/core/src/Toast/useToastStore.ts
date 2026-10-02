@@ -59,9 +59,7 @@ export function useToastStore(): ToastStore {
     }
 
     toasts.value = toasts.value.map((toast) => closing.includes(toast) ? { ...toast, open: false } : toast);
-    closing.forEach((toast) => {
-      toast.onClose?.();
-    });
+    closing.forEach((toast) => toast.onClose?.());
   }
 
   function update(id: string, updates: ToastUpdateOptions | ((prevToast: ToastObject) => ToastUpdateOptions)) {
