@@ -1,7 +1,7 @@
 {
   "name": "plugins",
   "type": "module",
-  "version": "2.0.22",
+  "version": "2.0.23",
   "private": true,
   "description": "Nuxt module for Akar",
   "license": "MIT",
