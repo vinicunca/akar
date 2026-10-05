@@ -8,7 +8,9 @@ import { isClient, isIOS, tryOnBeforeUnmount } from '@vueuse/shared';
 import { defu } from 'defu';
 import { computed, nextTick, ref, watch } from 'vue';
 import { injectConfigProviderContext } from '@/ConfigProvider/ConfigProvider.vue';
-import { context as dismissableLayerContext } from '@/DismissableLayer/context';
+import { acquireBodyPointerEvents, releaseBodyPointerEvents } from './bodyPointerEvents';
+// The whole lock stack holds a single share of the body pointer-events owner.
+const pointerEventsOwner = Symbol('useBodyScrollLock');
 
 const useBodyLockStackCount = createSharedComposable(() => {
   const map = ref<Map<string, boolean>>(new Map());
@@ -32,14 +34,9 @@ const useBodyLockStackCount = createSharedComposable(() => {
   const resetBodyStyle = () => {
     document.body.style.paddingRight = '';
     document.body.style.marginRight = '';
-    // A mounted `DismissableLayer` with `disableOutsidePointerEvents` may
-    // still own the body pointer-events lock (e.g. a modal Dialog rendered
-    // without the Overlay that would hold a scroll lock). Clearing it here
-    // would make everything behind that layer clickable again; the
-    // layer restores it once its last disabling layer is gone.
-    if (dismissableLayerContext.layersWithOutsidePointerEventsDisabled.size === 0) {
-      document.body.style.pointerEvents = '';
-    }
+
+    // Only restored once no `DismissableLayer` still holds it either.
+    releaseBodyPointerEvents(document, pointerEventsOwner);
     document.documentElement.style.removeProperty('--scrollbar-width');
     document.body.style.overflow = initialOverflow.value ?? '';
     isIOS && stopTouchMoveListener?.();
@@ -97,7 +94,7 @@ const useBodyLockStackCount = createSharedComposable(() => {
       if (!locked.value) {
         return;
       }
-      document.body.style.pointerEvents = 'none';
+      acquireBodyPointerEvents(document, pointerEventsOwner);
       document.body.style.overflow = 'hidden';
     });
   }, { immediate: true, flush: 'sync' });
