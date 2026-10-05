@@ -85,7 +85,8 @@ const props = withDefaults(defineProps<DismissableLayerProps & {
 const emits = defineEmits<DismissableLayerPrivateEmits>();
 
 const { forwardRef, currentElement: layerElement } = useForwardExpose();
-const ownerDocument = computed(
+// `undefined` on the server, where there is no document to fall back to.
+const ownerDocument = computed<Document | undefined>(
   () => layerElement.value?.ownerDocument ?? globalThis.document,
 );
 
@@ -164,7 +165,7 @@ onKeyStroke('Escape', (event) => {
 }, {
   // Listen on the layer's own window so Escape works for a layer rendered
   // inside an iframe, whose key events never reach the top-level window.
-  target: () => ownerDocument.value.defaultView ?? globalThis.window,
+  target: () => ownerDocument.value?.defaultView ?? globalThis.window,
 });
 
 // Use `watch` with explicit sources (instead of `watchEffect`) so this effect
@@ -190,7 +191,7 @@ watch(
       // below — keeps the set accurate when `disableOutsidePointerEvents`
       // toggles `true -> false` while still mounted (e.g. a modal Menu
       // closing). The shared owner restores the body only once the last
-      // layer or scroll lock lets go, whatever the cleanup order.
+      // layer or scroll lock lets go, whatever the cleanup order (#2674, #2867).
       onCleanup(() => {
         context.layersWithOutsidePointerEventsDisabled.delete(element);
         releaseBodyPointerEvents(doc, element);

@@ -4,8 +4,9 @@ import type { Side } from './utils';
 
 export interface MenuSubTriggerProps extends MenuItemImplProps {
   /**
-   * Time in milliseconds to keep a submenu open while the pointer moves from
-   * its trigger to the submenu.
+   * How long (in milliseconds) the pointer is given to reach the submenu after leaving the trigger.
+   * While it moves towards the submenu within this time, hovering other items won't close the submenu.
+   * Increase it for users who move the pointer slowly or on devices under heavy load.
    * @defaultValue 300
    */
   graceDuration?: number;
@@ -14,6 +15,7 @@ export interface MenuSubTriggerProps extends MenuItemImplProps {
 
 <script setup lang="ts">
 import type { ComponentPublicInstance } from 'vue';
+import { reactiveOmit } from '@vueuse/shared';
 import { nextTick, onUnmounted, ref, watch } from 'vue';
 import { useId } from '@/shared';
 import MenuAnchor from './MenuAnchor.vue';
@@ -26,6 +28,8 @@ import { getOpenState, isMouseEvent, SUB_OPEN_KEYS } from './utils';
 const props = withDefaults(defineProps<MenuSubTriggerProps>(), {
   graceDuration: 300,
 });
+// `graceDuration` is not a `MenuItemImpl` prop, so it would land on the DOM element.
+const itemProps = reactiveOmit(props, 'graceDuration');
 
 const menuContext = injectMenuContext();
 const rootContext = injectMenuRootContext();
@@ -45,7 +49,7 @@ watch(menuContext.open, (open) => {
 
 const openTimerRef = ref<number | null>(null);
 
-subContext.triggerId ||= useId(undefined, 'akar-menu-sub-trigger');
+subContext.triggerId ||= useId(undefined, 'reka-menu-sub-trigger');
 
 function clearOpenTimer() {
   if (openTimerRef.value) {
@@ -84,6 +88,8 @@ async function handlePointerLeave(event: PointerEvent) {
 
   const contentRect = menuContext.content.value?.getBoundingClientRect();
   if (contentRect?.width) {
+    // TODO (Radix UI): make sure to update this when we change positioning logic
+    // https://github.com/radix-ui/primitives/blob/main/packages/react/menu/src/Menu.tsx#L1088
     const side = menuContext.content.value?.dataset.side as Side;
 
     const rightSide = side === 'right';
@@ -141,7 +147,7 @@ async function handleKeyDown(event: KeyboardEvent) {
 <template>
   <MenuAnchor as-child>
     <MenuItemImpl
-      v-bind="props"
+      v-bind="itemProps"
       :id="subContext.triggerId"
       :ref="
         (vnode: Element | ComponentPublicInstance | null) => {

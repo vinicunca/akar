@@ -60,19 +60,20 @@ function handleTab(event: KeyboardEvent) {
   return handleCustomKeydown(event);
 }
 
-const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing();
 function handleEnter(event: KeyboardEvent) {
   return handleCustomKeydown(event, { preventImplicitSubmit: true });
 }
 
+const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing();
 async function handleCustomKeydown(event: KeyboardEvent, { preventImplicitSubmit = false } = {}) {
   if (isComposing.value) {
     return;
   }
 
-  // Detect consumer listeners that prevent the key after this handler runs.
-  // `defaultPrevented` alone cannot distinguish their call from our own
-  // synchronous cancellation of a form's implicit Enter submission.
+  // If keydown `Enter` or `Tab` was prevented, we let user handle updating the value themselves.
+  // Listeners that run after this one (e.g. `@keydown.enter.prevent`, or a wrapping `ComboboxInput`
+  // selecting its highlighted item) can only be observed after dispatch, and by then
+  // `defaultPrevented` may already be set by us, so their `preventDefault()` calls are tracked here.
   let isPreventedByOthers = event.defaultPrevented;
   const nativePreventDefault = event.preventDefault.bind(event);
   event.preventDefault = () => {
@@ -81,12 +82,13 @@ async function handleCustomKeydown(event: KeyboardEvent, { preventImplicitSubmit
   };
 
   const target = event.target as HTMLInputElement;
+  // A form submits implicitly as soon as the `Enter` keydown dispatch finishes,
+  // so it has to be cancelled synchronously. An empty draft keeps submitting the form.
   if (preventImplicitSubmit && target.value && !isPreventedByOthers) {
     nativePreventDefault();
   }
 
   await nextTick();
-  // if keydown 'Enter' or `Tab` was prevented, we let user handle updating the value themselves
   if (isPreventedByOthers) {
     return;
   }
@@ -99,6 +101,10 @@ async function handleCustomKeydown(event: KeyboardEvent, { preventImplicitSubmit
   if (isAdded) {
     target.value = '';
   }
+
+  // Keep focus in the input after `Tab` adds a tag. A browser still honours this
+  // from a microtask of the keydown dispatch; `Enter` was already cancelled above.
+  nativePreventDefault();
 }
 
 function handleInput(event: InputEvent) {
