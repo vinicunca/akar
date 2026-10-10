@@ -50,7 +50,7 @@ const currentTrigger = ref('');
                       >
                         <img
                           class="w-16"
-                          src="https://akar.vinicunca.dev/logo.svg"
+                          src="https://vinicunca.dev/logo.svg"
                         >
                         <div class="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">Akar</div>
                         <p class="text-mauve4 text-[14px] leading-[1.3]">Unstyled, accessible components for Vue.</p>

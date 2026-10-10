@@ -1,7 +1,7 @@
 <br />
 <p align="center">
   <a href=" https://github.com/vinicunca/akar">
-    <img src="https://akar.vinicunca.dev/logo.svg" alt="Logo" width="150" />
+    <img src="https://vinicunca.dev/logo.svg" alt="Logo" width="150" />
   </a>
 
 <h1 align="center">
@@ -22,7 +22,7 @@ Craft accessible web apps with <a href="https://vuejs.org/">Vue</a>.
 <a href="https://chat.vinicunca.dev"><b>Get involved!</b></a>
 </p>
 <p align="center">
- <a href="https://akar.vinicunca.dev">Documentation</a> | <a href="https://akar.vinicunca.dev/docs/overview/getting-started">Getting Started</a> | <a href="https://akar.vinicunca.dev/examples">Examples</a> | <a href="https://akar.vinicunca.dev/docs/overview/introduction">Why Akar?</a>
+ <a href="https://vinicunca.dev">Documentation</a> | <a href="https://vinicunca.dev/akar/overview/getting-started">Getting Started</a> | <a href="https://vinicunca.dev/examples">Examples</a> | <a href="https://vinicunca.dev/akar/overview/introduction">Why Akar?</a>
 </p>
 
 ## Installation
@@ -30,20 +30,22 @@ Craft accessible web apps with <a href="https://vuejs.org/">Vue</a>.
 ```bash
 pnpm add akar
 ```
+
 ```bash
 npm install akar
 ```
+
 ```bash
 yarn add akar
 ```
 
 ## Documentation
 
-For full documentation, visit [akar.vinicunca.dev](https://akar.vinicunca.dev).
+For full documentation, visit [vinicunca.dev](https://vinicunca.dev).
 
 ## Releases
 
-For changelog, visit [releases]( https://github.com/vinicunca/akar/releases).
+For changelog, visit [releases](https://github.com/vinicunca/akar/releases).
 
 ## Contributing
 
@@ -56,8 +58,8 @@ We would love to have your contributions! All PRs are welcome! We need help buil
 1. Clone the repo
 2. Run `pnpm i`
 3. Run `pnpm build` to run build `akar` locally
-3. Run `pnpm docs:dev` to run vitepress
-4. Open `http://localhost:5173`
+4. Run `pnpm docs:dev` to run vitepress
+5. Open `http://localhost:5173`
 
 ### Package
 

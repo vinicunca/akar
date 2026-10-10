@@ -27,7 +27,7 @@ export interface PrimitiveProps {
   /**
    * Change the default rendered element for the one passed as a child, merging their props and behavior.
    *
-   * Read our [Composition](https://akar.vinicunca.dev/docs/guides/composition) guide for more details.
+   * Read our [Composition](https://vinicunca.dev/akar/guides/composition) guide for more details.
    */
   asChild?: boolean;
   /**

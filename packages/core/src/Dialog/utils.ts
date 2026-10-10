@@ -25,7 +25,7 @@ export function useWarning({
 
 If you want to hide the \`${titleName}\`, you can wrap it with our VisuallyHidden component.
 
-For more information, see https://akar.vinicunca.dev/docs/components/${componentLink}`;
+For more information, see https://vinicunca.dev/akar/components/${componentLink}`;
 
   const DESCRIPTION_MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby="undefined"\` for ${contentName}.`;
 
