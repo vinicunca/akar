@@ -41,7 +41,9 @@ const selectedLabel = computed(() => {
 });
 
 const slotText = computed(() => {
-  return selectedLabel.value.length ? selectedLabel.value.join(', ') : props.placeholder;
+  return selectedLabel.value.length
+    ? selectedLabel.value.join(', ')
+    : props.placeholder;
 });
 </script>
 

@@ -123,7 +123,9 @@ const isIncreaseDisabled = computed(() => {
 // step and rounding to nearest — which overshoots (e.g. 18.98 + step 1 -> 19.98 -> 20 not 19).
 function getNextValue(type: 'increase' | 'decrease', from: number, multiplier = 1): number {
   const stepValue = step.value ?? 1;
-  const operator = type === 'increase' ? '+' : '-';
+  const operator = type === 'increase'
+    ? '+'
+    : '-';
   let nextValue: number;
 
   if (stepSnapping.value && !isNaN(stepValue)) {
@@ -134,8 +136,12 @@ function getNextValue(type: 'increase' | 'decrease', from: number, multiplier = 
       // Align to the grid line in the requested direction first…
       // eslint-disable-next-line no-nested-ternary
       const aligned = type === 'increase'
-        ? (snapped > from ? snapped : handleDecimalOperation('+', snapped, stepValue))
-        : (snapped < from ? snapped : handleDecimalOperation('-', snapped, stepValue));
+        ? (snapped > from
+            ? snapped
+            : handleDecimalOperation('+', snapped, stepValue))
+        : (snapped < from
+            ? snapped
+            : handleDecimalOperation('-', snapped, stepValue));
       // …then apply any remaining steps for multi-step keys (PageUp/PageDown).
       nextValue = multiplier > 1
         ? handleDecimalOperation(operator, aligned, stepValue * (multiplier - 1))
@@ -173,7 +179,9 @@ function handleChangingValue(type: 'increase' | 'decrease', multiplier = 1) {
   const nextValue = getNextValue(type, currentInputValue, multiplier);
   // An out-of-range value (e.g. typed with `allowInvalid`) would be clamped against the requested
   // direction — ArrowUp above `max` would lower it. Do nothing instead, like HTML stepUp/stepDown.
-  if (type === 'increase' ? nextValue < currentInputValue : nextValue > currentInputValue) {
+  if (type === 'increase'
+    ? nextValue < currentInputValue
+    : nextValue > currentInputValue) {
     return;
   }
   modelValue.value = nextValue;
@@ -210,7 +218,9 @@ const inputMode = computed<HTMLAttributes['inputmode']>(() => {
 // Replace negative textValue formatted using currencySign: 'accounting'
 // with a textValue that can be announced using a minus sign.
 const textValueFormatter = useNumberFormatter(locale, formatOptions);
-const textValue = computed(() => isNullish(modelValue.value) || isNaN(modelValue.value) ? '' : textValueFormatter.format(modelValue.value));
+const textValue = computed(() => isNullish(modelValue.value) || isNaN(modelValue.value)
+  ? ''
+  : textValueFormatter.format(modelValue.value));
 
 function validate(val: string) {
   // `allowInvalid` lets out-of-range values be typed, so the bounds are skipped here — they

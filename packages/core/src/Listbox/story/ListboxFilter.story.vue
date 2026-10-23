@@ -4,7 +4,9 @@ import { countryList } from '@/shared/constant';
 import { ListboxContent, ListboxFilter, ListboxItem, ListboxRoot } from '..';
 
 const searchTerm = ref('');
-const options = computed(() => searchTerm.value.trim() ? countryList.slice(0, 20).filter((i) => i.toLowerCase().includes(searchTerm.value.toLowerCase().trim())) : countryList.slice(0, 20));
+const options = computed(() => searchTerm.value.trim()
+  ? countryList.slice(0, 20).filter((i) => i.toLowerCase().includes(searchTerm.value.toLowerCase().trim()))
+  : countryList.slice(0, 20));
 </script>
 
 <template>

@@ -215,7 +215,10 @@ describe('given a TagsInput with objects', async () => {
       wrapper = mount(TagsInputObject, {
         props: {
           displayValue: (item: any) => `Person: ${item.name}`,
-          convertValue: (item: string) => ({ name: item, id: Math.random() }),
+          convertValue: (item: string) => ({
+            name: item,
+            id: Math.random(),
+          }),
         },
         attachTo: document.body,
       });
@@ -238,7 +241,12 @@ describe('given a TagsInput with objects', async () => {
     it('should update the tags', async () => {
       await addTag('Moriah Stanton');
       expect(tags.at(-1)?.text()).toBe('Person: Moriah Stanton');
-      expect(wrapper.vm.people).toEqual(expect.arrayContaining([expect.objectContaining({ id: expect.any(Number), name: expect.any(String) })]));
+      expect(wrapper.vm.people).toEqual(expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(Number),
+          name: expect.any(String),
+        }),
+      ]));
     });
   });
 

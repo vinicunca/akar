@@ -136,8 +136,12 @@ const segmentElements = ref<Set<HTMLElement>>(new Set());
 
 const step = computed(() => normalizeDateStep(props));
 
-const convertedMinValue = computed(() => minValue.value ? convertValue(minValue.value) : undefined);
-const convertedMaxValue = computed(() => maxValue.value ? convertValue(maxValue.value) : undefined);
+const convertedMinValue = computed(() => minValue.value
+  ? convertValue(minValue.value)
+  : undefined);
+const convertedMaxValue = computed(() => maxValue.value
+  ? convertValue(maxValue.value)
+  : undefined);
 
 onMounted(() => {
   getTimeFieldSegmentElements(parentElement.value).forEach((item) => {
@@ -159,7 +163,9 @@ const convertedModelValue = computed({
   },
   set(newValue) {
     if (newValue) {
-      modelValue.value = modelValue.value && 'day' in modelValue.value ? newValue : new Time(newValue.hour, newValue.minute, newValue.second, modelValue.value?.millisecond);
+      modelValue.value = modelValue.value && 'day' in modelValue.value
+        ? newValue
+        : new Time(newValue.hour, newValue.minute, newValue.second, modelValue.value?.millisecond);
     } else {
       modelValue.value = newValue;
     }
@@ -183,7 +189,9 @@ const convertedPlaceholder = computed({
   },
   set(newValue) {
     if (newValue) {
-      placeholder.value = 'day' in placeholder.value ? newValue.copy() : new Time(newValue.hour, newValue.minute, newValue.second, placeholder.value?.millisecond);
+      placeholder.value = 'day' in placeholder.value
+        ? newValue.copy()
+        : new Time(newValue.hour, newValue.minute, newValue.second, placeholder.value?.millisecond);
     }
     return newValue;
   },
@@ -215,7 +223,11 @@ const isInvalid = computed(() => {
 
 const initialSegments = initializeTimeSegmentValues(inferredGranularity.value);
 
-const segmentValues = ref<SegmentValueObj>(modelValue.value ? { ...syncTimeSegmentValues({ value: convertedModelValue.value, formatter }) } : { ...initialSegments });
+const segmentValues = ref<SegmentValueObj>(modelValue.value
+  ? {
+      ...syncTimeSegmentValues({ value: convertedModelValue.value, formatter }),
+    }
+  : { ...initialSegments });
 
 const allSegmentContent = computed(() => createContent({
   granularity: inferredGranularity.value,
@@ -238,8 +250,15 @@ const segmentContents = computed(() => {
         const hour = segmentValues.value.hour;
         if (hour !== null) {
           // eslint-disable-next-line no-nested-ternary
-          const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
-          return { ...segment, value: displayHour.toString() };
+          const displayHour = hour === 0
+            ? 12
+            : hour > 12
+              ? hour - 12
+              : hour;
+          return {
+            ...segment,
+            value: displayHour.toString(),
+          };
         }
       }
       return segment;
@@ -273,7 +292,9 @@ watch(convertedModelValue, (_modelValue) => {
 
 watch([convertedModelValue, locale], ([_modelValue]) => {
   if (!isNullish(_modelValue)) {
-    segmentValues.value = { ...syncTimeSegmentValues({ value: _modelValue, formatter }) };
+    segmentValues.value = {
+      ...syncTimeSegmentValues({ value: _modelValue, formatter }),
+    };
   } else if (Object.values(segmentValues.value).every((value) => value !== null) && isNullish(_modelValue)) {
     // If segment has null value, means that user modified it, thus do not reset the segmentValues
     segmentValues.value = { ...initialSegments };

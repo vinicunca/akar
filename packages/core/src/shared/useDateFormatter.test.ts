@@ -4,11 +4,31 @@ import { useDateFormatter } from './useDateFormatter';
 
 /** Fixed instants, pinned to UTC below so the suite is time-zone independent. */
 const HOURS = [
-  ['00:30', new Date('2024-01-20T00:30:00Z'), 'AM'],
-  ['11:30', new Date('2024-01-20T11:30:00Z'), 'AM'],
-  ['12:30', new Date('2024-01-20T12:30:00Z'), 'PM'],
-  ['15:30', new Date('2024-01-20T15:30:00Z'), 'PM'],
-  ['23:30', new Date('2024-01-20T23:30:00Z'), 'PM'],
+  [
+    '00:30',
+    new Date('2024-01-20T00:30:00Z'),
+    'AM',
+  ],
+  [
+    '11:30',
+    new Date('2024-01-20T11:30:00Z'),
+    'AM',
+  ],
+  [
+    '12:30',
+    new Date('2024-01-20T12:30:00Z'),
+    'PM',
+  ],
+  [
+    '15:30',
+    new Date('2024-01-20T15:30:00Z'),
+    'PM',
+  ],
+  [
+    '23:30',
+    new Date('2024-01-20T23:30:00Z'),
+    'PM',
+  ],
 ] as const;
 
 /**
@@ -16,7 +36,23 @@ const HOURS = [
  * `p.m.`, alongside a few that are. Every one of them must still resolve to the
  * internal `AM`/`PM` token.
  */
-const LOCALES = ['en-US', 'nl-NL', 'fr-FR', 'de-DE', 'it-IT', 'pt-BR', 'es-ES', 'ja-JP', 'zh-CN', 'ko-KR', 'ar-EG', 'fa-IR', 'hi-IN', 'th-TH', 'my-MM'];
+const LOCALES = [
+  'en-US',
+  'nl-NL',
+  'fr-FR',
+  'de-DE',
+  'it-IT',
+  'pt-BR',
+  'es-ES',
+  'ja-JP',
+  'zh-CN',
+  'ko-KR',
+  'ar-EG',
+  'fa-IR',
+  'hi-IN',
+  'th-TH',
+  'my-MM',
+];
 
 describe('useDateFormatter', () => {
   describe('dayPeriod', () => {
@@ -32,13 +68,34 @@ describe('useDateFormatter', () => {
     // and every afternoon time reads as AM.
     const optionCases: Array<[string, DateFormatterOptions]> = [
       ['no hour options', {}],
-      ['hourCycle h11', { hourCycle: 'h11' }],
-      ['hourCycle h12', { hourCycle: 'h12' }],
-      ['hourCycle h23', { hourCycle: 'h23' }],
-      ['hourCycle h24', { hourCycle: 'h24' }],
-      ['hour12 true', { hour12: true }],
-      ['hour12 false', { hour12: false }],
-      ['a non-gregorian calendar', { calendar: 'buddhist' }],
+      [
+        'hourCycle h11',
+        { hourCycle: 'h11' },
+      ],
+      [
+        'hourCycle h12',
+        { hourCycle: 'h12' },
+      ],
+      [
+        'hourCycle h23',
+        { hourCycle: 'h23' },
+      ],
+      [
+        'hourCycle h24',
+        { hourCycle: 'h24' },
+      ],
+      [
+        'hour12 true',
+        { hour12: true },
+      ],
+      [
+        'hour12 false',
+        { hour12: false },
+      ],
+      [
+        'a non-gregorian calendar',
+        { calendar: 'buddhist' },
+      ],
     ];
 
     describe.each(optionCases)('with %s', (_name, options) => {

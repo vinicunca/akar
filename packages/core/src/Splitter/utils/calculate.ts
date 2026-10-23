@@ -35,7 +35,7 @@ export function calculateDragOffsetPercentage(
   return offsetPercentage;
 }
 
-// https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementX
+/** https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementX */
 export function calculateDeltaPercentage(
   event: ResizeEvent,
   dragHandleId: string,
@@ -60,13 +60,17 @@ export function calculateDeltaPercentage(
         movement = isHorizontal ? 0 : delta;
         break;
       case 'ArrowLeft':
-        movement = isHorizontal ? -delta : 0;
+        movement = isHorizontal
+          ? -delta
+          : 0;
         break;
       case 'ArrowRight':
         movement = isHorizontal ? delta : 0;
         break;
       case 'ArrowUp':
-        movement = isHorizontal ? 0 : -delta;
+        movement = isHorizontal
+          ? 0
+          : -delta;
         break;
       case 'End':
         movement = 100;

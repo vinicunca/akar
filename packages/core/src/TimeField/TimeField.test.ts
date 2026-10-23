@@ -48,7 +48,14 @@ function setup(props: { timeFieldProps?: TimeFieldRootProps; emits?: { 'onUpdate
   const input = returned.getByTestId('input');
   const label = returned.getByTestId('label');
 
-  return { ...returned, user, input, hour, label, value };
+  return {
+    ...returned,
+    user,
+    input,
+    hour,
+    label,
+    value,
+  };
 }
 
 it('should pass axe accessibility tests', async () => {
@@ -247,7 +254,13 @@ describe('timeField', async () => {
     });
     const { minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
 
-    const segments = [hour, minute, second, dayPeriod, timeZoneName];
+    const segments = [
+      hour,
+      minute,
+      second,
+      dayPeriod,
+      timeZoneName,
+    ];
 
     await user.click(hour);
 
@@ -324,7 +337,13 @@ describe('timeField', async () => {
 
     const { minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
 
-    const segments = [hour, minute, second, dayPeriod, timeZoneName];
+    const segments = [
+      hour,
+      minute,
+      second,
+      dayPeriod,
+      timeZoneName,
+    ];
 
     for (const seg of segments) {
       await user.click(seg);
@@ -535,7 +554,9 @@ describe('timeField', async () => {
 
   it('displays correct timezone with ZonedDateTime value - `now`', async () => {
     const { getByTestId } = setup({
-      timeFieldProps: { modelValue: now('America/Los_Angeles') },
+      timeFieldProps: {
+        modelValue: now('America/Los_Angeles'),
+      },
     });
 
     const timeZone = getByTestId('timeZoneName');
@@ -548,7 +569,9 @@ describe('timeField', async () => {
 
   it('displays correct timezone with ZonedDateTime value - absolute -> local', async () => {
     const { getByTestId } = setup({
-      timeFieldProps: { modelValue: parseAbsoluteToLocal('2023-10-12T12:30:00Z') },
+      timeFieldProps: {
+        modelValue: parseAbsoluteToLocal('2023-10-12T12:30:00Z'),
+      },
     });
 
     const timeZone = getByTestId('timeZoneName');
@@ -1019,7 +1042,9 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
 
     it('backspace on an empty minute segment is a no-op (data-placeholder stays)', async () => {
       // Branch 132:0 — deleteValue(null) from handleMinuteSegmentKeydown
-      const { user, getByTestId } = setup({ timeFieldProps: { granularity: 'second' } });
+      const { user, getByTestId } = setup({
+        timeFieldProps: { granularity: 'second' },
+      });
       const minute = getByTestId('minute');
       await user.click(minute);
       expect(minute).toHaveAttribute('data-placeholder', '');
@@ -1030,7 +1055,9 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
 
     it('backspace on an empty second segment is a no-op (data-placeholder stays)', async () => {
       // Branch 139:0 — deleteValue(null) from handleSecondSegmentKeydown
-      const { user, getByTestId } = setup({ timeFieldProps: { granularity: 'second' } });
+      const { user, getByTestId } = setup({
+        timeFieldProps: { granularity: 'second' },
+      });
       const second = getByTestId('second');
       await user.click(second);
       expect(second).toHaveAttribute('data-placeholder', '');
@@ -1043,7 +1070,9 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 111:1 — isNumberString false in handleHourSegmentKeydown (Backspace key)
       // Branch 125:0 (via deleteValue) — single-digit value → modelValue=undefined, segment=null
       const { user, hour } = setup({
-        timeFieldProps: { modelValue: new Time(9, 30, 0) },
+        timeFieldProps: {
+          modelValue: new Time(9, 30, 0),
+        },
       });
       // Segment is filled (no data-placeholder attribute when value is set)
       expect(hour).not.toHaveAttribute('data-placeholder');
@@ -1056,7 +1085,10 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
     it('backspace on a two-digit minute segment truncates to one digit', async () => {
       // deleteValue: str.length===2 > 1 → returns parseInt(str.slice(0,-1))
       const { user, getByTestId } = setup({
-        timeFieldProps: { modelValue: new Time(9, 30, 0), granularity: 'second' },
+        timeFieldProps: {
+          modelValue: new Time(9, 30, 0),
+          granularity: 'second',
+        },
       });
       const minute = getByTestId('minute');
       expect(minute).not.toHaveAttribute('data-placeholder');
@@ -1071,7 +1103,10 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
     it('backspace on a single-digit second segment clears it to empty', async () => {
       // Branch 139:0 via deleteValue on single-digit second
       const { user, getByTestId } = setup({
-        timeFieldProps: { modelValue: new Time(9, 30, 5), granularity: 'second' },
+        timeFieldProps: {
+          modelValue: new Time(9, 30, 5),
+          granularity: 'second',
+        },
       });
       const second = getByTestId('second');
       expect(second).not.toHaveAttribute('data-placeholder');
@@ -1087,7 +1122,9 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
     it('arrow Up on empty minute sets it to 0 (min) — fills data-placeholder', async () => {
       // Branch 38:0 — minuteSecondIncrementation with prevValue=null, sign>0 → returns min (0)
       // Branch 39:0 — cond-expr sign > 0 → min path
-      const { user, getByTestId } = setup({ timeFieldProps: { granularity: 'second' } });
+      const { user, getByTestId } = setup({
+        timeFieldProps: { granularity: 'second' },
+      });
       const minute = getByTestId('minute');
       await user.click(minute);
       expect(minute).toHaveAttribute('data-placeholder', '');
@@ -1100,7 +1137,9 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
     it('arrow Down on empty minute sets it to 59 (max) — fills data-placeholder', async () => {
       // Branch 38:0 — minuteSecondIncrementation with prevValue=null, sign<0 → returns max (59)
       // Branch 39:1 — cond-expr sign > 0 → max path
-      const { user, getByTestId } = setup({ timeFieldProps: { granularity: 'second' } });
+      const { user, getByTestId } = setup({
+        timeFieldProps: { granularity: 'second' },
+      });
       const minute = getByTestId('minute');
       await user.click(minute);
       expect(minute).toHaveAttribute('data-placeholder', '');
@@ -1111,7 +1150,9 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
     });
 
     it('arrow Down on empty second sets it to 59 (max)', async () => {
-      const { user, getByTestId } = setup({ timeFieldProps: { granularity: 'second' } });
+      const { user, getByTestId } = setup({
+        timeFieldProps: { granularity: 'second' },
+      });
       const second = getByTestId('second');
       await user.click(second);
       await user.keyboard(kbd.ARROW_DOWN);
@@ -1140,7 +1181,10 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
     it('typing a first digit > 5 in minute auto-advances to next segment', async () => {
       // Branch 61:0 — updateMinuteOrSecond: num > maxStart (5) on first digit → moveToNext=true
       const { user, getByTestId } = setup({
-        timeFieldProps: { modelValue: new Time(9, 15, 0), granularity: 'second' },
+        timeFieldProps: {
+          modelValue: new Time(9, 15, 0),
+          granularity: 'second',
+        },
       });
       const minute = getByTestId('minute');
       const second = getByTestId('second');
@@ -1172,7 +1216,10 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
     it('typing two valid digits in minute advances to next segment', async () => {
       // Branch 63 false path (total <= 59) → moveToNext=true at the end (line 515)
       const { user, getByTestId } = setup({
-        timeFieldProps: { modelValue: new Time(9, 15, 0), granularity: 'second' },
+        timeFieldProps: {
+          modelValue: new Time(9, 15, 0),
+          granularity: 'second',
+        },
       });
       const minute = getByTestId('minute');
       const second = getByTestId('second');
@@ -1435,10 +1482,18 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
  */
 describe('timeField dayPeriod across locales', () => {
   const afternoon = new CalendarDateTime(2024, 1, 20, 15, 30);
-  const locales = ['en-US', 'es-ES', 'ja-JP', 'zh-CN', 'ko-KR'];
+  const locales = [
+    'en-US',
+    'es-ES',
+    'ja-JP',
+    'zh-CN',
+    'ko-KR',
+  ];
 
   it.each(locales)('shows PM for an afternoon value in %s', async (locale) => {
-    const { getByTestId } = setup({ timeFieldProps: { modelValue: afternoon, locale, hourCycle: 12 } });
+    const { getByTestId } = setup({
+      timeFieldProps: { modelValue: afternoon, locale, hourCycle: 12 },
+    });
     expect(getByTestId('dayPeriod')).toHaveTextContent('PM');
   });
 
@@ -1447,7 +1502,9 @@ describe('timeField dayPeriod across locales', () => {
       timeFieldProps: { modelValue: afternoon, locale, hourCycle: 12 },
       emits: {
         'onUpdate:modelValue': (data: TimeValue) => {
-          return rerender({ timeFieldProps: { modelValue: data, locale, hourCycle: 12 } });
+          return rerender({
+            timeFieldProps: { modelValue: data, locale, hourCycle: 12 },
+          });
         },
       },
     });

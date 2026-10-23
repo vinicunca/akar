@@ -46,7 +46,10 @@ function mountToaster(options: {
       toastManager: options.toastManager,
       limit: options.limit,
       duration: options.duration,
-    }, () => [h(Toaster), h(ToastViewport)]),
+    }, () => [
+      h(Toaster),
+      h(ToastViewport),
+    ]),
   }), { attachTo: document.body });
 
   return {
@@ -281,7 +284,9 @@ describe('useToastManager', () => {
     });
     await flush();
 
-    const action = [...getToast(id)!.querySelectorAll('button')].find((button) => button.textContent === 'Undo')!;
+    const action = [
+      ...getToast(id)!.querySelectorAll('button'),
+    ].find((button) => button.textContent === 'Undo')!;
     expect(action).toBeTruthy();
     await fireEvent.click(action);
     await flush();
@@ -298,7 +303,9 @@ describe('useToastManager', () => {
     });
     await flush();
 
-    const action = [...getToast(id)!.querySelectorAll('button')].find((button) => button.textContent === 'Undo')!;
+    const action = [
+      ...getToast(id)!.querySelectorAll('button'),
+    ].find((button) => button.textContent === 'Undo')!;
     await fireEvent.click(action);
     await flush();
     expect(api.toasts.value[0].open).toBe(true);
@@ -437,9 +444,15 @@ describe('toastPositioner', () => {
 
     const { api } = mountToaster({
       render: (toast) => h(ToastPositioner, { key: toast.id, toast, class: 'positioner' }, () =>
-        h(ToastRoot, { 'toast': toast, 'data-testid': toast.id }, () => [h(ToastArrow), h(ToastTitle)])),
+        h(ToastRoot, { 'toast': toast, 'data-testid': toast.id }, () => [
+          h(ToastArrow),
+          h(ToastTitle),
+        ])),
     });
-    const id = api.add({ title: 'Copied', positionerProps: { anchor, side: 'bottom' } });
+    const id = api.add({
+      title: 'Copied',
+      positionerProps: { anchor, side: 'bottom' },
+    });
     await flush();
 
     const toast = getToast(id)!;
@@ -458,15 +471,26 @@ describe('toastPositioner', () => {
       setup() {
         api = useToastManager();
         return () => h(ToastViewport, { as: 'div' }, () => api.toasts.value.map((toast) =>
-          h(ToastPositioner, { key: toast.id, toast, sideOffset: 8, class: 'positioner' }, () =>
-            h(ToastRoot, { 'toast': toast, 'as': 'div', 'data-testid': toast.id }, () => [h(ToastTitle), h(ToastArrow)]))));
+          h(ToastPositioner, {
+            key: toast.id,
+            toast,
+            sideOffset: 8,
+            class: 'positioner',
+          }, () =>
+            h(ToastRoot, { 'toast': toast, 'as': 'div', 'data-testid': toast.id }, () => [
+              h(ToastTitle),
+              h(ToastArrow),
+            ]))));
       },
     });
     const wrapper = mount(defineComponent({
       render: () => h(ToastProvider, null, () => h(AnchoredToaster)),
     }), { attachTo: document.body });
 
-    const id = api.add({ title: 'Copied', positionerProps: { anchor } });
+    const id = api.add({
+      title: 'Copied',
+      positionerProps: { anchor },
+    });
     await flush();
 
     const toast = getToast(id)!;

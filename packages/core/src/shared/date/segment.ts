@@ -5,7 +5,7 @@ export function isSegmentNavigationKey(key: string) {
 }
 
 export function isNumberString(value: string) {
-  // eslint-disable-next-line sonar/prefer-single-boolean-return
+  // eslint-disable-next-line sonarjs/prefer-single-boolean-return
   if (Number.isNaN(Number.parseInt(value))) {
     return false;
   }

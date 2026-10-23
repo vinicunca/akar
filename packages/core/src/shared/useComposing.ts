@@ -65,5 +65,11 @@ export function useComposing(onEnd?: (event: CompositionEvent) => void) {
     });
   }
 
-  return { isComposing, shouldDeferInput, handleCompositionStart, handleCompositionUpdate, handleCompositionEnd };
+  return {
+    isComposing,
+    shouldDeferInput,
+    handleCompositionStart,
+    handleCompositionUpdate,
+    handleCompositionEnd,
+  };
 }

@@ -33,10 +33,39 @@ const zonedDateTimeRange = {
 };
 
 const narrowWeekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const shortWeekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const longWeekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const shortWeekdays = [
+  'Sun',
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+  'Sat',
+];
+const longWeekdays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 // prettier-ignore
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 function getSelectedDays(calendar: HTMLElement) {
   return Array.from(calendar.querySelectorAll<HTMLElement>('[data-selected]'));
@@ -56,7 +85,9 @@ function setup(props: { calendarProps?: RangeCalendarRootProps; emits?: { 'onUpd
 
 describe('rangeCalendar', () => {
   it('respects a default value if provided - `CalendarDate`', async () => {
-    const { calendar, getByTestId } = setup({ calendarProps: { modelValue: calendarDateRange } });
+    const { calendar, getByTestId } = setup({
+      calendarProps: { modelValue: calendarDateRange },
+    });
 
     const selectedDays = calendar.querySelectorAll<HTMLElement>('[data-selected]');
     expect(selectedDays).toHaveLength(6);
@@ -66,7 +97,9 @@ describe('rangeCalendar', () => {
   });
 
   it('respects a default value if provided - `CalendarDateTime`', async () => {
-    const { calendar, getByTestId } = setup({ calendarProps: { modelValue: calendarDateTimeRange } });
+    const { calendar, getByTestId } = setup({
+      calendarProps: { modelValue: calendarDateTimeRange },
+    });
 
     const selectedDays = calendar.querySelectorAll<HTMLElement>('[data-selected]');
     expect(selectedDays).toHaveLength(6);
@@ -76,7 +109,9 @@ describe('rangeCalendar', () => {
   });
 
   it('respects a default value if provided - `ZonedDateTime`', async () => {
-    const { calendar, getByTestId } = setup({ calendarProps: { modelValue: zonedDateTimeRange } });
+    const { calendar, getByTestId } = setup({
+      calendarProps: { modelValue: zonedDateTimeRange },
+    });
 
     const selectedDays = calendar.querySelectorAll<HTMLElement>('[data-selected]');
     expect(selectedDays).toHaveLength(6);
@@ -86,7 +121,9 @@ describe('rangeCalendar', () => {
   });
 
   it('respects programmatically updated value', async () => {
-    const { calendar, getByTestId, rerender } = setup({ calendarProps: { modelValue: undefined } });
+    const { calendar, getByTestId, rerender } = setup({
+      calendarProps: { modelValue: undefined },
+    });
 
     const selectedDays = calendar.querySelectorAll<HTMLElement>('[data-selected]');
     expect(selectedDays).toHaveLength(0);
@@ -103,7 +140,9 @@ describe('rangeCalendar', () => {
   });
 
   it('does not crash when modelValue is null', async () => {
-    const { calendar, rerender } = setup({ calendarProps: { modelValue: null } });
+    const { calendar, rerender } = setup({
+      calendarProps: { modelValue: null },
+    });
 
     expect(getSelectedDays(calendar)).toHaveLength(0);
 
@@ -119,7 +158,11 @@ describe('rangeCalendar', () => {
   it('resets range on select when a range is already selected', async () => {
     const { getByTestId, calendar, user, rerender } = setup({
       calendarProps: { modelValue: calendarDateRange },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ calendarProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          calendarProps: { modelValue: data },
+        }),
+      },
     });
 
     let startValue = calendar.querySelector('[data-selection-start]');
@@ -213,7 +256,11 @@ describe('rangeCalendar', () => {
   it('resets range selection when pressing Escape', async () => {
     const { getByTestId, calendar, user, rerender } = setup({
       calendarProps: { modelValue: calendarDateRange },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ calendarProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          calendarProps: { modelValue: data },
+        }),
+      },
     });
 
     let startValue = calendar.querySelector('[data-selection-start]');
@@ -285,7 +332,9 @@ describe('rangeCalendar', () => {
   });
 
   it('navigates the months forward using the next button', async () => {
-    const { getByTestId, user } = setup({ calendarProps: { modelValue: calendarDateTimeRange } });
+    const { getByTestId, user } = setup({
+      calendarProps: { modelValue: calendarDateTimeRange },
+    });
 
     const heading = getByTestId('heading');
     const nextBtn = getByTestId('next-button');
@@ -298,7 +347,9 @@ describe('rangeCalendar', () => {
   });
 
   it('navigates the months backwards using the prev button', async () => {
-    const { getByTestId, user } = setup({ calendarProps: { modelValue: calendarDateTimeRange } });
+    const { getByTestId, user } = setup({
+      calendarProps: { modelValue: calendarDateTimeRange },
+    });
 
     const heading = getByTestId('heading');
     const prevBtn = getByTestId('prev-button');
@@ -1488,7 +1539,15 @@ describe('handles maximumDays', () => {
         placeholder: new CalendarDate(1980, 1, 10),
         maximumDays: 3,
       },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ calendarProps: { placeholder: new CalendarDate(1980, 1, 10), maximumDays: 3, modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          calendarProps: {
+            placeholder: new CalendarDate(1980, 1, 10),
+            maximumDays: 3,
+            modelValue: data,
+          },
+        }),
+      },
     });
 
     // No dates should be disabled due to maximumDays

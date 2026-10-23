@@ -175,7 +175,11 @@ onKeyStroke('Escape', (event) => {
 // layer would re-run this effect and its cleanup could prematurely restore the
 // body's `pointer-events` while an ancestor layer is still open (#2674).
 watch(
-  [layerElement, () => props.disableOutsidePointerEvents, () => props.present],
+  [
+    layerElement,
+    () => props.disableOutsidePointerEvents,
+    () => props.present,
+  ],
   ([element, disableOutsidePointerEvents, present], _, onCleanup) => {
     if (!element || !present) {
       return;
@@ -207,7 +211,10 @@ watch(
 // Kept separate from the pointer-events watch above so a
 // `disableOutsidePointerEvents` toggle alone never re-orders the stack.
 watch(
-  [layerElement, () => props.present],
+  [
+    layerElement,
+    () => props.present,
+  ],
   ([element, present], _, onCleanup) => {
     if (!element || !present) {
       return;

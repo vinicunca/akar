@@ -15,7 +15,9 @@ describe('test label functionalities', () => {
         setup() {
           return () =>
             h('div', [
-              h(Label, { for: 'input' }, { default: () => 'Label' }),
+              h(Label, { for: 'input' }, {
+                default: () => 'Label',
+              }),
               h('input', { id: 'input' }),
             ]);
         },
@@ -30,12 +32,16 @@ describe('test label functionalities', () => {
   });
 
   it('should render with a default slot', async () => {
-    const label = render(Label, { slots: { default: 'Label' } });
+    const label = render(Label, {
+      slots: { default: 'Label' },
+    });
     expect(label.html()).toBe('<label>Label</label>');
   });
 
   it('should render with a `for` attribute', async () => {
-    const label = render(Label, { props: { for: 'input' } });
+    const label = render(Label, {
+      props: { for: 'input' },
+    });
     expect(label.html()).toBe('<label for="input"></label>');
   });
 
@@ -51,7 +57,10 @@ describe('test label functionalities', () => {
     const { container } = render(
       defineComponent({
         setup() {
-          return () => h('div', [h(Label), h('input', { id: 'input' })]);
+          return () => h('div', [
+            h(Label),
+            h('input', { id: 'input' }),
+          ]);
         },
       }),
     );
@@ -66,7 +75,10 @@ describe('test label functionalities', () => {
       defineComponent({
         setup() {
           return () =>
-            h('div', [h(Label, { for: 'input' }), h('input', { id: 'input2' })]);
+            h('div', [
+              h(Label, { for: 'input' }),
+              h('input', { id: 'input2' }),
+            ]);
         },
       }),
     );

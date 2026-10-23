@@ -23,7 +23,9 @@ const isFormArrayEmptyAndRequired = computed(() =>
 const parsedValue = computed(() => {
   // if primitive value
   if (isString(props.value) || isNumber(props.value) || isBoolean(props.value) || props.value === null || props.value === undefined) {
-    return [{ name: props.name, value: props.value }];
+    return [
+      { name: props.name, value: props.value },
+    ];
   } else if (isObjectType(props.value) && Array.isArray(props.value)) {
     // if array value
     return props.value.flatMap((obj, index) => {

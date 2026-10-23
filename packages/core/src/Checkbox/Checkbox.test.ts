@@ -16,7 +16,11 @@ globalThis.ResizeObserver = class ResizeObserver {
   }
 
   observe() {
-    this.cb([{ borderBoxSize: { inlineSize: 0, blockSize: 0 } }]);
+    this.cb([
+      {
+        borderBoxSize: { inlineSize: 0, blockSize: 0 },
+      },
+    ]);
   }
 
   unobserve() {}
@@ -159,7 +163,9 @@ describe('given CheckboxGroup', () => {
 });
 
 describe('given a disabled Checkbox', () => {
-  const wrapper = mount(Checkbox, { props: { disabled: true } });
+  const wrapper = mount(Checkbox, {
+    props: { disabled: true },
+  });
 
   it('should have no accessibility violations', async () => {
     expect(await axe(wrapper.element, {
@@ -180,7 +186,9 @@ describe('given a disabled Checkbox', () => {
 });
 
 describe('given a disabled CheckboxGroup', () => {
-  const wrapper = mount(CheckboxGroup, { props: { disabled: true } });
+  const wrapper = mount(CheckboxGroup, {
+    props: { disabled: true },
+  });
 
   it('should have no accessibility violations', async () => {
     expect(await axe(wrapper.element, {
@@ -205,7 +213,9 @@ describe('given a CheckboxGroup with max', () => {
   let checkboxes: Array<DOMWrapper<HTMLButtonElement>>;
 
   beforeEach(async () => {
-    wrapper = mount(CheckboxGroup, { props: { max: 2 } });
+    wrapper = mount(CheckboxGroup, {
+      props: { max: 2 },
+    });
     checkboxes = wrapper.findAll('button');
     await checkboxes[0].trigger('click');
     await checkboxes[1].trigger('click');
@@ -230,7 +240,10 @@ describe('given a CheckboxGroup with max', () => {
   it('should reach the limited checkboxes with arrow keys', async () => {
     wrapper.unmount();
     // The story forwards its own props, so the omitted boolean would be cast to `false`
-    wrapper = mount(CheckboxGroup, { props: { max: 1, rovingFocus: true }, attachTo: document.body });
+    wrapper = mount(CheckboxGroup, {
+      props: { max: 1, rovingFocus: true },
+      attachTo: document.body,
+    });
     checkboxes = wrapper.findAll('button');
     await checkboxes[0].trigger('click');
     checkboxes[0].element.focus();
@@ -299,7 +312,9 @@ describe('given a disabled Checkbox rendered asChild', () => {
 });
 
 describe('given a CheckboxGroup with max set to null', () => {
-  const wrapper = mount(CheckboxGroup, { props: { max: null } });
+  const wrapper = mount(CheckboxGroup, {
+    props: { max: null },
+  });
 
   it('should not limit the selection', async () => {
     const checkboxes = wrapper.findAll('button');
@@ -313,7 +328,9 @@ describe('given a CheckboxGroup with max set to null', () => {
 });
 
 describe('given value as "indeterminate"', async () => {
-  const wrapper = mount(Checkbox, { props: { modelValue: 'indeterminate' } });
+  const wrapper = mount(Checkbox, {
+    props: { modelValue: 'indeterminate' },
+  });
 
   it('should have [data-state] of "indeterminate"', () => {
     expect(wrapper.find('button').attributes('data-state')).toBe('indeterminate');

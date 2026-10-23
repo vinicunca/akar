@@ -4,8 +4,7 @@ import { watchEffect } from 'vue';
 import { assert } from '../assert';
 import { getResizeHandleElement, getResizeHandleElementIndex, getResizeHandleElementsForGroup } from '../dom';
 
-// https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
-
+/** https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/ */
 export function useWindowSplitterResizeHandlerBehavior({
   disabled,
   handleId,
@@ -63,6 +62,7 @@ export function useWindowSplitterResizeHandlerBehavior({
 
           assert(index !== null);
 
+          // eslint-disable-next-line no-nested-ternary
           const nextIndex = event.shiftKey
             ? index > 0
               ? index - 1

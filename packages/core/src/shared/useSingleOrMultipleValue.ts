@@ -20,7 +20,9 @@ function validateProps({ type, defaultValue, modelValue }: SingleOrMultipleProps
   const canTypeBeInferred = modelValue !== undefined || defaultValue !== undefined;
 
   if (canTypeBeInferred) {
-    return Array.isArray(value) ? 'multiple' : 'single';
+    return Array.isArray(value)
+      ? 'multiple'
+      : 'single';
   } else {
     return type ?? 'single';
   } // always fallback to `single`
@@ -39,7 +41,9 @@ function getDefaultValue({ type, defaultValue }: SingleOrMultipleProps) {
     return defaultValue;
   }
 
-  return (type === 'single') ? undefined : [];
+  return (type === 'single')
+    ? undefined
+    : [];
 }
 
 export function useSingleOrMultipleValue<P extends SingleOrMultipleProps, Name extends string>(
@@ -55,9 +59,15 @@ export function useSingleOrMultipleValue<P extends SingleOrMultipleProps, Name e
 
   function changeModelValue(value: AcceptableValue) {
     if (type.value === 'single') {
-      modelValue.value = isDeepEqual(value, modelValue.value) ? undefined : value;
+      modelValue.value = isDeepEqual(value, modelValue.value)
+        ? undefined
+        : value;
     } else {
-      const modelValueArray = Array.isArray(modelValue.value) ? [...(modelValue.value as Array<AcceptableValue> || [])] : [modelValue.value].filter(Boolean);
+      const modelValueArray = Array.isArray(modelValue.value)
+        ? [
+            ...(modelValue.value as Array<AcceptableValue> || []),
+          ]
+        : [modelValue.value].filter(Boolean);
       if (isValueEqualOrExist(modelValueArray, value)) {
         const index = modelValueArray.findIndex((i) => isDeepEqual(i, value));
         modelValueArray.splice(index, 1);

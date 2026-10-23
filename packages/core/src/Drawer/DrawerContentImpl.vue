@@ -88,7 +88,9 @@ function writeSnapPointOffset() {
   const offset = activeSnapPointOffset.value;
   if (offset != null) {
     const dir = rootContext.swipeDirection.value;
-    const signedOffset = (dir === 'up' || dir === 'left') ? -offset : offset;
+    const signedOffset = (dir === 'up' || dir === 'left')
+      ? -offset
+      : offset;
     el.style.setProperty(DRAWER_CSS_VARS.snapPointOffset, `${signedOffset}px`);
   } else {
     el.style.setProperty(DRAWER_CSS_VARS.snapPointOffset, '0px');
@@ -125,7 +127,12 @@ const swipeDirections = computed<Array<SwipeDirection>>(() => {
     return [dismiss];
   }
   // Allow swiping in both directions for snap point navigation
-  const opposite: Record<string, SwipeDirection> = { up: 'down', down: 'up', left: 'right', right: 'left' };
+  const opposite: Record<string, SwipeDirection> = {
+    up: 'down',
+    down: 'up',
+    left: 'right',
+    right: 'left',
+  };
   return [dismiss, opposite[dismiss]];
 });
 
@@ -168,9 +175,15 @@ const { isSwiping, restore: restoreSwipe } = useSwipeDismiss({
     const el = currentElement.value;
     if (el) {
       const dir = rootContext.swipeDirection.value;
-      const size = (dir === 'left' || dir === 'right') ? el.offsetWidth : el.offsetHeight;
-      const axisDelta = (dir === 'left' || dir === 'right') ? lastRawDelta.x : lastRawDelta.y;
-      const releaseVelocity = (dir === 'left' || dir === 'right') ? velocity.x : velocity.y;
+      const size = (dir === 'left' || dir === 'right')
+        ? el.offsetWidth
+        : el.offsetHeight;
+      const axisDelta = (dir === 'left' || dir === 'right')
+        ? lastRawDelta.x
+        : lastRawDelta.y;
+      const releaseVelocity = (dir === 'left' || dir === 'right')
+        ? velocity.x
+        : velocity.y;
       const scalar = computeSwipeReleaseScalar({
         direction: dir,
         size,

@@ -43,8 +43,8 @@ export function getAreaGradient(
   yChannel: ColorChannel,
   colorSpace: ColorSpace = color.space as ColorSpace,
 ): { background: string; gradientX: string; gradientY: string } {
-  const hsl = convertToHsl(color);
-  const hsb = convertToHsb(color);
+  const _hsl = convertToHsl(color);
+  const _hsb = convertToHsb(color);
 
   // Determine which gradient layers to apply based on channels
   const gradientX = getChannelGradientForArea(color, xChannel, colorSpace, 'x');
@@ -65,40 +65,92 @@ function getHueGradient(): string {
 }
 
 function getSaturationGradient(hsl: { h: number; s: number; l: number; alpha: number }, colorSpace: ColorSpace): string {
-  const start = colorToString({ space: 'hsl', h: hsl.h, s: 0, l: colorSpace === 'hsl' ? hsl.l : 50, alpha: 1 }, 'hsl');
-  const end = colorToString({ space: 'hsl', h: hsl.h, s: 100, l: colorSpace === 'hsl' ? hsl.l : 50, alpha: 1 }, 'hsl');
+  const start = colorToString({
+    space: 'hsl',
+    h: hsl.h,
+    s: 0,
+    l: colorSpace === 'hsl'
+      ? hsl.l
+      : 50,
+    alpha: 1,
+  }, 'hsl');
+  const end = colorToString({
+    space: 'hsl',
+    h: hsl.h,
+    s: 100,
+    l: colorSpace === 'hsl'
+      ? hsl.l
+      : 50,
+    alpha: 1,
+  }, 'hsl');
   return `linear-gradient(to right, ${start}, ${end})`;
 }
 
 function getLightnessGradient(hsl: { h: number; s: number; l: number; alpha: number }): string {
-  const start = colorToString({ space: 'hsl', h: hsl.h, s: hsl.s, l: 0, alpha: 1 }, 'hsl');
-  const mid = colorToString({ space: 'hsl', h: hsl.h, s: hsl.s, l: 50, alpha: 1 }, 'hsl');
-  const end = colorToString({ space: 'hsl', h: hsl.h, s: hsl.s, l: 100, alpha: 1 }, 'hsl');
+  const start = colorToString({
+    space: 'hsl',
+    h: hsl.h,
+    s: hsl.s,
+    l: 0,
+    alpha: 1,
+  }, 'hsl');
+  const mid = colorToString({
+    space: 'hsl',
+    h: hsl.h,
+    s: hsl.s,
+    l: 50,
+    alpha: 1,
+  }, 'hsl');
+  const end = colorToString({
+    space: 'hsl',
+    h: hsl.h,
+    s: hsl.s,
+    l: 100,
+    alpha: 1,
+  }, 'hsl');
   return `linear-gradient(to right, ${start}, ${mid}, ${end})`;
 }
 
 function getBrightnessGradient(hsb: { h: number; s: number; b: number; alpha: number }): string {
-  const start = colorToString({ space: 'hsb', h: hsb.h, s: hsb.s, b: 0, alpha: 1 }, 'rgb');
-  const end = colorToString({ space: 'hsb', h: hsb.h, s: hsb.s, b: 100, alpha: 1 }, 'rgb');
+  const start = colorToString({
+    space: 'hsb',
+    h: hsb.h,
+    s: hsb.s,
+    b: 0,
+    alpha: 1,
+  }, 'rgb');
+  const end = colorToString({
+    space: 'hsb',
+    h: hsb.h,
+    s: hsb.s,
+    b: 100,
+    alpha: 1,
+  }, 'rgb');
   return `linear-gradient(to right, ${start}, ${end})`;
 }
 
 function getRedGradient(color: Color): string {
-  const { g, b, alpha } = color.space === 'rgb' ? color : { g: 128, b: 128, alpha: 1 };
+  const { g, b, alpha } = color.space === 'rgb'
+    ? color
+    : { g: 128, b: 128, alpha: 1 };
   const start = colorToString({ space: 'rgb', r: 0, g, b, alpha: 1 }, 'rgb');
   const end = colorToString({ space: 'rgb', r: 255, g, b, alpha: 1 }, 'rgb');
   return `linear-gradient(to right, ${start}, ${end})`;
 }
 
 function getGreenGradient(color: Color): string {
-  const { r, b, alpha } = color.space === 'rgb' ? color : { r: 128, b: 128, alpha: 1 };
+  const { r, b, alpha } = color.space === 'rgb'
+    ? color
+    : { r: 128, b: 128, alpha: 1 };
   const start = colorToString({ space: 'rgb', r, g: 0, b, alpha: 1 }, 'rgb');
   const end = colorToString({ space: 'rgb', r, g: 255, b, alpha: 1 }, 'rgb');
   return `linear-gradient(to right, ${start}, ${end})`;
 }
 
 function getBlueGradient(color: Color): string {
-  const { r, g, alpha } = color.space === 'rgb' ? color : { r: 128, g: 128, alpha: 1 };
+  const { r, g, alpha } = color.space === 'rgb'
+    ? color
+    : { r: 128, g: 128, alpha: 1 };
   const start = colorToString({ space: 'rgb', r, g, b: 0, alpha: 1 }, 'rgb');
   const end = colorToString({ space: 'rgb', r, g, b: 255, alpha: 1 }, 'rgb');
   return `linear-gradient(to right, ${start}, ${end})`;
@@ -113,7 +165,9 @@ const CHECKERBOARD_LAYERS = [
 ].join(', ');
 
 function getAlphaGradient(color: Color): string {
-  const { r, g, b } = color.space === 'rgb' ? color : convertToRgb(color);
+  const { r, g, b } = color.space === 'rgb'
+    ? color
+    : convertToRgb(color);
   const solidRgb = `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
   return `linear-gradient(to right, transparent, ${solidRgb}), ${CHECKERBOARD_LAYERS}`;
 }
@@ -124,7 +178,9 @@ function getChannelGradientForArea(
   colorSpace: ColorSpace,
   axis: 'x' | 'y',
 ): string {
-  const direction = axis === 'x' ? 'to right' : 'to top';
+  const direction = axis === 'x'
+    ? 'to right'
+    : 'to top';
   const hsl = convertToHsl(color);
   const hsb = convertToHsb(color);
 
@@ -136,12 +192,24 @@ function getChannelGradientForArea(
         return `linear-gradient(${direction}, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))`;
       }
       // For HSL: White to full color
-      const fullColor = colorToString({ space: 'hsl', h: hsl.h, s: 100, l: 50, alpha: 1 }, 'rgb');
+      const fullColor = colorToString({
+        space: 'hsl',
+        h: hsl.h,
+        s: 100,
+        l: 50,
+        alpha: 1,
+      }, 'rgb');
       return `linear-gradient(${direction}, #ffffff, ${fullColor})`;
     }
     case 'lightness': {
       // White -> color -> black
-      const mid = colorToString({ space: 'hsl', h: hsl.h, s: hsl.s, l: 50, alpha: 1 }, 'rgb');
+      const mid = colorToString({
+        space: 'hsl',
+        h: hsl.h,
+        s: hsl.s,
+        l: 50,
+        alpha: 1,
+      }, 'rgb');
       return `linear-gradient(${direction}, #000000, ${mid}, #ffffff)`;
     }
     case 'brightness': {
@@ -165,12 +233,24 @@ function getAreaBackgroundColor(
 
   // For HSL saturation/lightness area, show pure hue
   if (colorSpace === 'hsl' && xChannel === 'saturation' && yChannel === 'lightness') {
-    return colorToString({ space: 'hsl', h: hsl.h, s: 100, l: 50, alpha: 1 }, 'rgb');
+    return colorToString({
+      space: 'hsl',
+      h: hsl.h,
+      s: 100,
+      l: 50,
+      alpha: 1,
+    }, 'rgb');
   }
 
   // For HSB saturation/brightness area, show pure hue
   if (colorSpace === 'hsb' && xChannel === 'saturation' && yChannel === 'brightness') {
-    return colorToString({ space: 'hsb', h: hsb.h, s: 100, b: 100, alpha: 1 }, 'rgb');
+    return colorToString({
+      space: 'hsb',
+      h: hsb.h,
+      s: 100,
+      b: 100,
+      alpha: 1,
+    }, 'rgb');
   }
 
   // Default to white
@@ -198,7 +278,13 @@ export function getAreaBackgroundStyle(
     if (yChannel === 'saturation') {
       // Vertical: gray at bottom (0% sat) fading to transparent at top (100% sat shows hue)
       // No blend mode needed — transparent stacking is correct
-      const desatColor = colorToString({ space: 'hsl', h: hsl.h, s: 0, l: hsl.l, alpha: 1 }, 'rgb');
+      const desatColor = colorToString({
+        space: 'hsl',
+        h: hsl.h,
+        s: 0,
+        l: hsl.l,
+        alpha: 1,
+      }, 'rgb');
       return {
         backgroundImage: `linear-gradient(to bottom, transparent, ${desatColor}), ${hueGradient}`,
       };
@@ -225,8 +311,20 @@ export function getAreaBackgroundStyle(
       // HSL: Base is pure hue at 50% lightness
       // Saturation x-axis: gray (S=0) at left fading to transparent (shows pure hue at S=100)
       // Lightness y-axis: black at bottom (L=0), transparent at middle (L=50), white at top (L=100)
-      const hueColor = colorToString({ space: 'hsl', h: hsl.h, s: 100, l: 50, alpha: 1 }, 'rgb');
-      const grayColor = colorToString({ space: 'hsl', h: hsl.h, s: 0, l: 50, alpha: 1 }, 'rgb');
+      const hueColor = colorToString({
+        space: 'hsl',
+        h: hsl.h,
+        s: 100,
+        l: 50,
+        alpha: 1,
+      }, 'rgb');
+      const grayColor = colorToString({
+        space: 'hsl',
+        h: hsl.h,
+        s: 0,
+        l: 50,
+        alpha: 1,
+      }, 'rgb');
       const satGradient = `linear-gradient(to right, ${grayColor}, transparent)`;
       const lightGradient = 'linear-gradient(to top, #000000, transparent, #ffffff)';
 
@@ -240,7 +338,13 @@ export function getAreaBackgroundStyle(
       // HSB: Base is pure hue (full sat, full brightness)
       // Top edge: white (0% sat) → pure hue (100% sat)
       // Bottom edge: always black (0% brightness)
-      const hueColor = colorToString({ space: 'hsb', h: hsb.h, s: 100, b: 100, alpha: 1 }, 'rgb');
+      const hueColor = colorToString({
+        space: 'hsb',
+        h: hsb.h,
+        s: 100,
+        b: 100,
+        alpha: 1,
+      }, 'rgb');
       // White to transparent (left to right)
       const satGradient = 'linear-gradient(to right, #ffffff, transparent)';
       // Black gradient from bottom up
@@ -265,7 +369,12 @@ export function getAreaBackgroundStyle(
     const allChannels = ['red', 'green', 'blue'] as const;
     const varyingChannels = [xChannel, yChannel];
     const constantChannel = allChannels.find((c) => !varyingChannels.includes(c))!;
-    const constantValue = rgb[constantChannel === 'red' ? 'r' : constantChannel === 'green' ? 'g' : 'b'];
+    // eslint-disable-next-line no-nested-ternary
+    const constantValue = rgb[constantChannel === 'red'
+      ? 'r'
+      : constantChannel === 'green'
+        ? 'g'
+        : 'b'];
 
     // Create the three layers for screen blend mode:
     // 1. X gradient: black to full-X-color
@@ -273,12 +382,24 @@ export function getAreaBackgroundStyle(
     // 3. Background: black with Z channel set
 
     // X gradient: black (0,0,0) → full X (255,0,0) for red, etc.
-    const xColorStart: RGBColor = { space: 'rgb', r: 0, g: 0, b: 0, alpha: 1 };
+    const xColorStart: RGBColor = {
+      space: 'rgb',
+      r: 0,
+      g: 0,
+      b: 0,
+      alpha: 1,
+    };
     const xColorEnd: RGBColor = {
       space: 'rgb',
-      r: xChannel === 'red' ? 255 : 0,
-      g: xChannel === 'green' ? 255 : 0,
-      b: xChannel === 'blue' ? 255 : 0,
+      r: xChannel === 'red'
+        ? 255
+        : 0,
+      g: xChannel === 'green'
+        ? 255
+        : 0,
+      b: xChannel === 'blue'
+        ? 255
+        : 0,
       alpha: 1,
     };
     const xGradient = `linear-gradient(to right, ${colorToString(xColorStart, 'rgb')}, ${colorToString(xColorEnd, 'rgb')})`;
@@ -286,9 +407,15 @@ export function getAreaBackgroundStyle(
     // Y gradient: black (0,0,0) → full Y (0,255,0) for green, etc.
     const yColorEnd: RGBColor = {
       space: 'rgb',
-      r: yChannel === 'red' ? 255 : 0,
-      g: yChannel === 'green' ? 255 : 0,
-      b: yChannel === 'blue' ? 255 : 0,
+      r: yChannel === 'red'
+        ? 255
+        : 0,
+      g: yChannel === 'green'
+        ? 255
+        : 0,
+      b: yChannel === 'blue'
+        ? 255
+        : 0,
       alpha: 1,
     };
     const yGradient = `linear-gradient(to top, ${colorToString(xColorStart, 'rgb')}, ${colorToString(yColorEnd, 'rgb')})`;
@@ -296,9 +423,15 @@ export function getAreaBackgroundStyle(
     // Background: black with constant Z channel value
     const bgColor: RGBColor = {
       space: 'rgb',
-      r: constantChannel === 'red' ? constantValue : 0,
-      g: constantChannel === 'green' ? constantValue : 0,
-      b: constantChannel === 'blue' ? constantValue : 0,
+      r: constantChannel === 'red'
+        ? constantValue
+        : 0,
+      g: constantChannel === 'green'
+        ? constantValue
+        : 0,
+      b: constantChannel === 'blue'
+        ? constantValue
+        : 0,
       alpha: 1,
     };
 

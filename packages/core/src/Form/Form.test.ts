@@ -8,7 +8,13 @@ import { FieldControl, FieldError, FieldLabel, FieldRoot } from '@/Field';
 import { SelectRoot, SelectTrigger } from '@/Select';
 import { FormRoot } from '.';
 
-const components = { FormRoot, FieldRoot, FieldControl, FieldError, FieldLabel };
+const components = {
+  FormRoot,
+  FieldRoot,
+  FieldControl,
+  FieldError,
+  FieldLabel,
+};
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -78,7 +84,11 @@ describe('given a Form with server errors', () => {
           </FieldRoot>
         </FormRoot>
       `,
-    }, { props: { errors: { email: 'Taken' } } });
+    }, {
+      props: {
+        errors: { email: 'Taken' },
+      },
+    });
 
     expect(wrapper.text()).toContain('Taken');
 
@@ -89,7 +99,9 @@ describe('given a Form with server errors', () => {
     // A fresh submit producing the *same* message is a brand-new `errors`
     // object with an identical value for this field — watching only the
     // extracted string (unchanged) would never re-fire.
-    await wrapper.setProps({ errors: { email: 'Taken' } });
+    await wrapper.setProps({
+      errors: { email: 'Taken' },
+    });
     expect(wrapper.text()).toContain('Taken');
   });
 });
@@ -210,7 +222,9 @@ describe('given a Form submission', () => {
     const onSubmit = vi.fn();
     const validate = (value: unknown) =>
       new Promise<string | null>((resolve) => {
-        setTimeout(resolve, 10, value === 'taken' ? 'Already taken' : null);
+        setTimeout(resolve, 10, value === 'taken'
+          ? 'Already taken'
+          : null);
       });
 
     const wrapper = mount({
@@ -225,7 +239,10 @@ describe('given a Form submission', () => {
         </FormRoot>
       `,
       methods: { onSubmit },
-    }, { props: { validate }, attachTo: document.body });
+    }, {
+      props: { validate },
+      attachTo: document.body,
+    });
 
     await wrapper.find('input').setValue('taken');
     await submit(wrapper);
@@ -240,9 +257,12 @@ describe('given a Form submission', () => {
 
   it('keeps blocking on a previous async error while revalidation is pending outside onSubmit mode', async () => {
     const onSubmit = vi.fn();
+    // eslint-disable-next-line sonarjs/no-identical-functions
     const validate = (value: unknown) =>
       new Promise<string | null>((resolve) => {
-        setTimeout(resolve, 10, value === 'taken' ? 'Already taken' : null);
+        setTimeout(resolve, 10, value === 'taken'
+          ? 'Already taken'
+          : null);
       });
 
     const wrapper = mount({
@@ -256,7 +276,10 @@ describe('given a Form submission', () => {
         </FormRoot>
       `,
       methods: { onSubmit },
-    }, { props: { validate }, attachTo: document.body });
+    }, {
+      props: { validate },
+      attachTo: document.body,
+    });
 
     const input = wrapper.find('input');
     await input.setValue('taken');
@@ -345,7 +368,10 @@ describe('given a Form submission', () => {
         </FormRoot>
       `,
       methods: { onSubmit },
-    }, { props: { validate }, attachTo: document.body });
+    }, {
+      props: { validate },
+      attachTo: document.body,
+    });
 
     await submit(wrapper);
     expect(validate).not.toHaveBeenCalled();
@@ -367,10 +393,15 @@ describe('given a Form submission', () => {
           </FieldRoot>
         </FormRoot>
       `,
-    }, { props: { errors: {} }, attachTo: document.body });
+    }, {
+      props: { errors: {} },
+      attachTo: document.body,
+    });
 
     await submit(wrapper);
-    await wrapper.setProps({ errors: { username: 'Taken' } });
+    await wrapper.setProps({
+      errors: { username: 'Taken' },
+    });
     await nextTick();
 
     expect(document.activeElement).toBe(wrapper.find('[data-testid="username"]').element);
@@ -421,7 +452,10 @@ describe('given a Form submission', () => {
         </FormRoot>
       `,
       methods: { onSubmit },
-    }, { props: { validate }, attachTo: document.body });
+    }, {
+      props: { validate },
+      attachTo: document.body,
+    });
 
     await submit(wrapper);
 

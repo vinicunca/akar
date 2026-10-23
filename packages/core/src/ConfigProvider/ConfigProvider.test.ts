@@ -52,7 +52,10 @@ describe('given a default ConfigProvider', async () => {
 describe('given a dir="rtl" ConfigProvider', async () => {
   beforeEach(() => {
     document.body.innerHTML = '';
-    mount(ConfigProviderTest, { props: { dir: 'rtl' }, attachTo: document.body });
+    mount(ConfigProviderTest, {
+      props: { dir: 'rtl' },
+      attachTo: document.body,
+    });
   });
 
   it('should render direction="rtl"', () => {
@@ -66,21 +69,34 @@ describe('given a scrollBody ConfigProvider', async () => {
   });
 
   it('should set 0 padding, 0 margin body', async () => {
-    mount(ConfigProviderTest, { props: { scrollBody: false }, attachTo: document.body });
+    mount(ConfigProviderTest, {
+      props: { scrollBody: false },
+      attachTo: document.body,
+    });
     await nextTick();
     expect(document.body.style.paddingRight).toBe('0px');
     expect(document.body.style.marginRight).toBe('0px');
   });
 
   it('should set 0 padding body', async () => {
-    mount(ConfigProviderTest, { props: { scrollBody: { padding: 20 } }, attachTo: document.body });
+    mount(ConfigProviderTest, {
+      props: {
+        scrollBody: { padding: 20 },
+      },
+      attachTo: document.body,
+    });
     await nextTick();
     expect(document.body.style.paddingRight).toBe('20px');
     expect(document.body.style.marginRight).toBe('0px');
   });
 
   it('should set 0 margin body', async () => {
-    mount(ConfigProviderTest, { props: { scrollBody: { margin: 20, padding: 0 } }, attachTo: document.body });
+    mount(ConfigProviderTest, {
+      props: {
+        scrollBody: { margin: 20, padding: 0 },
+      },
+      attachTo: document.body,
+    });
     await nextTick();
     expect(document.body.style.paddingRight).toBe('0px');
     expect(document.body.style.marginRight).toBe('20px');

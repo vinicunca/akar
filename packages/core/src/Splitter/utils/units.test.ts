@@ -15,7 +15,10 @@ function createPanelData(overrides: Partial<PanelData> & { id: string }): PanelD
 describe('hasPixelSizedPanel', () => {
   it('should return false when no panels use px', () => {
     const panels = [
-      createPanelData({ id: 'a', constraints: { sizeUnit: '%' } }),
+      createPanelData({
+        id: 'a',
+        constraints: { sizeUnit: '%' },
+      }),
       createPanelData({ id: 'b', constraints: {} }),
     ];
     expect(hasPixelSizedPanel(panels)).toBe(false);
@@ -23,8 +26,14 @@ describe('hasPixelSizedPanel', () => {
 
   it('should return true when at least one panel uses px', () => {
     const panels = [
-      createPanelData({ id: 'a', constraints: { sizeUnit: '%' } }),
-      createPanelData({ id: 'b', constraints: { sizeUnit: 'px' } }),
+      createPanelData({
+        id: 'a',
+        constraints: { sizeUnit: '%' },
+      }),
+      createPanelData({
+        id: 'b',
+        constraints: { sizeUnit: 'px' },
+      }),
     ];
     expect(hasPixelSizedPanel(panels)).toBe(true);
   });
@@ -35,7 +44,12 @@ describe('convertPanelConstraintsToPercent', () => {
     const panels = [
       createPanelData({
         id: 'a',
-        constraints: { sizeUnit: '%', minSize: 10, maxSize: 80, defaultSize: 50 },
+        constraints: {
+          sizeUnit: '%',
+          minSize: 10,
+          maxSize: 80,
+          defaultSize: 50,
+        },
       }),
     ];
     const result = convertPanelConstraintsToPercent({ panelDataArray: panels, groupSizeInPixels: 1000 });
@@ -71,7 +85,10 @@ describe('convertPanelConstraintsToPercent', () => {
 
   it('should return null when px panel exists but groupSize is null', () => {
     const panels = [
-      createPanelData({ id: 'a', constraints: { sizeUnit: 'px', defaultSize: 200 } }),
+      createPanelData({
+        id: 'a',
+        constraints: { sizeUnit: 'px', defaultSize: 200 },
+      }),
     ];
     const result = convertPanelConstraintsToPercent({ panelDataArray: panels, groupSizeInPixels: null });
     expect(result).toBeNull();
@@ -81,7 +98,12 @@ describe('convertPanelConstraintsToPercent', () => {
     const panels = [
       createPanelData({
         id: 'sidebar',
-        constraints: { sizeUnit: 'px', defaultSize: 250, minSize: 150, maxSize: 350 },
+        constraints: {
+          sizeUnit: 'px',
+          defaultSize: 250,
+          minSize: 150,
+          maxSize: 350,
+        },
       }),
       createPanelData({
         id: 'content',
@@ -102,8 +124,14 @@ describe('convertPanelConstraintsToPercent', () => {
 describe('recalculateLayoutForPixelPanels', () => {
   it('should return null if no pixel panels exist', () => {
     const panels = [
-      createPanelData({ id: 'a', constraints: { sizeUnit: '%' } }),
-      createPanelData({ id: 'b', constraints: { sizeUnit: '%' } }),
+      createPanelData({
+        id: 'a',
+        constraints: { sizeUnit: '%' },
+      }),
+      createPanelData({
+        id: 'b',
+        constraints: { sizeUnit: '%' },
+      }),
     ];
     const result = recalculateLayoutForPixelPanels({
       layout: [50, 50],
@@ -116,8 +144,14 @@ describe('recalculateLayoutForPixelPanels', () => {
 
   it('should maintain pixel panel size when group resizes', () => {
     const panels = [
-      createPanelData({ id: 'sidebar', constraints: { sizeUnit: 'px' } }),
-      createPanelData({ id: 'content', constraints: { sizeUnit: '%' } }),
+      createPanelData({
+        id: 'sidebar',
+        constraints: { sizeUnit: 'px' },
+      }),
+      createPanelData({
+        id: 'content',
+        constraints: { sizeUnit: '%' },
+      }),
     ];
     // Sidebar is 200px (20% of 1000), content is 80%
     const result = recalculateLayoutForPixelPanels({
@@ -135,8 +169,14 @@ describe('recalculateLayoutForPixelPanels', () => {
 
   it('should return null for invalid group sizes', () => {
     const panels = [
-      createPanelData({ id: 'a', constraints: { sizeUnit: 'px' } }),
-      createPanelData({ id: 'b', constraints: { sizeUnit: '%' } }),
+      createPanelData({
+        id: 'a',
+        constraints: { sizeUnit: 'px' },
+      }),
+      createPanelData({
+        id: 'b',
+        constraints: { sizeUnit: '%' },
+      }),
     ];
 
     expect(recalculateLayoutForPixelPanels({
@@ -156,9 +196,18 @@ describe('recalculateLayoutForPixelPanels', () => {
 
   it('should handle multiple pixel panels', () => {
     const panels = [
-      createPanelData({ id: 'left', constraints: { sizeUnit: 'px' } }),
-      createPanelData({ id: 'center', constraints: { sizeUnit: '%' } }),
-      createPanelData({ id: 'right', constraints: { sizeUnit: 'px' } }),
+      createPanelData({
+        id: 'left',
+        constraints: { sizeUnit: 'px' },
+      }),
+      createPanelData({
+        id: 'center',
+        constraints: { sizeUnit: '%' },
+      }),
+      createPanelData({
+        id: 'right',
+        constraints: { sizeUnit: 'px' },
+      }),
     ];
     // left=200px (20%), center=60%, right=200px (20%) at 1000px group
     const result = recalculateLayoutForPixelPanels({
@@ -181,8 +230,14 @@ describe('recalculateLayoutForPixelPanels', () => {
     // Raw arithmetic: (460/921)*100 ≈ 49.945… per panel → sum ≈ 99.89 ≠ 100.
     // The fix normalises the output so the sum is always exactly 100.
     const panels = [
-      createPanelData({ id: 'a', constraints: { sizeUnit: 'px' } }),
-      createPanelData({ id: 'b', constraints: { sizeUnit: 'px' } }),
+      createPanelData({
+        id: 'a',
+        constraints: { sizeUnit: 'px' },
+      }),
+      createPanelData({
+        id: 'b',
+        constraints: { sizeUnit: 'px' },
+      }),
     ];
     const result = recalculateLayoutForPixelPanels({
       layout: [50, 50],
@@ -199,9 +254,18 @@ describe('recalculateLayoutForPixelPanels', () => {
     // Three px panels at equal thirds (33.33...%) in a group that resizes.
     // Floating-point triple-division will not sum to exactly 100.
     const panels = [
-      createPanelData({ id: 'a', constraints: { sizeUnit: 'px' } }),
-      createPanelData({ id: 'b', constraints: { sizeUnit: 'px' } }),
-      createPanelData({ id: 'c', constraints: { sizeUnit: 'px' } }),
+      createPanelData({
+        id: 'a',
+        constraints: { sizeUnit: 'px' },
+      }),
+      createPanelData({
+        id: 'b',
+        constraints: { sizeUnit: 'px' },
+      }),
+      createPanelData({
+        id: 'c',
+        constraints: { sizeUnit: 'px' },
+      }),
     ];
     const oneThird = 100 / 3;
     const result = recalculateLayoutForPixelPanels({

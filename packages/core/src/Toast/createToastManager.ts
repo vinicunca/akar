@@ -128,8 +128,12 @@ function resolvePromiseState<Value, Data extends object>(
   state: ToastPromiseState<Value, Data>,
   value?: Value,
 ): ToastUpdateOptions<Data> {
-  const resolved = typeof state === 'function' ? state(value as Value) : state;
-  return typeof resolved === 'string' ? { description: resolved } : resolved;
+  const resolved = typeof state === 'function'
+    ? state(value as Value)
+    : state;
+  return typeof resolved === 'string'
+    ? { description: resolved }
+    : resolved;
 }
 
 export function runToastPromise<Value, Data extends object>(
@@ -138,16 +142,24 @@ export function runToastPromise<Value, Data extends object>(
   add: ToastManager<Data>['add'],
   update: ToastManager<Data>['update'],
 ): Promise<Value> {
-  const loading = typeof options.loading === 'string' ? { description: options.loading } : options.loading;
+  const loading = typeof options.loading === 'string'
+    ? { description: options.loading }
+    : options.loading;
   const id = add({ ...loading, status: 'loading' });
 
   return promise.then(
     (value) => {
-      update(id, { ...resolvePromiseState(options.success, value), status: 'success' });
+      update(id, {
+        ...resolvePromiseState(options.success, value),
+        status: 'success',
+      });
       return value;
     },
     (error) => {
-      update(id, { ...resolvePromiseState(options.error, error), status: 'error' });
+      update(id, {
+        ...resolvePromiseState(options.error, error),
+        status: 'error',
+      });
       throw error;
     },
   );
@@ -178,7 +190,10 @@ export function createToastManager<Data extends object = any>(): GlobalToastMana
   const manager: ToastManager<Data> = {
     add(options) {
       const id = options.id ?? generateToastId();
-      emit({ action: 'add', options: { ...options, id } });
+      emit({
+        action: 'add',
+        options: { ...options, id },
+      });
       return id;
     },
     close(id) {

@@ -69,7 +69,10 @@ describe('given Pagination with <a> as buttons', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Pagination, { attachTo: document.body, props: { ...ALL_PAGINATION_BUTTONS_AS_A_PROPS } });
+    wrapper = mount(Pagination, {
+      attachTo: document.body,
+      props: { ...ALL_PAGINATION_BUTTONS_AS_A_PROPS },
+    });
   });
 
   it('should pass axe accessibility tests', async () => {
@@ -96,9 +99,14 @@ describe('given Pagination with <a> as buttons and disabled', () => {
 
   beforeEach(async () => {
     document.body.innerHTML = '';
-    wrapper = mount(Pagination, { attachTo: document.body, props: { ...ALL_PAGINATION_BUTTONS_AS_A_PROPS } });
+    wrapper = mount(Pagination, {
+      attachTo: document.body,
+      props: { ...ALL_PAGINATION_BUTTONS_AS_A_PROPS },
+    });
     await wrapper.find(`[aria-label="Page ${INITIAL_PAGE}"]`).trigger('click');
-    wrapper.setProps({ root: { disabled: true } });
+    wrapper.setProps({
+      root: { disabled: true },
+    });
   });
 
   it('should pass axe accessibility tests', async () => {
@@ -129,7 +137,10 @@ describe('given show-edges Pagination', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Pagination, { props: { showEdges: true }, attachTo: document.body });
+    wrapper = mount(Pagination, {
+      props: { showEdges: true },
+      attachTo: document.body,
+    });
   });
 
   it('should pass axe accessibility tests', async () => {
@@ -196,7 +207,10 @@ describe('given small total value', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Pagination, { attachTo: document.body, props: { total: 13 } });
+    wrapper = mount(Pagination, {
+      attachTo: document.body,
+      props: { total: 13 },
+    });
   });
 
   it('should pass axe accessibility tests', async () => {
@@ -241,7 +255,10 @@ describe('given 0 total value', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Pagination, { attachTo: document.body, props: { total: 0 } });
+    wrapper = mount(Pagination, {
+      attachTo: document.body,
+      props: { total: 0 },
+    });
   });
 
   it('should pass axe accessibility tests', async () => {

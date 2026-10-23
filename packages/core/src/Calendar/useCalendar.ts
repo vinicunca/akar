@@ -76,7 +76,9 @@ export function useCalendarState(props: UseCalendarStateProps) {
   );
 
   const hasSelectedDate = computed(() => {
-    return Array.isArray(props.date.value) ? props.date.value.length > 0 : !!props.date.value;
+    return Array.isArray(props.date.value)
+      ? props.date.value.length > 0
+      : !!props.date.value;
   });
 
   const isSelectedDateDisabled = computed(() => {
@@ -230,7 +232,9 @@ export function useCalendar(props: UseCalendarProps) {
     const firstDate = grid.value[0].value;
 
     if (!nextPageFunc && !props.nextPage.value) {
-      const newDate = firstDate.add({ months: props.pagedNavigation.value ? props.numberOfMonths.value : 1 });
+      const newDate = firstDate.add({
+        months: props.pagedNavigation.value ? props.numberOfMonths.value : 1,
+      });
 
       const newGrid = createMonths({
         dateObj: newDate,
@@ -278,7 +282,9 @@ export function useCalendar(props: UseCalendarProps) {
     const firstDate = grid.value[0].value;
 
     if (!prevPageFunc && !props.prevPage.value) {
-      const newDate = firstDate.subtract({ months: props.pagedNavigation.value ? props.numberOfMonths.value : 1 });
+      const newDate = firstDate.subtract({
+        months: props.pagedNavigation.value ? props.numberOfMonths.value : 1,
+      });
 
       const newGrid = createMonths({
         dateObj: newDate,
@@ -335,7 +341,12 @@ export function useCalendar(props: UseCalendarProps) {
     });
   });
 
-  watch([props.locale, props.weekStartsOn, props.fixedWeeks, props.numberOfMonths], () => {
+  watch([
+    props.locale,
+    props.weekStartsOn,
+    props.fixedWeeks,
+    props.numberOfMonths,
+  ], () => {
     grid.value = createMonths({
       dateObj: props.placeholder.value,
       weekStartsOn: props.weekStartsOn.value,
@@ -388,7 +399,9 @@ export function useCalendar(props: UseCalendarProps) {
       }
 
       const daysInMonth = getDaysInMonth(month.value);
-      const startDay = props.minValue.value && isSameMonth(props.minValue.value, month.value) ? props.minValue.value.day : 1;
+      const startDay = props.minValue.value && isSameMonth(props.minValue.value, month.value)
+        ? props.minValue.value.day
+        : 1;
 
       for (let day = startDay; day <= daysInMonth; day++) {
         const date = month.value.set({ day });

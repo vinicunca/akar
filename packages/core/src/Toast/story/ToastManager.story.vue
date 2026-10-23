@@ -12,7 +12,9 @@ function addToast() {
   count++;
   toast.add({
     title: `Toast ${count}`,
-    description: count % 2 ? 'A short one.' : 'A longer description, so the toasts in the stack have different heights.',
+    description: count % 2
+      ? 'A short one.'
+      : 'A longer description, so the toasts in the stack have different heights.',
     actionProps: { label: 'Undo', altText: 'Undo the change' },
   });
 }

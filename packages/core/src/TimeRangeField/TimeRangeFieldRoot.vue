@@ -139,8 +139,12 @@ const segmentElements = ref<Set<HTMLElement>>(new Set());
 
 const step = computed(() => normalizeDateStep(props));
 
-const convertedMinValue = computed(() => minValue.value ? convertValue(minValue.value) : undefined);
-const convertedMaxValue = computed(() => maxValue.value ? convertValue(maxValue.value) : undefined);
+const convertedMinValue = computed(() => minValue.value
+  ? convertValue(minValue.value)
+  : undefined);
+const convertedMaxValue = computed(() => maxValue.value
+  ? convertValue(maxValue.value)
+  : undefined);
 
 onMounted(() => {
   getTimeFieldSegmentElements(parentElement.value).forEach((item) => {
@@ -233,7 +237,10 @@ const startValue = ref(modelValue.value?.start?.copy()) as Ref<TimeValue | undef
 const endValue = ref(modelValue.value?.end?.copy()) as Ref<TimeValue | undefined>;
 
 watch([startValue, endValue], ([_startValue, _endValue]) => {
-  modelValue.value = { start: _startValue?.copy(), end: _endValue?.copy() };
+  modelValue.value = {
+    start: _startValue?.copy(),
+    end: _endValue?.copy(),
+  };
 });
 
 const convertedStartValue = computed({
@@ -245,7 +252,9 @@ const convertedStartValue = computed({
   },
   set(newValue) {
     if (newValue) {
-      startValue.value = startValue.value && 'day' in startValue.value ? newValue : new Time(newValue.hour, newValue.minute, newValue.second, startValue.value?.millisecond);
+      startValue.value = startValue.value && 'day' in startValue.value
+        ? newValue
+        : new Time(newValue.hour, newValue.minute, newValue.second, startValue.value?.millisecond);
     } else {
       startValue.value = newValue;
     }
@@ -262,7 +271,9 @@ const convertedEndValue = computed({
   },
   set(newValue) {
     if (newValue) {
-      endValue.value = endValue.value && 'day' in endValue.value ? newValue : new Time(newValue.hour, newValue.minute, newValue.second, endValue.value?.millisecond);
+      endValue.value = endValue.value && 'day' in endValue.value
+        ? newValue
+        : new Time(newValue.hour, newValue.minute, newValue.second, endValue.value?.millisecond);
     } else {
       endValue.value = newValue;
     }
@@ -288,7 +299,9 @@ const convertedPlaceholder = computed({
   },
   set(newValue) {
     if (newValue) {
-      placeholder.value = 'day' in placeholder.value ? newValue.copy() : new Time(newValue.hour, newValue.minute, newValue.second, placeholder.value?.millisecond);
+      placeholder.value = 'day' in placeholder.value
+        ? newValue.copy()
+        : new Time(newValue.hour, newValue.minute, newValue.second, placeholder.value?.millisecond);
     }
     return newValue;
   },
@@ -304,8 +317,16 @@ const inferredGranularity = computed(() => {
 
 const initialSegments = initializeTimeSegmentValues(inferredGranularity.value);
 
-const startSegmentValues = ref<SegmentValueObj>(convertedStartValue.value ? { ...syncTimeSegmentValues({ value: convertedStartValue.value, formatter }) } : { ...initialSegments });
-const endSegmentValues = ref<SegmentValueObj>(convertedEndValue.value ? { ...syncTimeSegmentValues({ value: convertedEndValue.value, formatter }) } : { ...initialSegments });
+const startSegmentValues = ref<SegmentValueObj>(convertedStartValue.value
+  ? {
+      ...syncTimeSegmentValues({ value: convertedStartValue.value, formatter }),
+    }
+  : { ...initialSegments });
+const endSegmentValues = ref<SegmentValueObj>(convertedEndValue.value
+  ? {
+      ...syncTimeSegmentValues({ value: convertedEndValue.value, formatter }),
+    }
+  : { ...initialSegments });
 
 const startSegmentContent = computed(() => createContent({
   granularity: inferredGranularity.value,
@@ -334,7 +355,10 @@ const segmentContents = computed(() => ({
   end: endSegmentContent.value.arr,
 }));
 
-const editableSegmentContents = computed(() => ({ start: segmentContents.value.start.filter(({ part }) => part !== 'literal'), end: segmentContents.value.end.filter(({ part }) => part !== 'literal') }));
+const editableSegmentContents = computed(() => ({
+  start: segmentContents.value.start.filter(({ part }) => part !== 'literal'),
+  end: segmentContents.value.end.filter(({ part }) => part !== 'literal'),
+}));
 
 watch(modelValue, (_modelValue) => {
   const isStartChanged = _modelValue?.start && startValue.value
@@ -354,7 +378,9 @@ watch(modelValue, (_modelValue) => {
 
 watch([convertedStartValue, locale], ([_startValue]) => {
   if (_startValue !== undefined) {
-    startSegmentValues.value = { ...syncSegmentValues({ value: _startValue, formatter }) };
+    startSegmentValues.value = {
+      ...syncSegmentValues({ value: _startValue, formatter }),
+    };
   } else if (Object.values(startSegmentValues.value).every((value) => value !== null) && _startValue === undefined) {
     // If segment has null value, means that user modified it, thus do not reset the segmentValues
     startSegmentValues.value = { ...initialSegments };
@@ -383,7 +409,9 @@ watch(convertedModelValue, (_modelValue) => {
 
 watch([convertedEndValue, locale], ([_endValue]) => {
   if (_endValue !== undefined) {
-    endSegmentValues.value = { ...syncSegmentValues({ value: _endValue, formatter }) };
+    endSegmentValues.value = {
+      ...syncSegmentValues({ value: _endValue, formatter }),
+    };
   } else if (Object.values(endSegmentValues.value).every((value) => value !== null) && _endValue === undefined) {
     // If segment has null value, means that user modified it, thus do not reset the segmentValues
     endSegmentValues.value = { ...initialSegments };

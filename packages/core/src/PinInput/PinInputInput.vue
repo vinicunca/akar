@@ -223,7 +223,9 @@ function handlePaste(event: ClipboardEvent) {
 
 function handleMultipleCharacter(values: string) {
   const tempModelValue = [...context.currentModelValue.value] as typeof context.currentModelValue.value;
-  const initialIndex = values.length >= inputElements.value.length ? 0 : props.index;
+  const initialIndex = values.length >= inputElements.value.length
+    ? 0
+    : props.index;
   const lastIndex = Math.min(initialIndex + values.length, inputElements.value.length);
   for (let i = initialIndex; i < lastIndex; i++) {
     const input = inputElements.value[i];

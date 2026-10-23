@@ -141,7 +141,9 @@ export function useNumberParser(locale: Ref<string>, options: Ref<Intl.NumberFor
 }
 
 export function handleDecimalOperation(operator: '-' | '+', value1: number, value2: number): number {
-  let result = operator === '+' ? value1 + value2 : value1 - value2;
+  let result = operator === '+'
+    ? value1 + value2
+    : value1 - value2;
 
   // Check if we have decimals
   if (value1 % 1 !== 0 || value2 % 1 !== 0) {
@@ -156,7 +158,9 @@ export function handleDecimalOperation(operator: '-' | '+', value1: number, valu
     value2 = Math.round(value2 * multiplier);
 
     // Perform the operation on integers values to make sure we don't get a fancy decimal value
-    result = operator === '+' ? value1 + value2 : value1 - value2;
+    result = operator === '+'
+      ? value1 + value2
+      : value1 - value2;
 
     // Transform the integer result back to decimal
     result /= multiplier;

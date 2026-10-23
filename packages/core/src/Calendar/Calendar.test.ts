@@ -16,10 +16,39 @@ const calendarDateTime = new CalendarDateTime(1980, 1, 20, 12, 30, 0, 0);
 const zonedDateTime = toZoned(calendarDateTime, 'America/New_York');
 
 const narrowWeekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const shortWeekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-const longWeekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const shortWeekdays = [
+  'Su',
+  'Mo',
+  'Tu',
+  'We',
+  'Th',
+  'Fr',
+  'Sa',
+];
+const longWeekdays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 const kbd = useTestKbd();
 
@@ -33,7 +62,9 @@ function setup(props: { calendarProps?: CalendarRootProps; emits?: { 'onUpdate:m
 
 function setupMulti(props: { calendarProps?: CalendarRootProps; emits?: { 'onUpdate:modelValue'?: (data: Array<DateValue>) => void } } = { }) {
   const user = userEvent.setup();
-  const returned = render(CalendarMultiple, { props: { ...props, multiple: true } });
+  const returned = render(CalendarMultiple, {
+    props: { ...props, multiple: true },
+  });
   const calendar = returned.getByTestId('calendar');
   expect(calendar).toBeVisible();
   return { ...returned, user, calendar };
@@ -54,27 +85,35 @@ it('should pass axe accessibility tests', async () => {
 
 describe('calendar', async () => {
   it('respects a default value if provided - `CalendarDate`', async () => {
-    const { getByTestId, calendar } = setup({ calendarProps: { modelValue: calendarDate } });
+    const { getByTestId, calendar } = setup({
+      calendarProps: { modelValue: calendarDate },
+    });
     expect(getSelectedDay(calendar)).toHaveTextContent(String(calendarDate.day));
     expect(getByTestId('heading')).toHaveTextContent('January 1980');
   });
 
   it('respects a default value if provided - `CalendarDateTime`', async () => {
-    const { calendar, getByTestId } = setup({ calendarProps: { modelValue: calendarDateTime } });
+    const { calendar, getByTestId } = setup({
+      calendarProps: { modelValue: calendarDateTime },
+    });
 
     expect(getSelectedDay(calendar)).toHaveTextContent(String(calendarDateTime.day));
     expect(getByTestId('heading')).toHaveTextContent('January 1980');
   });
 
   it('respects a default value if provided - `ZonedDateTime`', async () => {
-    const { calendar, getByTestId } = setup({ calendarProps: { modelValue: zonedDateTime } });
+    const { calendar, getByTestId } = setup({
+      calendarProps: { modelValue: zonedDateTime },
+    });
 
     expect(getSelectedDay(calendar)).toHaveTextContent(String(zonedDateTime.day));
     expect(getByTestId('heading')).toHaveTextContent('January 1980');
   });
 
   it('navigates the months forward using the next button', async () => {
-    const { getByTestId, user } = setup({ calendarProps: { modelValue: calendarDate } });
+    const { getByTestId, user } = setup({
+      calendarProps: { modelValue: calendarDate },
+    });
 
     const heading = getByTestId('heading');
     const nextBtn = getByTestId('next-button');
@@ -88,31 +127,50 @@ describe('calendar', async () => {
 
   it('keeps the visible month when modelValue is a new object for the same day', async () => {
     const selected = new CalendarDate(1980, 1, 20);
-    const { getByTestId, user, rerender } = setup({ calendarProps: { modelValue: selected } });
+    const { getByTestId, user, rerender } = setup({
+      calendarProps: { modelValue: selected },
+    });
     const heading = getByTestId('heading');
 
     expect(heading).toHaveTextContent('January 1980');
     await user.click(getByTestId('next-button'));
     expect(heading).toHaveTextContent('February 1980');
 
-    await rerender({ calendarProps: { modelValue: selected.copy() } });
+    await rerender({
+      calendarProps: {
+        modelValue: selected.copy(),
+      },
+    });
 
     expect(heading).toHaveTextContent('February 1980');
   });
 
   it('moves the visible month when the selected day changes', async () => {
-    const { getByTestId, user, rerender } = setup({ calendarProps: { modelValue: new CalendarDate(1980, 1, 20) } });
+    const { getByTestId, user, rerender } = setup({
+      calendarProps: {
+        modelValue: new CalendarDate(1980, 1, 20),
+      },
+    });
 
     await user.click(getByTestId('next-button'));
     expect(getByTestId('heading')).toHaveTextContent('February 1980');
 
-    await rerender({ calendarProps: { modelValue: new CalendarDate(1980, 9, 23) } });
+    await rerender({
+      calendarProps: {
+        modelValue: new CalendarDate(1980, 9, 23),
+      },
+    });
 
     expect(getByTestId('heading')).toHaveTextContent('September 1980');
   });
 
   it('navigates 10 years into the past when setting the `prevPage` function to subtract 10 years', async () => {
-    const { getByTestId, user } = setup({ calendarProps: { modelValue: calendarDate, prevPage: (date: DateValue) => date.subtract({ years: 10 }) } });
+    const { getByTestId, user } = setup({
+      calendarProps: {
+        modelValue: calendarDate,
+        prevPage: (date: DateValue) => date.subtract({ years: 10 }),
+      },
+    });
 
     const heading = getByTestId('heading');
     const prevBtn = getByTestId('prev-button');
@@ -123,7 +181,12 @@ describe('calendar', async () => {
   });
 
   it('overwrites the `nextPage` function from `CalendarRoot`', async () => {
-    const { getByTestId, user } = setup({ calendarProps: { modelValue: calendarDate, nextPage: (date: DateValue) => date.add({ years: 10 }) } });
+    const { getByTestId, user } = setup({
+      calendarProps: {
+        modelValue: calendarDate,
+        nextPage: (date: DateValue) => date.add({ years: 10 }),
+      },
+    });
 
     const heading = getByTestId('heading');
     const nextBtn = getByTestId('next-year-button');
@@ -134,7 +197,12 @@ describe('calendar', async () => {
   });
 
   it('overwrites the `prevPage` function from `CalendarRoot`', async () => {
-    const { getByTestId, user } = setup({ calendarProps: { modelValue: calendarDate, prevPage: (date: DateValue) => date.subtract({ years: 10 }) } });
+    const { getByTestId, user } = setup({
+      calendarProps: {
+        modelValue: calendarDate,
+        prevPage: (date: DateValue) => date.subtract({ years: 10 }),
+      },
+    });
 
     const heading = getByTestId('heading');
     const prevBtn = getByTestId('prev-year-button');
@@ -145,7 +213,12 @@ describe('calendar', async () => {
   });
 
   it('navigates 10 years into the future when setting the `nextPage` function to add 10 years', async () => {
-    const { getByTestId, user } = setup({ calendarProps: { modelValue: calendarDate, nextPage: (date: DateValue) => date.add({ years: 10 }) } });
+    const { getByTestId, user } = setup({
+      calendarProps: {
+        modelValue: calendarDate,
+        nextPage: (date: DateValue) => date.add({ years: 10 }),
+      },
+    });
 
     const heading = getByTestId('heading');
     const nextBtn = getByTestId('next-button');
@@ -156,7 +229,9 @@ describe('calendar', async () => {
   });
 
   it('navigates the months backwards using the prev button', async () => {
-    const { getByTestId, user } = setup({ calendarProps: { modelValue: calendarDate } });
+    const { getByTestId, user } = setup({
+      calendarProps: { modelValue: calendarDate },
+    });
 
     const heading = getByTestId('heading');
     const prevBtn = getByTestId('prev-button');
@@ -174,7 +249,12 @@ describe('calendar', async () => {
   });
 
   it('allows dates to be deselected by clicking the selected date', async () => {
-    const { user, calendar, rerender } = setup({ calendarProps: { modelValue: calendarDate }, emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ modelValue: data }) } });
+    const { user, calendar, rerender } = setup({
+      calendarProps: { modelValue: calendarDate },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({ modelValue: data }),
+      },
+    });
 
     const selectedDay = getSelectedDay(calendar);
 
@@ -190,7 +270,9 @@ describe('calendar', async () => {
   it.each([kbd.ENTER, kbd.SPACE])('allows deselection with %s key', async (key) => {
     const { user, calendar, rerender } = setup({
       calendarProps: { modelValue: calendarDate },
-      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ modelValue: data }) },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({ modelValue: data }),
+      },
     });
 
     const selectedDay = getSelectedDay(calendar);
@@ -235,7 +317,9 @@ describe('calendar', async () => {
   });
 
   it('displays multiple months when `numberOfMonths` is greater than 1', async () => {
-    const { getByTestId, calendar, user } = setup({ calendarProps: { modelValue: calendarDateTime, numberOfMonths: 2 } });
+    const { getByTestId, calendar, user } = setup({
+      calendarProps: { modelValue: calendarDateTime, numberOfMonths: 2 },
+    });
 
     const selectedDay = getSelectedDay(calendar);
     expect(selectedDay).toHaveTextContent(String(calendarDateTime.day));
@@ -998,8 +1082,14 @@ describe('calendar', async () => {
     });
 
     it.each([
-      ['has no time', new CalendarDate(2024, 2, 25)],
-      ['has a different time', new CalendarDateTime(2024, 2, 25, 0, 0)],
+      [
+        'has no time',
+        new CalendarDate(2024, 2, 25),
+      ],
+      [
+        'has a different time',
+        new CalendarDateTime(2024, 2, 25, 0, 0),
+      ],
     ])('page up keeps focus and the time when minValue %s', async (_, minValue) => {
       const { getByTestId, user } = setup({
         calendarProps: {
@@ -1306,7 +1396,9 @@ describe('calendar - `multiple`', () => {
     const d2 = new CalendarDate(1980, 1, 5);
 
     const { calendar } = setupMulti({
-      calendarProps: { modelValue: [d1, d2] },
+      calendarProps: {
+        modelValue: [d1, d2],
+      },
     } as { calendarProps: CalendarRootProps & { multiple: true } });
 
     const selectedDays = getSelectedDays(calendar);
@@ -1320,7 +1412,9 @@ describe('calendar - `multiple`', () => {
     const d2 = new CalendarDateTime(1980, 1, 5);
 
     const { calendar } = setupMulti({
-      calendarProps: { modelValue: [d1, d2] },
+      calendarProps: {
+        modelValue: [d1, d2],
+      },
     } as { calendarProps: CalendarRootProps & { multiple: true } });
 
     const selectedDays = getSelectedDays(calendar);
@@ -1334,7 +1428,9 @@ describe('calendar - `multiple`', () => {
     const d2 = toZoned(new CalendarDateTime(1980, 1, 5), 'America/New_York');
 
     const { calendar } = setupMulti({
-      calendarProps: { modelValue: [d1, d2] },
+      calendarProps: {
+        modelValue: [d1, d2],
+      },
     } as { calendarProps: CalendarRootProps & { multiple: true } });
 
     const selectedDays = getSelectedDays(calendar);
@@ -1348,8 +1444,12 @@ describe('calendar - `multiple`', () => {
     const d2 = new CalendarDate(1980, 5, 5);
 
     const { calendar, rerender, getByTestId } = setupMulti({
-      calendarProps: { modelValue: [d1, d2] } as CalendarRootProps & { multiple: true },
-      emits: { 'onUpdate:modelValue': (data: Array<DateValue>) => rerender({ modelValue: data }) },
+      calendarProps: {
+        modelValue: [d1, d2],
+      } as CalendarRootProps & { multiple: true },
+      emits: {
+        'onUpdate:modelValue': (data: Array<DateValue>) => rerender({ modelValue: data }),
+      },
     });
 
     const heading = getByTestId('heading');
@@ -1359,7 +1459,10 @@ describe('calendar - `multiple`', () => {
   });
 
   it('keeps the visible month when multiple modelValue is a new array for the same days', async () => {
-    const dates = [new CalendarDate(1980, 1, 2), new CalendarDate(1980, 5, 5)];
+    const dates = [
+      new CalendarDate(1980, 1, 2),
+      new CalendarDate(1980, 5, 5),
+    ];
     const { getByTestId, user, rerender } = setupMulti({
       calendarProps: { modelValue: dates } as CalendarRootProps & { multiple: true },
     });
@@ -1369,7 +1472,12 @@ describe('calendar - `multiple`', () => {
     await user.click(getByTestId('next-button'));
     expect(heading).toHaveTextContent('June 1980');
 
-    await rerender({ calendarProps: { modelValue: dates.map((date) => date.copy()), multiple: true } });
+    await rerender({
+      calendarProps: {
+        modelValue: dates.map((date) => date.copy()),
+        multiple: true,
+      },
+    });
 
     expect(heading).toHaveTextContent('June 1980');
   });
@@ -1378,8 +1486,12 @@ describe('calendar - `multiple`', () => {
     const d1 = new CalendarDate(1980, 1, 2);
     const d2 = new CalendarDate(1980, 1, 5);
     const { calendar, user, rerender } = setupMulti({
-      calendarProps: { modelValue: [d1, d2] } as CalendarRootProps & { multiple: true },
-      emits: { 'onUpdate:modelValue': (data: Array<DateValue>) => rerender({ modelValue: data }) },
+      calendarProps: {
+        modelValue: [d1, d2],
+      } as CalendarRootProps & { multiple: true },
+      emits: {
+        'onUpdate:modelValue': (data: Array<DateValue>) => rerender({ modelValue: data }),
+      },
     });
 
     const selectedDays = getSelectedDays(calendar);

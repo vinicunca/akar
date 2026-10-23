@@ -1,10 +1,12 @@
 import type { PanelGroupStorage } from '../SplitterGroup.vue';
 import type { PanelData } from '../SplitterPanel.vue';
 
-// PanelGroup might be rendering in a server-side environment where localStorage is not available
-// or on a browser with cookies/storage disabled.
-// In either case, this function avoids accessing localStorage until needed,
-// and avoids throwing user-visible errors.
+/**
+ * PanelGroup might be rendering in a server-side environment where localStorage is not available
+ * or on a browser with cookies/storage disabled.
+ * In either case, this function avoids accessing localStorage until needed,
+ * and avoids throwing user-visible errors.
+ */
 export function initializeDefaultStorage(storageObject: PanelGroupStorage) {
   try {
     if (typeof localStorage !== 'undefined') {
@@ -77,7 +79,7 @@ function loadSerializedPanelGroupState(
         return parsed as SerializedPanelGroupState;
       }
     }
-  } catch (error) {}
+  } catch {}
 
   return null;
 }

@@ -198,7 +198,9 @@ function handleArrowKey(e: KeyboardEvent) {
   e.stopPropagation();
   const parentElement = rootContext.parentElement.value!;
   const indexIncrementation = 7;
-  const sign = rootContext.dir.value === 'rtl' ? -1 : 1;
+  const sign = rootContext.dir.value === 'rtl'
+    ? -1
+    : 1;
   switch (e.code) {
     case KEY_CODES.ARROW_RIGHT:
       shiftFocus(props.day, sign);

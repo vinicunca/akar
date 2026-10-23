@@ -92,7 +92,9 @@ export function normalizeHour12(hourCycle: HourCycle) {
 }
 
 export function getInputType(granularity: Granularity): DateInputType {
-  return granularity === 'day' ? 'date' : 'datetime-local';
+  return granularity === 'day'
+    ? 'date'
+    : 'datetime-local';
 }
 
 export function normalizeInputValue(date: DateValue | undefined, granularity: Granularity): string {
@@ -110,11 +112,17 @@ export function normalizeInputValue(date: DateValue | undefined, granularity: Gr
     return `${year}-${month}-${day}`;
   }
 
-  const hour = String('hour' in date ? date.hour : 0).padStart(2, '0');
-  const minute = String('minute' in date ? date.minute : 0).padStart(2, '0');
+  const hour = String('hour' in date
+    ? date.hour
+    : 0).padStart(2, '0');
+  const minute = String('minute' in date
+    ? date.minute
+    : 0).padStart(2, '0');
 
   if (granularity === 'second') {
-    const second = String('second' in date ? date.second : 0).padStart(2, '0');
+    const second = String('second' in date
+      ? date.second
+      : 0).padStart(2, '0');
     return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
   }
 

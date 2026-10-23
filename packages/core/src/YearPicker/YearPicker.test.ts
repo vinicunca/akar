@@ -37,25 +37,33 @@ it('should pass axe accessibility tests', async () => {
 
 describe('year picker', async () => {
   it('respects a default value if provided - `CalendarDate`', async () => {
-    const { getByTestId, picker } = setup({ pickerProps: { modelValue: calendarDate } });
+    const { getByTestId, picker } = setup({
+      pickerProps: { modelValue: calendarDate },
+    });
     expect(getSelectedYear(picker)).toHaveTextContent('1980');
     expect(getByTestId('heading')).toHaveTextContent('1980 - 1991');
   });
 
   it('respects a default value if provided - `CalendarDateTime`', async () => {
-    const { picker, getByTestId } = setup({ pickerProps: { modelValue: calendarDateTime } });
+    const { picker, getByTestId } = setup({
+      pickerProps: { modelValue: calendarDateTime },
+    });
     expect(getSelectedYear(picker)).toHaveTextContent('1980');
     expect(getByTestId('heading')).toHaveTextContent('1980 - 1991');
   });
 
   it('respects a default value if provided - `ZonedDateTime`', async () => {
-    const { picker, getByTestId } = setup({ pickerProps: { modelValue: zonedDateTime } });
+    const { picker, getByTestId } = setup({
+      pickerProps: { modelValue: zonedDateTime },
+    });
     expect(getSelectedYear(picker)).toHaveTextContent('1980');
     expect(getByTestId('heading')).toHaveTextContent('1980 - 1991');
   });
 
   it('does not crash when modelValue is null', async () => {
-    const { picker, rerender } = setup({ pickerProps: { modelValue: null } });
+    const { picker, rerender } = setup({
+      pickerProps: { modelValue: null },
+    });
 
     expect(getSelectedYears(picker)).toHaveLength(0);
 
@@ -69,7 +77,9 @@ describe('year picker', async () => {
   });
 
   it('navigates to next decade using next button', async () => {
-    const { getByTestId, user } = setup({ pickerProps: { modelValue: calendarDate } });
+    const { getByTestId, user } = setup({
+      pickerProps: { modelValue: calendarDate },
+    });
 
     const heading = getByTestId('heading');
     const nextBtn = getByTestId('next-button');
@@ -83,30 +93,46 @@ describe('year picker', async () => {
 
   it('keeps the visible decade when modelValue is a new object for the same year', async () => {
     const selected = new CalendarDate(1980, 1, 20);
-    const { getByTestId, user, rerender } = setup({ pickerProps: { modelValue: selected } });
+    const { getByTestId, user, rerender } = setup({
+      pickerProps: { modelValue: selected },
+    });
     const heading = getByTestId('heading');
 
     await user.click(getByTestId('next-button'));
     expect(heading).toHaveTextContent('1992 - 2003');
 
-    await rerender({ pickerProps: { modelValue: selected.copy() } });
+    await rerender({
+      pickerProps: {
+        modelValue: selected.copy(),
+      },
+    });
 
     expect(heading).toHaveTextContent('1992 - 2003');
   });
 
   it('moves the visible decade when the selected year changes', async () => {
-    const { getByTestId, user, rerender } = setup({ pickerProps: { modelValue: new CalendarDate(1980, 1, 20) } });
+    const { getByTestId, user, rerender } = setup({
+      pickerProps: {
+        modelValue: new CalendarDate(1980, 1, 20),
+      },
+    });
 
     await user.click(getByTestId('next-button'));
     expect(getByTestId('heading')).toHaveTextContent('1992 - 2003');
 
-    await rerender({ pickerProps: { modelValue: new CalendarDate(2010, 1, 1) } });
+    await rerender({
+      pickerProps: {
+        modelValue: new CalendarDate(2010, 1, 1),
+      },
+    });
 
     expect(getByTestId('heading')).toHaveTextContent('2010 - 2021');
   });
 
   it('navigates to prev decade using prev button', async () => {
-    const { getByTestId, user } = setup({ pickerProps: { modelValue: calendarDate } });
+    const { getByTestId, user } = setup({
+      pickerProps: { modelValue: calendarDate },
+    });
 
     const heading = getByTestId('heading');
     const prevBtn = getByTestId('prev-button');
@@ -121,7 +147,11 @@ describe('year picker', async () => {
   it('allows years to be deselected by clicking the selected year', async () => {
     const { user, picker, rerender } = setup({
       pickerProps: { modelValue: calendarDate },
-      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ pickerProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({
+          pickerProps: { modelValue: data },
+        }),
+      },
     });
 
     const selectedYear = getSelectedYear(picker);
@@ -133,7 +163,11 @@ describe('year picker', async () => {
   it.each([kbd.ENTER, kbd.SPACE])('allows deselection with %s key', async (key) => {
     const { user, picker, rerender } = setup({
       pickerProps: { modelValue: calendarDate },
-      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ pickerProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({
+          pickerProps: { modelValue: data },
+        }),
+      },
     });
 
     const selectedYear = getSelectedYear(picker);
@@ -403,8 +437,15 @@ describe('year picker - multiple', () => {
     const d2 = new CalendarDate(1985, 1, 1);
 
     const { picker, getByTestId, user, rerender } = setup({
-      pickerProps: { modelValue: [d1, d2], multiple: true },
-      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ pickerProps: { modelValue: data as any, multiple: true } }) },
+      pickerProps: {
+        modelValue: [d1, d2],
+        multiple: true,
+      },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({
+          pickerProps: { modelValue: data as any, multiple: true },
+        }),
+      },
     } as any);
 
     const selectedYears = getSelectedYears(picker);
@@ -421,8 +462,15 @@ describe('year picker - multiple', () => {
     const d2 = new CalendarDate(1985, 1, 1);
 
     const { picker, user, rerender } = setup({
-      pickerProps: { modelValue: [d1, d2], multiple: true },
-      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ pickerProps: { modelValue: data as any, multiple: true } }) },
+      pickerProps: {
+        modelValue: [d1, d2],
+        multiple: true,
+      },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({
+          pickerProps: { modelValue: data as any, multiple: true },
+        }),
+      },
     } as any);
 
     const selectedYears = getSelectedYears(picker);

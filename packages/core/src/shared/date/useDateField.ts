@@ -61,12 +61,16 @@ function daySegmentAttrs(props: SegmentAttrProps) {
     dateFields.month = segmentValues.month;
   }
 
-  const date = Object.keys(dateFields).length > 0 ? placeholder.set(dateFields) : placeholder;
+  const date = Object.keys(dateFields).length > 0
+    ? placeholder.set(dateFields)
+    : placeholder;
 
   const valueNow = date.day;
   const valueMin = 1;
   const valueMax = getDaysInMonth(date);
-  const valueText = isEmpty ? 'Empty' : `${valueNow}`;
+  const valueText = isEmpty
+    ? 'Empty'
+    : `${valueNow}`;
 
   return {
     ...commonSegmentAttrs(props),
@@ -88,7 +92,9 @@ function monthSegmentAttrs(props: SegmentAttrProps) {
   const valueNow = date.month;
   const valueMin = 1;
   const valueMax = 12;
-  const valueText = isEmpty ? 'Empty' : `${valueNow} - ${formatter.fullMonth(toDate(date))}`;
+  const valueText = isEmpty
+    ? 'Empty'
+    : `${valueNow} - ${formatter.fullMonth(toDate(date))}`;
 
   return {
     ...commonSegmentAttrs(props),
@@ -105,11 +111,15 @@ function monthSegmentAttrs(props: SegmentAttrProps) {
 function yearSegmentAttrs(props: SegmentAttrProps) {
   const { segmentValues, placeholder } = props;
   const isEmpty = segmentValues.year === null;
-  const date = segmentValues.year ? placeholder.set({ year: segmentValues.year }) : placeholder;
+  const date = segmentValues.year
+    ? placeholder.set({ year: segmentValues.year })
+    : placeholder;
   const valueMin = 1;
   const valueMax = 9999;
   const valueNow = date.year;
-  const valueText = isEmpty ? 'Empty' : `${valueNow}`;
+  const valueText = isEmpty
+    ? 'Empty'
+    : `${valueNow}`;
 
   return {
     ...commonSegmentAttrs(props),
@@ -129,11 +139,19 @@ function hourSegmentAttrs(props: SegmentAttrProps) {
     return {};
   }
   const isEmpty = segmentValues.hour === null;
-  const date = segmentValues.hour ? placeholder.set({ hour: segmentValues.hour }) : placeholder;
-  const valueMin = hourCycle === 12 ? 1 : 0;
-  const valueMax = hourCycle === 12 ? 12 : 23;
+  const date = segmentValues.hour
+    ? placeholder.set({ hour: segmentValues.hour })
+    : placeholder;
+  const valueMin = hourCycle === 12
+    ? 1
+    : 0;
+  const valueMax = hourCycle === 12
+    ? 12
+    : 23;
   const valueNow = date.hour;
-  const valueText = isEmpty ? 'Empty' : `${valueNow} ${segmentValues.dayPeriod ?? ''}`;
+  const valueText = isEmpty
+    ? 'Empty'
+    : `${valueNow} ${segmentValues.dayPeriod ?? ''}`;
 
   return {
     ...commonSegmentAttrs(props),
@@ -158,7 +176,9 @@ function minuteSegmentAttrs(props: SegmentAttrProps) {
   const valueNow = date.minute;
   const valueMin = 0;
   const valueMax = 59;
-  const valueText = isEmpty ? 'Empty' : `${valueNow}`;
+  const valueText = isEmpty
+    ? 'Empty'
+    : `${valueNow}`;
 
   return {
     ...commonSegmentAttrs(props),
@@ -183,7 +203,9 @@ function secondSegmentAttrs(props: SegmentAttrProps) {
   const valueNow = date.second;
   const valueMin = 0;
   const valueMax = 59;
-  const valueText = isEmpty ? 'Empty' : `${valueNow}`;
+  const valueText = isEmpty
+    ? 'Empty'
+    : `${valueNow}`;
 
   return {
     ...commonSegmentAttrs(props),
@@ -205,7 +227,11 @@ function dayPeriodSegmentAttrs(props: SegmentAttrProps) {
   const valueMin = 0;
   const valueMax = 12;
   // eslint-disable-next-line no-nested-ternary
-  const valueNow = segmentValues.hour ? (segmentValues.hour > 12 ? segmentValues.hour - 12 : segmentValues.hour) : 0;
+  const valueNow = segmentValues.hour
+    ? (segmentValues.hour > 12
+        ? segmentValues.hour - 12
+        : segmentValues.hour)
+    : 0;
   const valueText = segmentValues.dayPeriod ?? 'AM';
 
   return {
@@ -243,7 +269,9 @@ function eraSegmentAttrs(props: SegmentAttrProps) {
   const valueMin = 0;
   const valueMax = 0;
   const valueNow = 0;
-  const valueText = 'era' in segmentValues ? segmentValues.era : placeholder.era;
+  const valueText = 'era' in segmentValues
+    ? segmentValues.era
+    : placeholder.era;
 
   return {
     ...commonSegmentAttrs(props),
@@ -307,12 +335,16 @@ export type UseDateFieldProps = {
 export function useDateField(props: UseDateFieldProps) {
   function minuteSecondIncrementation({ e, part, dateRef, prevValue }: MinuteSecondIncrementProps): number {
     const step = props.step.value[part] ?? 1;
-    const sign = e.key === KEY_CODES.ARROW_UP ? step : -step;
+    const sign = e.key === KEY_CODES.ARROW_UP
+      ? step
+      : -step;
     const min = 0;
     const max = 59;
 
     if (prevValue === null) {
-      return sign > 0 ? min : max;
+      return sign > 0
+        ? min
+        : max;
     }
 
     const cycleArgs: [keyof TimeFields, number] = [part, sign];
@@ -335,7 +367,9 @@ export function useDateField(props: UseDateFieldProps) {
   }
   function dateTimeValueIncrementation({ e, part, dateRef, prevValue }: DateTimeValueIncrementation): number {
     const step = props.step.value[part] ?? 1;
-    const sign = e.key === KEY_CODES.ARROW_UP ? step : -step;
+    const sign = e.key === KEY_CODES.ARROW_UP
+      ? step
+      : -step;
 
     if (prevValue === null) {
       return dateRef[part as keyof Omit<DateFields, 'era'>];
@@ -620,13 +654,23 @@ export function useDateField(props: UseDateFieldProps) {
     }
 
     if (prev === null) {
-      return { value: num === 0 ? 1 : num, moveToNext };
+      return {
+        value: num === 0
+          ? 1
+          : num,
+        moveToNext,
+      };
     }
 
     const str = prev.toString() + num.toString();
 
     if (str.length > 4) {
-      return { value: num === 0 ? 1 : num, moveToNext };
+      return {
+        value: num === 0
+          ? 1
+          : num,
+        moveToNext,
+      };
     }
 
     if (str.length === 4) {
@@ -654,7 +698,12 @@ export function useDateField(props: UseDateFieldProps) {
     const prevValue = props.segmentValues.value.day;
 
     if (e.key === KEY_CODES.ARROW_DOWN || e.key === KEY_CODES.ARROW_UP) {
-      props.segmentValues.value.day = dateTimeValueIncrementation({ e, part: 'day', dateRef: props.placeholder.value, prevValue });
+      props.segmentValues.value.day = dateTimeValueIncrementation({
+        e,
+        part: 'day',
+        dateRef: props.placeholder.value,
+        prevValue,
+      });
       return;
     }
 
@@ -691,7 +740,12 @@ export function useDateField(props: UseDateFieldProps) {
     const prevValue = props.segmentValues.value.month;
 
     if (e.key === KEY_CODES.ARROW_DOWN || e.key === KEY_CODES.ARROW_UP) {
-      props.segmentValues.value.month = dateTimeValueIncrementation({ e, part: 'month', dateRef: props.placeholder.value, prevValue });
+      props.segmentValues.value.month = dateTimeValueIncrementation({
+        e,
+        part: 'month',
+        dateRef: props.placeholder.value,
+        prevValue,
+      });
       return;
     }
 
@@ -720,7 +774,12 @@ export function useDateField(props: UseDateFieldProps) {
     const prevValue = props.segmentValues.value.year;
 
     if (e.key === KEY_CODES.ARROW_DOWN || e.key === KEY_CODES.ARROW_UP) {
-      props.segmentValues.value.year = dateTimeValueIncrementation({ e, part: 'year', dateRef: props.placeholder.value, prevValue });
+      props.segmentValues.value.year = dateTimeValueIncrementation({
+        e,
+        part: 'year',
+        dateRef: props.placeholder.value,
+        prevValue,
+      });
       return;
     }
 
@@ -755,13 +814,20 @@ export function useDateField(props: UseDateFieldProps) {
     const prevValue = props.segmentValues.value.hour;
 
     if (e.key === KEY_CODES.ARROW_UP || e.key === KEY_CODES.ARROW_DOWN) {
-      const newHour = dateTimeValueIncrementation({ e, part: 'hour', dateRef: props.placeholder.value, prevValue });
+      const newHour = dateTimeValueIncrementation({
+        e,
+        part: 'hour',
+        dateRef: props.placeholder.value,
+        prevValue,
+      });
       props.segmentValues.value.hour = newHour;
 
       if ('dayPeriod' in props.segmentValues.value && newHour !== null) {
         // Determine AM/PM based on internal 24-hour value
         // Hour 0-11 = AM, Hour 12-23 = PM
-        props.segmentValues.value.dayPeriod = newHour >= 12 ? 'PM' : 'AM';
+        props.segmentValues.value.dayPeriod = newHour >= 12
+          ? 'PM'
+          : 'AM';
       }
 
       return;
@@ -779,7 +845,11 @@ export function useDateField(props: UseDateFieldProps) {
         // 12 AM/PM should be treated as 0 internally even if it doesn't match the display
         // otherwise repeatedly typing 0 will not advance to the next segment
         // eslint-disable-next-line no-nested-ternary
-        displayPrev = prevValue % 12 === 0 ? 0 : (prevValue > 12 ? prevValue - 12 : prevValue);
+        displayPrev = prevValue % 12 === 0
+          ? 0
+          : (prevValue > 12
+              ? prevValue - 12
+              : prevValue);
       }
 
       const { value, moveToNext } = updateHour(max, num, displayPrev);
@@ -789,9 +859,13 @@ export function useDateField(props: UseDateFieldProps) {
       if (is12Hour && value !== null) {
         const period = props.segmentValues.value.dayPeriod || 'AM';
         if (value === 12) {
-          internalValue = period === 'AM' ? 0 : 12;
+          internalValue = period === 'AM'
+            ? 0
+            : 12;
         } else {
-          internalValue = period === 'PM' ? value + 12 : value;
+          internalValue = period === 'PM'
+            ? value + 12
+            : value;
         }
       }
 
@@ -818,7 +892,12 @@ export function useDateField(props: UseDateFieldProps) {
     const prevValue = props.segmentValues.value.minute;
 
     if (e.key === KEY_CODES.ARROW_UP || e.key === KEY_CODES.ARROW_DOWN) {
-      props.segmentValues.value.minute = minuteSecondIncrementation({ e, part: 'minute', dateRef: props.placeholder.value, prevValue });
+      props.segmentValues.value.minute = minuteSecondIncrementation({
+        e,
+        part: 'minute',
+        dateRef: props.placeholder.value,
+        prevValue,
+      });
     }
 
     if (isNumberString(e.key)) {
@@ -849,7 +928,12 @@ export function useDateField(props: UseDateFieldProps) {
     const prevValue = props.segmentValues.value.second;
 
     if (e.key === KEY_CODES.ARROW_UP || e.key === KEY_CODES.ARROW_DOWN) {
-      props.segmentValues.value.second = minuteSecondIncrementation({ e, part: 'second', dateRef: props.placeholder.value, prevValue });
+      props.segmentValues.value.second = minuteSecondIncrementation({
+        e,
+        part: 'second',
+        dateRef: props.placeholder.value,
+        prevValue,
+      });
     }
 
     if (isNumberString(e.key)) {
@@ -934,6 +1018,7 @@ export function useDateField(props: UseDateFieldProps) {
 
     segmentKeydownHandlers[props.part as keyof typeof segmentKeydownHandlers](e);
 
+    // eslint-disable-next-line sonarjs/no-collapsible-if
     if (
       !isIncludedIn(e.key, [KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_RIGHT])
       && e.key !== KEY_CODES.TAB

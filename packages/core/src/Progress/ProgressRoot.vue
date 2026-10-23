@@ -81,7 +81,9 @@ import { Primitive } from '@/Primitive';
 const props = withDefaults(defineProps<ProgressRootProps>(), {
   max: DEFAULT_MAX,
   getValueLabel: (value: number | null | undefined, max: number) =>
-    isNumber(value) ? `${Math.round((value / max) * DEFAULT_MAX)}%` : undefined,
+    isNumber(value)
+      ? `${Math.round((value / max) * DEFAULT_MAX)}%`
+      : undefined,
 });
 
 const emit = defineEmits<ProgressRootEmits>();

@@ -15,7 +15,10 @@ describe('validatePanelGroupLayout', () => {
 
   it('should throw when the layout length does not match the panel constraints', () => {
     expect(() =>
-      validatePanelGroupLayout({ layout: [50, 50], panelConstraints: [] }),
+      validatePanelGroupLayout({
+        layout: [50, 50],
+        panelConstraints: [],
+      }),
     ).toThrow('Invalid 0 panel layout');
   });
 });

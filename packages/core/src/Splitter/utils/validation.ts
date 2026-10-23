@@ -3,7 +3,7 @@ import { assert } from './assert';
 import { fuzzyNumbersEqual } from './compare';
 import { resizePanel } from './resizePanel';
 
-// All units must be in percentages; pixel values should be pre-converted
+/** All units must be in percentages; pixel values should be pre-converted */
 export function validatePanelGroupLayout({
   layout: prevLayout,
   panelConstraints,
@@ -147,7 +147,9 @@ export function validatePanelConstraints({
     }
 
     if (warnings.length > 0) {
-      const name = panelId != null ? `Panel "${panelId}"` : 'Panel';
+      const name = panelId != null
+        ? `Panel "${panelId}"`
+        : 'Panel';
       console.warn(
         `${name} has an invalid configuration:\n\n${warnings.join('\n')}`,
       );

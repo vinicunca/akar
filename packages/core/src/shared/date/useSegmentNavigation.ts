@@ -20,8 +20,12 @@ export function useSegmentNavigation({ segmentElements, currentFocusedElement, d
         el.getAttribute(attribute) === currentFocusedElement.value?.getAttribute(attribute))));
 
   const nextFocusableSegment = computed(() => {
-    const sign = dir.value === 'rtl' ? -1 : 1;
-    const nextCondition = sign < 0 ? currentSegmentIndex.value < 0 : currentSegmentIndex.value > segmentElements.value.size - 1;
+    const sign = dir.value === 'rtl'
+      ? -1
+      : 1;
+    const nextCondition = sign < 0
+      ? currentSegmentIndex.value < 0
+      : currentSegmentIndex.value > segmentElements.value.size - 1;
     if (nextCondition) {
       return null;
     }
@@ -30,8 +34,12 @@ export function useSegmentNavigation({ segmentElements, currentFocusedElement, d
   });
 
   const prevFocusableSegment = computed(() => {
-    const sign = dir.value === 'rtl' ? -1 : 1;
-    const prevCondition = sign > 0 ? currentSegmentIndex.value < 0 : currentSegmentIndex.value > segmentElements.value.size - 1;
+    const sign = dir.value === 'rtl'
+      ? -1
+      : 1;
+    const prevCondition = sign > 0
+      ? currentSegmentIndex.value < 0
+      : currentSegmentIndex.value > segmentElements.value.size - 1;
     if (prevCondition) {
       return null;
     }

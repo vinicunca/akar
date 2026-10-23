@@ -53,7 +53,9 @@ function createWrapper(initialItems: Array<ItemConfig>) {
                         'data-testid': item.value,
                         // When disabled, expose `data-disabled=""` on the real
                         // element so `ref.dataset.disabled === ''`.
-                        ...(item.disabled ? { 'data-disabled': '' } : {}),
+                        ...(item.disabled
+                          ? { 'data-disabled': '' }
+                          : {}),
                       }, item.value),
                   },
                 ),
@@ -175,7 +177,9 @@ describe('useCollection', () => {
   });
 
   it('finds detached registered items but not unmounted items', async () => {
-    const { getCollection, items, wrapper } = createWrapper([{ value: 'item' }]);
+    const { getCollection, items, wrapper } = createWrapper([
+      { value: 'item' },
+    ]);
     await nextTick();
 
     const { getItem, getItems } = getCollection();

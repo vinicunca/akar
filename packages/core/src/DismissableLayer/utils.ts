@@ -54,6 +54,7 @@ export function isLayerExist(layerElement: HTMLElement, targetElement: HTMLEleme
     layerElement.ownerDocument.querySelectorAll('[data-dismissable-layer]'),
   );
 
+  // eslint-disable-next-line sonarjs/prefer-single-boolean-return
   if (targetLayer && (mainLayer === targetLayer || nodeList.indexOf(mainLayer) < nodeList.indexOf(targetLayer))) {
     return true;
   } else {

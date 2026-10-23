@@ -159,10 +159,14 @@ const step = computed(() => normalizeDateStep(props));
 
 const inferredGranularity = computed(() => {
   if (props.granularity) {
-    return !hasTime(placeholder.value) ? 'day' : props.granularity;
+    return !hasTime(placeholder.value)
+      ? 'day'
+      : props.granularity;
   }
 
-  return hasTime(placeholder.value) ? 'minute' : 'day';
+  return hasTime(placeholder.value)
+    ? 'minute'
+    : 'day';
 });
 
 const isStartInvalid = computed(() => {
@@ -234,8 +238,16 @@ const isInvalid = computed(() => {
 
 const initialSegments = initializeSegmentValues(inferredGranularity.value);
 
-const startSegmentValues = ref<SegmentValueObj>(modelValue.value?.start ? { ...syncSegmentValues({ value: modelValue.value.start, formatter }) } : { ...initialSegments });
-const endSegmentValues = ref<SegmentValueObj>(modelValue.value?.end ? { ...syncSegmentValues({ value: modelValue.value.end, formatter }) } : { ...initialSegments });
+const startSegmentValues = ref<SegmentValueObj>(modelValue.value?.start
+  ? {
+      ...syncSegmentValues({ value: modelValue.value.start, formatter }),
+    }
+  : { ...initialSegments });
+const endSegmentValues = ref<SegmentValueObj>(modelValue.value?.end
+  ? {
+      ...syncSegmentValues({ value: modelValue.value.end, formatter }),
+    }
+  : { ...initialSegments });
 
 const startSegmentContent = computed(() => createContent({
   granularity: inferredGranularity.value,
@@ -262,13 +274,19 @@ const segmentContents = computed(() => ({
   end: endSegmentContent.value.arr,
 }));
 
-const editableSegmentContents = computed(() => ({ start: segmentContents.value.start.filter(({ part }) => part !== 'literal'), end: segmentContents.value.end.filter(({ part }) => part !== 'literal') }));
+const editableSegmentContents = computed(() => ({
+  start: segmentContents.value.start.filter(({ part }) => part !== 'literal'),
+  end: segmentContents.value.end.filter(({ part }) => part !== 'literal'),
+}));
 
 const startValue = ref(modelValue.value?.start?.copy()) as Ref<DateValue | undefined>;
 const endValue = ref(modelValue.value?.end?.copy()) as Ref<DateValue | undefined>;
 
 watch([startValue, endValue], ([_startValue, _endValue]) => {
-  modelValue.value = { start: _startValue?.copy(), end: _endValue?.copy() };
+  modelValue.value = {
+    start: _startValue?.copy(),
+    end: _endValue?.copy(),
+  };
 });
 
 watch(modelValue, (_modelValue) => {
@@ -289,7 +307,9 @@ watch(modelValue, (_modelValue) => {
 
 watch([startValue, locale], ([_startValue]) => {
   if (_startValue !== undefined) {
-    startSegmentValues.value = { ...syncSegmentValues({ value: _startValue, formatter }) };
+    startSegmentValues.value = {
+      ...syncSegmentValues({ value: _startValue, formatter }),
+    };
   } else if (Object.values(startSegmentValues.value).every((value) => value !== null) && _startValue === undefined) {
     // If segment has null value, means that user modified it, thus do not reset the segmentValues
     startSegmentValues.value = { ...initialSegments };
@@ -318,7 +338,9 @@ watch(modelValue, (_modelValue) => {
 
 watch([endValue, locale], ([_endValue]) => {
   if (_endValue !== undefined) {
-    endSegmentValues.value = { ...syncSegmentValues({ value: _endValue, formatter }) };
+    endSegmentValues.value = {
+      ...syncSegmentValues({ value: _endValue, formatter }),
+    };
   } else if (Object.values(endSegmentValues.value).every((value) => value !== null) && _endValue === undefined) {
     // If segment has null value, means that user modified it, thus do not reset the segmentValues
     endSegmentValues.value = { ...initialSegments };

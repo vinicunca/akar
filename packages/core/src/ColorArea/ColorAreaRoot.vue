@@ -164,9 +164,21 @@ const areaStyles = computed(() => {
   let bgColor = color.value;
   if (colorSpace.value === 'hsl' || colorSpace.value === 'hsb') {
     if (colorSpace.value === 'hsl') {
-      bgColor = { space: 'hsl', h: hueValue.value, s: 100, l: 50, alpha: 1 };
+      bgColor = {
+        space: 'hsl',
+        h: hueValue.value,
+        s: 100,
+        l: 50,
+        alpha: 1,
+      };
     } else {
-      bgColor = { space: 'hsb', h: hueValue.value, s: 100, b: 100, alpha: 1 };
+      bgColor = {
+        space: 'hsb',
+        h: hueValue.value,
+        s: 100,
+        b: 100,
+        alpha: 1,
+      };
     }
   }
   return getAreaBackgroundStyle(bgColor, xChannel.value, yChannel.value, colorSpace.value);

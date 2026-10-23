@@ -29,9 +29,13 @@ export function transformOrigin(options: {
 
       const [placedSide, placedAlign] = getSideAndAlignFromPlacement(placement);
       const noArrowAlignX = {
-        start: options.dir === 'rtl' ? '100%' : '0%',
+        start: options.dir === 'rtl'
+          ? '100%'
+          : '0%',
         center: '50%',
-        end: options.dir === 'rtl' ? '0%' : '100%',
+        end: options.dir === 'rtl'
+          ? '0%'
+          : '100%',
       }[placedAlign];
 
       const noArrowAlignY = {
@@ -47,19 +51,29 @@ export function transformOrigin(options: {
       let y = '';
 
       if (placedSide === 'bottom') {
-        x = isArrowHidden ? noArrowAlignX : `${arrowXCenter}px`;
+        x = isArrowHidden
+          ? noArrowAlignX
+          : `${arrowXCenter}px`;
         y = `${-arrowHeight}px`;
       } else if (placedSide === 'top') {
-        x = isArrowHidden ? noArrowAlignX : `${arrowXCenter}px`;
+        x = isArrowHidden
+          ? noArrowAlignX
+          : `${arrowXCenter}px`;
         y = `${rects.floating.height + arrowHeight}px`;
       } else if (placedSide === 'right') {
         x = `${-arrowHeight}px`;
-        y = isArrowHidden ? noArrowAlignY : `${arrowYCenter}px`;
+        y = isArrowHidden
+          ? noArrowAlignY
+          : `${arrowYCenter}px`;
       } else if (placedSide === 'left') {
         x = `${rects.floating.width + arrowHeight}px`;
-        y = isArrowHidden ? noArrowAlignY : `${arrowYCenter}px`;
+        y = isArrowHidden
+          ? noArrowAlignY
+          : `${arrowYCenter}px`;
       }
-      return { data: { x, y } };
+      return {
+        data: { x, y },
+      };
     },
   };
 }

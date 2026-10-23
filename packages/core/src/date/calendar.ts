@@ -144,7 +144,9 @@ export function createYear(props: SetYearProps): Array<DateValue> {
   const { dateObj, numberOfMonths = 1, pagedNavigation = false } = props;
 
   if (numberOfMonths && pagedNavigation) {
-    const monthsArray = Array.from({ length: Math.floor(12 / numberOfMonths) }, (_, i) => startOfMonth(dateObj.set({ month: i * numberOfMonths + 1 })));
+    const monthsArray = Array.from({
+      length: Math.floor(12 / numberOfMonths),
+    }, (_, i) => startOfMonth(dateObj.set({ month: i * numberOfMonths + 1 })));
 
     return monthsArray;
   }
@@ -195,7 +197,11 @@ export function createMonths(props: SetMonthProps) {
 export function createMonthGrid(props: CreateSelectProps): Grid<DateValue> {
   const { dateObj } = props;
   const months = createYear({ dateObj });
-  return { value: dateObj, cells: months, rows: chunk(months, 4) };
+  return {
+    value: dateObj,
+    cells: months,
+    rows: chunk(months, 4),
+  };
 }
 
 /**
@@ -214,7 +220,11 @@ export function createYearGrid(props: CreateSelectProps & { yearsPerPage?: numbe
 
   const years = Array.from({ length: yearsPerPage }, (_, i) => startOfYear(dateObj.set({ year: startYear + i })));
   const firstYear = years[0];
-  return { value: firstYear, cells: years, rows: chunk(years, 4) };
+  return {
+    value: firstYear,
+    cells: years,
+    rows: chunk(years, 4),
+  };
 }
 
 export function createYearRange({ start, end }: DateRange): Array<DateValue> {

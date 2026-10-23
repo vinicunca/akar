@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import type { ChannelRange, Color, ColorChannel, ColorSpace, HSBColor, HSLColor, RGBColor } from './types';
 import { convertToHsb, convertToHsl, convertToRgb } from './convert';
 
@@ -46,13 +47,21 @@ export function getChannelName(channel: ColorChannel): string {
 export function getChannelValue(color: Color, channel: ColorChannel): number {
   switch (channel) {
     case 'red':
-      return color.space === 'rgb' ? (color as RGBColor).r : convertToRgb(color).r;
+      return color.space === 'rgb'
+        ? (color as RGBColor).r
+        : convertToRgb(color).r;
     case 'green':
-      return color.space === 'rgb' ? (color as RGBColor).g : convertToRgb(color).g;
+      return color.space === 'rgb'
+        ? (color as RGBColor).g
+        : convertToRgb(color).g;
     case 'blue':
-      return color.space === 'rgb' ? (color as RGBColor).b : convertToRgb(color).b;
+      return color.space === 'rgb'
+        ? (color as RGBColor).b
+        : convertToRgb(color).b;
     case 'hue':
-      return color.space === 'hsl' ? (color as HSLColor).h : convertToHsl(color).h;
+      return color.space === 'hsl'
+        ? (color as HSLColor).h
+        : convertToHsl(color).h;
     case 'saturation':
       if (color.space === 'hsl') {
         return (color as HSLColor).s;
@@ -62,9 +71,13 @@ export function getChannelValue(color: Color, channel: ColorChannel): number {
       }
       return convertToHsl(color).s;
     case 'lightness':
-      return color.space === 'hsl' ? (color as HSLColor).l : convertToHsl(color).l;
+      return color.space === 'hsl'
+        ? (color as HSLColor).l
+        : convertToHsl(color).l;
     case 'brightness':
-      return color.space === 'hsb' ? (color as HSBColor).b : convertToHsb(color).b;
+      return color.space === 'hsb'
+        ? (color as HSBColor).b
+        : convertToHsb(color).b;
     case 'alpha':
       return color.alpha * 100;
     default:
@@ -90,7 +103,11 @@ export function setChannelValue(color: Color, channel: ColorChannel, value: numb
     const rgb = convertToRgb(color);
     const newRgb: RGBColor = {
       ...rgb,
-      [channel === 'red' ? 'r' : channel === 'green' ? 'g' : 'b']: clamped,
+      [channel === 'red'
+        ? 'r'
+        : channel === 'green'
+          ? 'g'
+          : 'b']: clamped,
     };
     return convertFromRgb(newRgb, color.space);
   }
@@ -100,7 +117,9 @@ export function setChannelValue(color: Color, channel: ColorChannel, value: numb
     const hsl = convertToHsl(color);
     const newHsl: HSLColor = {
       ...hsl,
-      [channel === 'hue' ? 'h' : 'l']: clamped,
+      [channel === 'hue'
+        ? 'h'
+        : 'l']: clamped,
     };
     return convertFromHsl(newHsl, color.space);
   }
@@ -171,13 +190,25 @@ export function setChannelValues(
     if (channel === 'alpha') {
       workingColor = { ...workingColor, alpha: clamped / 100 };
     } else if (workingColor.space === 'rgb' && (channel === 'red' || channel === 'green' || channel === 'blue')) {
-      const key = channel === 'red' ? 'r' : channel === 'green' ? 'g' : 'b';
+      const key = channel === 'red'
+        ? 'r'
+        : channel === 'green'
+          ? 'g'
+          : 'b';
       workingColor = { ...workingColor, [key]: clamped } as RGBColor;
     } else if (workingColor.space === 'hsl' && (channel === 'hue' || channel === 'saturation' || channel === 'lightness')) {
-      const key = channel === 'hue' ? 'h' : channel === 'saturation' ? 's' : 'l';
+      const key = channel === 'hue'
+        ? 'h'
+        : channel === 'saturation'
+          ? 's'
+          : 'l';
       workingColor = { ...workingColor, [key]: clamped } as HSLColor;
     } else if (workingColor.space === 'hsb' && (channel === 'hue' || channel === 'saturation' || channel === 'brightness')) {
-      const key = channel === 'hue' ? 'h' : channel === 'saturation' ? 's' : 'b';
+      const key = channel === 'hue'
+        ? 'h'
+        : channel === 'saturation'
+          ? 's'
+          : 'b';
       workingColor = { ...workingColor, [key]: clamped } as HSBColor;
     }
   }
@@ -264,10 +295,14 @@ function rgbToHsl(rgb: RGBColor): HSLColor {
 
   if (max !== min) {
     const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    s = l > 0.5
+      ? d / (2 - max - min)
+      : d / (max + min);
     switch (max) {
       case r:
-        h = (g - b) / d + (g < b ? 6 : 0);
+        h = (g - b) / d + (g < b
+          ? 6
+          : 0);
         break;
       case g:
         h = (b - r) / d + 2;
@@ -317,7 +352,9 @@ function hslToRgb(hsl: HSLColor): RGBColor {
       return p;
     };
 
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const q = l < 0.5
+      ? l * (1 + s)
+      : l + s - l * s;
     const p = 2 * l - q;
     r = hue2rgb(p, q, h + 1 / 3);
     g = hue2rgb(p, q, h);
@@ -343,13 +380,17 @@ function rgbToHsb(rgb: RGBColor): HSBColor {
   const d = max - min;
 
   let h = 0;
-  const s = max === 0 ? 0 : d / max;
+  const s = max === 0
+    ? 0
+    : d / max;
   const v = max;
 
   if (max !== min) {
     switch (max) {
       case r:
-        h = (g - b) / d + (g < b ? 6 : 0);
+        h = (g - b) / d + (g < b
+          ? 6
+          : 0);
         break;
       case g:
         h = (b - r) / d + 2;

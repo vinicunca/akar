@@ -28,7 +28,9 @@ const { forwardRef, currentElement: thumbElement } = useForwardExpose();
 const { CollectionItem } = useCollection();
 
 const value = computed(() => rootContext.modelValue?.value?.[props.index]);
-const percent = computed(() => value.value === undefined ? 0 : convertValueToPercentage(value.value, rootContext.min.value ?? 0, rootContext.max.value ?? 100));
+const percent = computed(() => value.value === undefined
+  ? 0
+  : convertValueToPercentage(value.value, rootContext.min.value ?? 0, rootContext.max.value ?? 100));
 const label = computed(() => getLabel(props.index, rootContext.modelValue?.value?.length ?? 0));
 const size = useSize(thumbElement);
 const orientationSize = computed(() => size[orientation!.size].value);

@@ -1,6 +1,6 @@
 import { clamp } from '@vinicunca/perkakas';
 
-// https://github.com/tmcw-up-for-adoption/simple-linear-scale/blob/master/index.js
+/** https://github.com/tmcw-up-for-adoption/simple-linear-scale/blob/master/index.js */
 export function linearScale(input: readonly [number, number], output: readonly [number, number]) {
   return (value: number) => {
     if (input[0] === input[1] || output[0] === output[1]) {

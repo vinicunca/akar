@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-commented-code */
 /* eslint-disable no-lone-blocks */
 import type { PanelConstraints } from '../SplitterPanel.vue';
 import { assert } from './assert';
@@ -17,7 +18,7 @@ export function compareLayouts(a: Array<number>, b: Array<number>) {
   return true;
 }
 
-// All units must be in percentages; pixel values should be pre-converted
+/** All units must be in percentages; pixel values should be pre-converted */
 export function adjustLayoutByDelta({
   delta,
   layout: prevLayout,
@@ -64,7 +65,9 @@ export function adjustLayoutByDelta({
     if (trigger === 'keyboard') {
       {
         // Check if we should expand a collapsed panel
-        const index = delta < 0 ? secondPivotIndex : firstPivotIndex;
+        const index = delta < 0
+          ? secondPivotIndex
+          : firstPivotIndex;
         const panelConstraints = panelConstraintsArray[index];
         assert(panelConstraints);
 
@@ -83,7 +86,9 @@ export function adjustLayoutByDelta({
             // DEBUG.push(`  -> expand delta: ${localDelta}`);
 
             if (fuzzyCompareNumbers(localDelta, Math.abs(delta)) > 0) {
-              delta = delta < 0 ? 0 - localDelta : localDelta;
+              delta = delta < 0
+                ? 0 - localDelta
+                : localDelta;
             }
             // DEBUG.push(`  -> delta: ${delta}`);
           }
@@ -92,7 +97,9 @@ export function adjustLayoutByDelta({
 
       {
         // Check if we should collapse a panel at its minimum size
-        const index = delta < 0 ? firstPivotIndex : secondPivotIndex;
+        const index = delta < 0
+          ? firstPivotIndex
+          : secondPivotIndex;
         const panelConstraints = panelConstraintsArray[index];
         assert(panelConstraints);
         const { collapsible } = panelConstraints;
@@ -112,7 +119,9 @@ export function adjustLayoutByDelta({
             // DEBUG.push(`  -> expand delta: ${localDelta}`);
 
             if (fuzzyCompareNumbers(localDelta, Math.abs(delta)) > 0) {
-              delta = delta < 0 ? 0 - localDelta : localDelta;
+              delta = delta < 0
+                ? 0 - localDelta
+                : localDelta;
             }
             // DEBUG.push(`  -> delta: ${delta}`);
           }
@@ -129,9 +138,13 @@ export function adjustLayoutByDelta({
     // If this amount is greater than the requested delta, that's useful information too–
     // as an expanding panel might change from collapsed to min size.
 
-    const increment = delta < 0 ? 1 : -1;
+    const increment = delta < 0
+      ? 1
+      : -1;
 
-    let index = delta < 0 ? secondPivotIndex : firstPivotIndex;
+    let index = delta < 0
+      ? secondPivotIndex
+      : firstPivotIndex;
     let maxAvailableDelta = 0;
 
     // DEBUG.push("pre calc...");
@@ -157,7 +170,9 @@ export function adjustLayoutByDelta({
 
     // DEBUG.push(`  -> max available delta: ${maxAvailableDelta}`);
     const minAbsDelta = Math.min(Math.abs(delta), Math.abs(maxAvailableDelta));
-    delta = delta < 0 ? 0 - minAbsDelta : minAbsDelta;
+    delta = delta < 0
+      ? 0 - minAbsDelta
+      : minAbsDelta;
     // DEBUG.push(`  -> adjusted delta: ${delta}`);
     // DEBUG.push("");
   }
@@ -165,7 +180,9 @@ export function adjustLayoutByDelta({
   {
     // Delta added to a panel needs to be subtracted from other panels (within the constraints that those panels allow).
 
-    const pivotIndex = delta < 0 ? firstPivotIndex : secondPivotIndex;
+    const pivotIndex = delta < 0
+      ? firstPivotIndex
+      : secondPivotIndex;
     let index = pivotIndex;
     while (index >= 0 && index < panelConstraintsArray.length) {
       const deltaRemaining = Math.abs(delta) - Math.abs(deltaApplied);
@@ -216,7 +233,9 @@ export function adjustLayoutByDelta({
 
   {
     // Now distribute the applied delta to the panels in the other direction
-    const pivotIndex = delta < 0 ? secondPivotIndex : firstPivotIndex;
+    const pivotIndex = delta < 0
+      ? secondPivotIndex
+      : firstPivotIndex;
 
     const prevSize = prevLayout[pivotIndex];
     assert(prevSize != null);
@@ -235,7 +254,9 @@ export function adjustLayoutByDelta({
     if (!fuzzyNumbersEqual(safeSize, unsafeSize)) {
       let deltaRemaining = unsafeSize - safeSize;
 
-      const pivotIndex = delta < 0 ? secondPivotIndex : firstPivotIndex;
+      const pivotIndex = delta < 0
+        ? secondPivotIndex
+        : firstPivotIndex;
       let index = pivotIndex;
       while (index >= 0 && index < panelConstraintsArray.length) {
         const prevSize = nextLayout[index];

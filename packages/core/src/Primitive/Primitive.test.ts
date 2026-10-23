@@ -128,7 +128,9 @@ describe('test Primitive functionalities', () => {
         components: { Container },
         setup() {
           const isActive = ref(true);
-          const toggleActive = () => isActive.value = !isActive.value;
+          const toggleActive = () => {
+            isActive.value = !isActive.value;
+          };
           return { isActive, toggleActive };
         },
         template: `

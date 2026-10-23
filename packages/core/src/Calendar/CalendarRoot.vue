@@ -274,7 +274,9 @@ function onDateChange(value: DateValue) {
       modelValue.value = value.copy();
     }
   } else if (!modelValue.value) {
-    modelValue.value = [value.copy()];
+    modelValue.value = [
+      value.copy(),
+    ];
   } else if (Array.isArray(modelValue.value)) {
     const index = modelValue.value.findIndex((date) => isSameDay(date, value));
     if (index === -1) {

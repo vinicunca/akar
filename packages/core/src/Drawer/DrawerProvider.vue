@@ -34,11 +34,15 @@ function createVisualStateStore(): DrawerVisualStateStore {
     set(next) {
       // eslint-disable-next-line no-nested-ternary
       const nextProgress = next.swipeProgress !== undefined
-        ? (Number.isFinite(next.swipeProgress) ? next.swipeProgress : 0)
+        ? (Number.isFinite(next.swipeProgress)
+            ? next.swipeProgress
+            : 0)
         : state.swipeProgress;
       // eslint-disable-next-line no-nested-ternary
       const nextHeight = next.frontmostHeight !== undefined
-        ? (Number.isFinite(next.frontmostHeight) ? next.frontmostHeight : 0)
+        ? (Number.isFinite(next.frontmostHeight)
+            ? next.frontmostHeight
+            : 0)
         : state.frontmostHeight;
       if (nextProgress === state.swipeProgress && nextHeight === state.frontmostHeight) {
         return;

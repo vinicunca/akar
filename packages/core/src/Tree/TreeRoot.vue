@@ -114,7 +114,9 @@ const virtualKeydownHook = createEventHook<KeyboardEvent>();
 
 const modelValue = useVModel(props, 'modelValue', emits, {
   // @ts-expect-error idk
-  defaultValue: props.defaultValue ?? (multiple.value ? [] : undefined),
+  defaultValue: props.defaultValue ?? (multiple.value
+    ? []
+    : undefined),
   passive: true,
   deep: true,
 }) as Ref<U | Array<U>>;
@@ -132,7 +134,9 @@ const selectedKeys = computed(() => {
   if (multiple.value && Array.isArray(modelValue.value)) {
     return modelValue.value.map((i) => props.getKey(i as any));
   } else {
-    return [props.getKey(modelValue.value as any ?? {})];
+    return [
+      props.getKey(modelValue.value as any ?? {}),
+    ];
   }
 });
 
@@ -245,7 +249,9 @@ provideTreeRootContext({
   selectedKeys,
   onSelect: (val) => {
     const condition = (baseValue: U) => props.getKey(baseValue as any ?? {}) === props.getKey(val);
-    const exist = props.multiple && Array.isArray(modelValue.value) ? modelValue.value?.findIndex(condition) !== -1 : undefined;
+    const exist = props.multiple && Array.isArray(modelValue.value)
+      ? modelValue.value?.findIndex(condition) !== -1
+      : undefined;
     onSelectItem(val, condition);
 
     if (props.bubbleSelect && props.multiple && Array.isArray(modelValue.value)) {
@@ -266,13 +272,18 @@ provideTreeRootContext({
           .filter((i) => !children.some((child) => props.getKey(i as any ?? {}) === props.getKey(child as any)));
       } else {
         // select all child
-        modelValue.value = [...modelValue.value, ...children];
+        modelValue.value = [
+          ...modelValue.value,
+          ...children,
+        ];
       }
     }
   },
   expanded,
   onToggle(val) {
-    const children = val ? props.getChildren(val) : undefined;
+    const children = val
+      ? props.getChildren(val)
+      : undefined;
     if (!children) {
       return;
     }

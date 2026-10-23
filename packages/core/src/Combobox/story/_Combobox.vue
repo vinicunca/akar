@@ -9,10 +9,24 @@ const props = defineProps<ComboboxRootProps>();
 const emits = defineEmits<ComboboxRootEmits>();
 
 const forwarded = useForwardPropsEmits(props, emits);
-const v = ref<any>(props.multiple ? [] : '');
+const v = ref<any>(props.multiple
+  ? []
+  : '');
 
-const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
-const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'];
+const options = [
+  'Apple',
+  'Banana',
+  'Blueberry',
+  'Grapes',
+  'Pineapple',
+];
+const vegetables = [
+  'Aubergine',
+  'Broccoli',
+  'Carrot',
+  'Courgette',
+  'Leek',
+];
 
 const open = ref(props.open);
 

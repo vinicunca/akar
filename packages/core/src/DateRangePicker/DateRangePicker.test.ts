@@ -45,7 +45,15 @@ function setup(props: { dateFieldProps?: DateRangePickerRootProps; emits?: { 'on
   const label = returned.getByTestId('label');
   const trigger = returned.getByTestId('trigger');
 
-  return { ...returned, user, start, end, input, label, trigger };
+  return {
+    ...returned,
+    user,
+    start,
+    end,
+    input,
+    label,
+    trigger,
+  };
 }
 
 it('should pass axe accessibility tests', async () => {

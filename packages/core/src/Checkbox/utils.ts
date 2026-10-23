@@ -6,5 +6,7 @@ export function isIndeterminate(checked?: CheckedState): checked is 'indetermina
 
 export function getState(checked: CheckedState) {
   // eslint-disable-next-line no-nested-ternary
-  return isIndeterminate(checked) ? 'indeterminate' : checked ? 'checked' : 'unchecked';
+  return isIndeterminate(checked)
+    ? 'indeterminate'
+    : checked ? 'checked' : 'unchecked';
 }

@@ -93,7 +93,9 @@ async function handlePointerLeave(event: PointerEvent) {
     const side = menuContext.content.value?.dataset.side as Side;
 
     const rightSide = side === 'right';
-    const bleed = rightSide ? -5 : +5;
+    const bleed = rightSide
+      ? -5
+      : +5;
     const contentNearEdge = contentRect[rightSide ? 'left' : 'right'];
     const contentFarEdge = contentRect[rightSide ? 'right' : 'left'];
 

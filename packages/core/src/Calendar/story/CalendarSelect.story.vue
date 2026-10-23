@@ -8,18 +8,78 @@ import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, Cale
 
 const preferences = [
   { locale: 'en-US', label: 'Default', ordering: 'gregory' },
-  { label: 'Arabic (Algeria)', locale: 'ar-DZ', territories: 'DJ DZ EH ER IQ JO KM LB LY MA MR OM PS SD SY TD TN YE', ordering: 'gregory islamic islamic-civil islamic-tbla' },
-  { label: 'Arabic (United Arab Emirates)', locale: 'ar-AE', territories: 'AE BH KW QA', ordering: 'gregory islamic-umalqura islamic islamic-civil islamic-tbla' },
-  { label: 'Arabic (Egypt)', locale: 'AR-EG', territories: 'EG', ordering: 'gregory coptic islamic islamic-civil islamic-tbla' },
-  { label: 'Arabic (Saudi Arabia)', locale: 'ar-SA', territories: 'SA', ordering: 'islamic-umalqura gregory islamic islamic-rgsa' },
-  { label: 'Farsi (Iran)', locale: 'fa-IR', territories: 'IR', ordering: 'persian gregory islamic islamic-civil islamic-tbla' },
-  { label: 'Farsi (Afghanistan)', locale: 'fa-AF', territories: 'AF IR', ordering: 'persian gregory islamic islamic-civil islamic-tbla' },
-  { label: 'Amharic (Ethiopia)', locale: 'am-ET', territories: 'ET', ordering: 'gregory ethiopic ethioaa' },
-  { label: 'Hebrew (Israel)', locale: 'he-IL', territories: 'IL', ordering: 'gregory hebrew islamic islamic-civil islamic-tbla' },
-  { label: 'Hindi (India)', locale: 'hi-IN', territories: 'IN', ordering: 'gregory indian' },
-  { label: 'Japanese (Japan)', locale: 'ja-JP', territories: 'JP', ordering: 'gregory japanese' },
-  { label: 'Thai (Thailand)', locale: 'th-TH', territories: 'TH', ordering: 'buddhist gregory' },
-  { label: 'Chinese (Taiwan)', locale: 'zh-TW', territories: 'TW', ordering: 'gregory roc chinese' },
+  {
+    label: 'Arabic (Algeria)',
+    locale: 'ar-DZ',
+    territories: 'DJ DZ EH ER IQ JO KM LB LY MA MR OM PS SD SY TD TN YE',
+    ordering: 'gregory islamic islamic-civil islamic-tbla',
+  },
+  {
+    label: 'Arabic (United Arab Emirates)',
+    locale: 'ar-AE',
+    territories: 'AE BH KW QA',
+    ordering: 'gregory islamic-umalqura islamic islamic-civil islamic-tbla',
+  },
+  {
+    label: 'Arabic (Egypt)',
+    locale: 'AR-EG',
+    territories: 'EG',
+    ordering: 'gregory coptic islamic islamic-civil islamic-tbla',
+  },
+  {
+    label: 'Arabic (Saudi Arabia)',
+    locale: 'ar-SA',
+    territories: 'SA',
+    ordering: 'islamic-umalqura gregory islamic islamic-rgsa',
+  },
+  {
+    label: 'Farsi (Iran)',
+    locale: 'fa-IR',
+    territories: 'IR',
+    ordering: 'persian gregory islamic islamic-civil islamic-tbla',
+  },
+  {
+    label: 'Farsi (Afghanistan)',
+    locale: 'fa-AF',
+    territories: 'AF IR',
+    ordering: 'persian gregory islamic islamic-civil islamic-tbla',
+  },
+  {
+    label: 'Amharic (Ethiopia)',
+    locale: 'am-ET',
+    territories: 'ET',
+    ordering: 'gregory ethiopic ethioaa',
+  },
+  {
+    label: 'Hebrew (Israel)',
+    locale: 'he-IL',
+    territories: 'IL',
+    ordering: 'gregory hebrew islamic islamic-civil islamic-tbla',
+  },
+  {
+    label: 'Hindi (India)',
+    locale: 'hi-IN',
+    territories: 'IN',
+    ordering: 'gregory indian',
+  },
+  {
+    label: 'Japanese (Japan)',
+    locale: 'ja-JP',
+    territories: 'JP',
+    ordering: 'gregory japanese',
+  },
+  {
+    label: 'Thai (Thailand)',
+    locale: 'th-TH',
+    territories: 'TH',
+    ordering: 'buddhist gregory',
+  },
+  {
+    label: 'Chinese (Taiwan)',
+    locale: 'zh-TW',
+    territories: 'TW',
+    ordering: 'gregory roc chinese',
+  },
 ];
 
 const calendars = [
@@ -42,7 +102,9 @@ const locale = ref(preferences[0].locale);
 const calendar = ref(calendars[0].key);
 
 const pref = computed(() => preferences.find((p) => p.locale === locale.value));
-const preferredCalendars = computed(() => pref.value ? pref.value.ordering.split(' ').map((p) => calendars.find((c) => c.key === p)).filter(Boolean) : [calendars[0]]);
+const preferredCalendars = computed(() => pref.value
+  ? pref.value.ordering.split(' ').map((p) => calendars.find((c) => c.key === p)).filter(Boolean)
+  : [calendars[0]]);
 const otherCalendars = computed(() => calendars.filter((c) => !preferredCalendars.value.some((p) => p!.key === c.key)));
 
 function updateLocale(newLocale: string) {

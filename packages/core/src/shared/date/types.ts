@@ -9,9 +9,9 @@ import type { TimeValue } from './comparators';
 import type { DATE_SEGMENT_PARTS, EDITABLE_SEGMENT_PARTS, NON_EDITABLE_SEGMENT_PARTS, TIME_SEGMENT_PARTS } from './parts';
 
 // Days of the week, starting with Sunday
-const daysOfWeek = [0, 1, 2, 3, 4, 5, 6] as const;
+const _daysOfWeek = [0, 1, 2, 3, 4, 5, 6] as const;
 export type DayOfWeek = {
-  daysOfWeek: Array<(typeof daysOfWeek)[number]>;
+  daysOfWeek: Array<(typeof _daysOfWeek)[number]>;
 };
 
 export type DateStep = {

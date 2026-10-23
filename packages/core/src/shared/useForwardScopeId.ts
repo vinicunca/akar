@@ -22,5 +22,7 @@ export function useForwardScopeId(): Record<string, string> {
   // vnode for scoped-CSS fallthrough. It is populated during the parent's render,
   // so it is already available by the time `setup()` runs.
   const scopeId = (getCurrentInstance()?.vnode as { scopeId?: string } | undefined)?.scopeId;
-  return scopeId ? { [scopeId]: '' } : {};
+  return scopeId
+    ? { [scopeId]: '' }
+    : {};
 }

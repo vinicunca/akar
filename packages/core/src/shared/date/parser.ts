@@ -20,8 +20,13 @@ type SyncTimeSegmentValuesProps = {
 export function syncTimeSegmentValues(props: SyncTimeSegmentValuesProps) {
   return Object.fromEntries(TIME_SEGMENT_PARTS.map((part) => {
     if (part === 'dayPeriod') {
-      const timeZone = isZonedDateTime(props.value) ? props.value.timeZone : undefined;
-      return [part, props.formatter.dayPeriod(toDate(props.value), timeZone)];
+      const timeZone = isZonedDateTime(props.value)
+        ? props.value.timeZone
+        : undefined;
+      return [
+        part,
+        props.formatter.dayPeriod(toDate(props.value), timeZone),
+      ];
     }
     return [part, props.value[part as keyof DateValue]];
   })) as SegmentValueObj;
@@ -36,7 +41,10 @@ export function syncSegmentValues(props: SyncDateSegmentValuesProps) {
   if ('hour' in props.value) {
     const timeValues = syncTimeSegmentValues({ value: props.value, formatter });
 
-    return { ...Object.fromEntries(dateValues), ...timeValues } as SegmentValueObj;
+    return {
+      ...Object.fromEntries(dateValues),
+      ...timeValues,
+    } as SegmentValueObj;
   }
 
   return Object.fromEntries(dateValues) as SegmentValueObj;
@@ -56,6 +64,7 @@ export function initializeTimeSegmentValues(granularity: 'hour' | 'minute' | 'se
       if (granularity === 'minute' && key === 'second') {
         return false;
       }
+      // eslint-disable-next-line sonarjs/prefer-single-boolean-return
       if (granularity === 'hour' && (key === 'second' || key === 'minute')) {
         return false;
       } else {
@@ -129,7 +138,9 @@ function createContentObj(props: CreateContentObjProps) {
              *   so that user can input any possible day.
              */
             month: segmentValues.month ?? 1,
-          }), part, { hourCycle: normalizeHourCycle(props.hourCycle) });
+          }), part, {
+            hourCycle: normalizeHourCycle(props.hourCycle),
+          });
         }
         return formatter.part(props.dateRef.set({ [part]: value }), part, {
           hourCycle: normalizeHourCycle(props.hourCycle),

@@ -51,28 +51,36 @@ it('should pass axe accessibility tests', async () => {
 
 describe('month range picker', () => {
   it('respects a default value if provided - `CalendarDate`', async () => {
-    const { picker, getByTestId } = setup({ pickerProps: { modelValue: calendarDateRange } });
+    const { picker, getByTestId } = setup({
+      pickerProps: { modelValue: calendarDateRange },
+    });
     const selectedMonths = getSelectedMonths(picker);
     expect(selectedMonths).toHaveLength(3);
     expect(getByTestId('heading')).toHaveTextContent('1980');
   });
 
   it('respects a default value if provided - `CalendarDateTime`', async () => {
-    const { picker, getByTestId } = setup({ pickerProps: { modelValue: calendarDateTimeRange } });
+    const { picker, getByTestId } = setup({
+      pickerProps: { modelValue: calendarDateTimeRange },
+    });
     const selectedMonths = getSelectedMonths(picker);
     expect(selectedMonths).toHaveLength(3);
     expect(getByTestId('heading')).toHaveTextContent('1980');
   });
 
   it('respects a default value if provided - `ZonedDateTime`', async () => {
-    const { picker, getByTestId } = setup({ pickerProps: { modelValue: zonedDateTimeRange } });
+    const { picker, getByTestId } = setup({
+      pickerProps: { modelValue: zonedDateTimeRange },
+    });
     const selectedMonths = getSelectedMonths(picker);
     expect(selectedMonths).toHaveLength(3);
     expect(getByTestId('heading')).toHaveTextContent('1980');
   });
 
   it('does not crash when modelValue is null', async () => {
-    const { picker, rerender } = setup({ pickerProps: { modelValue: null } });
+    const { picker, rerender } = setup({
+      pickerProps: { modelValue: null },
+    });
 
     expect(getSelectedMonths(picker)).toHaveLength(0);
 
@@ -88,7 +96,11 @@ describe('month range picker', () => {
   it('resets range on select when a range is already selected', async () => {
     const { getByTestId, picker, user, rerender } = setup({
       pickerProps: { modelValue: calendarDateRange },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ pickerProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          pickerProps: { modelValue: data },
+        }),
+      },
     });
 
     let startValue = picker.querySelector('[data-selection-start]');
@@ -150,7 +162,11 @@ describe('month range picker', () => {
   it('allows same month selection', async () => {
     const { getByTestId, picker, user, rerender } = setup({
       pickerProps: { placeholder: calendarDateRange.start },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ pickerProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          pickerProps: { modelValue: data },
+        }),
+      },
     });
 
     const janMonth = getByTestId('month-1');
@@ -165,7 +181,11 @@ describe('month range picker', () => {
   it('allows deselection', async () => {
     const { getByTestId, picker, user, rerender } = setup({
       pickerProps: { placeholder: calendarDateRange.start },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ pickerProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          pickerProps: { modelValue: data },
+        }),
+      },
     });
 
     const janMonth = getByTestId('month-1');
@@ -181,7 +201,11 @@ describe('month range picker', () => {
   it('resets range selection when pressing Escape', async () => {
     const { getByTestId, picker, user, rerender } = setup({
       pickerProps: { modelValue: calendarDateRange },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ pickerProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          pickerProps: { modelValue: data },
+        }),
+      },
     });
 
     let startValue = picker.querySelector('[data-selection-start]');
@@ -208,10 +232,16 @@ describe('month range picker', () => {
   it('resets to latest externally controlled complete range when pressing Escape', async () => {
     const { getByTestId, picker, user, rerender } = setup({
       pickerProps: { modelValue: calendarDateRange },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ pickerProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          pickerProps: { modelValue: data },
+        }),
+      },
     });
 
-    await rerender({ pickerProps: { modelValue: updatedCalendarDateRange } });
+    await rerender({
+      pickerProps: { modelValue: updatedCalendarDateRange },
+    });
 
     let startValue = picker.querySelector('[data-selection-start]');
     let endValue = picker.querySelector('[data-selection-end]');
@@ -232,7 +262,9 @@ describe('month range picker', () => {
   });
 
   it('navigates years forward using the next button', async () => {
-    const { getByTestId, user } = setup({ pickerProps: { modelValue: calendarDateRange } });
+    const { getByTestId, user } = setup({
+      pickerProps: { modelValue: calendarDateRange },
+    });
 
     const heading = getByTestId('heading');
     const nextBtn = getByTestId('next-button');
@@ -243,7 +275,9 @@ describe('month range picker', () => {
   });
 
   it('navigates years backwards using the prev button', async () => {
-    const { getByTestId, user } = setup({ pickerProps: { modelValue: calendarDateRange } });
+    const { getByTestId, user } = setup({
+      pickerProps: { modelValue: calendarDateRange },
+    });
 
     const heading = getByTestId('heading');
     const prevBtn = getByTestId('prev-button');
@@ -254,7 +288,7 @@ describe('month range picker', () => {
   });
 
   it('handles fixedDate with start correctly', async () => {
-    const { getByTestId, picker, user } = setup({
+    const { getByTestId, user } = setup({
       pickerProps: {
         defaultValue: calendarDateRange,
         fixedDate: 'start',
@@ -273,7 +307,7 @@ describe('month range picker', () => {
   });
 
   it('handles fixedDate with end correctly', async () => {
-    const { getByTestId, picker, user } = setup({
+    const { getByTestId, user } = setup({
       pickerProps: {
         defaultValue: calendarDateRange,
         fixedDate: 'end',
@@ -377,7 +411,11 @@ describe('month range picker - maximumMonths', () => {
         fixedDate: 'start',
         maximumMonths: 3,
       },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ pickerProps: { modelValue: data, fixedDate: 'start', maximumMonths: 3 } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          pickerProps: { modelValue: data, fixedDate: 'start', maximumMonths: 3 },
+        }),
+      },
     });
 
     expect(getByTestId('month-5')).toHaveAttribute('data-disabled');
@@ -404,7 +442,11 @@ describe('month range picker - maximumMonths', () => {
         fixedDate: 'end',
         maximumMonths: 3,
       },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ pickerProps: { modelValue: data, fixedDate: 'end', maximumMonths: 3 } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          pickerProps: { modelValue: data, fixedDate: 'end', maximumMonths: 3 },
+        }),
+      },
     });
 
     expect(getByTestId('month-2')).toHaveAttribute('data-disabled');

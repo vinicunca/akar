@@ -223,7 +223,17 @@ describe('given a virtualized Listbox on initial mount', () => {
   const originalGetBoundingClientRect = window.HTMLElement.prototype.getBoundingClientRect;
   beforeAll(() => {
     window.HTMLElement.prototype.getBoundingClientRect = function () {
-      return { width: 200, height: 200, top: 0, left: 0, right: 200, bottom: 200, x: 0, y: 0, toJSON() {} };
+      return {
+        width: 200,
+        height: 200,
+        top: 0,
+        left: 0,
+        right: 200,
+        bottom: 200,
+        x: 0,
+        y: 0,
+        toJSON() {},
+      };
     };
   });
   afterAll(() => {
@@ -231,13 +241,28 @@ describe('given a virtualized Listbox on initial mount', () => {
   });
 
   const VirtualListbox = defineComponent({
-    props: { multiple: Boolean, loop: Boolean, count: { type: Number, default: 100 }, disabled: { type: Array, default: () => [] }, modelValue: { type: null, default: undefined } },
+    props: {
+      multiple: Boolean,
+      loop: Boolean,
+      count: { type: Number, default: 100 },
+      disabled: {
+        type: Array,
+        default: () => [],
+      },
+      modelValue: { type: null, default: undefined },
+    },
     setup(props) {
       const options = Array.from({ length: props.count }, (_, i) => ({ label: `Item ${i}`, value: i }));
       return () => h(ListboxRoot, { multiple: props.multiple, loop: props.loop, modelValue: props.modelValue }, () =>
         h(ListboxContent, { style: 'height: 200px; overflow: auto' }, () =>
-          h(ListboxVirtualizer, { options, textContent: (o: any) => o.label }, {
-            default: ({ option }: any) => h(ListboxItem, { value: option, disabled: props.disabled.includes(option.value) }, () => option.label),
+          h(ListboxVirtualizer, {
+            options,
+            textContent: (o: any) => o.label,
+          }, {
+            default: ({ option }: any) => h(ListboxItem, {
+              value: option,
+              disabled: props.disabled.includes(option.value),
+            }, () => option.label),
           })));
     },
   });
@@ -261,7 +286,10 @@ describe('given a virtualized Listbox on initial mount', () => {
   });
 
   it('should highlight the first item without scrolling the page or stealing focus', async () => {
-    const wrapper = mount(VirtualListbox, { props: { multiple: true }, attachTo: document.body });
+    const wrapper = mount(VirtualListbox, {
+      props: { multiple: true },
+      attachTo: document.body,
+    });
     await flush();
 
     const items = wrapper.findAll('[role=option]');
@@ -281,7 +309,12 @@ describe('given a virtualized Listbox on initial mount', () => {
     // focused nor scrolled into view at the document level.
     // `modelValue` is the option object (items hold the whole option as value);
     // it matches option #3 structurally via the default `isEqual` comparison.
-    const wrapper = mount(VirtualListbox, { props: { modelValue: { label: 'Item 3', value: 3 } }, attachTo: document.body });
+    const wrapper = mount(VirtualListbox, {
+      props: {
+        modelValue: { label: 'Item 3', value: 3 },
+      },
+      attachTo: document.body,
+    });
     await flush();
 
     const checked = wrapper.find('[data-index="3"]');
@@ -297,7 +330,10 @@ describe('given a virtualized Listbox on initial mount', () => {
   it('should focus and scroll the first item when the user enters the listbox', async () => {
     // Entry focus (`onEnter`) is user-driven, so focusing and scrolling the
     // first item into view is expected here — unlike the mount highlight above.
-    const wrapper = mount(VirtualListbox, { props: { multiple: true }, attachTo: document.body });
+    const wrapper = mount(VirtualListbox, {
+      props: { multiple: true },
+      attachTo: document.body,
+    });
     await flush();
     scrollSpy.mockClear();
 
@@ -319,7 +355,10 @@ describe('given a virtualized Listbox on initial mount', () => {
     }
 
     it('should wrap from the first option to the last on `ArrowUp`', async () => {
-      const wrapper = mount(VirtualListbox, { props: { loop: true, count: 5 }, attachTo: document.body });
+      const wrapper = mount(VirtualListbox, {
+        props: { loop: true, count: 5 },
+        attachTo: document.body,
+      });
       await flush();
       const content = wrapper.find('[role=listbox]');
       await content.trigger('focus');
@@ -329,7 +368,10 @@ describe('given a virtualized Listbox on initial mount', () => {
     });
 
     it('should wrap from the last option to the first on `ArrowDown`', async () => {
-      const wrapper = mount(VirtualListbox, { props: { loop: true, count: 5 }, attachTo: document.body });
+      const wrapper = mount(VirtualListbox, {
+        props: { loop: true, count: 5 },
+        attachTo: document.body,
+      });
       await flush();
       const content = wrapper.find('[role=listbox]');
       await content.trigger('focus');
@@ -341,7 +383,14 @@ describe('given a virtualized Listbox on initial mount', () => {
     });
 
     it('should wrap past disabled boundary options', async () => {
-      const wrapper = mount(VirtualListbox, { props: { loop: true, count: 5, disabled: [0, 4] }, attachTo: document.body });
+      const wrapper = mount(VirtualListbox, {
+        props: {
+          loop: true,
+          count: 5,
+          disabled: [0, 4],
+        },
+        attachTo: document.body,
+      });
       await flush();
       const content = wrapper.find('[role=listbox]');
       await content.trigger('focus');
@@ -355,7 +404,10 @@ describe('given a virtualized Listbox on initial mount', () => {
 
     it('should not wrap at the end of the rendered window', async () => {
       // jsdom never scrolls, so only the first window of the 100 options is rendered.
-      const wrapper = mount(VirtualListbox, { props: { loop: true }, attachTo: document.body });
+      const wrapper = mount(VirtualListbox, {
+        props: { loop: true },
+        attachTo: document.body,
+      });
       await flush();
       const content = wrapper.find('[role=listbox]');
       await content.trigger('focus');
@@ -383,7 +435,10 @@ describe('given multiple `true` Listbox', () => {
 
   beforeEach(async () => {
     document.body.innerHTML = '';
-    wrapper = mount(Listbox, { props: { multiple: true, selectionBehavior: 'toggle' }, attachTo: document.body });
+    wrapper = mount(Listbox, {
+      props: { multiple: true, selectionBehavior: 'toggle' },
+      attachTo: document.body,
+    });
     await nextTick();
     content = wrapper.find('[role=listbox]');
     items = wrapper.findAll('[role=option]');
@@ -414,9 +469,22 @@ describe('given multiple `true` Listbox', () => {
     await content.trigger('keydown', { key: KEY_CODES.ARROW_UP });
     await content.trigger('keydown', { key: KEY_CODES.ENTER });
     expect(wrapper.emitted('update:modelValue')).toEqual([
-      [[items[0].text()]],
-      [[items[0].text(), items[1].text()]],
-      [[items[1].text()]],
+      [
+        [
+          items[0].text(),
+        ],
+      ],
+      [
+        [
+          items[0].text(),
+          items[1].text(),
+        ],
+      ],
+      [
+        [
+          items[1].text(),
+        ],
+      ],
     ]);
   });
 
@@ -446,9 +514,21 @@ describe('given multiple `true` Listbox', () => {
       await content.trigger('keydown', { key: KEY_CODES.ARROW_DOWN });
       await content.trigger('keydown', { key: KEY_CODES.ENTER });
       expect(wrapper.emitted('update:modelValue')).toEqual([
-        [[items[0].text()]],
-        [[items[0].text()]], // there's a bug here, it shouldn't emit the same value twice
-        [[items[1].text()]],
+        [
+          [
+            items[0].text(),
+          ],
+        ],
+        [
+          [
+            items[0].text(),
+          ],
+        ], // there's a bug here, it shouldn't emit the same value twice
+        [
+          [
+            items[1].text(),
+          ],
+        ],
       ]);
     });
 
@@ -477,8 +557,15 @@ describe('given a Listbox with `loop`', () => {
 
   function setup(loop: boolean) {
     document.body.innerHTML = '';
-    const wrapper = mount(Listbox, { props: { loop }, attachTo: document.body });
-    return { wrapper, content: wrapper.find('[role=listbox]'), items: wrapper.findAll('[role=option]') };
+    const wrapper = mount(Listbox, {
+      props: { loop },
+      attachTo: document.body,
+    });
+    return {
+      wrapper,
+      content: wrapper.find('[role=listbox]'),
+      items: wrapper.findAll('[role=option]'),
+    };
   }
 
   it('should wrap from the last item to the first on `ArrowDown`', async () => {
@@ -525,7 +612,10 @@ describe('given horizontal Listbox', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Listbox, { attachTo: document.body, props: { orientation: 'horizontal' } });
+    wrapper = mount(Listbox, {
+      attachTo: document.body,
+      props: { orientation: 'horizontal' },
+    });
     content = wrapper.find('[role=listbox]');
     items = wrapper.findAll('[role=option]');
   });
@@ -613,8 +703,13 @@ describe('given ListboxItem with reactive `disabled` prop', () => {
         return () =>
           h(ListboxRoot, null, {
             default: () => [
-              h(ListboxItem, { value: { id: 1 }, disabled: isDisabled.value }, () => 'toggleable'),
-              h(ListboxItem, { value: { id: 2 } }, () => 'other'),
+              h(ListboxItem, {
+                value: { id: 1 },
+                disabled: isDisabled.value,
+              }, () => 'toggleable'),
+              h(ListboxItem, {
+                value: { id: 2 },
+              }, () => 'other'),
             ],
           });
       },
@@ -653,8 +748,13 @@ describe('given ListboxItem with reactive fallthrough attrs', () => {
         return () =>
           h(ListboxRoot, null, {
             default: () => [
-              h(ListboxItem, { 'value': { id: 1 }, 'data-testid': testId.value }, () => 'first'),
-              h(ListboxItem, { value: { id: 2 } }, () => 'other'),
+              h(ListboxItem, {
+                'value': { id: 1 },
+                'data-testid': testId.value,
+              }, () => 'first'),
+              h(ListboxItem, {
+                value: { id: 2 },
+              }, () => 'other'),
             ],
           });
       },
@@ -677,8 +777,13 @@ describe('given ListboxItem with reactive fallthrough attrs', () => {
         return () =>
           h(ListboxRoot, null, {
             default: () => [
-              h(ListboxItem, { value: { id: 1 }, [attrName.value]: 'same' }, () => 'first'),
-              h(ListboxItem, { value: { id: 2 } }, () => 'other'),
+              h(ListboxItem, {
+                value: { id: 1 },
+                [attrName.value]: 'same',
+              }, () => 'first'),
+              h(ListboxItem, {
+                value: { id: 2 },
+              }, () => 'other'),
             ],
           });
       },
@@ -698,7 +803,17 @@ describe('given ListboxItem with reactive fallthrough attrs', () => {
   it('should re-render a surviving virtualizer row when filtering shrinks the options', async () => {
     const originalGetBoundingClientRect = window.HTMLElement.prototype.getBoundingClientRect;
     window.HTMLElement.prototype.getBoundingClientRect = function () {
-      return { width: 200, height: 200, top: 0, left: 0, right: 200, bottom: 200, x: 0, y: 0, toJSON() {} } as DOMRect;
+      return {
+        width: 200,
+        height: 200,
+        top: 0,
+        left: 0,
+        right: 200,
+        bottom: 200,
+        x: 0,
+        y: 0,
+        toJSON() {},
+      } as DOMRect;
     };
 
     try {
@@ -712,7 +827,10 @@ describe('given ListboxItem with reactive fallthrough attrs', () => {
           return () =>
             h(ListboxRoot, null, () =>
               h(ListboxContent, { style: 'height: 200px; overflow: auto' }, () =>
-                h(ListboxVirtualizer, { options: options.value, textContent: (o: any) => o.label }, {
+                h(ListboxVirtualizer, {
+                  options: options.value,
+                  textContent: (o: any) => o.label,
+                }, {
                   default: ({ option }: any) =>
                     h(ListboxItem, { 'value': option, 'data-testid': `option-${option.label}` }, () => option.label),
                 })));
@@ -724,7 +842,9 @@ describe('given ListboxItem with reactive fallthrough attrs', () => {
       expect(wrapper.find('[data-index="0"]').attributes('data-testid')).toBe('option-cdi');
 
       // a filter that keeps only the last option: index 0 survives but maps to a different option
-      options.value = [{ label: 'default', value: 'default' }];
+      options.value = [
+        { label: 'default', value: 'default' },
+      ];
       await nextTick();
 
       const survivor = wrapper.find('[data-index="0"]');
@@ -767,7 +887,9 @@ describe('given Listbox in a form', async () => {
 
     it('should trigger submit once', () => {
       expect(handleSubmit).toHaveBeenCalledTimes(1);
-      expect(handleSubmit.mock.results[0].value).toStrictEqual({ test: items[0].text() });
+      expect(handleSubmit.mock.results[0].value).toStrictEqual({
+        test: items[0].text(),
+      });
     });
   });
 
@@ -779,7 +901,9 @@ describe('given Listbox in a form', async () => {
 
     it('should trigger submit once', () => {
       expect(handleSubmit).toHaveBeenCalledTimes(1);
-      expect(handleSubmit.mock.results[0].value).toStrictEqual({ test: items[4].text() });
+      expect(handleSubmit.mock.results[0].value).toStrictEqual({
+        test: items[4].text(),
+      });
     });
   });
 });
@@ -809,7 +933,9 @@ describe('given Listbox with ListboxFilter handling IME composition', () => {
               },
             }),
             h(ListboxContent, {}, {
-              default: () => ['Apple', 'Banana'].map((i) => h(ListboxItem, { value: i }, { default: () => i })),
+              default: () => ['Apple', 'Banana'].map((i) => h(ListboxItem, { value: i }, {
+                default: () => i,
+              })),
             }),
           ],
         });

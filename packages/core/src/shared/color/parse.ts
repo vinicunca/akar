@@ -1,4 +1,4 @@
-/* eslint-disable sonar/regex-complexity */
+/* eslint-disable sonarjs/regex-complexity */
 import type { Color, HSBColor, HSLColor, RGBColor } from './types';
 import { isString } from '@vinicunca/perkakas';
 
@@ -90,7 +90,9 @@ function parseRgb(rgb: string): RGBColor {
     r: parseFloat(match[1]),
     g: parseFloat(match[2]),
     b: parseFloat(match[3]),
-    alpha: match[4] ? parseFloat(match[4]) : 1,
+    alpha: match[4]
+      ? parseFloat(match[4])
+      : 1,
   };
 }
 
@@ -105,7 +107,9 @@ function parseHsl(hsl: string): HSLColor {
     h: parseFloat(match[1]),
     s: parseFloat(match[2]),
     l: parseFloat(match[3]),
-    alpha: match[4] ? parseFloat(match[4]) : 1,
+    alpha: match[4]
+      ? parseFloat(match[4])
+      : 1,
   };
 }
 
@@ -120,7 +124,9 @@ function parseHsb(hsb: string): HSBColor {
     h: parseFloat(match[1]),
     s: parseFloat(match[2]),
     b: parseFloat(match[3]),
-    alpha: match[4] ? parseFloat(match[4]) : 1,
+    alpha: match[4]
+      ? parseFloat(match[4])
+      : 1,
   };
 }
 

@@ -105,7 +105,9 @@ const fieldContext = injectFieldRootContext(null);
 const disabled = computed(() => Boolean(props.disabled || fieldContext?.disabled.value));
 
 const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: (props.defaultValue ?? (props.selectionMode === 'multiple' ? [] : undefined)) as any,
+  defaultValue: (props.defaultValue ?? (props.selectionMode === 'multiple'
+    ? []
+    : undefined)) as any,
   passive: (props.modelValue === undefined) as false,
 }) as Ref<T | Array<T> | undefined>;
 
@@ -114,7 +116,9 @@ const selectedValues = computed<Array<T>>(() => {
   if (value === undefined || value === null) {
     return [];
   }
-  return Array.isArray(value) ? value : [value];
+  return Array.isArray(value)
+    ? value
+    : [value];
 });
 
 function isSelected(value: AcceptableValue) {
@@ -122,7 +126,9 @@ function isSelected(value: AcceptableValue) {
 }
 
 function setSelection(values: Array<T>) {
-  modelValue.value = selectionMode.value === 'multiple' ? values : values[0];
+  modelValue.value = selectionMode.value === 'multiple'
+    ? values
+    : values[0];
 }
 
 function toggleSelection(value: AcceptableValue) {
@@ -137,7 +143,9 @@ function toggleSelection(value: AcceptableValue) {
     }
     setSelection(next);
   } else {
-    setSelection(selectionMode.value === 'multiple' ? [...selectedValues.value, value as T] : [value as T]);
+    setSelection(selectionMode.value === 'multiple'
+      ? [...selectedValues.value, value as T]
+      : [value as T]);
   }
 }
 
@@ -167,9 +175,14 @@ function removeTags(value: AcceptableValue, withSelection: boolean) {
 const items = shallowReactive(new Set<TagGroupItemRegistration>());
 
 function getOrderedItems() {
-  return Array.from(items, (item) => ({ ...item, el: item.element() }))
+  return Array.from(items, (item) => ({
+    ...item,
+    el: item.element(),
+  }))
     .filter((item): item is TagGroupItemRegistration & { el: HTMLElement } => !!item.el)
-    .sort((a, b) => a.el.compareDocumentPosition(b.el) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1);
+    .sort((a, b) => a.el.compareDocumentPosition(b.el) & Node.DOCUMENT_POSITION_FOLLOWING
+      ? -1
+      : 1);
 }
 
 function isDisabledValue(value: T) {
@@ -219,7 +232,12 @@ const { handleTypeaheadSearch } = useTypeahead();
 function handleTypeahead(key: string) {
   const candidates = getOrderedItems()
     .filter((item) => !item.disabled())
-    .map((item) => ({ ref: item.el, value: { textValue: item.textValue() } }));
+    .map((item) => ({
+      ref: item.el,
+      value: {
+        textValue: item.textValue(),
+      },
+    }));
   handleTypeaheadSearch(key, candidates);
 }
 

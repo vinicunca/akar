@@ -96,7 +96,9 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   deep: true,
 }) as Ref<PinInputValue<Type>>;
 
-const currentModelValue = computed(() => Array.isArray(modelValue.value) ? [...modelValue.value] : []);
+const currentModelValue = computed(() => Array.isArray(modelValue.value)
+  ? [...modelValue.value]
+  : []);
 
 const inputElements = ref<Set<HTMLInputElement>>(new Set());
 function onInputElementChange(el: HTMLInputElement) {

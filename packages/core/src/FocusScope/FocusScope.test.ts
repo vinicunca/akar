@@ -207,7 +207,17 @@ describe('focusScope', () => {
 
   describe('given a FocusScope with SelectTrigger inside Dialog', () => {
     const DialogWithSelect = defineComponent({
-      components: { DialogRoot, DialogTrigger, DialogContent, DialogTitle, SelectRoot, SelectTrigger, SelectValue, SelectContent, SelectItem },
+      components: {
+        DialogRoot,
+        DialogTrigger,
+        DialogContent,
+        DialogTitle,
+        SelectRoot,
+        SelectTrigger,
+        SelectValue,
+        SelectContent,
+        SelectItem,
+      },
       template: `
         <DialogRoot>
           <DialogTrigger>Open</DialogTrigger>
@@ -247,7 +257,20 @@ describe('focusScope', () => {
 
   describe('given a FocusScope with Combobox input inside Dialog', () => {
     const DialogWithCombobox = defineComponent({
-      components: { DialogRoot, DialogTrigger, DialogContent, DialogTitle, ComboboxRoot, ComboboxAnchor, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxInput, ComboboxItem },
+      components: {
+        DialogRoot,
+        DialogTrigger,
+        DialogContent,
+        DialogTitle,
+        ComboboxRoot,
+        ComboboxAnchor,
+        ComboboxTrigger,
+        ComboboxPortal,
+        ComboboxContent,
+        ComboboxViewport,
+        ComboboxInput,
+        ComboboxItem,
+      },
       template: `
         <DialogRoot>
           <DialogTrigger>Open</DialogTrigger>
@@ -304,7 +327,19 @@ describe('focusScope', () => {
   // same path through a different consumer.
   describe('given a FocusScope with portaled Select content inside Dialog', () => {
     const DialogWithSelect = defineComponent({
-      components: { DialogRoot, DialogTrigger, DialogContent, DialogTitle, SelectRoot, SelectPortal, SelectTrigger, SelectValue, SelectContent, SelectViewport, SelectItem },
+      components: {
+        DialogRoot,
+        DialogTrigger,
+        DialogContent,
+        DialogTitle,
+        SelectRoot,
+        SelectPortal,
+        SelectTrigger,
+        SelectValue,
+        SelectContent,
+        SelectViewport,
+        SelectItem,
+      },
       template: `
         <DialogRoot>
           <DialogTrigger>Open</DialogTrigger>
@@ -365,7 +400,21 @@ describe('focusScope', () => {
     });
 
     const DialogWithComboboxSwap = defineComponent({
-      components: { DialogRoot, DialogTrigger, DialogContent, DialogTitle, ComboboxRoot, ComboboxAnchor, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxViewport, ComboboxInput, ComboboxItem, FormView },
+      components: {
+        DialogRoot,
+        DialogTrigger,
+        DialogContent,
+        DialogTitle,
+        ComboboxRoot,
+        ComboboxAnchor,
+        ComboboxTrigger,
+        ComboboxPortal,
+        ComboboxContent,
+        ComboboxViewport,
+        ComboboxInput,
+        ComboboxItem,
+        FormView,
+      },
       setup() {
         const view = ref<'combobox' | 'form'>('combobox');
         return { view };

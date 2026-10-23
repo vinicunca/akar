@@ -20,8 +20,20 @@ import {
 
 const fruit = ref('');
 
-const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
-const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'];
+const options = [
+  'Apple',
+  'Banana',
+  'Blueberry',
+  'Grapes',
+  'Pineapple',
+];
+const vegetables = [
+  'Aubergine',
+  'Broccoli',
+  'Carrot',
+  'Courgette',
+  'Leek',
+];
 
 const POSITION = ['item-aligned', 'popper'] as const;
 </script>

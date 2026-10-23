@@ -24,7 +24,9 @@ function getXValue(wrapper: VueWrapper): number {
 function getYValue(wrapper: VueWrapper, channelName: string): number {
   const text = wrapper.find('[role="slider"]').attributes('aria-valuetext') ?? '';
   const match = text.match(new RegExp(`${channelName} (\\d+)`));
-  return match ? Number(match[1]) : NaN;
+  return match
+    ? Number(match[1])
+    : NaN;
 }
 
 /** Triggers a keydown on the color area (role=application). */
@@ -50,7 +52,11 @@ describe('colorArea accessibility', () => {
 
   it('passes axe accessibility tests', async () => {
     expect(
-      await axe(wrapper.element, { rules: { label: { enabled: false } } }),
+      await axe(wrapper.element, {
+        rules: {
+          label: { enabled: false },
+        },
+      }),
     ).toHaveNoViolations();
   });
 
@@ -255,7 +261,12 @@ describe('colorArea HSL Saturation(x) / Lightness(y)', () => {
     it('saturation cannot exceed 100', async () => {
       // #ff0000 = hsl(0, 100%, 50%) — saturation is at max
       const w = mount(ColorArea, {
-        props: { defaultValue: '#ff0000', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+        props: {
+          defaultValue: '#ff0000',
+          colorSpace: 'hsl',
+          xChannel: 'saturation',
+          yChannel: 'lightness',
+        },
       });
       await keydown(w, 'ArrowRight');
       expect(getXValue(w)).toBe(100);
@@ -264,7 +275,12 @@ describe('colorArea HSL Saturation(x) / Lightness(y)', () => {
     it('saturation cannot go below 0', async () => {
       // #808080 = hsl(0, 0%, 50%) — saturation is at min
       const w = mount(ColorArea, {
-        props: { defaultValue: '#808080', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+        props: {
+          defaultValue: '#808080',
+          colorSpace: 'hsl',
+          xChannel: 'saturation',
+          yChannel: 'lightness',
+        },
       });
       await keydown(w, 'ArrowLeft');
       expect(getXValue(w)).toBe(0);
@@ -273,7 +289,12 @@ describe('colorArea HSL Saturation(x) / Lightness(y)', () => {
     it('lightness cannot exceed 100', async () => {
       // #ffffff = hsl(*, 0%, 100%) — lightness is at max
       const w = mount(ColorArea, {
-        props: { defaultValue: '#ffffff', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+        props: {
+          defaultValue: '#ffffff',
+          colorSpace: 'hsl',
+          xChannel: 'saturation',
+          yChannel: 'lightness',
+        },
       });
       await keydown(w, 'ArrowUp');
       expect(getYValue(w, 'Lightness')).toBe(100);
@@ -282,7 +303,12 @@ describe('colorArea HSL Saturation(x) / Lightness(y)', () => {
     it('lightness cannot go below 0', async () => {
       // #000000 = hsl(*, 0%, 0%) — lightness is at min
       const w = mount(ColorArea, {
-        props: { defaultValue: '#000000', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+        props: {
+          defaultValue: '#000000',
+          colorSpace: 'hsl',
+          xChannel: 'saturation',
+          yChannel: 'lightness',
+        },
       });
       await keydown(w, 'ArrowDown');
       expect(getYValue(w, 'Lightness')).toBe(0);
@@ -290,7 +316,12 @@ describe('colorArea HSL Saturation(x) / Lightness(y)', () => {
 
     it('home at saturation=0 clamps to 0 (no underflow)', async () => {
       const w = mount(ColorArea, {
-        props: { defaultValue: '#808080', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+        props: {
+          defaultValue: '#808080',
+          colorSpace: 'hsl',
+          xChannel: 'saturation',
+          yChannel: 'lightness',
+        },
       });
       await keydown(w, 'Home');
       expect(getXValue(w)).toBe(0);
@@ -298,7 +329,12 @@ describe('colorArea HSL Saturation(x) / Lightness(y)', () => {
 
     it('end at saturation=100 clamps to 100 (no overflow)', async () => {
       const w = mount(ColorArea, {
-        props: { defaultValue: '#ff0000', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+        props: {
+          defaultValue: '#ff0000',
+          colorSpace: 'hsl',
+          xChannel: 'saturation',
+          yChannel: 'lightness',
+        },
       });
       await keydown(w, 'End');
       expect(getXValue(w)).toBe(100);
@@ -394,7 +430,9 @@ describe('colorArea HSL Hue(x) / Saturation(y) — default channels', () => {
 
   it('arrowUp increments saturation by 1, hue unchanged', async () => {
     // saturation already at 100; test with a lower saturation color
-    const w = mount(ColorArea, { props: { defaultValue: '#804040' } }); // hsl(0, ~33%, 38%) approx
+    const w = mount(ColorArea, {
+      props: { defaultValue: '#804040' },
+    }); // hsl(0, ~33%, 38%) approx
     const initHue = getXValue(w);
     await keydown(w, 'ArrowUp');
     expect(getXValue(w)).toBe(initHue); // hue unchanged
@@ -470,7 +508,12 @@ describe('colorArea HSB Saturation(x) / Brightness(y)', () => {
   it('brightness cannot exceed 100', async () => {
     // Start at full brightness
     const w = mount(ColorArea, {
-      props: { defaultValue: '#ff00ff', colorSpace: 'hsb', xChannel: 'saturation', yChannel: 'brightness' },
+      props: {
+        defaultValue: '#ff00ff',
+        colorSpace: 'hsb',
+        xChannel: 'saturation',
+        yChannel: 'brightness',
+      },
     });
     // #ff00ff = hsb(300, 100%, 100%)
     await keydown(w, 'ArrowUp');
@@ -552,7 +595,12 @@ describe('colorArea RGB Red(x) / Green(y)', () => {
   it('red cannot exceed 255', async () => {
     // #ff00ff = rgb(255, 0, 255) — red at max
     const w = mount(ColorArea, {
-      props: { defaultValue: '#ff00ff', colorSpace: 'rgb', xChannel: 'red', yChannel: 'green' },
+      props: {
+        defaultValue: '#ff00ff',
+        colorSpace: 'rgb',
+        xChannel: 'red',
+        yChannel: 'green',
+      },
     });
     await keydown(w, 'ArrowRight');
     expect(getXValue(w)).toBe(255);
@@ -561,7 +609,12 @@ describe('colorArea RGB Red(x) / Green(y)', () => {
   it('red cannot go below 0', async () => {
     // #0000ff = rgb(0, 0, 255) — red at min
     const w = mount(ColorArea, {
-      props: { defaultValue: '#0000ff', colorSpace: 'rgb', xChannel: 'red', yChannel: 'green' },
+      props: {
+        defaultValue: '#0000ff',
+        colorSpace: 'rgb',
+        xChannel: 'red',
+        yChannel: 'green',
+      },
     });
     await keydown(w, 'ArrowLeft');
     expect(getXValue(w)).toBe(0);

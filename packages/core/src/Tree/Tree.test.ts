@@ -18,7 +18,10 @@ describe('given default Tree', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Tree, { attachTo: document.body, props: { selectionBehavior: 'toggle' } });
+    wrapper = mount(Tree, {
+      attachTo: document.body,
+      props: { selectionBehavior: 'toggle' },
+    });
     content = wrapper.find('[role=tree]');
     updateItems();
   });
@@ -129,7 +132,10 @@ describe('given multiple `true` Tree', () => {
 
   beforeEach(async () => {
     document.body.innerHTML = '';
-    wrapper = mount(Tree, { props: { multiple: true, selectionBehavior: 'toggle' }, attachTo: document.body });
+    wrapper = mount(Tree, {
+      props: { multiple: true, selectionBehavior: 'toggle' },
+      attachTo: document.body,
+    });
     await nextTick();
     // content = wrapper.find('[role=tree]')
     items = wrapper.findAll('[role=treeitem]');
@@ -251,8 +257,24 @@ describe('given a Tree with a custom children structure', () => {
 
   beforeEach(async () => {
     document.body.innerHTML = '';
-    // eslint-disable-next-line no-nested-ternary
-    wrapper = mount(Tree, { props: { items: customItems, multiple: true, selectionBehavior: 'toggle', getChildren: (val) => (!val.files) ? val.directories : (!val.directories) ? val.files : [...val.directories, ...val.files] }, attachTo: document.body });
+
+    wrapper = mount(Tree, {
+      props: {
+        items: customItems,
+        multiple: true,
+        selectionBehavior: 'toggle',
+        // eslint-disable-next-line no-nested-ternary
+        getChildren: (val) => (!val.files)
+          ? val.directories
+          : (!val.directories)
+              ? val.files
+              : [
+                  ...val.directories,
+                  ...val.files,
+                ],
+      },
+      attachTo: document.body,
+    });
     await nextTick();
     // content = wrapper.find('[role=tree]')
     items = wrapper.findAll('[role=treeitem]');
@@ -307,7 +329,15 @@ describe('given a Tree with bubbleSelect and propagateSelect', () => {
 
   beforeEach(async () => {
     document.body.innerHTML = '';
-    wrapper = mount(Tree, { props: { items: customItems, expanded: ['components', 'Home'], multiple: true, propagateSelect: true, bubbleSelect: true } });
+    wrapper = mount(Tree, {
+      props: {
+        items: customItems,
+        expanded: ['components', 'Home'],
+        multiple: true,
+        propagateSelect: true,
+        bubbleSelect: true,
+      },
+    });
     await nextTick();
     items = wrapper.findAll('[role=treeitem]');
   });
@@ -338,7 +368,13 @@ describe('given a Tree with disabled items', () => {
     { title: 'apple' },
     { title: 'banana' },
     { title: 'cherry' },
-    { title: 'fruits', children: [{ title: 'grape' }, { title: 'kiwi' }] },
+    {
+      title: 'fruits',
+      children: [
+        { title: 'grape' },
+        { title: 'kiwi' },
+      ],
+    },
   ];
 
   function mountTree(disabledKeys: Array<string> = ['banana'], rootDisabled = false) {
@@ -356,12 +392,17 @@ describe('given a Tree with disabled items', () => {
               key: item._id,
               ...item.bind,
               disabled: disabledKeys.includes(item._id),
-            }, { default: () => item.value.title }),
+            }, {
+              default: () => item.value.title,
+            }),
           ),
         });
       },
     }), { attachTo: document.body });
-    return { wrapper, items: () => wrapper.findAll('[role=treeitem]') };
+    return {
+      wrapper,
+      items: () => wrapper.findAll('[role=treeitem]'),
+    };
   }
 
   beforeEach(() => {
@@ -414,13 +455,23 @@ describe('given a Tree with a text field inside an item', () => {
   const Fixture = defineComponent({
     setup() {
       const items = [
-        { title: 'components', children: [{ title: 'Card.vue' }, { title: 'Button.vue' }] },
+        {
+          title: 'components',
+          children: [
+            { title: 'Card.vue' },
+            { title: 'Button.vue' },
+          ],
+        },
         { title: 'app.vue' },
       ];
 
       return () => h(
         TreeRoot,
-        { items, getKey: (item: any) => item.title, defaultExpanded: ['components'] },
+        {
+          items,
+          getKey: (item: any) => item.title,
+          defaultExpanded: ['components'],
+        },
         {
           default: ({ flattenItems }: any) => flattenItems.map((item: any) =>
             h(
@@ -431,7 +482,10 @@ describe('given a Tree with a text field inside an item', () => {
                   return h('input', { 'data-testid': 'rename' });
                 }
                 if (item.value.title === 'Card.vue') {
-                  return h('select', { 'data-testid': 'picker' }, [h('option', 'components'), h('option', 'other')]);
+                  return h('select', { 'data-testid': 'picker' }, [
+                    h('option', 'components'),
+                    h('option', 'other'),
+                  ]);
                 }
                 return h('span', item.value.title);
               },
@@ -510,7 +564,13 @@ describe('given a Tree with `loop`', () => {
   const treeItems = [
     { title: 'apple' },
     { title: 'banana' },
-    { title: 'fruits', children: [{ title: 'grape' }, { title: 'kiwi' }] },
+    {
+      title: 'fruits',
+      children: [
+        { title: 'grape' },
+        { title: 'kiwi' },
+      ],
+    },
   ];
 
   async function mountTree(loop: boolean) {
@@ -523,7 +583,9 @@ describe('given a Tree with `loop`', () => {
           loop,
         }, {
           default: ({ flattenItems }: any) => flattenItems.map((item: any) =>
-            h(TreeItem as any, { key: item._id, ...item.bind }, { default: () => item.value.title }),
+            h(TreeItem as any, { key: item._id, ...item.bind }, {
+              default: () => item.value.title,
+            }),
           ),
         });
       },
@@ -570,7 +632,17 @@ describe('given a Tree with `loop`', () => {
         disconnect() {}
       };
       window.HTMLElement.prototype.getBoundingClientRect = function () {
-        return { width: 200, height: 200, top: 0, left: 0, right: 200, bottom: 200, x: 0, y: 0, toJSON() {} };
+        return {
+          width: 200,
+          height: 200,
+          top: 0,
+          left: 0,
+          right: 200,
+          bottom: 200,
+          x: 0,
+          y: 0,
+          toJSON() {},
+        };
       };
     });
     afterAll(() => {
@@ -597,8 +669,15 @@ describe('given a Tree with `loop`', () => {
             items,
             getKey: (item: any) => item.title,
             loop: true,
-          }, () => h(TreeVirtualizer as any, { textContent: (item: any) => item.value.title }, {
-            default: ({ item }: any) => h(TreeItem as any, { ...item.bind, disabled: disabled.includes(item.index) }, { default: () => item.value.title }),
+          }, () => h(TreeVirtualizer as any, {
+            textContent: (item: any) => item.value.title,
+          }, {
+            default: ({ item }: any) => h(TreeItem as any, {
+              ...item.bind,
+              disabled: disabled.includes(item.index),
+            }, {
+              default: () => item.value.title,
+            }),
           })));
         },
       }), { attachTo: document.body });

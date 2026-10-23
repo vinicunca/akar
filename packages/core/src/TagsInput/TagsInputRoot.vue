@@ -108,7 +108,9 @@ const { getItems, CollectionSlot } = useCollection({ isProvider: true });
 const selectedElement = ref<HTMLElement>();
 const isInvalidInput = ref(false);
 
-const currentModelValue = computed(() => Array.isArray(modelValue.value) ? [...modelValue.value] : []);
+const currentModelValue = computed(() => Array.isArray(modelValue.value)
+  ? [...modelValue.value]
+  : []);
 
 function handleRemoveTag(index: number) {
   if (index !== -1) {
@@ -130,7 +132,9 @@ provideTagsInputRootContext({
     if ((modelValueIsObject || defaultValueIsObject) && !isFunction(props.convertValue)) {
       throw new Error('You must provide a `convertValue` function when using objects as values.');
     }
-    const payload = props.convertValue ? props.convertValue(_payload) : _payload as T;
+    const payload = props.convertValue
+      ? props.convertValue(_payload)
+      : _payload as T;
 
     if ((array.length >= max.value) && !!max.value) {
       emits('invalid', payload);
@@ -177,9 +181,13 @@ provideTagsInputRootContext({
         if (selectedElement.value) {
           const index = collection.findIndex((i) => i === selectedElement.value);
           const selectedItem = getItems().find((i) => i.ref === selectedElement.value);
-          const modelIndex = selectedItem ? modelValue.value.findIndex((v) => isDeepEqual(v, selectedItem.value)) : -1;
+          const modelIndex = selectedItem
+            ? modelValue.value.findIndex((v) => isDeepEqual(v, selectedItem.value))
+            : -1;
           handleRemoveTag(modelIndex);
-          selectedElement.value = selectedElement.value === lastTag ? collection.at(index - 1) : collection.at(index + 1);
+          selectedElement.value = selectedElement.value === lastTag
+            ? collection.at(index - 1)
+            : collection.at(index + 1);
           event.preventDefault();
         } else if (event.key === 'Backspace') {
           selectedElement.value = lastTag;

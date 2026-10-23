@@ -18,7 +18,15 @@ function setup(props?: NumberFieldRootProps) {
   const increment = returned.getByTestId('increment');
   const decrement = returned.getByTestId('decrement');
   expect(root).toBeVisible();
-  return { ...returned, user, root, input, label, increment, decrement };
+  return {
+    ...returned,
+    user,
+    root,
+    input,
+    label,
+    increment,
+    decrement,
+  };
 }
 
 async function dispatchPointerEvent(
@@ -150,14 +158,24 @@ describe('numberField', () => {
     });
 
     it('should clamp the starting value to max', async () => {
-      const { input, increment } = setup({ min: 0, max: 20, startingValue: 40, stepSnapping: true });
+      const { input, increment } = setup({
+        min: 0,
+        max: 20,
+        startingValue: 40,
+        stepSnapping: true,
+      });
 
       await userEvent.click(increment);
       expect(input.value).toBe('20');
     });
 
     it('should clamp the starting value to min', async () => {
-      const { input, decrement } = setup({ min: 10, max: 20, startingValue: 4, stepSnapping: true });
+      const { input, decrement } = setup({
+        min: 10,
+        max: 20,
+        startingValue: 4,
+        stepSnapping: true,
+      });
 
       await userEvent.click(decrement);
       expect(input.value).toBe('10');
@@ -488,7 +506,12 @@ describe('numberField', () => {
     });
 
     it('should compute min-max with step correctly', async () => {
-      const { input } = setup({ min: 2, max: 21, step: 3, stepSnapping: true });
+      const { input } = setup({
+        min: 2,
+        max: 21,
+        step: 3,
+        stepSnapping: true,
+      });
 
       expect(input.value).toBe('');
       await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 2
@@ -504,7 +527,12 @@ describe('numberField', () => {
     });
 
     it('should compute min-max with step correctly when stepSnapping false', async () => {
-      const { input } = setup({ min: 17, max: 21, step: 3, stepSnapping: false });
+      const { input } = setup({
+        min: 17,
+        max: 21,
+        step: 3,
+        stepSnapping: false,
+      });
 
       expect(input.value).toBe('');
       await fireEvent.keyDown(input, { key: KEY_CODES.ARROW_UP }); // 17
@@ -541,7 +569,12 @@ describe('numberField', () => {
 
   describe('given step alignment near min/max boundaries', () => {
     it('should keep increment enabled when an off-grid value can still align below max', async () => {
-      const { input, increment } = setup({ max: 10, step: 3, stepSnapping: true, defaultValue: 8 });
+      const { input, increment } = setup({
+        max: 10,
+        step: 3,
+        stepSnapping: true,
+        defaultValue: 8,
+      });
 
       expect(increment).not.toHaveAttribute('disabled');
       await userEvent.click(increment); // aligns to 9, not 8 + 3
@@ -549,7 +582,12 @@ describe('numberField', () => {
     });
 
     it('should keep decrement enabled when an off-grid value can still align above min', async () => {
-      const { input, decrement } = setup({ min: 2, step: 3, stepSnapping: true, defaultValue: 4 });
+      const { input, decrement } = setup({
+        min: 2,
+        step: 3,
+        stepSnapping: true,
+        defaultValue: 4,
+      });
 
       expect(decrement).not.toHaveAttribute('disabled');
       await userEvent.click(decrement); // aligns to 2, not 4 - 3
@@ -557,13 +595,23 @@ describe('numberField', () => {
     });
 
     it('should disable increment once the next aligned value cannot exceed max', async () => {
-      const { increment } = setup({ max: 10, step: 3, stepSnapping: true, defaultValue: 9 });
+      const { increment } = setup({
+        max: 10,
+        step: 3,
+        stepSnapping: true,
+        defaultValue: 9,
+      });
 
       expect(increment).toHaveAttribute('disabled');
     });
 
     it('should disable decrement once the next aligned value cannot go below min', async () => {
-      const { decrement } = setup({ min: 2, step: 3, stepSnapping: true, defaultValue: 2 });
+      const { decrement } = setup({
+        min: 2,
+        step: 3,
+        stepSnapping: true,
+        defaultValue: 2,
+      });
 
       expect(decrement).toHaveAttribute('disabled');
     });

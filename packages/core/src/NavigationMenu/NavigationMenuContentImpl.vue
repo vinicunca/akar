@@ -63,11 +63,15 @@ const motionAttribute = computed(() => {
     if (index !== prevIndex) {
       // If we're moving to this item from another
       if (isSelected && prevIndex !== -1) {
-        return index > prevIndex ? 'from-end' : 'from-start';
+        return index > prevIndex
+          ? 'from-end'
+          : 'from-start';
       }
       // If we're leaving this item for another
       if (wasSelected && index !== -1) {
-        return index > prevIndex ? 'to-start' : 'to-end';
+        return index > prevIndex
+          ? 'to-start'
+          : 'to-end';
       }
     }
     // Otherwise we're entering from closed or leaving the list

@@ -14,7 +14,13 @@ const { contains } = useFilter({ sensitivity: 'base' });
 
 const query = ref('');
 const values = ref<Array<string>>([]);
-const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
+const options = [
+  'Apple',
+  'Banana',
+  'Blueberry',
+  'Grapes',
+  'Pineapple',
+];
 
 const filteredOptions = computed(() => options.filter((option) => contains(option, query.value) && !values.value.includes(option)));
 </script>

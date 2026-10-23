@@ -300,7 +300,10 @@ describe('given NavigationMenuTrigger with consumer event listeners', () => {
         h(NavigationMenuContent, () => h(NavigationMenuLink, { href: '#' }, () => 'Docs')),
       ]))),
     }), { attachTo: document.body });
-    return { value, trigger: wrapper.find('[data-navigation-menu-trigger]') };
+    return {
+      value,
+      trigger: wrapper.find('[data-navigation-menu-trigger]'),
+    };
   }
 
   it('should open on click', async () => {
@@ -310,7 +313,9 @@ describe('given NavigationMenuTrigger with consumer event listeners', () => {
   });
 
   it('should not open on click when the consumer prevents default', async () => {
-    const { value, trigger } = mountNavigationMenu({ onClick: (event) => event.preventDefault() });
+    const { value, trigger } = mountNavigationMenu({
+      onClick: (event) => event.preventDefault(),
+    });
     await trigger.trigger('click');
     expect(value.value).toBe('');
   });
@@ -322,7 +327,9 @@ describe('given NavigationMenuTrigger with consumer event listeners', () => {
   });
 
   it('should not open on mouse pointermove when the consumer prevents default', async () => {
-    const { value, trigger } = mountNavigationMenu({ onPointermove: (event) => event.preventDefault() });
+    const { value, trigger } = mountNavigationMenu({
+      onPointermove: (event) => event.preventDefault(),
+    });
     await trigger.trigger('pointermove', { pointerType: 'mouse' });
     expect(value.value).toBe('');
   });
@@ -336,7 +343,9 @@ describe('given NavigationMenuTrigger with consumer event listeners', () => {
   });
 
   it('should not handle the entry key when the consumer prevents default', async () => {
-    const { trigger } = mountNavigationMenu({ onKeydown: (event) => event.preventDefault() });
+    const { trigger } = mountNavigationMenu({
+      onKeydown: (event) => event.preventDefault(),
+    });
     await trigger.trigger('click');
     const event = new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, cancelable: true });
     const stopPropagation = vi.spyOn(event, 'stopPropagation');
@@ -362,7 +371,9 @@ describe('given an open NavigationMenuTrigger', () => {
           h(NavigationMenuTrigger, () => 'Learn'),
           h(NavigationMenuContent, () => h(NavigationMenuLink, { href: '#' }, () => 'Docs')),
         ])),
-        withViewport ? h(NavigationMenuViewport) : null,
+        withViewport
+          ? h(NavigationMenuViewport)
+          : null,
       ]),
     }), { attachTo: document.body });
     await nextTick();
@@ -401,11 +412,22 @@ describe('given NavigationMenu and the Space key', () => {
     // Vue ignores bubbling events stamped in the same millisecond its listeners were attached.
     const mountedAt = Date.now();
     await vi.waitFor(() => expect(Date.now()).toBeGreaterThan(mountedAt));
-    return { wrapper, value, onLinkClick, trigger: wrapper.find('[data-navigation-menu-trigger]') };
+    return {
+      wrapper,
+      value,
+      onLinkClick,
+      trigger: wrapper.find('[data-navigation-menu-trigger]'),
+    };
   }
 
   function pressSpace(element: Element, repeat = false) {
-    const event = new KeyboardEvent('keydown', { key: ' ', keyCode: 32, repeat, bubbles: true, cancelable: true });
+    const event = new KeyboardEvent('keydown', {
+      key: ' ',
+      keyCode: 32,
+      repeat,
+      bubbles: true,
+      cancelable: true,
+    });
     element.dispatchEvent(event);
     return event;
   }
@@ -429,7 +451,9 @@ describe('given NavigationMenu and the Space key', () => {
     expect(trigger.element.tagName).toBe(asChild ? 'SPAN' : 'BUTTON');
     pressSpace(trigger.element);
     await nextTick();
-    const repeats = [pressSpace(trigger.element, true)];
+    const repeats = [
+      pressSpace(trigger.element, true),
+    ];
     await nextTick();
     expect(value.value).toBe('learn');
     expect(repeats.every((event) => event.defaultPrevented)).toBe(true);

@@ -8,10 +8,12 @@ expect.extend(matchers);
 
 configureAxe({
   globalOptions: {
-    rules: [{
-      id: 'region',
-      enabled: false,
-    }],
+    rules: [
+      {
+        id: 'region',
+        enabled: false,
+      },
+    ],
   },
 });
 

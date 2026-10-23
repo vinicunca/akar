@@ -42,7 +42,9 @@ function handleArrowNavigation(event: KeyboardEvent) {
     'data-akar-menubar-subtrigger',
   );
 
-  const prevMenuKey = rootContext.dir.value === 'rtl' ? 'ArrowRight' : 'ArrowLeft';
+  const prevMenuKey = rootContext.dir.value === 'rtl'
+    ? 'ArrowRight'
+    : 'ArrowLeft';
   const isPrevKey = prevMenuKey === event.key;
   const isNextKey = !isPrevKey;
 

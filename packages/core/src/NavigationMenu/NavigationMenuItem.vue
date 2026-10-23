@@ -64,7 +64,9 @@ async function handleContentEntry(side = 'start') {
     restoreContentTabOrderRef();
     const candidates = getTabbableCandidates(el);
     if (candidates.length) {
-      focusFirst(side === 'start' ? candidates : candidates.reverse());
+      focusFirst(side === 'start'
+        ? candidates
+        : candidates.reverse());
     }
   }
 }

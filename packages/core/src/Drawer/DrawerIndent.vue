@@ -29,7 +29,9 @@ onMounted(() => {
 
   const sync = () => {
     const { swipeProgress, frontmostHeight } = store.getSnapshot();
-    el.style.setProperty(DRAWER_CSS_VARS.swipeProgress, swipeProgress > 0 ? `${swipeProgress}` : '0');
+    el.style.setProperty(DRAWER_CSS_VARS.swipeProgress, swipeProgress > 0
+      ? `${swipeProgress}`
+      : '0');
     if (frontmostHeight > 0) {
       el.style.setProperty(DRAWER_CSS_VARS.height, `${frontmostHeight}px`);
     } else {

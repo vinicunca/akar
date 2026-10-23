@@ -107,12 +107,16 @@ const resolvedName = computed(() => props.name ?? fieldContext?.name.value);
 // it to `false` rather than `undefined` when omitted — `props.required` can
 // never actually be `undefined`. Only fall back to the Field's `required`
 // when a Field is present, so standalone output is untouched.
-const required = computed(() => (fieldContext ? (props.required || fieldContext.required.value) : props.required));
+const required = computed(() => (fieldContext
+  ? (props.required || fieldContext.required.value)
+  : props.required));
 const disabled = computed(() => Boolean(props.disabled || fieldContext?.disabled.value));
 
 const modelValue = useVModel(props, 'modelValue', emits, {
   // @ts-expect-error Missing infer for AcceptableValue
-  defaultValue: props.defaultValue ?? (multiple.value ? [] : undefined),
+  defaultValue: props.defaultValue ?? (multiple.value
+    ? []
+    : undefined),
   passive: (props.modelValue === undefined) as false,
   deep: true,
 }) as Ref<T | Array<T> | undefined>;
@@ -165,9 +169,13 @@ const nativeSelectKey = computed(() => {
 function handleValueChange(value: T) {
   let nextValue: T | Array<T>;
   if (multiple.value) {
-    const array = Array.isArray(modelValue.value) ? [...modelValue.value] : [];
+    const array = Array.isArray(modelValue.value)
+      ? [...modelValue.value]
+      : [];
     const index = array.findIndex((i) => compare(i, value, props.by));
-    index === -1 ? array.push(value) : array.splice(index, 1);
+    index === -1
+      ? array.push(value)
+      : array.splice(index, 1);
     nextValue = [...array];
   } else {
     nextValue = value;

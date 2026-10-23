@@ -22,7 +22,13 @@ import {
   SelectViewport,
 } from '..';
 
-const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
+const options = [
+  'Apple',
+  'Banana',
+  'Blueberry',
+  'Grapes',
+  'Pineapple',
+];
 </script>
 
 <template>

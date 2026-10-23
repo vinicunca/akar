@@ -132,7 +132,9 @@ const dir = useDirection(propDir);
 const fieldContext = injectFieldRootContext(null);
 const disabled = computed(() => Boolean(propDisabled.value || fieldContext?.disabled.value));
 const resolvedName = computed(() => props.name ?? fieldContext?.name.value);
-const resolvedRequired = computed(() => (fieldContext ? (props.required || fieldContext.required.value) : props.required));
+const resolvedRequired = computed(() => (fieldContext
+  ? (props.required || fieldContext.required.value)
+  : props.required));
 
 const formatter = useDateFormatter(locale.value, {
   hourCycle: normalizeHourCycle(props.hourCycle),
@@ -168,10 +170,14 @@ const step = computed(() => normalizeDateStep(props));
 
 const inferredGranularity = computed(() => {
   if (props.granularity) {
-    return !hasTime(placeholder.value) ? 'day' : props.granularity;
+    return !hasTime(placeholder.value)
+      ? 'day'
+      : props.granularity;
   }
 
-  return hasTime(placeholder.value) ? 'minute' : 'day';
+  return hasTime(placeholder.value)
+    ? 'minute'
+    : 'day';
 });
 
 const isInvalid = computed(() => {
@@ -196,7 +202,11 @@ const isInvalid = computed(() => {
 
 const initialSegments = initializeSegmentValues(inferredGranularity.value);
 
-const segmentValues = ref<SegmentValueObj>(modelValue.value ? { ...syncSegmentValues({ value: modelValue.value, formatter }) } : { ...initialSegments });
+const segmentValues = ref<SegmentValueObj>(modelValue.value
+  ? {
+      ...syncSegmentValues({ value: modelValue.value, formatter }),
+    }
+  : { ...initialSegments });
 
 const allSegmentContent = computed(() => createContent({
   granularity: inferredGranularity.value,
@@ -238,7 +248,9 @@ watch(modelValue, (value, previous) => {
 
 watch([modelValue, locale], ([_modelValue]) => {
   if (!isNullish(_modelValue)) {
-    segmentValues.value = { ...syncSegmentValues({ value: _modelValue, formatter }) };
+    segmentValues.value = {
+      ...syncSegmentValues({ value: _modelValue, formatter }),
+    };
   } else if (Object.values(segmentValues.value).every((value) => value !== null) && isNullish(_modelValue)) {
     // If segment has null value, means that user modified it, thus do not reset the segmentValues
     segmentValues.value = { ...initialSegments };
@@ -256,8 +268,12 @@ const { nextFocusableSegment, prevFocusableSegment, focusNext } = useSegmentNavi
 
 const inputType = computed(() => getInputType(inferredGranularity.value));
 const inputValue = computed(() => normalizeInputValue(modelValue.value, inferredGranularity.value));
-const inputMaxValue = computed(() => props.maxValue ? normalizeInputValue(props.maxValue, inferredGranularity.value) : undefined);
-const inputMinValue = computed(() => props.minValue ? normalizeInputValue(props.minValue, inferredGranularity.value) : undefined);
+const inputMaxValue = computed(() => props.maxValue
+  ? normalizeInputValue(props.maxValue, inferredGranularity.value)
+  : undefined);
+const inputMinValue = computed(() => props.minValue
+  ? normalizeInputValue(props.minValue, inferredGranularity.value)
+  : undefined);
 
 function handleKeydown(e: KeyboardEvent) {
   // Don't navigate between segments mid-composition, arrow keys are used for IME candidate navigation
@@ -408,6 +424,7 @@ defineExpose({
       :required="resolvedRequired"
       :max="inputMaxValue"
       :min="inputMinValue"
+      :step="inferredGranularity === 'second' ? 1 : undefined"
       @focus="Array.from(segmentElements)?.[0]?.focus()"
     />
   </Primitive>

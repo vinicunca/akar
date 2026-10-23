@@ -87,21 +87,29 @@ export function resolveKeyboardInputTarget(target: EventTarget | null): HTMLElem
   }
 
   if (isKeyboardInputElement(target)) {
-    return target.isContentEditable ? getContentEditableHost(target) : target;
+    return target.isContentEditable
+      ? getContentEditableHost(target)
+      : target;
   }
 
   const control = (target.closest('label') as HTMLLabelElement | null)?.control;
-  return control instanceof HTMLElement && isKeyboardInputElement(control) ? control : null;
+  return control instanceof HTMLElement && isKeyboardInputElement(control)
+    ? control
+    : null;
 }
 
 function resolveKeyboardTouchTarget(target: EventTarget | null): KeyboardTouchTarget | null {
   const focusTarget = resolveKeyboardInputTarget(target);
-  return focusTarget ? { focusTarget, clickTarget: target as HTMLElement } : null;
+  return focusTarget
+    ? { focusTarget, clickTarget: target as HTMLElement }
+    : null;
 }
 
 function getElementAtPoint(root: Node, x: number, y: number): Element | null {
   const elementFromPoint = (root as Partial<Document>).elementFromPoint;
-  return typeof elementFromPoint === 'function' ? elementFromPoint.call(root, x, y) : null;
+  return typeof elementFromPoint === 'function'
+    ? elementFromPoint.call(root, x, y)
+    : null;
 }
 
 /**
@@ -206,7 +214,9 @@ function isVerticallyScrollable(element: HTMLElement, allowOverflowIntent: boole
     return false;
   }
   // With intent, a container that overflows only once slack is added counts too.
-  return allowOverflowIntent ? element.clientHeight > 0 : element.scrollHeight > element.clientHeight;
+  return allowOverflowIntent
+    ? element.clientHeight > 0
+    : element.scrollHeight > element.clientHeight;
 }
 
 /** The parent in the flat tree: crosses slots and shadow roots. */
@@ -215,7 +225,9 @@ function getParentNode(node: Node): Node | null {
     return node.assignedSlot;
   }
   const parent = node.parentNode;
-  return parent instanceof ShadowRoot ? parent.host : parent;
+  return parent instanceof ShadowRoot
+    ? parent.host
+    : parent;
 }
 
 function findScrollableAncestor(
@@ -230,7 +242,9 @@ function findScrollableAncestor(
     }
     node = getParentNode(node);
   }
-  return isVerticallyScrollable(root, allowOverflowIntent) ? root : null;
+  return isVerticallyScrollable(root, allowOverflowIntent)
+    ? root
+    : null;
 }
 
 /**
@@ -331,7 +345,10 @@ export function useDrawerVirtualKeyboard(options: UseDrawerVirtualKeyboardOption
   function animateScroll(element: HTMLElement, scrollTop: number) {
     const win = element.ownerDocument.defaultView ?? window;
     const reducedMotion = win.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
-    element.scrollTo?.({ top: scrollTop, behavior: reducedMotion ? 'auto' : 'smooth' });
+    element.scrollTo?.({
+      top: scrollTop,
+      behavior: reducedMotion ? 'auto' : 'smooth',
+    });
   }
 
   function cancelPendingAlignment() {
@@ -403,7 +420,9 @@ export function useDrawerVirtualKeyboard(options: UseDrawerVirtualKeyboardOption
       return {
         top,
         // Fixed content already sits above the keyboard, so an inset would lift it twice.
-        bottom: layoutFollowsKeyboard ? layoutHeight : Math.min(layoutHeight, top + visualHeight),
+        bottom: layoutFollowsKeyboard
+          ? layoutHeight
+          : Math.min(layoutHeight, top + visualHeight),
         resizing: layoutFollowsKeyboard && Math.abs(layoutHeight - visualHeight) >= 1,
       };
     }
@@ -541,7 +560,9 @@ export function useDrawerVirtualKeyboard(options: UseDrawerVirtualKeyboardOption
       if (!settled) {
         // Commit only once the destination holds across two checks — layout may
         // still be transitioning, and a mid-transition destination overshoots.
-        const checks = scrollElement === scrollTarget ? scrollChecks + 1 : 1;
+        const checks = scrollElement === scrollTarget
+          ? scrollChecks + 1
+          : 1;
         scrollElement = scrollTarget;
         scrollDestination = destination;
         scrollChecks = checks;
@@ -590,7 +611,9 @@ export function useDrawerVirtualKeyboard(options: UseDrawerVirtualKeyboardOption
       const pass = () => {
         align();
         remaining -= 1;
-        realignTimer = remaining > 0 ? setTimeout(pass, KEYBOARD_REALIGN_INTERVAL) : undefined;
+        realignTimer = remaining > 0
+          ? setTimeout(pass, KEYBOARD_REALIGN_INTERVAL)
+          : undefined;
       };
       realignTimer = setTimeout(pass, KEYBOARD_REALIGN_INTERVAL);
     }
@@ -671,7 +694,9 @@ export function useDrawerVirtualKeyboard(options: UseDrawerVirtualKeyboardOption
     function onTouchStart(event: TouchEvent) {
       const touch = event.touches[0];
       touchMoved = false;
-      touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
+      touchStart = touch
+        ? { x: touch.clientX, y: touch.clientY }
+        : null;
     }
 
     function onTouchMove(event: TouchEvent) {

@@ -5,7 +5,10 @@ import { Time } from '@internationalized/date';
 import { ref } from 'vue';
 import TimeRangeField from './_DummyTimeRangeField.vue';
 
-const defaultValue = { start: new Time(10, 0, 0), end: new Time(11, 0, 0) };
+const defaultValue = {
+  start: new Time(10, 0, 0),
+  end: new Time(11, 0, 0),
+};
 const modelValue = ref(defaultValue) as Ref<{ start: TimeValue; end: TimeValue }>;
 
 const defaultPlaceholder = new Time(12, 30);

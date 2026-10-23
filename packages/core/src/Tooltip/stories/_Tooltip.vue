@@ -12,7 +12,7 @@ const toggleState = ref(false);
 
 <template>
   <TooltipProvider
-    v-bind="tooltipProvider"
+    v-bind="props.tooltipProvider"
   >
     <TooltipRoot v-model:open="toggleState">
       <TooltipTrigger

@@ -19,7 +19,13 @@ import {
 } from '..';
 
 const props = withDefaults(defineProps<SelectRootProps & { options?: Array<any> }>(), {
-  options: () => ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'],
+  options: () => [
+    'Apple',
+    'Banana',
+    'Blueberry',
+    'Grapes',
+    'Pineapple',
+  ],
 });
 const emits = defineEmits<SelectRootEmits>();
 const forwarded = useForwardPropsEmits(props, emits);

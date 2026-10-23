@@ -87,7 +87,10 @@ describe('useSelectionBehavior', () => {
       const props = reactive({ multiple: false, selectionBehavior: 'replace' as const });
       const { onSelectItem } = useSelectionBehavior(modelValue, props);
 
-      const val = { id: 7, nested: { a: 1 } };
+      const val = {
+        id: 7,
+        nested: { a: 1 },
+      };
       onSelectItem(val, () => true);
       expect(modelValue.value).toEqual(val);
       expect(modelValue.value).not.toBe(val);
@@ -111,7 +114,11 @@ describe('useSelectionBehavior', () => {
       const props = reactive({ multiple: true, selectionBehavior: 'replace' as const });
       const { handleMultipleReplace } = useSelectionBehavior(modelValue, props);
 
-      const items = [createItem(1), createItem(2), createItem(3)];
+      const items = [
+        createItem(1),
+        createItem(2),
+        createItem(3),
+      ];
       // firstValue never set -> early return, modelValue untouched.
       handleMultipleReplace('next', items[2].ref, () => items, [1, 2, 3]);
       expect(modelValue.value).toEqual([1, 2, 3]);
@@ -122,7 +129,11 @@ describe('useSelectionBehavior', () => {
       const props = reactive({ multiple: false, selectionBehavior: 'replace' as const });
       const { handleMultipleReplace } = useSelectionBehavior(modelValue, props);
 
-      const items = [createItem(1), createItem(2), createItem(3)];
+      const items = [
+        createItem(1),
+        createItem(2),
+        createItem(3),
+      ];
       // The `!props.multiple` guard short-circuits before firstValue matters.
       handleMultipleReplace('next', items[2].ref, () => items, [1, 2, 3]);
       expect(modelValue.value).toEqual([1, 2, 3]);
@@ -138,7 +149,11 @@ describe('useSelectionBehavior', () => {
       // Now make modelValue a non-array; handleMultipleReplace must bail.
       modelValue.value = { id: 1 };
 
-      const items = [createItem(1), createItem(2), createItem(3)];
+      const items = [
+        createItem(1),
+        createItem(2),
+        createItem(3),
+      ];
       handleMultipleReplace('next', items[2].ref, () => items, [1, 2, 3]);
       expect(modelValue.value).toEqual({ id: 1 });
     });
@@ -155,7 +170,12 @@ describe('useSelectionBehavior', () => {
       api.onSelectItem(10, () => false);
       const items = options.map(createItem);
       const getItems = () => items;
-      return { modelValue, items, getItems, handleMultipleReplace: api.handleMultipleReplace };
+      return {
+        modelValue,
+        items,
+        getItems,
+        handleMultipleReplace: api.handleMultipleReplace,
+      };
     }
 
     it('\'next\' sets modelValue to the inclusive range firstValue..lastValue', () => {

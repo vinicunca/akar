@@ -8,7 +8,10 @@ export const ITEM_SELECT = 'menu.itemSelect';
 export const SELECTION_KEYS = ['Enter', ' '];
 export const FIRST_KEYS = ['ArrowDown', 'PageUp', 'Home'];
 export const LAST_KEYS = ['ArrowUp', 'PageDown', 'End'];
-export const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS];
+export const FIRST_LAST_KEYS = [
+  ...FIRST_KEYS,
+  ...LAST_KEYS,
+];
 export const SUB_OPEN_KEYS: Record<Direction, Array<string>> = {
   ltr: [...SELECTION_KEYS, 'ArrowRight'],
   rtl: [...SELECTION_KEYS, 'ArrowLeft'],
@@ -71,8 +74,10 @@ export interface GraceIntent {
   side: Side;
 }
 
-// Determine if a point is inside of a polygon.
-// Based on https://github.com/substack/point-in-polygon
+/**
+ * Determine if a point is inside of a polygon.
+ * Based on https://github.com/substack/point-in-polygon
+ */
 export function isPointInPolygon(point: Point, polygon: Polygon) {
   const { x, y } = point;
   let inside = false;

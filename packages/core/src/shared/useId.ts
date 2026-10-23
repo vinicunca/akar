@@ -32,5 +32,7 @@ export function useId(deterministicId?: string | null | undefined, prefix = 'aka
     id = `${++count}`;
   }
 
-  return prefix ? `${prefix}-${id}` : id;
+  return prefix
+    ? `${prefix}-${id}`
+    : id;
 }

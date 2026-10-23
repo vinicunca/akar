@@ -57,7 +57,11 @@ describe('nested px SplitterGroup layout re-initialization', () => {
   function fireResize(width: number) {
     resizeCallbacks.forEach((cb) => {
       cb(
-        [{ contentRect: { width, height: 600 } } as ResizeObserverEntry],
+        [
+          {
+            contentRect: { width, height: 600 },
+          } as ResizeObserverEntry,
+        ],
         {} as ResizeObserver,
       );
     });

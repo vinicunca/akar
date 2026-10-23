@@ -73,7 +73,9 @@ export function getNextMatch(
   const isRepeated
     = search.length > 1 && Array.from(search).every((char) => char === search[0]);
   const normalizedSearch = isRepeated ? search[0] : search;
-  const currentMatchIndex = currentMatch ? values.indexOf(currentMatch) : -1;
+  const currentMatchIndex = currentMatch
+    ? values.indexOf(currentMatch)
+    : -1;
   let wrappedValues = wrapArray(values, Math.max(currentMatchIndex, 0));
   const excludeCurrentMatch = normalizedSearch.length === 1;
   if (excludeCurrentMatch) {
@@ -82,5 +84,7 @@ export function getNextMatch(
   const nextMatch = wrappedValues.find((value) =>
     value.toLowerCase().startsWith(normalizedSearch.toLowerCase()),
   );
-  return nextMatch !== currentMatch ? nextMatch : undefined;
+  return nextMatch !== currentMatch
+    ? nextMatch
+    : undefined;
 }

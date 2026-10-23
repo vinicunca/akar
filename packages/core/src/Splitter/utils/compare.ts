@@ -12,7 +12,9 @@ export function fuzzyCompareNumbers(
   if (delta === 0) {
     return 0;
   } else {
-    return delta > 0 ? 1 : -1;
+    return delta > 0
+      ? 1
+      : -1;
   }
 }
 

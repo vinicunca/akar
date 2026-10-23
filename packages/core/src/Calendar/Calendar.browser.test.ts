@@ -12,7 +12,11 @@ describe('given a Calendar, in a real browser', () => {
   it('moves focus by a month with PageUp / PageDown and by a week with arrow keys', async () => {
     mount(Calendar, {
       attachTo: document.body,
-      props: { calendarProps: { placeholder: new CalendarDate(2024, 3, 20) } },
+      props: {
+        calendarProps: {
+          placeholder: new CalendarDate(2024, 3, 20),
+        },
+      },
     });
     document.querySelector<HTMLElement>('[data-testid="date-3-20"]')!.focus();
 

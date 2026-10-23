@@ -73,7 +73,10 @@ function position() {
       const minContentWidth = triggerRect.width + leftDelta;
       const contentWidth = Math.max(minContentWidth, contentRect.width);
       const rightEdge = window.innerWidth - CONTENT_MARGIN;
-      const clampedLeft = clamp(left, { min: CONTENT_MARGIN, max: Math.max(CONTENT_MARGIN, rightEdge - contentWidth) });
+      const clampedLeft = clamp(left, {
+        min: CONTENT_MARGIN,
+        max: Math.max(CONTENT_MARGIN, rightEdge - contentWidth),
+      });
 
       contentWrapperElement.value.style.minWidth = `${minContentWidth}px`;
       contentWrapperElement.value.style.left = `${clampedLeft}px`;
@@ -86,7 +89,10 @@ function position() {
       const leftEdge = window.innerWidth - CONTENT_MARGIN;
       const clampedRight = clamp(
         right,
-        { min: CONTENT_MARGIN, max: Math.max(CONTENT_MARGIN, leftEdge - contentWidth) },
+        {
+          min: CONTENT_MARGIN,
+          max: Math.max(CONTENT_MARGIN, leftEdge - contentWidth),
+        },
       );
 
       contentWrapperElement.value.style.minWidth = `${minContentWidth}px`;

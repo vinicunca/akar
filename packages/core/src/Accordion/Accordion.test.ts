@@ -195,7 +195,10 @@ describe('given a multiple Accordion', () => {
   let wrapper: VueWrapper<InstanceType<typeof Accordion>>;
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Accordion, { props: { type: 'multiple' }, attachTo: document.body });
+    wrapper = mount(Accordion, {
+      props: { type: 'multiple' },
+      attachTo: document.body,
+    });
   });
 
   it('should pass axe accessibility tests', async () => {

@@ -72,7 +72,9 @@ export function useMonthPicker(props: UseMonthPickerProps) {
   const formatter = useDateFormatter(props.locale.value);
 
   const resolveMatcher = (matcher?: Matcher | Ref<Matcher | undefined>) =>
-    isFunction(matcher) ? matcher : matcher?.value;
+    isFunction(matcher)
+      ? matcher
+      : matcher?.value;
 
   const headingFormatOptions = computed(() => {
     const options: DateFormatterOptions = {

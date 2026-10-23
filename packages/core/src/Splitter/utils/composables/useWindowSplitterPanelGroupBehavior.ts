@@ -8,13 +8,11 @@ import { getPanelGroupElement, getResizeHandleElementsForGroup, getResizeHandleP
 import { adjustLayoutByDelta } from '../layout';
 import { determinePivotIndices } from '../pivot';
 
-// https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
-
+/** https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/ */
 export function useWindowSplitterPanelGroupBehavior({
   eagerValuesRef,
   groupId,
   layout,
-  panelDataArray,
   panelGroupElement,
   setLayout,
   getPanelDataWithPercentConstraints,
@@ -72,7 +70,9 @@ export function useWindowSplitterPanelGroupBehavior({
         );
         resizeHandleElement.setAttribute(
           'aria-valuenow',
-          valueNow != null ? `${Math.round(valueNow)}` : '',
+          valueNow != null
+            ? `${Math.round(valueNow)}`
+            : '',
         );
       }
     }
@@ -179,7 +179,9 @@ export function useWindowSplitterPanelGroupBehavior({
     });
 
     onCleanup(() => {
-      cleanupFunctions.forEach((cleanupFunction) => cleanupFunction());
+      cleanupFunctions.forEach((cleanupFunction) => {
+        cleanupFunction();
+      });
     });
   });
 }

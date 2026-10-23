@@ -39,8 +39,14 @@ export const DEFAULT_VALIDITY_STATE: FieldValidityState = {
  * `ValidityState` of their own, and to snapshot a native element's live one.
  */
 export function createValidityState(flags: Partial<Record<ValidityKey, boolean>> = {}): ValidityState {
-  const state = Object.fromEntries(VALIDITY_KEYS.map((key) => [key, Boolean(flags[key])])) as Record<ValidityKey, boolean>;
-  return { ...state, valid: VALIDITY_KEYS.every((key) => !state[key]) };
+  const state = Object.fromEntries(VALIDITY_KEYS.map((key) => [
+    key,
+    Boolean(flags[key]),
+  ])) as Record<ValidityKey, boolean>;
+  return {
+    ...state,
+    valid: VALIDITY_KEYS.every((key) => !state[key]),
+  };
 }
 
 type NativeControl = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
@@ -72,7 +78,9 @@ function normalizeErrors(result: FieldValidateResult): Array<string> {
   if (!result) {
     return [];
   }
-  return (Array.isArray(result) ? result : [result]).filter(Boolean);
+  return (Array.isArray(result)
+    ? result
+    : [result]).filter(Boolean);
 }
 
 function isPromiseLike<T>(value: unknown): value is PromiseLike<T> {
@@ -80,7 +88,9 @@ function isPromiseLike<T>(value: unknown): value is PromiseLike<T> {
 }
 
 function getNativeErrors(element: NativeControl | undefined) {
-  return element?.validationMessage ? [element.validationMessage] : [];
+  return element?.validationMessage
+    ? [element.validationMessage]
+    : [];
 }
 
 /**
@@ -138,10 +148,15 @@ export function useFieldValidation(options: UseFieldValidationOptions) {
 
     // Barred controls (disabled, `type="button"`, …) have no usable state.
     if (!live) {
-      return { ...createValidityState() };
+      return {
+        ...createValidityState(),
+      };
     }
 
-    const state: FieldValidityState = { ...createValidityState(live), valid: live.valid };
+    const state: FieldValidityState = {
+      ...createValidityState(live),
+      valid: live.valid,
+    };
 
     // Only let `valueMissing` mark the field invalid once the value has been
     // changed (or validation was forced), to reduce error noise.
@@ -156,7 +171,9 @@ export function useFieldValidation(options: UseFieldValidationOptions) {
 
   function publish(state: FieldValidityState, messages: Array<string>, committedValue: unknown) {
     validity.value = state;
-    errors.value = state.valid === false ? messages : [];
+    errors.value = state.valid === false
+      ? messages
+      : [];
     value.value = committedValue;
   }
 
@@ -173,7 +190,9 @@ export function useFieldValidation(options: UseFieldValidationOptions) {
     clearCustomValidity();
 
     let state = readState(source, currentValue);
-    const nativeErrors = state.valid === false ? getNativeErrors(source.element) : [];
+    const nativeErrors = state.valid === false
+      ? getNativeErrors(source.element)
+      : [];
     const validateFn = options.validate.value;
 
     if (!validateFn || (state.valid === false && !options.shouldValidateOnChange())) {
@@ -255,7 +274,10 @@ export function useFieldValidation(options: UseFieldValidationOptions) {
       return;
     }
 
-    publish({ ...createValidityState(), valid: true }, [], currentValue);
+    publish({
+      ...createValidityState(),
+      valid: true,
+    }, [], currentValue);
   }
 
   /** Runs on a value change: validates (debounced) when on-change validation applies. */

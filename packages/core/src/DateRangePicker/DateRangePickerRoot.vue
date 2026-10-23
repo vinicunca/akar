@@ -200,7 +200,10 @@ provideDateRangePickerRootContext({
     emits('update:startValue', date);
   },
   onDateChange(date: DateRange) {
-    modelValue.value = { start: date.start?.copy(), end: date.end?.copy() };
+    modelValue.value = {
+      start: date.start?.copy(),
+      end: date.end?.copy(),
+    };
   },
   onPlaceholderChange(date: DateValue) {
     placeholder.value = date.copy();

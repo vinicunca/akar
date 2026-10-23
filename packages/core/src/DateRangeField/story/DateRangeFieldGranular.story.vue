@@ -2,7 +2,10 @@
 import { CalendarDateTime } from '@internationalized/date';
 import DateRangeField from './_DummyDateRangeField.vue';
 
-const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new CalendarDateTime(2024, 2, 27) };
+const defaultValue = {
+  start: new CalendarDateTime(2024, 2, 20),
+  end: new CalendarDateTime(2024, 2, 27),
+};
 </script>
 
 <template>

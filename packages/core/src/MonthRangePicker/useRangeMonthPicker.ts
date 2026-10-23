@@ -91,7 +91,9 @@ export function useRangeMonthPickerState(props: UseRangeMonthPickerProps) {
             return compareYearMonth(date, startLimit) < 0 || compareYearMonth(date, endLimit) > 0;
           }
 
-          const fixedValue = props.fixedDate.value === 'start' ? props.start.value : props.end.value;
+          const fixedValue = props.fixedDate.value === 'start'
+            ? props.start.value
+            : props.end.value;
           const maxDate = fixedValue.add({ months: maximumMonths - 1 });
           const minDate = fixedValue.subtract({ months: maximumMonths - 1 });
           return compareYearMonth(date, minDate) < 0 || compareYearMonth(date, maxDate) > 0;
@@ -131,11 +133,15 @@ export function useRangeMonthPickerState(props: UseRangeMonthPickerProps) {
 
       if (compareYearMonth(focused, anchor) >= 0) {
         const maxEnd = anchor.add({ months: maximumMonths - 1 });
-        const cappedEnd = compareYearMonth(focused, maxEnd) > 0 ? maxEnd : focused;
+        const cappedEnd = compareYearMonth(focused, maxEnd) > 0
+          ? maxEnd
+          : focused;
         return { start: anchor, end: cappedEnd };
       } else {
         const minStart = anchor.subtract({ months: maximumMonths - 1 });
-        const cappedStart = compareYearMonth(focused, minStart) < 0 ? minStart : focused;
+        const cappedStart = compareYearMonth(focused, minStart) < 0
+          ? minStart
+          : focused;
         return { start: cappedStart, end: anchor };
       }
     }
@@ -143,7 +149,9 @@ export function useRangeMonthPickerState(props: UseRangeMonthPickerProps) {
     const isValid = areAllMonthsBetweenValid(
       start,
       end,
-      props.allowNonContiguousRanges.value ? () => false : props.isMonthUnavailable,
+      props.allowNonContiguousRanges.value
+        ? () => false
+        : props.isMonthUnavailable,
       rangeIsMonthDisabled,
     );
     if (isValid) {

@@ -190,7 +190,9 @@ export function useSwipeDismiss(options: UseSwipeDismissOptions) {
     if (typeof swipeThresholdProp === 'function') {
       return Math.max(0, swipeThresholdProp({ element: el, direction: dir }));
     }
-    return typeof swipeThresholdProp === 'number' ? swipeThresholdProp : DEFAULT_SWIPE_THRESHOLD;
+    return typeof swipeThresholdProp === 'number'
+      ? swipeThresholdProp
+      : DEFAULT_SWIPE_THRESHOLD;
   }
 
   function setSwiping(next: boolean) {
@@ -277,7 +279,9 @@ export function useSwipeDismiss(options: UseSwipeDismissOptions) {
    * Ported from BaseUI `useSwipeDismiss.ts:applyDirectionalDamping`.
    */
   function applyDirectionalDamping(deltaX: number, deltaY: number) {
-    const exponent = (value: number) => (value >= 0 ? value ** 0.5 : -((Math.abs(value)) ** 0.5));
+    const exponent = (value: number) => (value >= 0
+      ? value ** 0.5
+      : -((Math.abs(value)) ** 0.5));
     const dampAxis = (delta: number, allowNegative: boolean, allowPositive: boolean) => {
       if (!allowNegative && delta < 0) {
         return exponent(delta);
@@ -320,8 +324,12 @@ export function useSwipeDismiss(options: UseSwipeDismissOptions) {
     }
 
     const isVerticalDrawerAxis = drawerAxis.value === 'vertical';
-    const drawerAxisDelta = isVerticalDrawerAxis ? pos.y - dragStartPos.y : pos.x - dragStartPos.x;
-    const crossAxisDelta = isVerticalDrawerAxis ? pos.x - dragStartPos.x : pos.y - dragStartPos.y;
+    const drawerAxisDelta = isVerticalDrawerAxis
+      ? pos.y - dragStartPos.y
+      : pos.x - dragStartPos.x;
+    const crossAxisDelta = isVerticalDrawerAxis
+      ? pos.x - dragStartPos.x
+      : pos.y - dragStartPos.y;
     const absDrawerAxisDelta = Math.abs(drawerAxisDelta);
     const absCrossAxisDelta = Math.abs(crossAxisDelta);
 
@@ -354,7 +362,9 @@ export function useSwipeDismiss(options: UseSwipeDismissOptions) {
       const absX = Math.abs(rawDx);
       const absY = Math.abs(rawDy);
       if (hasVertical.value && hasHorizontal.value) {
-        lockedAxis = absX > absY ? 'horizontal' : 'vertical';
+        lockedAxis = absX > absY
+          ? 'horizontal'
+          : 'vertical';
       } else if (hasVertical.value) {
         lockedAxis = 'vertical';
       } else {
@@ -363,8 +373,12 @@ export function useSwipeDismiss(options: UseSwipeDismissOptions) {
     }
 
     // Axis-locked deltas for direction detection
-    const dx = lockedAxis === 'vertical' ? 0 : rawDx;
-    const dy = lockedAxis === 'horizontal' ? 0 : rawDy;
+    const dx = lockedAxis === 'vertical'
+      ? 0
+      : rawDx;
+    const dy = lockedAxis === 'horizontal'
+      ? 0
+      : rawDy;
 
     const dir: SwipeDirection | undefined = toValue(directions).find((d) => getDisplacement(d, dx, dy) > 0);
 
@@ -456,8 +470,12 @@ export function useSwipeDismiss(options: UseSwipeDismissOptions) {
     const threshold = getThreshold(el, intendedDirection ?? toValue(directions)[0]);
 
     const now = performance.now();
-    const velAge = lastDragSample ? now - lastDragSample.time : Infinity;
-    const velocity = velAge > MAX_RELEASE_VELOCITY_AGE_MS ? { x: 0, y: 0 } : lastVelocity;
+    const velAge = lastDragSample
+      ? now - lastDragSample.time
+      : Infinity;
+    const velocity = velAge > MAX_RELEASE_VELOCITY_AGE_MS
+      ? { x: 0, y: 0 }
+      : lastVelocity;
 
     // When onRelease returns true (snap-point release), it owns the open/close
     // and transform outcome — don't run the dismiss-vs-cancel branch, which
@@ -631,7 +649,9 @@ export function useSwipeDismiss(options: UseSwipeDismissOptions) {
     // on `ignoreScrollableAncestors`: that option is about starting a swipe from
     // inside a scroller on the dismiss axis.
     if (drawerAxis.value) {
-      const crossAxis = drawerAxis.value === 'vertical' ? 'horizontal' : 'vertical';
+      const crossAxis = drawerAxis.value === 'vertical'
+        ? 'horizontal'
+        : 'vertical';
       crossAxisScrollable = findScrollableAncestor(target, crossAxis);
     }
 

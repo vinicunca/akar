@@ -143,7 +143,9 @@ const { primitiveElement, currentElement } = usePrimitiveElement();
 const isFormControl = useFormControl(currentElement);
 
 const placeholder = computed(() => {
-  return isString(propPlaceholder.value) ? { edit: propPlaceholder.value, preview: propPlaceholder.value } : propPlaceholder.value;
+  return isString(propPlaceholder.value)
+    ? { edit: propPlaceholder.value, preview: propPlaceholder.value }
+    : propPlaceholder.value;
 });
 
 const inputValue = ref(modelValue.value);

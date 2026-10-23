@@ -3,7 +3,11 @@ import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 import { CheckboxGroupRoot, CheckboxIndicator, CheckboxRoot } from '..';
 
-const items = [{ name: 'jack' }, { name: 'john' }, { name: 'mike' }];
+const items = [
+  { name: 'jack' },
+  { name: 'john' },
+  { name: 'mike' },
+];
 const checkboxes = ref([items[1]]);
 </script>
 

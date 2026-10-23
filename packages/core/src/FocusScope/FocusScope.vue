@@ -100,7 +100,9 @@ watchEffect((cleanupFn) => {
   // originating inside a shadow root are retargeted to the host, so
   // `container.contains(target)` never matches and focus escapes the trap.
   const ownerDocument = container?.ownerDocument ?? document;
-  const root = container ? (container.getRootNode() as Document | ShadowRoot) : ownerDocument;
+  const root = container
+    ? (container.getRootNode() as Document | ShadowRoot)
+    : ownerDocument;
 
   function handleFocusIn(event: FocusEvent) {
     if (focusScope.paused || !container) {

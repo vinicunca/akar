@@ -3,7 +3,13 @@ import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 import { TagGroupItem, TagGroupItemDelete, TagGroupItemText, TagGroupRoot } from '..';
 
-const initialTags = ['News', 'Travel', 'Gaming', 'Shopping', 'Sports'];
+const initialTags = [
+  'News',
+  'Travel',
+  'Gaming',
+  'Shopping',
+  'Sports',
+];
 const tags = ref([...initialTags]);
 const selected = ref<Array<string>>([]);
 const single = ref<string>();

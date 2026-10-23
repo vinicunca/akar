@@ -36,7 +36,16 @@ function setup(props: { datePickerProps?: DatePickerRootProps; emits?: { 'onUpda
   const label = returned.getByTestId('label');
   const trigger = returned.getByTestId('trigger');
 
-  return { ...returned, user, month, day, year, input, label, trigger };
+  return {
+    ...returned,
+    user,
+    month,
+    day,
+    year,
+    input,
+    label,
+    trigger,
+  };
 }
 
 it('should pass axe accessibility tests', async () => {
@@ -88,7 +97,9 @@ describe('datePicker', async () => {
     expect(getByTestId('timeZoneName')).toHaveTextContent('EST');
 
     await rerender({
-      datePickerProps: { modelValue: toZoned(calendarDateTime, 'Asia/Tokyo') },
+      datePickerProps: {
+        modelValue: toZoned(calendarDateTime, 'Asia/Tokyo'),
+      },
     });
     expect(getByTestId('timeZoneName')).toHaveTextContent('GMT+9');
   });
@@ -108,7 +119,15 @@ describe('datePicker', async () => {
     const minute = getByTestId('minute');
     const dayPeriod = getByTestId('dayPeriod');
     const timeZoneName = getByTestId('timeZoneName');
-    const segments = [day, month, year, hour, minute, dayPeriod, timeZoneName];
+    const segments = [
+      day,
+      month,
+      year,
+      hour,
+      minute,
+      dayPeriod,
+      timeZoneName,
+    ];
 
     for (const segment of segments) {
       await user.click(segment);
@@ -197,7 +216,17 @@ describe('datePicker', async () => {
     });
     const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
 
-    const segments = [month, day, year, hour, minute, second, dayPeriod, timeZoneName, trigger];
+    const segments = [
+      month,
+      day,
+      year,
+      hour,
+      minute,
+      second,
+      dayPeriod,
+      timeZoneName,
+      trigger,
+    ];
 
     await user.click(month);
 
@@ -223,7 +252,16 @@ describe('datePicker', async () => {
     });
     const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
 
-    const segments = [month, day, year, hour, minute, second, dayPeriod, timeZoneName];
+    const segments = [
+      month,
+      day,
+      year,
+      hour,
+      minute,
+      second,
+      dayPeriod,
+      timeZoneName,
+    ];
 
     await user.click(month);
 
@@ -332,6 +370,7 @@ describe('datePicker', async () => {
   });
 
   it('preserves typed time when typing a date after the model value is cleared', async () => {
+    // eslint-disable-next-line sonarjs/no-unused-collection
     const emittedValues: Array<DateValue | undefined> = [];
     let rerender: ReturnType<typeof setup>['rerender'];
     const handleUpdateModelValue = (value: DateValue | undefined) => {
@@ -495,7 +534,10 @@ describe('datePicker', async () => {
       expect(heading).toHaveTextContent('February 1980');
 
       await rerender({
-        datePickerProps: { modelValue: selected.copy(), closeOnSelect: true },
+        datePickerProps: {
+          modelValue: selected.copy(),
+          closeOnSelect: true,
+        },
       });
 
       expect(heading).toHaveTextContent('February 1980');
@@ -511,7 +553,10 @@ describe('datePicker', async () => {
       expect(trigger).toHaveAttribute('aria-expanded', 'true');
 
       await rerender({
-        datePickerProps: { modelValue: calendarDateTime.set({ hour: 15 }), closeOnSelect: true },
+        datePickerProps: {
+          modelValue: calendarDateTime.set({ hour: 15 }),
+          closeOnSelect: true,
+        },
       });
 
       expect(trigger).toHaveAttribute('aria-expanded', 'true');
@@ -519,7 +564,9 @@ describe('datePicker', async () => {
 
     it('moves the visible month when the selected day changes', async () => {
       const { user, trigger, getByTestId, rerender } = setup({
-        datePickerProps: { modelValue: new CalendarDate(1980, 1, 20) },
+        datePickerProps: {
+          modelValue: new CalendarDate(1980, 1, 20),
+        },
       });
 
       await user.click(trigger);
@@ -527,7 +574,9 @@ describe('datePicker', async () => {
       expect(getByTestId('heading')).toHaveTextContent('February 1980');
 
       await rerender({
-        datePickerProps: { modelValue: new CalendarDate(1980, 9, 23) },
+        datePickerProps: {
+          modelValue: new CalendarDate(1980, 9, 23),
+        },
       });
 
       expect(getByTestId('heading')).toHaveTextContent('September 1980');

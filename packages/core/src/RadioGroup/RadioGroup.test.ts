@@ -72,7 +72,10 @@ describe('given disabled RadioGroup', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(RadioGroup, { attachTo: document.body, props: { disabled: true } });
+    wrapper = mount(RadioGroup, {
+      attachTo: document.body,
+      props: { disabled: true },
+    });
     radios = wrapper.findAll('[role=radio]');
   });
 
@@ -84,12 +87,20 @@ describe('given disabled RadioGroup', () => {
     expect(radios[0].attributes('data-state')).toBe('checked');
   });
 
-  it.each([[0, 'checked'], [1, 'unchecked'], [2, 'unchecked']])('should not select any item', async (input, output) => {
+  it.each([
+    [0, 'checked'],
+    [1, 'unchecked'],
+    [2, 'unchecked'],
+  ])('should not select any item', async (input, output) => {
     await radios[input].trigger('click');
     expect(radios[input].attributes('data-state')).toBe(output);
   });
 
-  it.each([[0], [1], [2]])('should have disabled attribute on item', async (input) => {
+  it.each([
+    [0],
+    [1],
+    [2],
+  ])('should have disabled attribute on item', async (input) => {
     expect(radios[input].attributes('disabled')).toBe('');
     expect(radios[input].attributes('data-disabled')).toBe('');
   });

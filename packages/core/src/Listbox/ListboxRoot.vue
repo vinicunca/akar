@@ -131,7 +131,9 @@ const firstValue = ref<T>();
 const isUserAction = ref(false);
 const focusable = ref(true);
 const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? (multiple.value ? [] : undefined),
+  defaultValue: props.defaultValue ?? (multiple.value
+    ? []
+    : undefined),
   passive: (props.modelValue === undefined) as false,
   deep: true,
 }) as Ref<T | Array<T> | undefined>;
@@ -139,10 +141,14 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 function onValueChange(val: T) {
   isUserAction.value = true;
   if (props.multiple) {
-    const modelArray = Array.isArray(modelValue.value) ? [...modelValue.value] : [];
+    const modelArray = Array.isArray(modelValue.value)
+      ? [...modelValue.value]
+      : [];
     const index = modelArray.findIndex((i) => compare(i, val, props.by));
     if (props.selectionBehavior === 'toggle') {
-      index === -1 ? modelArray.push(val) : modelArray.splice(index, 1);
+      index === -1
+        ? modelArray.push(val)
+        : modelArray.splice(index, 1);
       modelValue.value = modelArray;
     } else {
       modelValue.value = [val];
@@ -318,13 +324,17 @@ function isAtVirtualBoundary(intent: 'prev' | 'next') {
   // window reaches the end of the full options list; any rendered items past
   // the highlighted one are disabled.
   const rendered = getItems(true).map((i) => i.ref);
-  const edge = intent === 'next' ? rendered.at(-1) : rendered[0];
+  const edge = intent === 'next'
+    ? rendered.at(-1)
+    : rendered[0];
   if (!edge) {
     return false;
   }
   const position = Number(edge.getAttribute('aria-posinset'));
   const size = Number(edge.getAttribute('aria-setsize'));
-  return intent === 'next' ? position === size : position === 1;
+  return intent === 'next'
+    ? position === size
+    : position === 1;
 }
 
 function onKeydownNavigation(event: KeyboardEvent) {
@@ -347,19 +357,25 @@ function onKeydownNavigation(event: KeyboardEvent) {
       if (shouldLoop && isVirtual.value) {
         if (isAtVirtualBoundary(intent)) {
           // Let the virtualizer scroll to and highlight the opposite end.
-          const key = intent === 'next' ? KEY_CODES.HOME : KEY_CODES.END;
+          const key = intent === 'next'
+            ? KEY_CODES.HOME
+            : KEY_CODES.END;
           return virtualKeydownHook.trigger(new KeyboardEvent('keydown', { key, shiftKey: event.shiftKey }));
         }
         collection = [];
       } else {
-        collection = shouldLoop ? collection.slice(0, 1) : collection.slice(currentIndex + 1);
+        collection = shouldLoop
+          ? collection.slice(0, 1)
+          : collection.slice(currentIndex + 1);
       }
     }
     handleMultipleReplace(event, collection[0]);
   }
 
   if (collection.length) {
-    const index = !highlightedElement.value && intent === 'prev' ? collection.length - 1 : 0;
+    const index = !highlightedElement.value && intent === 'prev'
+      ? collection.length - 1
+      : 0;
     changeHighlight(collection[index]);
   }
 

@@ -8,7 +8,10 @@ const flattenedComponents = filteredComponents.flatMap((component) => components
 const namespacedComponents = filteredComponents.map((component) => {
   const key = component.charAt(0).toUpperCase() + component.slice(1);
   const entries = components[component]
-    .map((value) => [value.replace(key, ''), value] as const)
+    .map((value) => [
+      value.replace(key, ''),
+      value,
+    ] as const)
     .filter(([name]) => Boolean(name));
 
   if (entries.length === 0) {

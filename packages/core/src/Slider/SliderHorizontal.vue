@@ -26,7 +26,9 @@ function getValueFromPointerEvent(event: PointerEvent, slideStart?: boolean) {
 
   // Get the currently active thumb element
   const thumb = [...rootContext.thumbElements.value][rootContext.valueIndexToChangeRef.value];
-  const thumbWidth = rootContext.thumbAlignment.value === 'contain' ? thumb.clientWidth : 0;
+  const thumbWidth = rootContext.thumbAlignment.value === 'contain'
+    ? thumb.clientWidth
+    : 0;
 
   // Calculate offset for dragging, but only when needed
   if (!offsetPosition.value && !slideStart && rootContext.thumbAlignment.value === 'contain') {
@@ -35,7 +37,9 @@ function getValueFromPointerEvent(event: PointerEvent, slideStart?: boolean) {
 
   // Define the input range (slider track width minus thumb width)
   const input: [number, number] = [0, rect.width - thumbWidth];
-  const output: [number, number] = isSlidingFromLeft.value ? [min.value, max.value] : [max.value, min.value];
+  const output: [number, number] = isSlidingFromLeft.value
+    ? [min.value, max.value]
+    : [max.value, min.value];
   const value = linearScale(input, output);
 
   rectRef.value = rect;
@@ -48,7 +52,9 @@ function getValueFromPointerEvent(event: PointerEvent, slideStart?: boolean) {
 
 const startEdge = computed(() => isSlidingFromLeft.value ? 'left' : 'right');
 const endEdge = computed(() => isSlidingFromLeft.value ? 'right' : 'left');
-const direction = computed(() => isSlidingFromLeft.value ? 1 : -1);
+const direction = computed(() => isSlidingFromLeft.value
+  ? 1
+  : -1);
 
 provideSliderOrientationContext({
   startEdge,

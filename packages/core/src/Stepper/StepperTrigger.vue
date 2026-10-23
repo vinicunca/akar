@@ -55,7 +55,12 @@ function handleKeyDown(event: KeyboardEvent) {
     rootContext.changeModelValue(itemContext.step.value);
   }
 
-  if (isIncludedIn(event.key, [KEY_CODES.ARROW_LEFT, KEY_CODES.ARROW_RIGHT, KEY_CODES.ARROW_UP, KEY_CODES.ARROW_DOWN])) {
+  if (isIncludedIn(event.key, [
+    KEY_CODES.ARROW_LEFT,
+    KEY_CODES.ARROW_RIGHT,
+    KEY_CODES.ARROW_UP,
+    KEY_CODES.ARROW_DOWN,
+  ])) {
     useArrowNavigation(event, getActiveElement() as HTMLElement, undefined, {
       itemsArray: stepperItems.value,
       focus: true,

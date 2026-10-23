@@ -232,11 +232,16 @@ function onYearChange(value: DateValue) {
       modelValue.value = resolveYearValue(value, modelValue.value as DateValue);
     }
   } else if (!modelValue.value) {
-    modelValue.value = [resolveYearValue(value, placeholder.value)];
+    modelValue.value = [
+      resolveYearValue(value, placeholder.value),
+    ];
   } else if (Array.isArray(modelValue.value)) {
     const index = modelValue.value.findIndex((date) => isSameYear(date, value));
     if (index === -1) {
-      modelValue.value = [...modelValue.value, resolveYearValue(value, placeholder.value)];
+      modelValue.value = [
+        ...modelValue.value,
+        resolveYearValue(value, placeholder.value),
+      ];
     } else if (!preventDeselect.value) {
       const next = modelValue.value.filter((date) => !isSameYear(date, value));
       if (!next.length) {

@@ -26,11 +26,15 @@ export function getThumbSize(sizes: Sizes) {
 
 export function getThumbRatio(viewportSize: number, contentSize: number) {
   const ratio = viewportSize / contentSize;
-  return Number.isNaN(ratio) ? 0 : ratio;
+  return Number.isNaN(ratio)
+    ? 0
+    : ratio;
 }
 
-// Custom scroll handler to avoid scroll-linked effects
-// https://developer.mozilla.org/en-US/docs/Mozilla/Performance/Scroll-linked_effects
+/**
+ * Custom scroll handler to avoid scroll-linked effects
+ * https://developer.mozilla.org/en-US/docs/Mozilla/Performance/Scroll-linked_effects
+ */
 export function addUnlinkedScrollListener(
   node: HTMLElement,
   handler = () => {},
@@ -62,7 +66,9 @@ export function getThumbOffsetFromScroll(
   const maxScrollPos = sizes.content - sizes.viewport;
   const maxThumbPos = scrollbar - thumbSizePx;
   const scrollClampRange
-    = dir === 'ltr' ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
+    = dir === 'ltr'
+      ? [0, maxScrollPos]
+      : [maxScrollPos * -1, 0];
   const scrollWithoutMomentum = clamp(
     scrollPos,
     { min: scrollClampRange[0], max: scrollClampRange[1] },
@@ -72,7 +78,9 @@ export function getThumbOffsetFromScroll(
 }
 
 export function toInt(value?: string) {
-  return value ? Number.parseInt(value, 10) : 0;
+  return value
+    ? Number.parseInt(value, 10)
+    : 0;
 }
 
 export function getScrollPositionFromPointer(
@@ -90,7 +98,9 @@ export function getScrollPositionFromPointer(
     = sizes.scrollbar.size - sizes.scrollbar.paddingEnd - thumbOffsetFromEnd;
   const maxScrollPos = sizes.content - sizes.viewport;
   const scrollRange
-    = dir === 'ltr' ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
+    = dir === 'ltr'
+      ? [0, maxScrollPos]
+      : [maxScrollPos * -1, 0];
   const interpolate = linearScale(
     [minPointerPos, maxPointerPos],
     scrollRange as [number, number],

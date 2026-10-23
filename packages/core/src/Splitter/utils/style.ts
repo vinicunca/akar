@@ -89,7 +89,7 @@ export function setGlobalCursorStyle(
   styleElement.textContent = `*{cursor: ${style}!important;}`;
 }
 
-// the % of the group's overall space this panel should occupy.
+/** the % of the group's overall space this panel should occupy. */
 export function computePanelFlexBoxStyle({
   defaultSize,
   dragState,
@@ -112,7 +112,9 @@ export function computePanelFlexBoxStyle({
     // Initial render (before panels have registered themselves)
     // In order to support server rendering, fall back to default size if provided
     flexGrow
-      = defaultSize !== undefined ? defaultSize.toPrecision(precision) : '1';
+      = defaultSize !== undefined
+        ? defaultSize.toPrecision(precision)
+        : '1';
   } else if (panelData.length === 1) {
     // Special case: Single panel group should always fill full width/height
     flexGrow = '1';
@@ -130,6 +132,8 @@ export function computePanelFlexBoxStyle({
 
     // Disable pointer events inside of a panel during resize
     // This avoid edge cases like nested iframes
-    pointerEvents: dragState !== null ? 'none' : undefined,
+    pointerEvents: dragState !== null
+      ? 'none'
+      : undefined,
   };
 }

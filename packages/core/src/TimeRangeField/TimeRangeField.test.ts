@@ -8,7 +8,10 @@ import { axe } from 'vitest-axe';
 import { useTestKbd } from '@/shared';
 import TimeField from './story/_TimeRangeField.vue';
 
-const time = { start: new Time(9, 15, 29), end: new Time(17, 45, 0) };
+const time = {
+  start: new Time(9, 15, 29),
+  end: new Time(17, 45, 0),
+};
 const calendarDateTime = {
   start: new CalendarDateTime(2022, 1, 1, 9, 15),
   end: new CalendarDateTime(2022, 1, 1, 17, 45),
@@ -38,7 +41,15 @@ function setup(props: { timeRangeFieldProps?: TimeRangeFieldRootProps; emits?: {
   const input = returned.getByTestId('input');
   const label = returned.getByTestId('label');
 
-  return { ...returned, user, input, start, end, label, value };
+  return {
+    ...returned,
+    user,
+    input,
+    start,
+    end,
+    label,
+    value,
+  };
 }
 
 it('should pass axe accessibility tests', async () => {
@@ -185,8 +196,13 @@ describe('timeField', () => {
       timeRangeFieldProps: { modelValue: time, locale: 'en-GB' },
     });
 
-    const nextTime = { start: new Time(10, 0), end: new Time(11, 30) };
-    await rerender({ timeRangeFieldProps: { modelValue: nextTime, locale: 'en-GB' } });
+    const nextTime = {
+      start: new Time(10, 0),
+      end: new Time(11, 30),
+    };
+    await rerender({
+      timeRangeFieldProps: { modelValue: nextTime, locale: 'en-GB' },
+    });
 
     expect(start.hour).toHaveTextContent(String(nextTime.start.hour));
     expect(start.minute).toHaveTextContent(String(nextTime.start.minute).padStart(2, '0'));
@@ -199,7 +215,9 @@ describe('timeField', () => {
       timeRangeFieldProps: { modelValue: time, locale: 'en-GB' },
     });
 
-    await rerender({ timeRangeFieldProps: { modelValue: null, locale: 'en-GB' } });
+    await rerender({
+      timeRangeFieldProps: { modelValue: null, locale: 'en-GB' },
+    });
 
     expect(start.hour).toHaveTextContent('––');
     expect(end.minute).toHaveTextContent('––');
@@ -261,7 +279,12 @@ describe('timeField', () => {
       timeRangeFieldProps: { modelValue: time, locale: 'en-GB', disabled: true },
     });
 
-    const segments = [start.hour, start.minute, end.hour, end.minute];
+    const segments = [
+      start.hour,
+      start.minute,
+      end.hour,
+      end.minute,
+    ];
     for (const seg of segments) {
       await user.click(seg);
       expect(seg).not.toHaveFocus();

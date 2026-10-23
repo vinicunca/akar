@@ -13,7 +13,13 @@ const CLOSE_TEXT = 'Close';
 const TITLE_TEXT = 'Title';
 
 const NoLabelDialogTest = defineComponent({
-  components: { DialogRoot, DialogTrigger, DialogOverlay, DialogContent, DialogClose },
+  components: {
+    DialogRoot,
+    DialogTrigger,
+    DialogOverlay,
+    DialogContent,
+    DialogClose,
+  },
   template: `<DialogRoot>
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
   <DialogOverlay />
@@ -24,7 +30,14 @@ const NoLabelDialogTest = defineComponent({
 });
 
 const UndefinedDescribedByDialog = defineComponent({
-  components: { DialogRoot, DialogTrigger, DialogOverlay, DialogContent, DialogClose, DialogTitle },
+  components: {
+    DialogRoot,
+    DialogTrigger,
+    DialogOverlay,
+    DialogContent,
+    DialogClose,
+    DialogTitle,
+  },
   template: `<DialogRoot>
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
   <DialogOverlay />
@@ -40,7 +53,14 @@ function renderAndClickDialogTrigger(Dialog: any) {
 }
 
 const DialogTest = defineComponent({
-  components: { DialogRoot, DialogTrigger, DialogOverlay, DialogContent, DialogClose, DialogTitle },
+  components: {
+    DialogRoot,
+    DialogTrigger,
+    DialogOverlay,
+    DialogContent,
+    DialogClose,
+    DialogTitle,
+  },
   template: `<DialogRoot >
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
   <DialogOverlay />
@@ -52,7 +72,14 @@ const DialogTest = defineComponent({
 });
 
 const TabindexDialogTest = defineComponent({
-  components: { DialogRoot, DialogTrigger, DialogOverlay, DialogContent, DialogClose, DialogTitle },
+  components: {
+    DialogRoot,
+    DialogTrigger,
+    DialogOverlay,
+    DialogContent,
+    DialogClose,
+    DialogTitle,
+  },
   template: `<DialogRoot>
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
   <DialogOverlay />
@@ -66,7 +93,14 @@ const TabindexDialogTest = defineComponent({
 });
 
 const UnmountOnHideDialogTest = defineComponent({
-  components: { DialogRoot, DialogTrigger, DialogOverlay, DialogContent, DialogClose, DialogTitle },
+  components: {
+    DialogRoot,
+    DialogTrigger,
+    DialogOverlay,
+    DialogContent,
+    DialogClose,
+    DialogTitle,
+  },
   template: `<DialogRoot :unmount-on-hide="false">
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
   <DialogOverlay />
@@ -78,7 +112,14 @@ const UnmountOnHideDialogTest = defineComponent({
 });
 
 const NonModalUnmountOnHideDialogTest = defineComponent({
-  components: { DialogRoot, DialogTrigger, DialogOverlay, DialogContent, DialogClose, DialogTitle },
+  components: {
+    DialogRoot,
+    DialogTrigger,
+    DialogOverlay,
+    DialogContent,
+    DialogClose,
+    DialogTitle,
+  },
   template: `<DialogRoot :modal="false" :unmount-on-hide="false">
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
   <DialogContent>
@@ -92,7 +133,14 @@ const NonModalUnmountOnHideDialogTest = defineComponent({
 // nested *inside* the overlay (a common centering pattern), so pointerdown
 // events from controls in the content bubble up to the overlay.
 const NestedContentDialogTest = defineComponent({
-  components: { DialogRoot, DialogTrigger, DialogOverlay, DialogContent, DialogClose, DialogTitle },
+  components: {
+    DialogRoot,
+    DialogTrigger,
+    DialogOverlay,
+    DialogContent,
+    DialogClose,
+    DialogTitle,
+  },
   template: `<DialogRoot>
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
   <DialogOverlay>
@@ -240,7 +288,13 @@ describe('given a non-modal Dialog with unmountOnHide=false', () => {
 
 describe('given a Dialog with unmountOnHide=false, openAutoFocus', () => {
   const OpenAutoFocusDialog = defineComponent({
-    components: { DialogRoot, DialogTrigger, DialogContent, DialogClose, DialogTitle },
+    components: {
+      DialogRoot,
+      DialogTrigger,
+      DialogContent,
+      DialogClose,
+      DialogTitle,
+    },
     props: ['onOpenAutoFocus'],
     template: `<DialogRoot :unmount-on-hide="false">
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
@@ -254,7 +308,10 @@ describe('given a Dialog with unmountOnHide=false, openAutoFocus', () => {
   it('should not emit openAutoFocus while closed and emit once per open', async () => {
     document.body.innerHTML = '';
     const onOpenAutoFocus = vi.fn();
-    const wrapper = mount(OpenAutoFocusDialog, { attachTo: document.body, props: { onOpenAutoFocus } });
+    const wrapper = mount(OpenAutoFocusDialog, {
+      attachTo: document.body,
+      props: { onOpenAutoFocus },
+    });
     const trigger = wrapper.find('button');
 
     // Force-mounted but hidden: the auto-focus must not fire on mount.
@@ -270,7 +327,10 @@ describe('given a Dialog with unmountOnHide=false, openAutoFocus', () => {
   it('should emit openAutoFocus again on reopen', async () => {
     document.body.innerHTML = '';
     const onOpenAutoFocus = vi.fn();
-    const wrapper = mount(OpenAutoFocusDialog, { attachTo: document.body, props: { onOpenAutoFocus } });
+    const wrapper = mount(OpenAutoFocusDialog, {
+      attachTo: document.body,
+      props: { onOpenAutoFocus },
+    });
     const trigger = wrapper.find('button');
 
     await fireEvent.click(trigger.element);
@@ -291,7 +351,14 @@ describe('given a Dialog with unmountOnHide=false, openAutoFocus', () => {
 // very first open and the overlay never released the body scroll lock (#2450).
 describe('given a Dialog with forceMount', () => {
   const ForceMountDialog = defineComponent({
-    components: { DialogRoot, DialogTrigger, DialogOverlay, DialogContent, DialogClose, DialogTitle },
+    components: {
+      DialogRoot,
+      DialogTrigger,
+      DialogOverlay,
+      DialogContent,
+      DialogClose,
+      DialogTitle,
+    },
     props: ['onOpenAutoFocus'],
     template: `<DialogRoot>
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
@@ -316,7 +383,10 @@ describe('given a Dialog with forceMount', () => {
   it('should emit openAutoFocus on every open, not only the first', async () => {
     document.body.innerHTML = '';
     const onOpenAutoFocus = vi.fn();
-    wrapper = mount(ForceMountDialog, { attachTo: document.body, props: { onOpenAutoFocus } });
+    wrapper = mount(ForceMountDialog, {
+      attachTo: document.body,
+      props: { onOpenAutoFocus },
+    });
     const trigger = wrapper.find('button');
 
     // Force-mounted but closed: the dialog must not grab focus or lock the body
@@ -337,7 +407,12 @@ describe('given a Dialog with forceMount', () => {
 
   it('should release the body scroll lock on close', async () => {
     document.body.innerHTML = '';
-    wrapper = mount(ForceMountDialog, { attachTo: document.body, props: { onOpenAutoFocus: vi.fn() } });
+    wrapper = mount(ForceMountDialog, {
+      attachTo: document.body,
+      props: {
+        onOpenAutoFocus: vi.fn(),
+      },
+    });
     const trigger = wrapper.find('button');
 
     await fireEvent.click(trigger.element);
@@ -353,7 +428,13 @@ describe('given a Dialog with forceMount', () => {
 // `present`.
 describe('given a default Dialog, openAutoFocus', () => {
   const DefaultAutoFocusDialog = defineComponent({
-    components: { DialogRoot, DialogTrigger, DialogContent, DialogClose, DialogTitle },
+    components: {
+      DialogRoot,
+      DialogTrigger,
+      DialogContent,
+      DialogClose,
+      DialogTitle,
+    },
     props: ['onOpenAutoFocus'],
     template: `<DialogRoot>
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
@@ -367,7 +448,10 @@ describe('given a default Dialog, openAutoFocus', () => {
   it('should emit once per open across repeated opens', async () => {
     document.body.innerHTML = '';
     const onOpenAutoFocus = vi.fn();
-    const wrapper = mount(DefaultAutoFocusDialog, { attachTo: document.body, props: { onOpenAutoFocus } });
+    const wrapper = mount(DefaultAutoFocusDialog, {
+      attachTo: document.body,
+      props: { onOpenAutoFocus },
+    });
     const trigger = wrapper.find('button');
 
     await nextTick();
@@ -396,7 +480,14 @@ describe('given a default Dialog, openAutoFocus', () => {
 // the open dialog) and would pause the open dialog's focus trap.
 describe('given two Dialogs with unmountOnHide=false', () => {
   const TwoDialogsTest = defineComponent({
-    components: { DialogRoot, DialogTrigger, DialogOverlay, DialogContent, DialogClose, DialogTitle },
+    components: {
+      DialogRoot,
+      DialogTrigger,
+      DialogOverlay,
+      DialogContent,
+      DialogClose,
+      DialogTitle,
+    },
     props: ['onInteractOutside'],
     template: `<div>
   <DialogRoot :unmount-on-hide="false">
@@ -423,7 +514,10 @@ describe('given two Dialogs with unmountOnHide=false', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
     onInteractOutside = vi.fn();
-    wrapper = mount(TwoDialogsTest, { attachTo: document.body, props: { onInteractOutside } });
+    wrapper = mount(TwoDialogsTest, {
+      attachTo: document.body,
+      props: { onInteractOutside },
+    });
   });
 
   afterEach(() => {
@@ -474,7 +568,13 @@ describe('given two Dialogs with unmountOnHide=false', () => {
 // a separate mechanism unrelated to this prop.
 function makeModalDialog(contentBinding: string) {
   return defineComponent({
-    components: { DialogRoot, DialogTrigger, DialogContent, DialogClose, DialogTitle },
+    components: {
+      DialogRoot,
+      DialogTrigger,
+      DialogContent,
+      DialogClose,
+      DialogTitle,
+    },
     template: `<DialogRoot>
   <DialogTrigger>${OPEN_TEXT}</DialogTrigger>
   <DialogContent ${contentBinding}>

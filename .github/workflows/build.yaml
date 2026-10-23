@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - "packages/**"
+      - 'packages/**'
 
   pull_request:
     paths:
-      - "packages/**"
+      - 'packages/**'
 
 jobs:
   build:

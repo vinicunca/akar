@@ -85,7 +85,9 @@ function handleKeydown(event: KeyboardEvent) {
       return;
     }
     event.preventDefault();
-    let candidateNodes = [...getItems().map((i) => i.ref).filter((i) => i.dataset.disabled !== '')];
+    let candidateNodes = [
+      ...getItems().map((i) => i.ref).filter((i) => i.dataset.disabled !== ''),
+    ];
 
     if (focusIntent === 'last') {
       candidateNodes.reverse();

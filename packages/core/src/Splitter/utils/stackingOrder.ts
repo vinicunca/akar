@@ -19,27 +19,27 @@ export function compare(a: HTMLElement, b: HTMLElement): number {
     b: getAncestors(b),
   };
 
-  let common_ancestor;
+  let commonAncestor;
 
   // remove shared ancestors
   while (ancestors.a.at(-1) === ancestors.b.at(-1)) {
     a = ancestors.a.pop() as HTMLElement;
     b = ancestors.b.pop() as HTMLElement;
 
-    common_ancestor = a;
+    commonAncestor = a;
   }
 
-  assert(common_ancestor);
+  assert(commonAncestor);
 
-  const z_indexes = {
+  const zIndexes = {
     a: getZIndex(findStackingContext(ancestors.a)),
     b: getZIndex(findStackingContext(ancestors.b)),
   };
 
-  if (z_indexes.a === z_indexes.b) {
-    const children = common_ancestor.childNodes;
+  if (zIndexes.a === zIndexes.b) {
+    const children = commonAncestor.childNodes;
 
-    const furthest_ancestors = {
+    const furthestAncestors = {
       a: ancestors.a.at(-1),
       b: ancestors.b.at(-1),
     };
@@ -47,16 +47,16 @@ export function compare(a: HTMLElement, b: HTMLElement): number {
     let i = children.length;
     while (i--) {
       const child = children[i];
-      if (child === furthest_ancestors.a) {
+      if (child === furthestAncestors.a) {
         return 1;
       }
-      if (child === furthest_ancestors.b) {
+      if (child === furthestAncestors.b) {
         return -1;
       }
     }
   }
 
-  return Math.sign(z_indexes.a - z_indexes.b);
+  return Math.sign(zIndexes.a - zIndexes.b);
 }
 
 const props

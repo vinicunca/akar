@@ -38,7 +38,9 @@ it('should pass axe accessibility tests', async () => {
 
 describe('month picker', async () => {
   it('does not forward month prop as a DOM attribute', async () => {
-    const { getByTestId } = setup({ pickerProps: { placeholder: calendarDate } });
+    const { getByTestId } = setup({
+      pickerProps: { placeholder: calendarDate },
+    });
     const janMonth = getByTestId('month-1');
     expect(janMonth.getAttribute('month')).toBe(null);
   });
@@ -80,25 +82,33 @@ describe('month picker', async () => {
   });
 
   it('respects a default value if provided - `CalendarDate`', async () => {
-    const { getByTestId, picker } = setup({ pickerProps: { modelValue: calendarDate } });
+    const { getByTestId, picker } = setup({
+      pickerProps: { modelValue: calendarDate },
+    });
     expect(getSelectedMonth(picker)).toHaveTextContent('Jan');
     expect(getByTestId('heading')).toHaveTextContent('1980');
   });
 
   it('respects a default value if provided - `CalendarDateTime`', async () => {
-    const { picker, getByTestId } = setup({ pickerProps: { modelValue: calendarDateTime } });
+    const { picker, getByTestId } = setup({
+      pickerProps: { modelValue: calendarDateTime },
+    });
     expect(getSelectedMonth(picker)).toHaveTextContent('Jan');
     expect(getByTestId('heading')).toHaveTextContent('1980');
   });
 
   it('respects a default value if provided - `ZonedDateTime`', async () => {
-    const { picker, getByTestId } = setup({ pickerProps: { modelValue: zonedDateTime } });
+    const { picker, getByTestId } = setup({
+      pickerProps: { modelValue: zonedDateTime },
+    });
     expect(getSelectedMonth(picker)).toHaveTextContent('Jan');
     expect(getByTestId('heading')).toHaveTextContent('1980');
   });
 
   it('does not crash when modelValue is null', async () => {
-    const { picker, rerender } = setup({ pickerProps: { modelValue: null } });
+    const { picker, rerender } = setup({
+      pickerProps: { modelValue: null },
+    });
 
     expect(getSelectedMonths(picker)).toHaveLength(0);
 
@@ -112,7 +122,9 @@ describe('month picker', async () => {
   });
 
   it('navigates to next year using next button', async () => {
-    const { getByTestId, user } = setup({ pickerProps: { modelValue: calendarDate } });
+    const { getByTestId, user } = setup({
+      pickerProps: { modelValue: calendarDate },
+    });
 
     const heading = getByTestId('heading');
     const nextBtn = getByTestId('next-button');
@@ -126,30 +138,46 @@ describe('month picker', async () => {
 
   it('keeps the visible year when modelValue is a new object for the same month', async () => {
     const selected = new CalendarDate(1980, 1, 20);
-    const { getByTestId, user, rerender } = setup({ pickerProps: { modelValue: selected } });
+    const { getByTestId, user, rerender } = setup({
+      pickerProps: { modelValue: selected },
+    });
     const heading = getByTestId('heading');
 
     await user.click(getByTestId('next-button'));
     expect(heading).toHaveTextContent('1981');
 
-    await rerender({ pickerProps: { modelValue: selected.copy() } });
+    await rerender({
+      pickerProps: {
+        modelValue: selected.copy(),
+      },
+    });
 
     expect(heading).toHaveTextContent('1981');
   });
 
   it('moves the visible year when the selected month changes', async () => {
-    const { getByTestId, user, rerender } = setup({ pickerProps: { modelValue: new CalendarDate(1980, 1, 20) } });
+    const { getByTestId, user, rerender } = setup({
+      pickerProps: {
+        modelValue: new CalendarDate(1980, 1, 20),
+      },
+    });
 
     await user.click(getByTestId('next-button'));
     expect(getByTestId('heading')).toHaveTextContent('1981');
 
-    await rerender({ pickerProps: { modelValue: new CalendarDate(1975, 6, 1) } });
+    await rerender({
+      pickerProps: {
+        modelValue: new CalendarDate(1975, 6, 1),
+      },
+    });
 
     expect(getByTestId('heading')).toHaveTextContent('1975');
   });
 
   it('navigates to prev year using prev button', async () => {
-    const { getByTestId, user } = setup({ pickerProps: { modelValue: calendarDate } });
+    const { getByTestId, user } = setup({
+      pickerProps: { modelValue: calendarDate },
+    });
 
     const heading = getByTestId('heading');
     const prevBtn = getByTestId('prev-button');
@@ -164,7 +192,11 @@ describe('month picker', async () => {
   it('allows months to be deselected by clicking the selected month', async () => {
     const { user, picker, rerender } = setup({
       pickerProps: { modelValue: calendarDate },
-      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ pickerProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({
+          pickerProps: { modelValue: data },
+        }),
+      },
     });
 
     const selectedMonth = getSelectedMonth(picker);
@@ -176,7 +208,11 @@ describe('month picker', async () => {
   it.each([kbd.ENTER, kbd.SPACE])('allows deselection with %s key', async (key) => {
     const { user, picker, rerender } = setup({
       pickerProps: { modelValue: calendarDate },
-      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ pickerProps: { modelValue: data } }) },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({
+          pickerProps: { modelValue: data },
+        }),
+      },
     });
 
     const selectedMonth = getSelectedMonth(picker);
@@ -394,8 +430,15 @@ describe('month picker - multiple', () => {
     const d2 = new CalendarDate(1980, 3, 1);
 
     const { picker, getByTestId, user, rerender } = setup({
-      pickerProps: { modelValue: [d1, d2], multiple: true },
-      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ pickerProps: { modelValue: data as any, multiple: true } }) },
+      pickerProps: {
+        modelValue: [d1, d2],
+        multiple: true,
+      },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({
+          pickerProps: { modelValue: data as any, multiple: true },
+        }),
+      },
     } as any);
 
     const selectedMonths = getSelectedMonths(picker);
@@ -412,8 +455,15 @@ describe('month picker - multiple', () => {
     const d2 = new CalendarDate(1980, 3, 1);
 
     const { picker, user, rerender } = setup({
-      pickerProps: { modelValue: [d1, d2], multiple: true },
-      emits: { 'onUpdate:modelValue': (data: DateValue) => rerender({ pickerProps: { modelValue: data as any, multiple: true } }) },
+      pickerProps: {
+        modelValue: [d1, d2],
+        multiple: true,
+      },
+      emits: {
+        'onUpdate:modelValue': (data: DateValue) => rerender({
+          pickerProps: { modelValue: data as any, multiple: true },
+        }),
+      },
     } as any);
 
     const selectedMonths = getSelectedMonths(picker);
@@ -428,7 +478,11 @@ describe('month picker - multiple', () => {
 
     const { picker, getByTestId, user, rerender } = setup({
       pickerProps: { modelValue: d1, multiple: true },
-      emits: { 'onUpdate:modelValue': (data) => rerender({ pickerProps: { modelValue: data as any, multiple: true } }) },
+      emits: {
+        'onUpdate:modelValue': (data) => rerender({
+          pickerProps: { modelValue: data as any, multiple: true },
+        }),
+      },
     });
 
     expect(getSelectedMonths(picker)).toHaveLength(1);

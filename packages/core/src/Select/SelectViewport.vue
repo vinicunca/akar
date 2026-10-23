@@ -58,7 +58,9 @@ function handleScroll(event: WheelEvent) {
 
         contentWrapper.value.style.height = `${clampedNextHeight}px`;
         if (contentWrapper.value.style.bottom === '0px') {
-          viewport.scrollTop = heightDiff > 0 ? heightDiff : 0;
+          viewport.scrollTop = heightDiff > 0
+            ? heightDiff
+            : 0;
           // ensure the content stays pinned to the bottom
           contentWrapper.value.style.justifyContent = 'flex-end';
         }

@@ -32,7 +32,9 @@ export const EXCEEDED_VERTICAL_MAX = 0b1000;
 
 function getInputType(): 'coarse' | 'fine' | undefined {
   if (typeof matchMedia === 'function') {
-    return matchMedia('(pointer:coarse)').matches ? 'coarse' : 'fine';
+    return matchMedia('(pointer:coarse)').matches
+      ? 'coarse'
+      : 'fine';
   }
 }
 

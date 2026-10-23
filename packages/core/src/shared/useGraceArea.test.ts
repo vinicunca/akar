@@ -40,7 +40,9 @@ function makeRect(rect: Partial<DOMRect>): DOMRect {
 }
 
 function pointerEvent(type: string, init: { clientX?: number; clientY?: number; bubbles?: boolean }) {
-  const Ctor = typeof PointerEvent !== 'undefined' ? PointerEvent : MouseEvent;
+  const Ctor = typeof PointerEvent !== 'undefined'
+    ? PointerEvent
+    : MouseEvent;
   return new Ctor(type, { bubbles: true, ...init }) as PointerEvent;
 }
 
@@ -79,9 +81,27 @@ describe('useGraceArea', () => {
     document.body.appendChild(container);
 
     trigger.getBoundingClientRect = () =>
-      makeRect({ top: 0, left: 0, right: 100, bottom: 100, width: 100, height: 100, x: 0, y: 0 });
+      makeRect({
+        top: 0,
+        left: 0,
+        right: 100,
+        bottom: 100,
+        width: 100,
+        height: 100,
+        x: 0,
+        y: 0,
+      });
     container.getBoundingClientRect = () =>
-      makeRect({ top: 0, left: 200, right: 300, bottom: 100, width: 100, height: 100, x: 200, y: 0 });
+      makeRect({
+        top: 0,
+        left: 200,
+        right: 300,
+        bottom: 100,
+        width: 100,
+        height: 100,
+        x: 200,
+        y: 0,
+      });
 
     const mounted = mountGraceArea(trigger, container);
     wrapper = mounted.wrapper;

@@ -72,7 +72,10 @@ function close() {
 // A managed toast leaves the list once it is closed and its exit animation has
 // unmounted the content (or it closed before the content ever mounted).
 const isContentMounted = ref(false);
-watch([() => props.toast, isContentMounted], ([toast, mounted]) => {
+watch([
+  () => props.toast,
+  isContentMounted,
+], ([toast, mounted]) => {
   if (toast && !toast.open && !mounted) {
     providerContext.toastStore.remove(toast.id);
   }

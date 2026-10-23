@@ -81,8 +81,14 @@ function stubRect(element: HTMLElement, rect: { top: number; bottom: number }) {
 }
 
 function stubScrollMetrics(element: HTMLElement, scrollHeight: number, clientHeight: number) {
-  Object.defineProperty(element, 'scrollHeight', { configurable: true, get: () => scrollHeight });
-  Object.defineProperty(element, 'clientHeight', { configurable: true, get: () => clientHeight });
+  Object.defineProperty(element, 'scrollHeight', {
+    configurable: true,
+    get: () => scrollHeight,
+  });
+  Object.defineProperty(element, 'clientHeight', {
+    configurable: true,
+    get: () => clientHeight,
+  });
 }
 
 const originalScrollTo = window.scrollTo;
@@ -108,7 +114,9 @@ beforeEach(() => {
   Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
     configurable: true,
     get(this: HTMLElement) {
-      return this.style.height === '100svh' ? smallViewportHeight : originalOffsetHeight.get!.call(this);
+      return this.style.height === '100svh'
+        ? smallViewportHeight
+        : originalOffsetHeight.get!.call(this);
     },
   });
 });
@@ -137,8 +145,14 @@ function flushAlignment() {
 function dispatchTouch(element: HTMLElement, type: string, x: number, y: number) {
   const event = new Event(type, { bubbles: true, cancelable: true });
   const touch = { clientX: x, clientY: y };
-  Object.defineProperty(event, 'touches', { value: type === 'touchend' ? [] : [touch] });
-  Object.defineProperty(event, 'changedTouches', { value: [touch] });
+  Object.defineProperty(event, 'touches', {
+    value: type === 'touchend'
+      ? []
+      : [touch],
+  });
+  Object.defineProperty(event, 'changedTouches', {
+    value: [touch],
+  });
   element.dispatchEvent(event);
   return event;
 }
@@ -176,14 +190,22 @@ function mountHarness(options: HarnessOptions = {}) {
 
   const Harness = defineComponent({
     setup() {
-      useDrawerVirtualKeyboard({ enabled, elementRef: popupRef, modal, nestedDrawerOpen });
+      useDrawerVirtualKeyboard({
+        enabled,
+        elementRef: popupRef,
+        modal,
+        nestedDrawerOpen,
+      });
       return () =>
         h('div', {
           ref: (el: any) => {
             popupRef.value = el as HTMLElement;
           },
         }, [
-          h('div', { class: 'scroller', style: scrollable ? 'overflow-y: auto' : '' }, [
+          h('div', {
+            class: 'scroller',
+            style: scrollable ? 'overflow-y: auto' : '',
+          }, [
             h('input', { type: 'text', class: 'field' }),
           ]),
         ]);
@@ -200,7 +222,15 @@ function mountHarness(options: HarnessOptions = {}) {
   stubScrollMetrics(scroller, scrollHeight, clientHeight);
   scroller.scrollTo = vi.fn() as any;
 
-  return { wrapper, enabled, modal, nestedDrawerOpen, popup, scroller, input };
+  return {
+    wrapper,
+    enabled,
+    modal,
+    nestedDrawerOpen,
+    popup,
+    scroller,
+    input,
+  };
 }
 
 describe('useDrawerVirtualKeyboard keyboard detection', () => {
@@ -259,7 +289,9 @@ describe('useDrawerVirtualKeyboard with a layout viewport resized for the keyboa
   }
 
   it('applies no keyboard inset or slack when the small viewport follows the keyboard', async () => {
-    const { wrapper, popup, input, scroller } = mountHarness({ scrollerRect: { top: 380, bottom: 800 } });
+    const { wrapper, popup, input, scroller } = mountHarness({
+      scrollerRect: { top: 380, bottom: 800 },
+    });
 
     input.focus();
     await nextTick();
@@ -359,7 +391,10 @@ describe('resolveKeyboardInputTarget', () => {
     const span = document.querySelector('span')!;
     // jsdom does not implement `isContentEditable`.
     for (const el of [host, span]) {
-      Object.defineProperty(el, 'isContentEditable', { configurable: true, get: () => true });
+      Object.defineProperty(el, 'isContentEditable', {
+        configurable: true,
+        get: () => true,
+      });
     }
     expect(resolveKeyboardInputTarget(span)).toBe(host);
   });
@@ -732,7 +767,17 @@ describe('useDrawerVirtualKeyboard', () => {
     let top = 700;
     input.getBoundingClientRect = () => {
       top -= 40;
-      return { top, bottom: top + 40, left: 0, right: 0, width: 0, height: 40, x: 0, y: top, toJSON: () => ({}) } as DOMRect;
+      return {
+        top,
+        bottom: top + 40,
+        left: 0,
+        right: 0,
+        width: 0,
+        height: 40,
+        x: 0,
+        y: top,
+        toJSON: () => ({}),
+      } as DOMRect;
     };
     vi.advanceTimersByTime(100);
     expect(scroller.scrollTo).not.toHaveBeenCalled();

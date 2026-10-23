@@ -128,7 +128,12 @@ export function useArrowNavigation(
   let item: HTMLElement | null = null;
 
   if (goingHorizontal || goingVertical) {
-    const goForward = goingVertical ? down : dir === 'ltr' ? right : left;
+    // eslint-disable-next-line no-nested-ternary
+    const goForward = goingVertical
+      ? down
+      : dir === 'ltr'
+        ? right
+        : left;
     item = findNextFocusableElement(allCollectionItems, currentElement, {
       goForward,
       loop,
@@ -171,7 +176,9 @@ function findNextFocusableElement(
   elements: Array<HTMLElement>,
   currentElement: HTMLElement,
   options: FindNextFocusableElementOptions,
-  iterations = !elements.includes(currentElement) ? elements.length + 1 : elements.length,
+  iterations = !elements.includes(currentElement)
+    ? elements.length + 1
+    : elements.length,
 ): HTMLElement | null {
   if (--iterations === 0) {
     return null;
@@ -180,9 +187,13 @@ function findNextFocusableElement(
   const index = elements.indexOf(currentElement);
   let newIndex: number;
   if (index === -1) {
-    newIndex = options.goForward ? 0 : elements.length - 1;
+    newIndex = options.goForward
+      ? 0
+      : elements.length - 1;
   } else {
-    newIndex = options.goForward ? index + 1 : index - 1;
+    newIndex = options.goForward
+      ? index + 1
+      : index - 1;
   }
 
   if (!options.loop && (newIndex < 0 || newIndex >= elements.length)) {

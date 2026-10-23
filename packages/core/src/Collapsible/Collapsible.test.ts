@@ -56,7 +56,9 @@ describe('given a Collapsible with `unmountOnHide:false` ', async () => {
   let content: DOMWrapper<HTMLDivElement>;
 
   beforeEach(() => {
-    wrapper = mount(Collapsible, { props: { unmountOnHide: false } });
+    wrapper = mount(Collapsible, {
+      props: { unmountOnHide: false },
+    });
     trigger = wrapper.find('button');
     content = wrapper.find('[hidden]');
   });

@@ -29,7 +29,12 @@ const loadingIds = ref<Set<string>>(new Set());
 function addChildrenToNode(tree: Array<TreeNode>, targetId: string, newChildren: Array<TreeNode>): boolean {
   for (const node of tree) {
     if (node.id === targetId) {
-      node.children = node.children ? [...node.children, ...newChildren] : newChildren;
+      node.children = node.children
+        ? [
+            ...node.children,
+            ...newChildren,
+          ]
+        : newChildren;
       return true;
     }
     if (node.children && node.children.length > 0) {
@@ -45,6 +50,7 @@ function addChildrenToNode(tree: Array<TreeNode>, targetId: string, newChildren:
 function fetchData(value: TreeNode) {
   return new Promise<void>((resolve) => {
     if ((value.children?.length ?? 0) > 0) {
+      // eslint-disable-next-line no-promise-executor-return
       return resolve();
     }
 

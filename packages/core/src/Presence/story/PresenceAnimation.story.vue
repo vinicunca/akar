@@ -11,7 +11,9 @@ const animate = ref(false);
 
 watchEffect(() => {
   if (open.value) {
-    timerRef.value = window.setTimeout(() => (animate.value = true), 150);
+    timerRef.value = window.setTimeout(() => {
+      animate.value = true;
+    }, 150);
   } else {
     animate.value = false;
     window.clearTimeout(timerRef.value);

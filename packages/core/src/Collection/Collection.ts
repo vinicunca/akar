@@ -33,7 +33,9 @@ export function useCollection<ItemData = {}>(options: { key?: string; isProvider
     }
 
     const item = context.itemMap.value.get(element);
-    return item && (includeDisabledItem || item.ref.dataset.disabled !== '') ? item : undefined;
+    return item && (includeDisabledItem || item.ref.dataset.disabled !== '')
+      ? item
+      : undefined;
   };
 
   const getItems = (includeDisabledItem = false) => {
@@ -95,5 +97,12 @@ export function useCollection<ItemData = {}>(options: { key?: string; isProvider
   const reactiveItems = computed(() => Array.from(context.itemMap.value.values()));
   const itemMapSize = computed(() => context.itemMap.value.size);
 
-  return { getItems, getItem, reactiveItems, itemMapSize, CollectionSlot, CollectionItem };
+  return {
+    getItems,
+    getItem,
+    reactiveItems,
+    itemMapSize,
+    CollectionSlot,
+    CollectionItem,
+  };
 }

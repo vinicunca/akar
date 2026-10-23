@@ -28,7 +28,9 @@ export function useFocusGuards() {
       if (count === 1) {
         document
           .querySelectorAll('[data-akar-focus-guard]')
-          .forEach((node) => node.remove());
+          .forEach((node) => {
+            node.remove();
+          });
       }
       count--;
     });

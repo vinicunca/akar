@@ -34,7 +34,10 @@ describe('given default VisuallyHidden', () => {
     // if it is aria-hidden.
     document.body.innerHTML = '';
     const wrapper = mount(defineComponent({
-      render: () => h('button', [h('svg'), h(VisuallyHidden, () => 'Settings')]),
+      render: () => h('button', [
+        h('svg'),
+        h(VisuallyHidden, () => 'Settings'),
+      ]),
     }), { attachTo: document.body });
     expect(getByRole(document.body, 'button', { name: 'Settings' })).toBeTruthy();
     wrapper.unmount();

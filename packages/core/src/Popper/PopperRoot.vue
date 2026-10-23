@@ -27,7 +27,9 @@ const anchor = ref<ReferenceElement>();
 
 providePopperRootContext({
   anchor,
-  onAnchorChange: (element) => anchor.value = element,
+  onAnchorChange: (element) => {
+    anchor.value = element;
+  },
 });
 </script>
 

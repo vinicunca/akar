@@ -16,7 +16,9 @@ const timer = ref(0);
 watch(hasDynamicContent, () => {
   if (hasDynamicContent.value) {
     timer.value = window.setInterval(() => {
-      const nextCount = count.value < 5 ? count.value + 1 : count.value;
+      const nextCount = count.value < 5
+        ? count.value + 1
+        : count.value;
       if (nextCount === 5) {
         hasDynamicContent.value = false;
       }

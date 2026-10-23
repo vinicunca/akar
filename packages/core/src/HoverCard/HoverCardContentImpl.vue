@@ -68,7 +68,9 @@ onMounted(() => {
     document.addEventListener('pointerup', handlePointerUp);
 
     const tabbables = getTabbableNodes(contentElement.value);
-    tabbables.forEach((tabbable) => tabbable.setAttribute('tabindex', '-1'));
+    tabbables.forEach((tabbable) => {
+      tabbable.setAttribute('tabindex', '-1');
+    });
   }
 
   useEventListener(window, 'scroll', (event: Event) => {

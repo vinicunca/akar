@@ -19,7 +19,9 @@ export function parseStringToDateValue(dateStr: string, referenceVal: DateValue)
     dateValue = parseDate(dateStr);
   }
 
-  return dateValue.calendar !== referenceVal.calendar ? toCalendar(dateValue, referenceVal.calendar) : dateValue;
+  return dateValue.calendar !== referenceVal.calendar
+    ? toCalendar(dateValue, referenceVal.calendar)
+    : dateValue;
 }
 
 /**
@@ -170,7 +172,9 @@ export function getNextLastDayOfWeek<T extends DateValue = DateValue>(
    */
   const day = getDayOfWeek(date, locale, 'sun');
 
-  const lastDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
+  const lastDayOfWeek = firstDayOfWeek === 0
+    ? 6
+    : firstDayOfWeek - 1;
 
   if (day === lastDayOfWeek) {
     return date as T;

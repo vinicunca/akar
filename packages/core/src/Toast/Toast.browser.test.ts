@@ -40,7 +40,9 @@ describe('given a Toast, in a real browser', () => {
     const { open } = mountToast();
     await expect.poll(() => document.querySelector('[data-testid="viewport"] button')).toBeTruthy();
     const viewport = document.querySelector<HTMLElement>('[data-testid="viewport"]')!;
-    const button = [...viewport.querySelectorAll('button')].find((el) => el.textContent === label)!;
+    const button = [
+      ...viewport.querySelectorAll('button'),
+    ].find((el) => el.textContent === label)!;
 
     button.focus();
     await userEvent.keyboard('{Enter}');

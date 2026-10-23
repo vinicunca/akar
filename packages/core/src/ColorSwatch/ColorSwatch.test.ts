@@ -69,7 +69,13 @@ describe('colorSwatch', () => {
     it('should accept Color object', () => {
       const wrapper = mount(ColorSwatch, {
         props: {
-          color: { space: 'hsl' as const, h: 120, s: 50, l: 50, alpha: 1 },
+          color: {
+            space: 'hsl' as const,
+            h: 120,
+            s: 50,
+            l: 50,
+            alpha: 1,
+          },
         },
       });
       expect(wrapper.element).toBeTruthy();

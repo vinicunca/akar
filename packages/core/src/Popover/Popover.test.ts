@@ -61,12 +61,18 @@ describe('given a Popover whose content has no tabbable children', () => {
     const openLog: Array<boolean> = [];
     const Harness = defineComponent({
       render() {
-        return h(PopoverRoot, { 'onUpdate:open': (v: boolean) => openLog.push(v) }, {
+        return h(PopoverRoot, {
+          'onUpdate:open': (v: boolean) => openLog.push(v),
+        }, {
           default: () => [
-            h(PopoverTrigger, null, { default: () => 'open me' }),
+            h(PopoverTrigger, null, {
+              default: () => 'open me',
+            }),
             h(PopoverPortal, null, {
               default: () => [
-                h(PopoverContent, null, { default: () => h('div', 'hello') }),
+                h(PopoverContent, null, {
+                  default: () => h('div', 'hello'),
+                }),
               ],
             }),
           ],

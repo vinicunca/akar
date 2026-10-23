@@ -13,7 +13,9 @@ import TooltipTrigger from './TooltipTrigger.vue';
 import { TOOLTIP_OPEN } from './utils';
 
 function pointerEvent(type: string, init: { clientX?: number; clientY?: number }) {
-  const Ctor = typeof PointerEvent !== 'undefined' ? PointerEvent : MouseEvent;
+  const Ctor = typeof PointerEvent !== 'undefined'
+    ? PointerEvent
+    : MouseEvent;
   return new Ctor(type, { bubbles: true, ...init }) as PointerEvent;
 }
 
@@ -140,9 +142,18 @@ describe('given a tooltip trigger whose element is replaced after mount', () => 
   });
 
   const SwappableTrigger = defineComponent({
-    components: { AnchorProbe, TooltipContent, TooltipPortal, TooltipProvider, TooltipRoot, TooltipTrigger },
+    components: {
+      AnchorProbe,
+      TooltipContent,
+      TooltipPortal,
+      TooltipProvider,
+      TooltipRoot,
+      TooltipTrigger,
+    },
     setup() {
-      return { tag: ref('button') };
+      return {
+        tag: ref('button'),
+      };
     },
     template: `
       <TooltipProvider>
@@ -222,7 +233,13 @@ describe('given stacked tooltips whose content covers another trigger', () => {
   // Two triggers stacked vertically, like rows in a table. The second one's
   // tooltip opens on top of it, i.e. over the first trigger.
   const StackedTooltips = defineComponent({
-    components: { TooltipProvider, TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent },
+    components: {
+      TooltipProvider,
+      TooltipRoot,
+      TooltipTrigger,
+      TooltipPortal,
+      TooltipContent,
+    },
     template: `
       <TooltipProvider>
         <TooltipRoot>
@@ -246,7 +263,10 @@ describe('given stacked tooltips whose content covers another trigger', () => {
   // jsdom has no layout, so `elementsFromPoint` is stubbed with the hit-test
   // stack a browser would return for the given scenario.
   function stubElementsFromPoint(stack: () => Array<Element>) {
-    Object.defineProperty(document, 'elementsFromPoint', { value: vi.fn(stack), configurable: true });
+    Object.defineProperty(document, 'elementsFromPoint', {
+      value: vi.fn(stack),
+      configurable: true,
+    });
   }
 
   function pointerMove(target: Element, pointerType = 'mouse') {

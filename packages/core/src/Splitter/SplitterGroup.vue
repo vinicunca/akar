@@ -160,7 +160,9 @@ function getGroupSizeInPixels(): number | null {
   const element = panelGroupElementRef.value;
   if (element && element instanceof HTMLElement) {
     const rect = element.getBoundingClientRect();
-    const size = direction.value === 'horizontal' ? rect.width : rect.height;
+    const size = direction.value === 'horizontal'
+      ? rect.width
+      : rect.height;
 
     if (!Number.isNaN(size)) {
       groupSizeInPixels.value = size;
@@ -238,7 +240,9 @@ watchEffect((onCleanup) => {
     }
 
     const { height, width } = entry.contentRect;
-    const nextSize = direction.value === 'horizontal' ? width : height;
+    const nextSize = direction.value === 'horizontal'
+      ? width
+      : height;
 
     if (!Number.isNaN(nextSize)) {
       groupSizeInPixels.value = nextSize;
@@ -501,7 +505,9 @@ function registerResizeHandle(dragHandleId: string) {
       layout: initialLayout ?? prevLayout,
       panelConstraints,
       pivotIndices,
-      trigger: isKeyDown(event) ? 'keyboard' : 'mouse-or-touch',
+      trigger: isKeyDown(event)
+        ? 'keyboard'
+        : 'mouse-or-touch',
     });
 
     const layoutChanged = !compareLayouts(prevLayout, nextLayout);
@@ -521,12 +527,16 @@ function registerResizeHandle(dragHandleId: string) {
           if (isHorizontal) {
             reportConstraintsViolation(
               dragHandleId,
-              delta < 0 ? EXCEEDED_HORIZONTAL_MIN : EXCEEDED_HORIZONTAL_MAX,
+              delta < 0
+                ? EXCEEDED_HORIZONTAL_MIN
+                : EXCEEDED_HORIZONTAL_MAX,
             );
           } else {
             reportConstraintsViolation(
               dragHandleId,
-              delta < 0 ? EXCEEDED_VERTICAL_MIN : EXCEEDED_VERTICAL_MAX,
+              delta < 0
+                ? EXCEEDED_VERTICAL_MIN
+                : EXCEEDED_VERTICAL_MAX,
             );
           }
         } else {
@@ -797,7 +807,9 @@ function expandPanel(panelData: PanelData) {
       const isLastPanel
         = findPanelDataIndex(panelDataArray, panelData)
           === panelDataArray.length - 1;
-      const delta = isLastPanel ? panelSize - baseSize : baseSize - panelSize;
+      const delta = isLastPanel
+        ? panelSize - baseSize
+        : baseSize - panelSize;
 
       const nextLayout = adjustLayoutByDelta({
         delta,

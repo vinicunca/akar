@@ -226,7 +226,9 @@ function onMonthChange(value: DateValue) {
       modelValue.value = resolveMonthValue(value, modelValue.value as DateValue);
     }
   } else if (!modelValue.value) {
-    modelValue.value = [resolveMonthValue(value, placeholder.value)];
+    modelValue.value = [
+      resolveMonthValue(value, placeholder.value),
+    ];
   } else {
     const modelValueArray = Array.isArray(modelValue.value)
       ? modelValue.value
@@ -234,7 +236,10 @@ function onMonthChange(value: DateValue) {
 
     const index = modelValueArray.findIndex((date) => isSameYearMonth(date, value));
     if (index === -1) {
-      modelValue.value = [...modelValueArray, resolveMonthValue(value, placeholder.value)];
+      modelValue.value = [
+        ...modelValueArray,
+        resolveMonthValue(value, placeholder.value),
+      ];
     } else if (!preventDeselect.value) {
       const next = modelValueArray.filter((date) => !isSameYearMonth(date, value));
       if (!next.length) {

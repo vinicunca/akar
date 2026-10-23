@@ -27,7 +27,9 @@ function pureAnnotationPlugin(): OutputPlugin {
         }
         return `${PURE} ${match}`;
       });
-      return result === code ? null : result;
+      return result === code
+        ? null
+        : result;
     },
   };
 }
@@ -68,7 +70,9 @@ export default defineConfig({
   },
   outputOptions: {
     minifyInternalExports: false,
-    plugins: [pureAnnotationPlugin()],
+    plugins: [
+      pureAnnotationPlugin(),
+    ],
 
     // Don't rely on unbundle: it creates a lot of unwanted files because of the multiple sections of SFC files
     advancedChunks: {

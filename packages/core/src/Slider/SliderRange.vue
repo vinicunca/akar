@@ -20,7 +20,9 @@ const percentages = computed(() => rootContext.currentModelValue.value.map((valu
   convertValueToPercentage(value, rootContext.min.value, rootContext.max.value),
 ));
 
-const offsetStart = computed(() => rootContext.currentModelValue.value.length > 1 ? Math.min(...percentages.value!) : 0);
+const offsetStart = computed(() => rootContext.currentModelValue.value.length > 1
+  ? Math.min(...percentages.value!)
+  : 0);
 const offsetEnd = computed(() => 100 - Math.max(...percentages.value, 0));
 </script>
 

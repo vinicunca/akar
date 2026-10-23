@@ -120,7 +120,9 @@ function handleKeydown(ev: KeyboardEvent) {
   if (ev.defaultPrevented) {
     return;
   }
-  const verticalEntryKey = menuContext.dir.value === 'rtl' ? 'ArrowLeft' : 'ArrowRight';
+  const verticalEntryKey = menuContext.dir.value === 'rtl'
+    ? 'ArrowLeft'
+    : 'ArrowRight';
   const entryKey = { horizontal: 'ArrowDown', vertical: verticalEntryKey }[
     menuContext.orientation
   ];

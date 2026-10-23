@@ -106,7 +106,12 @@ describe('nested layers with disableOutsidePointerEvents', () => {
       },
     }), { attachTo: document.body });
 
-    return { wrapper, outerOpen, innerOpen, innerDisable };
+    return {
+      wrapper,
+      outerOpen,
+      innerOpen,
+      innerDisable,
+    };
   }
 
   it('should keep body pointer-events none after a nested layer closes while outer stays open', async () => {
@@ -295,7 +300,9 @@ describe('scroll-lock handoff to a modal layer without its own scroll lock', () 
     const wrapper = mount(defineComponent({
       setup() {
         return () => h('div', [
-          popoverOpen.value ? h(ModalLayerWithScrollLock) : null,
+          popoverOpen.value
+            ? h(ModalLayerWithScrollLock)
+            : null,
           dialogOpen.value
             ? h(DismissableLayerPrimitive, { disableOutsidePointerEvents: true }, () => 'dialog')
             : null,
@@ -385,7 +392,9 @@ describe('body pointer-events shared by scroll locks and modal layers', () => {
     const wrapper = mount(defineComponent({
       setup() {
         return () => h('div', [
-          lockOpen.value ? h(ScrollLock) : null,
+          lockOpen.value
+            ? h(ScrollLock)
+            : null,
           layerOpen.value
             ? h(DismissableLayerPrimitive, { disableOutsidePointerEvents: true }, () => 'dialog')
             : null,
@@ -407,7 +416,12 @@ describe('body pointer-events shared by scroll locks and modal layers', () => {
       expect(document.body.style.pointerEvents).toBe('none');
     }
 
-    return { wrapper, lockOpen, layerOpen, openLockThenLayer };
+    return {
+      wrapper,
+      lockOpen,
+      layerOpen,
+      openLockThenLayer,
+    };
   }
 
   it('should restore body pointer-events when the lock releases before a layer that mounted under it', async () => {
@@ -491,7 +505,10 @@ describe('given a default DismissableLayer', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(DismissableLayer, { attachTo: document.body, props: { openLabel: OPEN_LABEL, closeLabel: CLOSE_LABEL, outsideLabel: OUTSIDE_LABEL } });
+    wrapper = mount(DismissableLayer, {
+      attachTo: document.body,
+      props: { openLabel: OPEN_LABEL, closeLabel: CLOSE_LABEL, outsideLabel: OUTSIDE_LABEL },
+    });
     trigger = wrapper.find('button');
   });
 
@@ -607,7 +624,9 @@ describe('given a DismissableLayer after a cancelled touch tap outside', () => {
   it('should not dismiss on the next tap inside the layer itself', async () => {
     const wrapper = mount(DismissableLayerPrimitive, {
       attachTo: document.body,
-      slots: { default: () => h('button', { 'data-testid': 'inside' }, 'Inside') },
+      slots: {
+        default: () => h('button', { 'data-testid': 'inside' }, 'Inside'),
+      },
     });
     await sleep(1);
 
@@ -764,14 +783,21 @@ describe('given a DismissableLayer rendered inside an iframe (#2949)', () => {
 
     const wrapper = mount(DismissableLayerPrimitive, {
       attachTo: container,
-      slots: { default: () => h('button', { id: 'inside' }, 'Inside') },
+      slots: {
+        default: () => h('button', { id: 'inside' }, 'Inside'),
+      },
     });
     onTestFinished(() => {
       wrapper.unmount();
       iframe.remove();
     });
     const inside = iframeDocument.getElementById('inside')!;
-    return { wrapper, iframeDocument, inside, outside };
+    return {
+      wrapper,
+      iframeDocument,
+      inside,
+      outside,
+    };
   }
 
   beforeEach(() => {

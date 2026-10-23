@@ -125,7 +125,9 @@ const { multiple, disabled, ignoreFilter, resetSearchTermOnSelect, openOnFocus, 
 const dir = useDirection(propDir);
 
 const modelValue = useVModel(props as ComboboxRootProps<T>, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? (multiple.value ? [] : undefined),
+  defaultValue: props.defaultValue ?? (multiple.value
+    ? []
+    : undefined),
   passive: (props.modelValue === undefined) as false,
   deep: true,
 }) as Ref<T | Array<T>>;

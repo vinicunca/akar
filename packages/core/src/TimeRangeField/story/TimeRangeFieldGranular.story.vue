@@ -2,7 +2,10 @@
 import { Time } from '@internationalized/date';
 import TimeRangeField from './_DummyTimeRangeField.vue';
 
-const defaultValue = { start: new Time(10, 30, 45), end: new Time(14, 15, 20) };
+const defaultValue = {
+  start: new Time(10, 30, 45),
+  end: new Time(14, 15, 20),
+};
 </script>
 
 <template>

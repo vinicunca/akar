@@ -34,7 +34,13 @@ function makeHook(options: {
     viewportRef,
     onSnapPointChange: (v) => changes.push(v),
   });
-  return { ...hook, changes, activeSnapPoint, popupHeight, snapPoints };
+  return {
+    ...hook,
+    changes,
+    activeSnapPoint,
+    popupHeight,
+    snapPoints,
+  };
 }
 
 describe('useDrawerSnapPoints — snap release math', () => {
@@ -67,7 +73,13 @@ describe('useDrawerSnapPoints — snap release math', () => {
       const { resolvedSnapPoints } = makeHook({
         // 'abcpx' parses to NaN, '-100px' and -50 are negative — all must be
         // dropped so they never flow into geometry as `NaNpx`/out-of-range.
-        snapPoints: ['abcpx' as any, '-100px' as any, -50 as any, 300, 500],
+        snapPoints: [
+          'abcpx' as any,
+          '-100px' as any,
+          -50 as any,
+          300,
+          500,
+        ],
         popupHeight: 500,
       });
       expect(resolvedSnapPoints.value.map((p) => p.height).sort((a, b) => a - b)).toEqual([300, 500]);

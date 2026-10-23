@@ -7,11 +7,11 @@ import { useVModel } from '@vueuse/core';
 import { createContext, isValueEqualOrExist, useFormControl, useForwardExpose, useForwardScopeId } from '@/shared';
 import { injectCheckboxGroupRootContext } from './CheckboxGroupRoot.vue';
 
-export interface CheckboxRootProps<T = boolean> extends PrimitiveProps, FormFieldProps {
+export interface CheckboxRootProps<TrueValue = boolean, FalseValue = TrueValue> extends PrimitiveProps, FormFieldProps {
   /** The value of the checkbox when it is initially rendered. Use when you do not need to control its value. */
-  defaultValue?: T | 'indeterminate';
+  defaultValue?: NoInfer<TrueValue | FalseValue> | 'indeterminate';
   /** The controlled value of the checkbox. Can be binded with v-model. */
-  modelValue?: T | 'indeterminate' | null;
+  modelValue?: NoInfer<TrueValue | FalseValue> | 'indeterminate' | null;
   /** When `true`, prevents the user from interacting with the checkbox */
   disabled?: boolean;
   /**
@@ -24,16 +24,16 @@ export interface CheckboxRootProps<T = boolean> extends PrimitiveProps, FormFiel
   /**
    * The value used when the checkbox is checked. Defaults to `true`.
    */
-  trueValue?: T;
+  trueValue?: TrueValue;
   /**
    * The value used when the checkbox is unchecked. Defaults to `false`.
    */
-  falseValue?: T;
+  falseValue?: FalseValue;
 }
 
-export type CheckboxRootEmits<T = boolean> = {
+export type CheckboxRootEmits<TrueValue = boolean, FalseValue = TrueValue> = {
   /** Event handler called when the value of the checkbox changes. */
-  'update:modelValue': [value: T | 'indeterminate'];
+  'update:modelValue': [value: TrueValue | FalseValue | 'indeterminate'];
 };
 
 interface CheckboxRootContext {
@@ -45,7 +45,7 @@ export const [injectCheckboxRootContext, provideCheckboxRootContext]
   = createContext<CheckboxRootContext>('CheckboxRoot');
 </script>
 
-<script setup lang="ts" generic="T = boolean">
+<script setup lang="ts" generic="TrueValue = true, FalseValue = false">
 import { isDeepEqual, isNullish } from '@vinicunca/perkakas';
 import { computed, onBeforeUnmount, onMounted, useAttrs, watch } from 'vue';
 import { injectFieldRootContext } from '@/Field';
@@ -58,14 +58,14 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<CheckboxRootProps<T>>(), {
+const props = withDefaults(defineProps<CheckboxRootProps<TrueValue, FalseValue>>(), {
   modelValue: undefined,
   value: 'on',
   as: 'button',
   trueValue: (() => true) as unknown as undefined,
   falseValue: (() => false) as unknown as undefined,
 });
-const emits = defineEmits<CheckboxRootEmits<T>>();
+const emits = defineEmits<CheckboxRootEmits<TrueValue, FalseValue>>();
 
 defineSlots<{
   default?: (props: {
@@ -88,7 +88,7 @@ const fieldContext = injectFieldRootContext(null);
 const modelValue = useVModel(props as any, 'modelValue', emits as any, {
   defaultValue: props.defaultValue ?? props.falseValue,
   passive: (props.modelValue === undefined) as false,
-}) as Ref<T | 'indeterminate'>;
+}) as Ref<TrueValue | FalseValue | 'indeterminate'>;
 
 // An unchecked checkbox can't be added once its group has reached `max`.
 const isGroupMaxReached = computed(() => {
@@ -116,7 +116,9 @@ const resolvedName = computed(() => props.name ?? fieldContext?.name.value);
 // never actually be `undefined`. Only fall back to the Field's `required`
 // when a Field is present, so standalone output (where this cast has always
 // applied) is untouched.
-const resolvedRequired = computed(() => (fieldContext ? (props.required || fieldContext.required.value) : props.required));
+const resolvedRequired = computed(() => (fieldContext
+  ? (props.required || fieldContext.required.value)
+  : props.required));
 
 const isChecked = computed(() => isDeepEqual(modelValue.value, props.trueValue));
 
@@ -143,7 +145,9 @@ function handleClick() {
   const nextState = checkboxState.value !== true;
 
   if (!isNullish(checkboxGroupContext?.modelValue.value)) {
-    const modelValueArray = [...(checkboxGroupContext.modelValue.value || [])];
+    const modelValueArray = [
+      ...(checkboxGroupContext.modelValue.value || []),
+    ];
     if (isValueEqualOrExist(modelValueArray, props.value)) {
       const index = modelValueArray.findIndex((i) => isDeepEqual(i, props.value));
       modelValueArray.splice(index, 1);
@@ -153,9 +157,9 @@ function handleClick() {
     checkboxGroupContext.modelValue.value = modelValueArray;
   } else {
     if (modelValue.value === 'indeterminate') {
-      modelValue.value = props.trueValue as T;
+      modelValue.value = props.trueValue as TrueValue;
     } else {
-      modelValue.value = isChecked.value ? props.falseValue as T : props.trueValue as T;
+      modelValue.value = isChecked.value ? props.falseValue as FalseValue : props.trueValue as TrueValue;
     }
   }
 

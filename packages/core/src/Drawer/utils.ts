@@ -104,14 +104,18 @@ export function computeSwipeReleaseScalar(params: {
 
   const translation = baseOffset + axisDelta;
   const translationAlongDirection
-    = (direction === 'left' || direction === 'up') ? -translation : translation;
+    = (direction === 'left' || direction === 'up')
+      ? -translation
+      : translation;
   const remainingDistance = Math.max(0, size - translationAlongDirection);
   if (!Number.isFinite(remainingDistance) || remainingDistance <= 0) {
     return null;
   }
 
   const directionalVelocity
-    = (direction === 'left' || direction === 'up') ? -releaseVelocity : releaseVelocity;
+    = (direction === 'left' || direction === 'up')
+      ? -releaseVelocity
+      : releaseVelocity;
   if (!Number.isFinite(directionalVelocity) || directionalVelocity <= MIN_SWIPE_RELEASE_VELOCITY) {
     return null;
   }
@@ -194,7 +198,12 @@ export function registerDrawerCssProperties() {
   ];
   for (const name of lengthVars) {
     try {
-      CSS.registerProperty({ name, syntax: '<length>', inherits: false, initialValue: '0px' });
+      CSS.registerProperty({
+        name,
+        syntax: '<length>',
+        inherits: false,
+        initialValue: '0px',
+      });
     } catch {}
   }
 
@@ -204,7 +213,12 @@ export function registerDrawerCssProperties() {
   ];
   for (const { name, initialValue } of numberVars) {
     try {
-      CSS.registerProperty({ name, syntax: '<number>', inherits: false, initialValue });
+      CSS.registerProperty({
+        name,
+        syntax: '<number>',
+        inherits: false,
+        initialValue,
+      });
     } catch {}
   }
 

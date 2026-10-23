@@ -26,7 +26,9 @@ const props = withDefaults(defineProps<ColorSwatchPickerRootProps>(), {
 const emits = defineEmits<ColorSwatchPickerRootEmits>();
 
 const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? (props.multiple ? [] : ''),
+  defaultValue: props.defaultValue ?? (props.multiple
+    ? []
+    : ''),
   // Cast required for VueUse's passive option type; enables passive sync when modelValue is undefined
   passive: (props.modelValue === undefined) as false,
 });

@@ -12,7 +12,9 @@ vi.mock('@vueuse/core', async (importOriginal) => {
 
   return {
     ...mod,
-    useActiveElement: ((...args) => isServer ? shallowRef(undefined) : mod.useActiveElement(...args)) as typeof mod.useActiveElement,
+    useActiveElement: ((...args) => isServer
+      ? shallowRef(undefined)
+      : mod.useActiveElement(...args)) as typeof mod.useActiveElement,
   };
 });
 

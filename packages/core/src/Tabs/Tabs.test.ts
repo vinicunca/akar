@@ -122,7 +122,12 @@ describe('given Tabs without TabsContent', () => {
 
   it('should render aria-controls only for TabsTrigger with matching TabsContent', async () => {
     const wrapper = mount({
-      components: { TabsRoot, TabsList, TabsTrigger, TabsContent },
+      components: {
+        TabsRoot,
+        TabsList,
+        TabsTrigger,
+        TabsContent,
+      },
       template: `
         <TabsRoot default-value="tab1">
           <TabsList>
@@ -148,7 +153,9 @@ describe('given TabsTrigger with consumer event listeners', () => {
     const wrapper = mount(defineComponent({
       setup: () => () => h(TabsRoot, {
         'modelValue': value.value,
-        'onUpdate:modelValue': (next: string) => { value.value = next; },
+        'onUpdate:modelValue': (next: string) => {
+          value.value = next;
+        },
         'activationMode': 'manual',
       }, () => [
         h(TabsList, () => [
@@ -167,7 +174,9 @@ describe('given TabsTrigger with consumer event listeners', () => {
   });
 
   it.each(['Enter', ' '])('should not activate on %j keydown when the consumer prevents default', async (key) => {
-    const { value, trigger } = mountTabs({ onKeydown: (event) => event.preventDefault() });
+    const { value, trigger } = mountTabs({
+      onKeydown: (event) => event.preventDefault(),
+    });
     await trigger.trigger('keydown', { key });
     expect(value.value).toBe('one');
   });
@@ -179,7 +188,9 @@ describe('given TabsTrigger with consumer event listeners', () => {
   });
 
   it('should not activate on mousedown when the consumer prevents default', async () => {
-    const { value, trigger } = mountTabs({ onMousedown: (event) => event.preventDefault() });
+    const { value, trigger } = mountTabs({
+      onMousedown: (event) => event.preventDefault(),
+    });
     await trigger.trigger('mousedown', { button: 0, ctrlKey: false });
     expect(value.value).toBe('one');
   });

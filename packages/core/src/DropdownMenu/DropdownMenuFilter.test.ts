@@ -90,7 +90,9 @@ describe('given DropdownMenu with Filter', () => {
       filterInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
       await nextTick();
 
-      const items = [...document.querySelectorAll('[role="menuitem"]')];
+      const items = [
+        ...document.querySelectorAll('[role="menuitem"]'),
+      ];
       const lastItem = items.at(-1);
       expect(lastItem?.getAttribute('data-highlighted')).toBe('');
     });

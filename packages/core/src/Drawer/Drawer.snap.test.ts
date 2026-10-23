@@ -57,7 +57,7 @@ import {
 // mirrors a real CSS `height: 100dvh` drawer where popupHeight === viewport.
 const MOCK_POPUP_HEIGHT = 800;
 
-// eslint-disable-next-line sonar/no-unused-collection
+// eslint-disable-next-line sonarjs/no-unused-collection
 let installedObservers: Array<{
   cb: ResizeObserverCallback;
   target: Element | null;
@@ -179,10 +179,22 @@ function getSwipeMovementY(el: HTMLElement) {
 }
 
 const SnapDrawer = defineComponent({
-  components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerHandle, DrawerTitle, DrawerClose },
+  components: {
+    DrawerRoot,
+    DrawerTrigger,
+    DrawerPortal,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerHandle,
+    DrawerTitle,
+    DrawerClose,
+  },
   props: {
     defaultOpen: { type: Boolean, default: false },
-    defaultSnapPoint: { type: [Number, String, null] as any, default: 0.5 },
+    defaultSnapPoint: {
+      type: [Number, String, null] as any,
+      default: 0.5,
+    },
   },
   setup(props) {
     const open = ref(props.defaultOpen);
@@ -282,7 +294,9 @@ describe('drawer snap points — integration', () => {
     });
 
     it('writes a snap=1.0 offset (0px) when defaultSnapPoint is 1', async () => {
-      const { getByText } = render(SnapDrawer, { props: { defaultSnapPoint: 1 } });
+      const { getByText } = render(SnapDrawer, {
+        props: { defaultSnapPoint: 1 },
+      });
       await fireEvent.click(getByText('Open'));
       await nextTick();
       await nextTick();

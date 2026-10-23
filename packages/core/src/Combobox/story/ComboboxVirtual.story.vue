@@ -10,7 +10,9 @@ const { startsWith } = useFilter({ sensitivity: 'base' });
 const filterText = ref('');
 const filteredOptions = computed(() => {
   const options = countryList.map((a) => ({ label: a, value: a }));
-  return filterText.value ? options.filter((opt) => startsWith(opt.label, filterText.value)) : options;
+  return filterText.value
+    ? options.filter((opt) => startsWith(opt.label, filterText.value))
+    : options;
 });
 </script>
 

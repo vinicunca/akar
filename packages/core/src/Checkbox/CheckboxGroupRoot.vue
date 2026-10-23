@@ -61,7 +61,9 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 }) as Ref<Array<T>>;
 
 const rovingFocusProps = computed(() => {
-  return rovingFocus.value ? { loop: props.loop, dir: dir.value, orientation: props.orientation } : {};
+  return rovingFocus.value
+    ? { loop: props.loop, dir: dir.value, orientation: props.orientation }
+    : {};
 });
 
 provideCheckboxGroupRootContext({

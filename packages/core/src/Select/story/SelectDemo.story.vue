@@ -22,8 +22,20 @@ import SelectItemWrapper from './_SelectItem.vue';
 
 const fruit = ref(['Apple']);
 
-const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
-const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'];
+const options = [
+  'Apple',
+  'Banana',
+  'Blueberry',
+  'Grapes',
+  'Pineapple',
+];
+const vegetables = [
+  'Aubergine',
+  'Broccoli',
+  'Carrot',
+  'Courgette',
+  'Leek',
+];
 
 const POSITION = ['item-aligned', 'popper'] as const;
 </script>

@@ -39,7 +39,9 @@ describe('given a Popover, in a real browser', () => {
     await expect.poll(() => {
       const trigger = get('trigger')!.getBoundingClientRect();
       const content = get('content')!.getBoundingClientRect();
-      return Math.round(side === 'bottom' ? content.top - trigger.bottom : trigger.top - content.bottom);
+      return Math.round(side === 'bottom'
+        ? content.top - trigger.bottom
+        : trigger.top - content.bottom);
     }).toBe(sideOffset);
 
     const trigger = get('trigger')!.getBoundingClientRect();

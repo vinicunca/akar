@@ -72,7 +72,13 @@ export function getRange(currentPage: number, pageCount: number, siblingCount: n
     if (showLeftEllipsis && showRightEllipsis) {
       const middleRange = range(leftSiblingIndex, rightSiblingIndex);
 
-      return [firstPageIndex, ELLIPSIS, ...middleRange, ELLIPSIS, lastPageIndex];
+      return [
+        firstPageIndex,
+        ELLIPSIS,
+        ...middleRange,
+        ELLIPSIS,
+        lastPageIndex,
+      ];
     }
 
     const fullRange = range(firstPageIndex, lastPageIndex);

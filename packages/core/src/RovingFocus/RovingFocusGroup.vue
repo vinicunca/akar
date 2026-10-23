@@ -106,7 +106,12 @@ function handleFocus(event: FocusEvent) {
       const currentItem = items.find(
         (item) => item.id === currentTabStopId.value,
       );
-      const candidateItems = [activeItem, highlightedItem, currentItem, ...items].filter(
+      const candidateItems = [
+        activeItem,
+        highlightedItem,
+        currentItem,
+        ...items,
+      ].filter(
         Boolean,
       ) as typeof items;
       focusFirst(candidateItems, props.preventScrollOnEntryFocus);

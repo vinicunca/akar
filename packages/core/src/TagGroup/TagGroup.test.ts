@@ -19,7 +19,12 @@ interface DemoOptions {
 
 function mountTagGroup(options: DemoOptions = {}) {
   const Demo = defineComponent({
-    components: { TagGroupRoot, TagGroupItem, TagGroupItemText, TagGroupItemDelete },
+    components: {
+      TagGroupRoot,
+      TagGroupItem,
+      TagGroupItemText,
+      TagGroupItemDelete,
+    },
     setup() {
       const tags = ref(options.tags ?? ['Vue', 'Akar', 'Accessibility', 'Nuxt']);
       const selected = ref<string | Array<string> | undefined>(options.defaultValue);
@@ -28,7 +33,13 @@ function mountTagGroup(options: DemoOptions = {}) {
         removed.value.push(values);
         tags.value = tags.value.filter((tag) => !values.includes(tag));
       }
-      return { tags, selected, removed, onRemove, options };
+      return {
+        tags,
+        selected,
+        removed,
+        onRemove,
+        options,
+      };
     },
     template: `
       <TagGroupRoot
@@ -58,7 +69,13 @@ function mountTagGroup(options: DemoOptions = {}) {
   const rows = () => wrapper.findAll('[role="row"]');
   const row = (name: string) => rows().find((r) => r.text().startsWith(name))!;
   const deleteButton = (name: string) => row(name).get('button');
-  return { wrapper, root, rows, row, deleteButton };
+  return {
+    wrapper,
+    root,
+    rows,
+    row,
+    deleteButton,
+  };
 }
 
 function rowNames(rows: ReturnType<typeof mountTagGroup>['rows']) {
@@ -71,7 +88,10 @@ afterEach(() => {
 
 describe('tagGroup', () => {
   it('passes axe accessibility tests', async () => {
-    const { wrapper } = mountTagGroup({ selectionMode: 'multiple', defaultValue: ['Vue'] });
+    const { wrapper } = mountTagGroup({
+      selectionMode: 'multiple',
+      defaultValue: ['Vue'],
+    });
     expect(await axe(wrapper.element)).toHaveNoViolations();
   });
 
@@ -134,7 +154,9 @@ describe('tagGroup', () => {
 
     it('skips disabled tags', async () => {
       const user = userEvent.setup();
-      const { row } = mountTagGroup({ disabledTags: ['Akar'] });
+      const { row } = mountTagGroup({
+        disabledTags: ['Akar'],
+      });
 
       await user.tab();
       await user.keyboard('{ArrowRight}');
@@ -149,7 +171,9 @@ describe('tagGroup', () => {
 
       await user.tab();
       await user.keyboard('{ArrowRight}{Backspace}');
-      expect(wrapper.vm.removed).toEqual([['Akar']]);
+      expect(wrapper.vm.removed).toEqual([
+        ['Akar'],
+      ]);
       expect(rowNames(rows)).toEqual(['Vue', 'Accessibility', 'Nuxt']);
     });
 
@@ -159,36 +183,54 @@ describe('tagGroup', () => {
 
       await user.tab();
       await user.keyboard('{Delete}');
-      expect(wrapper.vm.removed).toEqual([['Vue']]);
+      expect(wrapper.vm.removed).toEqual([
+        ['Vue'],
+      ]);
     });
 
     it('removes only its tag from the delete button', async () => {
       const user = userEvent.setup();
-      const { wrapper, deleteButton } = mountTagGroup({ selectionMode: 'multiple', defaultValue: ['Vue', 'Nuxt'] });
+      const { wrapper, deleteButton } = mountTagGroup({
+        selectionMode: 'multiple',
+        defaultValue: ['Vue', 'Nuxt'],
+      });
 
       await user.click(deleteButton('Vue').element);
-      expect(wrapper.vm.removed).toEqual([['Vue']]);
+      expect(wrapper.vm.removed).toEqual([
+        ['Vue'],
+      ]);
       expect(wrapper.vm.selected).toEqual(['Nuxt']);
     });
 
     it('removes all selected tags when removing a selected tag with the keyboard', async () => {
       const user = userEvent.setup();
-      const { wrapper, rows } = mountTagGroup({ selectionMode: 'multiple', defaultValue: ['Vue', 'Nuxt'] });
+      const { wrapper, rows } = mountTagGroup({
+        selectionMode: 'multiple',
+        defaultValue: ['Vue', 'Nuxt'],
+      });
 
       await user.tab();
       await user.keyboard('{Backspace}');
-      expect(wrapper.vm.removed).toEqual([['Vue', 'Nuxt']]);
+      expect(wrapper.vm.removed).toEqual([
+        ['Vue', 'Nuxt'],
+      ]);
       expect(wrapper.vm.selected).toEqual([]);
       expect(rowNames(rows)).toEqual(['Akar', 'Accessibility']);
     });
 
     it('keeps disabled tags when removing the selection with the keyboard', async () => {
       const user = userEvent.setup();
-      const { wrapper, rows } = mountTagGroup({ selectionMode: 'multiple', defaultValue: ['Vue', 'Akar', 'Nuxt'], disabledTags: ['Akar'] });
+      const { wrapper, rows } = mountTagGroup({
+        selectionMode: 'multiple',
+        defaultValue: ['Vue', 'Akar', 'Nuxt'],
+        disabledTags: ['Akar'],
+      });
 
       await user.tab();
       await user.keyboard('{Backspace}');
-      expect(wrapper.vm.removed).toEqual([['Vue', 'Nuxt']]);
+      expect(wrapper.vm.removed).toEqual([
+        ['Vue', 'Nuxt'],
+      ]);
       expect(wrapper.vm.selected).toEqual(['Akar']);
       expect(rowNames(rows)).toEqual(['Akar', 'Accessibility']);
     });
@@ -224,7 +266,9 @@ describe('tagGroup', () => {
 
     it('focuses the group once the last tag is removed', async () => {
       const user = userEvent.setup();
-      const { root } = mountTagGroup({ tags: ['Vue'] });
+      const { root } = mountTagGroup({
+        tags: ['Vue'],
+      });
 
       await user.tab();
       await user.keyboard('{Delete}');
@@ -247,7 +291,9 @@ describe('tagGroup', () => {
 
     it('does not remove disabled tags', async () => {
       const user = userEvent.setup();
-      const { wrapper, deleteButton } = mountTagGroup({ disabledTags: ['Vue'] });
+      const { wrapper, deleteButton } = mountTagGroup({
+        disabledTags: ['Vue'],
+      });
 
       expect(deleteButton('Vue').attributes('disabled')).toBeDefined();
       await user.click(deleteButton('Vue').element);
@@ -313,7 +359,10 @@ describe('tagGroup', () => {
 
     it('clears the selection on Escape', async () => {
       const user = userEvent.setup();
-      const { wrapper } = mountTagGroup({ selectionMode: 'multiple', defaultValue: ['Vue', 'Nuxt'] });
+      const { wrapper } = mountTagGroup({
+        selectionMode: 'multiple',
+        defaultValue: ['Vue', 'Nuxt'],
+      });
 
       await user.tab();
       await user.keyboard('{Escape}');
@@ -322,7 +371,11 @@ describe('tagGroup', () => {
 
     it('keeps the last selected tag with `disallowEmptySelection`', async () => {
       const user = userEvent.setup();
-      const { wrapper, row } = mountTagGroup({ selectionMode: 'multiple', defaultValue: ['Vue'], disallowEmptySelection: true });
+      const { wrapper, row } = mountTagGroup({
+        selectionMode: 'multiple',
+        defaultValue: ['Vue'],
+        disallowEmptySelection: true,
+      });
 
       await user.click(row('Vue').element);
       await user.keyboard('{Escape}');
@@ -332,7 +385,13 @@ describe('tagGroup', () => {
 
   it('is labelled and described by an ancestor Field', async () => {
     const wrapper = mount(defineComponent({
-      components: { FieldRoot, FieldLabel, FieldDescription, TagGroupRoot, TagGroupItem },
+      components: {
+        FieldRoot,
+        FieldLabel,
+        FieldDescription,
+        TagGroupRoot,
+        TagGroupItem,
+      },
       template: `
         <FieldRoot>
           <FieldLabel :native-label="false">Frameworks</FieldLabel>

@@ -49,7 +49,10 @@ describe('given a HoverCard with enableTouch', () => {
   };
 
   beforeEach(() => {
-    wrapper = mount(HoverCard, { props: { enableTouch: true }, attachTo: document.body });
+    wrapper = mount(HoverCard, {
+      props: { enableTouch: true },
+      attachTo: document.body,
+    });
   });
 
   it('should toggle open/closed on touch tap', async () => {

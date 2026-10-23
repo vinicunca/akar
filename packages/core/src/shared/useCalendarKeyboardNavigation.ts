@@ -47,13 +47,22 @@ export function focusWeekBoundary(options: FocusWeekBoundaryOptions) {
     : getNextLastDayOfWeek(baseDate, weekStartsOn, locale);
   // The sign points outward toward the boundary; clamp/fallback logic in
   // `focusDate` turns it inward when the boundary day itself is not focusable.
-  const directionSign = boundary === 'start' ? -1 : 1;
-  focusDate({ ...options, target, directionSign, allowOutsideView: true });
+  const directionSign = boundary === 'start'
+    ? -1
+    : 1;
+  focusDate({
+    ...options,
+    target,
+    directionSign,
+    allowOutsideView: true,
+  });
 }
 
 export function focusPagination(options: FocusPaginationOptions) {
   const { baseDate, isNext, isYear, isOutsideVisibleView } = options;
-  const amount = isNext ? 1 : -1;
+  const amount = isNext
+    ? 1
+    : -1;
   const target = clampTargetDate(
     getTargetMonthDay(baseDate, isYear ? 'year' : 'month', amount),
     options.minValue,
@@ -61,7 +70,9 @@ export function focusPagination(options: FocusPaginationOptions) {
   );
 
   const customPageFn = (date: DateValue) => {
-    const pageDate = isYear ? date.add({ years: amount }) : date.add({ months: amount });
+    const pageDate = isYear
+      ? date.add({ years: amount })
+      : date.add({ months: amount });
     return pageDate.set({ day: 1 });
   };
 
@@ -77,7 +88,9 @@ export function focusPagination(options: FocusPaginationOptions) {
 }
 
 export function getTargetMonthDay(date: DateValue, unit: 'month' | 'year', amount: number): DateValue {
-  const targetBase = date.add(unit === 'month' ? { months: amount } : { years: amount });
+  const targetBase = date.add(unit === 'month'
+    ? { months: amount }
+    : { years: amount });
   const daysInTargetMonth = getDaysInMonth(targetBase);
   const targetDay = Math.min(date.day, daysInTargetMonth);
   return targetBase.set({ day: targetDay });
@@ -95,7 +108,12 @@ function compareDay(date: DateValue, reference: DateValue) {
  */
 function setDay(date: DateValue, bound: DateValue): DateValue {
   const day = toCalendar(toCalendarDate(bound), date.calendar);
-  return date.set({ era: day.era, year: day.year, month: day.month, day: day.day });
+  return date.set({
+    era: day.era,
+    year: day.year,
+    month: day.month,
+    day: day.day,
+  });
 }
 
 export function clampTargetDate(date: DateValue, minValue?: DateValue, maxValue?: DateValue): DateValue {
@@ -128,7 +146,9 @@ function focusDate(options: FocusDateOptions) {
   const wasClamped = isClampedToMin || isClampedToMax;
 
   if (!wasClamped) {
-    safeDirection = options.allowOutsideView ? -options.directionSign : options.directionSign;
+    safeDirection = options.allowOutsideView
+      ? -options.directionSign
+      : options.directionSign;
   } else if (isClampedToMin && options.directionSign < 0) {
     safeDirection = 1;
   } else if (isClampedToMax && options.directionSign > 0) {
@@ -154,7 +174,9 @@ function tryFocusDate(
   // outside-view copy in a neighbouring grid; always prefer the in-month cell.
   const valueSelector = `[data-value='${target.toString()}']`;
   const candidateDay = parentElement.querySelector<HTMLElement>(`${valueSelector}:not([data-outside-view])`)
-    ?? (options.allowOutsideView ? parentElement.querySelector<HTMLElement>(valueSelector) : null);
+    ?? (options.allowOutsideView
+      ? parentElement.querySelector<HTMLElement>(valueSelector)
+      : null);
 
   if (!candidateDay) {
     nextTick(() => tryFocusDate(parentElement, target, directionSign, retries + 1, options));

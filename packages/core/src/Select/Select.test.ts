@@ -191,7 +191,10 @@ describe('given Select with multiple props', async () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Select, { attachTo: document.body, props: { multiple: true } });
+    wrapper = mount(Select, {
+      attachTo: document.body,
+      props: { multiple: true },
+    });
     valueBox = wrapper.find('[aria-label="Customise options"]');
   });
 
@@ -311,7 +314,21 @@ describe('given Select with object type', async () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Select, { attachTo: document.body, props: { options: ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'].map((i) => ({ label: i, value: i.toLowerCase() })) } });
+    wrapper = mount(Select, {
+      attachTo: document.body,
+      props: {
+        options: [
+          'Apple',
+          'Banana',
+          'Blueberry',
+          'Grapes',
+          'Pineapple',
+        ].map((i) => ({
+          label: i,
+          value: i.toLowerCase(),
+        })),
+      },
+    });
     valueBox = wrapper.find('[aria-label="Customise options"]');
   });
 
@@ -351,7 +368,12 @@ describe('given Select with options containing spaces', () => {
 
   beforeEach(async () => {
     document.body.innerHTML = '';
-    wrapper = mount(Select, { attachTo: document.body, props: { options: ['New York', 'Newark', 'New Jersey'] } });
+    wrapper = mount(Select, {
+      attachTo: document.body,
+      props: {
+        options: ['New York', 'Newark', 'New Jersey'],
+      },
+    });
     await fireEvent.pointerDown(wrapper.find('button').element, {
       button: 0,
       ctrlKey: false,
@@ -362,7 +384,13 @@ describe('given Select with options containing spaces', () => {
   it('should include Space in the typeahead search once typing has started', async () => {
     (wrapper.findAll('[role=option]')[0].element as HTMLElement).focus();
 
-    for (const [key, code] of [['n', 'KeyN'], ['e', 'KeyE'], ['w', 'KeyW'], [' ', 'Space'], ['j', 'KeyJ']]) {
+    for (const [key, code] of [
+      ['n', 'KeyN'],
+      ['e', 'KeyE'],
+      ['w', 'KeyW'],
+      [' ', 'Space'],
+      ['j', 'KeyJ'],
+    ]) {
       await fireEvent.keyDown(document.activeElement!, { key, code });
       await nextTick();
     }
@@ -375,7 +403,12 @@ describe('given Select with options containing spaces', () => {
     await fireEvent.keyDown(document.activeElement!, { key: 'n', code: 'KeyN' });
     await nextTick();
 
-    const event = new KeyboardEvent('keydown', { key: ' ', code: 'Space', bubbles: true, cancelable: true });
+    const event = new KeyboardEvent('keydown', {
+      key: ' ',
+      code: 'Space',
+      bubbles: true,
+      cancelable: true,
+    });
     document.activeElement!.dispatchEvent(event);
 
     expect(event.defaultPrevented).toBe(true);
@@ -555,7 +588,12 @@ describe('given Select with `loop`', () => {
           ))));
       },
     }), { attachTo: document.body });
-    return { wrapper, items: () => [...document.querySelectorAll<HTMLElement>('[role=option]')] };
+    return {
+      wrapper,
+      items: () => [
+        ...document.querySelectorAll<HTMLElement>('[role=option]'),
+      ],
+    };
   }
 
   async function press(key: string) {
@@ -639,7 +677,9 @@ describe('given SelectTrigger with consumer event listeners', () => {
   });
 
   it.each(['Enter', ' ', 'ArrowDown'])('should not open on %j keydown when the consumer prevents default', async (key) => {
-    const { open, trigger } = mountSelect({ onKeydown: (event) => event.preventDefault() });
+    const { open, trigger } = mountSelect({
+      onKeydown: (event) => event.preventDefault(),
+    });
     await fireEvent.keyDown(trigger, { key });
     expect(open.value).toBe(false);
   });
@@ -651,13 +691,17 @@ describe('given SelectTrigger with consumer event listeners', () => {
   });
 
   it('should not open on mouse pointerdown when the consumer prevents default', async () => {
-    const { open, trigger } = mountSelect({ onPointerdown: (event) => event.preventDefault() });
+    const { open, trigger } = mountSelect({
+      onPointerdown: (event) => event.preventDefault(),
+    });
     await dispatchPointer(trigger, 'pointerdown', 'mouse');
     expect(open.value).toBe(false);
   });
 
   it('should not open on touch pointerup when the consumer prevents default', async () => {
-    const { open, trigger } = mountSelect({ onPointerup: (event) => event.preventDefault() });
+    const { open, trigger } = mountSelect({
+      onPointerup: (event) => event.preventDefault(),
+    });
     await dispatchPointer(trigger, 'pointerup', 'touch');
     expect(open.value).toBe(false);
   });
@@ -687,7 +731,9 @@ describe('given SelectTrigger with consumer event listeners', () => {
   });
 
   it('should not focus the trigger on click when the consumer prevents default', async () => {
-    const { trigger } = mountSelect({ onClick: (event) => event.preventDefault() });
+    const { trigger } = mountSelect({
+      onClick: (event) => event.preventDefault(),
+    });
     const focusSpy = vi.spyOn(trigger, 'focus');
     trigger.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, button: 0 }));
     expect(focusSpy).not.toHaveBeenCalled();

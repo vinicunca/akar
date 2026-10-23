@@ -3,32 +3,38 @@ import { Icon } from '@iconify/vue';
 
 import { StepperDescription, StepperIndicator, StepperItem, StepperRoot, StepperSeparator, StepperTitle, StepperTrigger } from '..';
 
-const steps = [{
-  step: 1,
-  title: 'Address',
-  description: 'Add your address here',
-  icon: 'radix-icons:home',
-}, {
-  step: 2,
-  title: 'Shipping',
-  description: 'Set your preferred shipping method',
-  icon: 'radix-icons:archive',
-}, {
-  step: 3,
-  title: 'Trade-in',
-  description: 'Add any trade-in items you have',
-  icon: 'radix-icons:update',
-}, {
-  step: 4,
-  title: 'Payment',
-  description: 'Add any payment information you have',
-  icon: 'radix-icons:sketch-logo',
-}, {
-  step: 5,
-  title: 'Checkout',
-  description: 'Confirm your order',
-  icon: 'radix-icons:check',
-}];
+const steps = [
+  {
+    step: 1,
+    title: 'Address',
+    description: 'Add your address here',
+    icon: 'radix-icons:home',
+  },
+  {
+    step: 2,
+    title: 'Shipping',
+    description: 'Set your preferred shipping method',
+    icon: 'radix-icons:archive',
+  },
+  {
+    step: 3,
+    title: 'Trade-in',
+    description: 'Add any trade-in items you have',
+    icon: 'radix-icons:update',
+  },
+  {
+    step: 4,
+    title: 'Payment',
+    description: 'Add any payment information you have',
+    icon: 'radix-icons:sketch-logo',
+  },
+  {
+    step: 5,
+    title: 'Checkout',
+    description: 'Confirm your order',
+    icon: 'radix-icons:check',
+  },
+];
 </script>
 
 <template>

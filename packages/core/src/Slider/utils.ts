@@ -103,7 +103,7 @@ export function hasMinStepsBetweenValues(values: Array<number>, minStepsBetweenV
   return true;
 }
 
-// https://github.com/tmcw-up-for-adoption/simple-linear-scale/blob/master/index.js
+/** https://github.com/tmcw-up-for-adoption/simple-linear-scale/blob/master/index.js */
 export function linearScale(input: readonly [number, number], output: readonly [number, number]) {
   return (value: number) => {
     if (input[0] === input[1] || output[0] === output[1]) {
@@ -126,14 +126,39 @@ export function roundValue(value: number, decimalCount: number) {
 export type Direction = 'ltr' | 'rtl';
 
 export const PAGE_KEYS = ['PageUp', 'PageDown'];
-export const ARROW_KEYS = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+export const ARROW_KEYS = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+];
 
 type SlideDirection = 'from-left' | 'from-right' | 'from-bottom' | 'from-top';
 export const BACK_KEYS: Record<SlideDirection, Array<string>> = {
-  'from-left': ['Home', 'PageDown', 'ArrowDown', 'ArrowLeft'],
-  'from-right': ['Home', 'PageDown', 'ArrowDown', 'ArrowRight'],
-  'from-bottom': ['Home', 'PageDown', 'ArrowDown', 'ArrowLeft'],
-  'from-top': ['Home', 'PageUp', 'ArrowUp', 'ArrowLeft'],
+  'from-left': [
+    'Home',
+    'PageDown',
+    'ArrowDown',
+    'ArrowLeft',
+  ],
+  'from-right': [
+    'Home',
+    'PageDown',
+    'ArrowDown',
+    'ArrowRight',
+  ],
+  'from-bottom': [
+    'Home',
+    'PageDown',
+    'ArrowDown',
+    'ArrowLeft',
+  ],
+  'from-top': [
+    'Home',
+    'PageUp',
+    'ArrowUp',
+    'ArrowLeft',
+  ],
 };
 
 type Side = 'top' | 'right' | 'bottom' | 'left';

@@ -44,7 +44,14 @@ function setup(props: { dateFieldProps?: DateRangeFieldRootProps; emits?: { 'onU
   const input = returned.getByTestId('input');
   const label = returned.getByTestId('label');
 
-  return { ...returned, user, start, end, input, label };
+  return {
+    ...returned,
+    user,
+    start,
+    end,
+    input,
+    label,
+  };
 }
 
 it('should pass axe accessibility tests', async () => {

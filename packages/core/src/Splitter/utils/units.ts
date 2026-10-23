@@ -128,8 +128,6 @@ export function recalculateLayoutForPixelPanels({
 
   const nextLayout = layout.map((size) => size ?? 0);
 
-  const prevPercentForPixelPanels = pixelPanelIndices.reduce((sum, index) => sum + (layout[index] ?? 0), 0);
-
   const nextPixelPercents = pixelPanelIndices.map((index) => {
     const prevPercent = layout[index] ?? 0;
     const prevPixelSize = (prevPercent / 100) * prevGroupSize;

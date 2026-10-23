@@ -33,7 +33,9 @@ describe('transformOrigin direction-aware logic', () => {
   ) {
     const result = await transformOrigin(options).fn({
       placement,
-      rects: { floating: { width: 100, height: 50 } },
+      rects: {
+        floating: { width: 100, height: 50 },
+      },
       middlewareData: { arrow: arrowData },
     } as any);
     return result.data as { x: string; y: string };
@@ -143,8 +145,12 @@ describe('popper wrapper dir attribute', () => {
         return () =>
           h(PopperRoot, null, {
             default: () => [
-              h(PopperAnchor, null, { default: () => 'Anchor' }),
-              h(PopperContent, { dir: 'rtl' }, { default: () => 'Content' }),
+              h(PopperAnchor, null, {
+                default: () => 'Anchor',
+              }),
+              h(PopperContent, { dir: 'rtl' }, {
+                default: () => 'Content',
+              }),
             ],
           });
       },
@@ -161,8 +167,12 @@ describe('popper wrapper dir attribute', () => {
         return () =>
           h(PopperRoot, null, {
             default: () => [
-              h(PopperAnchor, null, { default: () => 'Anchor' }),
-              h(PopperContent, { dir: 'ltr' }, { default: () => 'Content' }),
+              h(PopperAnchor, null, {
+                default: () => 'Anchor',
+              }),
+              h(PopperContent, { dir: 'ltr' }, {
+                default: () => 'Content',
+              }),
             ],
           });
       },

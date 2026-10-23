@@ -91,7 +91,9 @@ function toNativeSpace(color: Color, ch: ColorChannelType, space: ColorSpace): C
     case 'lightness':
       return convertToHsl(color);
     case 'saturation':
-      return space === 'hsb' ? convertToHsb(color) : convertToHsl(color);
+      return space === 'hsb'
+        ? convertToHsb(color)
+        : convertToHsl(color);
     case 'brightness':
       return convertToHsb(color);
     case 'red':

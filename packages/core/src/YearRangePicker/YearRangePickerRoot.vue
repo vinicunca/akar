@@ -292,16 +292,31 @@ watch([startValue, endValue], ([_startValue, _endValue]) => {
   isEditing.value = true;
   if (_endValue && _startValue) {
     const nextValue = _endValue.year < _startValue.year
-      ? { start: _endValue.copy(), end: _startValue.copy() }
-      : { start: _startValue.copy(), end: _endValue.copy() };
+      ? {
+          start: _endValue.copy(),
+          end: _startValue.copy(),
+        }
+      : {
+          start: _startValue.copy(),
+          end: _endValue.copy(),
+        };
 
     modelValue.value = { start: nextValue.start, end: nextValue.end };
     isEditing.value = false;
-    validModelValue.value = { start: nextValue.start.copy(), end: nextValue.end.copy() };
+    validModelValue.value = {
+      start: nextValue.start.copy(),
+      end: nextValue.end.copy(),
+    };
   } else {
     modelValue.value = _startValue
-      ? { start: _startValue.copy(), end: undefined }
-      : { start: _endValue?.copy(), end: undefined };
+      ? {
+          start: _startValue.copy(),
+          end: undefined,
+        }
+      : {
+          start: _endValue?.copy(),
+          end: undefined,
+        };
   }
 });
 

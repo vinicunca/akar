@@ -31,11 +31,15 @@ function isValidOrientation(orientation: any): orientation is DataOrientation {
 }
 
 const computedOrientation = computed(() =>
-  isValidOrientation(props.orientation) ? props.orientation : 'horizontal',
+  isValidOrientation(props.orientation)
+    ? props.orientation
+    : 'horizontal',
 );
 // `aria-orientation` defaults to `horizontal` so we only need it if `orientation` is vertical
 const ariaOrientation = computed(() =>
-  computedOrientation.value === 'vertical' ? props.orientation : undefined,
+  computedOrientation.value === 'vertical'
+    ? props.orientation
+    : undefined,
 );
 
 const semanticProps = computed(() =>

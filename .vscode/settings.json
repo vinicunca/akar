@@ -10,6 +10,10 @@
     "typescriptreact": "html",
     "postcss": "css"
   },
+
+  "eslint.lintTask.enable": true,
+  "eslint.lintTask.command": "pnpm lint",
+
   "eslint.codeAction.showDocumentation": {
     "enable": true
   },

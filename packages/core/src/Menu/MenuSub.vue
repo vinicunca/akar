@@ -53,7 +53,9 @@ watchEffect((cleanupFn) => {
   if (parentMenuContext?.open.value === false) {
     open.value = false;
   }
-  cleanupFn(() => (open.value = false));
+  cleanupFn(() => {
+    open.value = false;
+  });
 });
 
 provideMenuContext({

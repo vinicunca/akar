@@ -48,7 +48,13 @@ const DrawerTest = defineComponent({
 });
 
 const NoTitleDrawerTest = defineComponent({
-  components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerContent, DrawerClose },
+  components: {
+    DrawerRoot,
+    DrawerTrigger,
+    DrawerPortal,
+    DrawerContent,
+    DrawerClose,
+  },
   template: `
     <DrawerRoot>
       <DrawerTrigger>${OPEN_TEXT}</DrawerTrigger>
@@ -159,10 +165,20 @@ describe('given a default Drawer', () => {
 
 describe('update:open change event details', () => {
   const DrawerWithReason = defineComponent({
-    components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerContent, DrawerTitle, DrawerClose },
+    components: {
+      DrawerRoot,
+      DrawerTrigger,
+      DrawerPortal,
+      DrawerContent,
+      DrawerTitle,
+      DrawerClose,
+    },
     props: {
       onOpenChange: { type: Function, required: true },
-      modal: { type: [Boolean, String], default: true },
+      modal: {
+        type: [Boolean, String],
+        default: true,
+      },
     },
     template: `
       <DrawerRoot @update:open="onOpenChange" :modal="modal">
@@ -183,7 +199,9 @@ describe('update:open change event details', () => {
 
   it('emits trigger-press reason on trigger click', async () => {
     const onOpenChange = vi.fn();
-    const { getByText } = render(DrawerWithReason, { props: { onOpenChange } });
+    const { getByText } = render(DrawerWithReason, {
+      props: { onOpenChange },
+    });
     await fireEvent.click(getByText('Open'));
     await nextTick();
     expect(onOpenChange).toHaveBeenCalledWith(true, expect.objectContaining({ reason: 'trigger-press' }));
@@ -191,7 +209,9 @@ describe('update:open change event details', () => {
 
   it('emits close-press reason on close click', async () => {
     const onOpenChange = vi.fn();
-    const { getByText } = render(DrawerWithReason, { props: { onOpenChange } });
+    const { getByText } = render(DrawerWithReason, {
+      props: { onOpenChange },
+    });
     await fireEvent.click(getByText('Open'));
     await nextTick();
     onOpenChange.mockClear();
@@ -202,7 +222,9 @@ describe('update:open change event details', () => {
 
   it('closes on a second trigger click (toggle)', async () => {
     const onOpenChange = vi.fn();
-    const { getByText } = render(DrawerWithReason, { props: { onOpenChange } });
+    const { getByText } = render(DrawerWithReason, {
+      props: { onOpenChange },
+    });
     await fireEvent.click(getByText('Open'));
     await nextTick();
     onOpenChange.mockClear();
@@ -214,7 +236,9 @@ describe('update:open change event details', () => {
   it('closes on a second trigger click in non-modal mode', async () => {
     const user = userEvent.setup();
     const onOpenChange = vi.fn();
-    const { getByText } = render(DrawerWithReason, { props: { onOpenChange, modal: false } });
+    const { getByText } = render(DrawerWithReason, {
+      props: { onOpenChange, modal: false },
+    });
     await user.click(getByText('Open'));
     await nextTick();
     onOpenChange.mockClear();
@@ -227,10 +251,23 @@ describe('update:open change event details', () => {
 
 describe('given a Drawer with focus props', () => {
   const DrawerWithFocusProps = defineComponent({
-    components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerContent, DrawerTitle, DrawerClose },
+    components: {
+      DrawerRoot,
+      DrawerTrigger,
+      DrawerPortal,
+      DrawerContent,
+      DrawerTitle,
+      DrawerClose,
+    },
     props: {
-      initialFocus: { type: [Boolean, Object], default: undefined },
-      finalFocus: { type: [Boolean, Object], default: undefined },
+      initialFocus: {
+        type: [Boolean, Object],
+        default: undefined,
+      },
+      finalFocus: {
+        type: [Boolean, Object],
+        default: undefined,
+      },
     },
     template: `
       <div>
@@ -250,7 +287,14 @@ describe('given a Drawer with focus props', () => {
   });
 
   const DrawerWithoutFocusProps = defineComponent({
-    components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerContent, DrawerTitle, DrawerClose },
+    components: {
+      DrawerRoot,
+      DrawerTrigger,
+      DrawerPortal,
+      DrawerContent,
+      DrawerTitle,
+      DrawerClose,
+    },
     template: `
       <DrawerRoot>
         <DrawerTrigger>Open</DrawerTrigger>
@@ -291,7 +335,9 @@ describe('given a Drawer with focus props', () => {
 
   it('does not move focus on open when initialFocus is false', async () => {
     const user = userEvent.setup();
-    const { getByText, getByTestId } = render(DrawerWithFocusProps, { props: { initialFocus: false } });
+    const { getByText, getByTestId } = render(DrawerWithFocusProps, {
+      props: { initialFocus: false },
+    });
     const trigger = getByText('Open');
     await user.click(trigger);
     await nextTick();
@@ -302,7 +348,9 @@ describe('given a Drawer with focus props', () => {
   it('focuses the given element on open when initialFocus is an element', async () => {
     const user = userEvent.setup();
     const { getByText, getByTestId, rerender } = render(DrawerWithFocusProps);
-    await rerender({ initialFocus: getByTestId('outside') });
+    await rerender({
+      initialFocus: getByTestId('outside'),
+    });
     await user.click(getByText('Open'));
     await nextTick();
     expect(document.activeElement).toBe(getByTestId('outside'));
@@ -321,7 +369,9 @@ describe('given a Drawer with focus props', () => {
 
   it('does not restore focus on close when finalFocus is false', async () => {
     const user = userEvent.setup();
-    const { getByText } = render(DrawerWithFocusProps, { props: { finalFocus: false } });
+    const { getByText } = render(DrawerWithFocusProps, {
+      props: { finalFocus: false },
+    });
     const trigger = getByText('Open');
     await user.click(trigger);
     await nextTick();
@@ -333,7 +383,9 @@ describe('given a Drawer with focus props', () => {
   it('focuses the given element on close when finalFocus is an element', async () => {
     const user = userEvent.setup();
     const { getByText, getByTestId, rerender } = render(DrawerWithFocusProps);
-    await rerender({ finalFocus: getByTestId('outside') });
+    await rerender({
+      finalFocus: getByTestId('outside'),
+    });
     await user.click(getByText('Open'));
     await nextTick();
     await user.click(getByText('Close'));
@@ -430,7 +482,9 @@ describe('drawer with DrawerVirtualKeyboardProvider', () => {
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
       configurable: true,
       get(this: HTMLElement) {
-        return this.style.height === '100svh' ? LAYOUT_HEIGHT : originalOffsetHeight.get!.call(this);
+        return this.style.height === '100svh'
+          ? LAYOUT_HEIGHT
+          : originalOffsetHeight.get!.call(this);
       },
     });
   });
@@ -469,7 +523,14 @@ describe('drawer with DrawerVirtualKeyboardProvider', () => {
   it('warns when the drawer has no DrawerViewport to measure against', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const NoViewport = defineComponent({
-      components: { DrawerRoot, DrawerVirtualKeyboardProvider, DrawerTrigger, DrawerPortal, DrawerContent, DrawerTitle },
+      components: {
+        DrawerRoot,
+        DrawerVirtualKeyboardProvider,
+        DrawerTrigger,
+        DrawerPortal,
+        DrawerContent,
+        DrawerTitle,
+      },
       template: `
         <DrawerRoot>
           <DrawerVirtualKeyboardProvider>
@@ -496,7 +557,14 @@ describe('drawer with DrawerVirtualKeyboardProvider', () => {
   it('does not warn when a drawer with a DrawerViewport starts open', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const OpenOnMount = defineComponent({
-      components: { DrawerRoot, DrawerVirtualKeyboardProvider, DrawerPortal, DrawerContent, DrawerViewport, DrawerTitle },
+      components: {
+        DrawerRoot,
+        DrawerVirtualKeyboardProvider,
+        DrawerPortal,
+        DrawerContent,
+        DrawerViewport,
+        DrawerTitle,
+      },
       template: `
         <DrawerRoot default-open>
           <DrawerVirtualKeyboardProvider>
@@ -523,8 +591,18 @@ describe('drawer with DrawerVirtualKeyboardProvider', () => {
   it('forgets the viewport once it unmounts', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const ToggleableViewport = defineComponent({
-      components: { DrawerRoot, DrawerVirtualKeyboardProvider, DrawerTrigger, DrawerPortal, DrawerContent, DrawerViewport, DrawerTitle },
-      props: { withViewport: { type: Boolean, default: true } },
+      components: {
+        DrawerRoot,
+        DrawerVirtualKeyboardProvider,
+        DrawerTrigger,
+        DrawerPortal,
+        DrawerContent,
+        DrawerViewport,
+        DrawerTitle,
+      },
+      props: {
+        withViewport: { type: Boolean, default: true },
+      },
       template: `
         <DrawerRoot>
           <DrawerVirtualKeyboardProvider>

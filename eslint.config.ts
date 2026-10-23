@@ -4,10 +4,13 @@ export default vinicuncaESLint(
   {
     vue: {
       overrides: {
-        'vue/max-attributes-per-line': ['error', {
-          singleline: 1,
-          multiline: 1,
-        }],
+        'vue/max-attributes-per-line': [
+          'error',
+          {
+            singleline: 1,
+            multiline: 1,
+          },
+        ],
       },
     },
     typescript: true,
@@ -33,19 +36,25 @@ export default vinicuncaESLint(
       'no-console': 'warn',
       'import/first': 'off',
       'import/order': 'off',
-      'style/max-statements-per-line': ['error', { max: 2 }],
+      'style/max-statements-per-line': [
+        'error',
+        { max: 2 },
+      ],
       'vue/one-component-per-file': 'off',
       'unicorn/prefer-dom-node-text-content': 'off',
       'unicorn/prefer-number-properties': 'off',
       'unused-imports/no-unused-vars': 'off',
+      'ts/no-unused-vars': 'off',
       'regexp/no-super-linear-backtracking': 'off',
       'markdown/heading-increment': 'off',
       'markdown/no-multiple-h1': 'off',
       'no-await-in-loop': 'off',
-      'sonar/no-dead-store': 'off',
-      'sonar/no-nested-conditional': 'off',
-      'sonar/no-nested-functions': 'off',
-      'sonar/void-use': 'off',
+      'sonarjs/no-dead-store': 'off',
+      'sonarjs/no-nested-conditional': 'off',
+      'sonarjs/no-nested-functions': 'off',
+      'sonarjs/void-use': 'off',
+      'sonarjs/cognitive-complexity': 'off',
+      'slop/no-chained-type-assertions': 'off',
     },
   },
   {

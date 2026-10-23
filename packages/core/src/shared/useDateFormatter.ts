@@ -46,7 +46,10 @@ export function useDateFormatter(initialLocale: string, opts: DateFormatterOptio
   }
 
   function custom(date: Date, options: DateFormatterOptions) {
-    return new DateFormatter(locale.value, { ...opts, ...options }).format(date);
+    return new DateFormatter(locale.value, {
+      ...opts,
+      ...options,
+    }).format(date);
   }
 
   function selectedDate(date: DateValue, includeTime = true) {
@@ -63,21 +66,37 @@ export function useDateFormatter(initialLocale: string, opts: DateFormatterOptio
   }
 
   function fullMonthAndYear(date: Date, options: DateFormatterOptions = {}) {
-    return new DateFormatter(locale.value, { ...opts, month: 'long', year: 'numeric', ...options }).format(date);
+    return new DateFormatter(locale.value, {
+      ...opts,
+      month: 'long',
+      year: 'numeric',
+      ...options,
+    }).format(date);
   }
 
   function fullMonth(date: Date, options: DateFormatterOptions = {}) {
-    return new DateFormatter(locale.value, { ...opts, month: 'long', ...options }).format(date);
+    return new DateFormatter(locale.value, {
+      ...opts,
+      month: 'long',
+      ...options,
+    }).format(date);
   }
 
   function getMonths() {
     const defaultDate = today(getLocalTimeZone());
     const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-    return months.map((item) => ({ label: fullMonth(toDate(defaultDate.set({ month: item }))), value: item }));
+    return months.map((item) => ({
+      label: fullMonth(toDate(defaultDate.set({ month: item }))),
+      value: item,
+    }));
   }
 
   function fullYear(date: Date, options: DateFormatterOptions = {}) {
-    return new DateFormatter(locale.value, { ...opts, year: 'numeric', ...options }).format(date);
+    return new DateFormatter(locale.value, {
+      ...opts,
+      year: 'numeric',
+      ...options,
+    }).format(date);
   }
 
   function toParts(date: DateValue, options?: DateFormatterOptions) {
@@ -88,7 +107,10 @@ export function useDateFormatter(initialLocale: string, opts: DateFormatterOptio
         timeZone: (date as ZonedDateTime).timeZone,
       }).formatToParts(toDate(date));
     } else {
-      return new DateFormatter(locale.value, { ...opts, ...options }).formatToParts(toDate(date));
+      return new DateFormatter(locale.value, {
+        ...opts,
+        ...options,
+      }).formatToParts(toDate(date));
     }
   }
 
@@ -121,11 +143,15 @@ export function useDateFormatter(initialLocale: string, opts: DateFormatterOptio
       hourCycle: 'h23',
       hour12: undefined,
       numberingSystem: 'latn',
-      ...(timeZone ? { timeZone } : {}),
+      ...(timeZone
+        ? { timeZone }
+        : {}),
     }).formatToParts(date);
     const hour = Number(parts.find((p) => p.type === 'hour')?.value);
 
-    return !Number.isNaN(hour) && hour >= 12 ? 'PM' : 'AM';
+    return !Number.isNaN(hour) && hour >= 12
+      ? 'PM'
+      : 'AM';
   }
 
   const defaultPartOptions: DateFormatterOptions = {
@@ -142,7 +168,10 @@ export function useDateFormatter(initialLocale: string, opts: DateFormatterOptio
     type: Intl.DateTimeFormatPartTypes,
     options: DateFormatterOptions = {},
   ) {
-    const opts = { ...defaultPartOptions, ...options };
+    const opts = {
+      ...defaultPartOptions,
+      ...options,
+    };
     const parts = toParts(dateObj, opts);
     const part = parts.find((p) => p.type === type);
     return part ? part.value : '';

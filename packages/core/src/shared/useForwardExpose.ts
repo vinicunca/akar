@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import type { MaybeElement } from '@vueuse/core';
 import type { ComponentPublicInstance } from 'vue';
 // reference: https://github.com/vuejs/rfcs/issues/258#issuecomment-1068697672
@@ -72,7 +73,9 @@ export function useForwardExpose<T extends ComponentPublicInstance>() {
     Object.defineProperty(ret, '$el', {
       enumerable: true,
       configurable: true,
-      get: () => (ref instanceof Element ? ref : ref.$el),
+      get: () => (ref instanceof Element
+        ? ref
+        : ref.$el),
     });
 
     // ref not is Element

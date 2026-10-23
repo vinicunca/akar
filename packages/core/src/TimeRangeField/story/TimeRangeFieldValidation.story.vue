@@ -3,7 +3,10 @@ import type { Matcher } from '@/date';
 import { Time } from '@internationalized/date';
 import TimeRangeField from './_DummyTimeRangeField.vue';
 
-const defaultValue = { start: new Time(10, 0), end: new Time(12, 0) };
+const defaultValue = {
+  start: new Time(10, 0),
+  end: new Time(12, 0),
+};
 const minValue = new Time(9, 0);
 const maxValue = new Time(18, 0);
 

@@ -79,9 +79,13 @@ function handleWheelEvent(event: WheelEvent) {
 
   event.preventDefault();
   if (event.deltaY > 0) {
-    rootContext.invertWheelChange.value ? rootContext.handleDecrease() : rootContext.handleIncrease();
+    rootContext.invertWheelChange.value
+      ? rootContext.handleDecrease()
+      : rootContext.handleIncrease();
   } else if (event.deltaY < 0) {
-    rootContext.invertWheelChange.value ? rootContext.handleIncrease() : rootContext.handleDecrease();
+    rootContext.invertWheelChange.value
+      ? rootContext.handleIncrease()
+      : rootContext.handleDecrease();
   }
 }
 

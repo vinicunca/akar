@@ -48,7 +48,9 @@ describe('ssr hydration', () => {
       container.innerHTML = await renderToString(serverApp);
 
       // value 2.5 with step 0.5 → steps: 0.5,1,1.5,2,2.5,3
-      const serverOpacities = [...container.querySelectorAll('[role=radio]')]
+      const serverOpacities = [
+        ...container.querySelectorAll('[role=radio]'),
+      ]
         .map((el) => getStepOpacity(el.getAttribute('style') ?? undefined));
       expect(serverOpacities).toEqual(['0', '1', '0', '1', '1', '1']);
 
@@ -65,7 +67,9 @@ describe('ssr hydration', () => {
       clientApp.mount(container);
       await nextTick();
 
-      const clientOpacities = [...container.querySelectorAll('[role=radio]')]
+      const clientOpacities = [
+        ...container.querySelectorAll('[role=radio]'),
+      ]
         .map((el) => getStepOpacity(el.getAttribute('style') ?? undefined));
       expect(clientOpacities).toEqual(serverOpacities);
 
@@ -106,7 +110,10 @@ describe('given a default Rating', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Rating, { attachTo: document.body, props: { defaultValue: 1, length: 3, orientation: 'vertical' } });
+    wrapper = mount(Rating, {
+      attachTo: document.body,
+      props: { defaultValue: 1, length: 3, orientation: 'vertical' },
+    });
     radios = wrapper.findAll('[role=radio]');
   });
 
@@ -156,7 +163,10 @@ describe('given a hoverable Rating', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Rating, { attachTo: document.body, props: { defaultValue: 1, hoverable: true, length: 3 } });
+    wrapper = mount(Rating, {
+      attachTo: document.body,
+      props: { defaultValue: 1, hoverable: true, length: 3 },
+    });
     root = wrapper.find('[role=radiogroup]');
     radios = wrapper.findAll('[role=radio]');
   });
@@ -183,7 +193,10 @@ describe('given disabled Rating', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Rating, { attachTo: document.body, props: { defaultValue: 1, disabled: true, length: 3 } });
+    wrapper = mount(Rating, {
+      attachTo: document.body,
+      props: { defaultValue: 1, disabled: true, length: 3 },
+    });
     radios = wrapper.findAll('[role=radio]');
   });
 
@@ -195,12 +208,20 @@ describe('given disabled Rating', () => {
     expect(radios[0].attributes('data-state')).toBe('active');
   });
 
-  it.each([[0, 'active'], [1, undefined], [2, undefined]])('should not select any item', async (input, output) => {
+  it.each([
+    [0, 'active'],
+    [1, undefined],
+    [2, undefined],
+  ])('should not select any item', async (input, output) => {
     await radios[input].trigger('click');
     expect(radios[input].attributes('data-state')).toBe(output);
   });
 
-  it.each([[0], [1], [2]])('should have disabled attribute on item', async (input) => {
+  it.each([
+    [0],
+    [1],
+    [2],
+  ])('should have disabled attribute on item', async (input) => {
     expect(radios[input].attributes('disabled')).toBe('');
     expect(radios[input].attributes('data-disabled')).toBe('');
   });

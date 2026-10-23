@@ -6,7 +6,9 @@ import { ListboxContent, ListboxItem, ListboxRoot } from '..';
 const filterText = ref('');
 const filteredOptions = computed(() => {
   const options = countryList.map((a) => ({ label: a, value: a }));
-  return filterText.value ? options.filter((item) => item.label.toLowerCase().includes(filterText.value.toLowerCase())) : options;
+  return filterText.value
+    ? options.filter((item) => item.label.toLowerCase().includes(filterText.value.toLowerCase()))
+    : options;
 });
 </script>
 

@@ -11,7 +11,9 @@ export function roundToStepPrecision(value: number, step: number) {
   let roundedValue = value;
   const stepString = step.toString();
   const pointIndex = stepString.indexOf('.');
-  const precision = pointIndex >= 0 ? stepString.length - pointIndex : 0;
+  const precision = pointIndex >= 0
+    ? stepString.length - pointIndex
+    : 0;
   if (precision > 0) {
     const pow = 10 ** precision;
     roundedValue = Math.round(roundedValue * pow) / pow;
@@ -36,7 +38,9 @@ export function roundToStepPrecision(value: number, step: number) {
 export function snapValueToStep(value: number, min: number | undefined, max: number | undefined, step: number): number {
   min = Number(min);
   max = Number(max);
-  const remainder = ((value - (Number.isNaN(min) ? 0 : min)) % step);
+  const remainder = ((value - (Number.isNaN(min)
+    ? 0
+    : min)) % step);
   let snappedValue = roundToStepPrecision(Math.abs(remainder) * 2 >= step
     ? value + Math.sign(remainder) * (step - Math.abs(remainder))
     : value - remainder, step);

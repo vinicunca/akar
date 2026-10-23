@@ -81,7 +81,16 @@ function setup(props: { dateFieldProps?: DateFieldRootProps; emits?: { 'onUpdate
   const input = returned.getByTestId('input');
   const label = returned.getByTestId('label');
 
-  return { ...returned, user, month, day, year, input, label, value };
+  return {
+    ...returned,
+    user,
+    month,
+    day,
+    year,
+    input,
+    label,
+    value,
+  };
 }
 
 it('should pass axe accessibility tests', async () => {
@@ -172,7 +181,15 @@ describe('dateField', async () => {
     const minute = getByTestId('minute');
     const dayPeriod = getByTestId('dayPeriod');
     const timeZoneName = getByTestId('timeZoneName');
-    const segments = [day, month, year, hour, minute, dayPeriod, timeZoneName];
+    const segments = [
+      day,
+      month,
+      year,
+      hour,
+      minute,
+      dayPeriod,
+      timeZoneName,
+    ];
 
     for (const segment of segments) {
       await user.click(segment);
@@ -279,7 +296,16 @@ describe('dateField', async () => {
     });
     const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
 
-    const segments = [month, day, year, hour, minute, second, dayPeriod, timeZoneName];
+    const segments = [
+      month,
+      day,
+      year,
+      hour,
+      minute,
+      second,
+      dayPeriod,
+      timeZoneName,
+    ];
 
     await user.click(month);
 
@@ -305,7 +331,15 @@ describe('dateField', async () => {
     });
     const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
 
-    const segments = [month, day, year, hour, minute, second, dayPeriod];
+    const segments = [
+      month,
+      day,
+      year,
+      hour,
+      minute,
+      second,
+      dayPeriod,
+    ];
 
     await user.click(month);
 
@@ -398,12 +432,16 @@ describe('dateField', async () => {
     const emitted: Array<DateValue> = [];
     const { getByTestId, user, rerender } = setup({
       dateFieldProps: { modelValue: zonedDateTime },
-      emits: { 'onUpdate:modelValue': (data) => emitted.push(data) },
+      emits: {
+        'onUpdate:modelValue': (data) => emitted.push(data),
+      },
     });
     expect(getByTestId('timeZoneName')).toHaveTextContent('EST');
 
     await rerender({
-      dateFieldProps: { modelValue: toZoned(calendarDateTime, 'Asia/Tokyo') },
+      dateFieldProps: {
+        modelValue: toZoned(calendarDateTime, 'Asia/Tokyo'),
+      },
     });
     expect(getByTestId('timeZoneName')).toHaveTextContent('GMT+9');
 
@@ -423,7 +461,16 @@ describe('dateField', async () => {
 
     const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
 
-    const segments = [month, day, year, hour, minute, second, dayPeriod, timeZoneName];
+    const segments = [
+      month,
+      day,
+      year,
+      hour,
+      minute,
+      second,
+      dayPeriod,
+      timeZoneName,
+    ];
 
     for (const seg of segments) {
       await user.click(seg);
@@ -472,7 +519,16 @@ describe('dateField', async () => {
     });
 
     const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
-    const segments = [month, day, year, hour, minute, second, dayPeriod, timeZoneName];
+    const segments = [
+      month,
+      day,
+      year,
+      hour,
+      minute,
+      second,
+      dayPeriod,
+      timeZoneName,
+    ];
 
     await user.click(month);
     await user.keyboard('{2}');
@@ -534,7 +590,12 @@ describe('dateField', async () => {
       },
     });
 
-    const nonDisplayedSegments = ['hour', 'minute', 'second', 'dayPeriod'];
+    const nonDisplayedSegments = [
+      'hour',
+      'minute',
+      'second',
+      'dayPeriod',
+    ];
     const displayedSegments = [month, day, year];
     for (const seg of nonDisplayedSegments) {
       expect(queryByTestId(seg)).toBeNull();
@@ -637,7 +698,9 @@ describe('dateField', async () => {
       dateFieldProps: { modelValue: foreign },
       emits: {
         'onUpdate:modelValue': (data: DateValue) => {
-          return rerender({ dateFieldProps: { modelValue: data } });
+          return rerender({
+            dateFieldProps: { modelValue: data },
+          });
         },
       },
     });
@@ -647,7 +710,9 @@ describe('dateField', async () => {
 
     // The value's own clock is in the afternoon, so the segments must say so
     // even though the same instant is 02:30 AM in the local zone.
-    expect(hour).toHaveTextContent(String(foreign.hour > 12 ? foreign.hour - 12 : foreign.hour));
+    expect(hour).toHaveTextContent(String(foreign.hour > 12
+      ? foreign.hour - 12
+      : foreign.hour));
     expect(dayPeriod).toHaveTextContent('PM');
 
     // Typing an hour must be interpreted with the displayed period, not the
@@ -754,7 +819,9 @@ describe('dateField', async () => {
 
   it('displays correct timezone with ZonedDateTime value - `now`', async () => {
     const { getByTestId } = setup({
-      dateFieldProps: { modelValue: now('America/Los_Angeles') },
+      dateFieldProps: {
+        modelValue: now('America/Los_Angeles'),
+      },
     });
 
     const timeZone = getByTestId('timeZoneName');
@@ -767,7 +834,9 @@ describe('dateField', async () => {
 
   it('displays correct timezone with ZonedDateTime value - absolute -> local', async () => {
     const { getByTestId } = setup({
-      dateFieldProps: { modelValue: parseAbsoluteToLocal('2023-10-12T12:30:00Z') },
+      dateFieldProps: {
+        modelValue: parseAbsoluteToLocal('2023-10-12T12:30:00Z'),
+      },
     });
 
     const timeZone = getByTestId('timeZoneName');
@@ -1138,7 +1207,9 @@ describe('useDateField – characterization tests (coverage gaps)', () => {
         dateFieldProps: { modelValue: calendarDate },
         emits: {
           'onUpdate:modelValue': (data: DateValue) => {
-            return rerender({ dateFieldProps: { modelValue: data } });
+            return rerender({
+              dateFieldProps: { modelValue: data },
+            });
           },
         },
       });
@@ -1157,7 +1228,9 @@ describe('useDateField – characterization tests (coverage gaps)', () => {
         dateFieldProps: { modelValue: calendarDate },
         emits: {
           'onUpdate:modelValue': (data: DateValue) => {
-            return rerender({ dateFieldProps: { modelValue: data } });
+            return rerender({
+              dateFieldProps: { modelValue: data },
+            });
           },
         },
       });
@@ -1178,7 +1251,9 @@ describe('useDateField – characterization tests (coverage gaps)', () => {
         dateFieldProps: { modelValue: calendarDate },
         emits: {
           'onUpdate:modelValue': (data: DateValue) => {
-            return rerender({ dateFieldProps: { modelValue: data } });
+            return rerender({
+              dateFieldProps: { modelValue: data },
+            });
           },
         },
       });
@@ -1249,16 +1324,29 @@ describe('useDateField – characterization tests (coverage gaps)', () => {
 describe('dayPeriod across locales', () => {
   const afternoon = new CalendarDateTime(2024, 1, 20, 15, 30);
   const morning = new CalendarDateTime(2024, 1, 20, 9, 30);
-  const locales = ['en-US', 'nl-NL', 'es-ES', 'ja-JP', 'zh-CN', 'ko-KR', 'ar-EG', 'hi-IN'];
+  const locales = [
+    'en-US',
+    'nl-NL',
+    'es-ES',
+    'ja-JP',
+    'zh-CN',
+    'ko-KR',
+    'ar-EG',
+    'hi-IN',
+  ];
 
   describe.each(locales)('%s', (locale) => {
     it('shows PM for an afternoon value', async () => {
-      const { getByTestId } = setup({ dateFieldProps: { modelValue: afternoon, locale, hourCycle: 12 } });
+      const { getByTestId } = setup({
+        dateFieldProps: { modelValue: afternoon, locale, hourCycle: 12 },
+      });
       expect(getByTestId('dayPeriod')).toHaveTextContent('PM');
     });
 
     it('shows AM for a morning value', async () => {
-      const { getByTestId } = setup({ dateFieldProps: { modelValue: morning, locale, hourCycle: 12 } });
+      const { getByTestId } = setup({
+        dateFieldProps: { modelValue: morning, locale, hourCycle: 12 },
+      });
       expect(getByTestId('dayPeriod')).toHaveTextContent('AM');
     });
 
@@ -1267,7 +1355,9 @@ describe('dayPeriod across locales', () => {
         dateFieldProps: { modelValue: afternoon, locale, hourCycle: 12 },
         emits: {
           'onUpdate:modelValue': (data: DateValue) => {
-            return rerender({ dateFieldProps: { modelValue: data, locale, hourCycle: 12 } });
+            return rerender({
+              dateFieldProps: { modelValue: data, locale, hourCycle: 12 },
+            });
           },
         },
       });

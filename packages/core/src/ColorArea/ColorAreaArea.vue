@@ -131,7 +131,7 @@ function handleKeyDown(event: KeyboardEvent) {
   <Primitive
     ref="primitiveElement"
     :as-child="asChild"
-    :as="as"
+    :as="props.as"
     role="application"
     aria-roledescription="Color picker"
     :aria-disabled="rootContext.disabled.value ? 'true' : undefined"

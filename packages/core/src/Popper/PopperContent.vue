@@ -243,13 +243,21 @@ const { width: arrowWidth, height: arrowHeight } = useSize(arrow);
 const desiredPlacement = computed(
   () =>
     (props.side
-      + (props.align !== 'center' ? `-${props.align}` : '')) as Placement,
+      + (props.align !== 'center'
+        ? `-${props.align}`
+        : '')) as Placement,
 );
 
 const collisionPadding = computed(() => {
   return isNumber(props.collisionPadding)
     ? props.collisionPadding
-    : { top: 0, right: 0, bottom: 0, left: 0, ...props.collisionPadding };
+    : {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        ...props.collisionPadding,
+      };
 });
 
 const boundary = computed(() => {
@@ -290,7 +298,9 @@ const computedMiddleware = computed(() => {
     && shift({
       mainAxis: true,
       crossAxis: !!props.prioritizePosition,
-      limiter: props.sticky === 'partial' ? limitShift() : undefined,
+      limiter: props.sticky === 'partial'
+        ? limitShift()
+        : undefined,
       ...detectOverflowOptions.value,
     }),
     !props.prioritizePosition

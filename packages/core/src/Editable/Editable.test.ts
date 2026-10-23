@@ -23,7 +23,17 @@ function setup(props: {
   const submit = returned.getByTestId('submit');
   const cancel = returned.getByTestId('cancel');
   expect(editable).toBeVisible();
-  return { ...returned, user, root: editable, input, area, edit, submit, cancel, preview };
+  return {
+    ...returned,
+    user,
+    root: editable,
+    input,
+    area,
+    edit,
+    submit,
+    cancel,
+    preview,
+  };
 }
 
 it('should pass axe accessibility tests', async () => {
@@ -33,18 +43,24 @@ it('should pass axe accessibility tests', async () => {
 
 describe('editable', () => {
   it('respects a default value if provided', async () => {
-    const { preview } = setup({ editableProps: { defaultValue: 'Default Value' } });
+    const { preview } = setup({
+      editableProps: { defaultValue: 'Default Value' },
+    });
     expect(preview).toHaveTextContent('Default Value');
   });
 
   it('respects a default value if provided - `modelValue`', async () => {
-    const { preview } = setup({ editableProps: { modelValue: 'Default Value' } });
+    const { preview } = setup({
+      editableProps: { modelValue: 'Default Value' },
+    });
 
     expect(preview).toHaveTextContent('Default Value');
   });
 
   it('sets the placeholder value if any value isn\'t set', async () => {
-    const { preview } = setup({ editableProps: { placeholder: 'Enter text...' } });
+    const { preview } = setup({
+      editableProps: { placeholder: 'Enter text...' },
+    });
 
     expect(preview).toHaveTextContent('Enter text...');
   });
@@ -64,14 +80,18 @@ describe('editable', () => {
   });
 
   it('changes to editable mode when double clicking on the preview', async () => {
-    const { preview, input } = setup({ editableProps: { activationMode: 'dblclick' } });
+    const { preview, input } = setup({
+      editableProps: { activationMode: 'dblclick' },
+    });
 
     await userEvent.dblClick(preview);
     expect(input).toBeVisible();
   });
 
   it('selects the input value when entering edit mode and selectOnFocus is true', async () => {
-    const { input } = setup({ editableProps: { defaultValue: 'Default Value', selectOnFocus: true } });
+    const { input } = setup({
+      editableProps: { defaultValue: 'Default Value', selectOnFocus: true },
+    });
 
     await userEvent.click(input);
     expect(input).toHaveFocus();
@@ -81,7 +101,9 @@ describe('editable', () => {
   });
 
   it('starts in edit mode if the property is set', async () => {
-    const { input } = setup({ editableProps: { startWithEditMode: true } });
+    const { input } = setup({
+      editableProps: { startWithEditMode: true },
+    });
 
     expect(input).toBeVisible();
   });
@@ -90,8 +112,12 @@ describe('editable', () => {
     let submittedValue = '';
     const { input, preview, rerender } = setup({
       editableProps: { modelValue: '', submitMode: 'enter' },
-      onSubmit: (data) => submittedValue = data,
-      emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data }) },
+      onSubmit: (data) => {
+        submittedValue = data;
+      },
+      emits: {
+        'onUpdate:modelValue': (data: string) => rerender({ modelValue: data }),
+      },
     });
 
     await userEvent.type(input, 'New Value');
@@ -102,7 +128,12 @@ describe('editable', () => {
   });
 
   it('submits the value on blur', async () => {
-    const { input, preview, rerender } = setup({ editableProps: { modelValue: '', submitMode: 'blur' }, emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data, submitMode: 'blur' }) } });
+    const { input, preview, rerender } = setup({
+      editableProps: { modelValue: '', submitMode: 'blur' },
+      emits: {
+        'onUpdate:modelValue': (data: string) => rerender({ modelValue: data, submitMode: 'blur' }),
+      },
+    });
 
     await userEvent.dblClick(preview);
     await userEvent.type(input, 'New Value');
@@ -113,7 +144,12 @@ describe('editable', () => {
   });
 
   it('submits the value when pressing enter if submitMode is both', async () => {
-    const { input, preview, rerender } = setup({ editableProps: { modelValue: '', submitMode: 'both' }, emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data }) } });
+    const { input, preview, rerender } = setup({
+      editableProps: { modelValue: '', submitMode: 'both' },
+      emits: {
+        'onUpdate:modelValue': (data: string) => rerender({ modelValue: data }),
+      },
+    });
 
     await userEvent.type(input, 'New Value');
     await userEvent.keyboard(kbd.ENTER);
@@ -122,7 +158,12 @@ describe('editable', () => {
   });
 
   it('submits the value on blur if submitMode is both', async () => {
-    const { input, preview, rerender } = setup({ editableProps: { modelValue: '', submitMode: 'both' }, emits: { 'onUpdate:modelValue': (data: string) => rerender({ modelValue: data, submitMode: 'blur' }) } });
+    const { input, preview, rerender } = setup({
+      editableProps: { modelValue: '', submitMode: 'both' },
+      emits: {
+        'onUpdate:modelValue': (data: string) => rerender({ modelValue: data, submitMode: 'blur' }),
+      },
+    });
 
     await userEvent.dblClick(preview);
     await userEvent.type(input, 'New Value');
@@ -133,7 +174,9 @@ describe('editable', () => {
   });
 
   it('prevents entering edit mode when disabled', async () => {
-    const { preview, edit } = setup({ editableProps: { disabled: true } });
+    const { preview, edit } = setup({
+      editableProps: { disabled: true },
+    });
 
     await userEvent.click(preview);
 
@@ -141,7 +184,9 @@ describe('editable', () => {
   });
 
   it('prevents editing the input value when readonly', async () => {
-    const { input, edit } = setup({ editableProps: { defaultValue: 'Default Value', readonly: true } });
+    const { input, edit } = setup({
+      editableProps: { defaultValue: 'Default Value', readonly: true },
+    });
 
     await userEvent.click(edit);
 
@@ -153,7 +198,9 @@ describe('editable', () => {
   });
 
   it('uses the proper styles when autoResize is true', async () => {
-    const { input, preview, edit } = setup({ editableProps: { defaultValue: 'Default Value', autoResize: true } });
+    const { input, preview, edit } = setup({
+      editableProps: { defaultValue: 'Default Value', autoResize: true },
+    });
 
     expect(input).toHaveStyle({ visibility: 'hidden' });
 
@@ -163,7 +210,9 @@ describe('editable', () => {
   });
 
   it('should prevent user input text more than given `maxLength`', async () => {
-    const { input, edit } = setup({ editableProps: { maxLength: 10 } });
+    const { input, edit } = setup({
+      editableProps: { maxLength: 10 },
+    });
 
     await userEvent.click(edit);
 

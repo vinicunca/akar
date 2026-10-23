@@ -22,7 +22,9 @@ export function colorToString(color: Color, format: ColorFormat = 'hex'): string
  * Converts any color to hex string.
  */
 export function colorToHex(color: Color): string {
-  const rgb = color.space === 'rgb' ? color : convertToRgb(color);
+  const rgb = color.space === 'rgb'
+    ? color
+    : convertToRgb(color);
   const toHex = (n: number) => Math.round(n).toString(16).padStart(2, '0');
 
   if (rgb.alpha < 1) {
@@ -37,7 +39,9 @@ export function colorToHex(color: Color): string {
  * Converts any color to rgb() string.
  */
 export function colorToRgb(color: Color): string {
-  const rgb = color.space === 'rgb' ? color : convertToRgb(color);
+  const rgb = color.space === 'rgb'
+    ? color
+    : convertToRgb(color);
   const { r, g, b, alpha } = rgb;
 
   if (alpha < 1) {
@@ -50,7 +54,9 @@ export function colorToRgb(color: Color): string {
  * Converts any color to hsl() string.
  */
 export function colorToHsl(color: Color): string {
-  const hsl = color.space === 'hsl' ? color : convertToHsl(color);
+  const hsl = color.space === 'hsl'
+    ? color
+    : convertToHsl(color);
   const { h, s, l, alpha } = hsl;
 
   if (alpha < 1) {
@@ -63,7 +69,9 @@ export function colorToHsl(color: Color): string {
  * Converts any color to hsb() string.
  */
 export function colorToHsb(color: Color): string {
-  const hsb = color.space === 'hsb' ? color : convertToHsb(color);
+  const hsb = color.space === 'hsb'
+    ? color
+    : convertToHsb(color);
   const { h, s, b, alpha } = hsb;
 
   if (alpha < 1) {
@@ -124,10 +132,14 @@ function rgbToHsl(rgb: RGBColor): HSLColor {
 
   if (max !== min) {
     const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    s = l > 0.5
+      ? d / (2 - max - min)
+      : d / (max + min);
     switch (max) {
       case r:
-        h = (g - b) / d + (g < b ? 6 : 0);
+        h = (g - b) / d + (g < b
+          ? 6
+          : 0);
         break;
       case g:
         h = (b - r) / d + 2;
@@ -180,7 +192,9 @@ function hslToRgb(hsl: HSLColor): RGBColor {
       return p;
     };
 
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const q = l < 0.5
+      ? l * (1 + s)
+      : l + s - l * s;
     const p = 2 * l - q;
     r = hue2rgb(p, q, h + 1 / 3);
     g = hue2rgb(p, q, h);
@@ -209,13 +223,17 @@ function rgbToHsb(rgb: RGBColor): HSBColor {
   const d = max - min;
 
   let h = 0;
-  const s = max === 0 ? 0 : d / max;
+  const s = max === 0
+    ? 0
+    : d / max;
   const v = max;
 
   if (max !== min) {
     switch (max) {
       case r:
-        h = (g - b) / d + (g < b ? 6 : 0);
+        h = (g - b) / d + (g < b
+          ? 6
+          : 0);
         break;
       case g:
         h = (b - r) / d + 2;

@@ -137,19 +137,31 @@ function hasPrev() {
 
 const nextStepperItem = ref<HTMLElement | null>(null);
 const prevStepperItem = ref<HTMLElement | null>(null);
-const isNextDisabled = computed(() => nextStepperItem.value ? nextStepperItem.value.getAttribute('disabled') === '' : true);
-const isPrevDisabled = computed(() => prevStepperItem.value ? prevStepperItem.value.getAttribute('disabled') === '' : true);
+const isNextDisabled = computed(() => nextStepperItem.value
+  ? nextStepperItem.value.getAttribute('disabled') === ''
+  : true);
+const isPrevDisabled = computed(() => prevStepperItem.value
+  ? prevStepperItem.value.getAttribute('disabled') === ''
+  : true);
 
 watch(modelValue, async () => {
   await nextTick(() => {
-    nextStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! < totalStepperItemsArray.value.length ? totalStepperItemsArray.value[modelValue.value!] : null;
-    prevStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! > 1 ? totalStepperItemsArray.value[modelValue.value! - 2] : null;
+    nextStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! < totalStepperItemsArray.value.length
+      ? totalStepperItemsArray.value[modelValue.value!]
+      : null;
+    prevStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! > 1
+      ? totalStepperItemsArray.value[modelValue.value! - 2]
+      : null;
   });
 });
 watch(totalStepperItemsArray, async () => {
   await nextTick(() => {
-    nextStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! < totalStepperItemsArray.value.length ? totalStepperItemsArray.value[modelValue.value!] : null;
-    prevStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! > 1 ? totalStepperItemsArray.value[modelValue.value! - 2] : null;
+    nextStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! < totalStepperItemsArray.value.length
+      ? totalStepperItemsArray.value[modelValue.value!]
+      : null;
+    prevStepperItem.value = totalStepperItemsArray.value.length && modelValue.value! > 1
+      ? totalStepperItemsArray.value[modelValue.value! - 2]
+      : null;
   });
 });
 

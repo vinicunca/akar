@@ -73,7 +73,10 @@ describe('given default Autocomplete', () => {
       // In Autocomplete, typing immediately sets the modelValue, so reset only clears
       // the internal filter state — the input still reflects the modelValue.
       document.body.innerHTML = '';
-      const w = mount(Autocomplete, { attachTo: document.body, props: { resetSearchTermOnBlur: true } });
+      const w = mount(Autocomplete, {
+        attachTo: document.body,
+        props: { resetSearchTermOnBlur: true },
+      });
       const newInput = w.find('input');
       await w.find('button').trigger('click');
       await nextTick();
@@ -300,7 +303,15 @@ describe('given autocomplete in a form', () => {
 });
 
 describe('given autocomplete with cancel button and openOnFocus', () => {
-  const components = { AutocompleteRoot, AutocompleteAnchor, AutocompleteInput, AutocompleteCancel, AutocompleteContent, AutocompleteViewport, AutocompleteItem };
+  const components = {
+    AutocompleteRoot,
+    AutocompleteAnchor,
+    AutocompleteInput,
+    AutocompleteCancel,
+    AutocompleteContent,
+    AutocompleteViewport,
+    AutocompleteItem,
+  };
   const options = ['Apple', 'Banana', 'Cherry'];
 
   it.each([
@@ -311,7 +322,10 @@ describe('given autocomplete with cancel button and openOnFocus', () => {
     const wrapper = mount({
       components,
       setup() {
-        return { options, model: ref('') };
+        return {
+          options,
+          model: ref(''),
+        };
       },
       template: `
         ${root}

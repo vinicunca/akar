@@ -96,7 +96,9 @@ export function usePresence(
     const isCurrentAnimation = currentAnimationName.includes(
       CSS.escape(event.animationName),
     );
-    const directionName = state.value === 'mounted' ? 'enter' : 'leave';
+    const directionName = state.value === 'mounted'
+      ? 'enter'
+      : 'leave';
     if (isCurrentAnimation) {
       dispatchCustomEvent(`after-${directionName}`);
       dispatch('ANIMATION_END');
@@ -154,7 +156,9 @@ export function usePresence(
   const stateWatcher = watch(state, () => {
     const currentAnimationName = getAnimationName(node.value);
     prevAnimationNameRef.value
-      = state.value === 'mounted' ? currentAnimationName : 'none';
+      = state.value === 'mounted'
+        ? currentAnimationName
+        : 'none';
   });
 
   onUnmounted(() => {
@@ -180,5 +184,7 @@ export function usePresence(
 }
 
 function getAnimationName(node?: HTMLElement) {
-  return node ? getComputedStyle(node).animationName || 'none' : 'none';
+  return node
+    ? getComputedStyle(node).animationName || 'none'
+    : 'none';
 }

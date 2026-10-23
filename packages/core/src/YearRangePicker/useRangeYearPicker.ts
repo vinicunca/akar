@@ -91,7 +91,9 @@ export function useRangeYearPickerState(props: UseRangeYearPickerProps) {
             return date.year < startLimit.year || date.year > endLimit.year;
           }
 
-          const fixedValue = props.fixedDate.value === 'start' ? props.start.value : props.end.value;
+          const fixedValue = props.fixedDate.value === 'start'
+            ? props.start.value
+            : props.end.value;
           const maxDate = fixedValue.add({ years: maximumYears - 1 });
           const minDate = fixedValue.subtract({ years: maximumYears - 1 });
           return date.year < minDate.year || date.year > maxDate.year;
@@ -131,11 +133,15 @@ export function useRangeYearPickerState(props: UseRangeYearPickerProps) {
 
       if (focused.year >= anchor.year) {
         const maxEnd = anchor.add({ years: maximumYears - 1 });
-        const cappedEnd = focused.year > maxEnd.year ? maxEnd : focused;
+        const cappedEnd = focused.year > maxEnd.year
+          ? maxEnd
+          : focused;
         return { start: anchor, end: cappedEnd };
       } else {
         const minStart = anchor.subtract({ years: maximumYears - 1 });
-        const cappedStart = focused.year < minStart.year ? minStart : focused;
+        const cappedStart = focused.year < minStart.year
+          ? minStart
+          : focused;
         return { start: cappedStart, end: anchor };
       }
     }
@@ -143,7 +149,9 @@ export function useRangeYearPickerState(props: UseRangeYearPickerProps) {
     const isValid = areAllYearsBetweenValid(
       start,
       end,
-      props.allowNonContiguousRanges.value ? () => false : props.isYearUnavailable,
+      props.allowNonContiguousRanges.value
+        ? () => false
+        : props.isYearUnavailable,
       rangeIsYearDisabled,
     );
     if (isValid) {

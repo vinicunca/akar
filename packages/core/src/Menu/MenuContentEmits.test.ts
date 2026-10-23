@@ -38,7 +38,12 @@ const cases = [
           <MenuItem>Item</MenuItem>
         </MenuContent>
       </MenuRoot>
-    `, { MenuRoot, MenuAnchor, MenuContent, MenuItem }),
+    `, {
+      MenuRoot,
+      MenuAnchor,
+      MenuContent,
+      MenuItem,
+    }),
   },
   {
     name: 'DropdownMenuContent',
@@ -50,7 +55,12 @@ const cases = [
           <DropdownMenuItem>Item</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenuRoot>
-    `, { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem }),
+    `, {
+      DropdownMenuRoot,
+      DropdownMenuTrigger,
+      DropdownMenuContent,
+      DropdownMenuItem,
+    }),
   },
   {
     name: 'ContextMenuContent',
@@ -63,7 +73,12 @@ const cases = [
           <ContextMenuItem>Item</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenuRoot>
-    `, { ContextMenuRoot, ContextMenuTrigger, ContextMenuContent, ContextMenuItem }),
+    `, {
+      ContextMenuRoot,
+      ContextMenuTrigger,
+      ContextMenuContent,
+      ContextMenuItem,
+    }),
   },
   {
     name: 'MenubarContent',
@@ -77,7 +92,13 @@ const cases = [
           </MenubarContent>
         </MenubarMenu>
       </MenubarRoot>
-    `, { MenubarRoot, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem }),
+    `, {
+      MenubarRoot,
+      MenubarMenu,
+      MenubarTrigger,
+      MenubarContent,
+      MenubarItem,
+    }),
   },
 ];
 

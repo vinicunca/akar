@@ -133,7 +133,9 @@ describe('given Toolbar items with their own key handling', () => {
 
   const dropdownMenu = (open: Ref<boolean>) => h(DropdownMenuRoot, {
     'open': open.value,
-    'onUpdate:open': (value: boolean) => { open.value = value; },
+    'onUpdate:open': (value: boolean) => {
+      open.value = value;
+    },
   }, () => [
     h(ToolbarButton, { asChild: true }, () => h(DropdownMenuTrigger, { 'data-testid': 'trigger' }, () => 'Menu')),
     h(DropdownMenuPortal, () => h(DropdownMenuContent, () => h(DropdownMenuItem, () => 'Item'))),
@@ -141,18 +143,45 @@ describe('given Toolbar items with their own key handling', () => {
 
   const select = (open: Ref<boolean>) => h(SelectRoot, {
     'open': open.value,
-    'onUpdate:open': (value: boolean) => { open.value = value; },
+    'onUpdate:open': (value: boolean) => {
+      open.value = value;
+    },
   }, () => [
     h(ToolbarButton, { asChild: true }, () => h(SelectTrigger, { 'data-testid': 'trigger' }, () => 'Select')),
     h(SelectPortal, () => h(SelectContent, () => h(SelectViewport, () => h(SelectItem, { value: 'a' }, () => 'A')))),
   ]);
 
   it.each([
-    ['horizontal', 'DropdownMenuTrigger', 'ArrowDown', dropdownMenu],
-    ['vertical', 'DropdownMenuTrigger', 'ArrowDown', dropdownMenu],
-    ['horizontal', 'SelectTrigger', 'ArrowDown', select],
-    ['vertical', 'SelectTrigger', 'ArrowDown', select],
-    ['vertical', 'SelectTrigger', 'ArrowUp', select],
+    [
+      'horizontal',
+      'DropdownMenuTrigger',
+      'ArrowDown',
+      dropdownMenu,
+    ],
+    [
+      'vertical',
+      'DropdownMenuTrigger',
+      'ArrowDown',
+      dropdownMenu,
+    ],
+    [
+      'horizontal',
+      'SelectTrigger',
+      'ArrowDown',
+      select,
+    ],
+    [
+      'vertical',
+      'SelectTrigger',
+      'ArrowDown',
+      select,
+    ],
+    [
+      'vertical',
+      'SelectTrigger',
+      'ArrowUp',
+      select,
+    ],
   ] as const)('%s toolbar: %s should open on %s instead of moving focus', async (orientation, _name, key, item) => {
     const { open, trigger } = mountToolbar(orientation, item);
     await fireEvent.keyDown(trigger, { key });
@@ -185,7 +214,9 @@ describe('given Toolbar items with their own key handling', () => {
   });
 
   it('should not move focus when the consumer prevents default', async () => {
-    const { first } = await tabIntoToolbar({ onKeydown: (event) => event.preventDefault() });
+    const { first } = await tabIntoToolbar({
+      onKeydown: (event) => event.preventDefault(),
+    });
     expect(document.activeElement).toBe(first);
 
     await userEvent.keyboard('[ArrowDown]');

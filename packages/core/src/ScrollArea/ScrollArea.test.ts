@@ -47,7 +47,10 @@ describe('given prop:type="always" ScrollArea', () => {
   let wrapper: VueWrapper<InstanceType<typeof ScrollArea>>;
 
   beforeEach(() => {
-    wrapper = mount(ScrollArea, { attachTo: document.body, props: { type: 'always' } });
+    wrapper = mount(ScrollArea, {
+      attachTo: document.body,
+      props: { type: 'always' },
+    });
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 500 });
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 500 });
     Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, value: 2000 });
@@ -68,7 +71,10 @@ describe('given prop:type="scroll" ScrollArea', () => {
   let wrapper: VueWrapper<InstanceType<typeof ScrollArea>>;
 
   beforeEach(() => {
-    wrapper = mount(ScrollArea, { attachTo: document.body, props: { type: 'scroll' } });
+    wrapper = mount(ScrollArea, {
+      attachTo: document.body,
+      props: { type: 'scroll' },
+    });
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 500 });
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 500 });
     Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, value: 2000 });
@@ -131,7 +137,9 @@ describe('given prop:type="hover" ScrollArea with both scrollbars and a corner',
       }
 
       observe(target: Element) {
-        this.cb([{ target } as ResizeObserverEntry], this as unknown as ResizeObserver);
+        this.cb([
+          { target } as ResizeObserverEntry,
+        ], this as unknown as ResizeObserver);
       }
 
       unobserve() {}
@@ -143,7 +151,10 @@ describe('given prop:type="hover" ScrollArea with both scrollbars and a corner',
     Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, value: 2000 });
     Object.defineProperty(HTMLElement.prototype, 'scrollWidth', { configurable: true, value: 2000 });
 
-    wrapper = mount(BothScrollArea, { attachTo: document.body, props: { type: 'hover' } });
+    wrapper = mount(BothScrollArea, {
+      attachTo: document.body,
+      props: { type: 'hover' },
+    });
   });
 
   afterEach(() => {
@@ -177,8 +188,11 @@ describe('given prop:type="always" ScrollArea thumb state', () => {
     // Fire the callback on observe so the scrollbar measures its sizes (jsdom has no ResizeObserver).
     globalThis.ResizeObserver = class {
       constructor(private cb: ResizeObserverCallback) {}
+      // eslint-disable-next-line sonarjs/no-identical-functions
       observe(target: Element) {
-        this.cb([{ target } as ResizeObserverEntry], this as unknown as ResizeObserver);
+        this.cb([
+          { target } as ResizeObserverEntry,
+        ], this as unknown as ResizeObserver);
       }
 
       unobserve() {}
@@ -199,7 +213,10 @@ describe('given prop:type="always" ScrollArea thumb state', () => {
     Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, value: content });
     Object.defineProperty(HTMLElement.prototype, 'scrollWidth', { configurable: true, value: content });
 
-    const wrapper = mount(ScrollArea, { attachTo: document.body, props: { type: 'always' } });
+    const wrapper = mount(ScrollArea, {
+      attachTo: document.body,
+      props: { type: 'always' },
+    });
     await sleep(100);
 
     expect(wrapper.find('[data-orientation="vertical"] > div').attributes('data-state')).toBe(state);

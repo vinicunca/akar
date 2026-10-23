@@ -36,14 +36,18 @@ const ToastWithAction = defineComponent({
           },
         }, {
           default: () => [
-            h(ToastDescription, null, { default: () => 'Action available' }),
+            h(ToastDescription, null, {
+              default: () => 'Action available',
+            }),
             h(ToastAction, {
               altText: 'Perform action',
               closeOnClick: this.closeOnClick,
               onClick: () => {
                 this.actionClicks += 1;
               },
-            }, { default: () => 'Undo' }),
+            }, {
+              default: () => 'Undo',
+            }),
           ],
         }),
         h(ToastViewport),

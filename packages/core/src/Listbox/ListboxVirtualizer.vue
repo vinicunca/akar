@@ -137,7 +137,9 @@ rootContext.virtualFocusHook.on(({ event, scroll }) => {
       const item = queryCheckedElement(parentEl.value);
       if (item) {
         // eslint-disable-next-line no-nested-ternary
-        const focus = event ? true : scroll ? undefined : false;
+        const focus = event
+          ? true
+          : scroll ? undefined : false;
         rootContext.changeHighlight(item, scroll, focus);
       }
     });
@@ -238,11 +240,15 @@ rootContext.virtualKeydownHook.on((event) => {
   if (['first', 'last'].includes(intent)) {
     event.preventDefault();
 
-    const index = intent === 'first' ? 0 : props.options.length - 1;
+    const index = intent === 'first'
+      ? 0
+      : props.options.length - 1;
     virtualizer.value.scrollToIndex(index);
     requestAnimationFrame(() => {
       const items = getItems();
-      const item = intent === 'first' ? items[0] : items.at(-1);
+      const item = intent === 'first'
+        ? items[0]
+        : items.at(-1);
       if (item) {
         rootContext.changeHighlight(item.ref);
       }

@@ -13,7 +13,9 @@ vi.mock('@/shared/useBodyScrollLock', async (importOriginal) => {
 
   return {
     ...mod,
-    useBodyScrollLock: ((...args) => isServer ? ref(false) : mod.useBodyScrollLock(...args)) as typeof mod.useBodyScrollLock,
+    useBodyScrollLock: ((...args) => isServer
+      ? ref(false)
+      : mod.useBodyScrollLock(...args)) as typeof mod.useBodyScrollLock,
   };
 });
 

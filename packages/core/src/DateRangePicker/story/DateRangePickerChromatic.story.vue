@@ -5,7 +5,10 @@ import { CalendarDateTime } from '@internationalized/date';
 import { ref } from 'vue';
 import DateRangePicker from './_DummyDateRangePicker.vue';
 
-const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new CalendarDateTime(2024, 2, 27) };
+const defaultValue = {
+  start: new CalendarDateTime(2024, 2, 20),
+  end: new CalendarDateTime(2024, 2, 27),
+};
 const modelValue = ref(defaultValue) as Ref<{ start: DateValue; end: DateValue }>;
 </script>
 

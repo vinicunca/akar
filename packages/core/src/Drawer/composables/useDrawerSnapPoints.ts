@@ -18,7 +18,9 @@ export interface ResolvedSnapPoint {
 function parseSnapPoint(value: DrawerSnapPoint, viewportHeight: number, rootFontSize: number): number | null {
   let result: number | null = null;
   if (typeof value === 'number') {
-    result = (value >= 0 && value <= 1) ? value * viewportHeight : value;
+    result = (value >= 0 && value <= 1)
+      ? value * viewportHeight
+      : value;
   } else if (value.endsWith('rem')) {
     result = Number.parseFloat(value) * rootFontSize;
   } else if (value.endsWith('px')) {
@@ -42,7 +44,9 @@ export function useDrawerSnapPoints(options: {
 }) {
   const { snapPoints, activeSnapPoint, popupHeight, onSnapPointChange } = options;
 
-  const viewportHeight = ref(typeof window !== 'undefined' ? window.innerHeight : 0);
+  const viewportHeight = ref(typeof window !== 'undefined'
+    ? window.innerHeight
+    : 0);
   const rootFontSize = ref(
     typeof document !== 'undefined'
       ? Number.parseFloat(getComputedStyle(document.documentElement).fontSize) || 16
@@ -74,7 +78,11 @@ export function useDrawerSnapPoints(options: {
         continue;
       }
       const clampedHeight = Math.min(height, Math.min(ph, vh));
-      resolved.push({ value: pt, height: clampedHeight, offset: Math.max(0, ph - clampedHeight) });
+      resolved.push({
+        value: pt,
+        height: clampedHeight,
+        offset: Math.max(0, ph - clampedHeight),
+      });
     }
     return resolved.sort((a, b) => a.height - b.height);
   });
@@ -128,8 +136,12 @@ export function useDrawerSnapPoints(options: {
     // Convert raw velocity into a dismiss-signed scalar:
     //   positive = moving in dismiss direction (collapsing)
     //   negative = moving in open direction (expanding)
-    const axisVel = (direction === 'up' || direction === 'down') ? velocity.y : velocity.x;
-    const velSigned = (direction === 'up' || direction === 'left') ? -axisVel : axisVel;
+    const axisVel = (direction === 'up' || direction === 'down')
+      ? velocity.y
+      : velocity.x;
+    const velSigned = (direction === 'up' || direction === 'left')
+      ? -axisVel
+      : axisVel;
 
     // Current offset (from fully open): 0 = fully open, `ph` = fully closed.
     // Match by value OR parsed-height equivalence so equivalent representations
@@ -171,7 +183,9 @@ export function useDrawerSnapPoints(options: {
       // if (a) velocity direction matches drag direction and is fast enough, OR
       // (b) the projected target has physically crossed the adjacent snap.
       const sorted = [...points].sort((a, b) => a.offset - b.offset);
-      const currentIdx = activePoint ? sorted.indexOf(activePoint) : -1;
+      const currentIdx = activePoint
+        ? sorted.indexOf(activePoint)
+        : -1;
       if (currentIdx < 0) {
         onSnapPointChange(closest.value);
         return;
@@ -191,7 +205,9 @@ export function useDrawerSnapPoints(options: {
       const crossed = dragDir > 0
         ? targetOffset > adjacent.offset
         : targetOffset < adjacent.offset;
-      onSnapPointChange(crossed ? adjacent.value : (activeSnapPoint.value ?? closest.value));
+      onSnapPointChange(crossed
+        ? adjacent.value
+        : (activeSnapPoint.value ?? closest.value));
       return;
     }
 

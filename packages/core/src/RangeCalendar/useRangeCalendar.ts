@@ -142,13 +142,21 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
       const focused = props.focusedValue.value;
 
       if (!isBefore(focused, anchor)) {
-        return { start: anchor, end: anchor.add({ days: maximumDays - 1 }) };
+        return {
+          start: anchor,
+          end: anchor.add({ days: maximumDays - 1 }),
+        };
       }
 
-      return { start: anchor.subtract({ days: maximumDays - 1 }), end: anchor };
+      return {
+        start: anchor.subtract({ days: maximumDays - 1 }),
+        end: anchor,
+      };
     }
 
-    const isValid = areAllDaysBetweenValid(start, end, props.allowNonContiguousRanges.value ? () => false : props.isDateUnavailable, rangeIsDateDisabled, props.isDateHighlightable);
+    const isValid = areAllDaysBetweenValid(start, end, props.allowNonContiguousRanges.value
+      ? () => false
+      : props.isDateUnavailable, rangeIsDateDisabled, props.isDateHighlightable);
     if (isValid) {
       return {
         start,

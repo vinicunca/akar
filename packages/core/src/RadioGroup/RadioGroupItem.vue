@@ -62,7 +62,12 @@ const checked = computed(() => isDeepEqual(rootContext.modelValue?.value, props.
 provideRadiogroupItemContext({ disabled, checked });
 
 const isArrowKeyPressed = ref(false);
-const ARROW_KEYS = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+const ARROW_KEYS = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+];
 
 useEventListener('keydown', (event) => {
   if (ARROW_KEYS.includes(event.key)) {

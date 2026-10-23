@@ -16,12 +16,20 @@ const FieldProbe = defineComponent({
   name: 'FieldProbe',
   setup(_, { expose }) {
     const context = injectFieldRootContext();
-    expose({ report: (value: unknown) => context.handleControlInput({ value }) });
+    expose({
+      report: (value: unknown) => context.handleControlInput({ value }),
+    });
     return () => null;
   },
 });
 
-const components = { FieldRoot, FieldLabel, FieldControl, FieldDescription, FieldError };
+const components = {
+  FieldRoot,
+  FieldLabel,
+  FieldControl,
+  FieldDescription,
+  FieldError,
+};
 
 beforeAll(() => {
   // SelectTrigger's Popper machinery expects these during mount.
@@ -217,7 +225,9 @@ describe('given a Field with native constraint validation', () => {
 
 describe('given a Field with a custom validate function', () => {
   it('renders the sync validation message through the default slot', async () => {
-    const validate = vi.fn((value: unknown) => (value === 'taken' ? 'Already taken' : null));
+    const validate = vi.fn((value: unknown) => (value === 'taken'
+      ? 'Already taken'
+      : null));
 
     const wrapper = mount({
       components,
@@ -228,7 +238,9 @@ describe('given a Field with a custom validate function', () => {
           <FieldError v-slot="{ errors }">{{ errors[0] }}</FieldError>
         </FieldRoot>
       `,
-    }, { props: { validate } });
+    }, {
+      props: { validate },
+    });
 
     const input = wrapper.find('input');
     await input.setValue('taken');
@@ -252,7 +264,9 @@ describe('given a Field with a custom validate function', () => {
           <FieldError v-slot="{ errors }">{{ errors[0] }}</FieldError>
         </FieldRoot>
       `,
-    }, { props: { validate } });
+    }, {
+      props: { validate },
+    });
 
     const input = wrapper.find('input');
     await input.setValue('anything');
@@ -318,7 +332,10 @@ describe('given pilot controls participating in a Field', () => {
   });
 
   it('a standalone Checkbox (outside a Field) renders no aria-describedby', () => {
-    const wrapper = mount({ components: { CheckboxRoot }, template: '<CheckboxRoot />' });
+    const wrapper = mount({
+      components: { CheckboxRoot },
+      template: '<CheckboxRoot />',
+    });
     expect(wrapper.find('[role="checkbox"]').attributes('aria-describedby')).toBeUndefined();
   });
 
@@ -389,7 +406,10 @@ describe('given pilot controls participating in a Field', () => {
   });
 
   it('a standalone DateField (outside a Field) renders no aria-labelledby/describedby', () => {
-    const wrapper = mount({ components: { DateFieldRoot }, template: '<DateFieldRoot />' });
+    const wrapper = mount({
+      components: { DateFieldRoot },
+      template: '<DateFieldRoot />',
+    });
     const group = wrapper.find('[role="group"]');
     expect(group.attributes('aria-labelledby')).toBeUndefined();
     expect(group.attributes('aria-describedby')).toBeUndefined();
@@ -405,7 +425,16 @@ describe('given pilot controls participating in a Field', () => {
 });
 
 describe('given a Field-wrapped Select', () => {
-  const selectComponents = { ...components, FormRoot, SelectRoot, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectItem };
+  const selectComponents = {
+    ...components,
+    FormRoot,
+    SelectRoot,
+    SelectTrigger,
+    SelectPortal,
+    SelectContent,
+    SelectViewport,
+    SelectItem,
+  };
 
   it('a programmatic modelValue change reports filled but not dirty', async () => {
     const wrapper = mount({
@@ -418,7 +447,9 @@ describe('given a Field-wrapped Select', () => {
           </SelectRoot>
         </FieldRoot>
       `,
-    }, { props: { modelValue: undefined } });
+    }, {
+      props: { modelValue: undefined },
+    });
 
     const field = wrapper.find('[data-testid="field"]');
     expect(field.attributes('data-dirty')).toBeUndefined();
@@ -485,7 +516,10 @@ describe('given a Field-wrapped Select', () => {
           </SelectRoot>
         </FieldRoot>
       `,
-    }, { props: { validate }, attachTo: document.body });
+    }, {
+      props: { validate },
+      attachTo: document.body,
+    });
 
     await selectFirstOption(wrapper);
 
@@ -513,7 +547,10 @@ describe('given a Field-wrapped Select', () => {
           </FieldRoot>
         </FormRoot>
       `,
-    }, { props: { validate }, attachTo: document.body });
+    }, {
+      props: { validate },
+      attachTo: document.body,
+    });
 
     await wrapper.find('form').trigger('submit');
     // Draining the whole microtask queue (not just one `nextTick`) is
@@ -550,7 +587,10 @@ describe('given a Field-wrapped Select', () => {
           </SelectRoot>
         </FieldRoot>
       `,
-    }, { props: { validate }, attachTo: document.body });
+    }, {
+      props: { validate },
+      attachTo: document.body,
+    });
 
     const field = wrapper.find('[data-testid="field"]');
 
@@ -617,7 +657,10 @@ describe('given a native control whose value changes without an input event', ()
           </FieldRoot>
         </FormRoot>
       `,
-    }, { props: { validate }, attachTo: document.body });
+    }, {
+      props: { validate },
+      attachTo: document.body,
+    });
 
     const control = wrapper.find('input');
     await control.setValue('typed@example.com')
@@ -692,7 +735,9 @@ describe('given a Field-wrapped Checkbox', () => {
           <CheckboxRoot />
         </FieldRoot>
       `,
-    }, { props: { validate } });
+    }, {
+      props: { validate },
+    });
 
     await wrapper.find('[role="checkbox"]').trigger('click');
     expect(validate).toHaveBeenLastCalledWith(true, expect.anything());
@@ -788,7 +833,12 @@ describe('given a FieldError', () => {
           <FieldError data-testid="error" />
         </FieldRoot>
       `,
-    }, { props: { validate: () => ['Too short', 'Needs a number'] }, attachTo: document.body })
+    }, {
+      props: {
+        validate: () => ['Too short', 'Needs a number'],
+      },
+      attachTo: document.body,
+    })
 
     ;(wrapper.vm.$refs.field as { validate: () => boolean }).validate();
     await nextTick();
@@ -805,7 +855,14 @@ describe('given a FieldError', () => {
           <FieldControl />
         </FieldRoot>
       `,
-    }, { props: { validate: (value: unknown) => (value === 'bad' ? 'Not allowed' : null) }, attachTo: document.body });
+    }, {
+      props: {
+        validate: (value: unknown) => (value === 'bad'
+          ? 'Not allowed'
+          : null),
+      },
+      attachTo: document.body,
+    });
 
     const input = wrapper.find('input');
     const element = input.element as HTMLInputElement;
@@ -828,7 +885,9 @@ describe('given a FieldError', () => {
           <FieldError data-testid="default">Default</FieldError>
         </FieldRoot>
       `,
-    }, { props: { disabled: false } });
+    }, {
+      props: { disabled: false },
+    });
 
     expect(wrapper.find('[data-testid="always"]').exists()).toBe(true);
     expect(wrapper.find('[data-testid="default"]').exists()).toBe(true);
@@ -894,7 +953,9 @@ describe('given a Field\'s dirty and touched state', () => {
           <FieldControl />
         </FieldRoot>
       `,
-    }, { props: { dirty: true, touched: false } });
+    }, {
+      props: { dirty: true, touched: false },
+    });
     const field = wrapper.find('[data-testid="field"]');
 
     expect(field.attributes('data-dirty')).toBe('');
@@ -971,7 +1032,9 @@ describe('given a FieldLabel', () => {
           <FieldControl />
         </FieldRoot>
       `,
-    }, { props: { showLabel: true } });
+    }, {
+      props: { showLabel: true },
+    });
     await nextTick();
 
     const labelId = wrapper.find('label').attributes('id');
@@ -1018,7 +1081,9 @@ describe('given a FieldControl with v-model', () => {
           <FieldControl v-model="text" />
         </FieldRoot>
       `,
-    }, { props: { validate } });
+    }, {
+      props: { validate },
+    });
 
     const input = wrapper.find('input');
     expect((input.element as HTMLInputElement).value).toBe('a');
@@ -1044,7 +1109,12 @@ describe('given a FieldValidity', () => {
           </FieldValidity>
         </FieldRoot>
       `,
-    }, { props: { validate: () => 'Nope' }, attachTo: document.body });
+    }, {
+      props: {
+        validate: () => 'Nope',
+      },
+      attachTo: document.body,
+    });
 
     // `valid` is `null` until the field has been validated.
     expect(wrapper.find('[data-testid="out"]').text()).toBe('|false||')
@@ -1117,7 +1187,12 @@ describe('given a control with its own id', () => {
 describe('given consumer attributes that change without any field state change', () => {
   it('keeps FieldControl and pilot aria attributes in sync', async () => {
     const wrapper = mount({
-      components: { ...components, CheckboxRoot, SelectRoot, SelectTrigger },
+      components: {
+        ...components,
+        CheckboxRoot,
+        SelectRoot,
+        SelectTrigger,
+      },
       props: ['describedBy'],
       template: `
         <div>
@@ -1126,7 +1201,9 @@ describe('given consumer attributes that change without any field state change',
           <FieldRoot><SelectRoot><SelectTrigger :aria-describedby="describedBy">Choose</SelectTrigger></SelectRoot></FieldRoot>
         </div>
       `,
-    }, { props: { describedBy: 'first' } });
+    }, {
+      props: { describedBy: 'first' },
+    });
 
     await wrapper.setProps({ describedBy: 'second' });
     for (const selector of ['input', '[role="checkbox"]', '[role="combobox"]']) {

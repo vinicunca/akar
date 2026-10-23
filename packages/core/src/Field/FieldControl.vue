@@ -120,7 +120,9 @@ function handleInput() {
 // Flushed after render, so the element's value (and validity) is up to date.
 watch(() => props.modelValue, (value, previous) => {
   if (value !== undefined && value !== previous) {
-    fieldContext.handleControlInput({ value: String(value) });
+    fieldContext.handleControlInput({
+      value: String(value),
+    });
   }
 }, { flush: 'post' });
 

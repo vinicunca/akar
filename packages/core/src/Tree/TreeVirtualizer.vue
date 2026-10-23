@@ -147,9 +147,15 @@ rootContext.virtualKeydownHook.on((event) => {
     const isDown = event.key === KEY_CODES.ARROW_DOWN;
     const rendered = getItems(true).map((i) => i.ref);
     const enabled = rendered.filter((i) => i.dataset.disabled !== '');
-    const edgeEnabled = isDown ? enabled.at(-1) : enabled[0];
-    const edgeIndex = Number((isDown ? rendered.at(-1) : rendered[0])?.getAttribute('data-index'));
-    const boundaryIndex = isDown ? rootContext.expandedItems.value.length - 1 : 0;
+    const edgeEnabled = isDown
+      ? enabled.at(-1)
+      : enabled[0];
+    const edgeIndex = Number((isDown
+      ? rendered.at(-1)
+      : rendered[0])?.getAttribute('data-index'));
+    const boundaryIndex = isDown
+      ? rootContext.expandedItems.value.length - 1
+      : 0;
     // Wrap from the outermost enabled item once the window reaches the end of the list.
     if (edgeEnabled && edgeEnabled === getActiveElement() && edgeIndex === boundaryIndex) {
       intent = isDown ? 'first' : 'last';
@@ -159,14 +165,18 @@ rootContext.virtualKeydownHook.on((event) => {
   if (['first', 'last'].includes(intent)) {
     event.preventDefault();
 
-    const index = intent === 'first' ? 0 : rootContext.expandedItems.value.length - 1;
+    const index = intent === 'first'
+      ? 0
+      : rootContext.expandedItems.value.length - 1;
     virtualizer.value.scrollToIndex(index);
     requestAnimationFrame(() => {
       const items = getItems().filter((i) => i.ref.dataset.disabled !== '');
       if (!items.length) {
         return;
       }
-      const item = intent === 'first' ? items[0] : items.at(-1)!;
+      const item = intent === 'first'
+        ? items[0]
+        : items.at(-1)!;
       item.ref.focus();
     });
   } else if (intent === 'prev' && event.key !== 'ArrowUp') {

@@ -3,11 +3,15 @@ import vue from '@vitejs/plugin-vue';
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 
-// Runs `*.browser.test.ts` in a real browser, for behaviour jsdom cannot
-// represent: trusted key events, native focus order, form submission and layout.
-// Kept apart from `vite.config.ts` so the jsdom suite needs no browser installed.
+/**
+ * Runs `*.browser.test.ts` in a real browser, for behaviour jsdom cannot
+ * represent: trusted key events, native focus order, form submission and layout.
+ * Kept apart from `vite.config.ts` so the jsdom suite needs no browser installed.
+ */
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
@@ -22,7 +26,9 @@ export default defineConfig({
       enabled: true,
       headless: true,
       provider: playwright(),
-      instances: [{ browser: 'chromium' }],
+      instances: [
+        { browser: 'chromium' },
+      ],
       screenshotFailures: false,
     },
   },

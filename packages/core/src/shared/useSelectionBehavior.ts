@@ -22,9 +22,8 @@ export function useSelectionBehavior<T>(
           modelValue.value = [...modelValue.value, val];
         }
       }
-    }
-    // single select
-    else {
+    } else {
+      // single select
       if (props.selectionBehavior === 'replace') {
         modelValue.value = { ...val };
       } else {

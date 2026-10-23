@@ -21,6 +21,7 @@ export function getDirectionAwareKey(key: string, dir?: Direction) {
   if (dir !== 'rtl') {
     return key;
   }
+  // eslint-disable-next-line no-nested-ternary
   return key === 'ArrowLeft'
     ? 'ArrowRight'
     : key === 'ArrowRight'

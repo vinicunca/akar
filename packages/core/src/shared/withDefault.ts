@@ -8,9 +8,9 @@ import { useForwardExpose } from './useForwardExpose';
 // From vue next
 // https://github.com/vuejs/core/blob/1f2a652a9d2e3bec472fb1786a4c16d6ccfa1fb1/packages/runtime-core/src/h.ts#L53-L58
 type RawProps = VNodeProps & {
-  // used to differ from a single VNode object as children
+  /** used to differ from a single VNode object as children */
   __v_isVNode?: never;
-  // used to differ from Array children
+  /** used to differ from Array children */
   [Symbol.iterator]?: never;
 } & Record<string, any>;
 
@@ -50,7 +50,9 @@ export function withDefault<T extends ComponentOptionsBase<{}, {}, {}, any, any,
     name: `${WrappedComponent.__name ?? ''}Wrapper`,
     setup(_, ctx) {
       return () => {
-        const optionProps = typeof options?.props === 'function' ? options?.props(ctx.attrs) : options?.props;
+        const optionProps = typeof options?.props === 'function'
+          ? options?.props(ctx.attrs)
+          : options?.props;
         const { forwardRef } = useForwardExpose();
 
         const mergedProps = mergeProps(optionProps, ctx.attrs);

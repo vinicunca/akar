@@ -11,7 +11,16 @@ import ComboboxObject from './story/_ComboboxObject.vue';
 import ComboboxTagsInput from './story/_ComboboxTagsInput.vue';
 
 const PersistentCombobox = defineComponent({
-  components: { ComboboxAnchor, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxPortal, ComboboxRoot, ComboboxTrigger, ComboboxViewport },
+  components: {
+    ComboboxAnchor,
+    ComboboxContent,
+    ComboboxInput,
+    ComboboxItem,
+    ComboboxPortal,
+    ComboboxRoot,
+    ComboboxTrigger,
+    ComboboxViewport,
+  },
   props: {
     bodyLock: Boolean,
     onEscapeKeyDown: Function,
@@ -39,7 +48,15 @@ const PersistentCombobox = defineComponent({
 });
 
 const PersistentComboboxWithInputInside = defineComponent({
-  components: { ComboboxContent, ComboboxInput, ComboboxItem, ComboboxPortal, ComboboxRoot, ComboboxTrigger, ComboboxViewport },
+  components: {
+    ComboboxContent,
+    ComboboxInput,
+    ComboboxItem,
+    ComboboxPortal,
+    ComboboxRoot,
+    ComboboxTrigger,
+    ComboboxViewport,
+  },
   template: `<ComboboxRoot :unmount-on-hide="false">
   <ComboboxTrigger data-testid="inside-trigger">Open</ComboboxTrigger>
   <ComboboxPortal>
@@ -175,7 +192,10 @@ describe('given two persistent Comboboxes', () => {
   it('lets the open Combobox handle Escape when a hidden one mounted after it', async () => {
     document.body.innerHTML = '';
     const onSecondEscapeKeyDown = vi.fn();
-    wrapper = mount(TwoPersistentComboboxes, { attachTo: document.body, props: { onSecondEscapeKeyDown } });
+    wrapper = mount(TwoPersistentComboboxes, {
+      attachTo: document.body,
+      props: { onSecondEscapeKeyDown },
+    });
     await nextTick();
     const triggers = wrapper.findAll('[data-testid="persistent-trigger"]');
     const contents = document.querySelectorAll<HTMLElement>('[data-testid="persistent-content"]');
@@ -227,7 +247,10 @@ describe('given default Combobox', () => {
       animationName: '',
     });
     document.body.innerHTML = '';
-    wrapper = mount(Combobox, { attachTo: document.body, props: { resetSearchTermOnBlur: true } });
+    wrapper = mount(Combobox, {
+      attachTo: document.body,
+      props: { resetSearchTermOnBlur: true },
+    });
     valueBox = wrapper.find('input');
   });
 
@@ -353,7 +376,10 @@ describe('given a Combobox with multiple prop', async () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Combobox, { props: { multiple: true, resetSearchTermOnBlur: true }, attachTo: document.body });
+    wrapper = mount(Combobox, {
+      props: { multiple: true, resetSearchTermOnBlur: true },
+      attachTo: document.body,
+    });
     valueBox = wrapper.find('input');
   });
 
@@ -384,7 +410,9 @@ describe('given a Combobox with multiple prop', async () => {
       });
 
       it('should emit `update:modelValue` event', () => {
-        expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toEqual([items[1].text()]);
+        expect(wrapper.emitted('update:modelValue')?.[0]?.[0]).toEqual([
+          items[1].text(),
+        ]);
       });
     });
   });
@@ -405,7 +433,17 @@ describe('given a virtualized Combobox', () => {
   const originalGetBoundingClientRect = window.HTMLElement.prototype.getBoundingClientRect;
   beforeAll(() => {
     window.HTMLElement.prototype.getBoundingClientRect = function () {
-      return { width: 200, height: 200, top: 0, left: 0, right: 200, bottom: 200, x: 0, y: 0, toJSON() {} };
+      return {
+        width: 200,
+        height: 200,
+        top: 0,
+        left: 0,
+        right: 200,
+        bottom: 200,
+        x: 0,
+        y: 0,
+        toJSON() {},
+      };
     };
   });
   afterAll(() => {
@@ -428,7 +466,9 @@ describe('given a virtualized Combobox', () => {
           h(ComboboxAnchor, null, {
             default: () => [
               h(ComboboxInput),
-              h(ComboboxTrigger, null, { default: () => 'Open' }),
+              h(ComboboxTrigger, null, {
+                default: () => 'Open',
+              }),
             ],
           }),
           h(ComboboxContent, null, {
@@ -438,7 +478,9 @@ describe('given a virtualized Combobox', () => {
                 estimateSize: 25,
                 textContent: (o: any) => o.label,
               }, {
-                default: ({ option }: any) => h(ComboboxItem, { value: option }, { default: () => option.label }),
+                default: ({ option }: any) => h(ComboboxItem, { value: option }, {
+                  default: () => option.label,
+                }),
               }),
             }),
           }),
@@ -963,7 +1005,10 @@ describe('given combobox handleBlur with deferred close', () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(Combobox, { attachTo: document.body, props: { resetSearchTermOnBlur: true } });
+    wrapper = mount(Combobox, {
+      attachTo: document.body,
+      props: { resetSearchTermOnBlur: true },
+    });
   });
 
   it('should not close when focus is restored inside before deferred close fires', async () => {
@@ -1032,10 +1077,14 @@ describe('given a Combobox with popper content', () => {
       setup() {
         return () => h(ComboboxRoot, { open: true }, {
           default: () => [
-            h(ComboboxAnchor, null, { default: () => h(ComboboxInput) }),
+            h(ComboboxAnchor, null, {
+              default: () => h(ComboboxInput),
+            }),
             h(ComboboxContent, { position: 'popper', side: side.value }, {
               default: () => h(ComboboxViewport, null, {
-                default: () => h(ComboboxItem, { value: 'Apple' }, { default: () => 'Apple' }),
+                default: () => h(ComboboxItem, { value: 'Apple' }, {
+                  default: () => 'Apple',
+                }),
               }),
             }),
           ],
@@ -1071,14 +1120,18 @@ describe('comboboxContent with popper positioning', () => {
           h(ComboboxAnchor, null, {
             default: () => [
               h(ComboboxInput),
-              h(ComboboxTrigger, null, { default: () => 'Open' }),
+              h(ComboboxTrigger, null, {
+                default: () => 'Open',
+              }),
             ],
           }),
           h(ComboboxContent, { position: 'popper' }, {
             default: () => {
               slotRenderCount.value += 1;
               return h(ComboboxViewport, null, {
-                default: () => options.map((option) => h(ComboboxItem, { key: option, value: option }, { default: () => option })),
+                default: () => options.map((option) => h(ComboboxItem, { key: option, value: option }, {
+                  default: () => option,
+                })),
               });
             },
           }),
@@ -1098,8 +1151,12 @@ describe('comboboxContent with popper positioning', () => {
       }
 
       observe(target: Element) {
-        this.callback([{ target } as ResizeObserverEntry], this);
-        this.callback([{ target } as ResizeObserverEntry], this);
+        this.callback([
+          { target } as ResizeObserverEntry,
+        ], this);
+        this.callback([
+          { target } as ResizeObserverEntry,
+        ], this);
       }
 
       unobserve() {}
@@ -1185,8 +1242,12 @@ describe('combobox highlight scrolling with popper positioning', () => {
         default: () => [
           h(ComboboxAnchor, null, {
             default: () => [
-              props.withInput ? h(ComboboxInput) : null,
-              h(ComboboxTrigger, null, { default: () => 'Open' }),
+              props.withInput
+                ? h(ComboboxInput)
+                : null,
+              h(ComboboxTrigger, null, {
+                default: () => 'Open',
+              }),
             ],
           }),
           h(ComboboxPortal, null, {
@@ -1197,8 +1258,12 @@ describe('combobox highlight scrolling with popper positioning', () => {
               default: () => h(ComboboxViewport, null, {
                 default: () => props.showItems
                   ? [
-                      h(ComboboxItem, { value: 'alpha' }, { default: () => 'Alpha' }),
-                      h(ComboboxItem, { value: 'beta' }, { default: () => 'Beta' }),
+                      h(ComboboxItem, { value: 'alpha' }, {
+                        default: () => 'Alpha',
+                      }),
+                      h(ComboboxItem, { value: 'beta' }, {
+                        default: () => 'Beta',
+                      }),
                     ]
                   : [],
               }),
@@ -1220,12 +1285,18 @@ describe('combobox highlight scrolling with popper positioning', () => {
         },
       }, {
         default: () => [
-          h(ComboboxAnchor, null, { default: () => h(ComboboxInput) }),
+          h(ComboboxAnchor, null, {
+            default: () => h(ComboboxInput),
+          }),
           h(ComboboxContent, { position: 'inline' }, {
             default: () => h(ComboboxViewport, null, {
               default: () => [
-                h(ComboboxItem, { value: 'alpha' }, { default: () => 'Alpha' }),
-                h(ComboboxItem, { value: 'beta' }, { default: () => 'Beta' }),
+                h(ComboboxItem, { value: 'alpha' }, {
+                  default: () => 'Alpha',
+                }),
+                h(ComboboxItem, { value: 'beta' }, {
+                  default: () => 'Beta',
+                }),
               ],
             }),
           }),
@@ -1247,7 +1318,9 @@ describe('combobox highlight scrolling with popper positioning', () => {
         },
       }, {
         default: () => [
-          h(ComboboxAnchor, null, { default: () => h(ComboboxInput) }),
+          h(ComboboxAnchor, null, {
+            default: () => h(ComboboxInput),
+          }),
           h(ComboboxPortal, null, {
             default: () => h(ComboboxContent, { position: 'popper' }, {
               default: () => h(ComboboxViewport, { style: 'height: 200px; overflow: auto' }, {
@@ -1256,7 +1329,9 @@ describe('combobox highlight scrolling with popper positioning', () => {
                   estimateSize: 25,
                   textContent: (option) => option.label,
                 }, {
-                  default: ({ option }) => h(ComboboxItem, { value: option }, { default: () => option.label }),
+                  default: ({ option }) => h(ComboboxItem, { value: option }, {
+                    default: () => option.label,
+                  }),
                 }),
               }),
             }),
@@ -1282,8 +1357,12 @@ describe('combobox highlight scrolling with popper positioning', () => {
           default: () => h(ComboboxContent, { position: 'popper' }, {
             default: () => h(ComboboxViewport, null, {
               default: () => [
-                h(ComboboxItem, { value: 'alpha' }, { default: () => 'Alpha' }),
-                h(ComboboxItem, { value: 'beta' }, { default: () => 'Beta' }),
+                h(ComboboxItem, { value: 'alpha' }, {
+                  default: () => 'Alpha',
+                }),
+                h(ComboboxItem, { value: 'beta' }, {
+                  default: () => 'Beta',
+                }),
               ],
             }),
           }),
@@ -1298,9 +1377,15 @@ describe('combobox highlight scrolling with popper positioning', () => {
         },
       }, {
         default: () => [
-          h(ComboboxAnchor, null, { default: () => h(ComboboxInput) }),
-          props.first ? renderContent('first') : null,
-          props.second ? renderContent('second') : null,
+          h(ComboboxAnchor, null, {
+            default: () => h(ComboboxInput),
+          }),
+          props.first
+            ? renderContent('first')
+            : null,
+          props.second
+            ? renderContent('second')
+            : null,
         ],
       });
     },
@@ -1354,7 +1439,9 @@ describe('combobox highlight scrolling with popper positioning', () => {
 
   function getHighlightedElement(input: DOMWrapper<HTMLInputElement>) {
     const id = input.attributes('aria-activedescendant');
-    const element = id ? document.getElementById(id) : null;
+    const element = id
+      ? document.getElementById(id)
+      : null;
     expect(element).toBeInstanceOf(HTMLElement);
     return element as HTMLElement;
   }
@@ -1388,7 +1475,9 @@ describe('combobox highlight scrolling with popper positioning', () => {
     const highlightedElement = document.querySelector<HTMLElement>('[role="option"][data-highlighted]');
     expect(highlightedElement).toBeInstanceOf(HTMLElement);
     const optionFocusCalls = focusSpy.mock.calls.filter((_, index) => focusSpy.mock.instances[index] === highlightedElement);
-    expect(optionFocusCalls).toContainEqual([{ preventScroll: true }]);
+    expect(optionFocusCalls).toContainEqual([
+      { preventScroll: true },
+    ]);
     expect(optionFocusCalls).not.toContainEqual([]);
     expect(scrollSpy).not.toHaveBeenCalled();
 
@@ -1492,7 +1581,9 @@ describe('combobox highlight scrolling with popper positioning', () => {
     const highlightedElement = document.querySelector('[role="option"][data-highlighted]');
     expect(highlightedElement).toBeInstanceOf(HTMLElement);
     const optionFocusCalls = focusSpy.mock.calls.filter((_, index) => focusSpy.mock.instances[index] === highlightedElement);
-    expect(optionFocusCalls).toContainEqual([{ preventScroll: true }]);
+    expect(optionFocusCalls).toContainEqual([
+      { preventScroll: true },
+    ]);
     expect(optionFocusCalls).not.toContainEqual([]);
     expect(scrollSpy).not.toHaveBeenCalled();
 
@@ -1608,7 +1699,14 @@ describe('given a Combobox with `loop`', () => {
   window.HTMLElement.prototype.scrollIntoView = vi.fn();
 
   const LoopCombobox = defineComponent({
-    components: { ComboboxAnchor, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxRoot, ComboboxViewport },
+    components: {
+      ComboboxAnchor,
+      ComboboxContent,
+      ComboboxInput,
+      ComboboxItem,
+      ComboboxRoot,
+      ComboboxViewport,
+    },
     props: { loop: Boolean },
     template: `<ComboboxRoot :loop="loop" default-open>
   <ComboboxAnchor>
@@ -1631,7 +1729,10 @@ describe('given a Combobox with `loop`', () => {
   });
 
   it('should wrap the highlight around the boundary items', async () => {
-    const wrapper = mount(LoopCombobox, { props: { loop: true }, attachTo: document.body });
+    const wrapper = mount(LoopCombobox, {
+      props: { loop: true },
+      attachTo: document.body,
+    });
     await flushPromises();
     const input = wrapper.find('input');
 

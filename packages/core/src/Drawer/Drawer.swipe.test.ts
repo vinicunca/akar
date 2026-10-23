@@ -44,7 +44,12 @@ beforeAll(() => {
     constructor(private cb: ResizeObserverCallback) {}
     observe(target: Element) {
       queueMicrotask(() => this.cb(
-        [{ target, contentRect: { height: MOCK_POPUP_HEIGHT, width: 400 } } as unknown as ResizeObserverEntry],
+        [
+          {
+            target,
+            contentRect: { height: MOCK_POPUP_HEIGHT, width: 400 },
+          } as unknown as ResizeObserverEntry,
+        ],
         this as unknown as ResizeObserver,
       ));
     }
@@ -55,7 +60,9 @@ beforeAll(() => {
   Object.defineProperty(window, 'innerHeight', { configurable: true, value: MOCK_POPUP_HEIGHT });
   Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
     configurable: true,
-    get() { return MOCK_POPUP_HEIGHT; },
+    get() {
+      return MOCK_POPUP_HEIGHT;
+    },
   });
 });
 
@@ -108,7 +115,12 @@ function renderDrawer(options: {
 }) {
   const onOpenChange = vi.fn(options.onOpenChange);
   const Test = defineComponent({
-    components: { DrawerRoot, DrawerPortal, DrawerContent, DrawerTitle },
+    components: {
+      DrawerRoot,
+      DrawerPortal,
+      DrawerContent,
+      DrawerTitle,
+    },
     setup() {
       const open = ref(true);
       function onUpdate(value: boolean, details: DrawerOpenChangeDetails) {
@@ -117,7 +129,12 @@ function renderDrawer(options: {
           open.value = value;
         }
       }
-      return { open, onUpdate, controlled: options.controlled, snapPoints: options.snapPoints };
+      return {
+        open,
+        onUpdate,
+        controlled: options.controlled,
+        snapPoints: options.snapPoints,
+      };
     },
     template: `
       <DrawerRoot

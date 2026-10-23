@@ -50,9 +50,13 @@ export function hexToHSL(hex: string): { h: number; s: number; l: number } {
     l *= 100; // Scale l to 0-100 for consistency with chromatic case
   } else {
     const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    s = l > 0.5
+      ? d / (2 - max - min)
+      : d / (max + min);
     if (max === r) {
-      h = (g - b) / d + (g < b ? 6 : 0);
+      h = (g - b) / d + (g < b
+        ? 6
+        : 0);
     } else if (max === g) {
       h = (b - r) / d + 2;
     } else {
@@ -150,5 +154,7 @@ export function getColorName(hex: string) {
 export function getColorContrast(hex: string): 'light' | 'dark' {
   const { r, g, b } = hexToRGB(hex);
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.5 ? 'dark' : 'light';
+  return luminance > 0.5
+    ? 'dark'
+    : 'light';
 }

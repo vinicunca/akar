@@ -4,7 +4,10 @@ import { CalendarDateTime, isWeekend } from '@internationalized/date';
 
 import DateRangePicker from './_DummyDateRangePicker.vue';
 
-const defaultValue = { start: new CalendarDateTime(2024, 2, 20), end: new CalendarDateTime(2024, 2, 27) };
+const defaultValue = {
+  start: new CalendarDateTime(2024, 2, 20),
+  end: new CalendarDateTime(2024, 2, 27),
+};
 
 const minValue = new CalendarDateTime(2024, 2, 14);
 const maxValue = new CalendarDateTime(2024, 2, 28);

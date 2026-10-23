@@ -30,7 +30,10 @@ export function useGraceArea(triggerElement: Ref<HTMLElement | undefined>, conta
     const exitSide = getExitSideFromRect(exitPoint, currentTarget.getBoundingClientRect());
     const paddedExitPoints = getPaddedExitPoints(exitPoint, exitSide, 1);
     const hoverTargetPoints = getPointsFromRect(hoverTarget.getBoundingClientRect());
-    const graceArea = getHull([...paddedExitPoints, ...hoverTargetPoints]);
+    const graceArea = getHull([
+      ...paddedExitPoints,
+      ...hoverTargetPoints,
+    ]);
     pointerGraceArea.value = graceArea;
     isPointerInTransit.value = true;
   }

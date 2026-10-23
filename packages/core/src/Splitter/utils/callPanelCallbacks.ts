@@ -2,7 +2,7 @@ import type { PanelData } from '../SplitterPanel.vue';
 import { assert } from './assert';
 import { fuzzyNumbersEqual } from './compare';
 
-// Layout should be pre-converted into percentages
+/** Layout should be pre-converted into percentages */
 export function callPanelCallbacks(
   panelsArray: Array<PanelData>,
   layout: Array<number>,

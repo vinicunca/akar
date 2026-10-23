@@ -46,7 +46,10 @@ export function useForwardProps<T extends Record<string, any>>(props: MaybeRefOr
     });
 
     // Only return value from the props parameter
-    return Object.keys({ ...defaultProps, ...preservedProps }).reduce((prev, curr) => {
+    return Object.keys({
+      ...defaultProps,
+      ...preservedProps,
+    }).reduce((prev, curr) => {
       if (refProps.value[curr] !== undefined) {
         (prev as Record<string, any>)[curr] = refProps.value[curr];
       }

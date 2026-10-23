@@ -12,7 +12,13 @@ const people = [
   { id: 5, name: 'Katelyn Rohan' },
 ];
 
-const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'].map((v, i) => ({ id: i, name: v }));
+const vegetables = [
+  'Aubergine',
+  'Broccoli',
+  'Carrot',
+  'Courgette',
+  'Leek',
+].map((v, i) => ({ id: i, name: v }));
 
 const { contains } = useFilter({ sensitivity: 'base' });
 const v1 = ref(people[0]);

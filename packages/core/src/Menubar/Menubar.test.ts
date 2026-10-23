@@ -76,7 +76,10 @@ describe('given MenubarTrigger with consumer event listeners', () => {
         h(MenubarPortal, () => h(MenubarContent, () => h(MenubarItem, () => 'New'))),
       ])),
     }), { attachTo: document.body });
-    return { value, trigger: wrapper.find('button') };
+    return {
+      value,
+      trigger: wrapper.find('button'),
+    };
   }
 
   it.each(['Enter', ' ', 'ArrowDown'])('should open on %j keydown', async (key) => {
@@ -86,7 +89,9 @@ describe('given MenubarTrigger with consumer event listeners', () => {
   });
 
   it.each(['Enter', ' ', 'ArrowDown'])('should not open on %j keydown when the consumer prevents default', async (key) => {
-    const { value, trigger } = mountMenubar({ onKeydown: (event) => event.preventDefault() });
+    const { value, trigger } = mountMenubar({
+      onKeydown: (event) => event.preventDefault(),
+    });
     await trigger.trigger('keydown', { key });
     expect(value.value).toBe('');
   });
@@ -98,7 +103,9 @@ describe('given MenubarTrigger with consumer event listeners', () => {
   });
 
   it('should not open on pointerdown when the consumer prevents default', async () => {
-    const { value, trigger } = mountMenubar({ onPointerdown: (event) => event.preventDefault() });
+    const { value, trigger } = mountMenubar({
+      onPointerdown: (event) => event.preventDefault(),
+    });
     await fireEvent.pointerDown(trigger.element, { button: 0, ctrlKey: false });
     expect(value.value).toBe('');
   });

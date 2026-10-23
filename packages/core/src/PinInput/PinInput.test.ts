@@ -238,7 +238,10 @@ describe('give PinInput type=number', async () => {
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    wrapper = mount(PinInput, { props: { type: 'number' }, attachTo: document.body });
+    wrapper = mount(PinInput, {
+      props: { type: 'number' },
+      attachTo: document.body,
+    });
     inputs = wrapper.find('div').findAll('input:not([aria-hidden])');
     inputs[0].element.focus();
   });
@@ -430,7 +433,10 @@ describe('handle IME composition', () => {
 
   it('should reject non-numeric IME input in numeric mode', async () => {
     document.body.innerHTML = '';
-    wrapper = mount(PinInput, { attachTo: document.body, props: { type: 'number' } });
+    wrapper = mount(PinInput, {
+      attachTo: document.body,
+      props: { type: 'number' },
+    });
     inputs = wrapper.find('div').findAll('input:not([aria-hidden])');
     inputs[0].element.focus();
 
@@ -456,7 +462,10 @@ describe('handle IME composition', () => {
 
   it('should distribute multi-digit numeric composition commit across slots', async () => {
     document.body.innerHTML = '';
-    wrapper = mount(PinInput, { attachTo: document.body, props: { type: 'number' } });
+    wrapper = mount(PinInput, {
+      attachTo: document.body,
+      props: { type: 'number' },
+    });
     inputs = wrapper.find('div').findAll('input:not([aria-hidden])');
     inputs[0].element.focus();
 
@@ -480,7 +489,10 @@ describe('give OTP PinInput', () => {
     // `userEvent.tab()` / `userEvent.click()` need the real `getComputedStyle`
     window.getComputedStyle = originalGetComputedStyle;
     document.body.innerHTML = '';
-    wrapper = mount(PinInput, { attachTo: document.body, props: { otp: true } });
+    wrapper = mount(PinInput, {
+      attachTo: document.body,
+      props: { otp: true },
+    });
     inputs = wrapper.find('div').findAll('input:not([aria-hidden])');
     inputs[0].element.focus();
   });

@@ -133,8 +133,13 @@ const positionerContext = injectToastPositionerContext(null);
 // Read after the DOM updates, and again when a managed toast changes, so that an
 // updated toast (e.g. a promise going from loading to success) is announced again.
 const announceTextContent = shallowRef<Array<string> | null>(null);
-watch([currentElement, () => props.toast?.updateKey], ([element]) => {
-  announceTextContent.value = element ? getAnnounceTextContent(element) : null;
+watch([
+  currentElement,
+  () => props.toast?.updateKey,
+], ([element]) => {
+  announceTextContent.value = element
+    ? getAnnounceTextContent(element)
+    : null;
 }, { flush: 'post', immediate: true });
 
 const stackEntry = reactive({ seq: 0, height: 0, open: props.open });
@@ -194,8 +199,14 @@ watchEffect((cleanupFn) => {
 // start timer when toast opens or duration changes.
 // we include `open` in deps because closed !== unmounted when animating
 // so it could reopen before being completely unmounted
-const restartKey = computed(() => props.toast ? providerContext.toastStore.getRestartKey(props.toast.id) : 0);
-watch([() => props.open, duration, restartKey], () => {
+const restartKey = computed(() => props.toast
+  ? providerContext.toastStore.getRestartKey(props.toast.id)
+  : 0);
+watch([
+  () => props.open,
+  duration,
+  restartKey,
+], () => {
   // Reset the timer when the toast is rerendered with the new duration
   closeTimerRemainingTimeRef.value = duration.value;
 
@@ -223,7 +234,10 @@ onUnmounted(() => {
   unregisterToast?.();
 });
 
-provideToastRootContext({ onClose: handleClose, toast: toRef(props, 'toast') });
+provideToastRootContext({
+  onClose: handleClose,
+  toast: toRef(props, 'toast'),
+});
 </script>
 
 <template>

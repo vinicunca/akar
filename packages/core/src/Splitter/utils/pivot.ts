@@ -11,5 +11,7 @@ export function determinePivotIndices(
     panelGroupElement,
   );
 
-  return index != null ? [index, index + 1] : [-1, -1];
+  return index != null
+    ? [index, index + 1]
+    : [-1, -1];
 }

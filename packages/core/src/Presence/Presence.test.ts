@@ -9,7 +9,9 @@ describe('given a default Presence', () => {
   const wrapper = mount(defineComponent({
     components: { Presence },
     setup: () => {
-      return { open: ref(false) };
+      return {
+        open: ref(false),
+      };
     },
     template: `<div>
     <button @click="open = !open">
@@ -46,7 +48,9 @@ describe('given a forceMounted Presence', () => {
   const wrapper = mount(defineComponent({
     components: { Presence },
     setup: () => {
-      return { open: ref(false) };
+      return {
+        open: ref(false),
+      };
     },
     template: `<section>
     <button @click="open = !open">
@@ -111,7 +115,10 @@ describe('given a Presence with animated content', () => {
         el.value.appendChild(css);
       });
 
-      return { open: ref(false), el };
+      return {
+        open: ref(false),
+        el,
+      };
     },
     template: `<div ref="el">
     <button @click="open = !open">

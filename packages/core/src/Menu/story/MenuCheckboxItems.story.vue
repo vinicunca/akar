@@ -4,7 +4,12 @@ import { MenuCheckboxItem, MenuItemIndicator, MenuSeparator } from '..';
 import MenuWithAnchor from './_MenuWithAnchor.vue';
 import TickIcon from './_TickIcon.vue';
 
-const options = ['Crows', 'Ravens', 'Magpies', 'Jackdaws'];
+const options = [
+  'Crows',
+  'Ravens',
+  'Magpies',
+  'Jackdaws',
+];
 
 const selection = ref<Array<string>>([]);
 

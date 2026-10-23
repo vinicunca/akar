@@ -15,7 +15,10 @@ const locks = new WeakMap<Document, BodyPointerEventsLock>();
 export function acquireBodyPointerEvents(doc: Document, owner: unknown) {
   let lock = locks.get(doc);
   if (!lock) {
-    lock = { owners: new Set(), original: doc.body.style.pointerEvents };
+    lock = {
+      owners: new Set(),
+      original: doc.body.style.pointerEvents,
+    };
     locks.set(doc, lock);
   }
   lock.owners.add(owner);

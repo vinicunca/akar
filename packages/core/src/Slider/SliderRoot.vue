@@ -112,7 +112,9 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   passive: (props.modelValue === undefined) as false,
 }) as Ref<Array<number> | null>;
 
-const currentModelValue = computed(() => Array.isArray(modelValue.value) ? [...modelValue.value] : []);
+const currentModelValue = computed(() => Array.isArray(modelValue.value)
+  ? [...modelValue.value]
+  : []);
 
 const valueIndexToChangeRef = ref(0);
 const valuesBeforeSlideStartRef = ref(currentModelValue.value);

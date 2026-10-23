@@ -243,7 +243,10 @@ const serverError = computed(() => {
 // leaves `serverError` unchanged by value, so that watcher alone would never
 // fire. Also watch the parent `errors` object's identity so a fresh object —
 // even with identical contents — re-shows the error.
-watch([serverError, () => formContext?.serverErrors.value], () => {
+watch([
+  serverError,
+  () => formContext?.serverErrors.value,
+], () => {
   clearedServerError.value = false;
 });
 
@@ -251,10 +254,15 @@ const serverErrors = computed(() => {
   if (clearedServerError.value || !serverError.value) {
     return [];
   }
-  return (Array.isArray(serverError.value) ? serverError.value : [serverError.value]).filter(Boolean);
+  return (Array.isArray(serverError.value)
+    ? serverError.value
+    : [serverError.value]).filter(Boolean);
 });
 
-const errors = computed(() => [...validationErrors.value, ...serverErrors.value]);
+const errors = computed(() => [
+  ...validationErrors.value,
+  ...serverErrors.value,
+]);
 
 // App-controlled invalidity (the `invalid` prop and server errors) applies even
 // while disabled. Computed validity (native constraints and `validate`) doesn't,
@@ -271,8 +279,12 @@ const validity = computed<FieldValidityState>(() => ({ ...validationValidity.val
 
 const dataAttributes = computed<FieldDataAttributes>(() => ({
   'data-disabled': disabled.value ? '' : undefined,
-  'data-valid': valid.value === true ? '' : undefined,
-  'data-invalid': valid.value === false ? '' : undefined,
+  'data-valid': valid.value === true
+    ? ''
+    : undefined,
+  'data-invalid': valid.value === false
+    ? ''
+    : undefined,
   'data-dirty': dirty.value ? '' : undefined,
   'data-touched': touched.value ? '' : undefined,
   'data-filled': filled.value ? '' : undefined,
@@ -281,7 +293,9 @@ const dataAttributes = computed<FieldDataAttributes>(() => ({
 
 // --- Description / error id accumulation (deterministic: registration order) ---
 const describedByIds = ref<Array<string>>([]);
-const describedBy = computed(() => describedByIds.value.length ? describedByIds.value.join(' ') : undefined);
+const describedBy = computed(() => describedByIds.value.length
+  ? describedByIds.value.join(' ')
+  : undefined);
 
 function registerDescription(id: string) {
   describedByIds.value.push(id);
@@ -358,7 +372,9 @@ function resolveValue(detail?: FieldControlDetail) {
   if (detail) {
     return detail.value;
   }
-  return control.value ? control.value.getValue() : lastReportedValue.value;
+  return control.value
+    ? control.value.getValue()
+    : lastReportedValue.value;
 }
 
 function getValiditySource() {

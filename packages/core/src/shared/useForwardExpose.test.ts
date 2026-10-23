@@ -23,7 +23,9 @@ describe('useForwardRef', async () => {
         const el = ref();
         const forwardedRef = computed(() => el.value?.$el);
         return () =>
-          h('div', { test: forwardedRef.value }, [h(comp, { ref: el })]);
+          h('div', { test: forwardedRef.value }, [
+            h(comp, { ref: el }),
+          ]);
       }),
     );
     await flushPromises();
@@ -46,7 +48,9 @@ describe('useForwardRef', async () => {
         const el = ref();
         const forwardedRef = computed(() => el.value?.$el);
         return () =>
-          h('div', { test: forwardedRef.value }, [h(comp, { ref: el })]);
+          h('div', { test: forwardedRef.value }, [
+            h(comp, { ref: el }),
+          ]);
       }),
     );
     await flushPromises();
@@ -70,7 +74,9 @@ describe('useForwardRef', async () => {
         const el = ref();
         const forwardedRef = computed(() => el.value?.$el);
         return () =>
-          h('div', { test: forwardedRef.value }, [h(comp, { ref: el })]);
+          h('div', { test: forwardedRef.value }, [
+            h(comp, { ref: el }),
+          ]);
       }),
     );
     await flushPromises();
@@ -80,7 +86,9 @@ describe('useForwardRef', async () => {
     const Frag = defineComponent(
       (props, { slots }) =>
         () =>
-          h(Fragment, {}, [slots.default?.()]),
+          h(Fragment, {}, [
+            slots.default?.(),
+          ]),
     );
     const comp = defineComponent({
       components: { Frag },
@@ -103,7 +111,9 @@ describe('useForwardRef', async () => {
         const el = ref();
         const forwardedRef = computed(() => el.value?.$el);
         return () =>
-          h('div', { test: forwardedRef.value }, [h(comp, { ref: el })]);
+          h('div', { test: forwardedRef.value }, [
+            h(comp, { ref: el }),
+          ]);
       }),
     );
     await flushPromises();
@@ -130,7 +140,9 @@ describe('useForwardRef', async () => {
         const el = ref();
         const forwardedRef = computed(() => el.value?.$el);
         return () =>
-          h('div', { test: forwardedRef.value }, [h(comp, { ref: el })]);
+          h('div', { test: forwardedRef.value }, [
+            h(comp, { ref: el }),
+          ]);
       }),
     );
     await flushPromises();
@@ -157,7 +169,9 @@ describe('useForwardRef', async () => {
         const el = ref();
         const forwardedRef = computed(() => el.value?.$el);
         return () =>
-          h('div', { test: forwardedRef.value }, [h(comp, { ref: el })]);
+          h('div', { test: forwardedRef.value }, [
+            h(comp, { ref: el }),
+          ]);
       }),
     );
     await flushPromises();
@@ -193,9 +207,11 @@ describe('useForwardRef', async () => {
 
     // Parent component accesses via ref
     const parentRef = ref<any>();
-    const wrapper = mount(
+    const _wrapper = mount(
       defineComponent(() => {
-        return () => h('div', {}, [h(comp, { ref: parentRef })]);
+        return () => h('div', {}, [
+          h(comp, { ref: parentRef }),
+        ]);
       }),
     );
 
@@ -236,10 +252,12 @@ describe('useForwardRef', async () => {
     });
 
     const parentRef = ref<any>();
-    const wrapper = mount(
+    const _wrapper = mount(
       defineComponent(() => {
         return () =>
-          h('div', {}, [h(comp, { ref: parentRef, parentProp: 'custom-value' })]);
+          h('div', {}, [
+            h(comp, { ref: parentRef, parentProp: 'custom-value' }),
+          ]);
       }),
     );
 
@@ -259,7 +277,12 @@ describe('useForwardRef', async () => {
         const increment = () => count.value++;
         const getMessage = () => message.value;
         // Expose multiple properties and methods
-        expose({ count, message, increment, getMessage });
+        expose({
+          count,
+          message,
+          increment,
+          getMessage,
+        });
         return () => h('button', {}, 'inner');
       },
     });
@@ -279,9 +302,11 @@ describe('useForwardRef', async () => {
     });
 
     const parentRef = ref<any>();
-    const wrapper = mount(
+    const _wrapper = mount(
       defineComponent(() => {
-        return () => h('div', {}, [h(comp, { ref: parentRef })]);
+        return () => h('div', {}, [
+          h(comp, { ref: parentRef }),
+        ]);
       }),
     );
 
@@ -309,7 +334,11 @@ describe('useForwardRef', async () => {
         return () => {
           const showButton = toggle.value;
           return h(Primitive, { ref: forwardRef, asChild: true }, {
-            default: () => [showButton ? h('button') : h('span')],
+            default: () => [
+              showButton
+                ? h('button')
+                : h('span'),
+            ],
           });
         };
       },

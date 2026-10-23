@@ -5,8 +5,20 @@ import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, Combobox
 
 const v = ref('Apple');
 const searchTerm = ref('');
-const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'];
-const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'];
+const options = [
+  'Apple',
+  'Banana',
+  'Blueberry',
+  'Grapes',
+  'Pineapple',
+];
+const vegetables = [
+  'Aubergine',
+  'Broccoli',
+  'Carrot',
+  'Courgette',
+  'Leek',
+];
 </script>
 
 <template>

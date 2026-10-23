@@ -25,7 +25,9 @@ const disabled = computed(() => itemContext.disabled.value || props.disabled);
 
 // Only the focused tag's button is tabbable, so Tab moves from a tag to its
 // delete button and then out of the group, like React Aria.
-const tabindex = computed(() => itemContext.isTabStop.value ? 0 : -1);
+const tabindex = computed(() => itemContext.isTabStop.value
+  ? 0
+  : -1);
 
 function handleClick(event: MouseEvent) {
   // The tag itself toggles selection on click.

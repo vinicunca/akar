@@ -81,7 +81,13 @@ function mountHarness(opts: HarnessOptions = {}) {
   });
 
   const wrapper = mount(Harness, { attachTo: document.body });
-  return { wrapper, elementRef, onDismiss, onCancel, onRelease };
+  return {
+    wrapper,
+    elementRef,
+    onDismiss,
+    onCancel,
+    onRelease,
+  };
 }
 
 function dispatchPointer(
@@ -98,7 +104,9 @@ function dispatchPointer(
     pointerType: 'mouse',
     pointerId: 1,
     button: 0,
-    buttons: type === 'pointerup' || type === 'pointercancel' ? 0 : 1,
+    buttons: type === 'pointerup' || type === 'pointercancel'
+      ? 0
+      : 1,
     clientX: x,
     clientY: y,
     ...extra,
@@ -290,7 +298,9 @@ describe('useSwipeDismiss — non-dismissable direction (elastic pull)', () => {
   it('leaves an allowed direction undamped when both axes directions are allowed', async () => {
     // Snap-point drawers pass both the dismiss direction and its opposite, so
     // neither vertical direction should be damped.
-    const { wrapper, elementRef } = mountHarness({ directions: ['down', 'up'] });
+    const { wrapper, elementRef } = mountHarness({
+      directions: ['down', 'up'],
+    });
     await nextTick();
 
     const el = elementRef.value!;
@@ -416,7 +426,9 @@ describe('useSwipeDismiss — releases the popup never sees', () => {
 describe('useSwipeDismiss — cross-axis scroll arbitration', () => {
   /** Marks an element as genuinely scrollable on `axis` for jsdom, which reports every box as 0x0. */
   function makeScrollable(el: HTMLElement, axis: 'vertical' | 'horizontal', scrollOffset = 0) {
-    el.style.setProperty(axis === 'vertical' ? 'overflow-y' : 'overflow-x', 'auto');
+    el.style.setProperty(axis === 'vertical'
+      ? 'overflow-y'
+      : 'overflow-x', 'auto');
     const sizes = axis === 'vertical'
       ? { scrollHeight: 2000, clientHeight: 500, scrollTop: scrollOffset }
       : { scrollWidth: 2000, clientWidth: 500, scrollLeft: scrollOffset };
@@ -459,14 +471,22 @@ describe('useSwipeDismiss — cross-axis scroll arbitration', () => {
               ref: (el) => {
                 scrollRef.value = el as HTMLElement | null;
               },
-            }, [h('p', 'content')]),
+            }, [
+              h('p', 'content'),
+            ]),
           ],
         );
       },
     });
 
     const wrapper = mount(Harness, { attachTo: document.body });
-    return { wrapper, elementRef, scrollRef, onDismiss, onCancel };
+    return {
+      wrapper,
+      elementRef,
+      scrollRef,
+      onDismiss,
+      onCancel,
+    };
   }
 
   // jsdom's `TouchEvent`/`Touch` support varies, so build the event by hand.
@@ -479,7 +499,11 @@ describe('useSwipeDismiss — cross-axis scroll arbitration', () => {
   ) {
     const event = new Event(type, { bubbles: true, cancelable });
     Object.defineProperty(event, 'touches', {
-      value: type === 'touchend' ? [] : [{ clientX: x, clientY: y }],
+      value: type === 'touchend'
+        ? []
+        : [
+            { clientX: x, clientY: y },
+          ],
       configurable: true,
     });
     Object.defineProperty(event, 'timeStamp', { value: 0, configurable: true });
@@ -606,7 +630,9 @@ describe('useSwipeDismiss — cross-axis scroll arbitration', () => {
   });
 
   it('yields a horizontal drift on a bottom drawer to horizontally scrollable content', async () => {
-    const { wrapper, elementRef, scrollRef, onDismiss } = mountTouchHarness({ directions: ['down'] });
+    const { wrapper, elementRef, scrollRef, onDismiss } = mountTouchHarness({
+      directions: ['down'],
+    });
     await nextTick();
 
     const el = elementRef.value!;
@@ -683,9 +709,13 @@ describe('useSwipeDismiss — interactive start targets', () => {
         }, [
           h('a', { 'href': '#', 'data-testid': 'link' }, 'Link'),
           h('button', { 'data-testid': 'button' }, 'Button'),
-          h('label', { 'data-testid': 'label' }, [h('input', { type: 'checkbox' })]),
+          h('label', { 'data-testid': 'label' }, [
+            h('input', { type: 'checkbox' }),
+          ]),
           h('input', { 'type': 'range', 'data-testid': 'range' }),
-          h('div', { 'data-akar-swipe-ignore': '', 'data-testid': 'ignored' }, [h('span', 'Ignored')]),
+          h('div', { 'data-akar-swipe-ignore': '', 'data-testid': 'ignored' }, [
+            h('span', 'Ignored'),
+          ]),
           h('p', { 'data-testid': 'text' }, 'Text'),
         ]);
       },
@@ -699,7 +729,11 @@ describe('useSwipeDismiss — interactive start targets', () => {
   function dispatchTouch(target: HTMLElement, type: 'touchstart' | 'touchmove' | 'touchend', x: number, y: number) {
     const event = new Event(type, { bubbles: true, cancelable: true });
     Object.defineProperty(event, 'touches', {
-      value: type === 'touchend' ? [] : [{ clientX: x, clientY: y }],
+      value: type === 'touchend'
+        ? []
+        : [
+            { clientX: x, clientY: y },
+          ],
       configurable: true,
     });
     Object.defineProperty(event, 'timeStamp', { value: 0, configurable: true });
@@ -741,7 +775,9 @@ describe('useSwipeDismiss — interactive start targets', () => {
     const { wrapper, onDismiss, get } = mountTargetHarness({ ignoreSelectorWhenTouch: false });
     await nextTick();
 
-    const target = id === 'ignored' ? get(id).querySelector('span')! : get(id);
+    const target = id === 'ignored'
+      ? get(id).querySelector('span')!
+      : get(id);
     expect(touchSwipe(target).defaultPrevented).toBe(false);
     await nextTick();
     expect(onDismiss).not.toHaveBeenCalled();

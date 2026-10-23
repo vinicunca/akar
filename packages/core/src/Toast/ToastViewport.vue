@@ -184,13 +184,18 @@ watchEffect((cleanupFn) => {
 function getSortedTabbableCandidates({ tabbingDirection }: { tabbingDirection: 'forwards' | 'backwards' }) {
   const toastItems = getItems().map((i) => i.ref);
   const tabbableCandidates = toastItems.map((toastNode) => {
-    const toastTabbableCandidates = [toastNode, ...getTabbableCandidates(toastNode)];
+    const toastTabbableCandidates = [
+      toastNode,
+      ...getTabbableCandidates(toastNode),
+    ];
     return tabbingDirection === 'forwards'
       ? toastTabbableCandidates
       : toastTabbableCandidates.reverse();
   });
   return (
-    tabbingDirection === 'forwards' ? tabbableCandidates.reverse() : tabbableCandidates
+    tabbingDirection === 'forwards'
+      ? tabbableCandidates.reverse()
+      : tabbableCandidates
   ).flat();
 }
 </script>

@@ -162,7 +162,12 @@ async function handleSelectCustomEvent(ev?: PointerEvent | KeyboardEvent) {
     return;
   }
 
-  const eventDetail = { originalEvent: ev, value: props.value, isExpanded: isExpanded.value, isSelected: isSelected.value };
+  const eventDetail = {
+    originalEvent: ev,
+    value: props.value,
+    isExpanded: isExpanded.value,
+    isSelected: isSelected.value,
+  };
   handleAndDispatchCustomEvent(TREE_SELECT, handleSelect, eventDetail);
 }
 
@@ -171,7 +176,12 @@ async function handleToggleCustomEvent(ev?: PointerEvent | KeyboardEvent) {
     return;
   }
 
-  const eventDetail = { originalEvent: ev, value: props.value, isExpanded: isExpanded.value, isSelected: isSelected.value };
+  const eventDetail = {
+    originalEvent: ev,
+    value: props.value,
+    isExpanded: isExpanded.value,
+    isSelected: isSelected.value,
+  };
   handleAndDispatchCustomEvent(TREE_TOGGLE, handleToggle, eventDetail);
 }
 

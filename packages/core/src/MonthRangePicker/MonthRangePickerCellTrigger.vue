@@ -172,7 +172,9 @@ function handleArrowKey(e: KeyboardEvent) {
   e.preventDefault();
   e.stopPropagation();
   const parentElement = rootContext.parentElement.value!;
-  const sign = rootContext.dir.value === 'rtl' ? -1 : 1;
+  const sign = rootContext.dir.value === 'rtl'
+    ? -1
+    : 1;
 
   switch (e.code) {
     case KEY_CODES.ARROW_RIGHT:
@@ -265,7 +267,9 @@ function handleArrowKey(e: KeyboardEvent) {
         return;
       }
 
-      shiftFocus(candidateMonthValue, years > 0 ? 1 : -1, 1);
+      shiftFocus(candidateMonthValue, years > 0
+        ? 1
+        : -1, 1);
     });
   }
 }

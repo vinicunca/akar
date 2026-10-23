@@ -21,7 +21,9 @@ export function useToastStore(): ToastStore {
   }
 
   function replace(id: string, next: ToastObject) {
-    toasts.value = toasts.value.map((toast) => toast.id === id ? next : toast);
+    toasts.value = toasts.value.map((toast) => toast.id === id
+      ? next
+      : toast);
   }
 
   function remove(id: string) {
@@ -41,14 +43,28 @@ export function useToastStore(): ToastStore {
 
     if (existing?.open) {
       const { id: _id, ...updates } = options;
-      replace(id, { ...existing, ...updates, updateKey: existing.updateKey + 1 });
+      replace(id, {
+        ...existing,
+        ...updates,
+        updateKey: existing.updateKey + 1,
+      });
       restartKeys.set(id, (restartKeys.get(id) ?? 0) + 1);
       return id;
     }
 
     // A closing toast that is added again starts a new lifecycle at the front of the list.
-    const rest = existing ? toasts.value.filter((toast) => toast.id !== id) : toasts.value;
-    toasts.value = [{ ...options, id, open: true, updateKey: 0 }, ...rest];
+    const rest = existing
+      ? toasts.value.filter((toast) => toast.id !== id)
+      : toasts.value;
+    toasts.value = [
+      {
+        ...options,
+        id,
+        open: true,
+        updateKey: 0,
+      },
+      ...rest,
+    ];
     return id;
   }
 
@@ -58,8 +74,12 @@ export function useToastStore(): ToastStore {
       return;
     }
 
-    toasts.value = toasts.value.map((toast) => closing.includes(toast) ? { ...toast, open: false } : toast);
-    closing.forEach((toast) => toast.onClose?.());
+    toasts.value = toasts.value.map((toast) => closing.includes(toast)
+      ? { ...toast, open: false }
+      : toast);
+    closing.forEach((toast) => {
+      toast.onClose?.();
+    });
   }
 
   function update(id: string, updates: ToastUpdateOptions | ((prevToast: ToastObject) => ToastUpdateOptions)) {
@@ -69,13 +89,21 @@ export function useToastStore(): ToastStore {
       return;
     }
 
-    const patch = typeof updates === 'function' ? updates(prevToast) : updates;
+    const patch = typeof updates === 'function'
+      ? updates(prevToast)
+      : updates;
     const current = find(id);
     if (!current?.open) {
       return;
     }
 
-    replace(id, { ...current, ...patch, id, open: true, updateKey: current.updateKey + 1 });
+    replace(id, {
+      ...current,
+      ...patch,
+      id,
+      open: true,
+      updateKey: current.updateKey + 1,
+    });
   }
 
   return {

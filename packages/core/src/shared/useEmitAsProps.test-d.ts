@@ -1,4 +1,3 @@
-/* eslint-disable ts/no-unused-vars */
 /**
  * Compile-time type tests for `useEmitAsProps` and `useForwardPropsEmits`.
  *

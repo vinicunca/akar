@@ -10,7 +10,10 @@ function isDateDisabled(date: DateValue) {
   return date.day > 20;
 }
 
-const defaultValue = { start: new CalendarDate(2024, 2, 20), end: new CalendarDate(2024, 2, 24) };
+const defaultValue = {
+  start: new CalendarDate(2024, 2, 20),
+  end: new CalendarDate(2024, 2, 24),
+};
 const minValue = new CalendarDate(2024, 2, 12);
 const maxValue = new CalendarDate(2024, 2, 20);
 </script>

@@ -61,7 +61,10 @@ const isEmpty = computed(() => rootContext.ignoreFilter.value
 
 const { forwardRef, currentElement } = useForwardExpose();
 const scrollLocked = useBodyScrollLock(props.present && !!props.bodyLock);
-watch([() => props.present, () => props.bodyLock], ([present, bodyLock]) => {
+watch([
+  () => props.present,
+  () => props.bodyLock,
+], ([present, bodyLock]) => {
   scrollLocked.value = present && !!bodyLock;
 });
 useFocusGuards();
@@ -136,7 +139,9 @@ function isEventTargetWithinCombobox(target: EventTarget | null) {
   // click/focus to that control, so interacting with it should not dismiss the content.
   // Without this, clicking such a label while open dismisses on `pointerdown` and the
   // forwarded click/focus immediately re-opens it.
-  const label = target instanceof Element ? target.closest('label') : null;
+  const label = target instanceof Element
+    ? target.closest('label')
+    : null;
   const control = label?.control;
   return !!control && !!rootContext.parentElement.value?.contains(control);
 }
