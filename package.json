@@ -3,7 +3,7 @@
   "type": "module",
   "version": "2.0.25",
   "private": true,
-  "packageManager": "pnpm@12.8.1",
+  "packageManager": "pnpm@12.16.1",
   "license": "MIT",
   "repository": "vinicunca/akar",
   "scripts": {
@@ -28,12 +28,12 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
-    "@vinicunca/eslint-config": "^6.1.1",
+    "@vinicunca/eslint-config": "^6.2.0",
     "bumpp": "^12.3.0",
-    "eslint": "^10.13.0",
+    "eslint": "^10.14.0",
     "lint-staged": "^17.6.0",
     "simple-git-hooks": "^2.14.0",
-    "tsx": "^4.20.3",
+    "tsx": "^4.23.15",
     "typescript": "5.8.3",
     "vue-component-meta": "3.3.11"
   },

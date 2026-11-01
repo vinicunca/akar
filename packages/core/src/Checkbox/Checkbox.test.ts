@@ -109,6 +109,29 @@ describe('given a required Checkbox', () => {
   });
 });
 
+describe('given a named Checkbox in a form', () => {
+  it('has the new state in the form data when its change event fires', async () => {
+    const wrapper = mount({
+      components: { CheckboxRoot },
+      template: '<form><CheckboxRoot name="agree" aria-label="Agree" /></form>',
+    });
+    const form = wrapper.find('form').element as HTMLFormElement;
+    const seen: Array<Array<[string, FormDataEntryValue]>> = [];
+    form.addEventListener('change', () => seen.push([
+      ...new FormData(form),
+    ]));
+    await wrapper.find('button').trigger('click');
+    await wrapper.find('button').trigger('click');
+    expect(seen).toEqual([
+      [
+        ['agree', 'on'],
+      ],
+      [],
+    ]);
+    wrapper.unmount();
+  });
+});
+
 describe('given CheckboxGroup', () => {
   it('should pass axe accessibility tests', async () => {
     const wrapper = mount(CheckboxGroup, { attachTo: document.body });
