@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import type { CheckboxGroupRootProps } from '..';
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { CheckboxGroupRoot, CheckboxIndicator, CheckboxRoot } from '..';
+import type { CheckboxGroupRootProps } from '..'
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { CheckboxGroupRoot, CheckboxIndicator, CheckboxRoot } from '..'
 
-const props = defineProps<CheckboxGroupRootProps<any>>();
-const modelValue = ref([]);
+const props = defineProps<CheckboxGroupRootProps<any>>()
+const modelValue = ref([])
 
-const items = [
-  { name: 'jack' },
-  { name: 'john' },
-  { name: 'mike' },
-];
+const items = [{ name: 'jack' }, { name: 'john' }, { name: 'mike' }]
 </script>
 
 <template>

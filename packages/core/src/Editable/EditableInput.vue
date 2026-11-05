@@ -1,73 +1,71 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { Primitive, usePrimitiveElement } from '@/Primitive';
+import type { PrimitiveProps } from '@/Primitive'
+import { Primitive } from '@/Primitive'
 
 export interface EditableInputProps extends PrimitiveProps {
 }
 </script>
 
 <script setup lang="ts">
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { computed, nextTick, onMounted, watch } from 'vue';
-import { injectEditableRootContext } from './EditableRoot.vue';
+import { mergeProps, nextTick, onMounted, watch } from 'vue'
+import { useForwardElement } from '@/shared'
+import { injectEditableFieldControl, injectEditableRootContext } from './EditableRoot.vue'
+import { getEditableInputSurface } from './useEditable'
+
+defineOptions({
+  // Bound explicitly (same merge as fallthrough), so a Field's aria ids can be
+  // merged with the consumer's instead of being replaced by them.
+  inheritAttrs: false,
+})
 
 const props = withDefaults(defineProps<EditableInputProps>(), {
   as: 'input',
-});
+})
 
-const context = injectEditableRootContext();
+const context = injectEditableRootContext()
+// Same derivation as `useEditable().input`.
+const input = getEditableInputSurface(context)
 
-const disabled = computed(() => context.disabled.value);
+const { forwardRef, currentElement: inputRef, expose } = useForwardElement()
+defineExpose(expose)
 
-const placeholder = computed(() => context.placeholder.value?.edit);
-
-const { primitiveElement, currentElement: inputRef } = usePrimitiveElement();
-
+// Focus management is DOM- and lifecycle-bound, so it stays in the shell.
 onMounted(() => {
-  context.inputRef.value = inputRef.value as HTMLInputElement;
+  context.inputRef.value = inputRef.value as HTMLInputElement
   if (context.startWithEditMode.value) {
-    context.inputRef.value?.focus({ preventScroll: true });
-    if (context.selectOnFocus.value) {
-      context.inputRef.value?.select();
-    }
+    context.inputRef.value?.focus({ preventScroll: true })
+    if (context.selectOnFocus.value)
+      context.inputRef.value?.select()
   }
-});
+})
+
+// The root's Field binding (`null` outside a `FieldRoot`): the input is
+// labelled, described and marked invalid by the field. A consumer
+// `aria-invalid` wins.
+const field = injectEditableFieldControl(null)?.binding
+function renderAttrs(attrs: Record<string, unknown>) {
+  if (!field)
+    return mergeProps(input.attrs.value, attrs)
+  return mergeProps(field.dataAttributes(), input.attrs.value, attrs, { ...field.ariaAttrs(attrs, context.disabled.value) })
+}
 
 watch(context.isEditing, (value) => {
   if (value) {
     nextTick(() => {
-      context.inputRef.value?.focus({ preventScroll: true });
-      if (context.selectOnFocus.value) {
-        context.inputRef.value?.select();
-      }
-    });
+      context.inputRef.value?.focus({ preventScroll: true })
+      if (context.selectOnFocus.value)
+        context.inputRef.value?.select()
+    })
   }
-});
-
-function handleSubmitKeyDown(event: KeyboardEvent) {
-  if ((context.submitMode.value === 'enter' || context.submitMode.value === 'both') && event.key === KEY_CODES.ENTER && !event.shiftKey && !event.metaKey && !event.isComposing) {
-    context.submit();
-  }
-}
+})
 </script>
 
 <template>
   <Primitive
-    ref="primitiveElement"
-    v-bind="props"
-    :value="context.inputValue.value"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    :maxlength="context.maxLength.value"
-    :data-disabled="disabled ? '' : undefined"
-    :data-readonly="context.readonly.value ? '' : undefined"
-    :readonly="context.readonly.value"
-    aria-label="editable input"
-    :hidden="context.autoResize.value ? undefined : !context.isEditing.value"
-    :style="context.autoResize.value ? { all: 'unset', gridArea: '1 / 1 / auto / auto', visibility: !context.isEditing.value ? 'hidden' : undefined } : undefined"
-    @input="context.inputValue.value = $event.target.value"
-    @keydown.enter.space="handleSubmitKeyDown"
-    @keydown.esc="context.cancel"
+    :ref="forwardRef"
+    v-bind="renderAttrs($attrs)"
+    :as="props.as"
+    :as-child="props.asChild"
   >
     <slot />
   </Primitive>

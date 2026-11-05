@@ -1,24 +1,12 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..'
 
-const v = ref('Apple');
-const searchTerm = ref('');
-const options = [
-  'Apple',
-  'Banana',
-  'Blueberry',
-  'Grapes',
-  'Pineapple',
-];
-const vegetables = [
-  'Aubergine',
-  'Broccoli',
-  'Carrot',
-  'Courgette',
-  'Leek',
-];
+const v = ref('Apple')
+const searchTerm = ref('')
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
+const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 </script>
 
 <template>

@@ -1,36 +1,55 @@
-export * from './arrays';
-export * from './clamp';
-export { createContext } from './createContext';
-export { type DateRange, type DateStep, type DateValue, type SegmentPart, type TimeRange, type TimeValue } from './date';
-export { getActiveElement } from './getActiveElement';
-export { handleAndDispatchCustomEvent } from './handleAndDispatchCustomEvent';
-export { isHTMLElement } from './isHTMLElement';
-export { isValidVNodeElement } from './isValidVNodeElement';
-export { isValueEqualOrExist } from './isValueEqualOrExist';
-export { onFocusOutside } from './onFocusOutside';
-export { renderSlotFragments } from './renderSlotFragments';
-export { useArrowNavigation } from './useArrowNavigation';
-export { useBodyScrollLock } from './useBodyScrollLock';
-export { clampTargetDate, focusPagination, focusWeekBoundary, getTargetMonthDay, MAX_FOCUS_RETRIES } from './useCalendarKeyboardNavigation';
-export { useComposing } from './useComposing';
-export { type Formatter, useDateFormatter } from './useDateFormatter';
-export { useDirection } from './useDirection';
-export { type EmitAsProps, useEmitAsProps } from './useEmitAsProps';
-export { useFilter } from './useFilter';
-export { useFocusGuards } from './useFocusGuards';
-export { useFormControl } from './useFormControl';
-export { useForwardExpose } from './useForwardExpose';
-export { useForwardProps } from './useForwardProps';
-export { useForwardPropsEmits } from './useForwardPropsEmits';
-export { useForwardRef } from './useForwardRef';
-export { useForwardScopeId } from './useForwardScopeId';
-export { useGraceArea } from './useGraceArea';
-export { useHideOthers } from './useHideOthers';
-export { useId } from './useId';
-export { useTestKbd } from './useKbd';
-export { useLocale } from './useLocale';
-export { useSelectionBehavior } from './useSelectionBehavior';
-export { useSize } from './useSize';
-export { useStateMachine } from './useStateMachine';
-export { useTypeahead } from './useTypeahead';
-export { withDefault } from './withDefault';
+export * from './arrays'
+export * from './browser'
+export * from './clamp'
+export { type By, compare, valueComparator } from './compare'
+export { createContext } from './createContext'
+export { type DisclosureState, disclosureState, type SelectionState, selectionState, type TriSelectionState } from './dataState'
+export { type DateRange, type DateStep, type DateValue, type SegmentPart, type TimeRange, type TimeValue } from './date'
+export { getActiveElement } from './getActiveElement'
+export { containsComposed, getElementByIdFrom, getEventTarget, getOwnerDocument, getOwnerWindow, getRootNode, resolveTeleportTarget, type RootNode } from './getRootNode'
+export { handleAndDispatchCustomEvent } from './handleAndDispatchCustomEvent'
+export { injectStyle, supportsAdoptedStyleSheets } from './injectStyle'
+export { isElement } from './isElement'
+export { isHTMLElement } from './isHTMLElement'
+export { isValidVNodeElement } from './isValidVNodeElement'
+export { isValueEqualOrExist } from './isValueEqualOrExist'
+export { createLabelRegistry, type LabelRegistry } from './labelRegistry'
+export * from './nullish'
+export * from './object'
+export { onFocusOutside } from './onFocusOutside'
+export { createPartSurface, fieldRef, getterRef, type PartSurface } from './partSurface'
+export { createPopupRootStore, getPopupRootStore, PopupHandle, type PopupHandleTrigger, type PopupRootStore, setPopupRootStore, usePopupHandleAttachment, usePopupHandleTrigger } from './popupHandle'
+export { renderSlotFragments } from './renderSlotFragments'
+export { type PartState, type StateAttributesMapping, stateToDataAttrs } from './stateToDataAttrs'
+export { type BaseChangeReason, type ChangeEventDetails } from './types'
+export { useAncestorScroll } from './useAncestorScroll'
+export { useArrowNavigation } from './useArrowNavigation'
+export { useBodyScrollLock } from './useBodyScrollLock'
+export { clampTargetDate, focusPagination, focusWeekBoundary, getTargetMonthDay, MAX_FOCUS_RETRIES } from './useCalendarKeyboardNavigation'
+export { useComposing } from './useComposing'
+export { createChangeEventDetails, type SetStateOptions, useControllableState, type UseControllableStateOptions, type UseControllableStateReturn } from './useControllableState'
+export { type Formatter, useDateFormatter } from './useDateFormatter'
+export { useDirection } from './useDirection'
+export { type EmitAsProps, useEmitAsProps } from './useEmitAsProps'
+export { useFilter } from './useFilter'
+export { useFocusGuards } from './useFocusGuards'
+export { useFocusWithin } from './useFocusWithin'
+export { useFormControl } from './useFormControl'
+export { createElementExpose, type ElementExpose, mergeExpose, useForwardElement, type UseForwardElementReturn } from './useForwardElement'
+export { useForwardExpose } from './useForwardExpose'
+export { useForwardProps } from './useForwardProps'
+export { useForwardPropsEmits } from './useForwardPropsEmits'
+export { useForwardScopeId } from './useForwardScopeId'
+export { useGraceArea } from './useGraceArea'
+export { useHideOthers } from './useHideOthers'
+export { useId } from './useId'
+export { useKbd, useTestKbd } from './useKbd'
+export { useListSelection, type UseListSelectionOptions, type UseListSelectionReturn } from './useListSelection'
+export { useLocale } from './useLocale'
+export { type MergeableRef, type RefCleanup, type RefTarget, resolveRefTarget, useMergedRefs } from './useMergedRefs'
+export { getGeneratedId, setGeneratedIds, usePartId } from './usePartId'
+export { useSelectionBehavior } from './useSelectionBehavior'
+export { useSize } from './useSize'
+export { useStateMachine } from './useStateMachine'
+export { useTypeahead } from './useTypeahead'
+export { withDefault } from './withDefault'

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { MenuGroup, MenuItem, MenuLabel, MenuSeparator } from '..';
-import MenuWithAnchor from './_MenuWithAnchor.vue';
+import { MenuGroup, MenuItem, MenuLabel, MenuSeparator } from '..'
+import MenuWithAnchor from './_MenuWithAnchor.vue'
 
 function handleSelect(text: string) {
   // eslint-disable-next-line no-console
-  console.log({ text });
+  console.log({ text })
 }
 
 const foodGroups: Array<{
-  label?: string;
-  foods: Array<{ value: string; label: string; disabled?: boolean }>;
+  label?: string
+  foods: Array<{ value: string, label: string, disabled?: boolean }>
 }> = [
   {
     label: 'Fruits',
@@ -47,7 +47,7 @@ const foodGroups: Array<{
       { value: 'chocolates', label: 'Chocolates' },
     ],
   },
-];
+]
 </script>
 
 <template>

@@ -2,43 +2,50 @@
 import type {
   DialogContentImplEmits,
   DialogContentImplProps,
-} from './DialogContentImpl.vue';
+} from './DialogContentImpl.vue'
 
-export type DialogContentEmits = DialogContentImplEmits;
+export type DialogContentEmits = DialogContentImplEmits
 
 export interface DialogContentProps extends Omit<DialogContentImplProps, 'trapFocus'> {
+  /**
+   * Id of the element, which the trigger's `aria-controls` points at.
+   * Auto-generated when not provided.
+   */
+  id?: string
   /**
    * Used to force mounting when more control is needed. Useful when
    * controlling animation with Vue animation libraries.
    */
-  forceMount?: boolean;
+  forceMount?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Presence } from '@/Presence';
-import { useEmitAsProps, useForwardExpose } from '@/shared';
-import DialogContentModal from './DialogContentModal.vue';
-import DialogContentNonModal from './DialogContentNonModal.vue';
-import { injectDialogRootContext } from './DialogRoot.vue';
+import { computed } from 'vue'
+import { Presence } from '@/Presence'
+import { useEmitAsProps, useForwardElement, usePartId } from '@/shared'
+import { isPortalOpening } from '@/Teleport/portalGate'
+import DialogContentModal from './DialogContentModal.vue'
+import DialogContentNonModal from './DialogContentNonModal.vue'
+import { injectDialogRootContext } from './DialogRoot.vue'
 
-const props = withDefaults(
-  defineProps<DialogContentProps>(),
-  {
-    // Keep `undefined` (instead of Vue's boolean coercion to `false`) so the
-    // modal/non-modal child can apply its own default. This lets a modal
-    // `DialogContent` stay locked by default while still honoring an explicit
-    // `:disable-outside-pointer-events="false"`.
-    disableOutsidePointerEvents: undefined,
-  },
-);
-const emits = defineEmits<DialogContentEmits>();
+const props = withDefaults(defineProps<DialogContentProps>(), {
+  // Keep `undefined` (instead of Vue's boolean coercion to `false`) so the
+  // modal/non-modal child can apply its own default. This lets a modal
+  // `DialogContent` stay locked by default while still honoring an explicit
+  // `:disable-outside-pointer-events="false"` (#2677).
+  disableOutsidePointerEvents: undefined,
+})
+const emits = defineEmits<DialogContentEmits>()
 
-const rootContext = injectDialogRootContext();
+const rootContext = injectDialogRootContext()
+// Forwarded as the element's `id` (merged after the surface's context id);
+// mirrored into the context for the trigger's `aria-controls`.
+const contentId = usePartId(() => props.id, rootContext, 'contentId')
 
-const emitsAsProps = useEmitAsProps(emits);
-const { forwardRef } = useForwardExpose();
+const emitsAsProps = useEmitAsProps(emits)
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 
 // The node stays in the DOM across open/close when force-mounted, or when the
 // root opts out of unmounting. Only then does the child need the real presence
@@ -48,21 +55,23 @@ const { forwardRef } = useForwardExpose();
 // briefly told it is absent while `usePresence` settles on `MOUNT`.
 const staysMounted = computed(
   () => props.forceMount || !rootContext.unmountOnHide.value,
-);
+)
 </script>
 
 <template>
   <Presence
     v-slot="{ present }"
+    :appear="isPortalOpening(rootContext)"
     :present="rootContext.open.value"
     :force-mount="staysMounted"
+    @complete="rootContext.notifyOpenComplete"
   >
     <DialogContentModal
       v-if="rootContext.modal.value"
       v-show="forceMount || rootContext.unmountOnHide.value || present"
       :ref="forwardRef"
       :present="staysMounted ? present : true"
-      v-bind="{ ...props, ...emitsAsProps, ...$attrs }"
+      v-bind="{ ...props, ...emitsAsProps, ...$attrs, id: contentId }"
     >
       <slot />
     </DialogContentModal>
@@ -71,7 +80,7 @@ const staysMounted = computed(
       v-show="forceMount || rootContext.unmountOnHide.value || present"
       :ref="forwardRef"
       :present="staysMounted ? present : true"
-      v-bind="{ ...props, ...emitsAsProps, ...$attrs }"
+      v-bind="{ ...props, ...emitsAsProps, ...$attrs, id: contentId }"
     >
       <slot />
     </DialogContentNonModal>

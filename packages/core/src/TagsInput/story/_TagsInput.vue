@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..'
 
 export interface TestProps {
-  addOnTab?: boolean;
-  addOnBlur?: boolean;
+  addOnTab?: boolean
+  addOnBlur?: boolean
 }
 
 withDefaults(defineProps<TestProps>(), {
   addOnBlur: false,
   addOnTab: false,
-});
+})
 
-const modelValue = ref(['Test']);
+const modelValue = ref(['Test'])
 </script>
 
 <template>

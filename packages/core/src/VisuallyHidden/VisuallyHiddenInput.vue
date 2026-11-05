@@ -1,49 +1,49 @@
 <script setup lang="ts" generic="T">
-import type { VisuallyHiddenInputBubbleProps } from './VisuallyHiddenInputBubble.vue';
-import { isBoolean, isNumber, isObjectType, isString } from '@vinicunca/perkakas';
-import { computed } from 'vue';
-import VisuallyHiddenInputBubble from './VisuallyHiddenInputBubble.vue';
+import type { VisuallyHiddenInputBubbleProps } from './VisuallyHiddenInputBubble.vue'
+import { computed } from 'vue'
+import VisuallyHiddenInputBubble from './VisuallyHiddenInputBubble.vue'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
 const props = withDefaults(defineProps<VisuallyHiddenInputBubbleProps<T>>(), {
   feature: 'fully-hidden',
   checked: undefined,
-});
+})
 
 const isFormArrayEmptyAndRequired = computed(() =>
   typeof props.value === 'object'
   && Array.isArray(props.value)
   && props.value.length === 0
   && props.required,
-);
+)
 
 const parsedValue = computed(() => {
   // if primitive value
-  if (isString(props.value) || isNumber(props.value) || isBoolean(props.value) || props.value === null || props.value === undefined) {
-    return [
-      { name: props.name, value: props.value },
-    ];
-  } else if (isObjectType(props.value) && Array.isArray(props.value)) {
-    // if array value
-    return props.value.flatMap((obj, index) => {
-      // if item in array is object
-      if (isObjectType(obj)) {
-        return Object.entries(obj).map(([key, value]) => ({ name: `${props.name}[${index}][${key}]`, value }));
-      } else {
-        // if item in array is not object, may be primitive
-        return ({ name: `${props.name}[${index}]`, value: obj });
-      }
-    });
-  } else if (props.value !== null && typeof props.value === 'object' && !Array.isArray(props.value)) {
-    // if object value
-    return Object.entries(props.value as object).map(([key, value]) => ({ name: `${props.name}[${key}]`, value }));
+  if (typeof props.value === 'string' || typeof props.value === 'number' || typeof props.value === 'boolean' || props.value === null || props.value === undefined) {
+    return [{ name: props.name, value: props.value }]
   }
 
-  return [];
-});
+  // if array value
+  else if (typeof props.value === 'object' && Array.isArray(props.value)) {
+    return props.value.flatMap((obj, index) => {
+      // if item in array is object
+      if (typeof obj === 'object')
+        return Object.entries(obj).map(([key, value]) => ({ name: `${props.name}[${index}][${key}]`, value }))
+      // if item in array is not object, may be primitive
+      else
+        return ({ name: `${props.name}[${index}]`, value: obj })
+    })
+  }
+
+  // if object value
+  else if (props.value !== null && typeof props.value === 'object' && !Array.isArray(props.value)) {
+    return Object.entries(props.value as object).map(([key, value]) => ({ name: `${props.name}[${key}]`, value }))
+  }
+
+  return []
+})
 </script>
 
 <template>

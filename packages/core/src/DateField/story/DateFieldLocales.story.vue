@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DateFieldInput, DateFieldRoot } from '..';
+import { DateFieldInput, DateFieldRoot } from '..'
 </script>
 
 <template>

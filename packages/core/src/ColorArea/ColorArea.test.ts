@@ -1,43 +1,54 @@
-import type { VueWrapper } from '@vue/test-utils';
-import { fireEvent } from '@testing-library/vue';
-import { mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { axe } from 'vitest-axe';
-import ColorArea from './story/_ColorArea.vue';
+import type { VueWrapper } from '@vue/test-utils'
+import { fireEvent } from '@testing-library/vue'
+import { mount } from '@vue/test-utils'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { axe } from 'vitest-axe'
+import { h, nextTick } from 'vue'
+import { ConfigProvider } from '@/ConfigProvider'
+import { ColorAreaArea, ColorAreaRoot, ColorAreaThumb } from '.'
+import ColorArea from './story/_ColorArea.vue'
 
 // jsdom doesn't support pointer capture methods
-window.HTMLElement.prototype.setPointerCapture = vi.fn();
-window.HTMLElement.prototype.releasePointerCapture = vi.fn();
-window.HTMLElement.prototype.hasPointerCapture = vi.fn();
+window.HTMLElement.prototype.setPointerCapture = vi.fn()
+window.HTMLElement.prototype.releasePointerCapture = vi.fn()
+window.HTMLElement.prototype.hasPointerCapture = vi.fn()
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-/** Returns the x-channel value from aria-valuenow on the slider thumb. */
+/** The visually hidden range input of the x channel. */
+function xInput(wrapper: VueWrapper) {
+  return wrapper.find<HTMLInputElement>('input[type="range"][aria-orientation="horizontal"]')
+}
+
+/** The visually hidden range input of the y channel. */
+function yInput(wrapper: VueWrapper) {
+  return wrapper.find<HTMLInputElement>('input[type="range"][aria-orientation="vertical"]')
+}
+
+/** The x-channel value, read from its range input. */
 function getXValue(wrapper: VueWrapper): number {
-  return Number(wrapper.find('[role="slider"]').attributes('aria-valuenow'));
+  return Number(xInput(wrapper).element.value)
 }
 
-/**
- * Parses the y-channel value from aria-valuetext.
- * Format: "Saturation 50, Lightness 42"
- */
-function getYValue(wrapper: VueWrapper, channelName: string): number {
-  const text = wrapper.find('[role="slider"]').attributes('aria-valuetext') ?? '';
-  const match = text.match(new RegExp(`${channelName} (\\d+)`));
-  return match
-    ? Number(match[1])
-    : NaN;
+/** The y-channel value, read from its range input. */
+function getYValue(wrapper: VueWrapper): number {
+  return Number(yInput(wrapper).element.value)
 }
 
-/** Triggers a keydown on the color area (role=application). */
+/** The color area: the inputs live in the thumb, which lives in the area. */
+function area(wrapper: VueWrapper): HTMLElement {
+  return xInput(wrapper).element.parentElement!.parentElement!
+}
+
+/** Presses a key on the focused x input; it bubbles to the area's handler. */
 async function keydown(wrapper: VueWrapper, key: string, opts: Record<string, unknown> = {}) {
-  await wrapper.find('[role="application"]').trigger('keydown', { key, ...opts });
+  await xInput(wrapper).trigger('keydown', { key, ...opts })
 }
 
 // ─── Accessibility ────────────────────────────────────────────────────────────
 
 describe('colorArea accessibility', () => {
-  let wrapper: VueWrapper;
+  let wrapper: VueWrapper
 
   beforeEach(() => {
     wrapper = mount(ColorArea, {
@@ -47,44 +58,70 @@ describe('colorArea accessibility', () => {
         xChannel: 'saturation',
         yChannel: 'lightness',
       },
-    });
-  });
+    })
+  })
 
   it('passes axe accessibility tests', async () => {
     expect(
-      await axe(wrapper.element, {
-        rules: {
-          label: { enabled: false },
-        },
-      }),
-    ).toHaveNoViolations();
-  });
+      await axe(wrapper.element, { rules: { label: { enabled: false } } }),
+    ).toHaveNoViolations()
+  })
 
   it('root has role="group"', () => {
-    expect(wrapper.find('[role="group"]').exists()).toBe(true);
-  });
+    expect(wrapper.find('[role="group"]').exists()).toBe(true)
+  })
 
-  it('area has role="application" and aria-roledescription="Color picker"', () => {
-    const area = wrapper.find('[role="application"]');
-    expect(area.exists()).toBe(true);
-    expect(area.attributes('aria-roledescription')).toBe('Color picker');
-  });
+  it('has no role="application" and no ARIA slider on the thumb', () => {
+    expect(wrapper.find('[role="application"]').exists()).toBe(false)
+    expect(wrapper.find('[role="slider"]').exists()).toBe(false)
+    expect(wrapper.find('[aria-roledescription="Color picker"]').exists()).toBe(false)
+  })
 
-  it('thumb has role="slider" and aria-roledescription="Color thumb"', () => {
-    const thumb = wrapper.find('[role="slider"]');
-    expect(thumb.exists()).toBe(true);
-    expect(thumb.attributes('aria-roledescription')).toBe('Color thumb');
-  });
+  it('renders one range input per channel', () => {
+    expect(wrapper.findAll('input[type="range"]')).toHaveLength(2)
+  })
 
-  it('thumb aria-label names both channels', () => {
-    expect(wrapper.find('[role="slider"]').attributes('aria-label')).toBe('Saturation, Lightness');
-  });
-});
+  it('names each channel input after its channel', () => {
+    expect(xInput(wrapper).attributes('aria-label')).toBe('Saturation')
+    expect(yInput(wrapper).attributes('aria-label')).toBe('Lightness')
+  })
+
+  it('describes each input as a 2D slider with its own orientation', () => {
+    expect(xInput(wrapper).attributes('aria-roledescription')).toBe('2D slider')
+    expect(yInput(wrapper).attributes('aria-roledescription')).toBe('2D slider')
+    expect(xInput(wrapper).attributes('aria-orientation')).toBe('horizontal')
+    expect(yInput(wrapper).attributes('aria-orientation')).toBe('vertical')
+  })
+
+  it('reports each channel\'s own value, then the other channel', () => {
+    expect(xInput(wrapper).element.value).toBe('50')
+    expect(yInput(wrapper).element.value).toBe('50')
+    expect(xInput(wrapper).attributes('aria-valuetext')).toBe('50, Lightness 50')
+    expect(yInput(wrapper).attributes('aria-valuetext')).toBe('50, Saturation 50')
+  })
+
+  it('keeps one tab stop: the x input until the y input takes focus', async () => {
+    expect(xInput(wrapper).attributes('tabindex')).toBe('0')
+    expect(yInput(wrapper).attributes('tabindex')).toBe('-1')
+    await yInput(wrapper).trigger('focus')
+    expect(xInput(wrapper).attributes('tabindex')).toBe('-1')
+    expect(yInput(wrapper).attributes('tabindex')).toBe('0')
+  })
+
+  it('updates the accessible value of each channel after a change', async () => {
+    await keydown(wrapper, 'ArrowRight')
+    await keydown(wrapper, 'ArrowUp', { shiftKey: true })
+    expect(xInput(wrapper).element.value).toBe('51')
+    expect(xInput(wrapper).attributes('aria-valuetext')).toBe('51, Lightness 60')
+    expect(yInput(wrapper).element.value).toBe('60')
+    expect(yInput(wrapper).attributes('aria-valuetext')).toBe('60, Saturation 51')
+  })
+})
 
 // ─── Pointer interaction ─────────────────────────────────────────────────────
 
 describe('colorArea pointer interaction', () => {
-  it('thumb gains focus when dragging starts', async () => {
+  it('the x input gains focus when dragging starts', async () => {
     const wrapper = mount(ColorArea, {
       props: {
         defaultValue: '#bf40bf',
@@ -93,25 +130,24 @@ describe('colorArea pointer interaction', () => {
         yChannel: 'lightness',
       },
       attachTo: document.body,
-    });
+    })
 
-    const area = wrapper.find('[role="application"]');
-    const thumb = wrapper.find('[role="slider"]');
+    const input = xInput(wrapper)
 
-    expect(document.activeElement).not.toBe(thumb.element);
+    expect(document.activeElement).not.toBe(input.element)
 
-    await fireEvent.pointerDown(area.element, {
+    await fireEvent.pointerDown(area(wrapper), {
       clientX: 100,
       clientY: 100,
       pointerId: 1,
-    });
+    })
 
-    expect(document.activeElement).toBe(thumb.element);
+    expect(document.activeElement).toBe(input.element)
 
-    wrapper.unmount();
-  });
+    wrapper.unmount()
+  })
 
-  it('thumb does not gain focus when disabled', async () => {
+  it('no input gains focus when disabled', async () => {
     const wrapper = mount(ColorArea, {
       props: {
         defaultValue: '#bf40bf',
@@ -121,28 +157,26 @@ describe('colorArea pointer interaction', () => {
         disabled: true,
       },
       attachTo: document.body,
-    });
+    })
 
-    const area = wrapper.find('[role="application"]');
-    const thumb = wrapper.find('[role="slider"]');
-
-    await fireEvent.pointerDown(area.element, {
+    await fireEvent.pointerDown(area(wrapper), {
       clientX: 100,
       clientY: 100,
       pointerId: 1,
-    });
+    })
 
-    expect(document.activeElement).not.toBe(thumb.element);
+    expect(document.activeElement).not.toBe(xInput(wrapper).element)
+    expect(document.activeElement).not.toBe(yInput(wrapper).element)
 
-    wrapper.unmount();
-  });
-});
+    wrapper.unmount()
+  })
+})
 
 // ─── HSL Saturation(x) / Lightness(y) ────────────────────────────────────────
 
 describe('colorArea HSL Saturation(x) / Lightness(y)', () => {
   // #bf40bf ≈ hsl(300, 50%, 50%) — saturation=50, lightness=50
-  let wrapper: VueWrapper;
+  let wrapper: VueWrapper
 
   beforeEach(() => {
     wrapper = mount(ColorArea, {
@@ -152,197 +186,167 @@ describe('colorArea HSL Saturation(x) / Lightness(y)', () => {
         xChannel: 'saturation',
         yChannel: 'lightness',
       },
-    });
-  });
+    })
+  })
 
   describe('initial ARIA values', () => {
     it('aria-valuenow = 50 (saturation)', () => {
-      expect(getXValue(wrapper)).toBe(50);
-    });
+      expect(getXValue(wrapper)).toBe(50)
+    })
 
-    it('aria-valuemin = 0, aria-valuemax = 100', () => {
-      const thumb = wrapper.find('[role="slider"]');
-      expect(Number(thumb.attributes('aria-valuemin'))).toBe(0);
-      expect(Number(thumb.attributes('aria-valuemax'))).toBe(100);
-    });
+    it('min = 0, max = 100 on both inputs', () => {
+      for (const input of [xInput(wrapper), yInput(wrapper)]) {
+        expect(input.attributes('min')).toBe('0')
+        expect(input.attributes('max')).toBe('100')
+      }
+    })
 
     it('aria-valuetext reports both channels', () => {
-      expect(wrapper.find('[role="slider"]').attributes('aria-valuetext')).toBe(
-        'Saturation 50, Lightness 50',
-      );
-    });
+      expect(xInput(wrapper).attributes('aria-valuetext')).toBe('50, Lightness 50')
+      expect(yInput(wrapper).attributes('aria-valuetext')).toBe('50, Saturation 50')
+    })
 
-    it('thumb is focusable (tabindex=0)', () => {
-      expect(wrapper.find('[role="slider"]').attributes('tabindex')).toBe('0');
-    });
-  });
+    it('the x input is focusable (tabindex=0)', () => {
+      expect(xInput(wrapper).attributes('tabindex')).toBe('0')
+    })
+  })
 
   describe('arrowRight / ArrowLeft — x-axis (saturation ±1)', () => {
     it('arrowRight increments saturation by 1, lightness unchanged', async () => {
-      await keydown(wrapper, 'ArrowRight');
-      expect(getXValue(wrapper)).toBe(51);
-      expect(getYValue(wrapper, 'Lightness')).toBe(50);
-    });
+      await keydown(wrapper, 'ArrowRight')
+      expect(getXValue(wrapper)).toBe(51)
+      expect(getYValue(wrapper)).toBe(50)
+    })
 
     it('arrowLeft decrements saturation by 1, lightness unchanged', async () => {
-      await keydown(wrapper, 'ArrowLeft');
-      expect(getXValue(wrapper)).toBe(49);
-      expect(getYValue(wrapper, 'Lightness')).toBe(50);
-    });
+      await keydown(wrapper, 'ArrowLeft')
+      expect(getXValue(wrapper)).toBe(49)
+      expect(getYValue(wrapper)).toBe(50)
+    })
 
     it('shift+ArrowRight increments saturation by 10', async () => {
-      await keydown(wrapper, 'ArrowRight', { shiftKey: true });
-      expect(getXValue(wrapper)).toBe(60);
-      expect(getYValue(wrapper, 'Lightness')).toBe(50);
-    });
+      await keydown(wrapper, 'ArrowRight', { shiftKey: true })
+      expect(getXValue(wrapper)).toBe(60)
+      expect(getYValue(wrapper)).toBe(50)
+    })
 
     it('shift+ArrowLeft decrements saturation by 10', async () => {
-      await keydown(wrapper, 'ArrowLeft', { shiftKey: true });
-      expect(getXValue(wrapper)).toBe(40);
-      expect(getYValue(wrapper, 'Lightness')).toBe(50);
-    });
-  });
+      await keydown(wrapper, 'ArrowLeft', { shiftKey: true })
+      expect(getXValue(wrapper)).toBe(40)
+      expect(getYValue(wrapper)).toBe(50)
+    })
+  })
 
   describe('arrowUp / ArrowDown — y-axis (lightness ±1)', () => {
     it('arrowUp increments lightness by 1, saturation unchanged', async () => {
-      await keydown(wrapper, 'ArrowUp');
-      expect(getXValue(wrapper)).toBe(50);
-      expect(getYValue(wrapper, 'Lightness')).toBe(51);
-    });
+      await keydown(wrapper, 'ArrowUp')
+      expect(getXValue(wrapper)).toBe(50)
+      expect(getYValue(wrapper)).toBe(51)
+    })
 
     it('arrowDown decrements lightness by 1, saturation unchanged', async () => {
-      await keydown(wrapper, 'ArrowDown');
-      expect(getXValue(wrapper)).toBe(50);
-      expect(getYValue(wrapper, 'Lightness')).toBe(49);
-    });
+      await keydown(wrapper, 'ArrowDown')
+      expect(getXValue(wrapper)).toBe(50)
+      expect(getYValue(wrapper)).toBe(49)
+    })
 
     it('shift+ArrowUp increments lightness by 10', async () => {
-      await keydown(wrapper, 'ArrowUp', { shiftKey: true });
-      expect(getXValue(wrapper)).toBe(50);
-      expect(getYValue(wrapper, 'Lightness')).toBe(60);
-    });
+      await keydown(wrapper, 'ArrowUp', { shiftKey: true })
+      expect(getXValue(wrapper)).toBe(50)
+      expect(getYValue(wrapper)).toBe(60)
+    })
 
     it('shift+ArrowDown decrements lightness by 10', async () => {
-      await keydown(wrapper, 'ArrowDown', { shiftKey: true });
-      expect(getXValue(wrapper)).toBe(50);
-      expect(getYValue(wrapper, 'Lightness')).toBe(40);
-    });
-  });
+      await keydown(wrapper, 'ArrowDown', { shiftKey: true })
+      expect(getXValue(wrapper)).toBe(50)
+      expect(getYValue(wrapper)).toBe(40)
+    })
+  })
 
   describe('pageUp / PageDown — large y-axis jump (±10)', () => {
     it('pageUp increments lightness by 10, saturation unchanged', async () => {
-      await keydown(wrapper, 'PageUp');
-      expect(getYValue(wrapper, 'Lightness')).toBe(60);
-      expect(getXValue(wrapper)).toBe(50);
-    });
+      await keydown(wrapper, 'PageUp')
+      expect(getYValue(wrapper)).toBe(60)
+      expect(getXValue(wrapper)).toBe(50)
+    })
 
     it('pageDown decrements lightness by 10, saturation unchanged', async () => {
-      await keydown(wrapper, 'PageDown');
-      expect(getYValue(wrapper, 'Lightness')).toBe(40);
-      expect(getXValue(wrapper)).toBe(50);
-    });
-  });
+      await keydown(wrapper, 'PageDown')
+      expect(getYValue(wrapper)).toBe(40)
+      expect(getXValue(wrapper)).toBe(50)
+    })
+  })
 
   describe('home / End — large x-axis jump (±10)', () => {
     it('home decrements saturation by 10, lightness unchanged', async () => {
-      await keydown(wrapper, 'Home');
-      expect(getXValue(wrapper)).toBe(40);
-      expect(getYValue(wrapper, 'Lightness')).toBe(50);
-    });
+      await keydown(wrapper, 'Home')
+      expect(getXValue(wrapper)).toBe(40)
+      expect(getYValue(wrapper)).toBe(50)
+    })
 
     it('end increments saturation by 10, lightness unchanged', async () => {
-      await keydown(wrapper, 'End');
-      expect(getXValue(wrapper)).toBe(60);
-      expect(getYValue(wrapper, 'Lightness')).toBe(50);
-    });
-  });
+      await keydown(wrapper, 'End')
+      expect(getXValue(wrapper)).toBe(60)
+      expect(getYValue(wrapper)).toBe(50)
+    })
+  })
 
   describe('boundary clamping', () => {
     it('saturation cannot exceed 100', async () => {
       // #ff0000 = hsl(0, 100%, 50%) — saturation is at max
       const w = mount(ColorArea, {
-        props: {
-          defaultValue: '#ff0000',
-          colorSpace: 'hsl',
-          xChannel: 'saturation',
-          yChannel: 'lightness',
-        },
-      });
-      await keydown(w, 'ArrowRight');
-      expect(getXValue(w)).toBe(100);
-    });
+        props: { defaultValue: '#ff0000', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+      })
+      await keydown(w, 'ArrowRight')
+      expect(getXValue(w)).toBe(100)
+    })
 
     it('saturation cannot go below 0', async () => {
       // #808080 = hsl(0, 0%, 50%) — saturation is at min
       const w = mount(ColorArea, {
-        props: {
-          defaultValue: '#808080',
-          colorSpace: 'hsl',
-          xChannel: 'saturation',
-          yChannel: 'lightness',
-        },
-      });
-      await keydown(w, 'ArrowLeft');
-      expect(getXValue(w)).toBe(0);
-    });
+        props: { defaultValue: '#808080', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+      })
+      await keydown(w, 'ArrowLeft')
+      expect(getXValue(w)).toBe(0)
+    })
 
     it('lightness cannot exceed 100', async () => {
       // #ffffff = hsl(*, 0%, 100%) — lightness is at max
       const w = mount(ColorArea, {
-        props: {
-          defaultValue: '#ffffff',
-          colorSpace: 'hsl',
-          xChannel: 'saturation',
-          yChannel: 'lightness',
-        },
-      });
-      await keydown(w, 'ArrowUp');
-      expect(getYValue(w, 'Lightness')).toBe(100);
-    });
+        props: { defaultValue: '#ffffff', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+      })
+      await keydown(w, 'ArrowUp')
+      expect(getYValue(w)).toBe(100)
+    })
 
     it('lightness cannot go below 0', async () => {
       // #000000 = hsl(*, 0%, 0%) — lightness is at min
       const w = mount(ColorArea, {
-        props: {
-          defaultValue: '#000000',
-          colorSpace: 'hsl',
-          xChannel: 'saturation',
-          yChannel: 'lightness',
-        },
-      });
-      await keydown(w, 'ArrowDown');
-      expect(getYValue(w, 'Lightness')).toBe(0);
-    });
+        props: { defaultValue: '#000000', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+      })
+      await keydown(w, 'ArrowDown')
+      expect(getYValue(w)).toBe(0)
+    })
 
     it('home at saturation=0 clamps to 0 (no underflow)', async () => {
       const w = mount(ColorArea, {
-        props: {
-          defaultValue: '#808080',
-          colorSpace: 'hsl',
-          xChannel: 'saturation',
-          yChannel: 'lightness',
-        },
-      });
-      await keydown(w, 'Home');
-      expect(getXValue(w)).toBe(0);
-    });
+        props: { defaultValue: '#808080', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+      })
+      await keydown(w, 'Home')
+      expect(getXValue(w)).toBe(0)
+    })
 
     it('end at saturation=100 clamps to 100 (no overflow)', async () => {
       const w = mount(ColorArea, {
-        props: {
-          defaultValue: '#ff0000',
-          colorSpace: 'hsl',
-          xChannel: 'saturation',
-          yChannel: 'lightness',
-        },
-      });
-      await keydown(w, 'End');
-      expect(getXValue(w)).toBe(100);
-    });
-  });
+        props: { defaultValue: '#ff0000', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' },
+      })
+      await keydown(w, 'End')
+      expect(getXValue(w)).toBe(100)
+    })
+  })
 
   describe('disabled state', () => {
-    let w: VueWrapper;
+    let w: VueWrapper
 
     beforeEach(() => {
       w = mount(ColorArea, {
@@ -353,97 +357,103 @@ describe('colorArea HSL Saturation(x) / Lightness(y)', () => {
           yChannel: 'lightness',
           disabled: true,
         },
-      });
-    });
+      })
+    })
 
     it('area has data-disabled=""', () => {
-      expect(w.find('[role="application"]').attributes('data-disabled')).toBe('');
-    });
+      expect(area(w).getAttribute('data-disabled')).toBe('')
+    })
 
-    it('area has aria-disabled="true"', () => {
-      expect(w.find('[role="application"]').attributes('aria-disabled')).toBe('true');
-    });
+    it('root has aria-disabled="true"', () => {
+      expect(w.find('[role="group"]').attributes('aria-disabled')).toBe('true')
+    })
 
-    it('thumb has data-disabled="" and no tabindex', () => {
-      const thumb = w.find('[role="slider"]');
-      expect(thumb.attributes('data-disabled')).toBe('');
-      expect(thumb.attributes('tabindex')).toBeUndefined();
-    });
+    it('both inputs are disabled', () => {
+      expect(xInput(w).element.disabled).toBe(true)
+      expect(yInput(w).element.disabled).toBe(true)
+    })
+
+    it('passes axe accessibility tests', async () => {
+      expect(await axe(w.element, { rules: { label: { enabled: false } } })).toHaveNoViolations()
+    })
 
     it('arrowRight does not change saturation', async () => {
-      const before = getXValue(w);
-      await keydown(w, 'ArrowRight');
-      expect(getXValue(w)).toBe(before);
-    });
+      const before = getXValue(w)
+      await keydown(w, 'ArrowRight')
+      expect(getXValue(w)).toBe(before)
+    })
 
     it('arrowUp does not change lightness', async () => {
-      const before = getYValue(w, 'Lightness');
-      await keydown(w, 'ArrowUp');
-      expect(getYValue(w, 'Lightness')).toBe(before);
-    });
-  });
-});
+      const before = getYValue(w)
+      await keydown(w, 'ArrowUp')
+      expect(getYValue(w)).toBe(before)
+    })
+  })
+})
 
 // ─── HSL Hue(x) / Saturation(y) — default channels ───────────────────────────
 
 describe('colorArea HSL Hue(x) / Saturation(y) — default channels', () => {
   // No colorSpace/xChannel/yChannel passed → defaults: hsl / hue / saturation
-  let wrapper: VueWrapper;
+  let wrapper: VueWrapper
 
   beforeEach(() => {
     // #ff0000 = hsl(0, 100%, 50%) — hue=0, saturation=100
     wrapper = mount(ColorArea, {
       props: { defaultValue: '#ff0000' },
-    });
-  });
+    })
+  })
 
-  it('aria-label names hue and saturation', () => {
-    expect(wrapper.find('[role="slider"]').attributes('aria-label')).toBe('Hue, Saturation');
-  });
+  it('names the inputs hue and saturation', () => {
+    expect(xInput(wrapper).attributes('aria-label')).toBe('Hue')
+    expect(yInput(wrapper).attributes('aria-label')).toBe('Saturation')
+  })
 
   it('aria-valuenow = 0 (hue)', () => {
-    expect(getXValue(wrapper)).toBe(0);
-  });
+    expect(getXValue(wrapper)).toBe(0)
+  })
 
-  it('aria-valuemin = 0, aria-valuemax = 360 (hue range)', () => {
-    const thumb = wrapper.find('[role="slider"]');
-    expect(Number(thumb.attributes('aria-valuemin'))).toBe(0);
-    expect(Number(thumb.attributes('aria-valuemax'))).toBe(360);
-  });
+  it('min = 0, max = 360 on the hue input; 0 to 100 on the saturation input', () => {
+    expect(xInput(wrapper).attributes('min')).toBe('0')
+    expect(xInput(wrapper).attributes('max')).toBe('360')
+    expect(yInput(wrapper).attributes('min')).toBe('0')
+    expect(yInput(wrapper).attributes('max')).toBe('100')
+  })
 
   it('aria-valuetext reports hue and saturation', () => {
-    expect(wrapper.find('[role="slider"]').attributes('aria-valuetext')).toBe(
-      'Hue 0, Saturation 100',
-    );
-  });
+    expect(xInput(wrapper).attributes('aria-valuetext')).toBe('0, Saturation 100')
+    expect(yInput(wrapper).attributes('aria-valuetext')).toBe('100, Hue 0')
+  })
+
+  it('passes axe accessibility tests', async () => {
+    expect(await axe(wrapper.element, { rules: { label: { enabled: false } } })).toHaveNoViolations()
+  })
 
   it('arrowRight increments hue by 1', async () => {
-    await keydown(wrapper, 'ArrowRight');
-    expect(getXValue(wrapper)).toBe(1);
-    expect(getYValue(wrapper, 'Saturation')).toBe(100);
-  });
+    await keydown(wrapper, 'ArrowRight')
+    expect(getXValue(wrapper)).toBe(1)
+    expect(getYValue(wrapper)).toBe(100)
+  })
 
   it('hue cannot go below 0 (clamped at min)', async () => {
-    await keydown(wrapper, 'ArrowLeft'); // hue=0, ArrowLeft tries -1 → clamped to 0
-    expect(getXValue(wrapper)).toBe(0);
-  });
+    await keydown(wrapper, 'ArrowLeft') // hue=0, ArrowLeft tries -1 → clamped to 0
+    expect(getXValue(wrapper)).toBe(0)
+  })
 
   it('arrowUp increments saturation by 1, hue unchanged', async () => {
     // saturation already at 100; test with a lower saturation color
-    const w = mount(ColorArea, {
-      props: { defaultValue: '#804040' },
-    }); // hsl(0, ~33%, 38%) approx
-    const initHue = getXValue(w);
-    await keydown(w, 'ArrowUp');
-    expect(getXValue(w)).toBe(initHue); // hue unchanged
-  });
-});
+    const w = mount(ColorArea, { props: { defaultValue: '#804040' } }) // hsl(0, ~33%, 38%) approx
+    const initHue = getXValue(w)
+    await keydown(w, 'ArrowUp')
+    expect(getXValue(w)).toBe(initHue) // hue unchanged
+  })
+})
 
 // ─── HSB Saturation(x) / Brightness(y) ───────────────────────────────────────
 
 describe('colorArea HSB Saturation(x) / Brightness(y)', () => {
   // #800080 ≈ hsb(300, 100%, 50%)
-  let wrapper: VueWrapper;
+  let wrapper: VueWrapper
 
   beforeEach(() => {
     wrapper = mount(ColorArea, {
@@ -453,79 +463,74 @@ describe('colorArea HSB Saturation(x) / Brightness(y)', () => {
         xChannel: 'saturation',
         yChannel: 'brightness',
       },
-    });
-  });
+    })
+  })
 
-  it('aria-label names saturation and brightness', () => {
-    expect(wrapper.find('[role="slider"]').attributes('aria-label')).toBe('Saturation, Brightness');
-  });
+  it('names the inputs saturation and brightness', () => {
+    expect(xInput(wrapper).attributes('aria-label')).toBe('Saturation')
+    expect(yInput(wrapper).attributes('aria-label')).toBe('Brightness')
+  })
 
   it('initial saturation = 100', () => {
-    expect(getXValue(wrapper)).toBe(100);
-  });
+    expect(getXValue(wrapper)).toBe(100)
+  })
 
   it('initial brightness = 50', () => {
-    expect(getYValue(wrapper, 'Brightness')).toBe(50);
-  });
+    expect(getYValue(wrapper)).toBe(50)
+  })
 
-  it('aria-valuemin = 0, aria-valuemax = 100', () => {
-    const thumb = wrapper.find('[role="slider"]');
-    expect(Number(thumb.attributes('aria-valuemin'))).toBe(0);
-    expect(Number(thumb.attributes('aria-valuemax'))).toBe(100);
-  });
+  it('min = 0, max = 100 on both inputs', () => {
+    for (const input of [xInput(wrapper), yInput(wrapper)]) {
+      expect(input.attributes('min')).toBe('0')
+      expect(input.attributes('max')).toBe('100')
+    }
+  })
 
   it('arrowLeft decrements saturation by 1', async () => {
-    await keydown(wrapper, 'ArrowLeft');
-    expect(getXValue(wrapper)).toBe(99);
-    expect(getYValue(wrapper, 'Brightness')).toBe(50);
-  });
+    await keydown(wrapper, 'ArrowLeft')
+    expect(getXValue(wrapper)).toBe(99)
+    expect(getYValue(wrapper)).toBe(50)
+  })
 
   it('arrowLeft 5× decrements saturation by 5', async () => {
-    for (let i = 0; i < 5; i++) {
-      await keydown(wrapper, 'ArrowLeft');
-    }
-    expect(getXValue(wrapper)).toBe(95);
-    expect(getYValue(wrapper, 'Brightness')).toBe(50);
-  });
+    for (let i = 0; i < 5; i++) await keydown(wrapper, 'ArrowLeft')
+    expect(getXValue(wrapper)).toBe(95)
+    expect(getYValue(wrapper)).toBe(50)
+  })
 
   it('arrowDown decrements brightness by 1', async () => {
-    await keydown(wrapper, 'ArrowDown');
-    expect(getXValue(wrapper)).toBe(100);
-    expect(getYValue(wrapper, 'Brightness')).toBe(49);
-  });
+    await keydown(wrapper, 'ArrowDown')
+    expect(getXValue(wrapper)).toBe(100)
+    expect(getYValue(wrapper)).toBe(49)
+  })
 
   it('arrowUp increments brightness by 1', async () => {
-    await keydown(wrapper, 'ArrowUp');
-    expect(getXValue(wrapper)).toBe(100);
-    expect(getYValue(wrapper, 'Brightness')).toBe(51);
-  });
+    await keydown(wrapper, 'ArrowUp')
+    expect(getXValue(wrapper)).toBe(100)
+    expect(getYValue(wrapper)).toBe(51)
+  })
 
   it('saturation cannot exceed 100 (already at max)', async () => {
-    await keydown(wrapper, 'ArrowRight');
-    expect(getXValue(wrapper)).toBe(100);
-  });
+    await keydown(wrapper, 'ArrowRight')
+    expect(getXValue(wrapper)).toBe(100)
+  })
 
   it('brightness cannot exceed 100', async () => {
     // Start at full brightness
     const w = mount(ColorArea, {
-      props: {
-        defaultValue: '#ff00ff',
-        colorSpace: 'hsb',
-        xChannel: 'saturation',
-        yChannel: 'brightness',
-      },
-    });
+      props: { defaultValue: '#ff00ff', colorSpace: 'hsb', xChannel: 'saturation', yChannel: 'brightness' },
+    })
     // #ff00ff = hsb(300, 100%, 100%)
-    await keydown(w, 'ArrowUp');
-    expect(getYValue(w, 'Brightness')).toBe(100);
-  });
-});
+    await keydown(w, 'ArrowUp')
+    expect(getYValue(w)).toBe(100)
+  })
+})
 
 // ─── RGB Red(x) / Green(y) ────────────────────────────────────────────────────
 
 describe('colorArea RGB Red(x) / Green(y)', () => {
   // #7f007f = rgb(127, 0, 127)
-  let wrapper: VueWrapper;
+  let wrapper: VueWrapper
 
   beforeEach(() => {
     wrapper = mount(ColorArea, {
@@ -535,88 +540,188 @@ describe('colorArea RGB Red(x) / Green(y)', () => {
         xChannel: 'red',
         yChannel: 'green',
       },
-    });
-  });
+    })
+  })
 
-  it('aria-label names red and green', () => {
-    expect(wrapper.find('[role="slider"]').attributes('aria-label')).toBe('Red, Green');
-  });
+  it('names the inputs red and green', () => {
+    expect(xInput(wrapper).attributes('aria-label')).toBe('Red')
+    expect(yInput(wrapper).attributes('aria-label')).toBe('Green')
+  })
 
   it('aria-valuenow = 127 (red)', () => {
-    expect(getXValue(wrapper)).toBe(127);
-  });
+    expect(getXValue(wrapper)).toBe(127)
+  })
 
-  it('aria-valuemin = 0, aria-valuemax = 255 (RGB range)', () => {
-    const thumb = wrapper.find('[role="slider"]');
-    expect(Number(thumb.attributes('aria-valuemin'))).toBe(0);
-    expect(Number(thumb.attributes('aria-valuemax'))).toBe(255);
-  });
+  it('min = 0, max = 255 on both inputs (RGB range)', () => {
+    for (const input of [xInput(wrapper), yInput(wrapper)]) {
+      expect(input.attributes('min')).toBe('0')
+      expect(input.attributes('max')).toBe('255')
+    }
+  })
 
   it('initial green = 0', () => {
-    expect(getYValue(wrapper, 'Green')).toBe(0);
-  });
+    expect(getYValue(wrapper)).toBe(0)
+  })
 
   it('aria-valuetext reports red and green', () => {
-    expect(wrapper.find('[role="slider"]').attributes('aria-valuetext')).toBe('Red 127, Green 0');
-  });
+    expect(xInput(wrapper).attributes('aria-valuetext')).toBe('127, Green 0')
+    expect(yInput(wrapper).attributes('aria-valuetext')).toBe('0, Red 127')
+  })
 
   it('arrowRight increments red by 1, green unchanged', async () => {
-    await keydown(wrapper, 'ArrowRight');
-    expect(getXValue(wrapper)).toBe(128);
-    expect(getYValue(wrapper, 'Green')).toBe(0);
-  });
+    await keydown(wrapper, 'ArrowRight')
+    expect(getXValue(wrapper)).toBe(128)
+    expect(getYValue(wrapper)).toBe(0)
+  })
 
   it('arrowLeft decrements red by 1', async () => {
-    await keydown(wrapper, 'ArrowLeft');
-    expect(getXValue(wrapper)).toBe(126);
-  });
+    await keydown(wrapper, 'ArrowLeft')
+    expect(getXValue(wrapper)).toBe(126)
+  })
 
   it('arrowUp increments green by 1, red unchanged', async () => {
-    await keydown(wrapper, 'ArrowUp');
-    expect(getXValue(wrapper)).toBe(127);
-    expect(getYValue(wrapper, 'Green')).toBe(1);
-  });
+    await keydown(wrapper, 'ArrowUp')
+    expect(getXValue(wrapper)).toBe(127)
+    expect(getYValue(wrapper)).toBe(1)
+  })
 
   it('arrowDown at green=0 stays at 0 (clamp)', async () => {
-    await keydown(wrapper, 'ArrowDown');
-    expect(getYValue(wrapper, 'Green')).toBe(0);
-  });
+    await keydown(wrapper, 'ArrowDown')
+    expect(getYValue(wrapper)).toBe(0)
+  })
 
   it('shift+ArrowRight increments red by 10', async () => {
-    await keydown(wrapper, 'ArrowRight', { shiftKey: true });
-    expect(getXValue(wrapper)).toBe(137);
-  });
+    await keydown(wrapper, 'ArrowRight', { shiftKey: true })
+    expect(getXValue(wrapper)).toBe(137)
+  })
 
   it('shift+ArrowUp increments green by 10', async () => {
-    await keydown(wrapper, 'ArrowUp', { shiftKey: true });
-    expect(getYValue(wrapper, 'Green')).toBe(10);
-  });
+    await keydown(wrapper, 'ArrowUp', { shiftKey: true })
+    expect(getYValue(wrapper)).toBe(10)
+  })
 
   it('red cannot exceed 255', async () => {
     // #ff00ff = rgb(255, 0, 255) — red at max
     const w = mount(ColorArea, {
-      props: {
-        defaultValue: '#ff00ff',
-        colorSpace: 'rgb',
-        xChannel: 'red',
-        yChannel: 'green',
-      },
-    });
-    await keydown(w, 'ArrowRight');
-    expect(getXValue(w)).toBe(255);
-  });
+      props: { defaultValue: '#ff00ff', colorSpace: 'rgb', xChannel: 'red', yChannel: 'green' },
+    })
+    await keydown(w, 'ArrowRight')
+    expect(getXValue(w)).toBe(255)
+  })
 
   it('red cannot go below 0', async () => {
     // #0000ff = rgb(0, 0, 255) — red at min
     const w = mount(ColorArea, {
-      props: {
-        defaultValue: '#0000ff',
-        colorSpace: 'rgb',
-        xChannel: 'red',
-        yChannel: 'green',
-      },
-    });
-    await keydown(w, 'ArrowLeft');
-    expect(getXValue(w)).toBe(0);
-  });
-});
+      props: { defaultValue: '#0000ff', colorSpace: 'rgb', xChannel: 'red', yChannel: 'green' },
+    })
+    await keydown(w, 'ArrowLeft')
+    expect(getXValue(w)).toBe(0)
+  })
+})
+
+// ─── Channel inputs ──────────────────────────────────────────────────────────
+
+describe('colorArea channel inputs', () => {
+  const props = { defaultValue: '#bf40bf', colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness' } as const
+
+  it('moves focus to the y input on ArrowUp/ArrowDown/PageUp/PageDown and back on ArrowLeft/ArrowRight/Home/End', async () => {
+    const wrapper = mount(ColorArea, { props, attachTo: document.body })
+    xInput(wrapper).element.focus()
+    for (const key of ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown']) {
+      xInput(wrapper).element.focus()
+      await keydown(wrapper, key)
+      expect(document.activeElement).toBe(yInput(wrapper).element)
+    }
+    for (const key of ['ArrowLeft', 'ArrowRight', 'Home', 'End']) {
+      yInput(wrapper).element.focus()
+      await yInput(wrapper).trigger('keydown', { key })
+      expect(document.activeElement).toBe(xInput(wrapper).element)
+    }
+    wrapper.unmount()
+  })
+
+  it('prevents the native range step so arrow keys keep the area\'s rules', async () => {
+    const wrapper = mount(ColorArea, { props })
+    const event = new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+    xInput(wrapper).element.dispatchEvent(event)
+    expect(event.defaultPrevented).toBe(true)
+  })
+
+  it('writes the y channel when assistive technology sets the y input', async () => {
+    const wrapper = mount(ColorArea, { props })
+    await yInput(wrapper).setValue('70')
+    expect(getXValue(wrapper)).toBe(50)
+    expect(getYValue(wrapper)).toBe(70)
+    expect(yInput(wrapper).attributes('aria-valuetext')).toBe('70, Saturation 50')
+  })
+
+  it('keeps the inputs on the model when a controlled parent rejects the update', async () => {
+    const wrapper = mount(() => h(ColorAreaRoot, {
+      'modelValue': { space: 'hsl', h: 100, s: 50, l: 50, alpha: 1 },
+      'onUpdate:modelValue': () => {},
+    }, () => h(ColorAreaArea, {}, () => h(ColorAreaThumb))))
+    await xInput(wrapper).setValue('200')
+    await nextTick()
+    expect(getXValue(wrapper)).toBe(100)
+  })
+
+  it('keeps arrow keys and the exposed value mirrored in RTL', async () => {
+    const wrapper = mount(ColorArea, { props: { ...props, dir: 'rtl' } })
+    expect(xInput(wrapper).attributes('aria-orientation')).toBe('horizontal')
+    await keydown(wrapper, 'ArrowLeft')
+    expect(getXValue(wrapper)).toBe(51)
+    await keydown(wrapper, 'ArrowRight')
+    await keydown(wrapper, 'ArrowRight')
+    expect(getXValue(wrapper)).toBe(49)
+  })
+
+  it('passes axe with an inherited RTL direction', async () => {
+    const wrapper = mount(() => h(ConfigProvider, { dir: 'rtl' }, () => h(ColorAreaRoot, { defaultValue: '#bf40bf' }, () => h(ColorAreaArea, {}, () => h(ColorAreaThumb)))))
+    // The `label` rule stays on: every input is named by its channel.
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
+
+  it('centers the inputs in the thumb that holds them', () => {
+    const wrapper = mount(ColorArea, { props })
+    for (const input of [xInput(wrapper), yInput(wrapper)]) {
+      expect(input.element.parentElement!.style.position).toBe('absolute')
+      expect(input.element.style.left).toBe('50%')
+      expect(input.element.style.top).toBe('50%')
+    }
+  })
+
+  it.each(['ltr', 'rtl'] as const)('places the inputs at an asChild thumb\'s position in the area (%s)', async (dir) => {
+    const wrapper = mount(() => h(ColorAreaRoot, { defaultValue: { space: 'hsl', h: 300, s: 50, l: 50, alpha: 1 }, colorSpace: 'hsl', xChannel: 'saturation', yChannel: 'lightness', dir }, () =>
+      h(ColorAreaArea, { 'data-testid': 'area' }, () => h(ColorAreaThumb, { asChild: true }, () => h('div', { class: 'my-thumb' })))))
+    const thumb = wrapper.find<HTMLElement>('.my-thumb').element
+    const inputs = wrapper.findAll<HTMLInputElement>('input[type="range"]')
+    expect(thumb.style.position).toBe('absolute')
+    expect(inputs).toHaveLength(2)
+    expect(thumb.style.left).toBe('50%')
+    await keydown(wrapper, 'ArrowRight', { shiftKey: true })
+    await keydown(wrapper, 'ArrowUp', { shiftKey: true })
+    // The inputs are siblings of the thumb, so they follow its left/top within the area.
+    // ArrowRight moves the thumb right in both directions (in RTL it lowers x).
+    expect(thumb.style.left).toBe('60%')
+    expect(getXValue(wrapper)).toBe(dir === 'rtl' ? 40 : 60)
+    expect(thumb.style.top).toBe('40%')
+    for (const input of inputs) {
+      expect(input.element.parentElement).toBe(wrapper.find('[data-testid=area]').element)
+      expect(input.element.style.left).toBe(thumb.style.left)
+      expect(input.element.style.top).toBe(thumb.style.top)
+    }
+  })
+})
+
+// ─── Enter in a form ─────────────────────────────────────────────────────────
+
+describe('colorArea inside a form', () => {
+  it('prevents Enter on a channel input, so it does not submit the form', async () => {
+    const wrapper = mount(ColorArea, { props: { defaultValue: '#bf40bf' } })
+    for (const input of [xInput(wrapper), yInput(wrapper)]) {
+      const event = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true })
+      input.element.dispatchEvent(event)
+      expect(event.defaultPrevented).toBe(true)
+    }
+  })
+})

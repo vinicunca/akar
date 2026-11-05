@@ -1,23 +1,31 @@
 export {
   default as HoverCardArrow,
   type HoverCardArrowProps,
-} from './HoverCardArrow.vue';
+} from './HoverCardArrow.vue'
 export {
   default as HoverCardContent,
   type HoverCardContentEmits,
   type HoverCardContentProps,
-} from './HoverCardContent.vue';
+} from './HoverCardContent.vue'
 export {
   default as HoverCardPortal,
   type HoverCardPortalProps,
-} from './HoverCardPortal.vue';
+} from './HoverCardPortal.vue'
 export {
+  type HoverCardOpenChangeReason,
   default as HoverCardRoot,
   type HoverCardRootEmits,
   type HoverCardRootProps,
   injectHoverCardRootContext,
-} from './HoverCardRoot.vue';
+} from './HoverCardRoot.vue'
 export {
   default as HoverCardTrigger,
   type HoverCardTriggerProps,
-} from './HoverCardTrigger.vue';
+} from './HoverCardTrigger.vue'
+export {
+  type HoverCardContentState,
+  type HoverCardTriggerState,
+  useHoverCard,
+  type UseHoverCardProps,
+  type UseHoverCardReturn,
+} from './useHoverCard'

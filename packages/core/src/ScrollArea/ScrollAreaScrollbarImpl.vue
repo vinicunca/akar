@@ -1,102 +1,104 @@
 <script lang="ts">
 type ScrollbarAreaScrollbarImplEmits = {
-  onDragScroll: [payload: { x: number; y: number }];
-  onWheelScroll: [payload: { x: number; y: number }];
-  onThumbPointerDown: [payload: { x: number; y: number }];
-};
+  onDragScroll: [payload: { x: number, y: number }]
+  onWheelScroll: [payload: { x: number, y: number }]
+  onThumbPointerDown: [payload: { x: number, y: number }]
+}
 
 export interface ScrollAreaScrollbarImplProps {
-  isHorizontal: boolean;
+  isHorizontal: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { useResizeObserver } from '@vueuse/core';
-import { onMounted, onUnmounted, ref } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
-import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
-import { injectScrollAreaScrollbarContext } from './ScrollAreaScrollbar.vue';
-import { injectScrollAreaScrollbarVisibleContext } from './ScrollAreaScrollbarVisible.vue';
-import { toInt } from './utils';
+import { useResizeObserver } from '@vueuse/core'
+import { onMounted, onUnmounted, ref } from 'vue'
+import { Primitive } from '@/Primitive'
+import { containsComposed, getEventTarget, getOwnerDocument, useForwardElement } from '@/shared'
+import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue'
+import { injectScrollAreaScrollbarContext } from './ScrollAreaScrollbar.vue'
+import { injectScrollAreaScrollbarVisibleContext } from './ScrollAreaScrollbarVisible.vue'
+import { toInt } from './utils'
 
-const props = defineProps<ScrollAreaScrollbarImplProps>();
-const emit = defineEmits<ScrollbarAreaScrollbarImplEmits>();
-const rootContext = injectScrollAreaRootContext();
-const scrollbarVisibleContext = injectScrollAreaScrollbarVisibleContext();
-const scrollbarContext = injectScrollAreaScrollbarContext();
+const props = defineProps<ScrollAreaScrollbarImplProps>()
+const emit = defineEmits<ScrollbarAreaScrollbarImplEmits>()
+const rootContext = injectScrollAreaRootContext()
+const scrollbarVisibleContext = injectScrollAreaScrollbarVisibleContext()
+const scrollbarContext = injectScrollAreaScrollbarContext()
 
-const { forwardRef, currentElement: scrollbar } = useForwardExpose();
-const prevWebkitUserSelectRef = ref('');
-const rectRef = ref<DOMRect>();
+const { forwardRef, currentElement: scrollbar, expose } = useForwardElement()
+defineExpose(expose)
+const prevWebkitUserSelectRef = ref('')
+const rectRef = ref<DOMRect>()
 
 function handleDragScroll(event: MouseEvent) {
   if (rectRef.value) {
-    const x = event.clientX - rectRef.value?.left;
-    const y = event.clientY - rectRef.value?.top;
-    emit('onDragScroll', { x, y });
+    const x = event.clientX - rectRef.value?.left
+    const y = event.clientY - rectRef.value?.top
+    emit('onDragScroll', { x, y })
   }
 }
 
 function handlePointerDown(event: PointerEvent) {
-  const mainPointer = 0;
+  const mainPointer = 0
   if (event.button === mainPointer) {
-    const element = event.target as HTMLElement;
-    element.setPointerCapture(event.pointerId);
-    rectRef.value = scrollbar.value!.getBoundingClientRect();
+    const element = event.target as HTMLElement
+    element.setPointerCapture(event.pointerId)
+    rectRef.value = scrollbar.value!.getBoundingClientRect()
 
     // pointer capture doesn't prevent text selection in Safari
     // so we remove text selection manually when scrolling
-    prevWebkitUserSelectRef.value = document.body.style.webkitUserSelect;
-    document.body.style.webkitUserSelect = 'none';
-    if (rootContext.viewport) {
-      rootContext.viewport.value!.style.scrollBehavior = 'auto';
-    }
+    prevWebkitUserSelectRef.value = getOwnerDocument(scrollbar.value).body.style.webkitUserSelect
+    getOwnerDocument(scrollbar.value).body.style.webkitUserSelect = 'none'
+    if (rootContext.viewport)
+      rootContext.viewport.value!.style.scrollBehavior = 'auto'
 
-    handleDragScroll(event);
+    handleDragScroll(event)
   }
 }
 
 function handlePointerMove(event: PointerEvent) {
-  handleDragScroll(event);
+  handleDragScroll(event)
 }
 
 function handlePointerUp(event: PointerEvent) {
-  const element = event.target as HTMLElement;
-  if (element.hasPointerCapture(event.pointerId)) {
-    element.releasePointerCapture(event.pointerId);
-  }
+  const element = event.target as HTMLElement
+  if (element.hasPointerCapture(event.pointerId))
+    element.releasePointerCapture(event.pointerId)
 
-  document.body.style.webkitUserSelect = prevWebkitUserSelectRef.value;
-  if (rootContext.viewport) {
-    rootContext.viewport.value!.style.scrollBehavior = '';
-  }
+  getOwnerDocument(scrollbar.value).body.style.webkitUserSelect = prevWebkitUserSelectRef.value
+  if (rootContext.viewport)
+    rootContext.viewport.value!.style.scrollBehavior = ''
 
-  rectRef.value = undefined;
+  rectRef.value = undefined
 }
 
 function handleWheel(event: WheelEvent) {
-  const element = event.target as HTMLElement;
-  const isScrollbarWheel = scrollbar.value?.contains(element);
+  // Document-level listener: read the composed target so a wheel over a
+  // shadow-mounted scrollbar isn't retargeted to the host (which would fail the
+  // containment check and break wheel scrolling).
+  const element = getEventTarget<HTMLElement>(event)
+  // Composed in both directions: also a web component inside the scrollbar.
+  const isScrollbarWheel = !!scrollbar.value && containsComposed(scrollbar.value, element)
   const maxScrollPos
     = scrollbarVisibleContext.sizes.value.content
-      - scrollbarVisibleContext.sizes.value.viewport;
-  if (isScrollbarWheel) {
-    scrollbarVisibleContext.handleWheelScroll(event, maxScrollPos);
-  }
+      - scrollbarVisibleContext.sizes.value.viewport
+  if (isScrollbarWheel)
+    scrollbarVisibleContext.handleWheelScroll(event, maxScrollPos)
 }
 
+let wheelDoc: Document | undefined
 onMounted(() => {
-  document.addEventListener('wheel', handleWheel, { passive: false });
-});
+  wheelDoc = getOwnerDocument(scrollbar.value)
+  wheelDoc.addEventListener('wheel', handleWheel, { passive: false })
+})
 onUnmounted(() => {
-  document.removeEventListener('wheel', handleWheel);
-});
+  wheelDoc?.removeEventListener('wheel', handleWheel)
+})
 
 function handleSizeChange() {
-  if (!scrollbar.value) {
-    return;
-  }
+  if (!scrollbar.value)
+    return
   if (props.isHorizontal) {
     scrollbarVisibleContext.handleSizeChange({
       content: rootContext.viewport.value?.scrollWidth ?? 0,
@@ -106,8 +108,9 @@ function handleSizeChange() {
         paddingStart: toInt(getComputedStyle(scrollbar.value).paddingLeft),
         paddingEnd: toInt(getComputedStyle(scrollbar.value).paddingRight),
       },
-    });
-  } else {
+    })
+  }
+  else {
     scrollbarVisibleContext.handleSizeChange({
       content: rootContext.viewport.value?.scrollHeight ?? 0,
       viewport: rootContext.viewport.value?.offsetHeight ?? 0,
@@ -116,14 +119,14 @@ function handleSizeChange() {
         paddingStart: toInt(getComputedStyle(scrollbar.value!).paddingTop),
         paddingEnd: toInt(getComputedStyle(scrollbar.value!).paddingBottom),
       },
-    });
+    })
   }
 
-  scrollbarVisibleContext.onThumbPositionChange();
+  scrollbarVisibleContext.onThumbPositionChange()
 }
 
-useResizeObserver(scrollbar, handleSizeChange);
-useResizeObserver(rootContext.content, handleSizeChange);
+useResizeObserver(scrollbar, handleSizeChange)
+useResizeObserver(rootContext.content, handleSizeChange)
 </script>
 
 <template>

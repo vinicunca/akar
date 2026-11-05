@@ -1,39 +1,50 @@
 export {
   default as AlertDialogAction,
   type AlertDialogActionProps,
-} from './AlertDialogAction.vue';
+} from './AlertDialogAction.vue'
 export {
   default as AlertDialogCancel,
   type AlertDialogCancelProps,
-} from './AlertDialogCancel.vue';
+} from './AlertDialogCancel.vue'
 export {
   default as AlertDialogContent,
   type AlertDialogContentEmits,
   type AlertDialogContentProps,
   injectAlertDialogContentContext,
-} from './AlertDialogContent.vue';
+} from './AlertDialogContent.vue'
 export {
   default as AlertDialogDescription,
   type AlertDialogDescriptionProps,
-} from './AlertDialogDescription.vue';
+} from './AlertDialogDescription.vue'
 export {
   default as AlertDialogOverlay,
   type AlertDialogOverlayProps,
-} from './AlertDialogOverlay.vue';
+} from './AlertDialogOverlay.vue'
 export {
   default as AlertDialogPortal,
   type AlertDialogPortalProps,
-} from './AlertDialogPortal.vue';
+} from './AlertDialogPortal.vue'
 export {
   type AlertDialogEmits,
   type AlertDialogProps,
   default as AlertDialogRoot,
-} from './AlertDialogRoot.vue';
+} from './AlertDialogRoot.vue'
 export {
   default as AlertDialogTitle,
   type AlertDialogTitleProps,
-} from './AlertDialogTitle.vue';
+} from './AlertDialogTitle.vue'
 export {
   default as AlertDialogTrigger,
   type AlertDialogTriggerProps,
-} from './AlertDialogTrigger.vue';
+} from './AlertDialogTrigger.vue'
+export { AlertDialogHandle, createAlertDialogHandle } from './handle'
+export {
+  type AlertDialogContentContext,
+  type AlertDialogContentState,
+  type AlertDialogOpenChangeReason,
+  useAlertDialog,
+  useAlertDialogContent,
+  type UseAlertDialogContentReturn,
+  type UseAlertDialogProps,
+  type UseAlertDialogReturn,
+} from './useAlertDialog'

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { DataOrientation } from '@/shared/types';
-import { ref } from 'vue';
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '../';
+import type { DataOrientation } from '@/shared/types'
+import { ref } from 'vue'
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '../'
 
-const direction = ref<DataOrientation>('horizontal');
+const direction = ref<DataOrientation>('horizontal')
 </script>
 
 <template>
   <Story
     title="Splitter/Direction"
-    :layout="{ type: 'single', width: '100%', iframe: false }"
+    :layout="{ type: 'single', iframe: false }"
   >
     <Variant title="default">
       <div class="w-full">

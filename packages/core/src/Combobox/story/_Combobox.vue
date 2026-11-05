@@ -1,39 +1,25 @@
 <script setup lang="ts">
-import type { ComboboxRootEmits, ComboboxRootProps } from '..';
-import { Icon } from '@iconify/vue';
-import { computed, ref } from 'vue';
-import { useFilter, useForwardPropsEmits } from '@/shared';
-import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..';
+import type { ComboboxRootEmits, ComboboxRootProps } from '..'
+import { Icon } from '@iconify/vue'
+import { computed, ref } from 'vue'
+import { useFilter, useForwardPropsEmits } from '@/shared'
+import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..'
 
-const props = defineProps<ComboboxRootProps>();
-const emits = defineEmits<ComboboxRootEmits>();
+const props = defineProps<ComboboxRootProps>()
+const emits = defineEmits<ComboboxRootEmits>()
 
-const forwarded = useForwardPropsEmits(props, emits);
-const v = ref<any>(props.multiple
-  ? []
-  : '');
+const forwarded = useForwardPropsEmits(props, emits)
+const v = ref<any>(props.multiple ? [] : '')
 
-const options = [
-  'Apple',
-  'Banana',
-  'Blueberry',
-  'Grapes',
-  'Pineapple',
-];
-const vegetables = [
-  'Aubergine',
-  'Broccoli',
-  'Carrot',
-  'Courgette',
-  'Leek',
-];
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
+const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
-const open = ref(props.open);
+const open = ref(props.open)
 
-const query = ref('');
-const { contains } = useFilter({ sensitivity: 'base' });
-const filteredOptions = computed(() => options.filter((p) => contains(p, query.value)));
-const filteredVege = computed(() => vegetables.filter((p) => contains(p, query.value)));
+const query = ref('')
+const { contains } = useFilter({ sensitivity: 'base' })
+const filteredOptions = computed(() => options.filter(p => contains(p, query.value)))
+const filteredVege = computed(() => vegetables.filter(p => contains(p, query.value)))
 </script>
 
 <template>

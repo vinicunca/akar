@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '../useForwardExpose';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '../useForwardElement'
 
 export interface ArrowProps extends PrimitiveProps {
   /**
@@ -8,36 +8,38 @@ export interface ArrowProps extends PrimitiveProps {
    *
    * @defaultValue 10
    */
-  width?: number;
+  width?: number
   /**
    * The height of the arrow in pixels.
    *
    * @defaultValue 5
    */
-  height?: number;
+  height?: number
   /**
    * When `true`, render the rounded version of arrow. Do not work with `as`/`asChild`
    *
    * @defaultValue false
    */
-  rounded?: boolean;
+  rounded?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { Primitive } from '@/Primitive'
 
 const props = withDefaults(defineProps<ArrowProps>(), {
   width: 10,
   height: 5,
   as: 'svg',
-});
+})
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <Primitive
+    :ref="forwardRef"
     v-bind="props"
     :width="width"
     :height="height"

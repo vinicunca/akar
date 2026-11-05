@@ -1,121 +1,196 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
+import type { PrimitiveProps } from '@/Primitive'
 
 export interface CollapsibleContentProps extends PrimitiveProps {
+  /**
+   * Id of the element, which the trigger's `aria-controls` points at.
+   * Auto-generated when not provided.
+   */
+  id?: string
   /**
    * Used to force mounting when more control is needed. Useful when
    * controlling animation with Vue animation libraries.
    */
-  forceMount?: boolean;
+  forceMount?: boolean
 }
 
 export type CollapsibleContentEmits = {
-  contentFound: [void];
-};
+  contentFound: [event: Event]
+}
 </script>
 
 <script setup lang="ts">
-import { useEventListener } from '@vueuse/core';
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
-import { Presence } from '@/Presence';
-import {
-  Primitive,
-} from '@/Primitive';
-import { useForwardExpose, useId } from '@/shared';
-import { injectCollapsibleRootContext } from './CollapsibleRoot.vue';
+import { useEventListener } from '@vueuse/core'
+import { computed, mergeProps, nextTick, onMounted, ref, watch } from 'vue'
+import { Presence } from '@/Presence'
+import { ENDING_STYLE_ATTR, getRunningAnimations, STARTING_STYLE_ATTR, supportsAnimations } from '@/Presence/usePresence'
+import { renderAs } from '@/Primitive/renderAs'
+import { getGeneratedId, setGeneratedIds, useForwardElement, useId, usePartId } from '@/shared'
+import { onNextFrame } from '@/shared/timeout'
+import { injectCollapsibleRootContext } from './CollapsibleRoot.vue'
+import { getCollapsibleContentHidden, getCollapsibleContentSurface } from './useCollapsible'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
-const props = defineProps<CollapsibleContentProps>();
-const emits = defineEmits<CollapsibleContentEmits>();
+const props = defineProps<CollapsibleContentProps>()
+const emits = defineEmits<CollapsibleContentEmits>()
 
-const rootContext = injectCollapsibleRootContext();
-rootContext.contentId ||= useId(undefined, 'akar-collapsible-content');
+const rootContext = injectCollapsibleRootContext()
+// The first content allocates the generated id (the Root leaves the slot empty
+// to keep the v2 allocation order for SSR) and records it, so a later content
+// never takes another content's custom id for its fallback.
+if (!getGeneratedId(rootContext, 'contentId')) {
+  const generatedId = rootContext.contentId || useId(undefined, 'reka-collapsible-content')
+  setGeneratedIds(rootContext, { contentId: generatedId })
+  rootContext.contentId ||= generatedId
+}
+// Rendered on the element; mirrored into the context for the trigger's `aria-controls`.
+const contentId = usePartId(() => props.id, rootContext, 'contentId')
 
-const presentRef = ref<InstanceType<typeof Presence>>();
-const { forwardRef, currentElement } = useForwardExpose();
+const HEIGHT_VAR = '--reka-collapsible-content-height'
+const WIDTH_VAR = '--reka-collapsible-content-width'
 
-const width = ref(0);
-const height = ref(0);
+const presentRef = ref<InstanceType<typeof Presence>>()
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+
+const width = ref(0)
+const height = ref(0)
+const surface = getCollapsibleContentSurface(rootContext, {
+  // `hidden` is bound in the template from Presence's `present` slot prop: a
+  // surface reading `presentRef` would re-render every content once its
+  // Presence mounts and fills the ref.
+  present: true,
+  width,
+  height,
+})
 
 // when opening we want it to immediately open to retrieve dimensions
 // when closing we delay `present` to retrieve dimensions before closing
-const isOpen = computed(() => rootContext.open.value);
-const isMountAnimationPrevented = ref(isOpen.value);
-const currentStyle = ref<Record<string, string>>();
+const isOpen = computed(() => rootContext.open.value)
+const isMountAnimationPrevented = ref(isOpen.value)
+const currentStyle = ref<Record<string, string>>()
+
+/**
+ * A size transition is still running: the toggle interrupted an open or a
+ * close. Measuring would snap the panel to its full size, so keep it where it
+ * is and let the transition retarget from there (Base UI's
+ * `useCollapsiblePanel` likewise only refreshes the size variables from
+ * `scrollHeight` / `scrollWidth` here).
+ */
+function isTransitionRunning(node: HTMLElement) {
+  return supportsAnimations(node)
+    && getRunningAnimations(node).some(animation => 'transitionProperty' in animation)
+}
 
 watch(
   () => [isOpen.value, presentRef.value?.present],
   async () => {
-    await nextTick();
-    const node = currentElement.value;
-    if (!node) {
-      return;
+    // This `nextTick` is queued before Presence's exit check (this watcher is
+    // registered before Presence's, so it runs first): the measuring below
+    // restores the transitions and the ending style before Presence asks
+    // `getAnimations()` what to wait for. Accordion item switching relies on it
+    // (Base UI #3099).
+    await nextTick()
+    const node = currentElement.value
+    if (!node)
+      return
+
+    if (isTransitionRunning(node)) {
+      height.value = node.scrollHeight
+      width.value = node.scrollWidth
+      node.style.setProperty(HEIGHT_VAR, `${node.scrollHeight}px`)
+      node.style.setProperty(WIDTH_VAR, `${node.scrollWidth}px`)
+      return
     }
     currentStyle.value = currentStyle.value || {
       transitionDuration: node.style.transitionDuration,
       animationName: node.style.animationName,
-    };
+    }
     // block any animations/transitions so the element renders at its full dimensions
-    node.style.transitionDuration = '0s';
-    node.style.animationName = 'none';
+    node.style.transitionDuration = '0s'
+    node.style.animationName = 'none'
+
+    // Measure the natural size (#2827): a transition-based panel sizes itself
+    // from the CSS variables (`height: var(--reka-collapsible-content-height)`)
+    // and collapses through `data-starting-style` / `data-ending-style`, so
+    // neither may apply while measuring.
+    const lifecycleAttributes = [STARTING_STYLE_ATTR, ENDING_STYLE_ATTR].filter(name => node.hasAttribute(name))
+    lifecycleAttributes.forEach(name => node.removeAttribute(name))
+    node.style.setProperty(HEIGHT_VAR, 'auto')
+    node.style.setProperty(WIDTH_VAR, 'auto')
 
     // get width and height from full dimensions
-    const rect = node.getBoundingClientRect();
-    height.value = rect.height;
-    width.value = rect.width;
+    const rect = node.getBoundingClientRect()
+    height.value = rect.height
+    width.value = rect.width
+
+    node.style.setProperty(HEIGHT_VAR, `${rect.height}px`)
+    node.style.setProperty(WIDTH_VAR, `${rect.width}px`)
+    if (lifecycleAttributes.length) {
+      // Settle the styles once more with transitions still off, so the
+      // transition does not start from the `auto` size used for measuring
+      // (which cannot be interpolated): an open settles on its starting style
+      // (the transition runs from it once Presence removes the attribute), a
+      // close on the measured size (the transition runs from it to the ending
+      // style restored below).
+      const closing = lifecycleAttributes.includes(ENDING_STYLE_ATTR)
+      if (!closing)
+        lifecycleAttributes.forEach(name => node.setAttribute(name, ''))
+      void getComputedStyle(node).height
+      if (closing)
+        lifecycleAttributes.forEach(name => node.setAttribute(name, ''))
+    }
 
     // kick off any animations/transitions that were originally set up if it isn't the initial mount
     if (!isMountAnimationPrevented.value) {
-      node.style.transitionDuration = currentStyle.value.transitionDuration;
-      node.style.animationName = currentStyle.value.animationName;
+      node.style.transitionDuration = currentStyle.value.transitionDuration
+      node.style.animationName = currentStyle.value.animationName
     }
   },
   {
     immediate: true,
   },
-);
-
-const skipAnimation = computed(() => isMountAnimationPrevented.value && rootContext.open.value);
+)
 
 onMounted(() => {
-  requestAnimationFrame(() => {
-    isMountAnimationPrevented.value = false;
-  });
-});
+  onNextFrame(() => {
+    isMountAnimationPrevented.value = false
+  })
+})
 
 useEventListener(currentElement, 'beforematch', (ev) => {
   requestAnimationFrame(() => {
-    rootContext.onOpenToggle();
-    emits('contentFound');
-  });
-});
+    if (rootContext.onContentFound)
+      rootContext.onContentFound(ev)
+    else
+      rootContext.onOpenToggle(ev)
+    emits('contentFound', ev)
+  })
+})
 </script>
 
 <template>
   <Presence
     v-slot="{ present }"
     ref="presentRef"
-    :present="forceMount || rootContext.open.value"
+    :present="rootContext.open.value"
     :force-mount="true"
+    @complete="rootContext.notifyOpenComplete"
   >
-    <Primitive
-      v-bind="$attrs"
-      :id="rootContext.contentId"
+    <component
+      :is="renderAs(as, props.asChild)"
+      v-bind="mergeProps($attrs, surface.attrs.value, {
+        id: contentId,
+        // `forceMount` keeps the content shown; Presence still tracks the open state
+        // so `update:openComplete` is reported either way.
+        hidden: getCollapsibleContentHidden(forceMount || present, rootContext.unmountOnHide.value),
+      })"
       :ref="forwardRef"
-      :as-child="props.asChild"
-      :as="as"
-      :hidden="!present ? rootContext.unmountOnHide.value ? '' : 'until-found' : undefined"
-      :data-state="skipAnimation ? undefined : rootContext.open.value ? 'open' : 'closed'"
-      :data-disabled="rootContext.disabled?.value ? '' : undefined"
-      :style="{
-        [`--akar-collapsible-content-height`]: `${height}px`,
-        [`--akar-collapsible-content-width`]: `${width}px`,
-      }"
     >
-      <slot v-if="rootContext.unmountOnHide.value ? present : true" />
-    </Primitive>
+      <slot v-if="rootContext.unmountOnHide.value ? forceMount || present : true" />
+    </component>
   </Presence>
 </template>

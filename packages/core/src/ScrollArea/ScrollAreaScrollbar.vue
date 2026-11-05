@@ -1,83 +1,83 @@
 <script lang="ts">
-import type { Ref } from 'vue';
-import type { PrimitiveProps } from '@/Primitive';
-import { createContext, useForwardExpose } from '@/shared';
+import type { Ref } from 'vue'
+import type { PrimitiveProps } from '@/Primitive'
+import { createContext, useForwardElement } from '@/shared'
 
 export interface ScrollAreaScrollbarProps extends PrimitiveProps {
   /** The orientation of the scrollbar */
-  orientation?: 'vertical' | 'horizontal';
+  orientation?: 'vertical' | 'horizontal'
   /**
    * Used to force mounting when more control is needed. Useful when
    * controlling animation with Vue animation libraries.
    */
-  forceMount?: boolean;
+  forceMount?: boolean
 }
 
 export interface ScrollAreaScrollbarContext {
-  as: Ref<PrimitiveProps['as']>;
-  orientation: Ref<'vertical' | 'horizontal'>;
-  forceMount?: Ref<boolean>;
-  isHorizontal: Ref<boolean>;
-  asChild: Ref<boolean>;
+  as: Ref<PrimitiveProps['as']>
+  orientation: Ref<'vertical' | 'horizontal'>
+  forceMount?: Ref<boolean>
+  isHorizontal: Ref<boolean>
+  asChild: Ref<boolean>
 }
 
 export const [injectScrollAreaScrollbarContext, provideScrollAreaScrollbarContext]
-  = createContext<ScrollAreaScrollbarContext>('ScrollAreaScrollbar');
+  = createContext<ScrollAreaScrollbarContext>('ScrollAreaScrollbar')
 </script>
 
 <script setup lang="ts">
-import {
-  computed,
-  onUnmounted,
-  toRefs,
-  watch,
-} from 'vue';
-import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
-import ScrollAreaScrollbarAuto from './ScrollAreaScrollbarAuto.vue';
-import ScrollAreaScrollbarGlimpse from './ScrollAreaScrollbarGlimpse.vue';
-import ScrollAreaScrollbarHover from './ScrollAreaScrollbarHover.vue';
-import ScrollAreaScrollbarScroll from './ScrollAreaScrollbarScroll.vue';
-import ScrollAreaScrollbarVisible from './ScrollAreaScrollbarVisible.vue';
+import { computed, onUnmounted, toRef, watch } from 'vue'
+import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue'
+import ScrollAreaScrollbarAuto from './ScrollAreaScrollbarAuto.vue'
+import ScrollAreaScrollbarGlimpse from './ScrollAreaScrollbarGlimpse.vue'
+import ScrollAreaScrollbarHover from './ScrollAreaScrollbarHover.vue'
+import ScrollAreaScrollbarScroll from './ScrollAreaScrollbarScroll.vue'
+import ScrollAreaScrollbarVisible from './ScrollAreaScrollbarVisible.vue'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
 const props = withDefaults(defineProps<ScrollAreaScrollbarProps>(), {
   orientation: 'vertical',
   as: 'div',
-});
+})
 
-const { forwardRef } = useForwardExpose();
-const rootContext = injectScrollAreaRootContext();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectScrollAreaRootContext()
 
-const isHorizontal = computed(() => props.orientation === 'horizontal');
+const isHorizontal = computed(() => props.orientation === 'horizontal')
 
 watch(
   isHorizontal,
   () => {
-    if (isHorizontal.value) {
-      rootContext.onScrollbarXEnabledChange(true);
-    } else {
-      rootContext.onScrollbarYEnabledChange(true);
-    }
+    if (isHorizontal.value)
+      rootContext.onScrollbarXEnabledChange(true)
+    else rootContext.onScrollbarYEnabledChange(true)
   },
   { immediate: true },
-);
+)
 
 onUnmounted(() => {
-  rootContext.onScrollbarXEnabledChange(false);
-  rootContext.onScrollbarYEnabledChange(false);
-});
+  rootContext.onScrollbarXEnabledChange(false)
+  rootContext.onScrollbarYEnabledChange(false)
+})
 
-const { orientation, forceMount, asChild, as } = toRefs(props);
+const orientation = toRef(props, 'orientation')
+
+const forceMount = toRef(props, 'forceMount')
+
+const asChild = toRef(props, 'asChild')
+
+const as = toRef(props, 'as')
 provideScrollAreaScrollbarContext({
   orientation,
   forceMount,
   isHorizontal,
   as,
   asChild,
-});
+})
 </script>
 
 <template>
@@ -117,7 +117,7 @@ provideScrollAreaScrollbarContext({
     v-else-if="rootContext.type.value === 'always'"
     v-bind="$attrs"
     :ref="forwardRef"
-    data-state="visible"
+    data-state="open"
   >
     <slot />
   </ScrollAreaScrollbarVisible>

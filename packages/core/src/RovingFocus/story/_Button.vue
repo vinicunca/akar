@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import type { RovingFocusItemProps } from '..';
-import { computed, inject, ref } from 'vue';
-import { RovingFocusItem } from '..';
+import type { RovingFocusItemProps } from '..'
+import { computed, inject, ref } from 'vue'
+import { RovingFocusItem } from '..'
 
 interface Props extends RovingFocusItemProps {
-  value: string;
-  disabled?: boolean;
+  value: string
+  disabled?: boolean
 }
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 const context = inject('rovingFocusDemo', {
   value: ref(''),
-});
-const isSelected = computed(() => context.value.value === props.value);
+})
+const isSelected = computed(() => context.value.value === props.value)
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Autocomplete from './_Autocomplete.vue';
+import Autocomplete from './_Autocomplete.vue'
 </script>
 
 <template>

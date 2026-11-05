@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { FieldValidityState } from './useFieldValidation';
-import { injectFieldRootContext } from './FieldRoot.vue';
+import type { FieldValidityState } from './useFieldValidation'
+import { injectFieldRootContext } from './FieldRoot.vue'
 
 defineSlots<{
   default?: (props: {
     /** The field's validity. `valid` is `null` until the field has a validity to report. */
-    validity: FieldValidityState;
+    validity: FieldValidityState
     /** All current error messages. */
-    errors: Array<string>;
+    errors: string[]
     /** The first error message, or an empty string. */
-    error: string;
+    error: string
     /** The value validity was last computed for. */
-    value: unknown;
+    value: unknown
     /** The control's initial value. */
-    initialValue: unknown;
-  }) => any;
-}>();
+    initialValue: unknown
+  }) => any
+}>()
 
-const fieldContext = injectFieldRootContext();
+const fieldContext = injectFieldRootContext()
 </script>
 
 <template>

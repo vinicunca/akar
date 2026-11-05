@@ -1,38 +1,32 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { ComboboxAnchor, ComboboxCancel, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { ComboboxAnchor, ComboboxCancel, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..'
 
-const modelValue = ref('Banana');
+const modelValue = ref('Banana')
 
 const options = [
-  {
-    name: 'Fruit',
-    children: [
-      { name: 'Apple' },
-      { name: 'Banana' },
-      { name: 'Orange' },
-      { name: 'Honeydew' },
-      { name: 'Grapes' },
-      { name: 'Watermelon' },
-      { name: 'Cantaloupe' },
-      { name: 'Pear' },
-    ],
-  },
-  {
-    name: 'Vegetable',
-    children: [
-      { name: 'Cabbage' },
-      { name: 'Broccoli' },
-      { name: 'Carrots' },
-      { name: 'Lettuce' },
-      { name: 'Spinach' },
-      { name: 'Bok Choy' },
-      { name: 'Cauliflower' },
-      { name: 'Potatoes' },
-    ],
-  },
-];
+  { name: 'Fruit', children: [
+    { name: 'Apple' },
+    { name: 'Banana' },
+    { name: 'Orange' },
+    { name: 'Honeydew' },
+    { name: 'Grapes' },
+    { name: 'Watermelon' },
+    { name: 'Cantaloupe' },
+    { name: 'Pear' },
+  ] },
+  { name: 'Vegetable', children: [
+    { name: 'Cabbage' },
+    { name: 'Broccoli' },
+    { name: 'Carrots' },
+    { name: 'Lettuce' },
+    { name: 'Spinach' },
+    { name: 'Bok Choy' },
+    { name: 'Cauliflower' },
+    { name: 'Potatoes' },
+  ] },
+]
 </script>
 
 <template>

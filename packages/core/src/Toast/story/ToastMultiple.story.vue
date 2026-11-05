@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ToastAction, ToastDescription, ToastProvider, ToastRoot, ToastTitle, ToastViewport } from '..';
-import { useToast } from './_useToast';
+import { ToastAction, ToastDescription, ToastProvider, ToastRoot, ToastTitle, ToastViewport } from '..'
+import { useToast } from './_useToast'
 
-const { toast: addToast, toasts } = useToast();
+const { toast: addToast, toasts } = useToast()
 </script>
 
 <template>
@@ -25,7 +25,7 @@ const { toast: addToast, toasts } = useToast();
         :key="toast.id"
         v-bind="toast"
         v-slot="{ remaining }"
-        class="bg-gray-500 rounded-md shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] p-[15px] grid [grid-template-areas:_'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--akar-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut"
+        class="bg-gray-500 rounded-md shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] p-[15px] grid [grid-template-areas:_'title_action'_'description_action'] grid-cols-[auto_max-content] gap-x-[15px] items-center data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=move]:translate-x-[var(--reka-toast-swipe-move-x)] data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-[transform_200ms_ease-out] data-[swipe=end]:animate-swipeOut"
         @update:open="toast.onOpenChange"
       >
         <ToastTitle class="[grid-area:_title] mb-[5px] font-medium text-slate12 text-[15px]">

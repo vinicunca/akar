@@ -1,10 +1,14 @@
 export {
   default as ColorFieldInput,
   type ColorFieldInputProps,
-} from './ColorFieldInput.vue';
+} from './ColorFieldInput.vue'
 export {
   default as ColorFieldRoot,
   type ColorFieldRootEmits,
   type ColorFieldRootProps,
   injectColorFieldRootContext,
-} from './ColorFieldRoot.vue';
+} from './ColorFieldRoot.vue'
+
+export { useColorField } from './useColorField'
+export type { ColorFieldChangeReason, ColorFieldRootState, UseColorFieldProps, UseColorFieldReturn } from './useColorField'
+export type { ColorFieldInputState } from './useColorField'

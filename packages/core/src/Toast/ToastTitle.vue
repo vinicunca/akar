@@ -1,27 +1,29 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface ToastTitleProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { injectToastRootContext } from './ToastRootImpl.vue';
+import { renderAs } from '@/Primitive/renderAs'
+import { injectToastRootContext } from './ToastRootImpl.vue'
 
-const props = defineProps<ToastTitleProps>();
-useForwardExpose();
-const rootContext = injectToastRootContext(null);
+defineProps<ToastTitleProps>()
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectToastRootContext(null)
 // A managed toast without a title renders nothing, unless slot content is given.
 // Keep this note out of the template: a root comment turns the root into a
 // fragment, which drops `class` and other fallthrough attrs in production.
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, asChild)"
     v-if="$slots.default || !rootContext?.toast.value || rootContext.toast.value.title"
-    v-bind="props"
+    :ref="forwardRef"
   >
     <slot>{{ rootContext?.toast.value?.title }}</slot>
-  </Primitive>
+  </component>
 </template>

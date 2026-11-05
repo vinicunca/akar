@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { TreeItem } from '..';
-import Tree from './_TreeNested.vue';
+import { Icon } from '@iconify/vue'
+import { TreeItem } from '..'
+import Tree from './_TreeNested.vue'
 
 interface TreeNode {
-  title: string;
-  icon: string;
-  children?: Array<TreeNode>;
+  title: string
+  icon: string
+  children?: TreeNode[]
 }
 
 withDefaults(defineProps<{
-  treeItems: Array<TreeNode>;
-  level?: number;
+  treeItems: TreeNode[]
+  level?: number
 }>(), {
   level: 0,
-});
+})
 </script>
 
 <template>

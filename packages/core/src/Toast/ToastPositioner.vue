@@ -1,27 +1,27 @@
 <script lang="ts">
-import type { ReferenceElement } from '@floating-ui/vue';
-import type { ToastObject } from './createToastManager';
-import type { PopperContentProps } from '@/Popper';
-import { createContext, useForwardExpose } from '@/shared';
+import type { ReferenceElement } from '@floating-ui/vue'
+import type { ToastObject } from './createToastManager'
+import type { PopperContentProps } from '@/Popper'
+import { createContext, useForwardElement } from '@/shared'
 
 export interface ToastPositionerProps extends Omit<PopperContentProps, 'reference' | 'memoDependencies'> {
   /** The toast to position. Its `positionerProps` are used for any prop that is not set. */
-  toast: ToastObject;
+  toast: ToastObject
   /** The element to position the toast against. Defaults to `toast.positionerProps.anchor`. */
-  anchor?: ReferenceElement | null;
+  anchor?: ReferenceElement | null
 }
 
 export const [injectToastPositionerContext, provideToastPositionerContext]
-  = createContext<object>('ToastPositioner');
+  = createContext<object>('ToastPositioner')
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { PopperContent, PopperContentPropsDefaultValue, PopperRoot } from '@/Popper';
+import { computed } from 'vue'
+import { PopperContent, PopperContentPropsDefaultValue, PopperRoot } from '@/Popper'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
 const props = withDefaults(defineProps<ToastPositionerProps>(), {
   // Leave booleans unset so `toast.positionerProps` can fill them in.
@@ -32,35 +32,34 @@ const props = withDefaults(defineProps<ToastPositionerProps>(), {
   hideWhenDetached: undefined,
   disableUpdateOnLayoutShift: undefined,
   prioritizePosition: undefined,
-});
+})
 
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 
 const DEFAULTS = {
   ...PopperContentPropsDefaultValue,
   side: 'top',
   collisionPadding: 5,
   arrowPadding: 5,
-} as const;
+} as const
 
 const resolvedProps = computed(() => {
-  const fromToast = props.toast.positionerProps ?? {};
-  const resolved: Record<string, unknown> = {};
-  for (const key of Object.keys(props) as Array<keyof ToastPositionerProps>) {
-    if (key === 'toast' || key === 'anchor') {
-      continue;
-    }
-    resolved[key] = props[key] ?? fromToast[key as keyof typeof fromToast] ?? DEFAULTS[key as keyof typeof DEFAULTS];
+  const fromToast = props.toast.positionerProps ?? {}
+  const resolved: Record<string, unknown> = {}
+  for (const key of Object.keys(props) as (keyof ToastPositionerProps)[]) {
+    if (key === 'toast' || key === 'anchor')
+      continue
+    resolved[key] = props[key] ?? fromToast[key as keyof typeof fromToast] ?? DEFAULTS[key as keyof typeof DEFAULTS]
   }
-  if (typeof resolved.collisionBoundary === 'function') {
-    resolved.collisionBoundary = resolved.collisionBoundary();
-  }
-  return resolved as PopperContentProps;
-});
+  if (typeof resolved.collisionBoundary === 'function')
+    resolved.collisionBoundary = resolved.collisionBoundary()
+  return resolved as PopperContentProps
+})
 
-const anchor = computed(() => props.anchor ?? props.toast.positionerProps?.anchor ?? undefined);
+const anchor = computed(() => props.anchor ?? props.toast.positionerProps?.anchor ?? undefined)
 
-provideToastPositionerContext({});
+provideToastPositionerContext({})
 </script>
 
 <template>

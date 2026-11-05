@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { ProgressIndicator, ProgressRoot } from '..';
+import { ref } from 'vue'
+import { ProgressIndicator, ProgressRoot } from '..'
 
-const interactive = ref(0);
+const interactive = ref(0)
 setTimeout(() => {
   // For some reason, this interval triggers twice in the same tick
-  interactive.value = (interactive.value + 50) % 100;
-}, 200);
+  interactive.value = (interactive.value + 50) % 100
+}, 200)
 </script>
 
 <template>

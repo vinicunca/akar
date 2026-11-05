@@ -1,16 +1,16 @@
-import { cleanup, fireEvent, render } from '@testing-library/vue';
-import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { defineComponent, nextTick, ref } from 'vue';
+import { cleanup, fireEvent, render } from '@testing-library/vue'
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
+import { defineComponent, nextTick, ref } from 'vue'
 import {
   DrawerClose,
   DrawerContent,
-  DrawerHandle,
+  DrawerGrabber,
   DrawerOverlay,
   DrawerPortal,
   DrawerRoot,
   DrawerTitle,
   DrawerTrigger,
-} from '.';
+} from '.'
 
 /**
  * Integration tests for the snap-point bugs fixed in the PR:
@@ -55,22 +55,21 @@ import {
 // `useDrawerSnapPoints` uses `window.innerHeight` as the viewport height
 // baseline for fraction-based snap points. Setting both to the same value
 // mirrors a real CSS `height: 100dvh` drawer where popupHeight === viewport.
-const MOCK_POPUP_HEIGHT = 800;
+const MOCK_POPUP_HEIGHT = 800
 
-// eslint-disable-next-line sonarjs/no-unused-collection
 let installedObservers: Array<{
-  cb: ResizeObserverCallback;
-  target: Element | null;
-}> = [];
+  cb: ResizeObserverCallback
+  target: Element | null
+}> = []
 
 class ResizeObserverStub {
-  private cb: ResizeObserverCallback;
+  private cb: ResizeObserverCallback
   constructor(cb: ResizeObserverCallback) {
-    this.cb = cb;
+    this.cb = cb
   }
 
   observe(target: Element) {
-    installedObservers.push({ cb: this.cb, target });
+    installedObservers.push({ cb: this.cb, target })
     // Fire on the next microtask so the watcher has a chance to be set up.
     queueMicrotask(() => {
       this.cb(
@@ -85,9 +84,7 @@ class ResizeObserverStub {
               right: 400,
               x: 0,
               y: 0,
-              toJSON() {
-                return {};
-              },
+              toJSON() { return {} },
             },
             target,
             borderBoxSize: [],
@@ -96,8 +93,8 @@ class ResizeObserverStub {
           } as unknown as ResizeObserverEntry,
         ],
         this as unknown as ResizeObserver,
-      );
-    });
+      )
+    })
   }
 
   unobserve() {}
@@ -106,7 +103,7 @@ class ResizeObserverStub {
 
 beforeAll(() => {
   ;(globalThis as any).ResizeObserver = ResizeObserverStub
-  ;(window as any).ResizeObserver = ResizeObserverStub;
+  ;(window as any).ResizeObserver = ResizeObserverStub
 
   // Align jsdom's viewport height with our mocked popup height. JSDOM
   // defaults to 768, which would make `Math.round(0.5 * 768) = 384` and
@@ -115,27 +112,27 @@ beforeAll(() => {
   Object.defineProperty(window, 'innerHeight', {
     configurable: true,
     value: MOCK_POPUP_HEIGHT,
-  });
+  })
 
   // PointerEvent polyfill (same as useSwipeDismiss.test.ts)
   if (typeof PointerEvent === 'undefined') {
     class PointerEventPolyfill extends MouseEvent {
-      pointerId: number;
-      pointerType: string;
-      isPrimary: boolean;
+      pointerId: number
+      pointerType: string
+      isPrimary: boolean
       constructor(type: string, init: any = {}) {
-        super(type, init);
-        this.pointerId = init.pointerId ?? 1;
-        this.pointerType = init.pointerType ?? 'mouse';
-        this.isPrimary = init.isPrimary ?? true;
+        super(type, init)
+        this.pointerId = init.pointerId ?? 1
+        this.pointerType = init.pointerType ?? 'mouse'
+        this.isPrimary = init.isPrimary ?? true
       }
     }
-    ;(globalThis as any).PointerEvent = PointerEventPolyfill;
+    ;(globalThis as any).PointerEvent = PointerEventPolyfill
   }
   if (!Element.prototype.setPointerCapture) {
-    Element.prototype.setPointerCapture = vi.fn();
-    Element.prototype.releasePointerCapture = vi.fn();
-    Element.prototype.hasPointerCapture = () => false;
+    Element.prototype.setPointerCapture = vi.fn()
+    Element.prototype.releasePointerCapture = vi.fn()
+    Element.prototype.hasPointerCapture = () => false
   }
 
   // JSDOM reports 0 for offsetHeight/offsetWidth on every element. The
@@ -143,63 +140,47 @@ beforeAll(() => {
   // to match the mocked popup height.
   Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
     configurable: true,
-    get() {
-      return MOCK_POPUP_HEIGHT;
-    },
-  });
+    get() { return MOCK_POPUP_HEIGHT },
+  })
   Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
     configurable: true,
-    get() {
-      return 400;
-    },
-  });
-});
+    get() { return 400 },
+  })
+})
 
 beforeEach(() => {
-  installedObservers = [];
-});
+  installedObservers = []
+})
 
 afterEach(() => {
   // Unmount any components that testing-library rendered. Clearing
   // document.body.innerHTML directly would leave Vue's internal DOM
   // references stale and crash the next test's unmount.
-  cleanup();
-});
+  cleanup()
+})
 
 function findContent() {
-  return document.querySelector('[role="dialog"]') as HTMLElement | null;
+  return document.querySelector('[role="dialog"]') as HTMLElement | null
 }
 
 function getSnapOffset(el: HTMLElement) {
-  return el.style.getPropertyValue('--drawer-snap-point-offset');
+  return el.style.getPropertyValue('--drawer-snap-point-offset')
 }
 
 function getSwipeMovementY(el: HTMLElement) {
-  return el.style.getPropertyValue('--drawer-swipe-movement-y');
+  return el.style.getPropertyValue('--drawer-swipe-movement-y')
 }
 
 const SnapDrawer = defineComponent({
-  components: {
-    DrawerRoot,
-    DrawerTrigger,
-    DrawerPortal,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerHandle,
-    DrawerTitle,
-    DrawerClose,
-  },
+  components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerOverlay, DrawerContent, DrawerGrabber, DrawerTitle, DrawerClose },
   props: {
     defaultOpen: { type: Boolean, default: false },
-    defaultSnapPoint: {
-      type: [Number, String, null] as any,
-      default: 0.5,
-    },
+    defaultSnapPoint: { type: [Number, String, null] as any, default: 0.5 },
   },
   setup(props) {
-    const open = ref(props.defaultOpen);
-    const snapPoint = ref<number | string | null>(props.defaultSnapPoint);
-    return { open, snapPoint };
+    const open = ref(props.defaultOpen)
+    const snapPoint = ref<number | string | null>(props.defaultSnapPoint)
+    return { open, snapPoint }
   },
   template: `
     <DrawerRoot
@@ -211,103 +192,101 @@ const SnapDrawer = defineComponent({
       <DrawerPortal>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHandle />
+          <DrawerGrabber />
           <DrawerTitle>Snap Drawer</DrawerTitle>
           <DrawerClose>Close</DrawerClose>
         </DrawerContent>
       </DrawerPortal>
     </DrawerRoot>
   `,
-});
+})
 
 describe('drawer snap points — integration', () => {
   describe('mount-time snap offset write (reopen bug)', () => {
     it('writes --drawer-snap-point-offset on initial open for snap=0.5', async () => {
-      const { getByText } = render(SnapDrawer);
-      await fireEvent.click(getByText('Open'));
+      const { getByText } = render(SnapDrawer)
+      await fireEvent.click(getByText('Open'))
       // Allow microtask for ResizeObserver stub + Vue reactivity to settle
-      await nextTick();
-      await nextTick();
-      await nextTick();
+      await nextTick()
+      await nextTick()
+      await nextTick()
 
-      const content = findContent();
-      expect(content).not.toBeNull();
+      const content = findContent()
+      expect(content).not.toBeNull()
 
       // popupHeight=800, snap 0.5 => offset = 800 - 400 = 400
-      expect(getSnapOffset(content!)).toBe('400px');
-    });
+      expect(getSnapOffset(content!)).toBe('400px')
+    })
 
     it('writes --drawer-snap-point-offset on REOPEN after close (lazy-watcher bug)', async () => {
-      const { getByText } = render(SnapDrawer);
+      const { getByText } = render(SnapDrawer)
 
       // First open-close cycle. The lazy watcher fires here because
       // popupHeight transitions 0 -> 800, so this worked even before the fix.
-      await fireEvent.click(getByText('Open'));
-      await nextTick();
-      await nextTick();
-      await nextTick();
-      expect(getSnapOffset(findContent()!)).toBe('400px');
+      await fireEvent.click(getByText('Open'))
+      await nextTick()
+      await nextTick()
+      await nextTick()
+      expect(getSnapOffset(findContent()!)).toBe('400px')
 
       // Close the drawer. Presence will unmount the content.
-      await fireEvent.click(getByText('Close'));
-      await nextTick();
-      await nextTick();
+      await fireEvent.click(getByText('Close'))
+      await nextTick()
+      await nextTick()
 
       // Reopen. popupHeight is already cached on the root context (800px
       // from the previous mount), so activeSnapPointOffset is immediately
       // correct and a lazy `watch(activeSnapPointOffset, ...)` would NEVER
       // fire. The regression was that the CSS var stayed unset and the
       // drawer rendered as if snap=1.0 (offset=0).
-      await fireEvent.click(getByText('Open'));
-      await nextTick();
-      await nextTick();
-      await nextTick();
+      await fireEvent.click(getByText('Open'))
+      await nextTick()
+      await nextTick()
+      await nextTick()
 
-      const content = findContent();
-      expect(content).not.toBeNull();
-      expect(getSnapOffset(content!)).toBe('400px');
-    });
+      const content = findContent()
+      expect(content).not.toBeNull()
+      expect(getSnapOffset(content!)).toBe('400px')
+    })
 
     it('writes --drawer-snap-point-offset on REOPEN after snap transition + close', async () => {
       // Regression for the compound case: open at 0.5, toggle to 1.0 via a
       // state change, close, reopen - the offset must reflect the CURRENT
       // active snap point (which reopens at 0.5 because state goes back to
       // the v-model seed value in this harness).
-      const { getByText } = render(SnapDrawer);
+      const { getByText } = render(SnapDrawer)
 
-      await fireEvent.click(getByText('Open'));
-      await nextTick();
-      await nextTick();
-      await nextTick();
-      expect(getSnapOffset(findContent()!)).toBe('400px');
+      await fireEvent.click(getByText('Open'))
+      await nextTick()
+      await nextTick()
+      await nextTick()
+      expect(getSnapOffset(findContent()!)).toBe('400px')
 
-      await fireEvent.click(getByText('Close'));
-      await nextTick();
-      await nextTick();
+      await fireEvent.click(getByText('Close'))
+      await nextTick()
+      await nextTick()
 
-      await fireEvent.click(getByText('Open'));
-      await nextTick();
-      await nextTick();
-      await nextTick();
+      await fireEvent.click(getByText('Open'))
+      await nextTick()
+      await nextTick()
+      await nextTick()
 
-      expect(getSnapOffset(findContent()!)).toBe('400px');
-    });
+      expect(getSnapOffset(findContent()!)).toBe('400px')
+    })
 
     it('writes a snap=1.0 offset (0px) when defaultSnapPoint is 1', async () => {
-      const { getByText } = render(SnapDrawer, {
-        props: { defaultSnapPoint: 1 },
-      });
-      await fireEvent.click(getByText('Open'));
-      await nextTick();
-      await nextTick();
-      await nextTick();
+      const { getByText } = render(SnapDrawer, { props: { defaultSnapPoint: 1 } })
+      await fireEvent.click(getByText('Open'))
+      await nextTick()
+      await nextTick()
+      await nextTick()
 
-      const content = findContent();
-      expect(content).not.toBeNull();
+      const content = findContent()
+      expect(content).not.toBeNull()
       // popupHeight=800, snap 1.0 => offset = 800 - 800 = 0
-      expect(getSnapOffset(content!)).toBe('0px');
-    });
-  });
+      expect(getSnapOffset(content!)).toBe('0px')
+    })
+  })
 
   describe('swipe release does not leave stale movement var', () => {
     // These tests exercise the DrawerContentImpl.onRelease wiring that
@@ -330,67 +309,67 @@ describe('drawer snap points — integration', () => {
         buttons,
         clientX: x,
         clientY: y,
-      });
-      el.dispatchEvent(ev);
+      })
+      el.dispatchEvent(ev)
     }
 
     it('clears --drawer-swipe-movement-y after snap-to-snap release', async () => {
-      const { getByText } = render(SnapDrawer);
-      await fireEvent.click(getByText('Open'));
-      await nextTick();
-      await nextTick();
-      await nextTick();
+      const { getByText } = render(SnapDrawer)
+      await fireEvent.click(getByText('Open'))
+      await nextTick()
+      await nextTick()
+      await nextTick()
 
-      const content = findContent()!;
+      const content = findContent()!
 
       // Simulate a drag upward that would cross into snap=1.0 territory.
       // The exact displacement is irrelevant to this assertion — we only
       // need the release path to run through the snap branch.
-      dispatchPointer(content, 'pointerdown', 100, 500);
-      dispatchPointer(content, 'pointermove', 100, 480);
-      dispatchPointer(content, 'pointermove', 100, 400);
-      dispatchPointer(content, 'pointermove', 100, 200);
-      dispatchPointer(content, 'pointerup', 100, 200, 0);
-      await nextTick();
-      await nextTick();
+      dispatchPointer(content, 'pointerdown', 100, 500)
+      dispatchPointer(content, 'pointermove', 100, 480)
+      dispatchPointer(content, 'pointermove', 100, 400)
+      dispatchPointer(content, 'pointermove', 100, 200)
+      dispatchPointer(content, 'pointerup', 100, 200, 0)
+      await nextTick()
+      await nextTick()
 
       // Movement vars must be reset so the next interaction starts from a
       // clean slate and the inline `transform` doesn't carry stale drag
       // state into the new snap position.
-      expect(getSwipeMovementY(content)).toBe('0px');
-      expect(content.style.getPropertyValue('--drawer-swipe-movement-x')).toBe('0px');
-    });
+      expect(getSwipeMovementY(content)).toBe('0px')
+      expect(content.style.getPropertyValue('--drawer-swipe-movement-x')).toBe('0px')
+    })
 
     it('updates --drawer-snap-point-offset synchronously on snap-to-snap release (smooth drag)', async () => {
       // The sequencing fix: onRelease calls writeSnapPointOffset() BEFORE
       // clearing the movement vars, so the CSS transition starts from the
       // drag position instead of snapping back to the old snap offset for
       // one frame.
-      const { getByText } = render(SnapDrawer);
-      await fireEvent.click(getByText('Open'));
-      await nextTick();
-      await nextTick();
-      await nextTick();
+      const { getByText } = render(SnapDrawer)
+      await fireEvent.click(getByText('Open'))
+      await nextTick()
+      await nextTick()
+      await nextTick()
 
-      const content = findContent()!;
-      expect(getSnapOffset(content)).toBe('400px');
+      const content = findContent()!
+      expect(getSnapOffset(content)).toBe('400px')
 
       // Drag upward past the snap threshold. Snap to nearest should pick
       // snap=1.0 (offset=0) given a large enough upward displacement.
-      dispatchPointer(content, 'pointerdown', 100, 500);
-      dispatchPointer(content, 'pointermove', 100, 450);
-      dispatchPointer(content, 'pointermove', 100, 300);
-      dispatchPointer(content, 'pointermove', 100, 100);
-      dispatchPointer(content, 'pointerup', 100, 100, 0);
-      await nextTick();
-      await nextTick();
+      dispatchPointer(content, 'pointerdown', 100, 500)
+      dispatchPointer(content, 'pointermove', 100, 450)
+      dispatchPointer(content, 'pointermove', 100, 300)
+      dispatchPointer(content, 'pointermove', 100, 100)
+      dispatchPointer(content, 'pointerup', 100, 100, 0)
+      await nextTick()
+      await nextTick()
 
       // Snap offset should have updated immediately to the new target,
       // AND movement var should be cleared. If the movement var were
       // cleared without the snap offset update, the transform would
       // briefly revert to the old snap position.
-      expect(getSnapOffset(content)).toBe('0px');
-      expect(getSwipeMovementY(content)).toBe('0px');
-    });
-  });
-});
+      expect(getSnapOffset(content)).toBe('0px')
+      expect(getSwipeMovementY(content)).toBe('0px')
+    })
+  })
+})

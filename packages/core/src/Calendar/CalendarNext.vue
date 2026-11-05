@@ -1,53 +1,46 @@
 <script lang="ts">
-import type { DateValue } from '@internationalized/date';
-import type { PrimitiveProps } from '@/Primitive';
+import type { CalendarPageFunction } from '@/date'
+import type { PrimitiveProps } from '@/Primitive'
 
 export interface CalendarNextProps extends PrimitiveProps {
-  /** The function to be used for the next page. Overwrites the `nextPage` function set on the `CalendarRoot`. */
-  nextPage?: (placeholder: DateValue) => DateValue;
+  /** The function to be used for the next page. Overwrites the `nextPage` function set on the `CalendarRoot`. Receives the placeholder and the active view. Unlike the root function it applies in every view; render the button inside a `CalendarView` to scope it to one view. */
+  nextPage?: CalendarPageFunction
 }
 
 export interface CalendarNextSlot {
   default?: (props: {
     /** Current disable state */
-    disabled: boolean;
-  }) => any;
+    disabled: boolean
+  }) => any
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Primitive } from '@/Primitive';
-import { injectCalendarRootContext } from './CalendarRoot.vue';
+import { computed } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { useForwardElement } from '@/shared'
+import { injectCalendarRootContext } from './CalendarRoot.vue'
+import { getCalendarNavSurface } from './useCalendar'
 
-const props = withDefaults(defineProps<CalendarNextProps>(), { as: 'button', step: 'month' });
-defineSlots<CalendarNextSlot>();
+const props = withDefaults(defineProps<CalendarNextProps>(), { as: 'button' })
+defineSlots<CalendarNextSlot>()
 
-const disabled = computed(() => rootContext.disabled.value || rootContext.isNextButtonDisabled(props.nextPage));
+const rootContext = injectCalendarRootContext()
+const surface = getCalendarNavSurface(rootContext, 'next', computed(() => props.nextPage))
 
-const rootContext = injectCalendarRootContext();
-
-function handleClick() {
-  if (disabled.value) {
-    return;
-  }
-  rootContext.nextPage(props.nextPage);
-}
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <Primitive
-    :as="props.as"
-    :as-child="props.asChild"
-    aria-label="Next page"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     :type="props.as === 'button' ? 'button' : undefined"
-    :aria-disabled="disabled || undefined"
-    :data-disabled="disabled || undefined"
-    :disabled="disabled"
-    @click="handleClick"
+    v-bind="surface.attrs.value"
   >
-    <slot :disabled>
+    <slot :disabled="surface.state.value.disabled">
       Next page
     </slot>
-  </Primitive>
+  </component>
 </template>

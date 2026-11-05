@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { FocusGuards } from '@/FocusGuards';
-import { FocusScope } from '@/FocusScope';
-import { DismissableLayer } from '..';
+import { ref } from 'vue'
+import { FocusGuards } from '@/FocusGuards'
+import { FocusScope } from '@/FocusScope'
+import { DismissableLayer } from '..'
 
 defineProps<{
-  openLabel?: string;
-  closeLabel?: string;
-}>();
+  openLabel?: string
+  closeLabel?: string
+}>()
 
-const open = ref(false);
+const open = ref(false)
 </script>
 
 <template>

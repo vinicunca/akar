@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
-import ScrollAreaCopy from './_ScrollAreaCopy.vue';
-import ScrollAreaStory from './_ScrollAreaStory.vue';
+import { reactive } from 'vue'
+import ScrollAreaCopy from './_ScrollAreaCopy.vue'
+import ScrollAreaStory from './_ScrollAreaStory.vue'
 
-type Type = 'auto' | 'always' | 'scroll' | 'hover';
+type Type = 'auto' | 'always' | 'scroll' | 'hover'
 
 const state = reactive({
   type: 'hover' as Type,
-});
+})
 
 const contentChangeState = reactive({
   verticalCount: 1,
   horizontalCount: 1,
-});
+})
 </script>
 
 <template>

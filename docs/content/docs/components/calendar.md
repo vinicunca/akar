@@ -1,0 +1,434 @@
+---
+
+title: Calendar
+description: Displays dates and days of the week, facilitating date-related interactions.
+name: calendar
+---
+
+# Calendar
+
+<Description>
+Displays dates and days of the week, facilitating date-related interactions.
+</Description>
+
+<ComponentPreview name="Calendar" />
+
+## Features
+
+<Highlights
+  :features="[
+    'Full keyboard navigation',
+    'Can be controlled or uncontrolled',
+    'Focus is fully managed',
+    'Localization support',
+    'Highly composable'
+  ]"
+/>
+
+## Preface
+
+The component works with the [Temporal API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal): its values are `Temporal.PlainDate`, `Temporal.PlainDateTime` or `Temporal.ZonedDateTime`. Reka UI does not bundle a Temporal implementation, so on runtimes without native Temporal your app loads a polyfill. See [Dates & Times](/docs/guides/dates) for the setup and how the components treat calendars and time zones.
+
+## Installation
+
+On runtimes without native Temporal, install a polyfill and load it once, before the app mounts.
+
+<InstallationTabs value="temporal-polyfill-lite" />
+
+```ts
+// main.ts
+import { install } from 'temporal-polyfill-lite/shim'
+
+install(false) // keeps the native Temporal when the browser has one
+```
+
+Install the component from your command line.
+
+<InstallationTabs value="reka-ui" />
+
+## Anatomy
+
+Import all parts and piece them together.
+
+```vue
+<script setup>
+import {
+  CalendarCell,
+  CalendarCellTrigger,
+  CalendarGrid,
+  CalendarGridBody,
+  CalendarGridHead,
+  CalendarGridRow,
+  CalendarHeadCell,
+  CalendarHeader,
+  CalendarNext,
+  CalendarPrev,
+  CalendarRoot,
+  CalendarView,
+  CalendarViewTrigger,
+} from 'reka-ui'
+</script>
+
+<template>
+  <CalendarRoot>
+    <CalendarHeader>
+      <CalendarPrev />
+      <CalendarViewTrigger />
+      <CalendarNext />
+    </CalendarHeader>
+    <CalendarView view="day">
+      <CalendarGrid>
+        <CalendarGridHead>
+          <CalendarGridRow>
+            <CalendarHeadCell />
+          </CalendarGridRow>
+        </CalendarGridHead>
+        <CalendarGridBody>
+          <CalendarGridRow>
+            <CalendarCell>
+              <CalendarCellTrigger />
+            </CalendarCell>
+          </CalendarGridRow>
+        </CalendarGridBody>
+      </CalendarGrid>
+    </CalendarView>
+  </CalendarRoot>
+</template>
+```
+
+`CalendarView` and `CalendarViewTrigger` are optional. A calendar that only ever shows one unit (the default day grid, or a month or year picker via `granularity`) can put `CalendarGrid` straight under the root and use `CalendarHeading` in place of the trigger for a static heading; the two render the same text, so use one or the other.
+
+## API Reference
+
+### Root
+
+Contains all the parts of a calendar
+
+<!-- @include: @/meta/CalendarRoot.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-readonly]',
+      values: 'Present when readonly',
+    },
+    {
+      attribute: '[data-disabled]',
+      values: 'Present when disabled',
+    },
+    {
+      attribute: '[data-invalid]',
+      values: 'Present when invalid',
+    }
+  ]"
+/>
+
+### Header
+
+Contains the navigation buttons and the heading segments.
+
+<!-- @include: @/meta/CalendarHeader.md -->
+
+### Prev Button
+
+Calendar navigation button. It navigates the calendar one month/year/decade in the past based on the current calendar view.
+
+<!-- @include: @/meta/CalendarPrev.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-disabled]',
+      values: 'Present when disabled',
+    },
+  ]"
+/>
+
+### Next Button
+
+Calendar navigation button. It navigates the calendar one month/year/decade in the future based on the current calendar view.
+
+<!-- @include: @/meta/CalendarNext.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-disabled]',
+      values: 'Present when disabled',
+    },
+  ]"
+/>
+
+### Heading
+
+Heading for displaying the current month and year
+
+<!-- @include: @/meta/CalendarHeading.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-disabled]',
+      values: 'Present when disabled',
+    }
+  ]"
+/>
+
+### Grid
+
+Container for wrapping the calendar grid.
+
+<!-- @include: @/meta/CalendarGrid.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-readonly]',
+      values: 'Present when readonly',
+    },
+    {
+      attribute: '[data-disabled]',
+      values: 'Present when disabled',
+    }
+  ]"
+/>
+
+### Grid Head
+
+Container for wrapping the grid head.
+
+<!-- @include: @/meta/CalendarGridHead.md -->
+
+### Grid Body
+
+Container for wrapping the grid body.
+
+<!-- @include: @/meta/CalendarGridBody.md -->
+
+### Grid Row
+
+Container for wrapping the grid row.
+
+<!-- @include: @/meta/CalendarGridRow.md -->
+
+### Head Cell
+
+Container for wrapping the head cell. Used for displaying the week days.
+
+<!-- @include: @/meta/CalendarHeadCell.md -->
+
+### Cell
+
+Container for wrapping the calendar cells.
+
+<!-- @include: @/meta/CalendarCell.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-disabled]',
+      values: 'Present when disabled',
+    },
+  ]"
+/>
+
+### Cell Trigger
+
+Interactable container for displaying the cell dates. Clicking it selects the date.
+
+<!-- @include: @/meta/CalendarCellTrigger.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-selected]',
+      values: 'Present when selected',
+    },
+    {
+      attribute: '[data-value]',
+      values: 'The ISO string value of the date.',
+    },
+    {
+      attribute: '[data-disabled]',
+      values: 'Present when disabled',
+    },
+    {
+      attribute: '[data-unavailable]',
+      values: 'Present when unavailable',
+    },
+    {
+      attribute: '[data-today]',
+      values: 'Present when today',
+    },
+    {
+      attribute: '[data-outside-view]',
+      values: 'Present when the date is outside the current month it is displayed in.',
+    },
+    {
+      attribute: '[data-outside-visible-view]',
+      values: 'Present when the date is outside the months that are visible on the calendar.',
+    },
+    {
+      attribute: '[data-focused]',
+      values: 'Present when focused',
+    }
+  ]"
+/>
+
+### View
+
+Renders its content only while the root's `view` matches, and tells the cells inside which unit they render. Optional: a single-view calendar can place `CalendarGrid` directly under the root.
+
+<!-- @include: @/meta/CalendarView.md -->
+
+### View Trigger
+
+The heading as a button. Each press switches to the next coarser view (day → month → year) up to `maxView`; selecting a cell in a coarser view drills back down.
+
+<!-- @include: @/meta/CalendarViewTrigger.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-view]',
+      values: ['day', 'month', 'year'],
+    },
+    {
+      attribute: '[data-disabled]',
+      values: 'Present when disabled or at maxView',
+    },
+  ]"
+/>
+
+## Examples
+
+### Month picker
+
+Set `granularity="month"` to commit months instead of days. The grid then holds the twelve months of the placeholder's year, `columns` per row, and Prev / Next move a year at a time. The selected value keeps the placeholder's day.
+
+<ComponentPreview name="CalendarMonth" />
+
+### Year picker
+
+Set `granularity="year"`. The grid holds `yearsPerPage` years starting at the placeholder's decade, and Prev / Next move a page at a time.
+
+<ComponentPreview name="CalendarYear" />
+
+### Day, month and year views
+
+Wrap each grid in a `CalendarView` and put a `CalendarViewTrigger` in the header to let users drill from the day grid up to the month and year grids and back. See the [view switching example](/examples/date-picker-view-switching).
+
+The month and year views of a day calendar are navigation: `isDateDisabled`, `isDateUnavailable` and the root `nextPage` / `prevPage` apply only in the `granularity` view, so the coarser cells are limited by `minValue` and `maxValue` alone and show no selection.
+
+### Calendar with Year Incrementation
+
+This example showcases a calendar which allows incrementing the year.
+
+<ComponentPreview name="CalendarYearIncrement" />
+
+### Calendar with Locale and Calendar System Selection
+
+This example showcases some of the available locales and how the calendar systems are displayed.
+
+<ComponentPreview name="CalendarSelect" />
+
+### Calendar swipe gesture navigation
+
+This component demonstrates intuitive calendar navigation using touch-based swipe gestures, user-friendly way to browse through months.
+
+<ComponentPreview name="CalendarSwipe" />
+
+### Calendar week numbers
+
+This example showcases usage of the CalendarWeek component used to display the number of the week.
+
+<ComponentPreview name="CalendarWeeks" />
+
+## Real-world examples
+
+- [Date Picker View Switching](/examples/date-picker-view-switching): One Calendar with day, month and year views: click the heading to drill up, select a cell to drill back down.
+- [Date Picker Selection](/examples/date-picker-selection): Date pickers let users select a date or a range of dates. They commonly use in booking systems.
+
+## Accessibility
+
+### Keyboard Interactions
+
+<KeyboardTable
+  :data="[
+    {
+      keys: ['Tab'],
+      description: 'When focus moves onto the calendar, focuses the first navigation button.'
+    },
+    {
+      keys: ['Space'],
+      description:`
+      <span>
+          When the focus is on either <Code>CalendarNext</Code> or <Code>CalendarPrev</Code>, it navigates the calendar. Otherwise, it selects the date.
+      </span>
+    ` ,
+    },
+    {
+      keys: ['Enter'],
+      description:`
+      <span>
+          When the focus is on either <Code>CalendarNext</Code> or <Code>CalendarPrev</Code>, it navigates the calendar. Otherwise, it selects the date.
+      </span>
+    ` ,
+    },
+    {
+      keys: ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'],
+      description:
+      `
+        When the focus is on <Code>CalendarCellTrigger</Code>, it moves by one cell or one row (a week of days, or a row of months / years), changing the page if necessary.
+      `
+    },
+    {
+      keys: ['Home'],
+      description:
+      `
+        When the focus is on <Code>CalendarCellTrigger</Code>, in the day view, it moves focus to the first day of the current week. In the month and year views, it moves focus to the first month or year of the current page, skipping disabled cells and cells outside <Code>minValue</Code> / <Code>maxValue</Code>.
+      `
+    },
+    {
+      keys: ['End'],
+      description:
+      `
+        When the focus is on <Code>CalendarCellTrigger</Code>, in the day view, it moves focus to the last day of the current week. In the month and year views, it moves focus to the last month or year of the current page, skipping disabled cells and cells outside <Code>minValue</Code> / <Code>maxValue</Code>.
+      `
+    },
+    {
+      keys: ['PageUp'],
+      description:
+      `
+        When the focus is on <Code>CalendarCellTrigger</Code>, in the day view, it moves to the previous month while preserving the day of the month when possible, or clamps to the last day of the month. In the month and year views, it moves to the same cell on the previous page.
+      `
+    },
+    {
+      keys: ['PageDown'],
+      description:
+      `
+        When the focus is on <Code>CalendarCellTrigger</Code>, in the day view, it moves to the next month while preserving the day of the month when possible, or clamps to the last day of the month. In the month and year views, it moves to the same cell on the next page.
+      `
+    },
+    {
+      keys: ['Shift+PageUp'],
+      description:
+      `
+        When the focus is on <Code>CalendarCellTrigger</Code>, in the day view, it moves to the previous year while preserving the month and day when possible, or clamps to the last day of the month.
+      `
+    },
+    {
+      keys: ['Shift+PageDown'],
+      description:
+      `
+        When the focus is on <Code>CalendarCellTrigger</Code>, in the day view, it moves to the next year while preserving the month and day when possible, or clamps to the last day of the month.
+      `
+    }
+  ]"
+/>
+
+In a right-to-left layout (`dir="rtl"` on `CalendarRoot`, or on a [`ConfigProvider`](/docs/utilities/config-provider)), `ArrowLeft` moves to the next day and `ArrowRight` to the previous day; in the month and year views, to the next or previous month or year. See [Internationalization](/docs/guides/i18n#what-changes-in-rtl).
+
+## Headless composable
+
+`useCalendar` holds the value, the placeholder (the month shown) and the view (`modelValue`, `placeholder`, `view`, `select()`, `setPlaceholder()`, `setView()`, `drillUp()`, `nextPage()`, `prevPage()`), builds the `grid` and `weekDays`, applies `minValue`, `maxValue`, `isDateDisabled` and `isDateUnavailable`, and returns the `root`, `heading`, `viewTrigger`, `prev` and `next` [part surfaces](/docs/guides/composables#part-surfaces) with `getGridSurface()`, `getCellSurface()` and `getCellTriggerSurface()`. It registers watchers, so call it inside `setup()`. The composable is experimental; see [Headless composables](/docs/guides/composables).

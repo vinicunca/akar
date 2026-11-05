@@ -3,14 +3,14 @@ import type {
   Middleware,
   Placement,
   ReferenceElement,
-} from '@floating-ui/vue';
+} from '@floating-ui/vue'
 import type {
   Align,
   Side,
-} from './utils';
-import type { PrimitiveProps } from '@/Primitive';
-import type { Direction } from '@/shared/types';
-import { useDirection, useForwardExpose, useSize } from '@/shared';
+} from './utils'
+import type { PrimitiveProps } from '@/Primitive'
+import type { Direction } from '@/shared/types'
+import { useDirection, useForwardElement, useSize } from '@/shared'
 
 export const PopperContentPropsDefaultValue = {
   side: 'bottom' as Side,
@@ -29,13 +29,14 @@ export const PopperContentPropsDefaultValue = {
   positionStrategy: 'fixed' as 'absolute' | 'fixed',
   updatePositionStrategy: 'optimized' as 'optimized' | 'always',
   prioritizePosition: false,
-};
+}
 
 export interface PopperContentProps extends PrimitiveProps {
   /**
    * Reactive dependencies that should invalidate the memoized content subtree.
    */
-  memoDependencies?: Array<unknown>;
+  memoDependencies?: unknown[]
+
   /**
    * The preferred side of the trigger to render against when open.
    * Will be reversed when collisions occur and avoidCollisions
@@ -43,21 +44,21 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue "bottom"
    */
-  side?: Side;
+  side?: Side
 
   /**
    * The distance in pixels from the trigger.
    *
    * @defaultValue 0
    */
-  sideOffset?: number;
+  sideOffset?: number
 
   /**
    * Flip to the opposite side when colliding with boundary.
    *
    * @defaultValue true
    */
-  sideFlip?: boolean;
+  sideFlip?: boolean
 
   /**
    * The preferred alignment against the trigger.
@@ -65,14 +66,14 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue "center"
    */
-  align?: Align;
+  align?: Align
 
   /**
    * An offset in pixels from the `start` or `end` alignment options.
    *
    * @defaultValue 0
    */
-  alignOffset?: number;
+  alignOffset?: number
 
   /**
    * Flip alignment when colliding with boundary.
@@ -80,7 +81,7 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue true
    */
-  alignFlip?: boolean;
+  alignFlip?: boolean
 
   /**
    * When `true`, overrides the side and align preferences
@@ -88,7 +89,7 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue true
    */
-  avoidCollisions?: boolean;
+  avoidCollisions?: boolean
 
   /**
    * The element used as the collision boundary. By default
@@ -97,7 +98,7 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue []
    */
-  collisionBoundary?: Element | null | Array<Element | null>;
+  collisionBoundary?: Element | null | Array<Element | null>
 
   /**
    * The distance in pixels from the boundary edges where collision
@@ -106,7 +107,7 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue 0
    */
-  collisionPadding?: number | Partial<Record<Side, number>>;
+  collisionPadding?: number | Partial<Record<Side, number>>
 
   /**
    * The padding between the arrow and the edges of the content.
@@ -115,7 +116,7 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue 0
    */
-  arrowPadding?: number;
+  arrowPadding?: number
 
   /**
    * When `true`, hides the arrow when it cannot be centered
@@ -123,7 +124,7 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue true
    */
-  hideShiftedArrow?: boolean;
+  hideShiftedArrow?: boolean
 
   /**
    * The sticky behavior on the align axis. `partial` will keep the
@@ -133,33 +134,33 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue "partial"
    */
-  sticky?: 'partial' | 'always';
+  sticky?: 'partial' | 'always'
 
   /**
    * Whether to hide the content when the trigger becomes fully occluded.
    *
    * @defaultValue false
    */
-  hideWhenDetached?: boolean;
+  hideWhenDetached?: boolean
 
   /**
    *  The type of CSS position property to use.
    */
-  positionStrategy?: 'absolute' | 'fixed';
+  positionStrategy?: 'absolute' | 'fixed'
 
   /**
    * Strategy to update the position of the floating element on every animation frame.
    *
    * @defaultValue 'optimized'
    */
-  updatePositionStrategy?: 'optimized' | 'always';
+  updatePositionStrategy?: 'optimized' | 'always'
 
   /**
    * Whether to disable the update position for the content when the layout shifted.
    *
    * @defaultValue false
    */
-  disableUpdateOnLayoutShift?: boolean;
+  disableUpdateOnLayoutShift?: boolean
 
   /**
    * Force content to be position within the viewport.
@@ -168,7 +169,7 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    * @defaultValue false
    */
-  prioritizePosition?: boolean;
+  prioritizePosition?: boolean
 
   /**
    *  The custom element or virtual element that will be set as the reference
@@ -176,11 +177,12 @@ export interface PopperContentProps extends PrimitiveProps {
    *
    *  If provided, it will replace the default anchor element.
    */
-  reference?: ReferenceElement;
+  reference?: ReferenceElement
+
   /**
    * The reading direction of the popper content when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.
    */
-  dir?: Direction;
+  dir?: Direction
 }
 </script>
 
@@ -195,63 +197,55 @@ import {
   shift,
   size,
   useFloating,
-} from '@floating-ui/vue';
-import { isNumber } from '@vinicunca/perkakas';
-import { computed, ref, watchEffect, watchPostEffect } from 'vue';
-import { Primitive } from '@/Primitive';
-import { providePopperContentContext } from './PopperContentContext';
-import { injectPopperRootContext } from './PopperRoot.vue';
+} from '@floating-ui/vue'
+import { computed, ref, watchEffect, watchPostEffect } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { providePopperContentContext } from './PopperContentContext'
+import { injectPopperRootContext } from './PopperRoot.vue'
 import {
   getSideAndAlignFromPlacement,
   isNotNull,
   transformOrigin,
-} from './utils';
+} from './utils'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
 const props = withDefaults(defineProps<PopperContentProps>(), {
   ...PopperContentPropsDefaultValue,
-});
+})
 const emits = defineEmits<{
-  placed: [void];
-}>();
+  placed: [void]
+}>()
 
-const rootContext = injectPopperRootContext();
-const { forwardRef, currentElement: contentElement } = useForwardExpose();
-const dir = useDirection(computed(() => props.dir));
+const rootContext = injectPopperRootContext()
+const { forwardRef, currentElement: contentElement, expose } = useForwardElement()
+defineExpose(expose)
+const dir = useDirection(computed(() => props.dir))
 
-const floatingRef = ref<HTMLElement>();
+const floatingRef = ref<HTMLElement>()
 
-const arrow = ref<HTMLElement>();
-const { width: arrowWidth, height: arrowHeight } = useSize(arrow);
+const arrow = ref<HTMLElement>()
+const { width: arrowWidth, height: arrowHeight } = useSize(arrow)
 
 const desiredPlacement = computed(
   () =>
     (props.side
-      + (props.align !== 'center'
-        ? `-${props.align}`
-        : '')) as Placement,
-);
+      + (props.align !== 'center' ? `-${props.align}` : '')) as Placement,
+)
 
 const collisionPadding = computed(() => {
-  return isNumber(props.collisionPadding)
+  return typeof props.collisionPadding === 'number'
     ? props.collisionPadding
-    : {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        ...props.collisionPadding,
-      };
-});
+    : { top: 0, right: 0, bottom: 0, left: 0, ...props.collisionPadding }
+})
 
 const boundary = computed(() => {
   return Array.isArray(props.collisionBoundary)
     ? props.collisionBoundary
-    : [props.collisionBoundary];
-});
+    : [props.collisionBoundary]
+})
 
 const detectOverflowOptions = computed(() => {
   return {
@@ -259,15 +253,15 @@ const detectOverflowOptions = computed(() => {
     boundary: boundary.value.filter(isNotNull),
     // with `strategy: 'fixed'`, this is the only way to get it to respect boundaries
     altBoundary: boundary.value.length > 0,
-  };
-});
+  }
+})
 
 const flipOptions = computed(() => {
   return {
     mainAxis: props.sideFlip,
     crossAxis: props.alignFlip,
-  };
-});
+  }
+})
 
 const computedMiddleware = computed(() => {
   return [
@@ -285,9 +279,7 @@ const computedMiddleware = computed(() => {
     && shift({
       mainAxis: true,
       crossAxis: !!props.prioritizePosition,
-      limiter: props.sticky === 'partial'
-        ? limitShift()
-        : undefined,
+      limiter: props.sticky === 'partial' ? limitShift() : undefined,
       ...detectOverflowOptions.value,
     }),
     !props.prioritizePosition
@@ -299,24 +291,24 @@ const computedMiddleware = computed(() => {
     size({
       ...detectOverflowOptions.value,
       apply: ({ elements, rects, availableWidth, availableHeight }) => {
-        const { width: anchorWidth, height: anchorHeight } = rects.reference;
-        const contentStyle = elements.floating.style;
+        const { width: anchorWidth, height: anchorHeight } = rects.reference
+        const contentStyle = elements.floating.style
         contentStyle.setProperty(
-          '--akar-popper-available-width',
+          '--reka-popper-available-width',
           `${availableWidth}px`,
-        );
+        )
         contentStyle.setProperty(
-          '--akar-popper-available-height',
+          '--reka-popper-available-height',
           `${availableHeight}px`,
-        );
+        )
         contentStyle.setProperty(
-          '--akar-popper-anchor-width',
+          '--reka-popper-anchor-width',
           `${anchorWidth}px`,
-        );
+        )
         contentStyle.setProperty(
-          '--akar-popper-anchor-height',
+          '--reka-popper-anchor-height',
           `${anchorHeight}px`,
-        );
+        )
       },
     }),
     arrow.value
@@ -328,13 +320,13 @@ const computedMiddleware = computed(() => {
     }),
     props.hideWhenDetached
     && hide({ strategy: 'referenceHidden', ...detectOverflowOptions.value }),
-  ] as Array<Middleware>;
-});
+  ] as Middleware[]
+})
 
 // If provided custom reference, it will overwrite the default anchor element
-const reference = computed(() => props.reference ?? rootContext.anchor.value);
+const reference = computed(() => props.reference ?? rootContext.anchor.value)
 
-const { floatingStyles, placement, isPositioned, middlewareData } = useFloating(
+const { floatingStyles, placement, isPositioned, middlewareData, update } = useFloating(
   reference,
   floatingRef,
   {
@@ -344,63 +336,59 @@ const { floatingStyles, placement, isPositioned, middlewareData } = useFloating(
       const cleanup = autoUpdate(...args, {
         layoutShift: !props.disableUpdateOnLayoutShift,
         animationFrame: props.updatePositionStrategy === 'always',
-      });
-      return cleanup;
+      })
+      return cleanup
     },
     middleware: computedMiddleware,
   },
-);
+)
 
 const placedSide = computed(
   () => getSideAndAlignFromPlacement(placement.value)[0],
-);
+)
 const placedAlign = computed(
   () => getSideAndAlignFromPlacement(placement.value)[1],
-);
+)
 
 watchPostEffect(() => {
-  if (isPositioned.value) {
-    emits('placed');
-  }
-});
+  if (isPositioned.value)
+    emits('placed')
+})
 
 const shouldHideArrow = computed(() => {
-  const cannotCenterArrow = middlewareData.value.arrow?.centerOffset !== 0;
-  return props.hideShiftedArrow && cannotCenterArrow;
-});
+  const cannotCenterArrow = middlewareData.value.arrow?.centerOffset !== 0
+  return props.hideShiftedArrow && cannotCenterArrow
+})
 
-const contentZIndex = ref('');
+const contentZIndex = ref('')
 watchEffect(() => {
-  if (contentElement.value) {
-    contentZIndex.value = window.getComputedStyle(contentElement.value).zIndex;
-  }
-});
+  if (contentElement.value)
+    contentZIndex.value = window.getComputedStyle(contentElement.value).zIndex
+})
 
-const arrowX = computed(() => middlewareData.value.arrow?.x ?? 0);
-const arrowY = computed(() => middlewareData.value.arrow?.y ?? 0);
+const arrowX = computed(() => middlewareData.value.arrow?.x ?? 0)
+const arrowY = computed(() => middlewareData.value.arrow?.y ?? 0)
 
 providePopperContentContext({
   placedSide,
-  onArrowChange: (element) => {
-    arrow.value = element;
-  },
+  onArrowChange: element => arrow.value = element,
   arrowX,
   arrowY,
   shouldHideArrow,
-});
+})
 </script>
 
 <template>
   <div
     ref="floatingRef"
-    data-akar-popper-content-wrapper=""
+    data-reka-popper-content-wrapper=""
     :dir="dir"
     :style="{
       ...floatingStyles,
       transform: isPositioned ? floatingStyles.transform : 'translate(0, -200%)', // keep off the page when measuring
       minWidth: 'max-content',
       zIndex: contentZIndex,
-      ['--akar-popper-transform-origin' as any]: [
+      ['--reka-popper-transform-origin' as any]: [
         middlewareData.transformOrigin?.x,
         middlewareData.transformOrigin?.y,
       ].join(' '),
@@ -414,7 +402,8 @@ providePopperContentContext({
       }),
     }"
   >
-    <Primitive
+    <component
+      :is="renderAs(props.as, props.asChild)"
       v-if="props.memoDependencies"
       :ref="forwardRef"
       v-memo="[
@@ -427,8 +416,22 @@ providePopperContentContext({
         ...props.memoDependencies,
       ]"
       v-bind="$attrs"
-      :as-child="props.asChild"
-      :as="props.as"
+      :data-side="placedSide"
+      :data-align="placedAlign"
+      :style="{
+        // if the PopperContent hasn't been placed yet (not all measurements done)
+        // we prevent animations so that users's animation don't kick in too early referring wrong sides
+        animation: !isPositioned ? 'none' : undefined,
+      }"
+    >
+      <slot />
+    </component>
+
+    <component
+      :is="renderAs(props.as, props.asChild)"
+      v-else
+      :ref="forwardRef"
+      v-bind="$attrs"
       :data-side="placedSide"
       :data-align="placedAlign"
       :dir="dir"
@@ -439,23 +442,6 @@ providePopperContentContext({
       }"
     >
       <slot />
-    </Primitive>
-
-    <Primitive
-      v-else
-      :ref="forwardRef"
-      v-bind="$attrs"
-      :as-child="props.asChild"
-      :as="props.as"
-      :data-side="placedSide"
-      :data-align="placedAlign"
-      :style="{
-        // if the PopperContent hasn't been placed yet (not all measurements done)
-        // we prevent animations so that users's animation don't kick in too early referring wrong sides
-        animation: !isPositioned ? 'none' : undefined,
-      }"
-    >
-      <slot />
-    </Primitive>
+    </component>
   </div>
 </template>

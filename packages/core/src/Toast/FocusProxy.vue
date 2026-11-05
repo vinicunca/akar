@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { VisuallyHidden } from '@/VisuallyHidden';
-import { injectToastProviderContext } from './ToastProvider.vue';
+import { VisuallyHidden } from '@/VisuallyHidden'
+import { injectToastProviderContext } from './ToastProvider.vue'
 
 const emits = defineEmits<{
-  focusFromOutsideViewport: [void];
-}>();
+  focusFromOutsideViewport: [void]
+}>()
 
-const providerContext = injectToastProviderContext();
+const providerContext = injectToastProviderContext()
 </script>
 
 <template>

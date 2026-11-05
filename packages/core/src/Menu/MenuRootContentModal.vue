@@ -1,20 +1,23 @@
 <script setup lang="ts">
-import type { MenuContentImplEmits, MenuRootContentTypeProps } from './MenuContentImpl.vue';
-import { useForwardExpose, useForwardPropsEmits, useHideOthers } from '@/shared';
-import MenuContentImpl from './MenuContentImpl.vue';
-import { injectMenuContext } from './MenuRoot.vue';
+import type { MenuContentImplEmits, MenuRootContentTypeProps } from './MenuContentImpl.vue'
+import { computed } from 'vue'
+import { useForwardElement, useForwardPropsEmits, useHideOthers } from '@/shared'
+import MenuContentImpl from './MenuContentImpl.vue'
+import { injectMenuContext } from './MenuRoot.vue'
 
-const props = defineProps<MenuRootContentModalProps>();
-const emits = defineEmits<MenuRootContentModalEmits>();
-const forwarded = useForwardPropsEmits(props, emits);
+const props = defineProps<MenuRootContentModalProps>()
+const emits = defineEmits<MenuRootContentModalEmits>()
+const forwarded = useForwardPropsEmits(props, emits)
 
-const menuContext = injectMenuContext();
+const menuContext = injectMenuContext()
 
 interface MenuRootContentModalProps extends MenuRootContentTypeProps {}
-type MenuRootContentModalEmits = MenuContentImplEmits;
+type MenuRootContentModalEmits = MenuContentImplEmits
 
-const { forwardRef, currentElement } = useForwardExpose();
-useHideOthers(currentElement);
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+// Only while open: a `forceMount`ed content that is closed hides nothing.
+useHideOthers(computed(() => menuContext.open.value ? currentElement.value : undefined))
 </script>
 
 <template>
@@ -24,8 +27,8 @@ useHideOthers(currentElement);
     :trap-focus="menuContext.open.value"
     :disable-outside-pointer-events="menuContext.open.value"
     :disable-outside-scroll="true"
-    @dismiss="menuContext.onOpenChange(false)"
-    @focus-outside.prevent="emits('focusOutside', $event)"
+    @dismiss="(details) => menuContext.onOpenChange(false, details.reason, details.event)"
+    @focus-outside.prevent
   >
     <slot />
   </MenuContentImpl>

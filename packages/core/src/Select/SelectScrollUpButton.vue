@@ -1,47 +1,48 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface SelectScrollUpButtonProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { ref, watch, watchEffect } from 'vue';
-import { injectSelectContentContext } from './SelectContentImpl.vue';
-import { injectSelectItemAlignedPositionContext } from './SelectItemAlignedPosition.vue';
-import SelectScrollButtonImpl from './SelectScrollButtonImpl.vue';
+import { ref, watch, watchEffect } from 'vue'
+import { injectSelectContentContext } from './SelectContentImpl.vue'
+import SelectScrollButtonImpl from './SelectScrollButtonImpl.vue'
+import { injectSelectItemAlignedPositionContext } from './useSelectItemAlignedPosition'
+import { getScrollStep } from './utils'
 
-defineProps<SelectScrollUpButtonProps>();
+defineProps<SelectScrollUpButtonProps>()
 
-const contentContext = injectSelectContentContext();
+const contentContext = injectSelectContentContext()
 const alignedPositionContext
   = contentContext.position === 'item-aligned'
     ? injectSelectItemAlignedPositionContext()
-    : undefined;
+    : undefined
 
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
 
-const canScrollUp = ref(false);
+const canScrollUp = ref(false)
 
 watchEffect((cleanupFn) => {
   if (contentContext.viewport?.value && contentContext.isPositioned?.value) {
-    const viewport = contentContext.viewport.value;
+    const viewport = contentContext.viewport.value
 
     function handleScroll() {
-      canScrollUp.value = viewport.scrollTop > 0;
+      canScrollUp.value = viewport.scrollTop > 0
     }
-    handleScroll();
-    viewport.addEventListener('scroll', handleScroll);
+    handleScroll()
+    viewport.addEventListener('scroll', handleScroll)
 
-    cleanupFn(() => viewport.removeEventListener('scroll', handleScroll));
+    cleanupFn(() => viewport.removeEventListener('scroll', handleScroll))
   }
-});
+})
 
 watch(currentElement, () => {
-  if (currentElement.value) {
-    alignedPositionContext?.onScrollButtonChange(currentElement.value);
-  }
-});
+  if (currentElement.value)
+    alignedPositionContext?.onScrollButtonChange(currentElement.value)
+})
 </script>
 
 <template>
@@ -50,8 +51,8 @@ watch(currentElement, () => {
     :ref="forwardRef"
     @auto-scroll="() => {
       const { viewport, selectedItem } = contentContext;
-      if (viewport?.value && selectedItem?.value) {
-        viewport.value.scrollTop = viewport.value.scrollTop - selectedItem.value.offsetHeight;
+      if (viewport?.value) {
+        viewport.value.scrollTop = viewport.value.scrollTop - getScrollStep(viewport.value, selectedItem?.value);
       }
     }"
   >

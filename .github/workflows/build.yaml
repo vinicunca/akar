@@ -11,6 +11,9 @@ on:
     paths:
       - 'packages/**'
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,16 +26,14 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build
-        run: pnpm --filter akar build
+        run: pnpm --filter reka-ui build
 
-      - name: Check for errors
-        run: |
-          if [ $? -eq 0 ]; then
-            echo "Build succeeded"
-          else
-            echo "Build failed"
-            exit 1
-          fi
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: reka-ui-dist
+          path: packages/core/dist
+          retention-days: 1
 
   test:
     needs: build
@@ -45,8 +46,97 @@ jobs:
       - name: Setup (Install node & pnpm)
         uses: ./.github/actions/setup
 
-      - name: Test
-        run: pnpm test
+      # `src/subpaths.test.ts` checks the built entry points against the root barrel
+      - name: Download dist artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: reka-ui-dist
+          path: packages/core/dist
+
+      - name: Test (with coverage)
+        run: pnpm --filter reka-ui test:coverage
+
+      # The resolver and Nuxt module tests import the built `reka-ui/constant` and family entries
+      - name: Test (plugins)
+        if: ${{ !cancelled() }}
+        run: pnpm --filter plugins test
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report
+          path: packages/core/coverage
+          retention-days: 7
+
+  docs-meta:
+    # Informational: `pnpm docs:gen` still regresses a few generic components
+    # (see the note in docs/scripts/autogen.ts), so drift never blocks a PR.
+    # The full diff is printed so it can be applied to the branch by hand.
+    needs: build
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup (Install node & pnpm)
+        uses: ./.github/actions/setup
+
+      - name: Download dist artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: reka-ui-dist
+          path: packages/core/dist
+
+      - name: Regenerate component meta
+        run: pnpm docs:gen
+
+      - name: Report drift in docs/content/meta
+        run: |
+          git add -N docs/content/meta
+          git --no-pager diff --stat -- docs/content/meta
+          git --no-pager diff -- docs/content/meta
+          git diff --quiet -- docs/content/meta
+
+  test-browser:
+    needs: build
+    runs-on: ubuntu-latest
+    name: test-browser (${{ matrix.browser }})
+
+    # One job per engine, in parallel: Firefox and WebKit differ from Chromium in
+    # ways it can't show (focus events for a removed element, key defaults, layout).
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+
+    env:
+      BROWSER_ENGINES: ${{ matrix.browser }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup (Install node & pnpm)
+        uses: ./.github/actions/setup
+
+      - name: Install ${{ matrix.browser }}
+        run: pnpm --filter reka-ui exec playwright install --with-deps ${{ matrix.browser }}
+
+      # The built `reka-ui/elements` entry, loaded next to the source as a second
+      # copy of the library (src/elements/copies.browser.test.ts).
+      - name: Download dist artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: reka-ui-dist
+          path: packages/core/dist
+
+      - name: Test (browser)
+        run: pnpm --filter reka-ui test:browser
 
   size:
     needs: build
@@ -59,8 +149,11 @@ jobs:
       - name: Setup (Install node & pnpm)
         uses: ./.github/actions/setup
 
-      - name: Build
-        run: pnpm --filter akar build
+      - name: Download dist artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: reka-ui-dist
+          path: packages/core/dist
 
       - name: Check bundle size
-        run: pnpm --filter akar size
+        run: pnpm --filter reka-ui size

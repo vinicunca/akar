@@ -1,194 +1,180 @@
-import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
-import { sleep } from '@vinicunca/perkakas';
-import { mount } from '@vue/test-utils';
-import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { axe } from 'vitest-axe';
-import { nextTick } from 'vue';
-import { handleSubmit } from '@/test';
-import { CheckboxGroupRoot, CheckboxRoot } from '.';
-import Checkbox from './story/_Checkbox.vue';
-import CheckboxGroup from './story/_CheckboxGroup.vue';
+import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { axe } from 'vitest-axe'
+import { nextTick } from 'vue'
+import { handleSubmit, sleep } from '@/test'
+import { CheckboxGroupRoot, CheckboxRoot } from '.'
+import Checkbox from './story/_Checkbox.vue'
+import CheckboxGroup from './story/_CheckboxGroup.vue'
 
 globalThis.ResizeObserver = class ResizeObserver {
-  cb: any;
+  cb: any
   constructor(cb: any) {
-    this.cb = cb;
+    this.cb = cb
   }
 
   observe() {
-    this.cb([
-      {
-        borderBoxSize: { inlineSize: 0, blockSize: 0 },
-      },
-    ]);
+    this.cb([{ borderBoxSize: { inlineSize: 0, blockSize: 0 } }])
   }
 
   unobserve() {}
   disconnect() {}
-};
+}
 
 describe('given a default Checkbox', () => {
   it('should pass axe accessibility tests', async () => {
-    const wrapper = mount(Checkbox, { attachTo: document.body });
+    const wrapper = mount(Checkbox, { attachTo: document.body })
     expect(await axe(wrapper.element, {
       rules: {
         'label': { enabled: false },
         'nested-interactive': { enabled: false },
       },
-    })).toHaveNoViolations();
-  });
+    })).toHaveNoViolations()
+  })
 
   it('should render checkbox', () => {
-    const wrapper = mount(Checkbox);
-    expect(wrapper.element).toBeTruthy();
-  });
+    const wrapper = mount(Checkbox)
+    expect(wrapper.element).toBeTruthy()
+  })
 
   describe('when clicking the checkbox', async () => {
-    let wrapper: VueWrapper<InstanceType<typeof Checkbox>>;
-    let checkbox: DOMWrapper<HTMLButtonElement>;
+    let wrapper: VueWrapper<InstanceType<typeof Checkbox>>
+    let checkbox: DOMWrapper<HTMLButtonElement>
 
     beforeEach(async () => {
-      wrapper = mount(Checkbox);
-      checkbox = wrapper.find('button');
-      checkbox.trigger('click');
-    });
+      wrapper = mount(Checkbox)
+      checkbox = wrapper.find('button')
+      checkbox.trigger('click')
+    })
 
     it('should render a visible indicator', async () => {
-      const span = wrapper.find('span');
-      expect(span.exists()).toBe(true);
-    });
+      const span = wrapper.find('span')
+      expect(span.exists()).toBe(true)
+    })
 
     describe('when clicking the checkbox again', async () => {
       beforeEach(async () => {
-        await checkbox.trigger('click');
-      });
+        await checkbox.trigger('click')
+      })
       it('should remove the indicator', async () => {
-        expect(wrapper.find('span').exists()).toBe(false);
-      });
-    });
-  });
-});
+        expect(wrapper.find('span').exists()).toBe(false)
+      })
+    })
+  })
+})
 
 describe('given a Checkbox with an explicit aria-label', () => {
   afterEach(() => {
-    vi.restoreAllMocks();
-  });
+    vi.restoreAllMocks()
+  })
 
   it('should not query the DOM for a label', () => {
-    const querySpy = vi.spyOn(document, 'querySelector');
+    const querySpy = vi.spyOn(document, 'querySelector')
     const wrapper = mount(CheckboxRoot, {
       attachTo: document.body,
       attrs: { 'id': 'with-label', 'aria-label': 'Accept terms' },
-    });
+    })
 
-    expect(wrapper.find('button').attributes('aria-label')).toBe('Accept terms');
-    expect(querySpy).not.toHaveBeenCalledWith('[for="with-label"]');
-  });
+    expect(wrapper.find('button').attributes('aria-label')).toBe('Accept terms')
+    expect(querySpy).not.toHaveBeenCalledWith('[for="with-label"]')
+  })
 
   it('should query for the associated label when no aria-label is given', async () => {
-    const querySpy = vi.spyOn(document, 'querySelector');
+    const querySpy = vi.spyOn(document, 'querySelector')
     mount(CheckboxRoot, {
       attachTo: document.body,
       attrs: { id: 'without-label' },
-    });
-    await nextTick();
+    })
+    await nextTick()
 
-    expect(querySpy).toHaveBeenCalledWith('[for="without-label"]');
-  });
-});
+    expect(querySpy).toHaveBeenCalledWith('[for="without-label"]')
+  })
+})
 
 describe('given a required Checkbox', () => {
   const wrapper = mount({
     components: { Checkbox },
     template: '<form><Checkbox required /></form>',
-  });
+  })
 
   it('should have [aria-required] of "true"', () => {
-    expect(wrapper.find('button').attributes('aria-required')).toEqual('true');
-    expect(wrapper.find('[type="checkbox"]').attributes('required')).toBeDefined();
-  });
-});
+    expect(wrapper.find('button').attributes('aria-required')).toEqual('true')
+    expect(wrapper.find('[type="checkbox"]').attributes('required')).toBeDefined()
+  })
+})
 
 describe('given a named Checkbox in a form', () => {
   it('has the new state in the form data when its change event fires', async () => {
     const wrapper = mount({
       components: { CheckboxRoot },
       template: '<form><CheckboxRoot name="agree" aria-label="Agree" /></form>',
-    });
-    const form = wrapper.find('form').element as HTMLFormElement;
-    const seen: Array<Array<[string, FormDataEntryValue]>> = [];
-    form.addEventListener('change', () => seen.push([
-      ...new FormData(form),
-    ]));
-    await wrapper.find('button').trigger('click');
-    await wrapper.find('button').trigger('click');
-    expect(seen).toEqual([
-      [
-        ['agree', 'on'],
-      ],
-      [],
-    ]);
-    wrapper.unmount();
-  });
-});
+    })
+    const form = wrapper.find('form').element as HTMLFormElement
+    const seen: [string, FormDataEntryValue][][] = []
+    form.addEventListener('change', () => seen.push([...new FormData(form)]))
+    await wrapper.find('button').trigger('click')
+    await wrapper.find('button').trigger('click')
+    expect(seen).toEqual([[['agree', 'on']], []])
+    wrapper.unmount()
+  })
+})
 
 describe('given CheckboxGroup', () => {
   it('should pass axe accessibility tests', async () => {
-    const wrapper = mount(CheckboxGroup, { attachTo: document.body });
+    const wrapper = mount(CheckboxGroup, { attachTo: document.body })
     expect(await axe(wrapper.element, {
       rules: {
         label: { enabled: false },
       },
-    })).toHaveNoViolations();
-  });
+    })).toHaveNoViolations()
+  })
 
   it('should render checkbox', () => {
-    const wrapper = mount(CheckboxGroup);
-    expect(wrapper.element).toBeTruthy();
-  });
+    const wrapper = mount(CheckboxGroup)
+    expect(wrapper.element).toBeTruthy()
+  })
 
   describe('when clicking the checkbox', async () => {
-    let wrapper: VueWrapper<InstanceType<typeof CheckboxGroup>>;
-    let checkboxes: Array<DOMWrapper<HTMLButtonElement>>;
+    let wrapper: VueWrapper<InstanceType<typeof CheckboxGroup>>
+    let checkboxes: DOMWrapper<HTMLButtonElement>[]
 
     beforeEach(async () => {
-      wrapper = mount(CheckboxGroup);
-      checkboxes = wrapper.findAll('button');
-      checkboxes[0].trigger('click');
-    });
+      wrapper = mount(CheckboxGroup)
+      checkboxes = wrapper.findAll('button')
+      checkboxes[0].trigger('click')
+    })
 
     it('should render a visible indicator', async () => {
-      const span = wrapper.find('span');
-      expect(span.exists()).toBe(true);
-    });
+      const span = wrapper.find('span')
+      expect(span.exists()).toBe(true)
+    })
 
     describe('when clicking the checkbox again', async () => {
       beforeEach(async () => {
-        await checkboxes[0].trigger('click');
-      });
+        await checkboxes[0].trigger('click')
+      })
       it('should remove the indicator', async () => {
-        expect(wrapper.find('span').exists()).toBe(false);
-      });
-    });
+        expect(wrapper.find('span').exists()).toBe(false)
+      })
+    })
 
     describe('when clicking another checkbox', async () => {
       beforeEach(async () => {
-        await checkboxes[1].trigger('click');
-      });
+        await checkboxes[1].trigger('click')
+      })
 
       it('should render 2 checkboxes', async () => {
-        expect(checkboxes[0].attributes('data-state')).toBe('checked');
-        expect(checkboxes[1].attributes('data-state')).toBe('checked');
-        expect(checkboxes[2].attributes('data-state')).toBe('unchecked');
-      });
-    });
-  });
-});
+        expect(checkboxes[0].attributes('data-state')).toBe('checked')
+        expect(checkboxes[1].attributes('data-state')).toBe('checked')
+        expect(checkboxes[2].attributes('data-state')).toBe('unchecked')
+      })
+    })
+  })
+})
 
 describe('given a disabled Checkbox', () => {
-  const wrapper = mount(Checkbox, {
-    props: { disabled: true },
-  });
+  const wrapper = mount(Checkbox, { props: { disabled: true } })
 
   it('should have no accessibility violations', async () => {
     expect(await axe(wrapper.element, {
@@ -196,108 +182,101 @@ describe('given a disabled Checkbox', () => {
         'label': { enabled: false },
         'nested-interactive': { enabled: false },
       },
-    })).toHaveNoViolations();
-  });
+    })).toHaveNoViolations()
+  })
 
   describe('when clicking the checkbox', async () => {
-    const checkbox = wrapper.find('button');
-    await checkbox.trigger('click');
+    const checkbox = wrapper.find('button')
+    await checkbox.trigger('click')
     it('should not render a indicator', async () => {
-      expect(wrapper.find('span').exists()).toBeFalsy();
-    });
-  });
-});
+      expect(wrapper.find('span').exists()).toBeFalsy()
+    })
+  })
+})
 
 describe('given a disabled CheckboxGroup', () => {
-  const wrapper = mount(CheckboxGroup, {
-    props: { disabled: true },
-  });
+  const wrapper = mount(CheckboxGroup, { props: { disabled: true } })
 
   it('should have no accessibility violations', async () => {
     expect(await axe(wrapper.element, {
       rules: {
         label: { enabled: false },
       },
-    })).toHaveNoViolations();
-  });
+    })).toHaveNoViolations()
+  })
 
   describe('when clicking the checkboxGroup', async () => {
-    const checkboxes = wrapper.findAll('button');
-    await checkboxes[0].trigger('click');
+    const checkboxes = wrapper.findAll('button')
+    await checkboxes[0].trigger('click')
 
     it('should not render a indicator', async () => {
-      expect(wrapper.find('span').exists()).toBeFalsy();
-    });
-  });
-});
+      expect(wrapper.find('span').exists()).toBeFalsy()
+    })
+  })
+})
 
 describe('given a CheckboxGroup with max', () => {
-  let wrapper: VueWrapper<InstanceType<typeof CheckboxGroup>>;
-  let checkboxes: Array<DOMWrapper<HTMLButtonElement>>;
+  let wrapper: VueWrapper<InstanceType<typeof CheckboxGroup>>
+  let checkboxes: DOMWrapper<HTMLButtonElement>[]
 
   beforeEach(async () => {
-    wrapper = mount(CheckboxGroup, {
-      props: { max: 2 },
-    });
-    checkboxes = wrapper.findAll('button');
-    await checkboxes[0].trigger('click');
-    await checkboxes[1].trigger('click');
-  });
+    wrapper = mount(CheckboxGroup, { props: { max: 2 } })
+    checkboxes = wrapper.findAll('button')
+    await checkboxes[0].trigger('click')
+    await checkboxes[1].trigger('click')
+  })
 
   afterEach(() => {
-    wrapper.unmount();
-  });
+    wrapper.unmount()
+  })
 
   it('should mark the unchecked checkboxes disabled once the limit is reached', () => {
-    expect(checkboxes[0].attributes('aria-disabled')).toBeUndefined();
-    expect(checkboxes[1].attributes('aria-disabled')).toBeUndefined();
-    expect(checkboxes[2].attributes('aria-disabled')).toBe('true');
-  });
+    expect(checkboxes[0].attributes('aria-disabled')).toBeUndefined()
+    expect(checkboxes[1].attributes('aria-disabled')).toBeUndefined()
+    expect(checkboxes[2].attributes('aria-disabled')).toBe('true')
+  })
 
   it('should keep the limited checkboxes focusable', () => {
-    expect(checkboxes[2].attributes('disabled')).toBeUndefined();
+    expect(checkboxes[2].attributes('disabled')).toBeUndefined()
     // `RovingFocusGroup` skips items with `data-disabled`
-    expect(checkboxes[2].attributes('data-disabled')).toBeUndefined();
-  });
+    expect(checkboxes[2].attributes('data-disabled')).toBeUndefined()
+  })
 
   it('should reach the limited checkboxes with arrow keys', async () => {
-    wrapper.unmount();
+    wrapper.unmount()
     // The story forwards its own props, so the omitted boolean would be cast to `false`
-    wrapper = mount(CheckboxGroup, {
-      props: { max: 1, rovingFocus: true },
-      attachTo: document.body,
-    });
-    checkboxes = wrapper.findAll('button');
-    await checkboxes[0].trigger('click');
-    checkboxes[0].element.focus();
-    await checkboxes[0].trigger('keydown', { key: 'ArrowDown' });
-    await sleep(0);
-    expect(document.activeElement).toBe(checkboxes[1].element);
-  });
+    wrapper = mount(CheckboxGroup, { props: { max: 1, rovingFocus: true }, attachTo: document.body })
+    checkboxes = wrapper.findAll('button')
+    await checkboxes[0].trigger('click')
+    checkboxes[0].element.focus()
+    await checkboxes[0].trigger('keydown', { key: 'ArrowDown' })
+    await sleep(0)
+    expect(document.activeElement).toBe(checkboxes[1].element)
+  })
 
   it('should have no accessibility violations', async () => {
     expect(await axe(wrapper.element, {
       rules: {
         label: { enabled: false },
       },
-    })).toHaveNoViolations();
-  });
+    })).toHaveNoViolations()
+  })
 
   it('should not check another checkbox past the limit', async () => {
-    await checkboxes[2].trigger('click');
-    expect(checkboxes[2].attributes('data-state')).toBe('unchecked');
-  });
+    await checkboxes[2].trigger('click')
+    expect(checkboxes[2].attributes('data-state')).toBe('unchecked')
+  })
 
   describe('when unchecking a checkbox', () => {
     beforeEach(async () => {
-      await checkboxes[0].trigger('click');
-    });
+      await checkboxes[0].trigger('click')
+    })
 
     it('should enable the remaining checkboxes again', () => {
-      expect(checkboxes[2].attributes('aria-disabled')).toBeUndefined();
-    });
-  });
-});
+      expect(checkboxes[2].attributes('aria-disabled')).toBeUndefined()
+    })
+  })
+})
 
 describe('given a CheckboxGroup with max rendered asChild', () => {
   // A non-button element doesn't block clicks natively, so the click handler
@@ -309,62 +288,56 @@ describe('given a CheckboxGroup with max rendered asChild', () => {
         <div />
       </CheckboxRoot>
     </CheckboxGroupRoot>`,
-  });
+  })
 
   it('should not check another checkbox past the limit', async () => {
-    const checkboxes = wrapper.findAll('[role="checkbox"]');
-    await checkboxes[0].trigger('click');
-    await checkboxes[1].trigger('click');
-    expect(checkboxes[0].attributes('data-state')).toBe('checked');
-    expect(checkboxes[1].attributes('data-state')).toBe('unchecked');
-  });
-});
+    const checkboxes = wrapper.findAll('[role="checkbox"]')
+    await checkboxes[0].trigger('click')
+    await checkboxes[1].trigger('click')
+    expect(checkboxes[0].attributes('data-state')).toBe('checked')
+    expect(checkboxes[1].attributes('data-state')).toBe('unchecked')
+  })
+})
 
 describe('given a disabled Checkbox rendered asChild', () => {
   const wrapper = mount({
     components: { CheckboxRoot },
-    template: '<CheckboxRoot aria-label="a" disabled as-child><div /></CheckboxRoot>',
-  });
+    template: `<CheckboxRoot aria-label="a" disabled as-child><div /></CheckboxRoot>`,
+  })
 
   it('should not toggle when clicked', async () => {
-    const checkbox = wrapper.find('[role="checkbox"]');
-    await checkbox.trigger('click');
-    expect(checkbox.attributes('data-state')).toBe('unchecked');
-    expect(checkbox.attributes('aria-disabled')).toBe('true');
-  });
-});
+    const checkbox = wrapper.find('[role="checkbox"]')
+    await checkbox.trigger('click')
+    expect(checkbox.attributes('data-state')).toBe('unchecked')
+    expect(checkbox.attributes('aria-disabled')).toBe('true')
+  })
+})
 
 describe('given a CheckboxGroup with max set to null', () => {
-  const wrapper = mount(CheckboxGroup, {
-    props: { max: null },
-  });
+  const wrapper = mount(CheckboxGroup, { props: { max: null } })
 
   it('should not limit the selection', async () => {
-    const checkboxes = wrapper.findAll('button');
-    for (const checkbox of checkboxes) {
-      await checkbox.trigger('click');
-    }
-    for (const checkbox of checkboxes) {
-      expect(checkbox.attributes('data-state')).toBe('checked');
-    }
-  });
-});
+    const checkboxes = wrapper.findAll('button')
+    for (const checkbox of checkboxes)
+      await checkbox.trigger('click')
+    for (const checkbox of checkboxes)
+      expect(checkbox.attributes('data-state')).toBe('checked')
+  })
+})
 
 describe('given value as "indeterminate"', async () => {
-  const wrapper = mount(Checkbox, {
-    props: { modelValue: 'indeterminate' },
-  });
+  const wrapper = mount(Checkbox, { props: { modelValue: 'indeterminate' } })
 
   it('should have [data-state] of "indeterminate"', () => {
-    expect(wrapper.find('button').attributes('data-state')).toBe('indeterminate');
-    expect(wrapper.find('span').attributes('data-state')).toBe('indeterminate');
-  });
+    expect(wrapper.find('button').attributes('data-state')).toBe('indeterminate')
+    expect(wrapper.find('span').attributes('data-state')).toBe('indeterminate')
+  })
 
   it('should still be clickable', async () => {
-    await wrapper.find('button').trigger('click');
-    expect(wrapper.find('button').attributes('data-state')).toBe('checked');
-  });
-});
+    await wrapper.find('button').trigger('click')
+    expect(wrapper.find('button').attributes('data-state')).toBe('checked')
+  })
+})
 
 describe('given checkbox in a form', async () => {
   const wrapper = mount({
@@ -373,48 +346,48 @@ describe('given checkbox in a form', async () => {
     template: '<form @submit="handleSubmit"><Checkbox value="true" /></form>',
   }, {
     props: { handleSubmit },
-  });
+  })
 
   it('should have hidden input field', async () => {
-    expect(wrapper.find('[type="checkbox"]').exists()).toBe(true);
-  });
+    expect(wrapper.find('[type="checkbox"]').exists()).toBe(true)
+  })
 
   it('should pass axe accessibility tests', async () => {
-    expect(await axe(wrapper.element)).toHaveNoViolations();
-  });
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
 
   it('should not nest the hidden input inside the interactive control', () => {
-    expect(wrapper.find('button input').exists()).toBe(false);
-  });
+    expect(wrapper.find('button input').exists()).toBe(false)
+  })
 
   describe('after clicking submit button', () => {
     beforeEach(async () => {
-      await wrapper.find('button').trigger('click');
-      await wrapper.find('form').trigger('submit');
-    });
+      await wrapper.find('button').trigger('click')
+      await wrapper.find('form').trigger('submit')
+    })
 
     it('should trigger submit once', () => {
-      expect(handleSubmit).toHaveBeenCalledTimes(1);
-      expect(handleSubmit.mock.results[0].value).toStrictEqual({ test: 'true' });
-    });
-  });
+      expect(handleSubmit).toHaveBeenCalledTimes(1)
+      expect(handleSubmit.mock.results[0].value).toStrictEqual({ test: 'true' })
+    })
+  })
 
   describe('after uncheck and click submit button again', () => {
     beforeEach(async () => {
-      await wrapper.find('button').trigger('click');
-      await wrapper.find('form').trigger('submit');
-    });
+      await wrapper.find('button').trigger('click')
+      await wrapper.find('form').trigger('submit')
+    })
 
     it('should trigger submit once', () => {
-      expect(handleSubmit).toHaveBeenCalledTimes(1);
-      expect(handleSubmit.mock.results[0].value).toStrictEqual({ });
-    });
-  });
+      expect(handleSubmit).toHaveBeenCalledTimes(1)
+      expect(handleSubmit.mock.results[0].value).toStrictEqual({ })
+    })
+  })
 
   afterAll(() => {
-    handleSubmit.mockReset();
-  });
-});
+    handleSubmit.mockReset()
+  })
+})
 
 describe('given checkboxGroup in a form', async () => {
   const wrapper = mount({
@@ -423,53 +396,73 @@ describe('given checkboxGroup in a form', async () => {
     template: '<form @submit="handleSubmit"><CheckboxGroup name="test" /></form>',
   }, {
     props: { handleSubmit },
-  });
+  })
 
-  let checkboxes: Array<DOMWrapper<HTMLButtonElement>>;
-  let form: DOMWrapper<HTMLFormElement>;
+  let checkboxes: DOMWrapper<HTMLButtonElement>[]
+  let form: DOMWrapper<HTMLFormElement>
 
   beforeEach(async () => {
-    handleSubmit.mockClear();
-    checkboxes = wrapper.findAll('button');
-    form = wrapper.find('form');
+    handleSubmit.mockClear()
+    checkboxes = wrapper.findAll('button')
+    form = wrapper.find('form')
 
-    if (checkboxes[0].attributes('data-state') === 'unchecked') {
-      await checkboxes[0].trigger('click');
-    }
-  });
+    if (checkboxes[0].attributes('data-state') === 'unchecked')
+      await checkboxes[0].trigger('click')
+  })
 
   it('should have hidden input field', async () => {
-    expect(wrapper.find('input[data-hidden]').exists()).toBe(true);
-  });
+    expect(wrapper.find('input[data-hidden]').exists()).toBe(true)
+  })
 
   describe('after clicking submit button', () => {
     it('should trigger submit once', async () => {
-      await form.trigger('submit');
+      await form.trigger('submit')
 
       // Work around as the `handleSubmit.mock.results[0].value` is returning undefined
-      const event = handleSubmit.mock.calls[0][0];
-      const formData = new FormData(event.target);
-      const submittedData = Object.fromEntries(formData as any);
+      const event = handleSubmit.mock.calls[0][0]
+      const formData = new FormData(event.target)
+      const submittedData = Object.fromEntries(formData as any)
 
-      expect(handleSubmit).toHaveBeenCalledTimes(1);
-      expect(submittedData).toStrictEqual({ 'test[0][name]': 'jack' });
-    });
-  });
+      expect(handleSubmit).toHaveBeenCalledTimes(1)
+      expect(submittedData).toStrictEqual({ 'test[0][name]': 'jack' })
+    })
+  })
 
   describe('after uncheck and click submit button again', () => {
     beforeEach(async () => {
-      await checkboxes[0].trigger('click');
-      await form.trigger('submit');
-    });
+      await checkboxes[0].trigger('click')
+      await form.trigger('submit')
+    })
 
     it('should trigger submit once', () => {
       // Work around as the `handleSubmit.mock.results[0].value` is returning undefined
-      const event = handleSubmit.mock.calls[0][0];
-      const formData = new FormData(event.target);
-      const submittedData = Object.fromEntries(formData as any);
+      const event = handleSubmit.mock.calls[0][0]
+      const formData = new FormData(event.target)
+      const submittedData = Object.fromEntries(formData as any)
 
-      expect(handleSubmit).toHaveBeenCalledTimes(1);
-      expect(submittedData).toStrictEqual({ });
-    });
-  });
-});
+      expect(handleSubmit).toHaveBeenCalledTimes(1)
+      expect(submittedData).toStrictEqual({ })
+    })
+  })
+})
+
+describe('given a CheckboxGroup rendered asChild in a form', () => {
+  it('submits its values (the hidden inputs render next to the child)', async () => {
+    const wrapper = mount({
+      components: { CheckboxGroupRoot, CheckboxRoot },
+      template: `
+        <form>
+          <CheckboxGroupRoot name="toppings" :default-value="['cheese', 'ham']" as-child>
+            <div>
+              <CheckboxRoot value="cheese" />
+              <CheckboxRoot value="ham" />
+            </div>
+          </CheckboxGroupRoot>
+        </form>`,
+    }, { attachTo: document.body })
+    await nextTick()
+    const form = wrapper.find('form').element
+    expect([...new FormData(form)]).toEqual([['toppings[0]', 'cheese'], ['toppings[1]', 'ham']])
+    wrapper.unmount()
+  })
+})

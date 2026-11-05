@@ -1,30 +1,30 @@
-import { mount } from '@vue/test-utils';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { defineComponent, nextTick } from 'vue';
-import { ContextMenuContent, ContextMenuItem, ContextMenuRoot, ContextMenuTrigger } from '@/ContextMenu';
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger } from '@/DropdownMenu';
-import { MenubarContent, MenubarItem, MenubarMenu, MenubarRoot, MenubarTrigger } from '@/Menubar';
-import { MenuAnchor, MenuContent, MenuItem, MenuRoot } from '.';
+import { mount } from '@vue/test-utils'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { defineComponent, nextTick } from 'vue'
+import { ContextMenuContent, ContextMenuItem, ContextMenuRoot, ContextMenuTrigger } from '@/ContextMenu'
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuRoot, DropdownMenuTrigger } from '@/DropdownMenu'
+import { MenubarContent, MenubarItem, MenubarMenu, MenubarRoot, MenubarTrigger } from '@/Menubar'
+import { MenuAnchor, MenuContent, MenuItem, MenuRoot } from '.'
 
 globalThis.ResizeObserver = class ResizeObserver {
-  observe() { }
-  unobserve() { }
-  disconnect() { }
-};
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
 
 const CONTENT_ATTRS = `
   data-testid="content"
   class="custom"
   @open-auto-focus="onOpenAutoFocus"
   @entry-focus="onEntryFocus"
-`;
+`
 
 function createHarness(template: string, components: Record<string, any>) {
   return defineComponent({
     components,
     props: ['onOpenAutoFocus', 'onEntryFocus'],
     template,
-  });
+  })
 }
 
 const cases = [
@@ -38,12 +38,7 @@ const cases = [
           <MenuItem>Item</MenuItem>
         </MenuContent>
       </MenuRoot>
-    `, {
-      MenuRoot,
-      MenuAnchor,
-      MenuContent,
-      MenuItem,
-    }),
+    `, { MenuRoot, MenuAnchor, MenuContent, MenuItem }),
   },
   {
     name: 'DropdownMenuContent',
@@ -55,12 +50,7 @@ const cases = [
           <DropdownMenuItem>Item</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenuRoot>
-    `, {
-      DropdownMenuRoot,
-      DropdownMenuTrigger,
-      DropdownMenuContent,
-      DropdownMenuItem,
-    }),
+    `, { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem }),
   },
   {
     name: 'ContextMenuContent',
@@ -73,12 +63,7 @@ const cases = [
           <ContextMenuItem>Item</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenuRoot>
-    `, {
-      ContextMenuRoot,
-      ContextMenuTrigger,
-      ContextMenuContent,
-      ContextMenuItem,
-    }),
+    `, { ContextMenuRoot, ContextMenuTrigger, ContextMenuContent, ContextMenuItem }),
   },
   {
     name: 'MenubarContent',
@@ -92,68 +77,62 @@ const cases = [
           </MenubarContent>
         </MenubarMenu>
       </MenubarRoot>
-    `, {
-      MenubarRoot,
-      MenubarMenu,
-      MenubarTrigger,
-      MenubarContent,
-      MenubarItem,
-    }),
+    `, { MenubarRoot, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem }),
   },
-];
+]
 
 describe.each(cases)('$name emits', ({ harness, open, exposesEntryFocus }) => {
-  let onOpenAutoFocus: ReturnType<typeof vi.fn>;
-  let onEntryFocus: ReturnType<typeof vi.fn>;
-  let wrapper: ReturnType<typeof mount>;
+  let onOpenAutoFocus: ReturnType<typeof vi.fn>
+  let onEntryFocus: ReturnType<typeof vi.fn>
+  let wrapper: ReturnType<typeof mount>
 
   async function mountMenu(props: Record<string, unknown> = {}) {
     wrapper = mount(harness, {
       attachTo: document.body,
       props: { onOpenAutoFocus, onEntryFocus, ...props },
-    });
-    await open?.(wrapper);
-    await nextTick();
-    await nextTick();
-    return document.querySelector<HTMLElement>('[data-testid="content"]')!;
+    })
+    await open?.(wrapper)
+    await nextTick()
+    await nextTick()
+    return document.querySelector<HTMLElement>('[data-testid="content"]')!
   }
 
   beforeEach(() => {
-    document.body.innerHTML = '';
-    onOpenAutoFocus = vi.fn();
-    onEntryFocus = vi.fn();
-  });
+    document.body.innerHTML = ''
+    onOpenAutoFocus = vi.fn()
+    onEntryFocus = vi.fn()
+  })
 
   afterEach(() => {
-    wrapper.unmount();
-  });
+    wrapper.unmount()
+  })
 
   it('emits `openAutoFocus` when the content mounts and focuses it', async () => {
-    const content = await mountMenu();
+    const content = await mountMenu()
 
-    expect(content).toBeTruthy();
-    expect(onOpenAutoFocus).toHaveBeenCalledTimes(1);
-    expect(onOpenAutoFocus.mock.calls[0][0]).toBeInstanceOf(Event);
-    expect(content.contains(document.activeElement)).toBe(true);
-  });
+    expect(content).toBeTruthy()
+    expect(onOpenAutoFocus).toHaveBeenCalledTimes(1)
+    expect(onOpenAutoFocus.mock.calls[0][0]).toBeInstanceOf(Event)
+    expect(content.contains(document.activeElement)).toBe(true)
+  })
 
   it('skips auto focus when `openAutoFocus` is prevented', async () => {
-    onOpenAutoFocus.mockImplementation((event: Event) => event.preventDefault());
-    const content = await mountMenu();
+    onOpenAutoFocus.mockImplementation((event: Event) => event.preventDefault())
+    const content = await mountMenu()
 
-    expect(onOpenAutoFocus).toHaveBeenCalledTimes(1);
-    expect(content.contains(document.activeElement)).toBe(false);
-  });
+    expect(onOpenAutoFocus).toHaveBeenCalledTimes(1)
+    expect(content.contains(document.activeElement)).toBe(false)
+  })
 
   it(exposesEntryFocus ? 'emits `entryFocus`' : 'keeps `entryFocus` internal', async () => {
-    await mountMenu();
+    await mountMenu()
 
-    expect(onEntryFocus).toHaveBeenCalledTimes(exposesEntryFocus ? 1 : 0);
-  });
+    expect(onEntryFocus).toHaveBeenCalledTimes(exposesEntryFocus ? 1 : 0)
+  })
 
   it('still forwards other attributes to the content element', async () => {
-    const content = await mountMenu();
+    const content = await mountMenu()
 
-    expect(content.classList.contains('custom')).toBe(true);
-  });
-});
+    expect(content.classList.contains('custom')).toBe(true)
+  })
+})

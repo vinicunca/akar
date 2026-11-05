@@ -1,123 +1,84 @@
 <script lang="ts">
-import type { Ref } from 'vue';
-import type { Orientation } from './utils';
-import type { PrimitiveProps } from '@/Primitive';
-import { useCollection } from '@/Collection';
+import type { NavigationMenuChangeReason } from './useNavigationMenu'
+import type { Orientation } from './utils'
+import type { PrimitiveProps } from '@/Primitive'
+import type { ChangeEventDetails } from '@/shared'
+import { useCollection, useCollectionSlot } from '@/Collection'
 
 export type NavigationMenuSubEmits = {
+  /** Called before the value changes; `details.cancel()` keeps the current value. */
+  'beforeUpdate:modelValue': [value: string, details: ChangeEventDetails<NavigationMenuChangeReason>]
   /** Event handler called when the value changes. */
-  'update:modelValue': [value: string];
-};
+  'update:modelValue': [value: string, details: ChangeEventDetails<NavigationMenuChangeReason>]
+}
 
 export interface NavigationMenuSubProps extends PrimitiveProps {
   /** The controlled value of the sub menu item to activate. Can be used as `v-model`. */
-  modelValue?: string;
+  modelValue?: string
   /**
    * The value of the menu item that should be active when initially rendered.
    *
    * Use when you do not need to control the value state.
    */
-  defaultValue?: string;
+  defaultValue?: string
   /** The orientation of the menu. */
-  orientation?: Orientation;
+  orientation?: Orientation
 }
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { ref, watchEffect } from 'vue';
-import {
-  Primitive,
-} from '@/Primitive';
-import { useForwardExpose } from '@/shared';
-import { injectNavigationMenuContext, provideNavigationMenuContext } from './NavigationMenuRoot.vue';
+import type { Ref } from 'vue'
+import { mergeProps } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { useForwardElement } from '@/shared'
+import { injectNavigationMenuContext, provideNavigationMenuContext } from './NavigationMenuRoot.vue'
+import { useNavigationMenuSub } from './useNavigationMenu'
+
+defineOptions({
+  // `$attrs` are merged under the part's own bindings: the precedence the
+  // former `CollectionSlot` wrapper gave them.
+  inheritAttrs: false,
+})
 
 const props = withDefaults(defineProps<NavigationMenuSubProps>(), {
+  modelValue: undefined,
   orientation: 'horizontal',
-});
-const emits = defineEmits<NavigationMenuSubEmits>();
+})
+const emits = defineEmits<NavigationMenuSubEmits>()
 
 defineSlots<{
   default?: (props: {
     /** Current input values */
-    modelValue: typeof modelValue.value;
-  }) => any;
-}>();
+    modelValue: typeof modelValue.value
+  }) => any
+}>()
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? '',
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<string>;
-const previousValue = ref('');
+const menuContext = injectNavigationMenuContext()
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
 
-const menuContext = injectNavigationMenuContext();
-const { forwardRef, currentElement } = useForwardExpose();
+const { getItems } = useCollection({ key: 'NavigationMenu', isProvider: true })
+useCollectionSlot(currentElement, { key: 'NavigationMenu' })
 
-const indicatorTrack = ref<HTMLElement>();
-const viewport = ref<HTMLElement>();
-const activeTrigger = ref<HTMLElement>();
-
-const { getItems, CollectionSlot } = useCollection({ key: 'NavigationMenu', isProvider: true });
-
-watchEffect(() => {
-  if (!modelValue.value) {
-    return;
-  }
-
-  const items = getItems().map((i) => i.ref);
-  activeTrigger.value = items.find((item) =>
-    item.id.includes(modelValue.value),
-  );
-});
-
-provideNavigationMenuContext({
-  ...menuContext,
-  isRootMenu: false,
-  modelValue,
-  previousValue,
-  activeTrigger,
+const { modelValue, root, context } = useNavigationMenuSub({
+  parentContext: menuContext,
+  modelValue: () => props.modelValue,
+  defaultValue: props.defaultValue,
   orientation: props.orientation,
-  rootNavigationMenu: currentElement,
-  indicatorTrack,
-  onIndicatorTrackChange: (val) => {
-    indicatorTrack.value = val;
-  },
-  viewport,
-  onViewportChange: (val) => {
-    viewport.value = val;
-  },
+  rootElement: currentElement as Ref<HTMLElement | undefined>,
+  getItems: () => getItems().map(i => i.ref),
+  emit: emits,
+})
 
-  onTriggerEnter: (val) => {
-    modelValue.value = val;
-  },
-  onTriggerLeave: () => {
-    // do nothing for submenu
-  },
-  onContentEnter: () => {
-    // do nothing for submenu
-  },
-  onContentLeave: () => {
-    // do nothing for submenu
-  },
-  onItemSelect: (val) => {
-    modelValue.value = val;
-  },
-  onItemDismiss: () => {
-    modelValue.value = '';
-  },
-});
+provideNavigationMenuContext(context)
 </script>
 
 <template>
-  <CollectionSlot>
-    <Primitive
-      :ref="forwardRef"
-      :data-orientation="orientation"
-      :as-child="props.asChild"
-      :as="as"
-      data-akar-navigation-menu
-    >
-      <slot :model-value="modelValue" />
-    </Primitive>
-  </CollectionSlot>
+  <component
+    :is="renderAs(as, props.asChild)"
+    v-bind="mergeProps($attrs, root.attrs.value)"
+    :ref="forwardRef"
+  >
+    <slot :model-value="modelValue" />
+  </component>
 </template>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { SelectItem, SelectItemIndicator, SelectItemText } from '..';
+import { Icon } from '@iconify/vue'
+import { SelectItem, SelectItemIndicator, SelectItemText } from '..'
 
 defineProps<{
-  options: Array<string>;
-}>();
+  options: string[]
+}>()
 </script>
 
 <template>

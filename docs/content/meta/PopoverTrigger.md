@@ -1,0 +1,51 @@
+<!-- This file was automatically generated. Do not edit it manually -->
+
+<llm-exclude>
+<PropsTable :data="[
+  {
+    'name': 'as',
+    'description': '<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n',
+    'type': 'AsTag | Component',
+    'required': false,
+    'default': '\'button\''
+  },
+  {
+    'name': 'asChild',
+    'description': '<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\'https://www.reka-ui.com/docs/guides/composition\'>Composition</a> guide for more details.</p>\n',
+    'type': 'boolean',
+    'required': false
+  },
+  {
+    'name': 'handle',
+    'description': '<p>A handle from <code>createPopoverHandle()</code> that connects this trigger to a\n<code>PopoverRoot</code> rendered elsewhere (outside this trigger\'s tree or portal).</p>\n',
+    'type': 'PopoverHandle&lt;Payload&gt;',
+    'required': false
+  },
+  {
+    'name': 'id',
+    'description': '<p>Id of the element, which the content\'s <code>aria-labelledby</code> points at. With a\n<code>handle</code>, also the id the Root\'s <code>triggerId</code> refers to. Auto-generated when\nnot provided.</p>\n',
+    'type': 'string',
+    'required': false
+  },
+  {
+    'name': 'payload',
+    'description': '<p>Passed to the Root\'s default slot while this trigger owns the popover. Requires a <code>handle</code>.</p>\n',
+    'type': 'Payload',
+    'required': false
+  }
+]" />
+</llm-exclude>
+
+<llm-only>
+
+**Props**
+
+| Name | Description | Type | Required | Default |
+| --- | --- | --- | --- | --- |
+| `as` | The element or component this component should render as. Can be overwritten by `asChild`. | `AsTag \| Component` | No | `"button"` |
+| `asChild` | Change the default rendered element for the one passed as a child, merging their props and behavior. Read our Composition guide for more details. | `boolean` | No | - |
+| `handle` | A handle from `createPopoverHandle()` that connects this trigger to a `PopoverRoot` rendered elsewhere (outside this trigger's tree or portal). | `PopoverHandle<Payload>` | No | - |
+| `id` | Id of the element, which the content's `aria-labelledby` points at. With a `handle`, also the id the Root's `triggerId` refers to. Auto-generated when not provided. | `string` | No | - |
+| `payload` | Passed to the Root's default slot while this trigger owns the popover. Requires a `handle`. | `Payload` | No | - |
+
+</llm-only>

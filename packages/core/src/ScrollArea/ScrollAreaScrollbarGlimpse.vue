@@ -1,29 +1,30 @@
 <script lang="ts">
-import type { ScrollAreaScrollbarAutoProps } from './ScrollAreaScrollbarAuto.vue';
+import type { ScrollAreaScrollbarAutoProps } from './ScrollAreaScrollbarAuto.vue'
 
 export interface ScrollAreaScrollbarGlimpseProps extends ScrollAreaScrollbarAutoProps {}
 </script>
 
 <script setup lang="ts">
-import { useDebounceFn } from '@vueuse/core';
-import { computed, onMounted, onUnmounted, watchEffect } from 'vue';
-import { Presence } from '@/Presence';
-import { useForwardExpose } from '@/shared';
-import { useStateMachine } from '../shared/useStateMachine';
-import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
-import { injectScrollAreaScrollbarContext } from './ScrollAreaScrollbar.vue';
-import ScrollAreaScrollbarAuto from './ScrollAreaScrollbarAuto.vue';
+import { useDebounceFn } from '@vueuse/core'
+import { computed, onMounted, onUnmounted, watchEffect } from 'vue'
+import { Presence } from '@/Presence'
+import { disclosureState, useForwardElement } from '@/shared'
+import { useStateMachine } from '../shared/useStateMachine'
+import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue'
+import { injectScrollAreaScrollbarContext } from './ScrollAreaScrollbar.vue'
+import ScrollAreaScrollbarAuto from './ScrollAreaScrollbarAuto.vue'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
-defineProps<ScrollAreaScrollbarGlimpseProps>();
+defineProps<ScrollAreaScrollbarGlimpseProps>()
 
-const rootContext = injectScrollAreaRootContext();
-const scrollbarContext = injectScrollAreaScrollbarContext();
+const rootContext = injectScrollAreaRootContext()
+const scrollbarContext = injectScrollAreaScrollbarContext()
 
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 
 const { state, dispatch } = useStateMachine('hidden', {
   hidden: {
@@ -49,81 +50,81 @@ const { state, dispatch } = useStateMachine('hidden', {
     SCROLL: 'scrolling',
     POINTER_ENTER: 'interacting',
   },
-});
+})
 
-const visible = computed(() => state.value !== 'hidden');
+const visible = computed(() => state.value !== 'hidden')
 
 function handlePointerEnter() {
-  dispatch('POINTER_ENTER');
+  dispatch('POINTER_ENTER')
 }
 
 function handlePointerLeave() {
-  dispatch('POINTER_LEAVE');
+  dispatch('POINTER_LEAVE')
 }
 
-const debounceScrollEnd = useDebounceFn(() => dispatch('SCROLL_END'), 100);
+const debounceScrollEnd = useDebounceFn(() => dispatch('SCROLL_END'), 100)
 
 watchEffect((onCleanup) => {
   if (state.value === 'glimpse') {
-    const timeId = window.setTimeout(dispatch, rootContext.scrollHideDelay.value, 'HIDE');
+    const timeId = window.setTimeout(dispatch, rootContext.scrollHideDelay.value, 'HIDE')
 
     onCleanup(() => {
-      window.clearTimeout(timeId);
-    });
+      window.clearTimeout(timeId)
+    })
   }
-});
+})
 
 watchEffect((onCleanup) => {
   if (state.value === 'idle') {
-    const timeId = window.setTimeout(dispatch, rootContext.scrollHideDelay.value, 'HIDE');
+    const timeId = window.setTimeout(dispatch, rootContext.scrollHideDelay.value, 'HIDE')
 
     onCleanup(() => {
-      window.clearTimeout(timeId);
-    });
+      window.clearTimeout(timeId)
+    })
   }
-});
+})
 
 watchEffect((onCleanup) => {
-  const viewport = rootContext.viewport.value;
+  const viewport = rootContext.viewport.value
   const scrollDirection = scrollbarContext.isHorizontal.value
     ? 'scrollLeft'
-    : 'scrollTop';
+    : 'scrollTop'
 
   if (viewport) {
-    let prevScrollPos = viewport[scrollDirection];
+    let prevScrollPos = viewport[scrollDirection]
     const handleScroll = () => {
-      const scrollPos = viewport[scrollDirection];
-      const hasScrollInDirectionChanged = prevScrollPos !== scrollPos;
+      const scrollPos = viewport[scrollDirection]
+      const hasScrollInDirectionChanged = prevScrollPos !== scrollPos
       if (hasScrollInDirectionChanged) {
-        dispatch('SCROLL');
-        debounceScrollEnd();
+        dispatch('SCROLL')
+        debounceScrollEnd()
       }
-      prevScrollPos = scrollPos;
-    };
-    viewport.addEventListener('scroll', handleScroll);
+      prevScrollPos = scrollPos
+    }
+    viewport.addEventListener('scroll', handleScroll)
 
     onCleanup(() => {
-      viewport.removeEventListener('scroll', handleScroll);
-    });
+      viewport.removeEventListener('scroll', handleScroll)
+    })
   }
-});
+})
 
 onMounted(() => {
-  const scrollArea = rootContext.scrollArea.value;
+  const scrollArea = rootContext.scrollArea.value
 
   if (scrollArea) {
-    scrollArea.addEventListener('pointerenter', handlePointerEnter);
-    scrollArea.addEventListener('pointerleave', handlePointerLeave);
+    scrollArea.addEventListener('pointerenter', handlePointerEnter)
+    scrollArea.addEventListener('pointerleave', handlePointerLeave)
   }
-});
+})
 
 onUnmounted(() => {
-  const scrollArea = rootContext.scrollArea.value;
+  const scrollArea = rootContext.scrollArea.value
   if (scrollArea) {
-    scrollArea.removeEventListener('pointerenter', handlePointerEnter);
-    scrollArea.removeEventListener('pointerleave', handlePointerLeave);
+    scrollArea.removeEventListener('pointerenter', handlePointerEnter)
+    scrollArea.removeEventListener('pointerleave', handlePointerLeave)
   }
-});
+})
 </script>
 
 <template>
@@ -131,7 +132,7 @@ onUnmounted(() => {
     <ScrollAreaScrollbarAuto
       v-bind="$attrs"
       :ref="forwardRef"
-      :data-state="visible ? 'visible' : 'hidden'"
+      :data-state="disclosureState(visible)"
     >
       <slot />
     </ScrollAreaScrollbarAuto>

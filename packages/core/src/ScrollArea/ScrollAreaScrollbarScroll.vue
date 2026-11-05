@@ -1,25 +1,26 @@
 <script lang="ts">
 export interface ScrollAreaScrollbarScrollProps {
-  forceMount?: boolean;
+  forceMount?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { useDebounceFn } from '@vueuse/core';
-import { computed, watchEffect } from 'vue';
-import { Presence } from '@/Presence';
-import { useForwardExpose } from '@/shared';
-import { useStateMachine } from '../shared/useStateMachine';
-import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
-import { injectScrollAreaScrollbarContext } from './ScrollAreaScrollbar.vue';
-import ScrollAreaScrollbarVisible from './ScrollAreaScrollbarVisible.vue';
+import { useDebounceFn } from '@vueuse/core'
+import { computed, watchEffect } from 'vue'
+import { Presence } from '@/Presence'
+import { disclosureState, useForwardElement } from '@/shared'
+import { useStateMachine } from '../shared/useStateMachine'
+import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue'
+import { injectScrollAreaScrollbarContext } from './ScrollAreaScrollbar.vue'
+import ScrollAreaScrollbarVisible from './ScrollAreaScrollbarVisible.vue'
 
-defineProps<ScrollAreaScrollbarScrollProps>();
+defineProps<ScrollAreaScrollbarScrollProps>()
 
-const rootContext = injectScrollAreaRootContext();
-const scrollbarContext = injectScrollAreaScrollbarContext();
+const rootContext = injectScrollAreaRootContext()
+const scrollbarContext = injectScrollAreaScrollbarContext()
 
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 
 const { state, dispatch } = useStateMachine('hidden', {
   hidden: {
@@ -38,46 +39,46 @@ const { state, dispatch } = useStateMachine('hidden', {
     SCROLL: 'scrolling',
     POINTER_ENTER: 'interacting',
   },
-});
+})
 
-const visible = computed(() => state.value !== 'hidden');
+const visible = computed(() => state.value !== 'hidden')
 
 watchEffect((onCleanup) => {
   if (state.value === 'idle') {
-    const timeId = window.setTimeout(dispatch, rootContext.scrollHideDelay.value, 'HIDE');
+    const timeId = window.setTimeout(dispatch, rootContext.scrollHideDelay.value, 'HIDE')
 
     onCleanup(() => {
-      window.clearTimeout(timeId);
-    });
+      window.clearTimeout(timeId)
+    })
   }
-});
+})
 
-const debounceScrollEnd = useDebounceFn(() => dispatch('SCROLL_END'), 100);
+const debounceScrollEnd = useDebounceFn(() => dispatch('SCROLL_END'), 100)
 
 watchEffect((onCleanup) => {
-  const viewport = rootContext.viewport.value;
+  const viewport = rootContext.viewport.value
   const scrollDirection = scrollbarContext.isHorizontal.value
     ? 'scrollLeft'
-    : 'scrollTop';
+    : 'scrollTop'
 
   if (viewport) {
-    let prevScrollPos = viewport[scrollDirection];
+    let prevScrollPos = viewport[scrollDirection]
     const handleScroll = () => {
-      const scrollPos = viewport[scrollDirection];
-      const hasScrollInDirectionChanged = prevScrollPos !== scrollPos;
+      const scrollPos = viewport[scrollDirection]
+      const hasScrollInDirectionChanged = prevScrollPos !== scrollPos
       if (hasScrollInDirectionChanged) {
-        dispatch('SCROLL');
-        debounceScrollEnd();
+        dispatch('SCROLL')
+        debounceScrollEnd()
       }
-      prevScrollPos = scrollPos;
-    };
-    viewport.addEventListener('scroll', handleScroll);
+      prevScrollPos = scrollPos
+    }
+    viewport.addEventListener('scroll', handleScroll)
 
     onCleanup(() => {
-      viewport.removeEventListener('scroll', handleScroll);
-    });
+      viewport.removeEventListener('scroll', handleScroll)
+    })
   }
-});
+})
 </script>
 
 <template>
@@ -85,7 +86,7 @@ watchEffect((onCleanup) => {
     <ScrollAreaScrollbarVisible
       v-bind="$attrs"
       :ref="forwardRef"
-      :data-state="visible ? 'visible' : 'hidden'"
+      :data-state="disclosureState(visible)"
     >
       <slot />
     </ScrollAreaScrollbarVisible>

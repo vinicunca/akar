@@ -1,17 +1,45 @@
 <script lang="ts">
-import type { DateValue } from '@internationalized/date';
-import { isEqualDay } from '@internationalized/date';
-import { CalendarRoot } from '..';
-import { injectDatePickerRootContext } from './DatePickerRoot.vue';
+import type { CalendarGridData, CalendarUnit, DateValue, WeekStartsOn } from '@/date'
+import { CalendarRoot } from '..'
+import { injectDatePickerRootContext } from './DatePickerRoot.vue'
 </script>
 
 <script setup lang="ts">
-const rootContext = injectDatePickerRootContext();
+import { useForwardElement } from '@/shared'
+
+defineSlots<{
+  default?: (props: {
+    /** The current date of the placeholder */
+    date: DateValue
+    /** The rendered page(s) of the active view */
+    grid: CalendarGridData[]
+    /** The days of the week (day view only) */
+    weekDays: string[]
+    /** The start of the week */
+    weekStartsOn: WeekStartsOn
+    /** The calendar locale */
+    locale: string
+    /** Whether or not to always display 6 weeks in the calendar */
+    fixedWeeks: boolean
+    /** The active view */
+    view: CalendarUnit
+  }) => any
+}>()
+
+const rootContext = injectDatePickerRootContext()
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+
+// The calendar is controlled by the picker. Its `beforeUpdate:modelValue`
+// runs the picker's change, so a pick emits once, from the picker, with the
+// calendar's reason (`cell-press`, `cell-keydown`).
 </script>
 
 <template>
   <CalendarRoot
-    v-slot="{ weekDays, grid, date, weekStartsOn, locale, fixedWeeks }"
+    :ref="forwardRef"
+    v-slot="{ weekDays, grid, date, weekStartsOn, locale, fixedWeeks, view }"
     v-bind="{
       isDateDisabled: rootContext.isDateDisabled,
       isDateUnavailable: rootContext.isDateUnavailable,
@@ -27,18 +55,17 @@ const rootContext = injectDatePickerRootContext();
       readonly: rootContext.readonly.value,
       preventDeselect: rootContext.preventDeselect.value,
       dir: rootContext.dir.value,
+      maxView: rootContext.maxView.value,
+      yearsPerPage: rootContext.yearsPerPage.value,
+      columns: rootContext.columns.value,
     }"
-    :model-value="rootContext.modelValue.value"
+    :model-value="rootContext.modelValue.value ?? null"
     :placeholder="rootContext.placeholder.value"
+    :view="rootContext.view.value"
     :multiple="false"
-    @update:model-value="(date: DateValue | undefined) => {
-      if (date && rootContext.modelValue.value && isEqualDay(date, rootContext.modelValue.value)) return
-      rootContext.onDateChange(date)
-    }"
-    @update:placeholder="(date: DateValue) => {
-      if (isEqualDay(date, rootContext.placeholder.value)) return
-      rootContext.onPlaceholderChange(date)
-    }"
+    @before-update:model-value="rootContext.onCalendarBeforeUpdate"
+    @update:placeholder="rootContext.onCalendarPlaceholderChange"
+    @update:view="(next, details) => rootContext.onViewChange(next, details)"
   >
     <slot
       :date="date"
@@ -47,6 +74,7 @@ const rootContext = injectDatePickerRootContext();
       :week-starts-on="weekStartsOn"
       :locale="locale"
       :fixed-weeks="fixedWeeks"
+      :view="view"
     />
   </CalendarRoot>
 </template>

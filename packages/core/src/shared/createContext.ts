@@ -1,6 +1,5 @@
-import type { InjectionKey } from 'vue';
-import { isString } from '@vinicunca/perkakas';
-import { inject, provide } from 'vue';
+import type { InjectionKey } from 'vue'
+import { inject, provide } from 'vue'
 
 /**
  * @param providerComponentName - The name(s) of the component(s) providing the context.
@@ -10,15 +9,15 @@ import { inject, provide } from 'vue';
  * @param contextName The description for injection key symbol.
  */
 export function createContext<ContextValue>(
-  providerComponentName: string | Array<string>,
+  providerComponentName: string | string[],
   contextName?: string,
 ) {
   const symbolDescription
-    = isString(providerComponentName) && !contextName
+    = typeof providerComponentName === 'string' && !contextName
       ? `${providerComponentName}Context`
-      : contextName;
+      : contextName
 
-  const injectionKey: InjectionKey<ContextValue | null> = Symbol(symbolDescription);
+  const injectionKey: InjectionKey<ContextValue | null> = Symbol(symbolDescription)
 
   /**
    * @param fallback The context value to return if the injection fails.
@@ -31,14 +30,12 @@ export function createContext<ContextValue>(
   >(
     fallback?: T,
   ): T extends null ? ContextValue | null : ContextValue => {
-    const context = inject(injectionKey, fallback);
-    if (context) {
-      return context;
-    }
+    const context = inject(injectionKey, fallback)
+    if (context)
+      return context
 
-    if (context === null) {
-      return context as any;
-    }
+    if (context === null)
+      return context as any
 
     throw new Error(
       `Injection \`${injectionKey.toString()}\` not found. Component must be used within ${
@@ -48,13 +45,13 @@ export function createContext<ContextValue>(
           )}`
           : `\`${providerComponentName}\``
       }`,
-    );
-  };
+    )
+  }
 
   const provideContext = (contextValue: ContextValue) => {
-    provide(injectionKey, contextValue);
-    return contextValue;
-  };
+    provide(injectionKey, contextValue)
+    return contextValue
+  }
 
-  return [injectContext, provideContext] as const;
+  return [injectContext, provideContext] as const
 }

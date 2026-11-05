@@ -1,29 +1,29 @@
 <script lang="ts">
-import type { Ref } from 'vue';
-import type { ToastObject } from './createToastManager';
-import type { SwipeEvent } from './utils';
-import type { PrimitiveProps } from '@/Primitive';
-import { isClient } from '@vueuse/shared';
-import { useCollection } from '@/Collection';
-import { createContext, getActiveElement, useForwardExpose } from '@/shared';
+import type { Ref } from 'vue'
+import type { ToastObject } from './createToastManager'
+import type { ToastOpenChangeReason } from './useToast'
+import type { SwipeEvent } from './utils'
+import type { PrimitiveProps } from '@/Primitive'
+import type { BaseChangeReason } from '@/shared'
+import { COLLECTION_ITEM_ATTRS, useCollectionItem } from '@/Collection/Collection'
+import { createContext, getActiveElement, useForwardElement } from '@/shared'
 
 export type ToastRootImplEmits = {
-  close: [];
   /** Event handler called when the escape key is down. It can be prevented by calling `event.preventDefault`. */
-  escapeKeyDown: [event: KeyboardEvent];
+  escapeKeyDown: [event: KeyboardEvent]
   /** Event handler called when the dismiss timer is paused. This occurs when the pointer is moved over the viewport, the viewport is focused or when the window is blurred. */
-  pause: [];
+  pause: []
   /** Event handler called when the dismiss timer is resumed. This occurs when the pointer is moved away from the viewport, the viewport is blurred or when the window is focused. */
-  resume: [];
+  resume: []
   /** Event handler called when starting a swipe interaction. It can be prevented by calling `event.preventDefault`. */
-  swipeStart: [event: SwipeEvent];
+  swipeStart: [event: SwipeEvent]
   /** Event handler called during a swipe interaction. It can be prevented by calling `event.preventDefault`. */
-  swipeMove: [event: SwipeEvent];
+  swipeMove: [event: SwipeEvent]
   /** Event handler called when swipe interaction is cancelled. It can be prevented by calling `event.preventDefault`. */
-  swipeCancel: [event: SwipeEvent];
+  swipeCancel: [event: SwipeEvent]
   /** Event handler called at the end of a swipe interaction. It can be prevented by calling `event.preventDefault`. */
-  swipeEnd: [event: SwipeEvent];
-};
+  swipeEnd: [event: SwipeEvent]
+}
 
 export interface ToastRootImplProps extends PrimitiveProps {
   /**
@@ -31,213 +31,192 @@ export interface ToastRootImplProps extends PrimitiveProps {
    *
    * For toasts that are the result of a user action, choose `foreground`. Toasts generated from background tasks should use `background`.
    */
-  type?: 'foreground' | 'background';
+  type?: 'foreground' | 'background'
   /**
    * The controlled open state of the dialog. Can be bind as `v-model:open`.
    */
-  open?: boolean;
+  open?: boolean
   /**
    * Time in milliseconds that toast should remain visible for. Overrides value
    * given to `ToastProvider`.
    */
-  duration?: number;
+  duration?: number
   /**
    * A toast from `useToastManager()`. Its `open`, `duration`, `type` and `status` drive the toast,
    * and `ToastTitle`, `ToastDescription` and `ToastAction` render its content.
    */
-  toast?: ToastObject;
+  toast?: ToastObject
+}
+
+/** Internal: the close of `useToastRoot()`, handed down by `ToastRoot`. */
+interface ToastRootImplInternalProps {
+  requestClose?: (reason: ToastOpenChangeReason | BaseChangeReason, event?: Event) => boolean
+}
+
+export interface ToastRootContext {
+  /**
+   * Closes the toast. `reason` defaults to `'imperative-action'`; a click with an
+   * empty `pointerType` (a keyboard activation) moves focus to the viewport.
+   * Returns `false` when the toast was already closed or the close was cancelled.
+   */
+  onClose: (event?: Event, reason?: ToastOpenChangeReason | BaseChangeReason) => boolean
+  toast: Ref<ToastObject | undefined>
 }
 
 export const [injectToastRootContext, provideToastRootContext]
-  = createContext<{ onClose: (event?: PointerEvent) => void; toast: Ref<ToastObject | undefined> }>('ToastRoot');
+  = createContext<ToastRootContext>('ToastRoot')
 </script>
 
 <script setup lang="ts">
-import { onKeyStroke, useRafFn, useResizeObserver } from '@vueuse/core';
-import { computed, onMounted, onUnmounted, reactive, ref, shallowRef, toRef, watch, watchEffect } from 'vue';
-import { Primitive } from '@/Primitive';
-import ToastAnnounce from './ToastAnnounce.vue';
-import { injectToastPositionerContext } from './ToastPositioner.vue';
-import { injectToastProviderContext } from './ToastProvider.vue';
-import { getAnnounceTextContent, handleAndDispatchCustomEvent, isDeltaInDirection, TOAST_SWIPE_CANCEL, TOAST_SWIPE_END, TOAST_SWIPE_MOVE, TOAST_SWIPE_START, VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';
+import { onKeyStroke, useResizeObserver } from '@vueuse/core'
+import { computed, mergeProps, onMounted, onUnmounted, reactive, shallowRef, toRef, watch, watchEffect } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import ToastAnnounce from './ToastAnnounce.vue'
+import { injectToastPositionerContext } from './ToastPositioner.vue'
+import { injectToastProviderContext } from './ToastProvider.vue'
+import { getToastSurface, useToastSwipe, useToastTimer } from './useToast'
+import { getAnnounceTextContent, VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
-const props = withDefaults(defineProps<ToastRootImplProps>(), {
+const props = withDefaults(defineProps<ToastRootImplProps & ToastRootImplInternalProps>(), {
   open: false,
   as: 'li',
-});
+})
 
-const emits = defineEmits<ToastRootImplEmits>();
+const emits = defineEmits<ToastRootImplEmits>()
 
-const { forwardRef, currentElement } = useForwardExpose();
-const { CollectionItem } = useCollection();
+const { forwardRef, currentElement, expose } = useForwardElement()
+useCollectionItem(currentElement)
+defineExpose(expose)
 
-const providerContext = injectToastProviderContext();
-const pointerStartRef = ref<{ x: number; y: number } | null>(null);
-const swipeDeltaRef = ref<{ x: number; y: number } | null>(null);
+const providerContext = injectToastProviderContext()
 const duration = computed(
   () => typeof props.duration === 'number'
     ? props.duration
     : providerContext.duration.value,
-);
+)
 
-const closeTimerStartTimeRef = ref(0);
-const closeTimerRemainingTimeRef = ref(duration.value);
-const closeTimerRef = ref(0);
-const remainingTime = ref(duration.value);
+function handleClose(event?: Event, reason: ToastOpenChangeReason | BaseChangeReason = 'imperative-action') {
+  const isNonPointerEvent = (event as PointerEvent | undefined)?.pointerType === ''
+  const isFocusInToast = currentElement.value?.contains(getActiveElement())
 
-const remainingRaf = useRafFn(() => {
-  const elapsedTime = Date.now() - closeTimerStartTimeRef.value;
-  remainingTime.value = Math.max(closeTimerRemainingTimeRef.value - elapsedTime, 0);
-}, { fpsLimit: 60 });
+  // A cancelled close (`beforeUpdate:open`) leaves focus and the pause state alone.
+  if (!props.requestClose?.(reason, event))
+    return false
 
-function startTimer(duration: number) {
-  if (duration <= 0 || duration === Number.POSITIVE_INFINITY) {
-    return;
-  }
-  // startTimer is used inside a watch with immediate set to true.
-  // This results in code execution during SSR.
-  // Ensure this code only runs in a browser environment
-  if (!isClient) {
-    return;
-  }
-  window.clearTimeout(closeTimerRef.value);
-  closeTimerStartTimeRef.value = Date.now();
-  closeTimerRef.value = window.setTimeout(handleClose, duration);
-}
-
-function handleClose(event?: PointerEvent) {
-  const isNonPointerEvent = event?.pointerType === '';
-
-  // akar: update to only perform focus when user focus via keyboard
+  // reka: update to only perform focus when user focus via keyboard
   // focus viewport if focus is within toast to read the remaining toast
   // count to SR users and ensure focus isn't lost
-  const isFocusInToast = currentElement.value?.contains(getActiveElement());
-  if (isFocusInToast && isNonPointerEvent) {
-    providerContext.viewport.value?.focus();
-  }
+  if (isFocusInToast && isNonPointerEvent)
+    providerContext.viewport.value?.focus()
 
   if (isNonPointerEvent) {
     // when manually close the toast, we reset isClosePausedRef
-    providerContext.isClosePausedRef.value = false;
+    providerContext.isClosePausedRef.value = false
   }
-
-  emits('close');
+  return true
 }
 
-const positionerContext = injectToastPositionerContext(null);
+const positionerContext = injectToastPositionerContext(null)
 
 // Read after the DOM updates, and again when a managed toast changes, so that an
 // updated toast (e.g. a promise going from loading to success) is announced again.
-const announceTextContent = shallowRef<Array<string> | null>(null);
-watch([
-  currentElement,
-  () => props.toast?.updateKey,
-], ([element]) => {
-  announceTextContent.value = element
-    ? getAnnounceTextContent(element)
-    : null;
-}, { flush: 'post', immediate: true });
+const announceTextContent = shallowRef<string[] | null>(null)
+watch([currentElement, () => props.toast?.updateKey], ([element]) => {
+  announceTextContent.value = element ? getAnnounceTextContent(element) : null
+}, { flush: 'post', immediate: true })
 
-const stackEntry = reactive({ seq: 0, height: 0, open: props.open });
-const stack = computed(() => providerContext.getToastStack(stackEntry));
+const stackEntry = reactive({ seq: 0, height: 0, open: props.open })
+const stack = computed(() => providerContext.getToastStack(stackEntry))
 
 function measureHeight() {
-  const element = currentElement.value;
-  if (!element) {
-    return;
-  }
+  const element = currentElement.value
+  if (!element)
+    return
   // Measure the natural height, even when styles collapse the toast to the frontmost height.
-  const previousHeight = element.style.height;
-  element.style.height = 'auto';
-  stackEntry.height = element.offsetHeight;
-  element.style.height = previousHeight;
+  const previousHeight = element.style.height
+  element.style.height = 'auto'
+  stackEntry.height = element.offsetHeight
+  element.style.height = previousHeight
 }
 
-useResizeObserver(currentElement, measureHeight);
-watch(() => props.toast?.updateKey, measureHeight, { flush: 'post' });
+useResizeObserver(currentElement, measureHeight)
+watch(() => props.toast?.updateKey, measureHeight, { flush: 'post' })
 
 watch(() => props.open, (open, wasOpen) => {
-  stackEntry.open = open;
-  if (open && !wasOpen) {
-    providerContext.reopenToast(stackEntry);
-  }
-});
+  stackEntry.open = open
+  if (open && !wasOpen)
+    providerContext.reopenToast(stackEntry)
+})
 
 if (props.type && !['foreground', 'background'].includes(props.type)) {
-  const error = 'Invalid prop `type` supplied to `Toast`. Expected `foreground | background`.';
-  throw new Error(error);
+  const error = 'Invalid prop `type` supplied to `Toast`. Expected `foreground | background`.'
+  throw new Error(error)
 }
 
-watchEffect((cleanupFn) => {
-  const viewport = providerContext.viewport.value;
-  if (viewport) {
-    const handleResume = () => {
-      startTimer(closeTimerRemainingTimeRef.value);
-      remainingRaf.resume();
-      emits('resume');
-    };
-    const handlePause = () => {
-      const elapsedTime = Date.now() - closeTimerStartTimeRef.value;
-      closeTimerRemainingTimeRef.value = closeTimerRemainingTimeRef.value - elapsedTime;
-      window.clearTimeout(closeTimerRef.value);
-      remainingRaf.pause();
-      emits('pause');
-    };
-    viewport.addEventListener(VIEWPORT_PAUSE, handlePause);
-    viewport.addEventListener(VIEWPORT_RESUME, handleResume);
-    cleanupFn(() => {
-      viewport.removeEventListener(VIEWPORT_PAUSE, handlePause);
-      viewport.removeEventListener(VIEWPORT_RESUME, handleResume);
-    });
-  }
-});
-
-// start timer when toast opens or duration changes.
-// we include `open` in deps because closed !== unmounted when animating
-// so it could reopen before being completely unmounted
-const restartKey = computed(() => props.toast
-  ? providerContext.toastStore.getRestartKey(props.toast.id)
-  : 0);
-watch([
-  () => props.open,
+// The auto-dismiss timer (re)starts when the toast opens, its duration changes
+// or a managed toast is added again with the same id. A timeout whose close is
+// cancelled re-arms a full `duration`, so the toast asks again later.
+const restartKey = computed(() => props.toast ? providerContext.toastStore.getRestartKey(props.toast.id) : 0)
+const { remaining: remainingTime, pause, resume } = useToastTimer({
+  open: () => props.open,
   duration,
   restartKey,
-], () => {
-  // Reset the timer when the toast is rerendered with the new duration
-  closeTimerRemainingTimeRef.value = duration.value;
+  isPaused: () => providerContext.isClosePausedRef.value,
+  onTimeout: () => handleClose(undefined, 'timeout'),
+  onPause: () => emits('pause'),
+  onResume: () => emits('resume'),
+})
 
-  if (props.open && !providerContext.isClosePausedRef.value) {
-    startTimer(duration.value);
+watchEffect((cleanupFn) => {
+  const viewport = providerContext.viewport.value
+  if (viewport) {
+    viewport.addEventListener(VIEWPORT_PAUSE, pause)
+    viewport.addEventListener(VIEWPORT_RESUME, resume)
+    cleanupFn(() => {
+      viewport.removeEventListener(VIEWPORT_PAUSE, pause)
+      viewport.removeEventListener(VIEWPORT_RESUME, resume)
+    })
   }
-}, { immediate: true });
+})
+
+const { swipe } = useToastSwipe({
+  swipeDirection: providerContext.swipeDirection,
+  swipeThreshold: providerContext.swipeThreshold,
+  disabled: providerContext.disableSwipe,
+  emit: emits,
+  onSwipeEnd: event => handleClose(event, 'swipe'),
+})
+
+const toastSurface = getToastSurface({
+  providerContext,
+  open: () => props.open,
+  status: () => props.toast?.status,
+  stack: () => stack.value,
+  height: () => stackEntry.height,
+})
 
 onKeyStroke('Escape', (event) => {
-  emits('escapeKeyDown', event);
-  if (!event.defaultPrevented) {
-    providerContext.isFocusedToastEscapeKeyDownRef.value = true;
-    handleClose();
-  }
-});
+  emits('escapeKeyDown', event)
+  if (!event.defaultPrevented)
+    handleClose(event, 'escape-key')
+})
 
-let unregisterToast: (() => void) | undefined;
+let unregisterToast: (() => void) | undefined
 onMounted(() => {
-  providerContext.onToastAdd();
-  unregisterToast = providerContext.registerToast(stackEntry);
-  measureHeight();
-});
+  providerContext.onToastAdd()
+  unregisterToast = providerContext.registerToast(stackEntry)
+  measureHeight()
+})
 onUnmounted(() => {
-  providerContext.onToastRemove();
-  unregisterToast?.();
-});
+  providerContext.onToastRemove()
+  unregisterToast?.()
+})
 
-provideToastRootContext({
-  onClose: handleClose,
-  toast: toRef(props, 'toast'),
-});
+provideToastRootContext({ onClose: handleClose, toast: toRef(props, 'toast') })
 </script>
 
 <template>
@@ -268,94 +247,15 @@ provideToastRootContext({
     :to="providerContext.viewport.value ?? 'body'"
     :disabled="!!positionerContext"
   >
-    <CollectionItem>
-      <Primitive
-        :ref="forwardRef"
-        tabindex="0"
-        v-bind="$attrs"
-        :as="as"
-        :as-child="asChild"
-        :data-state="open ? 'open' : 'closed'"
-        :data-swipe-direction="providerContext.swipeDirection.value"
-        :data-status="toast?.status"
-        :data-expanded="providerContext.expanded.value ? '' : undefined"
-        :data-limited="stack.limited ? '' : undefined"
-        :inert="stack.limited || undefined"
-        :style="{
-          ...(providerContext.disableSwipe.value ? undefined : { userSelect: 'none', touchAction: 'none' }),
-          '--akar-toast-index': stack.index,
-          '--akar-toast-offset-y': `${stack.offsetY}px`,
-          '--akar-toast-height': stackEntry.height ? `${stackEntry.height}px` : undefined,
-        }"
-        @pointerdown.left="(event: PointerEvent) => {
-          if (providerContext.disableSwipe.value) return;
-
-          pointerStartRef = { x: event.clientX, y: event.clientY };
-        }"
-        @pointermove="(event: PointerEvent) => {
-          if (providerContext.disableSwipe.value || !pointerStartRef) return;
-
-          const x = event.clientX - pointerStartRef.x;
-          const y = event.clientY - pointerStartRef.y;
-          const hasSwipeMoveStarted = Boolean(swipeDeltaRef);
-          const isHorizontalSwipe = ['left', 'right'].includes(providerContext.swipeDirection.value);
-          const clamp = ['left', 'up'].includes(providerContext.swipeDirection.value)
-            ? Math.min
-            : Math.max;
-          const clampedX = isHorizontalSwipe ? clamp(0, x) : 0;
-          const clampedY = !isHorizontalSwipe ? clamp(0, y) : 0;
-          const moveStartBuffer = event.pointerType === 'touch' ? 10 : 2;
-          const delta = { x: clampedX, y: clampedY };
-          const eventDetail = { originalEvent: event, delta };
-          if (hasSwipeMoveStarted) {
-            swipeDeltaRef = delta;
-            handleAndDispatchCustomEvent(TOAST_SWIPE_MOVE, (ev: SwipeEvent) => emits('swipeMove', ev), eventDetail);
-          }
-          else if (isDeltaInDirection(delta, providerContext.swipeDirection.value, moveStartBuffer)) {
-            swipeDeltaRef = delta;
-            handleAndDispatchCustomEvent(TOAST_SWIPE_START, (ev: SwipeEvent) => emits('swipeStart', ev), eventDetail);
-            (event.target as HTMLElement).setPointerCapture(event.pointerId);
-          }
-          else if (Math.abs(x) > moveStartBuffer || Math.abs(y) > moveStartBuffer) {
-            // User is swiping in wrong direction so we disable swipe gesture
-            // for the current pointer down interaction
-            pointerStartRef = null;
-          }
-        }"
-        @pointerup="(event: PointerEvent) => {
-          if (providerContext.disableSwipe.value) return;
-
-          const delta = swipeDeltaRef;
-          const target = event.target as HTMLElement;
-          if (target.hasPointerCapture(event.pointerId)) {
-            target.releasePointerCapture(event.pointerId);
-          }
-          swipeDeltaRef = null;
-          pointerStartRef = null;
-          if (delta) {
-            const toast = event.currentTarget;
-            const eventDetail = { originalEvent: event, delta };
-            if (
-              isDeltaInDirection(delta, providerContext.swipeDirection.value, providerContext.swipeThreshold.value)
-            ) {
-              handleAndDispatchCustomEvent(TOAST_SWIPE_END, (ev: SwipeEvent) => emits('swipeEnd', ev), eventDetail);
-            }
-            else {
-              handleAndDispatchCustomEvent(TOAST_SWIPE_CANCEL, (ev: SwipeEvent) => emits('swipeCancel', ev), eventDetail);
-            }
-            // Prevent click event from triggering on items within the toast when
-            // pointer up is part of a swipe gesture
-            toast?.addEventListener('click', (event) => event.preventDefault(), {
-              once: true,
-            });
-          }
-        }"
-      >
-        <slot
-          :remaining="remainingTime"
-          :duration="duration"
-        />
-      </Primitive>
-    </CollectionItem>
+    <component
+      :is="renderAs(as, asChild)"
+      v-bind="mergeProps(COLLECTION_ITEM_ATTRS, $attrs, toastSurface.attrs.value, swipe.attrs.value, { tabindex: $attrs.tabindex ?? '0' })"
+      :ref="forwardRef"
+    >
+      <slot
+        :remaining="remainingTime"
+        :duration="duration"
+      />
+    </component>
   </Teleport>
 </template>

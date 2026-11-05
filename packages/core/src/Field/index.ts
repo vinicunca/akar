@@ -2,19 +2,19 @@ export {
   default as FieldControl,
   type FieldControlEmits,
   type FieldControlProps,
-} from './FieldControl.vue';
+} from './FieldControl.vue'
 export {
   default as FieldDescription,
   type FieldDescriptionProps,
-} from './FieldDescription.vue';
+} from './FieldDescription.vue'
 export {
   default as FieldError,
   type FieldErrorProps,
-} from './FieldError.vue';
+} from './FieldError.vue'
 export {
   default as FieldLabel,
   type FieldLabelProps,
-} from './FieldLabel.vue';
+} from './FieldLabel.vue'
 export {
   type FieldControlDetail,
   type FieldControlRegistration,
@@ -24,12 +24,12 @@ export {
   type FieldRootEmits,
   type FieldRootProps,
   injectFieldRootContext,
-} from './FieldRoot.vue';
-export { default as FieldValidity } from './FieldValidity.vue';
+} from './FieldRoot.vue'
+export { default as FieldValidity } from './FieldValidity.vue'
 export {
   createValidityState,
   type FieldValidateFn,
   type FieldValidateResult,
   type FieldValidationMode,
   type FieldValidityState,
-} from './useFieldValidation';
+} from './useFieldValidation'

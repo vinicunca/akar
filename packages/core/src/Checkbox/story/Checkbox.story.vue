@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { CheckboxIndicator, CheckboxRoot } from '..';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { CheckboxIndicator, CheckboxRoot } from '..'
 
-const checkboxOne = ref<boolean | 'indeterminate'>('indeterminate');
-const checkboxThree = ref(false);
-const customStringState = ref<'yes' | 'no'>('no');
-const customNumberState = ref<1 | 0>(0);
+const checkboxOne = ref<boolean | 'indeterminate'>('indeterminate')
+const checkboxThree = ref(false)
+const customStringState = ref<'yes' | 'no'>('no')
+const customNumberState = ref<1 | 0>(0)
 </script>
 
 <template>

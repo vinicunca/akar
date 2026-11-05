@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { ComputedRef, Ref } from 'vue';
-import type { FieldValidationMode } from '@/Field/useFieldValidation';
-import type { PrimitiveProps } from '@/Primitive';
-import { createContext, useForwardExpose } from '@/shared';
+import type { ComputedRef, Ref } from 'vue'
+import type { FieldValidationMode } from '@/Field/useFieldValidation'
+import type { PrimitiveProps } from '@/Primitive'
+import { createContext, mergeExpose, useForwardElement } from '@/shared'
 
 export interface FormRootProps extends PrimitiveProps {
   /**
@@ -10,7 +10,7 @@ export interface FormRootProps extends PrimitiveProps {
    * matching `FieldRoot`'s `FieldError` until the user edits that field, or a
    * new value for that key is provided.
    */
-  errors?: Record<string, string | Array<string>>;
+  errors?: Record<string, string | string[]>
   /**
    * When fields validate. The `validationMode` of a `FieldRoot` takes precedence over this.
    * - `onSubmit`: when the form is submitted, then on every change after that.
@@ -18,7 +18,7 @@ export interface FormRootProps extends PrimitiveProps {
    * - `onChange`: on every change to a control's value.
    * @defaultValue "onSubmit"
    */
-  validationMode?: FieldValidationMode;
+  validationMode?: FieldValidationMode
 }
 
 export type FormRootEmits = {
@@ -29,85 +29,84 @@ export type FormRootEmits = {
    * (e.g. to its `action`) unless you call `event.preventDefault()`, or
    * listen to `formSubmit`.
    */
-  submit: [event: SubmitEvent];
+  submit: [event: SubmitEvent]
   /**
    * Emitted after `submit` with the values of every named field. Listening
    * to it prevents the native submission.
    */
-  formSubmit: [values: Record<string, unknown>, event: SubmitEvent];
-};
+  formSubmit: [values: Record<string, unknown>, event: SubmitEvent]
+}
 
 export interface FormRegisteredField {
-  name: Ref<string | undefined>;
+  name: Ref<string | undefined>
   /** Runs the field's validation now. Returns whether it's valid. */
-  validate: () => boolean;
-  invalid: ComputedRef<boolean>;
-  getValue: () => unknown;
-  getControlElement: () => HTMLElement | undefined;
-  resetField: () => void;
+  validate: () => boolean
+  invalid: ComputedRef<boolean>
+  getValue: () => unknown
+  getControlElement: () => HTMLElement | undefined
+  resetField: () => void
 }
 
 export interface FormRootContext {
-  serverErrors: ComputedRef<Record<string, string | Array<string>>>;
-  validationMode: ComputedRef<FieldValidationMode>;
+  serverErrors: ComputedRef<Record<string, string | string[]>>
+  validationMode: ComputedRef<FieldValidationMode>
   /** How many times the form has been submitted. */
-  submitCount: Ref<number>;
+  submitCount: Ref<number>
   /** The values of every named field. */
-  getValues: () => Record<string, unknown>;
-  registerField: (field: FormRegisteredField) => () => void;
+  getValues: () => Record<string, unknown>
+  registerField: (field: FormRegisteredField) => () => void
 }
 
 export const [injectFormRootContext, provideFormRootContext]
-  = createContext<FormRootContext>('FormRoot');
+  = createContext<FormRootContext>('FormRoot')
 </script>
 
 <script setup lang="ts">
-import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue';
-import { Primitive } from '@/Primitive';
+import { computed, getCurrentInstance, nextTick, ref, watch } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
 
 const props = withDefaults(defineProps<FormRootProps>(), {
   as: 'form',
   validationMode: 'onSubmit',
-});
-const emit = defineEmits<FormRootEmits>();
+})
+const emit = defineEmits<FormRootEmits>()
 
-const instance = getCurrentInstance();
+const instance = getCurrentInstance()
 
 function validate(fieldName?: string) {
   const targets = fieldName
-    ? Array.from(fields).filter((field) => field.name.value === fieldName)
-    : Array.from(fields);
+    ? Array.from(fields).filter(field => field.name.value === fieldName)
+    : Array.from(fields)
   // Validate every field (no short-circuit), so each one shows its errors.
-  return targets.map((field) => field.validate()).every(Boolean);
+  return targets.map(field => field.validate()).every(Boolean)
 }
 
-defineExpose({
+const { forwardRef, expose } = useForwardElement()
+defineExpose(mergeExpose(expose, {
   /** Validates every field, or only the field with the given `name`. Returns whether they're all valid. */
   validate,
-});
-useForwardExpose();
+}))
 
-const serverErrors = computed(() => props.errors ?? {});
-const validationMode = computed(() => props.validationMode);
-const submitCount = ref(0);
+const serverErrors = computed(() => props.errors ?? {})
+const validationMode = computed(() => props.validationMode)
+const submitCount = ref(0)
 
-const fields = new Set<FormRegisteredField>();
+const fields = new Set<FormRegisteredField>()
 
 function registerField(field: FormRegisteredField) {
-  fields.add(field);
+  fields.add(field)
   return () => {
-    fields.delete(field);
-  };
+    fields.delete(field)
+  }
 }
 
 function getValues() {
-  const values: Record<string, unknown> = {};
+  const values: Record<string, unknown> = {}
   fields.forEach((field) => {
-    if (field.name.value) {
-      values[field.name.value] = field.getValue();
-    }
-  });
-  return values;
+    if (field.name.value)
+      values[field.name.value] = field.getValue()
+  })
+  return values
 }
 
 /**
@@ -116,66 +115,60 @@ function getValues() {
  * lists). Returns whether any field is invalid.
  */
 function focusFirstInvalid() {
-  let hasInvalid = false;
-  let first: HTMLElement | undefined;
+  let hasInvalid = false
+  let first: HTMLElement | undefined
   fields.forEach((field) => {
-    if (!field.invalid.value) {
-      return;
-    }
-    hasInvalid = true;
-    const element = field.getControlElement();
-    if (element && (!first || first.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_PRECEDING)) {
-      first = element;
-    }
-  });
+    if (!field.invalid.value)
+      return
+    hasInvalid = true
+    const element = field.getControlElement()
+    if (element && (!first || first.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_PRECEDING))
+      first = element
+  })
 
   if (first) {
-    first.focus();
-    if (first instanceof HTMLInputElement) {
-      first.select();
-    }
+    first.focus()
+    if (first instanceof HTMLInputElement)
+      first.select()
   }
-  return hasInvalid;
+  return hasInvalid
 }
 
 // Set on a valid submit, so server `errors` arriving in response focus the
 // first field they invalidate.
-let awaitingServerErrors = false;
+let awaitingServerErrors = false
 
 watch(serverErrors, async () => {
-  if (!awaitingServerErrors) {
-    return;
-  }
-  awaitingServerErrors = false;
-  await nextTick();
-  focusFirstInvalid();
-});
+  if (!awaitingServerErrors)
+    return
+  awaitingServerErrors = false
+  await nextTick()
+  focusFirstInvalid()
+})
 
 function handleSubmit(event: Event) {
-  submitCount.value++;
+  submitCount.value++
 
   // Async `validate` functions can't hold up the native submit event, so
   // only synchronous results (native constraints, sync `validate`, server
   // errors, `invalid`) gate it — matching Base UI.
-  validate();
+  validate()
   if (focusFirstInvalid()) {
-    event.preventDefault();
-    return;
+    event.preventDefault()
+    return
   }
 
-  awaitingServerErrors = true;
-  emit('submit', event as SubmitEvent);
+  awaitingServerErrors = true
+  emit('submit', event as SubmitEvent)
 
   if (instance?.vnode.props?.onFormSubmit) {
-    event.preventDefault();
-    emit('formSubmit', getValues(), event as SubmitEvent);
+    event.preventDefault()
+    emit('formSubmit', getValues(), event as SubmitEvent)
   }
 }
 
 function handleReset() {
-  fields.forEach((field) => {
-    field.resetField();
-  });
+  fields.forEach(field => field.resetField())
 }
 
 provideFormRootContext({
@@ -184,17 +177,17 @@ provideFormRootContext({
   submitCount,
   getValues,
   registerField,
-});
+})
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="asChild"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     novalidate
     @submit="handleSubmit"
     @reset="handleReset"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

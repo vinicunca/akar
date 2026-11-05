@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { ToastDescription, ToastProvider, ToastRoot, ToastViewport } from '..';
+import { ref } from 'vue'
+import { ToastDescription, ToastProvider, ToastRoot, ToastViewport } from '..'
 
-const one = ref(0);
-const two = ref(0);
+const one = ref(0)
+const two = ref(0)
 </script>
 
 <template>

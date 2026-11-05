@@ -1,26 +1,27 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface ScrollAreaCornerProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import ScrollAreaCornerImpl from './ScrollAreaCornerImpl.vue';
-import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
+import { computed } from 'vue'
+import ScrollAreaCornerImpl from './ScrollAreaCornerImpl.vue'
+import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue'
 
-const props = defineProps<ScrollAreaCornerProps>();
+const props = defineProps<ScrollAreaCornerProps>()
 
-const { forwardRef } = useForwardExpose();
-const rootContext = injectScrollAreaRootContext();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectScrollAreaRootContext()
 
 const hasBothScrollbarsVisible = computed(
   () => !!rootContext.scrollbarX.value && !!rootContext.scrollbarY.value,
-);
+)
 const hasCorner = computed(
   () => rootContext.type.value !== 'scroll' && hasBothScrollbarsVisible.value,
-);
+)
 </script>
 
 <template>

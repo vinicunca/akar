@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuRoot,
   ContextMenuTrigger,
-} from '..';
+} from '..'
 
 withDefaults(defineProps<{ forceMount?: boolean }>(), {
   forceMount: false,
-});
+})
 
-const open = ref(false);
-const rejectOpen = ref(false);
+const open = ref(false)
+const rejectOpen = ref(false)
 
 function handleOpenChange(value: boolean) {
-  if (value && rejectOpen.value) {
-    return;
-  }
+  if (value && rejectOpen.value)
+    return
 
-  open.value = value;
+  open.value = value
 }
 </script>
 

@@ -5,7 +5,7 @@
     "schedule:weekly",
     "group:allNonMajor"
   ],
-  "timezone": "Asia/Makassar",
+  "timezone": "Asia/Kuala_Lumpur",
   "labels": [
     "dependencies"
   ],
@@ -46,7 +46,7 @@
         "eslint",
         "simple-git-hooks",
         "lint-staged",
-        "@vinicunca/eslint-config"
+        "@antfu/eslint-config"
       ],
       "matchPackagePrefixes": [
         "eslint"
@@ -68,7 +68,7 @@
     }
   ],
   "ignoreDeps": [
-    "akar",
+    "reka-ui",
     "node",
     "typescript"
   ],

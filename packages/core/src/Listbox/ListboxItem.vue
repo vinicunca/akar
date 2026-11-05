@@ -1,110 +1,169 @@
 <script lang="ts">
-import { createContext, handleAndDispatchCustomEvent, useForwardExpose, useId } from '@/shared';
+import type { Ref } from 'vue'
+import type { PrimitiveProps } from '..'
+import type { AcceptableValue } from '@/shared/types'
+import { createContext, useForwardElement, useId } from '@/shared'
 
 export interface ListboxItemProps<T = AcceptableValue> extends PrimitiveProps {
   /** The value given as data when submitted with a `name`. */
-  value: T;
+  value: T
   /** When `true`, prevents the user from interacting with the item. */
-  disabled?: boolean;
+  disabled?: boolean
+  /** Text used for the label registry; defaults to the rendered text content. */
+  textValue?: string
 }
-export type SelectEvent<T> = CustomEvent<{ originalEvent: PointerEvent; value?: T }>;
+export type SelectEvent<T> = CustomEvent<{ originalEvent: PointerEvent, value?: T }>
 
 export type ListboxItemEmits<T = AcceptableValue> = {
   /** Event handler called when the selecting item. <br> It can be prevented by calling `event.preventDefault`. */
-  select: [event: SelectEvent<T>];
-};
-
-const LISTBOX_SELECT = 'listbox.select';
+  select: [event: SelectEvent<T>]
+}
 
 interface ListboxItemContext {
-  isSelected: Ref<boolean>;
+  isSelected: Ref<boolean>
 }
 
 export const [injectListboxItemContext, provideListboxItemContext]
-  = createContext<ListboxItemContext>('ListboxItem');
+  = createContext<ListboxItemContext>('ListboxItem')
 </script>
 
 <script setup lang="ts"  generic="T extends AcceptableValue = AcceptableValue">
-import type { Ref } from 'vue';
-import type { PrimitiveProps } from '..';
-import type { AcceptableValue } from '@/shared/types';
-import { computed } from 'vue';
-import { useCollection } from '@/Collection';
-import { Primitive } from '..';
-import { injectListboxRootContext } from './ListboxRoot.vue';
-import { valueComparator } from './utils';
+import { computed, mergeProps, onUnmounted, onUpdated, ref, watch, watchPostEffect } from 'vue'
+import { useCollectionItem } from '@/Collection'
+import { renderAs } from '@/Primitive/renderAs'
+import { getterRef } from '@/shared/partSurface'
+import { injectListboxGroupContext } from './ListboxGroup.vue'
+import { injectListboxRootContext } from './ListboxRoot.vue'
+import { getListboxItemSurface } from './useListbox'
+import { compare } from './utils'
+
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<ListboxItemProps<T>>(), {
   as: 'div',
-});
-const emits = defineEmits<ListboxItemEmits<T>>();
+})
+const emits = defineEmits<ListboxItemEmits<T>>()
 
 defineSlots<{
   default?: (props: {
     /** Whether the item is currently selected */
-    selected: boolean;
-  }) => any;
-}>();
+    selected: boolean
+  }) => any
+}>()
 
-const id = useId(undefined, 'akar-listbox-item');
-const { CollectionItem } = useCollection();
-const { forwardRef, currentElement } = useForwardExpose();
-const rootContext = injectListboxRootContext();
+const id = useId(undefined, 'reka-listbox-item')
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+// Registered with the collection from setup; no wrapper component.
+useCollectionItem(currentElement, () => props.value)
+const rootContext = injectListboxRootContext()
 
-const isHighlighted = computed(() => currentElement.value != null && currentElement.value === rootContext.highlightedElement.value);
-const isSelected = computed(() => valueComparator(rootContext.modelValue.value, props.value, rootContext.by));
+// role/tabindex/aria-selected/disabled + the click/Space select protocol and
+// the hover highlight all come from the shared surface builder (single source
+// with `useListboxRoot()`); the collection registration, the SSR id and the
+// label registration stay in the SFC. The surface's state is read directly:
+// highlight and selection are keyed-selector cells, so only the items a change
+// flips re-render.
+const surface = getListboxItemSurface(rootContext, () => props.value, () => props.disabled, {
+  element: currentElement,
+  onSelect: event => emits('select', event as SelectEvent<T>),
+})
+const isSelected = getterRef(surface.isSelected)
 
-const disabled = computed(() => rootContext.disabled.value || props.disabled);
+// No `v-memo`: the item renders its slot itself, and Vue re-renders it exactly
+// when it must: when its state or attrs change, when something the slot reads
+// changes, or when its parent hands it a new slot function (which may close
+// over new data even when the state is the same, so a memo keyed on the state
+// would show stale content). The item's own state comes from keyed
+// selectors, so a highlight move or a selection change re-renders only the
+// items it flips, as long as no parent re-renders with them: the content keeps
+// its highlight-dependent `tabindex` out of its render for that reason. A
+// parent that does re-render (a `v-for` over data that changed, or a render
+// function reading the model) re-renders every item, as v2 did; a consumer
+// `v-memo` on that `v-for` keeps it to the items whose data changed.
 
-async function handleSelect(ev: SelectEvent<T>) {
-  emits('select', ev);
-  if (ev?.defaultPrevented) {
-    return;
-  }
-
-  if (!disabled.value && ev) {
-    rootContext.onValueChange(props.value);
-    rootContext.changeHighlight(currentElement.value);
-  }
+// Sticky: registered once mounted, never unregistered (#2824). Re-registered
+// whenever `value` / `textValue` / `disabled` change (the post effect) or the
+// item re-renders (`onUpdated`, which covers slot text that is not a prop);
+// the registry ignores a rewrite that changes nothing. Text that changes
+// without re-rendering this item (a child component updating on its own) is
+// what `textValue` is for.
+//
+// A filtered-out item (#2824 item 7) renders nothing, so it has no text to
+// read: it keeps the label it last rendered with.
+const label = ref<string>()
+// A reused item (index-keyed `v-for`) that now holds another value must not
+// keep the old value's text: forget it, so the item renders once and re-measures.
+watch(() => props.value, (value, old) => {
+  if (!compare(value, old, rootContext.by))
+    label.value = undefined
+})
+// What this item last registered: a re-render that changes none of it (a
+// filter keystroke re-rendering a still-visible item) skips the registry.
+// The skip compares the value's registry key, read here so the post effect
+// tracks it: an object mutated in place under `by: 'id'` changes its key and
+// must re-register. An object the registry keys by its whole content (no `by`,
+// or a function `by`) always registers, which reads (and tracks) its fields.
+const ALWAYS_REGISTER = Symbol('always')
+function registryKey(value: T): unknown {
+  if (value === null || typeof value !== 'object')
+    return value
+  const key = typeof rootContext.by === 'string' ? (value as Record<string, unknown>)[rootContext.by] : ALWAYS_REGISTER
+  return key !== null && typeof key === 'object' ? ALWAYS_REGISTER : key
+}
+let registered: { value: T, key: unknown, text: string, disabled: boolean } | undefined
+function syncLabel() {
+  const text = props.textValue ?? (isFilteredOut.value ? label.value : currentElement.value?.textContent ?? '')
+  if (text === undefined)
+    return
+  label.value = text
+  const value = props.value
+  const key = registryKey(value)
+  const isDisabled = (rootContext.disabled.value || props.disabled) ?? false
+  if (key !== ALWAYS_REGISTER && registered && registered.value === value && Object.is(registered.key, key) && registered.text === text && registered.disabled === isDisabled)
+    return
+  registered = { value, key, text, disabled: isDisabled }
+  rootContext.labels.register(value, text, isDisabled)
 }
 
-function handleSelectCustomEvent(ev: PointerEvent) {
-  const eventDetail = { originalEvent: ev, value: props.value as T };
-  handleAndDispatchCustomEvent(LISTBOX_SELECT, handleSelect, eventDetail);
-}
+// Filtering: the item stays mounted (so it keeps its registrations) but
+// renders nothing while filtered out, which also takes it out of the
+// collection that navigation, typeahead and select-all walk.
+const groupContext = injectListboxGroupContext(null)
+const unregisterFilterItem = rootContext.registerFilterItem(id, {
+  value: () => props.value,
+  label: () => props.textValue ?? label.value,
+  group: groupContext?.id,
+})
+onUnmounted(unregisterFilterItem)
+const isFilteredOut = computed(() => rootContext.isFilteredOut(id))
+
+watchPostEffect(syncLabel)
+onUpdated(syncLabel)
 
 provideListboxItemContext({
   isSelected,
-});
+})
+
+// Binding order is part of the v2 contract: `v-bind="$attrs"` sat after `:id`
+// and before every other binding, so a consumer `id` (e.g. ComboboxItem's)
+// overrides the generated one, the surface's role/aria/data-* override
+// same-named `$attrs`, and a consumer listener runs before the surface's
+// handler. `mergeProps($attrs, surface.attrs.value)` in the template keeps
+// exactly that precedence and listener chaining (never an object spread, which
+// would clobber the handlers).
 </script>
 
 <template>
-  <CollectionItem :value="value">
-    <Primitive
+  <template v-if="!isFilteredOut">
+    <component
+      :is="renderAs(as, asChild)"
       :id="id"
-      v-bind="$attrs"
+      v-bind="mergeProps($attrs, surface.attrs.value)"
       :ref="forwardRef"
-      v-memo="[isHighlighted, isSelected, disabled, rootContext.focusable.value, ...Object.entries($attrs).flat()]"
-      role="option"
-      :tabindex="rootContext.focusable.value ? isHighlighted ? '0' : '-1' : -1"
-      :aria-selected="isSelected"
-      :as="as"
-      :as-child="asChild"
-      :disabled="disabled ? '' : undefined"
-      :data-disabled="disabled ? '' : undefined"
-      :data-highlighted="isHighlighted ? '' : undefined"
-      :data-state="isSelected ? 'checked' : 'unchecked'"
-      @click="handleSelectCustomEvent"
-      @keydown.space.prevent="handleSelectCustomEvent"
-      @pointermove="() => {
-        if (rootContext.highlightedElement.value === currentElement)
-          return
-
-        if (rootContext.highlightOnHover.value)
-          rootContext.changeHighlight(currentElement, false, false)
-      }"
+      data-reka-collection-item=""
     >
       <slot :selected="isSelected" />
-    </Primitive>
-  </CollectionItem>
+    </component>
+  </template>
 </template>

@@ -1,38 +1,34 @@
 <script lang="ts">
-import type { CollapsibleContentProps } from '../Collapsible';
+import type { CollapsibleContentProps } from '../Collapsible'
 
 export interface AccordionContentProps extends CollapsibleContentProps {}
 </script>
 
 <script setup lang="ts">
-import { useForwardExpose } from '@/shared';
-import { CollapsibleContent } from '../Collapsible';
-import { injectAccordionItemContext } from './AccordionItem.vue';
-import { injectAccordionRootContext } from './AccordionRoot.vue';
+import { useForwardElement } from '@/shared'
+import { CollapsibleContent } from '../Collapsible'
+import { injectAccordionItemContext } from './AccordionItem.vue'
+import { injectAccordionRootContext } from './AccordionRoot.vue'
+import { getAccordionContentSurface } from './useAccordion'
 
-const props = defineProps<AccordionContentProps>();
+const props = defineProps<AccordionContentProps>()
 
-const rootContext = injectAccordionRootContext();
-const itemContext = injectAccordionItemContext();
+const rootContext = injectAccordionRootContext()
+const itemContext = injectAccordionItemContext()
+const surface = getAccordionContentSurface(rootContext, itemContext)
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <CollapsibleContent
-    role="region"
+    :id="props.id"
+    :ref="forwardRef"
     :as-child="props.asChild"
     :as="as"
     :force-mount="props.forceMount"
-    :aria-labelledby="itemContext.triggerId"
-    :data-state="itemContext.dataState.value"
-    :data-disabled="itemContext.dataDisabled.value"
-    :data-orientation="rootContext.orientation"
-    style="
-      --akar-accordion-content-width: var(--akar-collapsible-content-width);
-      --akar-accordion-content-height: var(--akar-collapsible-content-height);
-    "
-    @content-found="rootContext.changeModelValue(itemContext.value.value)"
+    v-bind="surface.attrs.value"
   >
     <slot />
   </CollapsibleContent>

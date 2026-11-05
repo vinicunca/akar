@@ -1,139 +1,126 @@
-import type { DateFields, DateValue, TimeFields } from '@internationalized/date';
+import type { DatePickerRootProps } from './DatePickerRoot.vue'
+import type { DateTimeField, DateValue } from '@/date'
+import userEvent from '@testing-library/user-event'
+import { render } from '@testing-library/vue'
+import { describe, expect, it } from 'vitest'
+import { axe } from 'vitest-axe'
+import { ConfigProvider } from '@/ConfigProvider'
+import { cycleField, getFieldValue } from '@/date'
+import { useTestKbd } from '@/shared'
+import DatePicker from './story/_DatePicker.vue'
 
-import type { DatePickerRootProps } from './DatePickerRoot.vue';
-import { CalendarDate, CalendarDateTime, toZoned } from '@internationalized/date';
-import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/vue';
-import { describe, expect, it } from 'vitest';
-import { axe } from 'vitest-axe';
-import { ConfigProvider } from '@/ConfigProvider';
-import { useTestKbd } from '@/shared';
-import DatePicker from './story/_DatePicker.vue';
+const calendarDate = new Temporal.PlainDate(1980, 1, 20)
+const calendarDateTime = new Temporal.PlainDateTime(1980, 1, 20, 12, 30, 0, 0)
+const zonedDateTime = calendarDateTime.toZonedDateTime('America/New_York')
 
-const calendarDate = new CalendarDate(1980, 1, 20);
-const calendarDateTime = new CalendarDateTime(1980, 1, 20, 12, 30, 0, 0);
-const zonedDateTime = toZoned(calendarDateTime, 'America/New_York');
+const kbd = useTestKbd()
 
-const kbd = useTestKbd();
-
-function getTimeSegments(getByTestId: (...args: Array<any>) => HTMLElement) {
+function getTimeSegments(getByTestId: (...args: any[]) => HTMLElement) {
   return {
     hour: getByTestId('hour'),
     minute: getByTestId('minute'),
     second: getByTestId('second'),
     dayPeriod: getByTestId('dayPeriod'),
     timeZoneName: getByTestId('timeZoneName'),
-  };
+  }
 }
 
-function setup(props: { datePickerProps?: DatePickerRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue | undefined) => void } } = {}) {
-  const user = userEvent.setup();
-  const returned = render(DatePicker, { props });
-  const month = returned.getByTestId('month');
-  const day = returned.getByTestId('day');
-  const year = returned.getByTestId('year');
-  const input = returned.getByTestId('input');
-  const label = returned.getByTestId('label');
-  const trigger = returned.getByTestId('trigger');
+function setup(props: { datePickerProps?: DatePickerRootProps, emits?: { 'onUpdate:modelValue'?: (data: DateValue | undefined) => void } } = {}) {
+  const user = userEvent.setup()
+  const returned = render(DatePicker, { props })
+  const month = returned.getByTestId('month')
+  const day = returned.getByTestId('day')
+  const year = returned.getByTestId('year')
+  const input = returned.getByTestId('input')
+  const label = returned.getByTestId('label')
+  const trigger = returned.getByTestId('trigger')
 
-  return {
-    ...returned,
-    user,
-    month,
-    day,
-    year,
-    input,
-    label,
-    trigger,
-  };
+  return { ...returned, user, month, day, year, input, label, trigger }
 }
 
 it('should pass axe accessibility tests', async () => {
-  const { container } = setup();
-  expect(await axe(container)).toHaveNoViolations();
-});
+  const { container } = setup()
+  expect(await axe(container)).toHaveNoViolations()
+})
+
+it('should pass axe accessibility tests with the calendar open', async () => {
+  const { user, trigger, getByTestId, baseElement } = setup()
+  await user.click(trigger)
+  expect(getByTestId('calendar')).toBeInTheDocument()
+  expect(await axe(baseElement)).toHaveNoViolations()
+})
 
 describe('datePicker', async () => {
   it('populates segment with value - `CalendarDate`', async () => {
     const { month, day, year } = setup({
       datePickerProps: { modelValue: calendarDate },
-    });
+    })
 
-    expect(month).toHaveTextContent(String(calendarDate.month));
-    expect(day).toHaveTextContent(String(calendarDate.day));
-    expect(year).toHaveTextContent(String(calendarDate.year));
-  });
+    expect(month).toHaveTextContent(String(calendarDate.month))
+    expect(day).toHaveTextContent(String(calendarDate.day))
+    expect(year).toHaveTextContent(String(calendarDate.year))
+  })
 
   it('populates segment with value - `CalendarDateTime`', async () => {
     const { month, day, year, getByTestId } = setup({
       datePickerProps: { modelValue: calendarDateTime },
-    });
+    })
 
-    expect(month).toHaveTextContent(String(calendarDateTime.month));
-    expect(day).toHaveTextContent(String(calendarDateTime.day));
-    expect(year).toHaveTextContent(String(calendarDateTime.year));
-    expect(getByTestId('hour')).toHaveTextContent(String(calendarDateTime.hour));
-    expect(getByTestId('minute')).toHaveTextContent(String(calendarDateTime.minute));
-  });
+    expect(month).toHaveTextContent(String(calendarDateTime.month))
+    expect(day).toHaveTextContent(String(calendarDateTime.day))
+    expect(year).toHaveTextContent(String(calendarDateTime.year))
+    expect(getByTestId('hour')).toHaveTextContent(String(calendarDateTime.hour))
+    expect(getByTestId('minute')).toHaveTextContent(String(calendarDateTime.minute))
+  })
 
   it('populates segment with value - `ZonedDateTime`', async () => {
     const { month, day, year, getByTestId } = setup({
       datePickerProps: { modelValue: zonedDateTime },
-    });
+    })
 
-    expect(month).toHaveTextContent(String(zonedDateTime.month));
-    expect(day).toHaveTextContent(String(zonedDateTime.day));
-    expect(year).toHaveTextContent(String(zonedDateTime.year));
-    expect(getByTestId('hour')).toHaveTextContent(String(zonedDateTime.hour));
-    expect(getByTestId('minute')).toHaveTextContent(String(zonedDateTime.minute));
-    expect(getByTestId('dayPeriod')).toHaveTextContent('PM');
-    expect(getByTestId('timeZoneName')).toHaveTextContent('EST');
-  });
+    expect(month).toHaveTextContent(String(zonedDateTime.month))
+    expect(day).toHaveTextContent(String(zonedDateTime.day))
+    expect(year).toHaveTextContent(String(zonedDateTime.year))
+    expect(getByTestId('hour')).toHaveTextContent(String(zonedDateTime.hour))
+    expect(getByTestId('minute')).toHaveTextContent(String(zonedDateTime.minute))
+    expect(getByTestId('dayPeriod')).toHaveTextContent('PM')
+    expect(getByTestId('timeZoneName')).toHaveTextContent('EST')
+  })
 
   it('syncs a same-day time zone change from `modelValue`', async () => {
     const { getByTestId, rerender } = setup({
       datePickerProps: { modelValue: zonedDateTime },
-    });
-    expect(getByTestId('timeZoneName')).toHaveTextContent('EST');
+    })
+    expect(getByTestId('timeZoneName')).toHaveTextContent('EST')
 
     await rerender({
-      datePickerProps: {
-        modelValue: toZoned(calendarDateTime, 'Asia/Tokyo'),
-      },
-    });
-    expect(getByTestId('timeZoneName')).toHaveTextContent('GMT+9');
-  });
+      datePickerProps: { modelValue: calendarDateTime.toZonedDateTime('Asia/Tokyo') },
+    })
+    expect(getByTestId('timeZoneName')).toHaveTextContent('GMT+9')
+  })
 
   it('focuses first segment on label click', async () => {
-    const { user, input, label } = setup();
-    await user.click(label);
-    expect(input.firstElementChild).toHaveFocus();
-  });
+    const { user, input, label } = setup()
+    await user.click(label)
+    expect(input.firstElementChild).toHaveFocus()
+  })
 
   it('focuses segments on click', async () => {
     const { user, day, month, year, getByTestId } = setup({
       datePickerProps: { modelValue: zonedDateTime },
-    });
+    })
 
-    const hour = getByTestId('hour');
-    const minute = getByTestId('minute');
-    const dayPeriod = getByTestId('dayPeriod');
-    const timeZoneName = getByTestId('timeZoneName');
-    const segments = [
-      day,
-      month,
-      year,
-      hour,
-      minute,
-      dayPeriod,
-      timeZoneName,
-    ];
+    const hour = getByTestId('hour')
+    const minute = getByTestId('minute')
+    const dayPeriod = getByTestId('dayPeriod')
+    const timeZoneName = getByTestId('timeZoneName')
+    const segments = [day, month, year, hour, minute, dayPeriod, timeZoneName]
 
     for (const segment of segments) {
-      await user.click(segment);
-      expect(segment).toHaveFocus();
+      await user.click(segment)
+      expect(segment).toHaveFocus()
     }
-  });
+  })
 
   it('increments segment on arrow up', async () => {
     const { user, day, month, year, getByTestId } = setup({
@@ -141,35 +128,35 @@ describe('datePicker', async () => {
         modelValue: zonedDateTime,
         granularity: 'second',
       },
-    });
+    })
 
-    const hour = getByTestId('hour');
-    const minute = getByTestId('minute');
-    const second = getByTestId('second');
+    const hour = getByTestId('hour')
+    const minute = getByTestId('minute')
+    const second = getByTestId('second')
 
-    function cycle(segment: keyof TimeFields | keyof DateFields) {
-      return String(zonedDateTime.cycle(segment, 1)[segment]);
+    function cycle(segment: DateTimeField) {
+      return String(getFieldValue(cycleField(zonedDateTime, segment, 1), segment))
     }
 
-    await user.click(day);
-    await user.keyboard(kbd.ARROW_UP);
-    expect(day).toHaveTextContent(cycle('day'));
-    await user.click(month);
-    await user.keyboard(kbd.ARROW_UP);
-    expect(month).toHaveTextContent(cycle('month'));
-    await user.click(year);
-    await user.keyboard(kbd.ARROW_UP);
-    expect(year).toHaveTextContent(cycle('year'));
-    await user.click(hour);
-    await user.keyboard(kbd.ARROW_UP);
-    expect(hour).toHaveTextContent('1');
-    await user.click(minute);
-    await user.keyboard(kbd.ARROW_UP);
-    expect(minute).toHaveTextContent(cycle('minute'));
-    await user.click(second);
-    await user.keyboard(kbd.ARROW_UP);
-    expect(second).toHaveTextContent(cycle('second'));
-  });
+    await user.click(day)
+    await user.keyboard(kbd.ARROW_UP)
+    expect(day).toHaveTextContent(cycle('day'))
+    await user.click(month)
+    await user.keyboard(kbd.ARROW_UP)
+    expect(month).toHaveTextContent(cycle('month'))
+    await user.click(year)
+    await user.keyboard(kbd.ARROW_UP)
+    expect(year).toHaveTextContent(cycle('year'))
+    await user.click(hour)
+    await user.keyboard(kbd.ARROW_UP)
+    expect(hour).toHaveTextContent('1')
+    await user.click(minute)
+    await user.keyboard(kbd.ARROW_UP)
+    expect(minute).toHaveTextContent(cycle('minute'))
+    await user.click(second)
+    await user.keyboard(kbd.ARROW_UP)
+    expect(second).toHaveTextContent(cycle('second'))
+  })
 
   it('decrements segment on arrow down', async () => {
     const { user, day, month, year, getByTestId } = setup({
@@ -177,35 +164,35 @@ describe('datePicker', async () => {
         modelValue: zonedDateTime,
         granularity: 'second',
       },
-    });
+    })
 
-    const hour = getByTestId('hour');
-    const minute = getByTestId('minute');
-    const second = getByTestId('second');
+    const hour = getByTestId('hour')
+    const minute = getByTestId('minute')
+    const second = getByTestId('second')
 
-    function cycle(segment: keyof TimeFields | keyof DateFields) {
-      return String(zonedDateTime.cycle(segment, -1)[segment]);
+    function cycle(segment: DateTimeField) {
+      return String(getFieldValue(cycleField(zonedDateTime, segment, -1), segment))
     }
 
-    await user.click(day);
-    await user.keyboard(kbd.ARROW_DOWN);
-    expect(day).toHaveTextContent(cycle('day'));
-    await user.click(month);
-    await user.keyboard(kbd.ARROW_DOWN);
-    expect(month).toHaveTextContent(cycle('month'));
-    await user.click(year);
-    await user.keyboard(kbd.ARROW_DOWN);
-    expect(year).toHaveTextContent(cycle('year'));
-    await user.click(hour);
-    await user.keyboard(kbd.ARROW_DOWN);
-    expect(hour).toHaveTextContent(cycle('hour'));
-    await user.click(minute);
-    await user.keyboard(kbd.ARROW_DOWN);
-    expect(minute).toHaveTextContent(cycle('minute'));
-    await user.click(second);
-    await user.keyboard(kbd.ARROW_DOWN);
-    expect(second).toHaveTextContent(cycle('second'));
-  });
+    await user.click(day)
+    await user.keyboard(kbd.ARROW_DOWN)
+    expect(day).toHaveTextContent(cycle('day'))
+    await user.click(month)
+    await user.keyboard(kbd.ARROW_DOWN)
+    expect(month).toHaveTextContent(cycle('month'))
+    await user.click(year)
+    await user.keyboard(kbd.ARROW_DOWN)
+    expect(year).toHaveTextContent(cycle('year'))
+    await user.click(hour)
+    await user.keyboard(kbd.ARROW_DOWN)
+    expect(hour).toHaveTextContent(cycle('hour'))
+    await user.click(minute)
+    await user.keyboard(kbd.ARROW_DOWN)
+    expect(minute).toHaveTextContent(cycle('minute'))
+    await user.click(second)
+    await user.keyboard(kbd.ARROW_DOWN)
+    expect(second).toHaveTextContent(cycle('second'))
+  })
 
   it('navigates segments using the arrow keys', async () => {
     const { getByTestId, user, day, month, year, trigger } = setup({
@@ -213,35 +200,25 @@ describe('datePicker', async () => {
         modelValue: zonedDateTime,
         granularity: 'second',
       },
-    });
-    const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
+    })
+    const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId)
 
-    const segments = [
-      month,
-      day,
-      year,
-      hour,
-      minute,
-      second,
-      dayPeriod,
-      timeZoneName,
-      trigger,
-    ];
+    const segments = [month, day, year, hour, minute, second, dayPeriod, timeZoneName, trigger]
 
-    await user.click(month);
+    await user.click(month)
 
     for (const seg of segments) {
-      expect(seg).toHaveFocus();
-      await user.keyboard(kbd.ARROW_RIGHT);
+      expect(seg).toHaveFocus()
+      await user.keyboard(kbd.ARROW_RIGHT)
     }
-    expect(trigger).toHaveFocus();
+    expect(trigger).toHaveFocus()
 
     for (const seg of segments.reverse()) {
-      expect(seg).toHaveFocus();
-      await user.keyboard(kbd.ARROW_LEFT);
+      expect(seg).toHaveFocus()
+      await user.keyboard(kbd.ARROW_LEFT)
     }
-    expect(month).toHaveFocus();
-  });
+    expect(month).toHaveFocus()
+  })
 
   it('navigates the segments using tab', async () => {
     const { getByTestId, user, day, month, year, trigger } = setup({
@@ -249,70 +226,61 @@ describe('datePicker', async () => {
         modelValue: zonedDateTime,
         granularity: 'second',
       },
-    });
-    const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId);
+    })
+    const { hour, minute, second, dayPeriod, timeZoneName } = getTimeSegments(getByTestId)
 
-    const segments = [
-      month,
-      day,
-      year,
-      hour,
-      minute,
-      second,
-      dayPeriod,
-      timeZoneName,
-    ];
+    const segments = [month, day, year, hour, minute, second, dayPeriod, timeZoneName]
 
-    await user.click(month);
+    await user.click(month)
 
     for (const seg of segments) {
-      expect(seg).toHaveFocus();
-      await user.keyboard(kbd.TAB);
+      expect(seg).toHaveFocus()
+      await user.keyboard(kbd.TAB)
     }
-    expect(trigger).toHaveFocus();
+    expect(trigger).toHaveFocus()
 
     for (const seg of segments.reverse()) {
-      await user.keyboard(kbd.SHIFT_TAB);
-      expect(seg).toHaveFocus();
+      await user.keyboard(kbd.SHIFT_TAB)
+      expect(seg).toHaveFocus()
     }
-  });
+  })
 
   it('prevents interaction and picker to be opened when `disabled` is `true`', async () => {
     const { trigger, day, month, year } = setup({
       datePickerProps: {
         disabled: true,
       },
-    });
-    expect(trigger).toBeDisabled();
-    expect(day).not.toHaveAttribute('tabindex');
-    expect(month).not.toHaveAttribute('tabindex');
-    expect(year).not.toHaveAttribute('tabindex');
-  });
+    })
+    expect(trigger).toBeDisabled()
+    expect(day).not.toHaveAttribute('tabindex')
+    expect(month).not.toHaveAttribute('tabindex')
+    expect(year).not.toHaveAttribute('tabindex')
+  })
 
   it('should select and deselect a date', async () => {
-    const { user, trigger, getByTestId } = setup();
+    const { user, trigger, getByTestId } = setup()
 
-    await user.click(trigger);
-    const calendar = await screen.findByTestId('calendar');
-    const targetCell = calendar.querySelector('div[data-akar-calendar-cell-trigger]:not([data-outside-view])')!;
+    await user.click(trigger)
+    const calendar = getByTestId('calendar')
+    const targetCell = calendar.querySelector('div[data-reka-calendar-cell-trigger]:not([data-outside-view])')!
 
-    await user.click(targetCell);
-    expect(calendar.querySelector('[data-selected]')).toBeInTheDocument();
-    await user.click(targetCell);
-    expect(calendar.querySelector('[data-selected]')).not.toBeInTheDocument();
-  });
+    await user.click(targetCell)
+    expect(calendar.querySelector('[data-selected]')).toBeInTheDocument()
+    await user.click(targetCell)
+    expect(calendar.querySelector('[data-selected]')).not.toBeInTheDocument()
+  })
 
   it('resets stale placeholder time when selecting a date after the model value is cleared', async () => {
-    const emittedValues: Array<DateValue | undefined> = [];
+    const emittedValues: (DateValue | undefined)[] = []
     const { user, trigger, getByTestId, rerender } = setup({
       datePickerProps: {
         modelValue: calendarDateTime,
         granularity: 'minute',
       },
       emits: {
-        'onUpdate:modelValue': (value) => emittedValues.push(value),
+        'onUpdate:modelValue': value => emittedValues.push(value),
       },
-    });
+    })
 
     await rerender({
       datePickerProps: {
@@ -320,33 +288,33 @@ describe('datePicker', async () => {
         granularity: 'minute',
       },
       emits: {
-        'onUpdate:modelValue': (value) => emittedValues.push(value),
+        'onUpdate:modelValue': (value: DateValue | undefined) => emittedValues.push(value),
       },
-    });
+    })
 
-    await user.click(trigger);
-    await user.click(getByTestId('date-1-1'));
+    await user.click(trigger)
+    await user.click(getByTestId('date-1-1'))
 
-    const selectedValue = emittedValues.at(-1);
-    expect(selectedValue).toBeInstanceOf(CalendarDateTime);
-    expect((selectedValue as CalendarDateTime).hour).toBe(0);
-    expect((selectedValue as CalendarDateTime).minute).toBe(0);
-    expect((selectedValue as CalendarDateTime).second).toBe(0);
-    expect((selectedValue as CalendarDateTime).millisecond).toBe(0);
-  });
+    const selectedValue = emittedValues.at(-1)
+    expect(selectedValue).toBeInstanceOf(Temporal.PlainDateTime)
+    expect((selectedValue as Temporal.PlainDateTime).hour).toBe(0)
+    expect((selectedValue as Temporal.PlainDateTime).minute).toBe(0)
+    expect((selectedValue as Temporal.PlainDateTime).second).toBe(0)
+    expect((selectedValue as Temporal.PlainDateTime).millisecond).toBe(0)
+  })
 
   it('resets stale ZonedDateTime placeholder time when selecting a date after the model value is cleared', async () => {
-    const emittedValues: Array<DateValue | undefined> = [];
-    const zonedValue = toZoned(new CalendarDateTime(1980, 1, 20, 12, 30, 45, 123), 'America/New_York');
+    const emittedValues: (DateValue | undefined)[] = []
+    const zonedValue = new Temporal.PlainDateTime(1980, 1, 20, 12, 30, 45, 123).toZonedDateTime('America/New_York')
     const { user, trigger, getByTestId, rerender } = setup({
       datePickerProps: {
         modelValue: zonedValue,
         granularity: 'second',
       },
       emits: {
-        'onUpdate:modelValue': (value) => emittedValues.push(value),
+        'onUpdate:modelValue': value => emittedValues.push(value),
       },
-    });
+    })
 
     await rerender({
       datePickerProps: {
@@ -354,27 +322,26 @@ describe('datePicker', async () => {
         granularity: 'second',
       },
       emits: {
-        'onUpdate:modelValue': (value) => emittedValues.push(value),
+        'onUpdate:modelValue': (value: DateValue | undefined) => emittedValues.push(value),
       },
-    });
+    })
 
-    await user.click(trigger);
-    await user.click(getByTestId('date-1-1'));
+    await user.click(trigger)
+    await user.click(getByTestId('date-1-1'))
 
-    const selectedValue = emittedValues.at(-1);
-    expect(selectedValue).toHaveProperty('timeZone', 'America/New_York');
-    expect(selectedValue?.hour).toBe(0);
-    expect(selectedValue?.minute).toBe(0);
-    expect(selectedValue?.second).toBe(0);
-    expect(selectedValue?.millisecond).toBe(0);
-  });
+    const selectedValue = emittedValues.at(-1) as Temporal.ZonedDateTime | undefined
+    expect(selectedValue).toHaveProperty('timeZoneId', 'America/New_York')
+    expect(selectedValue?.hour).toBe(0)
+    expect(selectedValue?.minute).toBe(0)
+    expect(selectedValue?.second).toBe(0)
+    expect(selectedValue?.millisecond).toBe(0)
+  })
 
   it('preserves typed time when typing a date after the model value is cleared', async () => {
-    // eslint-disable-next-line sonarjs/no-unused-collection
-    const emittedValues: Array<DateValue | undefined> = [];
-    let rerender: ReturnType<typeof setup>['rerender'];
+    const emittedValues: (DateValue | undefined)[] = []
+    let rerender: ReturnType<typeof setup>['rerender']
     const handleUpdateModelValue = (value: DateValue | undefined) => {
-      emittedValues.push(value);
+      emittedValues.push(value)
       return rerender({
         datePickerProps: {
           modelValue: value,
@@ -383,8 +350,8 @@ describe('datePicker', async () => {
         emits: {
           'onUpdate:modelValue': handleUpdateModelValue,
         },
-      });
-    };
+      })
+    }
 
     const view = setup({
       datePickerProps: {
@@ -394,8 +361,8 @@ describe('datePicker', async () => {
       emits: {
         'onUpdate:modelValue': handleUpdateModelValue,
       },
-    });
-    rerender = view.rerender;
+    })
+    rerender = view.rerender
 
     await rerender({
       datePickerProps: {
@@ -405,25 +372,25 @@ describe('datePicker', async () => {
       emits: {
         'onUpdate:modelValue': handleUpdateModelValue,
       },
-    });
+    })
 
-    await view.user.click(view.month);
-    await view.user.keyboard('{2}');
-    await view.user.click(view.day);
-    await view.user.keyboard('{3}');
-    await view.user.click(view.year);
-    await view.user.keyboard('{2020}');
-    await view.user.click(view.getByTestId('hour'));
-    await view.user.keyboard('{9}');
-    await view.user.click(view.getByTestId('minute'));
-    await view.user.keyboard('{45}');
+    await view.user.click(view.month)
+    await view.user.keyboard('{2}')
+    await view.user.click(view.day)
+    await view.user.keyboard('{3}')
+    await view.user.click(view.year)
+    await view.user.keyboard('{2020}')
+    await view.user.click(view.getByTestId('hour'))
+    await view.user.keyboard('{9}')
+    await view.user.click(view.getByTestId('minute'))
+    await view.user.keyboard('{45}')
 
-    expect(view.month).toHaveTextContent('2');
-    expect(view.day).toHaveTextContent('3');
-    expect(view.year).toHaveTextContent('2020');
-    expect(view.getByTestId('hour')).toHaveTextContent('9');
-    expect(view.getByTestId('minute')).toHaveTextContent('45');
-  });
+    expect(view.month).toHaveTextContent('2')
+    expect(view.day).toHaveTextContent('3')
+    expect(view.year).toHaveTextContent('2020')
+    expect(view.getByTestId('hour')).toHaveTextContent('9')
+    expect(view.getByTestId('minute')).toHaveTextContent('45')
+  })
 
   it('should close the picker on select when `closeOnSelect` is true', async () => {
     const { user, trigger, getByTestId } = setup({
@@ -431,17 +398,17 @@ describe('datePicker', async () => {
         defaultValue: calendarDate,
         closeOnSelect: true,
       },
-    });
+    })
 
-    await user.click(trigger);
+    await user.click(trigger)
 
-    const popoverContent = await screen.findByTestId('popover-content');
-    expect(popoverContent).toBeVisible();
+    const popoverContent = getByTestId('popover-content')
+    expect(popoverContent).toBeVisible()
 
-    const day = getByTestId('date-1-1');
-    await user.click(day);
-    expect(popoverContent).not.toBeVisible();
-  });
+    const day = getByTestId('date-1-1')
+    await user.click(day)
+    expect(popoverContent).not.toBeVisible()
+  })
 
   it('should not close the picker on select when `closeOnSelect` is true', async () => {
     const { user, trigger, getByTestId } = setup({
@@ -449,137 +416,127 @@ describe('datePicker', async () => {
         defaultValue: calendarDate,
         closeOnSelect: false,
       },
-    });
+    })
 
-    await user.click(trigger);
+    await user.click(trigger)
 
-    const popoverContent = await screen.findByTestId('popover-content');
-    expect(popoverContent).toBeVisible();
+    const popoverContent = getByTestId('popover-content')
+    expect(popoverContent).toBeVisible()
 
-    const day = getByTestId('date-1-1');
-    await user.click(day);
-    expect(popoverContent).toBeVisible();
-  });
+    const day = getByTestId('date-1-1')
+    await user.click(day)
+    expect(popoverContent).toBeVisible()
+  })
 
   describe('locale integration with ConfigProvider', () => {
     it('uses locale from ConfigProvider when no locale prop is provided', async () => {
-      const user = userEvent.setup();
+      const user = userEvent.setup()
       const { getByTestId } = render({
         components: { ConfigProvider, DatePicker },
         template: `
           <ConfigProvider locale="de">
-            <DatePicker :datePickerProps="{ modelValue: new CalendarDate(2024, 1, 15) }" />
+            <DatePicker :datePickerProps="{ modelValue: new Temporal.PlainDate(2024, 1, 15) }" />
           </ConfigProvider>
         `,
         setup() {
-          return { CalendarDate };
+          return { Temporal }
         },
-      });
+      })
 
-      const trigger = getByTestId('trigger');
-      await user.click(trigger);
+      const trigger = getByTestId('trigger')
+      await user.click(trigger)
 
-      const heading = await screen.findByTestId('heading');
+      const heading = getByTestId('heading')
       // German locale should display month name in German (e.g., "Januar" not "January")
-      expect(heading).toHaveTextContent('Januar');
-    });
+      expect(heading).toHaveTextContent('Januar')
+    })
 
     it('locale prop overrides ConfigProvider locale', async () => {
-      const user = userEvent.setup();
+      const user = userEvent.setup()
       const { getByTestId } = render({
         components: { ConfigProvider, DatePicker },
         template: `
           <ConfigProvider locale="de">
-            <DatePicker :datePickerProps="{ modelValue: new CalendarDate(2024, 1, 15), locale: 'en-US' }" />
+            <DatePicker :datePickerProps="{ modelValue: new Temporal.PlainDate(2024, 1, 15), locale: 'en-US' }" />
           </ConfigProvider>
         `,
         setup() {
-          return { CalendarDate };
+          return { Temporal }
         },
-      });
+      })
 
-      const trigger = getByTestId('trigger');
-      await user.click(trigger);
+      const trigger = getByTestId('trigger')
+      await user.click(trigger)
 
-      const heading = await screen.findByTestId('heading');
+      const heading = getByTestId('heading')
       // Even though ConfigProvider sets 'de', explicit prop should use 'en-US'
-      expect(heading).toHaveTextContent('January');
-    });
+      expect(heading).toHaveTextContent('January')
+    })
 
     it('uses default locale when no ConfigProvider and no locale prop', async () => {
       const { user, trigger, getByTestId } = setup({
         datePickerProps: { modelValue: calendarDate },
-      });
+      })
 
-      await user.click(trigger);
+      await user.click(trigger)
 
-      const heading = await screen.findByTestId('heading');
+      const heading = getByTestId('heading')
       // Should use browser default locale (typically 'en' in test environment)
       // January 1980 should be displayed
-      expect(heading).toHaveTextContent('January');
-      expect(heading).toHaveTextContent('1980');
-    });
+      expect(heading).toHaveTextContent('January')
+      expect(heading).toHaveTextContent('1980')
+    })
 
     it('keeps the visible month when modelValue is a new object for the same day', async () => {
-      const selected = new CalendarDate(1980, 1, 20);
+      const selected = new Temporal.PlainDate(1980, 1, 20)
       const { user, trigger, getByTestId, rerender } = setup({
         datePickerProps: { modelValue: selected, closeOnSelect: true },
-      });
+      })
 
-      await user.click(trigger);
+      await user.click(trigger)
 
-      const heading = await screen.findByTestId('heading');
-      expect(heading).toHaveTextContent('January 1980');
-      await user.click(getByTestId('next-button'));
-      expect(heading).toHaveTextContent('February 1980');
+      const heading = getByTestId('heading')
+      expect(heading).toHaveTextContent('January 1980')
+      await user.click(getByTestId('next-button'))
+      expect(heading).toHaveTextContent('February 1980')
 
       await rerender({
-        datePickerProps: {
-          modelValue: selected.copy(),
-          closeOnSelect: true,
-        },
-      });
+        datePickerProps: { modelValue: selected, closeOnSelect: true },
+      })
 
-      expect(heading).toHaveTextContent('February 1980');
-      expect(trigger).toHaveAttribute('aria-expanded', 'true');
-    });
+      expect(heading).toHaveTextContent('February 1980')
+      expect(trigger).toHaveAttribute('aria-expanded', 'true')
+    })
 
     it('keeps the popover open when modelValue changes time on the same day', async () => {
       const { user, trigger, getByTestId, rerender } = setup({
         datePickerProps: { modelValue: calendarDateTime, closeOnSelect: true },
-      });
+      })
 
-      await user.click(trigger);
-      expect(trigger).toHaveAttribute('aria-expanded', 'true');
+      await user.click(trigger)
+      expect(trigger).toHaveAttribute('aria-expanded', 'true')
 
       await rerender({
-        datePickerProps: {
-          modelValue: calendarDateTime.set({ hour: 15 }),
-          closeOnSelect: true,
-        },
-      });
+        datePickerProps: { modelValue: calendarDateTime.with({ hour: 15 }), closeOnSelect: true },
+      })
 
-      expect(trigger).toHaveAttribute('aria-expanded', 'true');
-    });
+      expect(trigger).toHaveAttribute('aria-expanded', 'true')
+    })
 
     it('moves the visible month when the selected day changes', async () => {
       const { user, trigger, getByTestId, rerender } = setup({
-        datePickerProps: {
-          modelValue: new CalendarDate(1980, 1, 20),
-        },
-      });
+        datePickerProps: { modelValue: new Temporal.PlainDate(1980, 1, 20) },
+      })
 
-      await user.click(trigger);
-      await user.click(await screen.findByTestId('next-button'));
-      expect(getByTestId('heading')).toHaveTextContent('February 1980');
+      await user.click(trigger)
+      await user.click(getByTestId('next-button'))
+      expect(getByTestId('heading')).toHaveTextContent('February 1980')
 
       await rerender({
-        datePickerProps: {
-          modelValue: new CalendarDate(1980, 9, 23),
-        },
-      });
+        datePickerProps: { modelValue: new Temporal.PlainDate(1980, 9, 23) },
+      })
 
-      expect(getByTestId('heading')).toHaveTextContent('September 1980');
-    });
-  });
-});
+      expect(getByTestId('heading')).toHaveTextContent('September 1980')
+    })
+  })
+})

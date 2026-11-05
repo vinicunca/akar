@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   PopoverArrow,
   PopoverClose,
@@ -7,9 +7,9 @@ import {
   PopoverPortal,
   PopoverRoot,
   PopoverTrigger,
-} from '..';
+} from '..'
 
-const buttonRef = ref();
+const buttonRef = ref()
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Radio from '../Radio.vue';
+import Radio from '../Radio.vue'
 </script>
 
 <template>

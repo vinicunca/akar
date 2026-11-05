@@ -11,6 +11,7 @@ node_modules
 .DS_Store
 dist
 dist-ssr
+packages/core/.entries
 coverage
 *.local
 .env
@@ -33,6 +34,8 @@ coverage
 
 test-results/
 playwright-report/
+.worktrees/
+.claude/worktrees/*
 vite.config.ts.timestamp*
 */.vitepress/cache
 .eslintcache

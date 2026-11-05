@@ -1,28 +1,32 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
+import type { PrimitiveProps } from '@/Primitive'
 
 export interface EditableEditTriggerProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { injectEditableRootContext } from './EditableRoot.vue';
+import { Primitive } from '@/Primitive'
+import { useForwardElement } from '@/shared'
+import { injectEditableRootContext } from './EditableRoot.vue'
+import { getEditableTriggerSurface } from './useEditable'
 
-const props = withDefaults(defineProps<EditableEditTriggerProps>(), { as: 'button' });
+const props = withDefaults(defineProps<EditableEditTriggerProps>(), { as: 'button' })
 
-const context = injectEditableRootContext();
+const context = injectEditableRootContext()
+// Same derivation as `useEditable().editTrigger`.
+const trigger = getEditableTriggerSurface(context, 'edit')
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <Primitive
-    v-bind="props"
-    aria-label="edit"
-    :aria-disabled="context.disabled.value ? '' : undefined"
-    :data-disabled="context.disabled.value ? '' : undefined"
-    :disabled="context.disabled.value"
+    :ref="forwardRef"
+    v-bind="trigger.attrs.value"
+    :as="props.as"
+    :as-child="props.asChild"
     :type="as === 'button' ? 'button' : undefined"
-    :hidden="context.isEditing.value ? '' : undefined"
-    @click="context.edit"
   >
     <slot>Edit</slot>
   </Primitive>

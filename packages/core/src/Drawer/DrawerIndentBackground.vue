@@ -1,26 +1,27 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
+import type { PrimitiveProps } from '@/Primitive'
 
 export interface DrawerIndentBackgroundProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
-import { injectDrawerProviderContext } from './DrawerProvider.vue';
+import { renderAs } from '@/Primitive/renderAs'
+import { useForwardElement } from '@/shared'
+import { injectDrawerProviderContext } from './DrawerProvider.vue'
 
-const props = withDefaults(defineProps<DrawerIndentBackgroundProps>(), { as: 'div' });
-const { forwardRef } = useForwardExpose();
-const providerContext = injectDrawerProviderContext(null);
+withDefaults(defineProps<DrawerIndentBackgroundProps>(), { as: 'div' })
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const providerContext = injectDrawerProviderContext(null)
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
+  <component
+    :is="renderAs(as, asChild)"
     :ref="forwardRef"
     :data-active="providerContext?.active.value ? '' : undefined"
     :data-inactive="!providerContext?.active.value ? '' : undefined"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

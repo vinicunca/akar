@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PopoverArrow, PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from '@/Popover';
+import { PopoverArrow, PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from '@/Popover'
 </script>
 
 <template>

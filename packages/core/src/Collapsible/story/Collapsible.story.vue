@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from '..';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from '..'
 
-const rootOpen = ref(false);
-const rootDisabled = ref(false);
+const rootOpen = ref(false)
+const rootDisabled = ref(false)
 </script>
 
 <template>
@@ -47,7 +47,7 @@ const rootDisabled = ref(false);
         <div
           class="bg-white rounded my-[10px] p-[10px] shadow-[0_2px_10px] shadow-blackA7"
         >
-          <span class="text-violet11 text-[15px] leading-[25px]">vinicunca/akar</span>
+          <span class="text-violet11 text-[15px] leading-[25px]">unovue/reka-ui</span>
         </div>
 
         <CollapsibleContent class=" data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp">

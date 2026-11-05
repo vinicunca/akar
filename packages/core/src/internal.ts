@@ -5,4 +5,4 @@
  * @internal
  */
 
-export * from './Menu';
+export * from './Menu'

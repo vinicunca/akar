@@ -1,47 +1,34 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { isDeepEqual } from '@vinicunca/perkakas';
-import { computed } from 'vue';
-import { useForwardExpose } from '@/shared';
-import { injectTagsInputItemContext } from './TagsInputItem.vue';
-import { injectTagsInputRootContext } from './TagsInputRoot.vue';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
+import { injectTagsInputItemContext } from './TagsInputItem.vue'
+import { injectTagsInputRootContext } from './TagsInputRoot.vue'
+import { getTagsInputItemDeleteSurface } from './useTagsInput'
 
 export interface TagsInputItemDeleteProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs'
 
-const props = withDefaults(defineProps<TagsInputItemDeleteProps>(), {
+withDefaults(defineProps<TagsInputItemDeleteProps>(), {
   as: 'button',
-});
+})
 
-useForwardExpose();
-const context = injectTagsInputRootContext();
-const itemContext = injectTagsInputItemContext();
-
-const disabled = computed(() => itemContext.disabled?.value || context.disabled.value);
-
-function handleDelete() {
-  if (disabled.value) {
-    return;
-  }
-  const index = context.modelValue.value.findIndex((i) => isDeepEqual(i, itemContext.value.value));
-  context.onRemoveValue(index);
-}
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const context = injectTagsInputRootContext()
+const itemContext = injectTagsInputItemContext()
+const itemDelete = getTagsInputItemDeleteSurface(context, itemContext)
 </script>
 
 <template>
-  <Primitive
-    tabindex="-1"
-    v-bind="props"
-    :aria-labelledby="itemContext.textId"
-    :aria-current="itemContext.isSelected.value"
-    :data-state="itemContext.isSelected.value ? 'active' : 'inactive'"
-    :data-disabled="disabled ? '' : undefined"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     :type="as === 'button' ? 'button' : undefined"
-    @click="handleDelete"
+    v-bind="itemDelete.attrs.value"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

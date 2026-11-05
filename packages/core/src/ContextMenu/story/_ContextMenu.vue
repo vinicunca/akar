@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
 import {
   ContextMenuArrow,
   ContextMenuCheckboxItem,
@@ -17,15 +17,15 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from '..';
+} from '..'
 
-const checkboxOne = ref(false);
-const checkboxTwo = ref(false);
-const person = ref('pedro');
+const checkboxOne = ref(false)
+const checkboxTwo = ref(false)
+const person = ref('pedro')
 
 function handleClick() {
   // eslint-disable-next-line no-alert
-  alert('hello!');
+  alert('hello!')
 }
 </script>
 

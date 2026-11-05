@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuRoot,
   NavigationMenuTrigger,
-} from '..';
+} from '..'
 
-const modelValue = ref('');
+const modelValue = ref('')
 </script>
 
 <template>

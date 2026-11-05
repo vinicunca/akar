@@ -1,31 +1,34 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
+import type { PrimitiveProps } from '@/Primitive'
 
 export interface ComboboxLabelProps extends PrimitiveProps {
-  for?: string;
+  for?: string
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { useForwardExpose, useId } from '@/shared';
-import { injectComboboxGroupContext } from './ComboboxGroup.vue';
+import { renderAs } from '@/Primitive/renderAs'
+import { useForwardElement, useId } from '@/shared'
+import { injectComboboxGroupContext } from './ComboboxGroup.vue'
 
 const props = withDefaults(defineProps<ComboboxLabelProps>(), {
   as: 'div',
-});
+})
 
-useForwardExpose();
-const groupContext = injectComboboxGroupContext({ id: '', labelId: '' });
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const groupContext = injectComboboxGroupContext({ id: '', labelId: '' })
 
-groupContext.labelId ||= useId(undefined, 'akar-combobox-group-label');
+groupContext.labelId ||= useId(undefined, 'reka-combobox-group-label')
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
+  <component
+    :is="renderAs(as, asChild)"
+    v-bind="{ for: props.for }"
     :id="groupContext.labelId"
+    :ref="forwardRef"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

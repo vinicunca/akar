@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { MenuItem, MenuSeparator } from '..';
-import MenuWithAnchor from './_MenuWithAnchor.vue';
+import { MenuItem, MenuSeparator } from '..'
+import MenuWithAnchor from './_MenuWithAnchor.vue'
 
 function handleSelect(text: string) {
   // eslint-disable-next-line no-console
-  console.log({ text });
+  console.log({ text })
   // eslint-disable-next-line no-alert
-  alert(text);
+  alert(text)
 }
 </script>
 

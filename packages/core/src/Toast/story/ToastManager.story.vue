@@ -1,32 +1,28 @@
 <script setup lang="ts">
-import { createToastManager, ToastProvider } from '..';
-import AnchoredToaster from './_AnchoredToaster.vue';
-import Toaster from './_Toaster.vue';
+import { createToastManager, ToastProvider } from '..'
+import AnchoredToaster from './_AnchoredToaster.vue'
+import Toaster from './_Toaster.vue'
 
-const toast = createToastManager();
-const anchoredToast = createToastManager();
+const toast = createToastManager()
+const anchoredToast = createToastManager()
 
-let count = 0;
+let count = 0
 
 function addToast() {
-  count++;
+  count++
   toast.add({
     title: `Toast ${count}`,
-    description: count % 2
-      ? 'A short one.'
-      : 'A longer description, so the toasts in the stack have different heights.',
+    description: count % 2 ? 'A short one.' : 'A longer description, so the toasts in the stack have different heights.',
     actionProps: { label: 'Undo', altText: 'Undo the change' },
-  });
+  })
 }
 
 function addPromise(fail: boolean) {
-  toast.promise(new Promise((resolve, reject) => {
-    setTimeout(fail ? reject : resolve, 2000);
-  }), {
+  toast.promise(new Promise((resolve, reject) => setTimeout(fail ? reject : resolve, 2000)), {
     loading: { title: 'Saving…' },
     success: { title: 'Saved', description: 'Your document is saved.' },
     error: { title: 'Could not save', description: 'Try again later.' },
-  }).catch(() => {});
+  }).catch(() => {})
 }
 
 function copy(event: MouseEvent) {
@@ -34,7 +30,7 @@ function copy(event: MouseEvent) {
     title: 'Copied',
     duration: 1500,
     positionerProps: { anchor: event.currentTarget as HTMLElement },
-  });
+  })
 }
 </script>
 

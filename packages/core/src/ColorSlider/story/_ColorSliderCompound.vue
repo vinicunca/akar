@@ -1,27 +1,23 @@
 <script setup lang="ts">
-import type { Color } from '@/shared/color';
-import { computed, ref } from 'vue';
-import { ColorSwatch } from '@/ColorSwatch';
-import { colorToString, normalizeColor } from '@/shared/color';
+import type { Color } from '@/shared/color'
+import { computed, ref } from 'vue'
+import { ColorSwatch } from '@/ColorSwatch'
+import { colorToString, normalizeColor } from '@/shared/color'
 import {
   ColorSliderRoot,
   ColorSliderThumb,
   ColorSliderTrack,
-} from '../';
+} from '../'
 
 const props = defineProps<{
-  defaultValue?: string;
-  colorSpace?: 'rgb' | 'hsl' | 'hsb';
-  channels: Array<'hue' | 'saturation' | 'lightness' | 'brightness' | 'red' | 'green' | 'blue' | 'alpha'>;
-}>();
+  defaultValue?: string
+  colorSpace?: 'rgb' | 'hsl' | 'hsb'
+  channels: Array<'hue' | 'saturation' | 'lightness' | 'brightness' | 'red' | 'green' | 'blue' | 'alpha'>
+}>()
 
-// Use a Color object as single source of truth to avoid hex round-trip drift.
-const colorObj = ref<Color>(normalizeColor(props.defaultValue ?? '#7f007f'));
-const hexColor = computed(() => colorToString(colorObj.value, 'hex'));
-
-function handleColorUpdate(newColor: Color) {
-  colorObj.value = newColor;
-}
+// Every part emits a Color object, so one v-model shares the color losslessly.
+const colorObj = ref<Color>(normalizeColor(props.defaultValue ?? '#7f007f'))
+const hexColor = computed(() => colorToString(colorObj.value, 'hex'))
 
 const channelLabels: Record<string, string> = {
   hue: 'H',
@@ -32,7 +28,7 @@ const channelLabels: Record<string, string> = {
   green: 'G',
   blue: 'B',
   alpha: 'A',
-};
+}
 </script>
 
 <template>
@@ -41,7 +37,7 @@ const channelLabels: Record<string, string> = {
       <ColorSwatch
         :color="hexColor"
         class="w-12 h-12 rounded-lg border-2 border-gray-200"
-        style="background-color: var(--akar-color-swatch-color)"
+        style="background-color: var(--reka-color-swatch-color)"
       />
       <div class="flex flex-col gap-0.5">
         <span class="text-sm font-medium text-gray-700">Selected Color</span>
@@ -57,11 +53,10 @@ const channelLabels: Record<string, string> = {
       >
         <span class="text-xs font-medium text-gray-500 w-3 shrink-0">{{ channelLabels[channel] }}</span>
         <ColorSliderRoot
-          :model-value="colorObj"
+          v-model="colorObj"
           :channel="channel"
           :color-space="colorSpace ?? 'hsl'"
           class="relative flex items-center select-none touch-none w-[220px] h-5"
-          @update:color="handleColorUpdate"
         >
           <ColorSliderTrack
             class="relative flex-1 rounded-full h-3"

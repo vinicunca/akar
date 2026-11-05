@@ -1,73 +1,88 @@
+// The reason unions of the root and sub parts (`update:open`) and of the
+// checkbox item and radio group (`update:modelValue`) belong to the
+// underlying Menu family, which is not a root export of the package.
+export { type MenuCheckboxItemChangeReason, type MenuOpenChangeReason, type MenuRadioGroupChangeReason } from '../Menu'
 export {
   default as ContextMenuArrow,
   type ContextMenuArrowProps,
-} from './ContextMenuArrow.vue';
+} from './ContextMenuArrow.vue'
 export {
   default as ContextMenuCheckboxItem,
   type ContextMenuCheckboxItemEmits,
   type ContextMenuCheckboxItemProps,
-} from './ContextMenuCheckboxItem.vue';
+} from './ContextMenuCheckboxItem.vue'
 export {
   default as ContextMenuContent,
   type ContextMenuContentEmits,
   type ContextMenuContentProps,
-} from './ContextMenuContent.vue';
+} from './ContextMenuContent.vue'
 export {
   default as ContextMenuGroup,
   type ContextMenuGroupProps,
-} from './ContextMenuGroup.vue';
+} from './ContextMenuGroup.vue'
 export {
   default as ContextMenuItem,
   type ContextMenuItemEmits,
   type ContextMenuItemProps,
-} from './ContextMenuItem.vue';
+} from './ContextMenuItem.vue'
 export {
   default as ContextMenuItemIndicator,
   type ContextMenuItemIndicatorProps,
-} from './ContextMenuItemIndicator.vue';
+} from './ContextMenuItemIndicator.vue'
 export {
   default as ContextMenuLabel,
   type ContextMenuLabelProps,
-} from './ContextMenuLabel.vue';
+} from './ContextMenuLabel.vue'
 export {
   default as ContextMenuPortal,
   type ContextMenuPortalProps,
-} from './ContextMenuPortal.vue';
+} from './ContextMenuPortal.vue'
 export {
   default as ContextMenuRadioGroup,
   type ContextMenuRadioGroupEmits,
   type ContextMenuRadioGroupProps,
-} from './ContextMenuRadioGroup.vue';
+} from './ContextMenuRadioGroup.vue'
 export {
   default as ContextMenuRadioItem,
   type ContextMenuRadioItemEmits,
   type ContextMenuRadioItemProps,
-} from './ContextMenuRadioItem.vue';
+} from './ContextMenuRadioItem.vue'
 export {
   default as ContextMenuRoot,
   type ContextMenuRootEmits,
   type ContextMenuRootProps,
   injectContextMenuRootContext,
-} from './ContextMenuRoot.vue';
+} from './ContextMenuRoot.vue'
 export {
   default as ContextMenuSeparator,
   type ContextMenuSeparatorProps,
-} from './ContextMenuSeparator.vue';
+} from './ContextMenuSeparator.vue'
 export {
   default as ContextMenuSub,
   type ContextMenuSubEmits,
   type ContextMenuSubProps,
-} from './ContextMenuSub.vue';
+} from './ContextMenuSub.vue'
 export {
   default as ContextMenuSubContent,
   type ContextMenuSubContentEmits,
   type ContextMenuSubContentProps,
-} from './ContextMenuSubContent.vue';
+} from './ContextMenuSubContent.vue'
 export {
   default as ContextMenuSubTrigger,
   type ContextMenuSubTriggerProps,
-} from './ContextMenuSubTrigger.vue';
+} from './ContextMenuSubTrigger.vue'
 export {
   default as ContextMenuTrigger,
   type ContextMenuTriggerProps,
-} from './ContextMenuTrigger.vue';
+} from './ContextMenuTrigger.vue'
+export {
+  type ContextMenuContentHandlers,
+  type ContextMenuOpenChangeReason,
+  type ContextMenuTriggerOptions,
+  type ContextMenuTriggerState,
+  type ContextMenuTriggerSurface,
+  type ContextMenuVirtualElement,
+  useContextMenu,
+  type UseContextMenuProps,
+  type UseContextMenuReturn,
+} from './useContextMenu'

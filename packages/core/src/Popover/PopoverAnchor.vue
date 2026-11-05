@@ -1,30 +1,36 @@
 <script lang="ts">
-import type { PopperAnchorProps } from '@/Popper';
-import { useForwardExpose } from '@/shared';
+import type { PopperAnchorProps } from '@/Popper'
+import { useForwardElement } from '@/shared'
 
 export interface PopoverAnchorProps extends PopperAnchorProps {}
 </script>
 
 <script setup lang="ts">
-import { onBeforeMount, onUnmounted } from 'vue';
-import { PopperAnchor } from '@/Popper';
-import { injectPopoverRootContext } from './PopoverRoot.vue';
+import { onBeforeMount, onUnmounted } from 'vue'
+import { usePopperAnchor } from '@/Popper/usePopperAnchor'
+import { renderAs } from '@/Primitive/renderAs'
+import { injectPopoverRootContext } from './PopoverRoot.vue'
 
-const props = defineProps<PopoverAnchorProps>();
+const props = defineProps<PopoverAnchorProps>()
 
-useForwardExpose();
-const rootContext = injectPopoverRootContext();
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+usePopperAnchor({ element: currentElement, reference: () => props.reference })
+const rootContext = injectPopoverRootContext()
 
 onBeforeMount(() => {
-  rootContext.hasCustomAnchor.value = true;
-});
+  rootContext.hasCustomAnchor.value = true
+})
 onUnmounted(() => {
-  rootContext.hasCustomAnchor.value = false;
-});
+  rootContext.hasCustomAnchor.value = false
+})
 </script>
 
 <template>
-  <PopperAnchor v-bind="props">
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+  >
     <slot />
-  </PopperAnchor>
+  </component>
 </template>

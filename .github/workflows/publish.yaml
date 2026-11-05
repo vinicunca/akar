@@ -1,0 +1,60 @@
+name: Publish Docs
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Publish to Cloudflare Pages
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup (Install node & pnpm)
+        uses: ./.github/actions/setup
+
+      - name: Build Reka UI
+        run: pnpm --filter reka-ui build
+
+      - name: Build Docs
+        run: pnpm docs:build
+        env:
+          # The VitePress build compiles every demo and example into both the
+          # client and SSR bundles, and now peaks just past Node's default ~4GB
+          # heap. Without this the build dies with "Reached heap limit".
+          NODE_OPTIONS: --max-old-space-size=8192
+
+      # cloudflare/pages-action was deprecated and its repository removed;
+      # wrangler-action is Cloudflare's supported replacement.
+      # A prerelease's docs go to the `next` preview deployment
+      # (next.reka-ui.pages.dev), so reka-ui.com keeps the stable docs.
+      - name: Pick the Pages branch
+        id: pages
+        run: |
+          version=$(node -p "require('./packages/core/package.json').version")
+          # Build metadata (`+build-1`) is not part of the prerelease.
+          case "${version%%+*}" in
+            *-*) echo "branch=next" >> "$GITHUB_OUTPUT" ;;
+            *) echo "branch=main" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_UNOVUE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_UNOVUE_ACCOUNT_ID }}
+          # Creates a GitHub Deployment for the Pages deploy
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          workingDirectory: docs
+          # The lockfile lives at the repo root, so auto-detection falls back to
+          # npm, which can't install into a pnpm workspace (`link:` deps)
+          packageManager: pnpm
+          # Stable releases deploy as the production branch regardless of the triggering ref
+          command: pages deploy .vitepress/dist --project-name=reka-ui --branch=${{ steps.pages.outputs.branch }}

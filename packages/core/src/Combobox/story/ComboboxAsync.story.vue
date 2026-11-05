@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { useFetch } from '@vueuse/core';
-import { ref } from 'vue';
-import { ComboboxAnchor, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..';
+import { Icon } from '@iconify/vue'
+import { useFetch } from '@vueuse/core'
+import { ref } from 'vue'
+import { ComboboxAnchor, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..'
 
-const v = ref<Array<{ id: number }>>([]);
+const v = ref<{ id: number }[]>([])
 
 const { data, execute, isFinished } = useFetch('https://jsonplaceholder.typicode.com/comments', {
   immediate: false,
   initialData: [],
-}).get().json<Array<{ id: number }>>();
+}).get().json<{ id: number }[]>()
 
 async function handleOpen(val: boolean) {
-  if (val && data.value?.length === 0) {
-    execute();
-  }
+  if (val && data.value?.length === 0)
+    execute()
 }
 </script>
 

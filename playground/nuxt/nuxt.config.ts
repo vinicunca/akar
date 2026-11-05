@@ -1,4 +1,4 @@
-/** https://nuxt.com/docs/api/configuration/nuxt-config */
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
@@ -24,11 +24,11 @@ export default defineNuxtConfig({
             ...component,
             kebabName: component.kebabName.replace('-tailwind', ''),
             pascalName: component.pascalName.replace('Tailwind', ''),
-          };
+          }
         },
-      });
+      })
     },
   },
 
   compatibilityDate: '2024-09-17',
-});
+})

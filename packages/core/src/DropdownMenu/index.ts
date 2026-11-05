@@ -1,78 +1,91 @@
+// The reason unions of the root and sub parts (`update:open`) and of the
+// checkbox item and radio group (`update:modelValue`) belong to the
+// underlying Menu family, which is not a root export of the package.
+export { type MenuCheckboxItemChangeReason, type MenuOpenChangeReason, type MenuRadioGroupChangeReason } from '../Menu'
 export {
   default as DropdownMenuArrow,
   type DropdownMenuArrowProps,
-} from './DropdownMenuArrow.vue';
+} from './DropdownMenuArrow.vue'
 export {
   default as DropdownMenuCheckboxItem,
   type DropdownMenuCheckboxItemEmits,
   type DropdownMenuCheckboxItemProps,
-} from './DropdownMenuCheckboxItem.vue';
+} from './DropdownMenuCheckboxItem.vue'
 export {
   default as DropdownMenuContent,
   type DropdownMenuContentEmits,
   type DropdownMenuContentProps,
-} from './DropdownMenuContent.vue';
+} from './DropdownMenuContent.vue'
 export {
   default as DropdownMenuFilter,
   type DropdownMenuFilterEmits,
   type DropdownMenuFilterProps,
-} from './DropdownMenuFilter.vue';
+} from './DropdownMenuFilter.vue'
 export {
   default as DropdownMenuGroup,
   type DropdownMenuGroupProps,
-} from './DropdownMenuGroup.vue';
+} from './DropdownMenuGroup.vue'
 export {
   default as DropdownMenuItem,
   type DropdownMenuItemEmits,
   type DropdownMenuItemProps,
-} from './DropdownMenuItem.vue';
+} from './DropdownMenuItem.vue'
 export {
   default as DropdownMenuItemIndicator,
   type DropdownMenuItemIndicatorProps,
-} from './DropdownMenuItemIndicator.vue';
+} from './DropdownMenuItemIndicator.vue'
 export {
   default as DropdownMenuLabel,
   type DropdownMenuLabelProps,
-} from './DropdownMenuLabel.vue';
+} from './DropdownMenuLabel.vue'
 export {
   default as DropdownMenuPortal,
   type DropdownMenuPortalProps,
-} from './DropdownMenuPortal.vue';
+} from './DropdownMenuPortal.vue'
 export {
   default as DropdownMenuRadioGroup,
   type DropdownMenuRadioGroupEmits,
   type DropdownMenuRadioGroupProps,
-} from './DropdownMenuRadioGroup.vue';
+} from './DropdownMenuRadioGroup.vue'
 export {
   default as DropdownMenuRadioItem,
   type DropdownMenuRadioItemEmits,
   type DropdownMenuRadioItemProps,
-} from './DropdownMenuRadioItem.vue';
+} from './DropdownMenuRadioItem.vue'
 export {
   default as DropdownMenuRoot,
   type DropdownMenuRootEmits,
   type DropdownMenuRootProps,
   injectDropdownMenuRootContext,
-} from './DropdownMenuRoot.vue';
+} from './DropdownMenuRoot.vue'
 export {
   default as DropdownMenuSeparator,
   type DropdownMenuSeparatorProps,
-} from './DropdownMenuSeparator.vue';
+} from './DropdownMenuSeparator.vue'
 export {
   default as DropdownMenuSub,
   type DropdownMenuSubEmits,
   type DropdownMenuSubProps,
-} from './DropdownMenuSub.vue';
+} from './DropdownMenuSub.vue'
 export {
   default as DropdownMenuSubContent,
   type DropdownMenuSubContentEmits,
   type DropdownMenuSubContentProps,
-} from './DropdownMenuSubContent.vue';
+} from './DropdownMenuSubContent.vue'
 export {
   default as DropdownMenuSubTrigger,
   type DropdownMenuSubTriggerProps,
-} from './DropdownMenuSubTrigger.vue';
+} from './DropdownMenuSubTrigger.vue'
 export {
   default as DropdownMenuTrigger,
   type DropdownMenuTriggerProps,
-} from './DropdownMenuTrigger.vue';
+} from './DropdownMenuTrigger.vue'
+export { createDropdownMenuHandle, DropdownMenuHandle } from './handle'
+export {
+  type DropdownMenuContentSurface,
+  type DropdownMenuOpenChangeReason,
+  type DropdownMenuTriggerState,
+  useDropdownMenu,
+  type UseDropdownMenuProps,
+  type UseDropdownMenuReturn,
+} from './useDropdownMenu'

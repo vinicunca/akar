@@ -1,27 +1,30 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface ProgressIndicatorProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { injectProgressRootContext } from './ProgressRoot.vue';
+import { renderAs } from '@/Primitive/renderAs'
+import { injectProgressRootContext } from './ProgressRoot.vue'
+import { getProgressIndicatorSurface } from './useProgress'
 
-const props = defineProps<ProgressIndicatorProps>();
+const props = defineProps<ProgressIndicatorProps>()
 
-const rootContext = injectProgressRootContext();
-useForwardExpose();
+const rootContext = injectProgressRootContext()
+// Same derivation as `useProgress().indicator`.
+const indicator = getProgressIndicatorSurface(rootContext)
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
-    :data-state="rootContext.progressState.value"
-    :data-value="rootContext.modelValue?.value ?? undefined"
-    :data-max="rootContext.max.value"
+  <component
+    :is="renderAs(props.as, props.asChild)"
+    :ref="forwardRef"
+    v-bind="indicator.attrs.value"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

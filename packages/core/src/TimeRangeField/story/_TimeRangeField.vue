@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { TimeRangeFieldRootProps } from '..';
-import type { TimeValue } from '@/shared/date';
-import { Label } from '@/Label';
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from '..';
+import type { TimeRangeFieldRootProps } from '..'
+import type { TimeValue } from '@/shared/date'
+import { Label } from '@/Label'
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from '..'
 
-const props = defineProps<{ timeRangeFieldProps?: TimeRangeFieldRootProps; emits?: { 'onUpdate:modelValue'?: (data: TimeValue) => void } }>();
+const props = defineProps<{ timeRangeFieldProps?: TimeRangeFieldRootProps, emits?: { 'onUpdate:modelValue'?: (data: TimeValue) => void } }>()
 </script>
 
 <template>

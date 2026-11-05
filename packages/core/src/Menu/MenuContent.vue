@@ -2,36 +2,46 @@
 import type {
   MenuContentImplEmits,
   MenuRootContentTypeProps,
-} from './MenuContentImpl.vue';
+} from './MenuContentImpl.vue'
 
-export type MenuContentEmits = MenuContentImplEmits;
+export type MenuContentEmits = MenuContentImplEmits
 
 export interface MenuContentProps extends MenuRootContentTypeProps {
   /**
    * Used to force mounting when more control is needed. Useful when
    * controlling animation with Vue animation libraries.
    */
-  forceMount?: boolean;
+  forceMount?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { Presence } from '@/Presence';
-import { useForwardPropsEmits } from '@/shared';
-import { injectMenuContext, injectMenuRootContext } from './MenuRoot.vue';
-import MenuRootContentModal from './MenuRootContentModal.vue';
-import MenuRootContentNonModal from './MenuRootContentNonModal.vue';
+import { Presence } from '@/Presence'
+import { useForwardElement, useForwardPropsEmits } from '@/shared'
+import { isPortalOpening } from '@/Teleport/portalGate'
+import { injectMenuContext, injectMenuRootContext } from './MenuRoot.vue'
+import MenuRootContentModal from './MenuRootContentModal.vue'
+import MenuRootContentNonModal from './MenuRootContentNonModal.vue'
 
-const props = defineProps<MenuContentProps>();
-const emits = defineEmits<MenuContentImplEmits>();
-const forwarded = useForwardPropsEmits(props, emits);
+const props = defineProps<MenuContentProps>()
+const emits = defineEmits<MenuContentImplEmits>()
+const forwarded = useForwardPropsEmits(props, emits)
 
-const menuContext = injectMenuContext();
-const rootContext = injectMenuRootContext();
+const menuContext = injectMenuContext()
+const rootContext = injectMenuRootContext()
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <Presence :present="forceMount || menuContext.open.value">
+  <Presence
+    :ref="forwardRef"
+    :appear="isPortalOpening(menuContext)"
+    :present="menuContext.open.value"
+    :force-mount="forceMount"
+    @complete="menuContext.notifyOpenComplete"
+  >
     <MenuRootContentModal
       v-if="rootContext.modal.value"
       v-bind="{ ...$attrs, ...forwarded }"

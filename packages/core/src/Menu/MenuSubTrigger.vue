@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { MenuItemImplProps } from './MenuItemImpl.vue';
-import type { Side } from './utils';
+import type { MenuItemImplProps } from './MenuItemImpl.vue'
+import type { Side } from './utils'
 
 export interface MenuSubTriggerProps extends MenuItemImplProps {
   /**
@@ -9,95 +9,96 @@ export interface MenuSubTriggerProps extends MenuItemImplProps {
    * Increase it for users who move the pointer slowly or on devices under heavy load.
    * @defaultValue 300
    */
-  graceDuration?: number;
+  graceDuration?: number
 }
 </script>
 
 <script setup lang="ts">
-import type { ComponentPublicInstance } from 'vue';
-import { reactiveOmit } from '@vueuse/shared';
-import { nextTick, onUnmounted, ref, watch } from 'vue';
-import { useId } from '@/shared';
-import MenuAnchor from './MenuAnchor.vue';
-import { injectMenuContentContext } from './MenuContentImpl.vue';
-import MenuItemImpl from './MenuItemImpl.vue';
-import { injectMenuContext, injectMenuRootContext } from './MenuRoot.vue';
-import { injectMenuSubContext } from './MenuSub.vue';
-import { getOpenState, isMouseEvent, SUB_OPEN_KEYS } from './utils';
+import type { ComponentPublicInstance } from 'vue'
+import { reactiveOmit } from '@vueuse/shared'
+import { mergeProps, nextTick, onUnmounted, ref, watch } from 'vue'
+import { usePopperAnchor } from '@/Popper/usePopperAnchor'
+import { disclosureState, useForwardElement, useId } from '@/shared'
+import { injectMenuContentContext } from './MenuContentImpl.vue'
+import MenuItemImpl from './MenuItemImpl.vue'
+import { injectMenuContext, injectMenuRootContext } from './MenuRoot.vue'
+import { injectMenuSubContext } from './MenuSub.vue'
+import { isMouseEvent, SELECTION_KEYS, SUB_OPEN_KEYS } from './utils'
+
+defineOptions({
+  // `$attrs` are merged under the part's own bindings: the precedence the
+  // former `MenuAnchor` (as-child) wrapper gave them.
+  inheritAttrs: false,
+})
 
 const props = withDefaults(defineProps<MenuSubTriggerProps>(), {
   graceDuration: 300,
-});
+})
 // `graceDuration` is not a `MenuItemImpl` prop, so it would land on the DOM element.
-const itemProps = reactiveOmit(props, 'graceDuration');
+const itemProps = reactiveOmit(props, 'graceDuration')
 
-const menuContext = injectMenuContext();
-const rootContext = injectMenuRootContext();
-const subContext = injectMenuSubContext();
-const contentContext = injectMenuContentContext();
+const menuContext = injectMenuContext()
+const rootContext = injectMenuRootContext()
+const subContext = injectMenuSubContext()
+const contentContext = injectMenuContentContext()
 
 watch(menuContext.open, (open) => {
   if (open) {
     contentContext.activeSubmenuContext.value = {
       onOpenChange: menuContext.onOpenChange,
       trigger: subContext.trigger,
-    };
-  } else if (contentContext.activeSubmenuContext.value?.trigger.value === subContext.trigger.value) {
-    contentContext.activeSubmenuContext.value = undefined;
+    }
   }
-});
+  else if (contentContext.activeSubmenuContext.value?.trigger.value === subContext.trigger.value) {
+    contentContext.activeSubmenuContext.value = undefined
+  }
+})
 
-const openTimerRef = ref<number | null>(null);
+const openTimerRef = ref<number | null>(null)
 
-subContext.triggerId ||= useId(undefined, 'reka-menu-sub-trigger');
+subContext.triggerId ||= useId(undefined, 'reka-menu-sub-trigger')
 
 function clearOpenTimer() {
-  if (openTimerRef.value) {
-    window.clearTimeout(openTimerRef.value);
-  }
-  openTimerRef.value = null;
+  if (openTimerRef.value)
+    window.clearTimeout(openTimerRef.value)
+  openTimerRef.value = null
 }
 
 onUnmounted(() => {
-  clearOpenTimer();
-});
+  clearOpenTimer()
+})
 
 function handlePointerMove(event: PointerEvent) {
-  if (!isMouseEvent(event)) {
-    return;
-  }
-  const defaultPrevented = contentContext.onItemEnter(event);
-  if (defaultPrevented) {
-    return;
-  }
+  if (!isMouseEvent(event))
+    return
+  const defaultPrevented = contentContext.onItemEnter(event)
+  if (defaultPrevented)
+    return
 
   if (!props.disabled && !menuContext.open.value && !openTimerRef.value) {
-    contentContext.onPointerGraceIntentChange(null);
+    contentContext.onPointerGraceIntentChange(null)
     openTimerRef.value = window.setTimeout(() => {
-      menuContext.onOpenChange(true);
-      clearOpenTimer();
-    }, 100);
+      menuContext.onOpenChange(true, 'trigger-hover', event)
+      clearOpenTimer()
+    }, 100)
   }
 }
 
 async function handlePointerLeave(event: PointerEvent) {
-  if (!isMouseEvent(event)) {
-    return;
-  }
-  clearOpenTimer();
+  if (!isMouseEvent(event))
+    return
+  clearOpenTimer()
 
-  const contentRect = menuContext.content.value?.getBoundingClientRect();
+  const contentRect = menuContext.content.value?.getBoundingClientRect()
   if (contentRect?.width) {
     // TODO (Radix UI): make sure to update this when we change positioning logic
     // https://github.com/radix-ui/primitives/blob/main/packages/react/menu/src/Menu.tsx#L1088
-    const side = menuContext.content.value?.dataset.side as Side;
+    const side = menuContext.content.value?.dataset.side as Side
 
-    const rightSide = side === 'right';
-    const bleed = rightSide
-      ? -5
-      : +5;
-    const contentNearEdge = contentRect[rightSide ? 'left' : 'right'];
-    const contentFarEdge = contentRect[rightSide ? 'right' : 'left'];
+    const rightSide = side === 'right'
+    const bleed = rightSide ? -5 : +5
+    const contentNearEdge = contentRect[rightSide ? 'left' : 'right']
+    const contentFarEdge = contentRect[rightSide ? 'right' : 'left']
 
     contentContext.onPointerGraceIntentChange({
       area: [
@@ -110,76 +111,81 @@ async function handlePointerLeave(event: PointerEvent) {
         { x: contentNearEdge, y: contentRect.bottom },
       ],
       side,
-    });
+    })
 
-    window.clearTimeout(contentContext.pointerGraceTimerRef.value);
+    window.clearTimeout(contentContext.pointerGraceTimerRef.value)
     contentContext.pointerGraceTimerRef.value = window.setTimeout(
       () => contentContext.onPointerGraceIntentChange(null),
       props.graceDuration,
-    );
-  } else {
-    const defaultPrevented = contentContext.onTriggerLeave(event);
-    if (defaultPrevented) {
-      return;
-    }
+    )
+  }
+  else {
+    const defaultPrevented = contentContext.onTriggerLeave(event)
+    if (defaultPrevented)
+      return
 
     // There's 100ms where the user may leave an item before the submenu was opened.
-    contentContext.onPointerGraceIntentChange(null);
+    contentContext.onPointerGraceIntentChange(null)
   }
 }
 
 async function handleKeyDown(event: KeyboardEvent) {
-  const isTypingAhead = contentContext.searchRef.value !== '';
-  if (props.disabled || (isTypingAhead && event.key === ' ')) {
-    return;
-  }
+  const isTypingAhead = contentContext.searchRef.value !== ''
+  if (props.disabled || (isTypingAhead && event.key === ' '))
+    return
   if (SUB_OPEN_KEYS[rootContext.dir.value].includes(event.key)) {
-    menuContext.onOpenChange(true);
+    // Enter/Space activate the trigger; ArrowRight/ArrowLeft are list navigation.
+    const opened = menuContext.onOpenChange(true, SELECTION_KEYS.includes(event.key) ? 'trigger-press' : 'list-navigation', event)
+    // prevent window from scrolling
+    event.preventDefault()
+    // `false` is either "already open" (re-focus the content below) or a
+    // cancelled open (`beforeUpdate:open`) — never move focus into a closed submenu.
+    if (!opened && !menuContext.open.value)
+      return
 
-    await nextTick();
+    await nextTick()
     // The trigger may hold focus if opened via pointer interaction
     // so we ensure content is given focus again when switching to keyboard.
-    menuContext.content.value?.focus();
-    // prevent window from scrolling
-    event.preventDefault();
+    menuContext.content.value?.focus()
   }
+}
+
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+const anchor = usePopperAnchor({ consumerAttrs: true, element: currentElement })
+
+function setTriggerRef(item: Element | ComponentPublicInstance | null) {
+  forwardRef(item)
+  if (item)
+    subContext?.onTriggerChange((item as ComponentPublicInstance).$el)
 }
 </script>
 
 <template>
-  <MenuAnchor as-child>
-    <MenuItemImpl
-      v-bind="itemProps"
-      :id="subContext.triggerId"
-      :ref="
-        (vnode: Element | ComponentPublicInstance | null) => {
-          if (!vnode) return undefined
-          // @ts-ignore
-          subContext?.onTriggerChange(vnode?.$el);
-          return undefined
-        }
-      "
-      aria-haspopup="menu"
-      :aria-expanded="menuContext.open.value"
-      :aria-controls="subContext.contentId"
-      :data-state="getOpenState(menuContext.open.value)"
-      @click="
-        async (event: MouseEvent) => {
-          if (props.disabled || event.defaultPrevented) return;
-          /**
-           * We manually focus because iOS Safari doesn't always focus on click (e.g. buttons)
-           * and we rely heavily on `onFocusOutside` for submenus to close when switching
-           * between separate submenus.
-           */
-          (event.currentTarget as HTMLElement)?.focus();
-          if (!menuContext.open.value) menuContext.onOpenChange(true);
-        }
-      "
-      @pointermove="handlePointerMove"
-      @pointerleave="handlePointerLeave"
-      @keydown="handleKeyDown"
-    >
-      <slot />
-    </MenuItemImpl>
-  </MenuAnchor>
+  <MenuItemImpl
+    v-bind="mergeProps(anchor.consumerAttrs($attrs), itemProps)"
+    :id="subContext.triggerId"
+    :ref="setTriggerRef"
+    aria-haspopup="menu"
+    :aria-expanded="menuContext.open.value"
+    :aria-controls="subContext.contentId"
+    :data-state="disclosureState(menuContext.open.value)"
+    @click="
+      async (event: MouseEvent) => {
+        if (props.disabled || event.defaultPrevented) return;
+        /**
+         * We manually focus because iOS Safari doesn't always focus on click (e.g. buttons)
+         * and we rely heavily on `onFocusOutside` for submenus to close when switching
+         * between separate submenus.
+         */
+        (event.currentTarget as HTMLElement)?.focus();
+        if (!menuContext.open.value) menuContext.onOpenChange(true, 'trigger-press', event);
+      }
+    "
+    @pointermove="handlePointerMove"
+    @pointerleave="handlePointerLeave"
+    @keydown="handleKeyDown"
+  >
+    <slot />
+  </MenuItemImpl>
 </template>

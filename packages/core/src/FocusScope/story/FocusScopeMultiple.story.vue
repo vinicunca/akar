@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { FocusScope } from '..';
+import { ref } from 'vue'
+import { FocusScope } from '..'
 
-const trapped1 = ref(false);
-const trapped2 = ref(false);
+const trapped1 = ref(false)
+const trapped2 = ref(false)
 </script>
 
 <template>

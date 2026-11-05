@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { AvatarFallback, AvatarImage, AvatarRoot } from '..';
+import { computed, ref } from 'vue'
+import { AvatarFallback, AvatarImage, AvatarRoot } from '..'
 
 const PROFILES = [
   {
@@ -13,17 +13,16 @@ const PROFILES = [
     alt: '',
     fallback: 'AD',
   },
-];
-const index = ref(0);
+]
+const index = ref(0)
 const profile = computed(() => {
-  return PROFILES[index.value];
-});
+  return PROFILES[index.value]
+})
 function rotateIndex() {
-  if (index.value) {
-    index.value = 0;
-  } else {
-    index.value = 1;
-  }
+  if (index.value)
+    index.value = 0
+  else
+    index.value = 1
 }
 </script>
 
@@ -64,7 +63,7 @@ function rotateIndex() {
       >
         <AvatarImage
           class="h-full w-full rounded-[inherit] object-cover"
-          src="https://vinicunca.dev/og.jpg"
+          src="https://reka-ui.com/og.jpg"
           alt="Pedro Duarte"
         />
         <AvatarFallback

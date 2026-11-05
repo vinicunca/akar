@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Label } from '@/Label';
-import { PinInputInput, PinInputRoot } from '..';
+import { ref } from 'vue'
+import { Label } from '@/Label'
+import { PinInputInput, PinInputRoot } from '..'
 
-const value = ref<Array<string>>([]);
+const value = ref<string[]>([])
 </script>
 
 <template>

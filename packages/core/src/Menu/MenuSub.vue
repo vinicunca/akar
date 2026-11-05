@@ -1,82 +1,89 @@
 <script lang="ts">
-import type { Ref } from 'vue';
-import type { MenuContext } from './MenuRoot.vue';
-import { createContext } from '@/shared';
+import type { Ref } from 'vue'
+import type { MenuContext } from './MenuRoot.vue'
+import type { MenuOpenChangeReason } from './useMenu'
+import type { ChangeEventDetails } from '@/shared'
+import { createContext, useControllableState, useId } from '@/shared'
 
 export interface MenuSubContext {
-  contentId: string;
-  triggerId: string;
-  trigger: Ref<HTMLElement | undefined>;
-  onTriggerChange: (trigger: HTMLElement | undefined) => void;
-  parentMenuContext?: MenuContext;
+  contentId: string
+  triggerId: string
+  trigger: Ref<HTMLElement | undefined>
+  onTriggerChange: (trigger: HTMLElement | undefined) => void
+  parentMenuContext?: MenuContext
 }
 
 export const [injectMenuSubContext, provideMenuSubContext]
-  = createContext<MenuSubContext>('MenuSub');
+  = createContext<MenuSubContext>('MenuSub')
 
 export interface MenuSubProps {
   /** The controlled open state of the menu. Can be used as `v-model:open`. */
-  open?: boolean;
+  open?: boolean
 }
 
 export type MenuSubEmits = {
+  /** Called before the open state of the submenu changes; `details.cancel()` vetoes the change. */
+  'beforeUpdate:open': [payload: boolean, details: ChangeEventDetails<MenuOpenChangeReason>]
   /** Event handler called when the open state of the submenu changes. */
-  'update:open': [payload: boolean];
-};
+  'update:open': [payload: boolean, details: ChangeEventDetails<MenuOpenChangeReason>]
+  /** Event handler called after the open or close animations of the submenu content have finished. */
+  'update:openComplete': [value: boolean]
+}
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
 import {
   ref,
-  watchEffect,
-} from 'vue';
-import { PopperRoot } from '@/Popper';
-import { injectMenuContext, provideMenuContext } from './MenuRoot.vue';
+  watch,
+} from 'vue'
+import { PopperRoot } from '@/Popper'
+import { injectMenuContext, provideMenuContext } from './MenuRoot.vue'
 
 const props = withDefaults(defineProps<MenuSubProps>(), {
   open: undefined,
-});
-const emits = defineEmits<MenuSubEmits>();
+})
+const emits = defineEmits<MenuSubEmits>()
 
-const open = useVModel(props, 'open', emits, {
+const { state: open, setState } = useControllableState<boolean, MenuOpenChangeReason>({
+  prop: () => props.open,
   defaultValue: false,
-  passive: (props.open === undefined) as false,
-}) as Ref<boolean>;
+  name: 'open',
+  emit: emits,
+})
 
-const parentMenuContext = injectMenuContext();
-const trigger = ref<HTMLElement>();
-const content = ref<HTMLElement>();
+const parentMenuContext = injectMenuContext()
+const trigger = ref<HTMLElement>()
+const content = ref<HTMLElement>()
 
-// Prevent the parent menu from reopening with open submenus.
-watchEffect((cleanupFn) => {
-  if (parentMenuContext?.open.value === false) {
-    open.value = false;
-  }
-  cleanupFn(() => {
-    open.value = false;
-  });
-});
+// Prevent the parent menu from reopening with open submenus. A getter-source
+// `watch` (not `watchEffect`): `setState` reads the sub's own `open` for its
+// equality check, which must not become a dependency of this effect.
+watch(() => parentMenuContext?.open.value, (parentOpen, _, onCleanup) => {
+  if (parentOpen === false)
+    setState(false)
+  onCleanup(() => setState(false))
+}, { immediate: true })
 
 provideMenuContext({
   open,
-  onOpenChange: (value) => {
-    open.value = value;
-  },
+  onOpenChange: (value, reason, event) => setState(value, reason, event),
   content,
   onContentChange: (element) => {
-    content.value = element;
+    content.value = element
   },
-});
+  notifyOpenComplete: value => emits('update:openComplete', value),
+})
 
 provideMenuSubContext({
   triggerId: '',
-  contentId: '',
+  // Allocated here, not by the content: a closed submenu's portal mounts no
+  // content, and the trigger's `aria-controls` must name it on the first open.
+  contentId: useId(undefined, 'reka-menu-sub-content'),
   trigger,
   onTriggerChange: (element) => {
-    trigger.value = element;
+    trigger.value = element
   },
-});
+})
 </script>
 
 <template>

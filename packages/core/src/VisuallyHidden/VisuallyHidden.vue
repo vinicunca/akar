@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
+import type { PrimitiveProps } from '@/Primitive'
 
 export interface VisuallyHiddenProps extends PrimitiveProps {
   /**
@@ -12,20 +12,24 @@ export interface VisuallyHiddenProps extends PrimitiveProps {
    *   (`aria-hidden="true"`) and the tab order (`tabindex="-1"`). Use for
    *   hidden form inputs.
    */
-  feature?: 'focusable' | 'fully-hidden';
+  feature?: 'focusable' | 'fully-hidden'
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { renderAsEmpty, rendersChildren } from '@/Primitive/renderAs'
+import { useForwardElement } from '@/shared'
 
-withDefaults(defineProps<VisuallyHiddenProps>(), { as: 'span', feature: 'focusable' });
+withDefaults(defineProps<VisuallyHiddenProps>(), { as: 'span', feature: 'focusable' })
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="asChild"
+  <component
+    :is="renderAsEmpty(as, asChild)"
+    :ref="forwardRef"
     :aria-hidden="feature === 'fully-hidden' ? 'true' : undefined"
     :data-hidden="feature === 'fully-hidden' ? '' : undefined"
     :tabindex="feature === 'fully-hidden' ? '-1' : undefined"
@@ -44,10 +48,17 @@ withDefaults(defineProps<VisuallyHiddenProps>(), { as: 'span', feature: 'focusab
       wordWrap: 'normal',
 
       // Prevent causing unnecessary container scroll
+      // @see https://github.com/unovue/reka-ui/issues/2127
       top: '-1px',
       left: '-1px',
     }"
   >
-    <slot />
-  </Primitive>
+    <!-- `as="input"` (the hidden form input) renders no children. -->
+    <template
+      v-if="rendersChildren(as, asChild)"
+      #default
+    >
+      <slot />
+    </template>
+  </component>
 </template>

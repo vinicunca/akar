@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { computed, ref } from 'vue';
-import { useFilter } from '@/shared';
-import { countryList } from '@/shared/constant';
-import { ComboboxAnchor, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxRoot, ComboboxTrigger, ComboboxViewport, ComboboxVirtualizer } from '..';
+import { Icon } from '@iconify/vue'
+import { computed, ref } from 'vue'
+import { useFilter } from '@/shared'
+import { countryList } from '@/shared/constant'
+import { ComboboxAnchor, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxRoot, ComboboxTrigger, ComboboxViewport, ComboboxVirtualizer } from '..'
 
-const { startsWith } = useFilter({ sensitivity: 'base' });
+const { startsWith } = useFilter({ sensitivity: 'base' })
 
-const filterText = ref('');
+const filterText = ref('')
 const filteredOptions = computed(() => {
-  const options = countryList.map((a) => ({ label: a, value: a }));
-  return filterText.value
-    ? options.filter((opt) => startsWith(opt.label, filterText.value))
-    : options;
-});
+  const options = countryList.map(a => ({ label: a, value: a }))
+  return filterText.value ? options.filter(opt => startsWith(opt.label, filterText.value)) : options
+})
 </script>
 
 <template>

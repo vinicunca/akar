@@ -1,25 +1,30 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { injectMenuGroupContext } from './MenuGroup.vue';
+import type { PrimitiveProps } from '@/Primitive'
+import { injectMenuGroupContext } from './MenuGroup.vue'
 
 export interface MenuLabelProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs'
+import { useForwardElement } from '@/shared'
 
-const props = withDefaults(defineProps<MenuLabelProps>(), {
+withDefaults(defineProps<MenuLabelProps>(), {
   as: 'div',
-});
+})
 
-const groupContext = injectMenuGroupContext({ id: '' });
+const groupContext = injectMenuGroupContext({ id: '' })
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
+  <component
+    :is="renderAs(as, asChild)"
     :id="groupContext.id || undefined"
+    :ref="forwardRef"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

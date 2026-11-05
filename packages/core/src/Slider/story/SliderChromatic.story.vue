@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from '..';
+import { ref } from 'vue'
+import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from '..'
 
-const controlledLtr = ref([44]);
-const controlledLtrMulti = ref([10, 30]);
-const controlledRtl = ref([44]);
-const controlledRtlMulti = ref([10, 30]);
+const controlledLtr = ref([44])
+const controlledLtrMulti = ref([10, 30])
+const controlledRtl = ref([44])
+const controlledRtlMulti = ref([10, 30])
 </script>
 
 <template>

@@ -1,110 +1,111 @@
 <script lang="ts">
-import type { SelectEvent } from './utils';
-import type { PrimitiveProps } from '@/Primitive';
-import type { AcceptableValue, FormFieldProps } from '@/shared/types';
+import type { RadioGroupChangeReason } from './useRadioGroup'
+import type { SelectEvent } from './utils'
+import type { PrimitiveProps } from '@/Primitive'
+import type { ChangeEventDetails } from '@/shared'
+import type { AcceptableValue, FormFieldProps } from '@/shared/types'
 
 export type RadioEmits = {
-  'update:checked': [value: boolean];
-  'select': [SelectEvent];
-};
+  /** Event handler called before the checked state changes; call `details.cancel()` to keep the current state */
+  'beforeUpdate:checked': [value: boolean, details: ChangeEventDetails<RadioGroupChangeReason>]
+  /** Event handler called when the checked state changes; `details.event` is the originating click */
+  'update:checked': [value: boolean, details: ChangeEventDetails<RadioGroupChangeReason>]
+  'select': [SelectEvent]
+}
 
 export interface RadioProps extends PrimitiveProps, FormFieldProps {
-  id?: string;
+  id?: string
   /** The value given as data when submitted with a `name`. */
-  value?: AcceptableValue;
+  value?: AcceptableValue
   /** When `true`, prevents the user from interacting with the radio item. */
-  disabled?: boolean;
-  checked?: boolean;
+  disabled?: boolean
+  checked?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { computed, toRefs } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useFormControl, useForwardExpose, useForwardScopeId } from '@/shared';
-import { VisuallyHiddenInput } from '@/VisuallyHidden';
-import { handleSelect } from './utils';
+import { computed, mergeProps } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { getRootNode, useControllableState, useFormControl, useForwardElement, useForwardScopeId } from '@/shared'
+import { VisuallyHiddenInput } from '@/VisuallyHidden'
+import { getRadioSurface } from './useRadioGroup'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
-const props = withDefaults(
-  defineProps<RadioProps>(),
-  {
-    disabled: false,
-    checked: undefined,
-    as: 'button',
-  },
-);
-const emits = defineEmits<RadioEmits>();
+const props = withDefaults(defineProps<RadioProps>(), {
+  disabled: false,
+  checked: undefined,
+  as: 'button',
+})
+const emits = defineEmits<RadioEmits>()
 
 defineSlots<{
   default?: (props: {
     /** Current checked state */
-    checked: typeof checked.value;
-  }) => any;
-}>();
+    checked: typeof checked.value
+  }) => any
+}>()
 
-const checked = useVModel(props, 'checked', emits, {
-  passive: (props.checked === undefined) as false,
-});
+// Controlled (`RadioGroupItem` always passes `checked`) or uncontrolled (a bare
+// `<Radio>`); `beforeUpdate:checked` / `update:checked` carry the details whose
+// `event` `RadioGroupItem` forwards to the group's `changeModelValue`.
+const { state: checked, setState: setChecked } = useControllableState<boolean, RadioGroupChangeReason>({
+  prop: () => props.checked,
+  defaultValue: false,
+  name: 'checked',
+  emit: emits,
+})
 
-const { value } = toRefs(props);
-const { forwardRef, currentElement: triggerElement } = useForwardExpose();
-const isFormControl = useFormControl(triggerElement);
+const { forwardRef, currentElement: triggerElement, expose } = useForwardElement()
+defineExpose(expose)
+const isFormControl = useFormControl(triggerElement)
 // Hidden form input is a sibling (not nested) of the control to avoid the
 // `nested-interactive` a11y violation; forward the parent scope id for scoped styles.
-const scopeIdAttrs = useForwardScopeId();
+const scopeIdAttrs = useForwardScopeId()
 
-const ariaLabel = computed(() => props.id && triggerElement.value
-  ? (document.querySelector(`[for="${props.id}"]`) as HTMLLabelElement)?.innerText
-  : undefined);
+// DOM-bound: resolves the associated `[for]` label text through the element's
+// root (shadow-safe). Stays in the shell (needs `triggerElement`, SSR-guarded).
+const ariaLabel = computed(() => props.id && triggerElement.value ? (getRootNode(triggerElement.value).querySelector(`[for="${props.id}"]`) as HTMLLabelElement)?.innerText : undefined)
 
-function handleClick(event: MouseEvent) {
-  if (props.disabled) {
-    return;
-  }
+// role/aria-checked/disabled/value/required/name + data-state/data-disabled and
+// the click protocol (`radio.select` → check → in-form propagation stop) come
+// from the shared surface builder — the same derivation `useRadioGroup()`'s
+// item surface composes. `isFormControl` is the one DOM-bound seam, injected.
+const radio = getRadioSurface({
+  checked,
+  disabled: () => props.disabled,
+  required: () => props.required,
+  value: () => props.value,
+  name: () => props.name,
+  onSelect: event => emits('select', event),
+  isFormControl,
+  onCheckedChange: (value, event) => setChecked(value, 'item-press', event),
+})
 
-  handleSelect(event, props.value, (ev) => {
-    emits('select', ev);
-    if (ev?.defaultPrevented) {
-      return;
-    }
-
-    checked.value = true;
-    if (isFormControl.value) {
-    // if radio is in a form, stop propagation from the button so that we only propagate
-    // one click event (from the input). We propagate changes from an input so that native
-    // form validation works and form events reflect radio updates.
-      ev.stopPropagation();
-    }
-  });
-}
+// Listener order is part of the contract: `v-bind="$attrs"` sat BEFORE
+// `@click.stop` (a consumer listener runs first and observes the pre-check
+// state). `mergeProps` chains same-named listeners in argument order, so the
+// surface's `onClick` is bound separately below, after `$attrs`.
+const radioAttrs = computed(() => {
+  const { onClick: _onClick, ...attrs } = radio.attrs.value
+  return attrs
+})
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, asChild)"
     :id="id"
     :ref="forwardRef"
-    role="radio"
     :type="as === 'button' ? 'button' : undefined"
-    :as="as"
-    :aria-checked="checked ?? false"
     :aria-label="ariaLabel"
-    :as-child="asChild"
-    :disabled="disabled ? '' : undefined"
-    :data-state="checked ? 'checked' : 'unchecked'"
-    :data-disabled="disabled ? '' : undefined"
-    :value="value"
-    :required="required"
-    :name="name"
-    v-bind="{ ...scopeIdAttrs, ...$attrs }"
-    @click.stop="handleClick"
+    v-bind="mergeProps(radioAttrs, scopeIdAttrs, $attrs)"
+    @click="radio.props.value.onClick"
   >
     <slot :checked="checked" />
-  </Primitive>
+  </component>
 
   <VisuallyHiddenInput
     v-if="isFormControl && name"

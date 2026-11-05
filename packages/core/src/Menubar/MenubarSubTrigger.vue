@@ -1,21 +1,23 @@
 <script lang="ts">
-import type { MenuSubTriggerProps } from '@/Menu';
-import { useForwardExpose } from '@/shared';
+import type { MenuSubTriggerProps } from '@/Menu'
+import { useForwardElement } from '@/shared'
 
 export interface MenubarSubTriggerProps extends MenuSubTriggerProps {}
 </script>
 
 <script setup lang="ts">
-import { MenuSubTrigger } from '@/Menu';
+import { MenuSubTrigger } from '@/Menu'
 
-const props = defineProps<MenubarSubTriggerProps>();
-useForwardExpose();
+const props = defineProps<MenubarSubTriggerProps>()
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <MenuSubTrigger
+    :ref="forwardRef"
     v-bind="props"
-    data-akar-menubar-subtrigger=""
+    data-reka-menubar-subtrigger=""
   >
     <slot />
   </MenuSubTrigger>

@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface TooltipArrowProps extends PrimitiveProps {
   /**
@@ -8,30 +8,34 @@ export interface TooltipArrowProps extends PrimitiveProps {
    *
    * @defaultValue 10
    */
-  width?: number;
+  width?: number
 
   /**
    * The height of the arrow in pixels.
    *
    * @defaultValue 5
    */
-  height?: number;
+  height?: number
 }
 </script>
 
 <script setup lang="ts">
-import { PopperArrow } from '@/Popper';
+import { PopperArrow } from '@/Popper'
 
 const props = withDefaults(defineProps<TooltipArrowProps>(), {
   width: 10,
   height: 5,
   as: 'svg',
-});
-useForwardExpose();
+})
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <PopperArrow v-bind="props">
+  <PopperArrow
+    :ref="forwardRef"
+    v-bind="props"
+  >
     <slot />
   </PopperArrow>
 </template>

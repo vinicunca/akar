@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TimeFieldInput, TimeFieldRoot } from '..';
+import { TimeFieldInput, TimeFieldRoot } from '..'
 </script>
 
 <template>

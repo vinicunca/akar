@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { ProgressIndicator, ProgressRoot } from '..';
+import { ref } from 'vue'
+import { ProgressIndicator, ProgressRoot } from '..'
 
-const interactive = ref(0);
+const interactive = ref(0)
 setInterval(() => {
   // For some reason, this interval triggers twice in the same tick
-  interactive.value = (interactive.value + Math.random() * 15) % 100;
-}, 2000);
+  interactive.value = (interactive.value + Math.random() * 15) % 100
+}, 2000)
 
-const errorCaseValue = ref(1);
-const errorCaseMax = ref(100);
+const errorCaseValue = ref(1)
+const errorCaseMax = ref(100)
 </script>
 
 <template>

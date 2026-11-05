@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { ToastCloseProps } from './ToastClose.vue';
+import type { ToastCloseProps } from './ToastClose.vue'
 
 export interface ToastActionProps extends ToastCloseProps {
   /**
@@ -10,64 +10,62 @@ export interface ToastActionProps extends ToastCloseProps {
    * @example <ToastAction altText="Goto account settings to upgrade">Upgrade</ToastAction>
    * @example <ToastAction altText="Undo (Alt+U)">Undo</ToastAction>
    */
-  altText?: string;
+  altText?: string
   /**
    * Whether the action should close the toast when clicked.
    *
    * @defaultValue true
    */
-  closeOnClick?: boolean;
+  closeOnClick?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { computed, useSlots } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
-import ToastAnnounceExclude from './ToastAnnounceExclude.vue';
-import { injectToastRootContext } from './ToastRootImpl.vue';
+import { computed, mergeProps, useSlots } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { useForwardElement } from '@/shared'
+import { injectToastRootContext } from './ToastRootImpl.vue'
+
+defineOptions({
+  // `$attrs` are merged over the announce-exclude marks and under the part's
+  // own bindings: the order the former `<ToastAnnounceExclude as-child>`
+  // wrapper gave them.
+  inheritAttrs: false,
+})
 
 const props = withDefaults(defineProps<ToastActionProps>(), {
   as: 'button',
   closeOnClick: true,
-});
+})
 
-const rootContext = injectToastRootContext();
-const { forwardRef } = useForwardExpose();
-const slots = useSlots();
+const rootContext = injectToastRootContext()
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const slots = useSlots()
 
-const actionProps = computed(() => rootContext.toast.value?.actionProps);
+const actionProps = computed(() => rootContext.toast.value?.actionProps)
 // A managed toast without `actionProps` renders no action, unless slot content is given.
-const isRendered = computed(() => !!slots.default || !rootContext.toast.value || !!actionProps.value);
-const altText = computed(() => props.altText ?? actionProps.value?.altText);
+const isRendered = computed(() => !!slots.default || !rootContext.toast.value || !!actionProps.value)
+const altText = computed(() => props.altText ?? actionProps.value?.altText)
 
-if (isRendered.value && !altText.value) {
-  throw new Error('Missing prop `altText` expected on `ToastAction`');
-}
+if (isRendered.value && !altText.value)
+  throw new Error('Missing prop `altText` expected on `ToastAction`')
 
 function handleClick(event: MouseEvent) {
-  actionProps.value?.onClick?.(event);
-  if (actionProps.value?.closeOnClick ?? props.closeOnClick) {
+  actionProps.value?.onClick?.(event)
+  if (actionProps.value?.closeOnClick ?? props.closeOnClick)
     // Pass the event on, like `ToastClose`: a keyboard click hands focus to the viewport.
-    rootContext.onClose(event as PointerEvent);
-  }
+    rootContext.onClose(event, 'action-press')
 }
 </script>
 
 <template>
-  <ToastAnnounceExclude
+  <component
+    :is="renderAs(as, asChild)"
     v-if="isRendered && altText"
-    :alt-text="altText"
-    as-child
+    :ref="forwardRef"
+    v-bind="mergeProps({ 'data-reka-toast-announce-exclude': '', 'data-reka-toast-announce-alt': altText || undefined }, $attrs, { type: as === 'button' ? 'button' : undefined, onClick: handleClick })"
   >
-    <Primitive
-      :ref="forwardRef"
-      :as="as"
-      :as-child="asChild"
-      :type="as === 'button' ? 'button' : undefined"
-      @click="handleClick"
-    >
-      <slot>{{ actionProps?.label }}</slot>
-    </Primitive>
-  </ToastAnnounceExclude>
+    <slot>{{ actionProps?.label }}</slot>
+  </component>
 </template>

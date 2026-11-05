@@ -8,11 +8,11 @@ import {
   MenuSub,
   MenuSubContent,
   MenuSubTrigger,
-} from '..';
+} from '..'
 
 defineProps<{
-  graceDuration?: number;
-}>();
+  graceDuration?: number
+}>()
 </script>
 
 <template>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { TreeItem, TreeRoot } from '..';
-import { items } from './constants';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { TreeItem, TreeRoot } from '..'
+import { items } from './constants'
 
-const models = ref([]);
+const models = ref([])
 </script>
 
 <template>

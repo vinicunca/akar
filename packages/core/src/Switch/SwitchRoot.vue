@@ -1,139 +1,172 @@
 <script lang="ts">
-import type { ComputedRef, Ref } from 'vue';
-import type { PrimitiveProps } from '@/Primitive';
-import type { FormFieldProps } from '@/shared/types';
-import { createContext, useFormControl, useForwardExpose, useForwardScopeId } from '@/shared';
+import type { ComputedRef, Ref } from 'vue'
+import type { SwitchChangeReason } from './useSwitch'
+import type { PrimitiveProps } from '@/Primitive'
+import type { ChangeEventDetails } from '@/shared'
+import type { FormFieldProps } from '@/shared/types'
+import { createContext, getRootNode, useFormControl, useForwardElement, useForwardScopeId } from '@/shared'
 
 export interface SwitchRootProps<TrueValue = boolean, FalseValue = TrueValue> extends PrimitiveProps, FormFieldProps {
   /** The state of the switch when it is initially rendered. Use when you do not need to control its state. */
-  defaultValue?: NoInfer<TrueValue | FalseValue>;
+  defaultValue?: NoInfer<TrueValue | FalseValue>
   /** The controlled state of the switch. Can be bind as `v-model`. */
-  modelValue?: NoInfer<TrueValue | FalseValue> | null;
+  modelValue?: NoInfer<TrueValue | FalseValue> | null
   /** When `true`, prevents the user from interacting with the switch. */
-  disabled?: boolean;
-  id?: string;
+  disabled?: boolean
+  id?: string
   /** The value given as data when submitted with a `name`. */
-  value?: string;
+  value?: string
   /**
    * The value used when the switch is on. Defaults to `true`.
    */
-  trueValue?: TrueValue;
+  trueValue?: TrueValue
   /**
    * The value used when the switch is off. Defaults to `false`.
    */
-  falseValue?: FalseValue;
+  falseValue?: FalseValue
 }
 
 export type SwitchRootEmits<TrueValue = boolean, FalseValue = TrueValue> = {
+  /** Event handler called before the value of the switch changes; `details.cancel()` vetoes the change. */
+  'beforeUpdate:modelValue': [payload: TrueValue | FalseValue, details: ChangeEventDetails<SwitchChangeReason>]
   /** Event handler called when the value of the switch changes. */
-  'update:modelValue': [payload: TrueValue | FalseValue];
-};
+  'update:modelValue': [payload: TrueValue | FalseValue, details: ChangeEventDetails<SwitchChangeReason>]
+}
 
 export interface SwitchRootContext {
-  checked: ComputedRef<boolean>;
-  toggleCheck: () => void;
-  disabled: Ref<boolean>;
+  checked: ComputedRef<boolean>
+  toggleCheck: () => void
+  disabled: Ref<boolean>
 }
 
 export const [injectSwitchRootContext, provideSwitchRootContext]
-  = createContext<SwitchRootContext>('SwitchRoot');
+  = createContext<SwitchRootContext>('SwitchRoot')
 </script>
 
 <script setup lang="ts" generic="TrueValue = true, FalseValue = false">
-import { useVModel } from '@vueuse/core';
-import { computed, toRefs } from 'vue';
-import { Primitive } from '@/Primitive';
-import { VisuallyHiddenInput } from '@/VisuallyHidden';
+import { computed, mergeProps, watch } from 'vue'
+import { useFieldControl } from '@/Field/useFieldControl'
+import { renderAs } from '@/Primitive/renderAs'
+import { VisuallyHiddenInput } from '@/VisuallyHidden'
+import { useSwitch } from './useSwitch'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
-const props = withDefaults(
-  defineProps<SwitchRootProps<TrueValue, FalseValue>>(),
-  {
-    as: 'button',
-    modelValue: undefined,
-    value: 'on',
-    trueValue: (() => true) as unknown as undefined,
-    falseValue: (() => false) as unknown as undefined,
-  },
-);
-const emit = defineEmits<SwitchRootEmits<TrueValue, FalseValue>>();
+const props = withDefaults(defineProps<SwitchRootProps<TrueValue, FalseValue>>(), {
+  as: 'button',
+  modelValue: undefined,
+  value: 'on',
+  trueValue: (() => true) as unknown as undefined,
+  falseValue: (() => false) as unknown as undefined,
+})
+const emit = defineEmits<SwitchRootEmits<TrueValue, FalseValue>>()
 
 defineSlots<{
   default?: (props: {
     /** Current value */
-    modelValue: typeof modelValue.value;
+    modelValue: typeof modelValue.value
     /** Whether the switch is checked */
-    checked: typeof checked.value;
-  }) => any;
-}>();
+    checked: typeof checked.value
+  }) => any
+}>()
 
-const { disabled } = toRefs(props);
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+const scopeIdAttrs = useForwardScopeId()
+const isFormControl = useFormControl(currentElement)
 
-const modelValue = useVModel(props as any, 'modelValue', emit as any, {
-  defaultValue: props.defaultValue ?? props.falseValue,
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<TrueValue | FalseValue>;
+// Optional Field participation: `null` outside a `FieldRoot`, so every
+// binding below is inert without a Field.
+const field = useFieldControl({
+  id: () => props.id,
+  element: () => currentElement.value as HTMLElement | undefined,
+  getValue: () => checked.value,
+  required: () => props.required,
+  // A required switch must be on.
+  isFilled: value => value === true,
+})
+// Getters rather than computeds: cheap, and free for a standalone switch.
+const resolvedId = () => field ? field.id() : props.id
+const resolvedName = () => field ? field.name(props.name) : props.name
+const resolvedRequired = () => field ? field.required(props.required) : props.required
 
-const checked = computed(() => modelValue.value === props.trueValue);
+// DOM-bound: resolves the associated `[for]` label text through the element's
+// root (shadow-safe, #2792). Stays in the shell (needs `currentElement`,
+// SSR-guarded) — not in the composable.
+const ariaLabel = computed(() => resolvedId() && currentElement.value ? (getRootNode(currentElement.value).querySelector(`[for="${resolvedId()}"]`) as HTMLLabelElement)?.innerText : undefined)
 
-function toggleCheck() {
-  if (disabled.value) {
-    return;
-  }
+// Controlled/uncontrolled + `beforeUpdate:` / `update:` emits live in the
+// composable's `useControllableState` (`modelValue === undefined` → uncontrolled).
+const { modelValue, checked, disabled, root, context } = useSwitch<TrueValue | FalseValue>({
+  modelValue: () => props.modelValue as TrueValue | FalseValue | undefined,
+  defaultValue: props.defaultValue,
+  emit,
+  // The Field hears its own commits by reason (`change`): user input, or, for
+  // a programmatic one (`setModelValue` and the like), only the watcher below,
+  // which also reports a parent-driven change.
+  onUpdate: field ? (value, details) => field.change(value === props.trueValue, details) : undefined,
+  disabled: () => field ? field.disabled(props.disabled) : props.disabled,
+  required: resolvedRequired,
+  value: () => props.value,
+  trueValue: () => props.trueValue as TrueValue,
+  falseValue: () => props.falseValue as FalseValue,
+})
 
-  modelValue.value = checked.value ? props.falseValue as FalseValue : props.trueValue as TrueValue;
+provideSwitchRootContext(context)
+
+if (field)
+  watch(checked, value => field.sync(value))
+
+// Listener order is part of the v2 contract: `v-bind="$attrs"` sat AFTER the
+// component's `role` / `aria-*` / `data-*` bindings (a consumer attribute wins)
+// but BEFORE `@click` / `@keydown` (a consumer listener runs first and observes
+// the pre-toggle model). `mergeProps` chains same-named listeners in argument
+// order, so the composable's handlers are bound separately below, after `$attrs`.
+const rootAttrs = computed(() => {
+  const { onClick: _onClick, onKeydown: _onKeydown, ...attrs } = root.attrs.value
+  return attrs
+})
+
+// `$attrs` isn't reactive, so the Field's wiring is read during render. Its
+// state attributes fill in what the switch leaves unset; its aria ids are
+// merged with the consumer's.
+function renderAttrs(attrs: Record<string, unknown>) {
+  if (!field)
+    return mergeProps(rootAttrs.value, scopeIdAttrs, attrs)
+  return field.fillDataAttributes(mergeProps(
+    rootAttrs.value,
+    scopeIdAttrs,
+    attrs,
+    { ...field.ariaAttrs(attrs, disabled.value), onFocus: field.onFocus, onBlur: field.onBlur },
+  ))
 }
-
-const { forwardRef, currentElement } = useForwardExpose();
-const isFormControl = useFormControl(currentElement);
-// Hidden form input is a sibling (not nested) of the control to avoid the
-// `nested-interactive` a11y violation; forward the parent scope id for scoped styles.
-const scopeIdAttrs = useForwardScopeId();
-const ariaLabel = computed(() => props.id && currentElement.value
-  ? (document.querySelector(`[for="${props.id}"]`) as HTMLLabelElement)?.innerText
-  : undefined);
-
-provideSwitchRootContext({
-  checked,
-  toggleCheck,
-  disabled,
-});
 </script>
 
 <template>
-  <Primitive
-    :id="id"
+  <component
+    :is="renderAs(as, asChild)"
+    :id="resolvedId()"
     :ref="forwardRef"
-    role="switch"
     :type="as === 'button' ? 'button' : undefined"
-    :value="value"
     :aria-label="$attrs['aria-label'] || ariaLabel"
-    :aria-checked="checked"
-    :aria-required="required"
-    :data-state="checked ? 'checked' : 'unchecked'"
-    :data-disabled="disabled ? '' : undefined"
-    :as-child="asChild"
-    :as="as"
-    :disabled="disabled"
-    v-bind="{ ...scopeIdAttrs, ...$attrs }"
-    @click="toggleCheck"
-    @keydown.enter.prevent="toggleCheck"
+    v-bind="renderAttrs($attrs)"
+    @click="root.props.value.onClick"
+    @keydown="root.props.value.onKeydown"
   >
     <slot
       :model-value="modelValue"
       :checked="checked"
     />
-  </Primitive>
+  </component>
 
   <VisuallyHiddenInput
-    v-if="isFormControl && name"
+    v-if="isFormControl && resolvedName()"
     type="checkbox"
-    :name="name"
+    :name="resolvedName()!"
     :disabled="disabled"
-    :required="required"
+    :required="resolvedRequired()"
     :value="value"
     :checked="checked"
     v-bind="scopeIdAttrs"

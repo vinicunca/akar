@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
+import { Icon } from '@iconify/vue'
 import {
   DialogClose,
   DialogContent,
@@ -7,8 +7,8 @@ import {
   DialogPortal,
   DialogRoot,
   DialogTrigger,
-} from '..';
-import DropdownMenu from '../../DropdownMenu/story/_DropdownMenu.vue';
+} from '..'
+import DropdownMenu from '../../DropdownMenu/story/_DropdownMenu.vue'
 </script>
 
 <template>

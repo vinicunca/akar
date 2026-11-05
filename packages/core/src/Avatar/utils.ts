@@ -1,80 +1,74 @@
-import type { ImgHTMLAttributes, Ref } from 'vue';
-import { isString } from '@vinicunca/perkakas';
-import { isClient } from '@vueuse/shared';
-import { computed, onMounted, onUnmounted, ref, watchEffect } from 'vue';
+import type { ImgHTMLAttributes, Ref } from 'vue'
+import { isClient } from '@vueuse/shared'
+import { computed, onMounted, onUnmounted, ref, watchEffect } from 'vue'
 
-export type ImageLoadingStatus = 'idle' | 'loading' | 'loaded' | 'error';
+export type ImageLoadingStatus = 'idle' | 'loading' | 'loaded' | 'error'
 
 function resolveLoadingStatus(image: HTMLImageElement | null, src?: string): ImageLoadingStatus {
   if (!image) {
-    return 'idle';
+    return 'idle'
   }
   if (!src) {
-    return 'error';
+    return 'error'
   }
   if (image.src !== src) {
-    image.src = src;
+    image.src = src
   }
-  return image.complete && image.naturalWidth > 0
-    ? 'loaded'
-    : 'loading';
+  return image.complete && image.naturalWidth > 0 ? 'loaded' : 'loading'
 }
 
-export function useImageLoadingStatus(src: Ref<string>, { referrerPolicy, crossOrigin }: { referrerPolicy?: Ref<ImgHTMLAttributes['referrerpolicy']>; crossOrigin?: Ref<ImgHTMLAttributes['crossorigin']> } = {}) {
-  const isMounted = ref(false);
-  const imageRef = ref<HTMLImageElement | null>(null);
+export function useImageLoadingStatus(src: Ref<string>, { referrerPolicy, crossOrigin }: { referrerPolicy?: Ref<ImgHTMLAttributes['referrerpolicy']>, crossOrigin?: Ref<ImgHTMLAttributes['crossorigin']> } = {}) {
+  const isMounted = ref(false)
+  const imageRef = ref<HTMLImageElement | null>(null)
   const image = computed(() => {
     if (!isMounted.value) {
-      return null;
+      return null
     }
     if (!imageRef.value && isClient) {
-      imageRef.value = new window.Image();
+      imageRef.value = new window.Image()
     }
-    return imageRef.value;
-  });
+    return imageRef.value
+  })
 
-  const loadingStatus = ref<ImageLoadingStatus>(resolveLoadingStatus(image.value, src.value));
+  const loadingStatus = ref<ImageLoadingStatus>(resolveLoadingStatus(image.value, src.value))
 
   const updateStatus = (status: ImageLoadingStatus) => () => {
-    if (isMounted.value) {
-      loadingStatus.value = status;
-    }
-  };
+    if (isMounted.value)
+      loadingStatus.value = status
+  }
 
   onMounted(() => {
-    isMounted.value = true;
+    isMounted.value = true
 
     watchEffect((onCleanup) => {
-      const img = image.value;
-      if (!img) {
-        return;
-      }
+      const img = image.value
+      if (!img)
+        return
 
-      loadingStatus.value = resolveLoadingStatus(img, src.value);
+      // Before `src`: the request is made with the policy in force when `src` is set.
+      if (referrerPolicy?.value)
+        img.referrerPolicy = referrerPolicy.value
+      if (typeof crossOrigin?.value === 'string')
+        img.crossOrigin = crossOrigin.value
 
-      const handleLoad = updateStatus('loaded');
-      const handleError = updateStatus('error');
+      const handleLoad = updateStatus('loaded')
+      const handleError = updateStatus('error')
 
-      img.addEventListener('load', handleLoad);
-      img.addEventListener('error', handleError);
+      img.addEventListener('load', handleLoad)
+      img.addEventListener('error', handleError)
 
-      if (referrerPolicy?.value) {
-        img.referrerPolicy = referrerPolicy.value;
-      }
-      if (isString(crossOrigin?.value)) {
-        img.crossOrigin = crossOrigin.value;
-      }
+      loadingStatus.value = resolveLoadingStatus(img, src.value)
 
       onCleanup(() => {
-        img.removeEventListener('load', handleLoad);
-        img.removeEventListener('error', handleError);
-      });
-    });
-  });
+        img.removeEventListener('load', handleLoad)
+        img.removeEventListener('error', handleError)
+      })
+    })
+  })
 
   onUnmounted(() => {
-    isMounted.value = false;
-  });
+    isMounted.value = false
+  })
 
-  return loadingStatus;
+  return loadingStatus
 }

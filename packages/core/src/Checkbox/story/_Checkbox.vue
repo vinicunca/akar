@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { CheckboxRootProps } from '..';
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { CheckboxIndicator, CheckboxRoot } from '..';
+import type { CheckboxRootProps } from '..'
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { CheckboxIndicator, CheckboxRoot } from '..'
 
-const props = defineProps<CheckboxRootProps>();
-const modelValue = ref(props.modelValue);
+const props = defineProps<CheckboxRootProps>()
+const modelValue = ref(props.modelValue)
 </script>
 
 <template>

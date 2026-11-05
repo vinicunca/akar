@@ -1,39 +1,33 @@
 <script setup lang="ts">
-import type { GenericComponentInstance } from '@/shared/types';
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { ComboboxAnchor, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxPortal, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..';
+import type { GenericComponentInstance } from '@/shared/types'
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { ComboboxAnchor, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxPortal, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..'
 
 const options = [
-  {
-    name: 'Fruit',
-    children: [
-      { name: 'Apple' },
-      { name: 'Banana' },
-      { name: 'Orange' },
-      { name: 'Honeydew' },
-      { name: 'Grapes' },
-      { name: 'Watermelon' },
-      { name: 'Cantaloupe' },
-      { name: 'Pear' },
-    ],
-  },
-  {
-    name: 'Vegetable',
-    children: [
-      { name: 'Cabbage' },
-      { name: 'Broccoli' },
-      { name: 'Carrots' },
-      { name: 'Lettuce' },
-      { name: 'Spinach' },
-      { name: 'Bok Choy' },
-      { name: 'Cauliflower' },
-      { name: 'Potatoes' },
-    ],
-  },
-];
+  { name: 'Fruit', children: [
+    { name: 'Apple' },
+    { name: 'Banana' },
+    { name: 'Orange' },
+    { name: 'Honeydew' },
+    { name: 'Grapes' },
+    { name: 'Watermelon' },
+    { name: 'Cantaloupe' },
+    { name: 'Pear' },
+  ] },
+  { name: 'Vegetable', children: [
+    { name: 'Cabbage' },
+    { name: 'Broccoli' },
+    { name: 'Carrots' },
+    { name: 'Lettuce' },
+    { name: 'Spinach' },
+    { name: 'Bok Choy' },
+    { name: 'Cauliflower' },
+    { name: 'Potatoes' },
+  ] },
+]
 
-const comboboxRef = ref<GenericComponentInstance<typeof ComboboxRoot>>();
+const comboboxRef = ref<GenericComponentInstance<typeof ComboboxRoot>>()
 </script>
 
 <template>

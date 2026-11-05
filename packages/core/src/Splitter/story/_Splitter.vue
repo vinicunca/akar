@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..';
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..'
 </script>
 
 <template>

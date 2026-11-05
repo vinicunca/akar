@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ColorArea from './_ColorArea.vue';
+import ColorArea from './_ColorArea.vue'
 </script>
 
 <template>

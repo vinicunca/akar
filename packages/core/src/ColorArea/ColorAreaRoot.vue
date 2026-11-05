@@ -1,70 +1,93 @@
 <script lang="ts">
-import type { ComputedRef, CSSProperties, Ref } from 'vue';
-import type { PrimitiveProps } from '@/Primitive';
-import type { Color, ColorChannel, ColorSpace } from '@/shared/color';
-import type { FormFieldProps } from '@/shared/types';
-import { createContext, useFormControl, useForwardExpose } from '@/shared';
+import type { ComputedRef, CSSProperties, Ref } from 'vue'
+import type { ColorAreaAxis, ColorAreaChangeReason } from './useColorArea'
+import type { FieldControlBinding } from '@/Field/useFieldControl'
+import type { PrimitiveProps } from '@/Primitive'
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared'
+import type { Color, ColorChannel, ColorSpace } from '@/shared/color'
+import type { Direction, FormFieldProps } from '@/shared/types'
+import { createContext, useDirection, useFormControl, useForwardElement } from '@/shared'
 
 export interface ColorAreaRootProps extends PrimitiveProps, FormFieldProps {
-  /** The color value (controlled). Can be a hex string or Color object. */
-  modelValue?: string | Color;
-  /** The default color value (uncontrolled). */
-  defaultValue?: string | Color;
+  /** The color value (controlled). A string is parsed once; emitted values are always `Color` objects. */
+  modelValue?: string | Color
+  /** The default color value (uncontrolled). A string is parsed once. */
+  defaultValue?: string | Color
   /** The color space to operate in. */
-  colorSpace?: ColorSpace;
+  colorSpace?: ColorSpace
   /** Color channel for the horizontal (x) axis. */
-  xChannel?: ColorChannel;
+  xChannel?: ColorChannel
   /** Color channel for the vertical (y) axis. */
-  yChannel?: ColorChannel;
+  yChannel?: ColorChannel
   /** When `true`, prevents the user from interacting with the area. */
-  disabled?: boolean;
+  disabled?: boolean
   /** The name of the x channel input element for form submission. */
-  xName?: string;
+  xName?: string
   /** The name of the y channel input element for form submission. */
-  yName?: string;
+  yName?: string
+  /** The reading direction of the area. In `rtl` the x axis runs right to left. If omitted, inherits from `ConfigProvider` or assumes `ltr`. */
+  dir?: Direction
 }
 
 export type ColorAreaRootEmits = {
-  'update:modelValue': [value: string];
-  'update:color': [value: Color];
-  'change': [value: string];
-  'changeEnd': [value: string];
-};
+  /** Event handler called before the color value changes; `details.cancel()` vetoes the change. */
+  'beforeUpdate:modelValue': [value: Color, details: ChangeEventDetails<ColorAreaChangeReason>]
+  /** Event handler called when the color value changes. */
+  'update:modelValue': [value: Color, details: ChangeEventDetails<ColorAreaChangeReason>]
+  /** Event handler called with the same `Color` as `update:modelValue`, after it. */
+  'update:color': [value: Color]
+  /** Event handler called with the hex serialization of the new color, after `update:modelValue`. Lossy: drops the hue of greys and sub-byte precision. */
+  'update:hex': [value: string]
+  /** Event handler called on every pointer move or keyboard step that changes the color. */
+  'change': [value: Color]
+  /** Event handler called when an interaction that changed the color ends: on pointer release and after each keyboard step. */
+  'changeEnd': [value: Color]
+}
 
 export interface ColorAreaRootContext {
-  color: Ref<Color>;
-  xValue: Ref<number>;
-  yValue: Ref<number>;
-  xChannel: Ref<ColorChannel>;
-  yChannel: Ref<ColorChannel>;
-  colorSpace: Ref<ColorSpace>;
-  disabled: Ref<boolean>;
-  xRange: ComputedRef<{ min: number; max: number; step: number }>;
-  yRange: ComputedRef<{ min: number; max: number; step: number }>;
-  thumbRef: Ref<HTMLElement | undefined>;
-  updateValues: (x: number, y: number) => void;
-  commitValues: () => void;
+  color: ComputedRef<Color>
+  xValue: ComputedRef<number>
+  yValue: ComputedRef<number>
+  xChannel: Ref<ColorChannel>
+  yChannel: Ref<ColorChannel>
+  colorSpace: Ref<ColorSpace>
+  disabled: Ref<boolean>
+  dir: Ref<Direction>
+  xRange: ComputedRef<{ min: number, max: number, step: number }>
+  yRange: ComputedRef<{ min: number, max: number, step: number }>
+  thumbRef: Ref<HTMLElement | undefined>
+  /** The hidden range input of each axis, rendered by `ColorAreaThumb`. */
+  xInputRef: Ref<HTMLInputElement | undefined>
+  yInputRef: Ref<HTMLInputElement | undefined>
+  /** The axis whose input last had focus; it holds the area's single tab stop. */
+  focusedAxis: Ref<ColorAreaAxis>
+  /** Focuses the input of `axis` (default: the last focused axis), or the thumb when no input is rendered. */
+  focusInput: (axis?: ColorAreaAxis) => void
+  updateValues: (x: number, y: number, reason?: ColorAreaChangeReason | BaseChangeReason, event?: Event) => boolean
+  commitValues: () => void
 }
 
 export const [injectColorAreaRootContext, provideColorAreaRootContext]
-  = createContext<ColorAreaRootContext>('ColorAreaRoot');
+  = createContext<ColorAreaRootContext>('ColorAreaRoot')
+
+/**
+ * A color area's participation in an ancestor `FieldRoot` (`null` outside
+ * one): the root owns the color and the registration, the thumb's inputs
+ * carry the field's id and aria wiring.
+ * @internal
+ */
+export const [injectColorAreaFieldContext, provideColorAreaFieldContext]
+  = createContext<FieldControlBinding | null>('ColorAreaRoot', 'ColorAreaFieldContext')
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { computed, nextTick, ref, toRefs, watch } from 'vue';
-import { Primitive } from '@/Primitive';
-import {
-  colorToString,
-  convertToHsb,
-  convertToHsl,
-  getAreaBackgroundStyle,
-  getChannelRange,
-  getChannelValue,
-  normalizeColor,
-  setChannelValues,
-} from '@/shared/color';
-import { VisuallyHiddenInput } from '@/VisuallyHidden';
+import { mergeProps, watch } from 'vue'
+import { useFieldControl } from '@/Field/useFieldControl'
+import { useFieldFocusWithin } from '@/Field/useFieldFocusWithin'
+import { renderAs } from '@/Primitive/renderAs'
+import { colorToString } from '@/shared/color'
+import { VisuallyHiddenInput } from '@/VisuallyHidden'
+import { useColorArea } from './useColorArea'
 
 const props = withDefaults(defineProps<ColorAreaRootProps>(), {
   colorSpace: 'hsl',
@@ -73,194 +96,93 @@ const props = withDefaults(defineProps<ColorAreaRootProps>(), {
   disabled: false,
   defaultValue: '#ff0000',
   as: 'div',
-});
+})
 
-const emits = defineEmits<ColorAreaRootEmits>();
+const emits = defineEmits<ColorAreaRootEmits>()
 
 defineSlots<{
   default?: (props: {
     /** CSS styles for the color area background gradient */
-    style: CSSProperties;
-  }) => any;
-}>();
+    style: CSSProperties
+  }) => any
+}>()
 
-const { colorSpace, xChannel, yChannel, disabled } = toRefs(props);
-const { forwardRef, currentElement } = useForwardExpose();
-const isFormControl = useFormControl(currentElement);
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+const isFormControl = useFormControl(currentElement)
+const dir = useDirection(() => props.dir)
 
-// Normalize the model value to a Color object
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue,
-  passive: (props.modelValue === undefined) as false,
-});
+// Optional Field participation: `null` outside a `FieldRoot`, so every
+// binding below is inert without a Field.
+const field = useFieldControl({
+  // The x input renders its own `id`, else the field's.
+  id: () => context.xInputRef.value?.id || undefined,
+  element: () => context.xInputRef.value ?? context.thumbRef.value,
+  // The model: a `Color`.
+  getValue: () => color.value,
+  required: () => props.required,
+})
 
-// The actual color object for rendering
-const color = computed({
-  get: () => normalizeColor(modelValue.value ?? '#000000'),
-  set: (newColor: Color) => {
-    const hexString = colorToString(newColor, 'hex');
-    modelValue.value = hexString;
-    emits('update:color', newColor);
-  },
-});
+const { root, context, areaStyles, xValue, yValue, color } = useColorArea({
+  colorSpace: () => props.colorSpace,
+  xChannel: () => props.xChannel,
+  yChannel: () => props.yChannel,
+  disabled: () => field ? field.disabled(props.disabled) : props.disabled,
+  modelValue: () => props.modelValue,
+  defaultValue: () => props.defaultValue,
+  dir: () => dir.value,
+  emit: emits,
+  // The Field hears its own commits by reason (`change`): user input, or, for
+  // a programmatic one (`setModelValue` and the like), only the watcher below,
+  // which also reports a parent-driven change.
+  onUpdate: field?.change,
+})
 
-// Get channel ranges
-const xRange = computed(() => getChannelRange(xChannel.value));
-const yRange = computed(() => getChannelRange(yChannel.value));
+provideColorAreaRootContext(context)
+provideColorAreaFieldContext(field)
 
-// Store exact channel values as refs to avoid floating-point drift
-// Initialize from the color value (rounded to nearest integer)
-const xValue = ref(Math.round(getChannelValue(color.value, xChannel.value)));
-const yValue = ref(Math.round(getChannelValue(color.value, yChannel.value)));
+if (field)
+  watch(color, value => field.sync(value))
 
-// Store the hue separately to preserve it when saturation is 0 (grayscale)
-const hueValue = ref(colorSpace.value === 'hsl'
-  ? convertToHsl(color.value).h
-  : colorSpace.value === 'hsb'
-    ? convertToHsb(color.value).h
-    : 0);
-
-// Track when we're in the middle of an update to prevent circular sync
-let isUpdating = false;
-
-// Sync channel values when color changes externally
-watch(() => color.value, (newColor) => {
-  // Skip if we just triggered this update ourselves
-  if (isUpdating) {
-    return;
-  }
-
-  const newX = Math.round(getChannelValue(newColor, xChannel.value));
-  const newY = Math.round(getChannelValue(newColor, yChannel.value));
-
-  // Only update if the rounded value meaningfully changed.
-  // During drag, xValue/yValue store exact floats (e.g. 80.45).
-  // External updates (e.g. hue slider) should not snap these to integers.
-  if (Math.round(xValue.value) !== newX) {
-    xValue.value = newX;
-  }
-  if (Math.round(yValue.value) !== newY) {
-    yValue.value = newY;
-  }
-
-  // Update hue if saturation is not 0 (to preserve hue for grayscale colors)
-  if (colorSpace.value === 'hsl') {
-    const hsl = convertToHsl(newColor);
-    if (hsl.s > 0) {
-      hueValue.value = hsl.h;
-    }
-  } else if (colorSpace.value === 'hsb') {
-    const hsb = convertToHsb(newColor);
-    if (hsb.s > 0) {
-      hueValue.value = hsb.h;
-    }
-  }
-}, { immediate: true });
-
-// Background styles for the color area
-// Use preserved hue to ensure background doesn't change when saturation is 0
-const areaStyles = computed(() => {
-  // Create a color with the preserved hue for background computation
-  let bgColor = color.value;
-  if (colorSpace.value === 'hsl' || colorSpace.value === 'hsb') {
-    if (colorSpace.value === 'hsl') {
-      bgColor = {
-        space: 'hsl',
-        h: hueValue.value,
-        s: 100,
-        l: 50,
-        alpha: 1,
-      };
-    } else {
-      bgColor = {
-        space: 'hsb',
-        h: hueValue.value,
-        s: 100,
-        b: 100,
-        alpha: 1,
-      };
-    }
-  }
-  return getAreaBackgroundStyle(bgColor, xChannel.value, yChannel.value, colorSpace.value);
-});
-
-function updateValues(x: number, y: number) {
-  const clampedX = Math.max(xRange.value.min, Math.min(xRange.value.max, x));
-  const clampedY = Math.max(yRange.value.min, Math.min(yRange.value.max, y));
-
-  // Update exact values
-  xValue.value = clampedX;
-  yValue.value = clampedY;
-
-  // Prevent watch from syncing back to xValue/yValue
-  isUpdating = true;
-
-  // Update color from exact values (with preserved hue)
-  const channels: Array<{ channel: ColorChannel; value: number }> = [
-    { channel: xChannel.value, value: clampedX },
-    { channel: yChannel.value, value: clampedY },
-  ];
-
-  // Preserve hue only when it is NOT directly controlled by an axis
-  const usesHueAxis = xChannel.value === 'hue' || yChannel.value === 'hue';
-  if (!usesHueAxis && (colorSpace.value === 'hsl' || colorSpace.value === 'hsb')) {
-    channels.push({ channel: 'hue', value: hueValue.value });
-  }
-
-  color.value = setChannelValues(color.value, channels);
-
-  // Re-enable watch sync after Vue has processed the update
-  nextTick(() => {
-    isUpdating = false;
-  });
-}
-
-function commitValues() {
-  emits('changeEnd', colorToString(color.value, 'hex'));
-}
-
-const thumbRef = ref<HTMLElement>();
-
-provideColorAreaRootContext({
-  color: computed(() => color.value) as Ref<Color>,
-  xValue,
-  yValue,
-  xChannel,
-  yChannel,
-  colorSpace,
-  disabled,
-  xRange,
-  yRange,
-  thumbRef,
-  updateValues,
-  commitValues,
-});
+// The Field's state attributes go first so the area's own `data-*` win. The
+// field is focused while focus is on either axis, and blurred once it leaves.
+const focusWithin = useFieldFocusWithin(field, currentElement as Ref<HTMLElement | undefined>)
+const fieldAttrs = focusWithin && { onFocusin: focusWithin.onFocusin, onFocusout: focusWithin.onFocusout }
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, asChild)"
     :ref="forwardRef"
-    :as="as"
-    :as-child="asChild"
-    role="group"
-    :aria-disabled="disabled ? 'true' : undefined"
-    :data-disabled="disabled ? '' : undefined"
+    v-bind="field ? field.fillDataAttributes(mergeProps(root.attrs.value, fieldAttrs!)) : root.attrs.value"
   >
     <slot :style="areaStyles" />
 
-    <VisuallyHiddenInput
-      v-if="isFormControl && xName"
-      type="text"
-      :value="xValue"
-      :name="xName"
-      :disabled="disabled"
-    />
-    <VisuallyHiddenInput
-      v-if="isFormControl && yName"
-      type="text"
-      :value="yValue"
-      :name="yName"
-      :disabled="disabled"
-    />
-  </Primitive>
+    <!-- One placeholder for all hidden inputs, so a non-form instance renders a single comment node. -->
+    <template v-if="isFormControl && ((field ? field.name(name) : name) || xName || yName)">
+      <!-- The color, as ColorField submits it, under the field's name (or its own); `xName`/`yName` add the channel values. -->
+      <VisuallyHiddenInput
+        v-if="field ? field.name(name) : name"
+        type="text"
+        :value="colorToString(color, 'hex')"
+        :name="(field ? field.name(name) : name)!"
+        :disabled="context.disabled.value"
+        :required="field ? field.required(required) : required"
+      />
+      <VisuallyHiddenInput
+        v-if="xName"
+        type="text"
+        :value="xValue"
+        :name="xName"
+        :disabled="context.disabled.value"
+      />
+      <VisuallyHiddenInput
+        v-if="yName"
+        type="text"
+        :value="yValue"
+        :name="yName"
+        :disabled="context.disabled.value"
+      />
+    </template>
+  </component>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
 import {
   DialogClose,
   DialogContent,
@@ -10,9 +10,9 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from '..';
+} from '..'
 
-const open = ref(false);
+const open = ref(false)
 </script>
 
 <template>

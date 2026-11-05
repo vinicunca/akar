@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type {
   MenubarItemEmits,
-} from '..';
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { useEmitAsProps } from '@/shared';
+} from '..'
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { useEmitAsProps } from '@/shared'
 import {
   MenubarCheckboxItem,
   MenubarContent,
@@ -17,16 +17,16 @@ import {
   MenubarRoot,
   MenubarSeparator,
   MenubarTrigger,
-} from '..';
+} from '..'
 
-const emits = defineEmits<MenubarItemEmits>();
-const currentMenu = ref('');
-const checkboxOne = ref(false);
-const checkboxTwo = ref(false);
-const person = ref('pedro');
+const emits = defineEmits<MenubarItemEmits>()
+const currentMenu = ref('')
+const checkboxOne = ref(false)
+const checkboxTwo = ref(false)
+const person = ref('pedro')
 function handleClick() {
   // eslint-disable-next-line no-alert
-  alert('hello!');
+  alert('hello!')
 }
 </script>
 

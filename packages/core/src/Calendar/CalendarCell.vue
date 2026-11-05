@@ -1,30 +1,44 @@
 <script lang="ts">
-import type { DateValue } from '@internationalized/date';
-import type { PrimitiveProps } from '@/Primitive';
+import type { DateValue } from '@/date'
+import type { PrimitiveProps } from '@/Primitive'
 
 export interface CalendarCellProps extends PrimitiveProps {
   /** The date value for the cell */
-  date: DateValue;
+  value: DateValue
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { injectCalendarRootContext } from './CalendarRoot.vue';
+import type { Component } from 'vue'
+import { h, useSlots } from 'vue'
+import { Primitive } from '@/Primitive'
+import { renderAs } from '@/Primitive/renderAs'
+import { useForwardElement } from '@/shared'
+import { injectCalendarGridContext } from './CalendarGrid.vue'
+import { injectCalendarRootContext } from './CalendarRoot.vue'
+import { getCalendarCellSurface } from './useCalendar'
 
-withDefaults(defineProps<CalendarCellProps>(), { as: 'td' });
-const rootContext = injectCalendarRootContext();
+const props = withDefaults(defineProps<CalendarCellProps>(), { as: 'td' })
+
+const rootContext = injectCalendarRootContext()
+const gridContext = injectCalendarGridContext(null)
+
+const surface = getCalendarCellSurface(rootContext, () => props.value, () => gridContext?.value.value)
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const slots = useSlots()
+
+// The slot content goes straight into the element: no `<slot>` fragment, so
+// no empty anchor text nodes (this part renders once per calendar cell).
+function renderRoot() {
+  // `Primitive` only for a consumer's `#render`, which it honours; `slots` hold it.
+  return slots.render
+    ? h(Primitive, { ref: forwardRef, as: props.as, asChild: props.asChild, ...surface.attrs.value }, slots)
+    : h(renderAs(props.as, props.asChild) as Component, { ref: forwardRef, ...surface.attrs.value }, slots)
+}
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="asChild"
-    role="gridcell"
-    :aria-selected="rootContext.isDateSelected(date) ? true : undefined"
-    :aria-disabled="rootContext.isDateDisabled(date) || rootContext.isDateUnavailable?.(date) || rootContext.disableDaysOutsideCurrentView.value"
-    :data-disabled="rootContext.isDateDisabled(date) || rootContext.disableDaysOutsideCurrentView.value ? '' : undefined"
-  >
-    <slot />
-  </Primitive>
+  <component :is="renderRoot()" />
 </template>

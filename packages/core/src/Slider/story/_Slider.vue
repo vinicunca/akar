@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { SliderRootEmits, SliderRootProps } from '..';
-import { ref } from 'vue';
-import { useForwardPropsEmits } from '@/shared';
-import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from '..';
+import type { SliderRootEmits, SliderRootProps } from '..'
+import { ref } from 'vue'
+import { useForwardPropsEmits } from '@/shared'
+import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from '..'
 
 const props = withDefaults(defineProps<SliderRootProps>(), {
   inverted: false,
-});
-const emits = defineEmits<SliderRootEmits>();
+})
+const emits = defineEmits<SliderRootEmits>()
 
-const sliderValue = ref([50]);
+const sliderValue = ref([50])
 
-const forwarded = useForwardPropsEmits(props, emits);
+const forwarded = useForwardPropsEmits(props, emits)
 </script>
 
 <template>

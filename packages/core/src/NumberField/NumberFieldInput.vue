@@ -1,157 +1,75 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { onMounted, ref, watch } from 'vue';
-import { injectNumberFieldRootContext } from './NumberFieldRoot.vue';
+import type { PrimitiveProps } from '@/Primitive'
+import { mergeProps, nextTick, onMounted } from 'vue'
+import { useForwardElement } from '@/shared'
+import { injectNumberFieldFieldControl, injectNumberFieldRootContext } from './NumberFieldRoot.vue'
 
 export interface NumberFieldInputProps extends PrimitiveProps {
 }
 </script>
 
 <script setup lang="ts">
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { Primitive, usePrimitiveElement } from '@/Primitive';
-import { getActiveElement, useComposing } from '@/shared';
+import { renderAsEmpty, rendersChildren } from '@/Primitive/renderAs'
+import { createNumberFieldInputSurface } from './useNumberField'
 
-const props = withDefaults(defineProps<NumberFieldInputProps>(), {
+defineOptions({
+  // Bound explicitly (same merge as fallthrough), so a Field's aria ids can be
+  // merged with the consumer's instead of being replaced by them.
+  inheritAttrs: false,
+})
+
+withDefaults(defineProps<NumberFieldInputProps>(), {
   as: 'input',
-});
+})
 
-const { primitiveElement, currentElement } = usePrimitiveElement();
-const rootContext = injectNumberFieldRootContext();
-const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing();
-
-function handleKeydown(event: KeyboardEvent) {
-  // Don't step/apply mid-composition, keys are used for IME candidate navigation and commit.
-  // `isComposing` stays true until the tick after `compositionend`, so the commit keydown
-  // (which can report `event.isComposing === false`) is still skipped.
-  if (isComposing.value || event.isComposing) {
-    return;
-  }
-
-  switch (event.key) {
-    case KEY_CODES.ARROW_UP:
-      event.preventDefault();
-      rootContext.handleIncrease();
-      break;
-    case KEY_CODES.ARROW_DOWN:
-      event.preventDefault();
-      rootContext.handleDecrease();
-      break;
-    case KEY_CODES.PAGE_UP:
-      event.preventDefault();
-      rootContext.handleIncrease(10);
-      break;
-    case KEY_CODES.PAGE_DOWN:
-      event.preventDefault();
-      rootContext.handleDecrease(10);
-      break;
-    case KEY_CODES.HOME:
-      event.preventDefault();
-      rootContext.handleMinMaxValue('min');
-      break;
-    case KEY_CODES.END:
-      event.preventDefault();
-      rootContext.handleMinMaxValue('max');
-      break;
-    case KEY_CODES.ENTER:
-      rootContext.applyInputValue((event.target as HTMLInputElement)?.value);
-      break;
-  }
-}
-
-function handleWheelEvent(event: WheelEvent) {
-  if (rootContext.disableWheelChange.value) {
-    return;
-  }
-
-  // only handle when in focus
-  if (event.target !== getActiveElement()) {
-    return;
-  }
-
-  // if on a trackpad, users can scroll in both X and Y at once, check the magnitude of the change
-  // if it's mostly in the X direction, then just return, the user probably doesn't mean to inc/dec
-  // this isn't perfect, events come in fast with small deltas and a part of the scroll may give a false indication
-  // especially if the user is scrolling near 45deg
-  if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
-    return;
-  }
-
-  event.preventDefault();
-  if (event.deltaY > 0) {
-    rootContext.invertWheelChange.value
-      ? rootContext.handleDecrease()
-      : rootContext.handleIncrease();
-  } else if (event.deltaY < 0) {
-    rootContext.invertWheelChange.value
-      ? rootContext.handleIncrease()
-      : rootContext.handleDecrease();
-  }
-}
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectNumberFieldRootContext()
+// Same factory as `useNumberField().createInputSurface()`: owns the displayed text and IME state.
+const input = createNumberFieldInputSurface(rootContext)
 
 onMounted(() => {
-  rootContext.onInputElement(currentElement.value as HTMLInputElement);
-});
+  rootContext.onInputElement(currentElement.value as HTMLInputElement)
+})
 
-const inputValue = ref(rootContext.textValue.value);
-watch(() => rootContext.textValue.value, () => {
-  inputValue.value = rootContext.textValue.value;
-}, { immediate: true, deep: true });
+// The root's Field binding (`null` outside a `FieldRoot`). The input is the
+// field's control: it carries the id, label, description and invalid state,
+// and reports focus and blur (touched).
+const field = injectNumberFieldFieldControl(null)
 
-function handleChange() {
-  requestAnimationFrame(() => {
-    inputValue.value = rootContext.textValue.value;
-  });
+// `$attrs` isn't reactive, so the Field's wiring is read during render. Its
+// state attributes go first; its aria ids are merged with the consumer's, and
+// a consumer `aria-invalid` wins.
+function renderAttrs(attrs: Record<string, unknown>) {
+  if (!field)
+    return mergeProps(input.attrs.value, attrs)
+  return mergeProps(
+    field.dataAttributes(),
+    input.attrs.value,
+    attrs,
+    { ...field.ariaAttrs(attrs, rootContext.disabled.value), onFocus: field.onFocus, onBlur: handleFieldBlur },
+  )
+}
+
+// A blur commits the typed text first (the surface's own `onBlur`). Report
+// the blur once that change has rendered, so on-blur validation reads the
+// committed value, from a controlled parent and the hidden input alike.
+function handleFieldBlur() {
+  nextTick(field!.onBlur)
 }
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
-    :id="rootContext.id.value"
-    ref="primitiveElement"
-    :value="inputValue"
-    role="spinbutton"
-    type="text"
-    tabindex="0"
-    :inputmode="rootContext.inputMode.value"
-    :disabled="rootContext.disabled.value ? '' : undefined"
-    :data-disabled="rootContext.disabled.value ? '' : undefined"
-    :readonly="rootContext.readonly.value ? '' : undefined"
-    :data-readonly="rootContext.readonly.value ? '' : undefined"
-    autocomplete="off"
-    autocorrect="off"
-    spellcheck="false"
-    aria-roledescription="Number field"
-    :aria-valuenow="rootContext.modelValue.value"
-    :aria-valuemin="rootContext.min.value"
-    :aria-valuemax="rootContext.max.value"
-    @keydown="handleKeydown"
-    @wheel="handleWheelEvent"
-    @beforeinput="(event: InputEvent) => {
-      if (event.isComposing) return
-      // A collapsed deletion carries no data, so nextValue would repeat the current value; undo and redo read the same
-      // Every deletion is skipped so they stay consistent, and applyInputValue reformats on blur
-      if (event.inputType.startsWith('delete') || event.inputType.startsWith('history')) return
-      const target = event.target as HTMLInputElement
-      let nextValue
-        = target.value.slice(0, target.selectionStart ?? undefined)
-          + (event.data ?? '')
-          + target.value.slice(target.selectionEnd ?? undefined);
-
-      // validate
-      if (!rootContext.validate(nextValue))
-        event.preventDefault()
-    }"
-    @input="(event: InputEvent) => {
-      const target = event.target as HTMLInputElement
-      inputValue = target.value
-    }"
-    @change="handleChange"
-    @blur="rootContext.applyInputValue($event.target?.value)"
-    @compositionstart="handleCompositionStart"
-    @compositionend="handleCompositionEnd"
+  <component
+    :is="renderAsEmpty(as, asChild)"
+    :ref="forwardRef"
+    v-bind="renderAttrs($attrs)"
   >
-    <slot />
-  </Primitive>
+    <template
+      v-if="rendersChildren(as, asChild)"
+      #default
+    >
+      <slot />
+    </template>
+  </component>
 </template>

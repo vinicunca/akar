@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { TagsInputRootProps } from '..';
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..';
+import type { TagsInputRootProps } from '..'
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..'
 
-const props = defineProps<TagsInputRootProps>();
+const props = defineProps<TagsInputRootProps>()
 const people = ref([
   { id: 1, name: 'Durward Reynolds' },
   { id: 2, name: 'Kenton Towne' },
-]);
-defineExpose({ people });
+])
+defineExpose({ people })
 </script>
 
 <template>

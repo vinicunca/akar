@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import type { ScrollAreaRootProps } from '../ScrollAreaRoot.vue';
+import type { ScrollAreaRootProps } from '../ScrollAreaRoot.vue'
 import {
   ScrollAreaCorner,
   ScrollAreaRoot,
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaViewport,
-} from '..';
+} from '..'
 
 interface Props extends ScrollAreaRootProps {
-  animated?: boolean;
-  vertical?: boolean;
-  horizontal?: boolean;
+  animated?: boolean
+  vertical?: boolean
+  horizontal?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   animated: false,
   vertical: true,
   horizontal: true,
-});
+})
 </script>
 
 <template>

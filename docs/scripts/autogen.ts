@@ -1,0 +1,453 @@
+import type { ComponentMeta, MetaCheckerOptions, PropertyMeta, PropertyMetaSchema } from 'vue-component-meta'
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { join, parse, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import _traverse from '@babel/traverse'
+
+const STARTS_WITH_UPPERCASE_RE = /^[A-Z]/
+import fg from 'fast-glob'
+import MarkdownIt from 'markdown-it'
+import { components } from 'reka-ui/constant'
+import { createChecker } from 'vue-component-meta'
+import { babelParse, parse as sfcParse } from 'vue/compiler-sfc'
+import { transformJSDocLinks } from './utils'
+
+const traverse = ((_traverse as any).default ?? _traverse) as typeof _traverse
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
+
+// Declared before the top-level `forEach` calls below, which use them through
+// `generateMarkdownTables`.
+const CODE_TAG_RE = /<code>([\s\S]*?)<\/code>/g
+const CODE_SPAN_SPLIT_RE = /(`[^`]*`)/
+const LT_RE = /</g
+const PIPE_RE = /\|/g
+const NEWLINE_RE = /\n/g
+
+const md = new MarkdownIt()
+md.use(transformJSDocLinks)
+
+const checkerOptions: MetaCheckerOptions = {
+  forceUseTs: true,
+  printer: { newLine: 1 },
+  // vue-component-meta v3 defaults `schema` to `false`, which stops it from
+  // expanding type aliases/unions into nested enum schemas (props collapse to
+  // alias names like `Direction`, and slot tables are dropped). v2 expanded by
+  // default; restore that so `parseTypeFromSchema` sees the enum members again.
+  schema: true,
+  // KNOWN v3 LIMITATION: generic SFC params (`<script setup generic="T ...">`)
+  // are no longer instantiated to their default/constraint type. v2 resolved
+  // them (e.g. `T` -> `string | string[]`, `T[]` -> `AcceptableValue[]`); v3
+  // emits the bare `T` / `Type` / conditional type. Affects the value props of
+  // generic components (Accordion, Combobox, Listbox, Select, Tree, Checkbox,
+  // PinInput, Tabs, TagsInput, Switch). No clean fix via the public API yet
+  // (getBaseConstraintOfType / manual constraint substitution diverge from v2),
+  // so a full regen will regress those few files until upstream resolves it.
+}
+
+const tsconfigChecker = createChecker(
+  resolve(__dirname, '../../packages/core/tsconfig.app.json'),
+  checkerOptions,
+)
+
+const eventDescriptionMap = new Map<string, string>()
+const depTree = new Map<string, string[]>()
+let prevDeps: string[] = []
+
+function toSingleQuotedJson(obj: unknown): string {
+  return JSON.stringify(obj, null, 2)
+    .replace(/'/g, '\\\'')
+    .replace(/"/g, '\'')
+}
+
+const coreDir = resolve(__dirname, '../../packages/core')
+// An `export { … } from '<source>'` block of a family `index.ts`.
+const EXPORT_BLOCK_RE = /export \{([^}]*)\} from '([^']+)'/g
+// A value specifier inside it that renames: `ComboboxItem as AutocompleteItem`
+// (another family's part) or `default as DrawerPopup` (a second name for an SFC).
+const ALIAS_SPECIFIER_RE = /(?:^|,)\s*(?!type\s)(\w+) as (\w+)/g
+
+/**
+ * Descriptions an alias needs instead of the original's, where the original's
+ * text is wrong for the alias (`AutocompleteItem` is `ComboboxItem`, whose
+ * `value` doc describes form submission, which Autocomplete does not do).
+ */
+const ALIAS_DESCRIPTION_OVERRIDES: Record<string, { props?: Record<string, string> }> = {
+  AutocompleteItem: {
+    props: {
+      value: 'The value of the item, of the root\'s item type `T` (`string` by default). Selecting the item writes `displayValue(value)` into the input, else `String(value)`.',
+    },
+  },
+}
+
+const allComponents = fg.sync(['src/**/*.vue', '!src/**/story/*.vue', '!src/**/*.story.vue'], {
+  cwd: coreDir,
+  absolute: true,
+})
+
+const listOfComponents = Object.values(components).flatMap(i => i)
+const primitiveComponents = allComponents.filter((i) => {
+  // @ts-expect-error: complains because name is a string; completely fine and *actually* intended.
+  return listOfComponents.includes(parse(i).name)
+})
+
+// 1. Generate all the dependencies for each components
+allComponents.forEach((i) => {
+  generateDependencies(i)
+})
+
+// 2. Generate component meta
+primitiveComponents.forEach((componentPath) => {
+  writeComponentMeta(componentPath, parse(componentPath).name)
+})
+
+// 3. A part exported under another name gets a meta file per alias, so its
+// page includes tables under its own part names: a family re-exporting another
+// family's parts (`ComboboxItem as AutocompleteItem` from '@/Combobox'), or a
+// second name for an SFC (`default as DrawerPopup` from './DrawerContent.vue').
+fg.sync(['src/*/index.ts'], { cwd: coreDir, absolute: true }).forEach((indexPath) => {
+  const source = readFileSync(indexPath, 'utf8')
+  for (const [, specifiers, from] of source.matchAll(EXPORT_BLOCK_RE)) {
+    for (const [, original, alias] of specifiers.matchAll(ALIAS_SPECIFIER_RE)) {
+      let originalPath: string | undefined
+      if (from.startsWith('@/'))
+        originalPath = resolve(coreDir, 'src', from.slice(2), `${original}.vue`)
+      // Only a second name: the SFC's own name is a documented component too.
+      else if (original === 'default' && from.endsWith('.vue') && (listOfComponents as string[]).includes(parse(from).name))
+        originalPath = resolve(parse(indexPath).dir, from)
+      if (!originalPath || !existsSync(originalPath) || parse(originalPath).name === alias)
+        continue
+      writeComponentMeta(originalPath, alias)
+    }
+  }
+})
+
+function writeComponentMeta(componentPath: string, componentName: string) {
+  const dir = parse(componentPath).dir.split('/').at(-1) ?? ''
+  const flattenDeps = [dir, ...getDependencies(dir)]
+  if (!arraysAreEqual(prevDeps, flattenDeps)) {
+    flattenDeps.forEach((dep) => {
+      getEventFromComponentPath(dep)
+    })
+    prevDeps = flattenDeps
+  }
+
+  // Emits the component declares itself describe themselves: a dependency's
+  // description of the same emit name (e.g. ListboxRoot's `update:modelValue`
+  // under AutocompleteRoot) must not replace them.
+  const ownEventDescriptions = readEventDescriptions(componentPath)
+  const meta = parseMeta(tsconfigChecker.getComponentMeta(componentPath), name => ownEventDescriptions.get(name) ?? eventDescriptionMap.get(name))
+  const overrides = ALIAS_DESCRIPTION_OVERRIDES[componentName]
+  for (const prop of meta.props) {
+    const description = overrides?.props?.[prop.name]
+    if (description)
+      prop.description = md.render(description)
+  }
+
+  const metaDirPath = resolve(__dirname, '../content/meta')
+  mkdirSync(metaDirPath, { recursive: true })
+
+  const metaMdFilePath = join(metaDirPath, `${componentName}.md`)
+
+  let parsedString = '<!-- This file was automatically generated. Do not edit it manually -->\n\n'
+
+  let vitePressParts = ''
+  if (meta.props.length)
+    vitePressParts += `<PropsTable :data="${toSingleQuotedJson(meta.props)}" />\n`
+  if (meta.events.length)
+    vitePressParts += `\n<EmitsTable :data="${toSingleQuotedJson(meta.events)}" />\n`
+  if (meta.slots.length)
+    vitePressParts += `\n<SlotsTable :data="${toSingleQuotedJson(meta.slots)}" />\n`
+  if (meta.methods.length)
+    vitePressParts += `\n<MethodsTable :data="${toSingleQuotedJson(meta.methods)}" />\n`
+
+  if (vitePressParts)
+    parsedString += `<llm-exclude>\n${vitePressParts}</llm-exclude>\n`
+
+  const llmParts = generateMarkdownTables(meta)
+  if (llmParts)
+    parsedString += `\n<llm-only>\n\n${llmParts}</llm-only>\n`
+
+  writeFileSync(metaMdFilePath, parsedString)
+}
+
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/&#39;/g, '\'').replace(/&quot;/g, '"').trim()
+}
+
+function generateMarkdownTables(meta: ReturnType<typeof parseMeta>): string {
+  // Keep `<code>` spans as Markdown code and escape any other `<`, so a decoded
+  // tag name such as `<body>` is not parsed as HTML by VitePress.
+  const clean = (s: string) => stripHtml(s.replace(CODE_TAG_RE, (_, code: string) => `\`${code}\``))
+    .split(CODE_SPAN_SPLIT_RE)
+    .map(part => part.startsWith('`') ? part : part.replace(LT_RE, '\\<'))
+    .join('')
+    .replace(PIPE_RE, '\\|')
+    .replace(NEWLINE_RE, ' ')
+  // For cells rendered inside a code span, where a backslash would show literally.
+  const cleanCode = (s: string) => stripHtml(s).replace(PIPE_RE, '\\|').replace(NEWLINE_RE, ' ')
+
+  function toMdTable(title: string, headers: string[], rows: string[][]): string {
+    if (!rows.length)
+      return ''
+    return `**${title}**\n\n| ${headers.join(' | ')} |\n| ${headers.map(() => '---').join(' | ')} |\n${rows.map(r => `| ${r.join(' | ')} |`).join('\n')}\n\n`
+  }
+
+  return [
+    toMdTable('Props', ['Name', 'Description', 'Type', 'Required', 'Default'], meta.props.map(p => [
+      `\`${p.name}\``,
+      clean(p.description),
+      `\`${cleanCode(p.type)}\``,
+      p.required ? 'Yes' : 'No',
+      p.default != null ? `\`${cleanCode(String(p.default))}\`` : '-',
+    ])),
+    toMdTable('Events', ['Name', 'Description', 'Type'], meta.events.map(e => [`\`${e.name}\``, clean(e.description), `\`${cleanCode(e.type)}\``])),
+    toMdTable('Slots', ['Name', 'Description', 'Type'], meta.slots.map(s => [`\`${s.name}\``, clean(s.description), `\`${cleanCode(s.type)}\``])),
+    toMdTable('Methods', ['Name', 'Description', 'Type'], meta.methods.map(m => [`\`${m.name}\``, clean(m.description), `\`${cleanCode(m.type)}\``])),
+  ].join('')
+}
+
+function parseTypeFromSchema(schema: PropertyMetaSchema): string {
+  if (typeof schema === 'object' && (schema.kind === 'enum' || schema.kind === 'array')) {
+    const isFlatEnum = schema.schema?.every(val => typeof val === 'string')
+    const enumValue = schema?.schema?.filter(i => i !== 'undefined') ?? []
+
+    if (schema.kind === 'enum' && isFlatEnum && STARTS_WITH_UPPERCASE_RE.test(schema.type))
+      return enumValue.join(' | ')
+    else if (typeof schema.schema?.[0] === 'object' && schema.schema?.[0].kind === 'enum')
+      return schema.schema.map((s: PropertyMetaSchema) => parseTypeFromSchema(s)).join(' | ')
+    else
+      return schema.type
+  }
+  else if (typeof schema === 'object' && (schema.kind === 'object' || schema.kind === 'event')) {
+    return schema.type
+  }
+  else if (typeof schema === 'string') {
+    return schema
+  }
+  else {
+    return ''
+  }
+}
+
+// Utilities
+
+// Drops the `| undefined` an optional prop adds to its type, and only that one:
+// an `undefined` nested in the type, such as a callback's `T[] | undefined`
+// return, is part of the contract and stays.
+function stripOptionalUndefined(type: string): string {
+  const members: string[] = []
+  let depth = 0
+  let quote = ''
+  let start = 0
+  for (let i = 0; i < type.length; i++) {
+    const char = type[i]
+    if (quote) {
+      if (char === quote && type[i - 1] !== '\\')
+        quote = ''
+      continue
+    }
+    if (char === '\'' || char === '"' || char === '`') {
+      quote = char
+    }
+    else if (char === '=' && type[i + 1] === '>') {
+      // A top-level arrow: the union after it is the return type, keep it whole.
+      if (depth === 0)
+        return type.trim()
+      i++
+    }
+    else if ('([{<'.includes(char)) {
+      depth++
+    }
+    else if (')]}>'.includes(char)) {
+      depth--
+    }
+    else if (char === '|' && depth === 0) {
+      members.push(type.slice(start, i))
+      start = i + 1
+    }
+  }
+  members.push(type.slice(start))
+  const kept = members.map(m => m.trim()).filter(m => m && m !== 'undefined')
+  return kept.length ? kept.join(' | ') : type.trim()
+}
+
+function parseMeta(meta: ComponentMeta, getEventDescription: (name: string) => string | undefined) {
+  const props = meta.props
+  // Exclude global props
+    .filter(prop => !prop.global)
+    .map((prop) => {
+      let defaultValue = prop.default
+      let type = prop.type
+      const { name, description, required } = prop
+
+      if (name === 'as')
+        defaultValue = defaultValue ?? '"div"'
+
+      if (defaultValue === 'undefined')
+        defaultValue = undefined
+
+      if (!type.includes('AcceptableValue'))
+        type = parseTypeFromSchema(prop.schema) || type
+
+      // ComboboxRoot types `multiple` by its `M extends boolean` generic (it
+      // narrows the `update:modelValue` payload); the bare param means nothing
+      // in a props table, so show its constraint.
+      if (name === 'multiple' && type.trim() === 'M')
+        type = 'boolean'
+
+      return ({
+        name,
+        description: md.render(description),
+        type: stripOptionalUndefined(type).replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+        required,
+        default: defaultValue ?? undefined,
+      })
+    })
+    .sort((a, b) => a.name.localeCompare(b.name))
+
+  const events = meta.events
+    .map((event) => {
+      const { name, type } = event
+      return ({
+        name,
+        description: md.render((getEventDescription(name) ?? '').replace(/^[ \t]+/gm, '')),
+        // Unlike optional props, undefined in an event payload is a value consumers can receive.
+        type: type.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+      })
+    })
+    .sort((a, b) => a.name.localeCompare(b.name))
+
+  const defaultSlot = meta.slots?.[0]
+  const slots: { name: string, description: string, type: string }[] = []
+
+  if (defaultSlot && defaultSlot.type !== '{}') {
+    const schema = defaultSlot.schema
+    if (typeof schema === 'object' && schema.schema) {
+      Object.values(schema.schema).forEach((childMeta: PropertyMeta) => {
+        slots.push({
+          name: childMeta.name,
+          description: md.render(childMeta.description),
+          type: parseTypeFromSchema(childMeta.schema).replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+        })
+      })
+    }
+  }
+
+  // exposed method
+  const methods = meta.exposed
+    .filter(expose => typeof expose.schema === 'object' && expose.schema.kind === 'event')
+    .map(expose => ({
+      name: expose.name,
+      description: md.render(expose.description),
+      type: expose.type.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+    }))
+
+  return {
+    props,
+    events,
+    slots,
+    methods,
+  }
+}
+
+function getEventFromComponentPath(dir: string) {
+  const files = readdirSync(resolve(__dirname, '../../packages/core/src', dir), { withFileTypes: true }).filter(file => file.name.includes('.vue'))
+
+  files.forEach((file) => {
+    readEventDescriptions(join(file.parentPath, file.name)).forEach((description, key) => {
+      eventDescriptionMap.set(key, description)
+    })
+  })
+}
+
+interface TypeLiteralMember {
+  type: string
+  key?: { type: string, value?: unknown, name?: unknown }
+  leadingComments?: { value: string, loc?: unknown }[] | null
+}
+
+/** The JSDoc of each member of the type literals a `.vue` file exports, keyed by member name. */
+function readEventDescriptions(filePath: string) {
+  const descriptions = new Map<string, string>()
+  const source = readFileSync(filePath, { encoding: 'utf8' })
+  const { descriptor } = sfcParse(source, {
+    filename: parse(filePath).base,
+  })
+
+  const code = descriptor.script?.content
+  if (!code)
+    return descriptions
+
+  const result = babelParse(code, {
+    sourceType: 'module',
+    plugins: ['typescript'],
+  })
+
+  const readMembers = (members: TypeLiteralMember[]) => {
+    members.forEach((member) => {
+      const comment = member.leadingComments?.[0]
+      if (member.type !== 'TSPropertySignature' || !member.key || !comment?.loc)
+        return
+      const key = member.key.type === 'StringLiteral' ? member.key.value : member.key.type === 'Identifier' ? member.key.name : undefined
+      if (typeof key === 'string')
+        descriptions.set(key, comment.value.replaceAll('*', '').trim())
+    })
+  }
+
+  for (const node of result.program.body) {
+    if (node.type === 'ExportNamedDeclaration' && node.loc && node.declaration?.type === 'TSTypeAliasDeclaration') {
+      const annotation = node.declaration.typeAnnotation
+      if (annotation.type === 'TSTypeLiteral') {
+        readMembers(annotation.members)
+      }
+      else if (annotation.type === 'TSIntersectionType') {
+        const literalType = annotation.types.find(t => t.type === 'TSTypeLiteral')
+        if (literalType?.type === 'TSTypeLiteral')
+          readMembers(literalType.members)
+      }
+    }
+  }
+  return descriptions
+}
+
+function generateDependencies(componentPath: string) {
+  const { name: componentName, dir: componentDir } = parse(componentPath)
+  const dir = componentDir.split('/').at(-1) ?? ''
+
+  const source = readFileSync(componentPath, { encoding: 'utf8' })
+  const { descriptor } = sfcParse(source, {
+    filename: componentName,
+  })
+
+  const code = descriptor.script?.content
+  if (code) {
+    const result = babelParse(code, {
+      sourceType: 'module',
+      plugins: ['typescript'],
+    })
+
+    traverse(result, {
+      ImportDeclaration: (path) => {
+        const value = path.node.source.value.split('/').at(-1)
+        if (value && STARTS_WITH_UPPERCASE_RE.test(value) && !value.includes('vue')) {
+          const prev = depTree.get(dir) ?? []
+          depTree.set(dir, [...new Set([...prev, value])])
+        }
+      },
+    })
+  }
+}
+
+function getDependencies(dir: string, list = new Set<string>()) {
+  const deps = depTree.get(dir)
+
+  deps?.forEach((dep) => {
+    list.add(dep)
+    getDependencies(dep, list)
+  })
+  return Array.from(list)
+}
+
+function arraysAreEqual<T>(arr1: T[], arr2: T[]): boolean {
+  return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index])
+}

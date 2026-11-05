@@ -1,82 +1,80 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
-import { useNonce } from '@/shared/useNonce';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
+import { useNonce } from '@/shared/useNonce'
 
 export interface SelectViewportProps extends PrimitiveProps {
   /**
    * Will add `nonce` attribute to the style tag which can be used by Content Security Policy. <br> If omitted, inherits globally from `ConfigProvider`.
    */
-  nonce?: string;
+  nonce?: string
 }
 </script>
 
 <script setup lang="ts">
-import { onMounted, ref, toRefs } from 'vue';
-import {
-  Primitive,
-} from '@/Primitive';
-import { injectSelectContentContext } from './SelectContentImpl.vue';
-import { injectSelectItemAlignedPositionContext } from './SelectItemAlignedPosition.vue';
-import { CONTENT_MARGIN } from './utils';
+import { onMounted, ref, toRefs } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { injectSelectContentContext } from './SelectContentImpl.vue'
+import { injectSelectItemAlignedPositionContext } from './useSelectItemAlignedPosition'
+import { CONTENT_MARGIN } from './utils'
 
-const props = defineProps<SelectViewportProps>();
-const { nonce: propNonce } = toRefs(props);
-const nonce = useNonce(propNonce);
+const props = defineProps<SelectViewportProps>()
+const { nonce: propNonce } = toRefs(props)
+const nonce = useNonce(propNonce)
 
-const contentContext = injectSelectContentContext();
+const contentContext = injectSelectContentContext()
 const alignedPositionContext
   = contentContext.position === 'item-aligned'
     ? injectSelectItemAlignedPositionContext()
-    : undefined;
+    : undefined
 
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
 
 onMounted(() => {
-  contentContext?.onViewportChange(currentElement.value);
-});
+  contentContext?.onViewportChange(currentElement.value)
+})
 
-const prevScrollTopRef = ref(0);
+const prevScrollTopRef = ref(0)
 
 function handleScroll(event: WheelEvent) {
-  const viewport = event.currentTarget as HTMLElement;
-  const { shouldExpandOnScrollRef, contentWrapper } = alignedPositionContext ?? {};
+  const viewport = event.currentTarget as HTMLElement
+  const { shouldExpandOnScrollRef, contentWrapper } = alignedPositionContext ?? {}
   if (shouldExpandOnScrollRef?.value && contentWrapper?.value) {
-    const scrolledBy = Math.abs(prevScrollTopRef.value - viewport.scrollTop);
+    const scrolledBy = Math.abs(prevScrollTopRef.value - viewport.scrollTop)
     if (scrolledBy > 0) {
-      const availableHeight = window.innerHeight - CONTENT_MARGIN * 2;
+      const availableHeight = window.innerHeight - CONTENT_MARGIN * 2
       const cssMinHeight = Number.parseFloat(
         contentWrapper.value.style.minHeight,
-      );
-      const cssHeight = Number.parseFloat(contentWrapper.value.style.height);
-      const prevHeight = Math.max(cssMinHeight, cssHeight);
+      )
+      const cssHeight = Number.parseFloat(contentWrapper.value.style.height)
+      const prevHeight = Math.max(cssMinHeight, cssHeight)
 
       if (prevHeight < availableHeight) {
-        const nextHeight = prevHeight + scrolledBy;
-        const clampedNextHeight = Math.min(availableHeight, nextHeight);
-        const heightDiff = nextHeight - clampedNextHeight;
+        const nextHeight = prevHeight + scrolledBy
+        const clampedNextHeight = Math.min(availableHeight, nextHeight)
+        const heightDiff = nextHeight - clampedNextHeight
 
-        contentWrapper.value.style.height = `${clampedNextHeight}px`;
+        contentWrapper.value.style.height = `${clampedNextHeight}px`
         if (contentWrapper.value.style.bottom === '0px') {
-          viewport.scrollTop = heightDiff > 0
-            ? heightDiff
-            : 0;
+          viewport.scrollTop = heightDiff > 0 ? heightDiff : 0
           // ensure the content stays pinned to the bottom
-          contentWrapper.value.style.justifyContent = 'flex-end';
+          contentWrapper.value.style.justifyContent = 'flex-end'
         }
       }
     }
   }
-  prevScrollTopRef.value = viewport.scrollTop;
+  prevScrollTopRef.value = viewport.scrollTop
 }
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(props.as, props.asChild)"
     :ref="forwardRef"
-    data-akar-select-viewport
+    data-reka-select-viewport
     role="presentation"
-    v-bind="{ ...$attrs, ...props }"
+    v-bind="{ ...$attrs, nonce: props.nonce }"
     :style="{
       // we use position: 'relative' here on the `viewport` so that when we call
       // `selectedItem.offsetTop` in calculations, the offset is relative to the viewport
@@ -88,14 +86,14 @@ function handleScroll(event: WheelEvent) {
     @scroll="handleScroll"
   >
     <slot />
-  </Primitive>
-  <Primitive
-    as="style"
+  </component>
+  <component
+    :is="renderAs('style')"
     :nonce="nonce"
   >
     /* Hide scrollbars cross-browser and enable momentum scroll for touch
-    devices */ [data-akar-select-viewport] { scrollbar-width:none; -ms-overflow-style: none;
+    devices */ [data-reka-select-viewport] { scrollbar-width:none; -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch; }
-    [data-akar-select-viewport]::-webkit-scrollbar { display: none; }
-  </Primitive>
+    [data-reka-select-viewport]::-webkit-scrollbar { display: none; }
+  </component>
 </template>

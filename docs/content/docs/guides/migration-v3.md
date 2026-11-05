@@ -1,0 +1,779 @@
+---
+title: Migration - v2 to v3
+description: This guide collects the breaking changes between Reka UI v2 and v3, with search-and-replace instructions for each of them.
+---
+
+# Migration - v2 to v3
+
+<Description>
+This guide collects the breaking changes between Reka UI v2 and v3, with search-and-replace instructions for each of them.
+</Description>
+
+Reka UI v3 is still in progress. This page collects the breaking changes as they land on the `v3` branch, so it will keep growing until the release is finalized. Each section describes what changed and the mechanical rewrite needed to move an existing v2 codebase over.
+
+Prefer to hand the mechanical work to an AI agent? [Migrating with an AI agent](./migration-v3-agent) is this guide rewritten as instructions for one: point your agent at it, let it apply the rewrites, and review the diff.
+
+## `data-state` vocabulary
+
+In v3, `data-state` answers exactly one of two questions: disclosure ("is this surface revealed?") is reported as `open` or `closed`, and selection ("is this control in its affirmative state?") is reported as `checked` or `unchecked`, with `indeterminate` reserved for tri-state controls that also emit `aria-checked="mixed"`. Both values are always emitted—`data-state` is never absent—and qualifiers such as *how* a surface came to be open live in their own `data-*` attribute rather than in `data-state`.
+
+Parts that were already on `open` / `closed` or `checked` / `unchecked` / `indeterminate` are unchanged. Genuine multi-value machines keep a vocabulary of their own: [Progress](../components/progress) (`indeterminate` / `loading` / `complete`) and the [Splitter](../components/splitter) resize handle (`drag` / `hover` / `inactive`) are untouched, while [Stepper](../components/stepper) keeps `completed` but renames `active` / `inactive` to `current` / `upcoming`, so that its words are neither synonyms of the two axes nor the same as Tabs' old `active` / `inactive`.
+
+| Part | v2 | v3 |
+| --- | --- | --- |
+| `Toggle`, `ToggleGroupItem`, `ToolbarToggleItem` | `on` / `off` | `checked` / `unchecked` |
+| `TabsTrigger`, `TabsContent` | `active` / `inactive` | `checked` / `unchecked` |
+| `TagsInputItem`, `TagsInputItemDelete` | `active` / `inactive` | `checked` / `unchecked` |
+| `RatingItemIndicator` | `active` / (absent) | `checked` / `unchecked` |
+| `StepperItem`, `StepperTrigger`, `StepperSeparator` | `completed` / `active` / `inactive` | `completed` / `current` / `upcoming` |
+| `ScrollAreaScrollbar`, `ScrollAreaThumb`, `NavigationMenuIndicator` | `visible` / `hidden` | `open` / `closed` |
+| `SplitterPanel` | `expanded` / `collapsed` / (absent when not collapsible) | `open` / `closed` (non-collapsible panels are always `open`) |
+| `CollapsibleContent` | `open` / `closed` / (absent on the initial animated mount) | `open` / `closed` |
+| `TooltipTrigger`, `TooltipContent` | `closed` / `delayed-open` / `instant-open` | `open` / `closed`, plus a boolean `data-delayed` attribute present while open when the open was delayed |
+| Everything already on `open` / `closed` or `checked` / `unchecked` / `indeterminate` | unchanged | unchanged |
+
+### Search and replace
+
+The rewrites are mechanical. In Tailwind variants:
+
+- `data-[state=on]:` → `data-[state=checked]:`, `data-[state=off]:` → `data-[state=unchecked]:`
+- `data-[state=active]:` → `data-[state=checked]:`, `data-[state=inactive]:` → `data-[state=unchecked]:` — for **Tabs, TagsInput and Rating only**.
+- `data-[state=active]:` → `data-[state=current]:`, `data-[state=inactive]:` → `data-[state=upcoming]:` — for **Stepper only** (`data-[state=completed]:` is unchanged). Only the Splitter resize handle still emits `inactive`, so leave selectors on `SplitterResizeHandle` alone.
+- `data-[state=visible]:` → `data-[state=open]:`, `data-[state=hidden]:` → `data-[state=closed]:`
+- `data-[state=expanded]:` → `data-[state=open]:`, `data-[state=collapsed]:` → `data-[state=closed]:`
+- `data-[state=delayed-open]:` → `data-[state=open]:data-[delayed]:`
+- `data-[state=instant-open]:` → `data-[state=open]:` (combine with `:not([data-delayed])` in plain CSS if you need to target instant opens specifically)
+
+In plain CSS the same rewrites apply to attribute selectors:
+
+- `[data-state='on']` → `[data-state='checked']`, `[data-state='off']` → `[data-state='unchecked']`
+- `[data-state='active']` → `[data-state='checked']`, `[data-state='inactive']` → `[data-state='unchecked']` — Tabs, TagsInput and Rating only.
+- `[data-state='active']` → `[data-state='current']`, `[data-state='inactive']` → `[data-state='upcoming']` — Stepper only; `[data-state='completed']` is unchanged and the Splitter resize handle keeps `inactive`.
+- `[data-state='visible']` → `[data-state='open']`, `[data-state='hidden']` → `[data-state='closed']`
+- `[data-state='expanded']` → `[data-state='open']`, `[data-state='collapsed']` → `[data-state='closed']`
+- `[data-state='delayed-open']` → `[data-state='open'][data-delayed]`
+- `[data-state='instant-open']` → `[data-state='open']:not([data-delayed])`
+
+Because both values are now always emitted, any styles that relied on the attribute being *absent* (for example `.RatingItemIndicator:not([data-state])`, or a `SplitterPanel` without `data-state` because it is not collapsible) should target the explicit `unchecked` / `open` value instead.
+
+```css
+.Toggle[data-state='on'] { /* [!code --] */
+.Toggle[data-state='checked'] { /* [!code ++] */
+  background-color: var(--green-5);
+}
+
+.TabsTrigger[data-state='active'] { /* [!code --] */
+.TabsTrigger[data-state='checked'] { /* [!code ++] */
+  color: var(--grass-11);
+}
+
+.StepperItem[data-state='active'] .StepperIndicator { /* [!code --] */
+.StepperItem[data-state='current'] .StepperIndicator { /* [!code ++] */
+  background-color: var(--mauve-12);
+}
+
+.TooltipContent[data-state='delayed-open'][data-side='top'] { /* [!code --] */
+.TooltipContent[data-state='open'][data-delayed][data-side='top'] { /* [!code ++] */
+  animation-name: slideDownAndFade;
+}
+```
+
+## Change events carry details
+
+`update:*` events on stateful roots now receive a second argument, a `ChangeEventDetails` object, and a cancellable `beforeUpdate:*` event fires before every change. `v-model` keeps working unchanged. The details tell you *why* the state changed (`details.reason`) and which native event caused it (`details.event`), and `details.cancel()` inside `beforeUpdate:*` keeps the current state.
+
+Converted so far: `SwitchRoot`, `TabsRoot`, `Toggle`, `ToggleGroupRoot`, `CheckboxRoot`, `CheckboxGroupRoot`, `RadioGroupRoot`, `ListboxRoot`, `AccordionRoot` (`modelValue`), `DropdownMenuRoot`, `DropdownMenuSub`, `ContextMenuRoot`, `ContextMenuSub`, `MenubarRoot` (`modelValue`), `MenubarSub`, `DialogRoot`, `AlertDialogRoot`, `PopoverRoot`, `TooltipRoot`, `HoverCardRoot`, `CollapsibleRoot`, `DateFieldRoot`, `TimeFieldRoot`, `DateRangeFieldRoot` and `TimeRangeFieldRoot` (`modelValue`, `placeholder`), `DatePickerRoot` and `DateRangePickerRoot` (`modelValue`, `placeholder`, `open`, `view`, and `startValue` on `DateRangePickerRoot`), `CalendarRoot` and `RangeCalendarRoot` (`modelValue`, `placeholder`, `view`), `ColorAreaRoot`, `ColorFieldRoot`, `ColorSliderRoot` and `ColorSwatchPickerRoot` (`modelValue`), `ComboboxRoot` and `AutocompleteRoot` (`modelValue`, `open`), `NumberFieldRoot`, `PinInputRoot`, `RatingRoot`, `SliderRoot`, `TagsInputRoot`, `TagGroupRoot` and `EditableRoot` (`modelValue`), `SelectRoot` (`modelValue`, `open`), `TreeRoot` (`modelValue`, `expanded`), `PaginationRoot` (`page`), `StepperRoot` (`modelValue`), `ToolbarToggleGroup` (through the `ToggleGroupRoot` it wraps), `SplitterGroup` (`layout`), `NavigationMenuRoot` and `NavigationMenuSub` (`modelValue`), `ToastRoot` (`open`), `DrawerRoot` (`open`, `snapPoint`; see [Drawer, Tree and Combobox corrections](#drawer-tree-and-combobox-corrections)), and the `CheckboxItem` and `RadioGroup` parts of `DropdownMenu`, `ContextMenu` and `Menubar` (`modelValue`). That completes the conversion; the parts that keep a single-argument `update:*` on purpose are listed in [Change details coverage](#change-details-coverage).
+
+`DrawerRoot` joins the contract too. Its `update:open` used to fire before the change, so `details.cancel()` inside it kept the drawer as it was (except under `v-model:open`, which wrote the value anyway). Cancel in `beforeUpdate:open` now; `update:open` fires after the change.
+
+A change to a value that is already current no longer emits: `update:modelValue` fires only when the value actually changes, so re-pressing the checked radio or the selected single-mode toggle emits nothing (the `select` event on `RadioGroupItem` still fires). A multiple selection follows the same rule, compared entry by entry: a `ListboxRoot` with `multiple` and `selection-behavior="replace"` no longer emits a fresh `[value]` array when the selected item is pressed again. `TreeRoot` compares selections with `getKey`, so re-pressing the selected item with `selection-behavior="replace"` emits nothing either, and pressing the current page or step on `PaginationRoot` or `StepperRoot` emits nothing.
+
+`ColorAreaRoot` now emits `change`, which v2 declared but never fired, on every pointer move and arrow-key step that changes the color. It also emits `changeEnd` after each keyboard step, not only when the pointer is released. A listener on either event that assumed it never fired, or fired only once per drag, runs more often. Both events carry a `Color` object, see [Color values are `Color` objects](#color-values-are-color-objects).
+
+Each family exports its reason union, for example `DialogOpenChangeReason` (`'trigger-press' | 'close-press' | 'escape-key' | 'outside-press' | 'focus-outside'`), `TooltipOpenChangeReason` (`'trigger-hover' | 'trigger-leave' | 'trigger-focus' | 'trigger-blur' | 'trigger-press' | 'content-leave' | 'escape-key' | 'outside-press'`) or `ListboxChangeReason` (`'item-press' | 'item-keydown' | 'select-all' | 'range-select'` — an Enter selection synthesizes a click on the highlighted item, so it reports `'item-press'`). `ComboboxChangeReason` is `'clear-press'` (`ComboboxCancel` with `reset-model-value-on-clear`) plus the `ListboxChangeReason` members (`'item-press'` for a click or Enter on an item, and `'item-keydown'`, `'select-all'`, `'range-select'` in a `multiple` combobox), `AutocompleteChangeReason` adds `'input-change'` for typed text, and both roots report `open` changes as `ComboboxOpenChangeReason` (`'trigger-press' | 'input-change' | 'input-press' | 'input-focus' | 'list-navigation' | 'item-press' | 'escape-key' | 'outside-press' | 'focus-outside'`). `SelectChangeReason` is `'item-press' | 'item-keydown' | 'typeahead' | 'autofill'` (`typeahead` for typing on the closed trigger, `autofill` for the browser filling the hidden native `<select>`), and `SelectOpenChangeReason` is `'trigger-press' | 'list-navigation' | 'item-press' | 'item-keydown' | 'escape-key' | 'outside-press'` (`list-navigation` for ArrowDown or ArrowUp on the trigger). `AccordionChangeReason` and `CollapsibleChangeReason` are both `'trigger-press' | 'content-found'`, where `content-found` is the browser's find-in-page revealing content kept in the DOM with `:unmount-on-hide="false"`. `TreeChangeReason` is `'item-press' | 'item-keydown' | 'range-select'` (a click, Enter or Space on an item, and Shift+ArrowUp/ArrowDown extending a `multiple` selection, plus Shift+Home/End, Shift+PageUp/PageDown and Shift+ArrowLeft/ArrowRight inside a `TreeVirtualizer`), and `TreeExpandedChangeReason` is `'item-press' | 'item-keydown'` (a click, or ArrowRight/ArrowLeft). `PaginationChangeReason` is `'next-press' | 'prev-press' | 'first-press' | 'last-press' | 'item-press'`. `StepperChangeReason` is `'trigger-press' | 'trigger-keydown' | 'next-step' | 'prev-step'`, where the last two come from the root's `nextStep()` and `prevStep()`; `goToStep()` reports `'imperative-action'`. `NavigationMenuChangeReason` is `'trigger-press' | 'trigger-hover' | 'pointer-leave' | 'escape-key' | 'outside-press' | 'focus-outside' | 'link-press'` (on `NavigationMenuRoot` and `NavigationMenuSub`), `MenuCheckboxItemChangeReason` and `MenuRadioGroupChangeReason` are `'item-press'` (the menu checkbox items and radio groups), and `ToastOpenChangeReason` is `'timeout' | 'close-press' | 'action-press' | 'swipe' | 'escape-key'`. Those unions only list the interaction reasons: `details.reason` is typed as the family union plus the shared `BaseChangeReason`, so every family also reports `'imperative-action'` for programmatic changes such as the slot's `close()`, and a `switch` written against the family union alone misses it. A delayed hover open on Tooltip, HoverCard and NavigationMenu reports `trigger-hover` with the pointer event that armed the timer.
+
+The form-input families report these reasons:
+
+- `NumberFieldChangeReason`: `'increment-press' | 'decrement-press' | 'keyboard' | 'wheel' | 'blur'`. `keyboard` covers the arrow, Page and Home/End keys and Enter committing typed text; `blur` is typed text committed on blur. A held button repeats with `increment-press` / `decrement-press` and no event.
+- `PinInputChangeReason`: `'input' | 'paste' | 'backspace-key' | 'delete-key'`. `input` also covers an IME commit and autofill.
+- `RatingChangeReason`: `'item-press'`, for a pointer or keyboard selection (both reach the rating as a click on the item) and for a clearable reset to `0`.
+- `SliderChangeReason`: `'track-press' | 'drag' | 'keyboard'`. On keyboard steps `valueCommit` still fires before `update:modelValue`; a step cancelled in `beforeUpdate:modelValue` emits no `valueCommit`.
+- `TagsInputChangeReason`: `'enter-key' | 'tab-key' | 'blur' | 'delimiter' | 'paste' | 'backspace-key' | 'delete-key' | 'item-delete-press' | 'clear-press'`.
+- `TagGroupChangeReason`: `'item-press' | 'item-keydown' | 'escape-key' | 'delete-press' | 'delete-key'`. Removing a selected tag deselects it with `delete-press` (its delete button) or `delete-key` (Backspace or Delete).
+- `EditableChangeReason`: `'submit-press' | 'enter-key' | 'outside-press' | 'focus-outside'`. Typing does not change the model; only a submit does. `update:state` stays a single-argument event.
+
+`SplitterLayoutChangeReason` is `'drag' | 'keyboard' | 'panel-change' | 'group-resize'` (see [Splitter layout model](#splitter-layout-model)).
+
+Wrapper families reuse the union of the family they wrap. `AlertDialogOpenChangeReason` is `DialogOpenChangeReason`. `DropdownMenuOpenChangeReason`, `ContextMenuOpenChangeReason` and `MenubarChangeReason` are `MenuOpenChangeReason` (`'trigger-press' | 'trigger-hover' | 'item-press' | 'list-navigation' | 'sibling-open' | 'escape-key' | 'outside-press' | 'focus-outside'`). On `MenubarRoot`:
+
+- a press or Enter, Space or ArrowDown on a trigger reports `trigger-press`;
+- moving the pointer to another trigger while a menu is open reports `trigger-hover`;
+- ArrowLeft or ArrowRight inside a menu reports `list-navigation`;
+- a close reports the menu's reason (`item-press`, `escape-key`, `outside-press` or `focus-outside`).
+
+The four segmented fields share one union, exported as `DateFieldChangeReason`, `TimeFieldChangeReason`, `DateRangeFieldChangeReason` and `TimeRangeFieldChangeReason`: `'segment-input'` (a typed digit, or `a` / `p` on the day period), `'segment-increment'` and `'segment-decrement'` (ArrowUp and ArrowDown), `'segment-clear'` (Backspace) and `'step-snap'` (`stepSnapping` rounding a segment when it loses focus). The pickers report the reason of whichever part made the change: `DatePickerChangeReason` is `DateFieldChangeReason | CalendarChangeReason` and `DateRangePickerChangeReason` is `DateRangeFieldChangeReason | RangeCalendarChangeReason`, so a typed date reports `'segment-input'` and a picked day `'cell-press'` or `'cell-keydown'`. A placeholder that follows a new value reports `'imperative-action'`.
+
+What to check in your code:
+
+- Explicit `@update:open` / `@update:model-value` listeners receive an extra argument. Handlers that only read the first argument keep working; handlers typed with a single-parameter signature still type-check.
+- Custom parts built on `injectAccordionRootContext()` or `injectCollapsibleRootContext()`: the Accordion root context's `modelValue` is now a readonly `ComputedRef`, so call `changeModelValue` instead of assigning it, and `changeModelValue(value, reason?, event?)` now takes an optional reason and native event and returns a boolean (`false` when the change was cancelled or did not change the value). On the Collapsible root context, `onOpenToggle(event?)` accepts the native event, `onContentFound(event)` is new, and `contentId` is backed by a ref, so assigning it also updates the trigger's `aria-controls`. For the Tree, Pagination and Stepper contexts, see [Tree, Pagination and Stepper](#tree-pagination-and-stepper).
+- Wrappers that re-declare the emit types need the new tuple shape:
+
+  ```ts
+  type Emits = {
+    'update:open': [value: boolean] // [!code --]
+    'update:open': [value: boolean, details: ChangeEventDetails<DialogOpenChangeReason>] // [!code ++]
+  }
+  ```
+
+- Uncontrolled components emit synchronously from the interaction instead of from a watcher on the next tick. Code that relied on the old timing may observe the difference.
+- A component that mounts uncontrolled and later receives a defined model value becomes controlled at that point and stays controlled, even if the model is later cleared to `undefined`.
+
+```vue
+<DialogRoot
+  v-model:open="open"
+  @before-update:open="(value, details) => {
+    // keep the dialog open while the form is dirty, but let the close button through
+    if (!value && isDirty && details.reason !== 'close-press')
+      details.cancel()
+  }"
+/>
+```
+
+## Tree, Pagination and Stepper
+
+`TreeRoot`, `PaginationRoot` and `StepperRoot` are built on `useTree()`, `usePagination()` and `useStepper()`, and `ToolbarRoot` on `useToolbar()`. The DOM is unchanged. Their models follow the [details contract](#change-events-carry-details). These changes need attention:
+
+- **No duplicate keys with `propagate-select` or `bubble-select`.** v2 added a parent or a child again when it was already selected: pressing a child, its parent, then the last child left the parent in the selection twice, and pressing a parent whose child was already selected listed that child twice. The next press then removed only one copy, so the item stayed selected. A key that is already selected is no longer added a second time. A press still emits `update:modelValue` once with the final selection, as in v2; it now emits synchronously, carries the details and is preceded by one cancellable `beforeUpdate:modelValue`.
+- **A bound `model-value` on `TreeRoot` controls the selection.** v2 kept a local copy of the selection, so `:model-value="x"` without an `@update:model-value` listener still changed on click. The selection now stays at `x` until the parent updates it, like every other converted root. Use `v-model`, or `default-value` for an uncontrolled tree. `expanded` already behaved this way. Mutating the selection or expanded array in place (for example pushing onto the slot's `modelValue`) no longer emits either; assign a new array instead.
+- **Context changes for custom parts.** On `injectTreeRootContext()`, `modelValue` and `expanded` are read-only; `onSelect(value, reason?, event?)` and `onToggle(value, reason?, event?)` take an optional reason and native event and return `false` when nothing changed or the change was cancelled, and `handleMultipleReplace` takes the keyboard event as a fifth argument. `setModelValue(value, reason?, event?)` and `setExpanded(keys, reason?, event?)` are new: they write the whole selection or the expanded keys in one change, for custom select-all or expand-all parts that assigned `modelValue.value` or `expanded.value`. The context's `items` is typed `T[] | undefined`, as the prop is optional. On `injectPaginationRootContext()`, `page` is read-only and `onPageChange(value, reason?, event?)` returns a boolean. On `injectStepperRootContext()`, `modelValue` is read-only and `changeModelValue(value, reason?, event?)` returns a boolean; the `StepperItem` context's refs are read-only.
+- **Stepper navigation returns a boolean.** `goToStep(step)`, `nextStep()` and `prevStep()` on the `StepperRoot` slot and template ref return `false` when the step is blocked (out of range, disabled, or past the next step of a `linear` stepper), unchanged or cancelled. They returned nothing in v2.
+- **`goToStep()` no longer moves onto a disabled step.** v2 meant to block it, but checked the wrong trigger and read the empty `disabled` attribute as false, so the check never fired. A step whose trigger is disabled (`disabled` on its `StepperItem`) is now skipped: `goToStep()` returns `false` and nothing is emitted.
+- **Wrappers that re-declare the emits** need the new tuples: `'update:modelValue': [value, details: ChangeEventDetails<TreeChangeReason>]` and `'update:expanded': [value: string[], details: ChangeEventDetails<TreeExpandedChangeReason>]` on Tree, `'update:page': [value: number, details: ChangeEventDetails<PaginationChangeReason>]` on Pagination, and `'update:modelValue': [value: number | undefined, details: ChangeEventDetails<StepperChangeReason>]` on Stepper.
+
+The composables are new and additive. A standalone `useTree()` returns the selection and expanded models, the flattened visible items and per-item surfaces, but arrow-key focus still comes from `RovingFocusGroup` / `RovingFocusItem`, and `TreeVirtualizer` stays a component. `TreeRoot` has no `getNavigationIntent` yet; arrow keys go through `RovingFocus` as in v2.
+
+## ESM only
+
+v3 ships ES modules only. The CommonJS build and the `require` export conditions are gone, so `require('reka-ui')` no longer resolves.
+
+What to check in your code:
+
+- Replace `require()` calls with `import`, or with a dynamic `import()` inside files that must stay CommonJS.
+- Vite, Nuxt and Vitest need no change.
+- Jest needs ESM support for the package: run Jest in ESM mode, or let it transform `reka-ui` by excluding it from `transformIgnorePatterns`.
+
+## Auto-imports use per-component entry points
+
+Every component family now has its own entry point, named after it in kebab-case (`reka-ui/dialog`, `reka-ui/alert-dialog`, …). It exports the very same components as the package root, so `import { DialogRoot } from 'reka-ui'` keeps working, and parts from both can be mixed in one component tree. See [Importing components](../overview/installation#importing-components).
+
+The [Nuxt module](../overview/installation#nuxt-modules) now imports each component from its entry point instead of from `reka-ui`. It also adds `reka-ui` and those entry points to Vite's `optimizeDeps.include`, so layers and libraries that import from `reka-ui` share the same components. Most apps need no change. Check:
+
+- Configuration that matches the exact specifier `reka-ui` does not match `reka-ui/dialog`. Examples are an `alias` entry, a regular expression in `vite.optimizeDeps` or `vite.ssr.noExternal` that ends at `reka-ui`, and a Vitest or Jest mapping keyed on `^reka-ui$`. Extend these to the subpaths.
+- To keep the v2 imports, set `reka: { subpaths: false }` in `nuxt.config.ts`.
+
+The [`unplugin-vue-components` resolver](../overview/installation#unplugin-vue-components) still imports from `reka-ui` by default. `RekaResolver({ subpaths: true })` switches it to the entry points. That option also needs `reka-ui` and the entry points in Vite's `optimizeDeps.include`; see [Per-component entry points](../overview/installation#per-component-entry-points).
+
+## Generated ids
+
+The ids Reka UI generates for overlay parts are now derived from the root. This covers the Dialog and AlertDialog content, title and description, the Drawer content, title and description, the Popover trigger and content, the DropdownMenu trigger and content, and the Tooltip label that the trigger's `aria-describedby` points at. Their shape differs from v2, for example `reka-tooltip-<n>-content` instead of `reka-tooltip-content-<n>`. A `MenubarMenu` now allocates its content id when the menu is set up instead of when its content first renders.
+
+Only code that hard-coded the shape of a generated id is affected. In tests, select by role, label or text, or compare the attribute with the id read from the other element. In CSS, style by data attribute or class. An `id` you pass to a part yourself is unchanged.
+
+### Part `id` props
+
+The trigger and content of Collapsible, Accordion, Popover and Tabs, and the trigger, content, title and description of Dialog, AlertDialog and Drawer, take an `id` prop. The part renders it, and the attribute that points at the part (`aria-controls`, `aria-labelledby` or `aria-describedby`) follows it, also when the prop changes. In v2 such an `id` was a plain attribute: the paired attribute kept the generated id, and `CollapsibleContent` and `AccordionContent` dropped it for their generated id. In Tabs, a `TabsTrigger` or `TabsContent` `id` replaces only that part's id; the paired part with the same `value` points at it, and the other values keep the ids derived from the root and `value`.
+
+Remove workarounds that copied a custom id into `aria-controls`, `aria-labelledby` or `aria-describedby` by hand.
+
+## Disabled triggers rendered `asChild`
+
+A disabled `Toggle`, `ToggleGroupItem` or `CheckboxRoot` now ignores a user click even when it renders `asChild` onto an element that has no native `disabled` behaviour, such as a `div` or a link. In v2 only the native `disabled` attribute blocked the click, so those elements still toggled.
+
+If you relied on a disabled `asChild` control still reacting to clicks, drop `disabled` and express the state another way. Programmatic changes through the composables (`toggle()`, `setChecked()`) are not guarded by `disabled`.
+
+## Calendar views
+
+`MonthPicker`, `MonthRangePicker`, `YearPicker` and `YearRangePicker` are gone. `Calendar` and `RangeCalendar` now carry a `view` (`day` | `month` | `year`, bindable as `v-model:view`) and a `granularity` that fixes what a selection means. A month picker is `<CalendarRoot granularity="month">`, a year range picker is `<RangeCalendarRoot granularity="year">`, and a day calendar can drill up to its month and year grids through the new `CalendarView` / `CalendarViewTrigger` parts (and their `RangeCalendar*`, `DatePicker*`, `DateRangePicker*` equivalents). Selecting a cell in a view coarser than the granularity moves the placeholder and drills down; selecting at the granularity commits.
+
+| v2 | v3 |
+| --- | --- |
+| `MonthPickerRoot` | `CalendarRoot granularity="month"` |
+| `YearPickerRoot` | `CalendarRoot granularity="year"` |
+| `MonthRangePickerRoot`, `YearRangePickerRoot` | `RangeCalendarRoot granularity="month"` / `"year"` |
+| `MonthPicker<Part>`, `YearPicker<Part>` | `Calendar<Part>` |
+| `MonthRangePicker<Part>`, `YearRangePicker<Part>` | `RangeCalendar<Part>` |
+| `isMonthDisabled`, `isYearDisabled` | `isDateDisabled` (called only for cells at the `granularity`, with that unit as its second argument) |
+| `isMonthUnavailable`, `isYearUnavailable` | `isDateUnavailable` |
+| `maximumMonths`, `maximumYears` | `maximumLength` (counted in units of `granularity`; `maximumDays` remains as a deprecated alias) |
+| `CalendarCell :date`, `RangeCalendarCell :date` | `:value` |
+| `CalendarCellTrigger :day :month`, `RangeCalendarCellTrigger :day :month` | `CalendarCellTrigger :value` + `CalendarGrid :value="page.value"` |
+| `MonthPickerCellTrigger :month`, `YearPickerCellTrigger :year` | `CalendarCellTrigger :value` |
+| cell trigger slot `dayValue` / `monthValue` / `yearValue` | `cellValue` |
+| `grid` slot prop as a single object (month and year pickers) | `grid` is always an array of pages; iterate it |
+| `nextPage` / `prevPage` `(placeholder) => DateValue` | unchanged signature, with the view as an additive second argument; the root function is used only in the `granularity` view |
+| `data-selected="true"`, `data-selection-start="true"` … | emitted as empty strings; presence selectors (`[data-selected]`, `data-[selected]:`) are unaffected |
+
+The `DatePicker` and `DateRangePicker` roots forward `view`, `defaultView`, `maxView`, `yearsPerPage` and `columns` and emit `beforeUpdate:view` / `update:view` with the calendar's change details; they do not expose the calendar `granularity` (that name already belongs to the field's time granularity, and a field edits full dates), so month or year pickers use `Calendar` / `RangeCalendar` directly.
+
+Every `CalendarGrid` (and `RangeCalendarGrid`, `DatePickerGrid`, `DateRangePickerGrid`) in the day view needs the page it renders as `:value="page.value"`. The cell triggers no longer receive the month themselves, so a grid without `value` cannot mark the leading and trailing days of the neighbouring months as `data-outside-view`.
+
+Type and import names follow the same mapping as the parts: `MonthPickerRootProps` becomes `CalendarRootProps`, `YearRangePickerRootEmits` becomes `RangeCalendarRootEmits`, and so on. The namespaced `MonthPicker.*`, `MonthRangePicker.*`, `YearPicker.*` and `YearRangePicker.*` objects from `reka-ui/namespaced` are gone too; use `Calendar.*` and `RangeCalendar.*`.
+
+The keyboard shortcuts are unchanged: in the day view Home / End move within the week, PageUp / PageDown by a month and Shift+PageUp / Shift+PageDown by a year; in the month and year views PageUp / PageDown move by a page, as they did in the month and year pickers.
+
+Change events on these roots now follow the [details contract](#change-events-carry-details): `update:modelValue`, `update:placeholder` and `update:view` receive a `ChangeEventDetails<CalendarChangeReason>` second argument (reasons: `cell-press`, `cell-keydown`, `view-drill`, `view-trigger`, `page-navigation`, `focus-navigation`; `escape-key` on ranges) and are preceded by a cancellable `beforeUpdate:*` emit.
+
+```vue
+<MonthPickerRoot v-slot="{ grid }"> <!-- [!code --] -->
+  <MonthPickerGrid> <!-- [!code --] -->
+    <MonthPickerGridBody> <!-- [!code --] -->
+      <MonthPickerGridRow v-for="(row, i) in grid.rows" :key="i"> <!-- [!code --] -->
+        <MonthPickerCell v-for="month in row" :key="month.toString()" :date="month"> <!-- [!code --] -->
+          <MonthPickerCellTrigger :month="month" /> <!-- [!code --] -->
+<CalendarRoot v-slot="{ grid }" granularity="month"> <!-- [!code ++] -->
+  <CalendarGrid v-for="page in grid" :key="page.value.toString()" :value="page.value"> <!-- [!code ++] -->
+    <CalendarGridBody> <!-- [!code ++] -->
+      <CalendarGridRow v-for="(row, i) in page.rows" :key="i"> <!-- [!code ++] -->
+        <CalendarCell v-for="month in row" :key="month.toString()" :value="month"> <!-- [!code ++] -->
+          <CalendarCellTrigger :value="month" /> <!-- [!code ++] -->
+```
+
+### Matchers and paging apply at the granularity
+
+`isDateDisabled` and `isDateUnavailable` are called only for cells at the `granularity`: day cells in a day calendar, month cells in a `granularity="month"` calendar. The views coarser than the granularity are navigation. Their cells are disabled only by `minValue`, `maxValue` and `disabled`, they never call your matchers, and they show no selection state. So a day matcher such as `isWeekend` keeps working once you add views: it does not disable a month because the 1st of that month is a Sunday. In the same way, a `nextPage` / `prevPage` function on the root is used only in the `granularity` view, and the month and year views page by a year and by `yearsPerPage`. A `nextPage` / `prevPage` on a `CalendarNext` / `CalendarPrev` part applies in every view; place the part inside a `CalendarView` to limit it to one view.
+
+### Adding views to a day calendar
+
+The views are optional, and a calendar without them is unchanged. To let users drill up from the days to the months and years, wrap each grid in a `CalendarView`, move the `v-slot` from the root to each `CalendarView` (its slot passes the `grid` of that view), and replace `CalendarHeading` with a `CalendarViewTrigger`. If you built your own switcher around a `Calendar` and a `MonthPicker` / `YearPicker` with `v-if`, this replaces it. The [view switching example](/examples/date-picker-view-switching) shows a complete calendar.
+
+```vue
+<CalendarRoot v-model="date">
+  <CalendarHeader>
+    <CalendarPrev />
+    <CalendarHeading /> <!-- [!code --] -->
+    <CalendarViewTrigger /> <!-- [!code ++] -->
+    <CalendarNext />
+  </CalendarHeader>
+  <CalendarView v-slot="{ grid, weekDays }" view="day"> <!-- [!code ++] -->
+    <CalendarGrid v-for="month in grid" :key="month.value.toString()" :value="month.value">
+      <!-- the existing day grid -->
+    </CalendarGrid>
+  </CalendarView> <!-- [!code ++] -->
+  <CalendarView v-slot="{ grid }" view="month"> <!-- [!code ++] -->
+    <CalendarGrid v-for="page in grid" :key="page.value.toString()" :value="page.value"> <!-- [!code ++] -->
+      <CalendarGridBody> <!-- [!code ++] -->
+        <CalendarGridRow v-for="(row, i) in page.rows" :key="i"> <!-- [!code ++] -->
+          <CalendarCell v-for="month in row" :key="month.toString()" :value="month"> <!-- [!code ++] -->
+            <CalendarCellTrigger :value="month" /> <!-- [!code ++] -->
+          </CalendarCell> <!-- [!code ++] -->
+        </CalendarGridRow> <!-- [!code ++] -->
+      </CalendarGridBody> <!-- [!code ++] -->
+    </CalendarGrid> <!-- [!code ++] -->
+  </CalendarView> <!-- [!code ++] -->
+  <!-- a third CalendarView with view="year" has the same shape -->
+</CalendarRoot>
+```
+
+The `CalendarViewTrigger` shows the heading of the active view (`September 2026`, `2026`, `2020 - 2031`) and switches to the next coarser view, up to `maxView`. Selecting a month or year cell drills back down. Bind `v-model:view` to control the view, or set `defaultView` to start on another one.
+
+## `by` comparison functions receive every value
+
+A comparison function passed as `by` (on `ListboxRoot`, `ComboboxRoot` and `SelectRoot`) now runs for every value, strings included. In v2 string values were always compared with `===` and the function was only called for objects, so a case-insensitive `by` never matched string options. A function that assumes objects (`a.id === b.id`) must now guard for strings when the list mixes both. `by` is read once at setup, as before; changing it after mount has no effect.
+
+## Listbox keyboard handling
+
+Keyboard navigation in `ListboxContent`, `ListboxFilter`, `ComboboxInput` and `AutocompleteInput` now goes through one intent resolution. Most keys behave as before; these changed:
+
+- **PageUp / PageDown** move the highlight to the first / last item and prevent the browser default, in `ListboxContent` and in the filter input. In v2 neither handled them, so they scrolled the listbox container (or the page).
+- **Arrow keys while a filter has focus.** ArrowLeft and ArrowRight always stay with the text input (caret movement, Shift selection), even in a `horizontal` listbox. ArrowUp, ArrowDown, Home and End still move the highlight from the filter. `ListboxContent` no longer prevents the default of arrow keys while a filter owns the keyboard.
+- **Typeahead** no longer receives navigation keys. In v2 an arrow or Home/End press was also appended to the typeahead search.
+
+Two additions come with it:
+
+- `getNavigationIntent` on `ListboxRoot` decides what a keydown means. Return `'first' | 'last' | 'prev' | 'next'` to move, `'select'` to select the highlighted item as Enter does, `null` to opt the key out (for Enter this also skips the selection), or `undefined` to keep the default mapping. Use it for command-palette keys such as Ctrl+N / Ctrl+P. The filter input never hands it unmodified printable keys, so typing is never swallowed. Space on a focused item already selects that item, and a `'select'` intent for Space does not select it a second time. `ComboboxRoot` and `AutocompleteRoot` accept it too: there a `'next'` or `'prev'` intent also opens a closed popup, as ArrowDown and ArrowUp do.
+- `textValue` on `ListboxItem` sets the text the root's label registry records for the item, and defaults to the item's text content. Set it when the visible content is not plain text (an icon, a component that updates on its own).
+
+The `update:modelValue` and `beforeUpdate:modelValue` events of `ListboxRoot` are now typed as `T | T[] | undefined`: an array with `multiple`, and `undefined` when a single selection is cleared. A handler typed for a single `T` may need widening; the runtime payload is unchanged.
+
+## Listbox filtering
+
+`ListboxRoot` has a new, opt-in `filter` prop. Nothing changes until you pass one: without it (or with `null`) the listbox filters nothing, and a list you already filter by hand from the `ListboxFilter` value keeps working as in v2. With a filter function, for example `contains` from `useFilter({ sensitivity: 'base' })`, items whose text does not match the `ListboxFilter` value are not rendered, a group whose items all fail to match is hidden, and keyboard navigation, typeahead and select-all only see the matching items. In a `ListboxVirtualizer`, the filter runs over `options` (matching `textContent(option)`), so a filtered-out option takes no virtual index. See [Filtering](../components/listbox#filtering). `ComboboxRoot` and `AutocompleteRoot` filter through the same mechanism, on by default; see [Combobox and Autocomplete filtering](#combobox-and-autocomplete-filtering).
+
+## Combobox and Autocomplete filtering
+
+`ComboboxRoot` and `AutocompleteRoot` have a `filter` prop and run it through the shared Listbox filter. Without it they match items with `useFilter`'s `contains` (case and accent insensitive), as in v2. Pass a function `(text, search, value) => boolean` to change how items match, or `null` to turn client filtering off. `ignoreFilter` still works but is deprecated: it is an alias for `:filter="null"` and wins over `filter`.
+
+```vue
+<ComboboxRoot ignore-filter /> <!-- [!code --] -->
+
+<ComboboxRoot :filter="null" /> <!-- [!code ++] -->
+```
+
+What changed:
+
+- **A virtualized combobox now filters.** In v2 `ComboboxVirtualizer` turned filtering off, so its `options` had to be filtered by hand. The root's filter now runs over `options`, matching `textContent(option)` or, without `text-content`, the option's string form. A list you still filter yourself keeps working when the two agree, but an object option without `text-content` stringifies to `[object Object]` and never matches. Set `:filter="null"` on a virtualized combobox you filter yourself, or drop your own filtering and pass the full list with `text-content`.
+- **A filtered-out item stays mounted** and renders nothing, instead of being unmounted. Its slot content keeps its state, and the item keeps its entry in the label registry. A group whose items all fail to match stays mounted with `hidden`, as in v2.
+- **`filtered`** on the root's template ref is now `{ search, active, count }`, the Listbox filter state. The v2 `{ count, items, groups }` maps were keyed by internal item ids; use `count` for an empty state.
+
+## Combobox and Autocomplete roots
+
+`ComboboxRoot` and `AutocompleteRoot` are built on `useComboboxRoot()` and no longer render a `ListboxRoot` component inside. The DOM is the same: the root still renders one element, which receives your attributes.
+
+- **One context.** The root provides one object as both the Combobox and the Listbox root context, so `injectListboxRootContext()` inside a combobox returns the same object as `injectComboboxRootContext()`. Custom parts built on `injectComboboxRootContext()`: `allItems`, `allGroups` and `ignoreFilter` are gone (use `filterState.value.count` and `filter.value === null`), `filterState` is `{ search, active, count }`, `onOpenChange(value, reason?, event?)` returns a boolean instead of a promise, `highlightedElement` holds `null` instead of `undefined` when nothing is highlighted, and assigning `modelValue.value` still works but reports `'imperative-action'`. Use `setModelValue(value, reason?, event?)` to pass a reason. On `injectAutocompleteRootContext()`, `modelValue` is read-only; call `onModelValueChange(value, reason?, event?)`.
+- **Content ids** derive from the root's id: `reka-combobox-v-0-content` instead of `reka-combobox-content-v-1`, and `reka-autocomplete-v-0-content` for Autocomplete. The input's and the trigger's `aria-controls` point at it from the first render; in v2 they stayed empty until the content first mounted. Selectors and snapshots that hard-code the old ids need updating.
+- **`ComboboxInput` and `AutocompleteInput` render the input themselves** instead of wrapping `ListboxFilter`. The rendered `<input>` and its attributes are unchanged. Tests that look up `ListboxRoot` or `ListboxFilter` with `findComponent` inside a combobox no longer find them.
+- **`update:modelValue` is typed by `multiple`**: `T[]` when `multiple` is set, `T | null` when it is absent (`ComboboxCancel` with `reset-model-value-on-clear` emits `null`), either while it is a plain `boolean`. The runtime payload is unchanged.
+- **`modelValue` and `defaultValue` accept `null`** (`T | T[] | null`, v2: `T | T[]`), so the `null` a clear emits can be bound back: `v-model` on a `ref<string | null>` type-checks even when `T` is pinned to `string`. Type-only; the same holds for `useComboboxRoot()`'s `modelValue`, `defaultValue` and `setModelValue`.
+- **New:** `displayValue` on `ComboboxRoot` sets the input text for the selected value when `ComboboxInput` has no `displayValue` of its own. On `AutocompleteRoot` it sets the text a selected item writes into the value.
+
+## Color values are `Color` objects
+
+`ColorAreaRoot`, `ColorFieldRoot` and `ColorSliderRoot` now emit a `Color` object instead of a hex string. A `Color` is a plain object in one color space, such as `{ space: 'hsl', h: 217, s: 91, l: 60, alpha: 1 }`. Each component emits it in the space it edits: the `colorSpace` prop, or the space that holds the edited channel (`rgb` for `red`, `hsb` for `brightness`). The hex string could not hold the hue of a grey or anything finer than one 8-bit step, so v2 kept that precision in hidden internal state; in v3 the emitted value carries it, and components that share one `v-model` no longer drift.
+
+What changed:
+
+- `update:modelValue`, `beforeUpdate:modelValue`, `change` and `changeEnd` carry a `Color`. `update:color` is unchanged and carries the same `Color` as `update:modelValue`.
+- `modelValue` and `defaultValue` still accept a color string, so `v-model` on a `ref('#3b82f6')` keeps working, but after the first change the ref holds a `Color`. Code that uses the bound value as a string (template text, a CSS `background`, a string comparison, an API payload) must format it.
+- The new `update:hex` event (and `onHexUpdate` on the composables) emits the hex string after each change. It is lossy, so do not feed it back into `v-model` when you need the hue of greys to survive. Forms still submit hex through the hidden input.
+- An update fires only when the color actually changes, compared structurally with `isEqualColor` (now exported). The v2 exception where `ColorAreaRoot` and `ColorSliderRoot` re-emitted an unchanged hex string for a change finer than hex precision is gone: such a change emits a `Color` that differs from the previous one.
+- `ColorFieldRoot` now emits `change` and `changeEnd` too, both after each committed change. On every component `changeEnd` fires only when the interaction changed the color and the model holds the result: a drag that returns to its start, or an update a controlled parent rejects, reports nothing. With a controlled `modelValue`, `changeEnd` fires once the parent has applied the update, after it re-renders.
+- `ColorAreaRoot` derives its thumb from the model, so a controlled parent that rejects an update keeps the thumb in place. It takes a `dir` prop and inherits the direction from `ConfigProvider`, so under `dir="rtl"` its x axis, arrow keys, thumb and gradient are mirrored.
+- Keyboard steps in `ColorAreaRoot` and channel steps in `ColorFieldRoot` snap to the step grid, so a channel at 11.1 steps to 12. A custom `step` on `ColorFieldRoot` snaps to multiples of that step.
+- `ColorSwatchPickerRoot` and `ColorSwatchPickerItem` accept a `Color` object as well as a string, and compare values structurally: a model of `'#ff0000'` selects an item whose value is `{ space: 'hsl', h: 0, s: 100, l: 50, alpha: 1 }`. The picker still emits the selected item's value as declared.
+- The root contexts expose `color`, `xValue` and `yValue` as read-only computeds.
+
+```vue
+<script setup lang="ts">
+import type { Color } from 'reka-ui' // [!code ++]
+import { ColorAreaArea, ColorAreaRoot, ColorAreaThumb, colorToHex, normalizeColor } from 'reka-ui'
+import { computed, ref } from 'vue'
+
+const color = ref('#3b82f6') // [!code --]
+const color = ref<string | Color>('#3b82f6') // [!code ++]
+const hex = computed(() => colorToHex(normalizeColor(color.value))) // [!code ++]
+</script>
+
+<template>
+  <ColorAreaRoot v-slot="{ style }" v-model="color">
+    <ColorAreaArea :style="style">
+      <ColorAreaThumb />
+    </ColorAreaArea>
+  </ColorAreaRoot>
+  <span>{{ color }}</span> <!-- [!code --] -->
+  <span>{{ hex }}</span> <!-- [!code ++] -->
+</template>
+```
+
+If the app stores a hex string and you accept the precision loss, keep the string and update it from `update:hex`: `:model-value="hex" @update:hex="hex = $event"`. `update:hex` follows every model update, and a move finer than one 8-bit step still updates the model, so it can repeat the same string. Compare against the previous value before doing anything costly with it.
+
+The color utilities changed with the model. `convertToHsl` and `convertToHsb` convert between HSL and HSB directly and keep the hue of a grey. The channel and gradient helpers are no longer exported; see [Color utilities removed from the package root](#color-utilities-removed-from-the-package-root). The red, green and blue slider gradients use the color's real channel values for HSL and HSB colors instead of a fixed 128, and `parseColor` accepts `hsv()` as documented.
+
+`ColorSliderTrack`'s gradient now runs from the slider's minimum to its maximum: bottom to top on a vertical slider (top to bottom when it is also `inverted`), and right to left on a horizontal slider when exactly one of `inverted` and right-to-left is set (the direction is inherited from `ConfigProvider`). In v2 it always ran left to right, so it did not match the thumb on those sliders. Remove any CSS that rotated or flipped the track to compensate.
+
+`ColorFieldInput` now validates on commit. When Enter or blur rejects text that does not parse (a color string, or a number with a `channel`), the text still reverts to the current color, and the input gets `aria-invalid="true"` and the input and `ColorFieldRoot` get `data-invalid`. They stay until an edit parses or a later change commits; partial input while typing is never flagged.
+
+## ColorArea exposes one range input per channel
+
+`ColorAreaThumb` now renders two visually hidden `<input type="range">` elements, one per channel, after its slot content. In v2 the thumb was a single `role="slider"` that held only the x channel (the y channel was free text in `aria-valuetext`, and `aria-orientation` was always `horizontal`), and `ColorAreaArea` had `role="application"`.
+
+- Each input is named after its channel ("Saturation", "Lightness"), has its own value, `min`, `max` and `aria-orientation` (`horizontal` for x, `vertical` for y), and reports the other channel as context in `aria-valuetext` ("50, Lightness 40").
+- Focus goes to the inputs, not the thumb. One input is in the tab order; an arrow key moves focus to the input of the axis it changes. Pointer, keyboard and right-to-left behaviour are unchanged.
+- `ColorAreaThumb` no longer has `role`, `tabindex`, `aria-label`, `aria-valuenow`, `aria-valuetext`, `aria-roledescription` or `aria-orientation`. `ColorAreaArea` no longer has `role`, `aria-roledescription` or `aria-disabled`; `ColorAreaRoot` keeps `aria-disabled`, and every part keeps `data-disabled`.
+- Focus styles on the thumb (`:focus`, `focus:`) never match now. Use `:focus-within` / `focus-within:` on the thumb or the area, or `:has(:focus-visible)` for keyboard focus only. With `<ColorAreaThumb as-child>` the inputs render next to your element (placed at the thumb's position), not inside it, so put the focus style on `ColorAreaArea`.
+- Enter on a channel input does not submit an enclosing form, as with the v2 thumb.
+- Tests that find the thumb with `getByRole('slider')` find two sliders now: select one by name (`getByRole('slider', { name: 'Saturation' })`). Tests that read the y value from the thumb's `aria-valuetext` read the y input's value instead.
+- With `useColorArea()` directly, render the new `xInput` and `yInput` surfaces as `<input>` elements in the thumb and bind them with `setInputElement('x' | 'y', el)`. The thumb surface no longer carries the ARIA slider attributes.
+
+```vue
+<style>
+.ColorAreaThumb:focus { /* [!code --] */
+.ColorAreaThumb:focus-within { /* [!code ++] */
+  outline: 2px solid black;
+}
+</style>
+```
+
+## Color utilities removed from the package root
+
+The package root now exports the color utilities an app needs to work with the `Color` model: `parseColor`, `normalizeColor`, `isValidColor`, `isEqualColor`, `colorToHex`, `colorToString`, `convertToRgb`, `convertToHsl`, `convertToHsb` and the `Color`, `RGBColor`, `HSLColor`, `HSBColor`, `ColorSpace`, `ColorChannel` and `ColorFormat` types. The channel and gradient helpers the Color components use internally are no longer exported:
+
+| Removed | Replacement |
+| --- | --- |
+| `colorToRgb(color)`, `colorToHsl(color)`, `colorToHsb(color)` | `colorToString(color, 'rgb')`, `colorToString(color, 'hsl')`, `colorToString(color, 'hsb')` |
+| `getChannelValue(color, channel)` | The property of the converted color: `hue` → `convertToHsl(color).h`, `saturation` → `convertToHsl(color).s` (or `convertToHsb(color).s` for an HSB color), `lightness` → `convertToHsl(color).l`, `brightness` → `convertToHsb(color).b`, `red`/`green`/`blue` → `convertToRgb(color).r`/`.g`/`.b`, `alpha` → `color.alpha * 100` |
+| `setChannelValue(color, 'hue', 120)`, `setChannelValues(color, [...])` | Spread the converted color: `{ ...convertToHsl(color), h: 120 }` |
+| `getChannelRange(channel)` | The fixed ranges: hue 0 to 360; saturation, lightness, brightness and alpha 0 to 100 (alpha is stored 0 to 1 on the `Color`); red, green and blue 0 to 255. All step by 1 |
+| `getChannelName(channel)` | Your own (localized) label for the channel |
+| `getAreaBackgroundStyle`, `getAreaGradient` | The `style` slot prop of `ColorAreaRoot`, bound to `ColorAreaArea` |
+| `getSliderBackgroundStyle`, `getSliderGradient` | `ColorSliderTrack`, which sets the gradient for its channel and layout |
+
+```ts
+import { convertToHsl } from 'reka-ui' // was: import { getChannelValue, setChannelValue } from 'reka-ui'
+
+const hue = getChannelValue(color, 'hue') // [!code --]
+const hue = convertToHsl(color).h // [!code ++]
+const shifted = setChannelValue(color, 'hue', hue + 30) // [!code --]
+const shifted = { ...convertToHsl(color), h: (hue + 30) % 360 } // [!code ++]
+```
+
+## Template refs on parts
+
+A template ref on a part now exposes the part's element and its documented methods, and nothing else. Every part exposes `element` and `$el`, both reading the same reactive ref to its rendered DOM element, next to the methods listed in its API reference. See [the element-first ref contract](../utilities/use-forward-expose#the-element-first-ref-contract).
+
+What changed:
+
+- **`$el` needs no migration.** `partRef.value.$el` still returns the part's element. It is now reactive: a `computed` that reads it re-runs when the part's root element changes (a `v-if`, an `as` change, an `asChild` child swap). In v2 it was a snapshot that could point at a removed element. `partRef.value.element` returns the same element.
+- **`element` is `null` when the part renders no element** (a closed `DialogContent`, an unmounted `PopoverContent`). `$el` then falls back to the placeholder comment node Vue renders, as in v2, so VueUse's `unrefElement(partRef)` and `useEventListener(partRef, …)` receive a node and never the component itself. Check `element` when you need to know whether the part is rendered.
+- **Props are no longer readable from a part ref.** In v2, `partRef.value.disabled` or `partRef.value.modelValue` returned the part's prop value. This was never documented and is now `undefined`. Read the value from the state you pass to the part. In development, the first such read logs a warning that names the part and the prop.
+- **Methods are no longer forwarded through `as` / `asChild`.** In v2, when a part rendered your component through `as` or `asChild`, the methods your component exposed were also reachable on the part's ref. Put a ref on your own component to call them. The methods a part documents (`validate`, `scrollTop`, `highlightItem`, …) are unchanged.
+- **Components passed to `asChild` should expose `element`.** A component with a single root element works without changes. A component with several root nodes, a root that changes with `v-if`, or a target on an inner element should call `useForwardElement()` and `defineExpose(expose)`, and bind `forwardRef` on the element the part should target. Without it, Reka UI falls back to the component's `$el`, which Vue does not keep up to date.
+- **`useForwardExpose` is deprecated.** It keeps its v2 behavior and logs a one-time warning in development. Replace it with `useForwardElement`, imported from `reka-ui`:
+
+```vue
+<script setup lang="ts">
+import { useForwardElement } from 'reka-ui'
+
+const { forwardRef } = useForwardExpose() // [!code --]
+const { forwardRef, expose } = useForwardElement() // [!code ++]
+defineExpose(expose) // [!code ++]
+</script>
+```
+
+If the component already calls `defineExpose({ ... })`, wrap the object in `mergeExpose(expose, { ... })`.
+
+## Modal layers no longer touch `<body>`
+
+Modal overlays follow [Base UI](https://base-ui.com)'s model in v3. A modal layer (a modal `Dialog`, `AlertDialog`, `Drawer`, `Popover`, `DropdownMenu` or `ContextMenu`, an open `Select`, and any content with `disableOutsidePointerEvents`) no longer sets `pointer-events: none` on `<body>`, and the page scroll lock no longer adds `padding-right` or a `--scrollbar-width` variable.
+
+### Outside pointer interaction
+
+The page is now blocked by a transparent internal backdrop that the layer renders right below itself: a `position: fixed` `<div data-reka-internal-backdrop role="presentation">` covering the viewport. It takes the `z-index` of the layer (of its positioning wrapper for floating content, or of the fixed container around a scrollable dialog), so it covers page content with a lower `z-index`, such as a sticky header. A press on it is an outside press, so it closes the layer, as before. `<body>` keeps its own `pointer-events`. A non-portaled layer inside an element that contains fixed elements (`transform`, `filter`, `backdrop-filter`, `contain: paint`, `will-change: transform`) gets its backdrop in `<body>` instead, with a hole over the layer.
+
+- **Only content above the layer's own `z-index` stays interactive.** An element in the root stacking context whose `z-index` is higher than the layer's (a chat launcher or a cookie banner at `z-index: 2147483647`, a toast viewport above your overlays) can be clicked while a modal layer is open. Page content at or below the layer's `z-index` is covered, as in v2. In v2 the whole page was unclickable, whatever its `z-index`.
+- **A modal `Dialog` or `Drawer` closes only on its own backdrop.** A press on the internal backdrop, on `DialogOverlay` / `DrawerOverlay`, or on a container around the content closes it; a press on an element stacked above the backdrop does not. Popovers and menus close on any outside press, as before.
+- **A modal `Popover` or `DropdownMenu` keeps its trigger reachable.** The trigger is cut out of the backdrop, so pressing it toggles the layer closed instead of hitting the backdrop. The `ContextMenu` trigger area and the `Combobox` input are cut out in the same way.
+- **Layers below a modal layer stay inert.** A non-modal popover that is open under a modal dialog still gets `pointer-events: none` (and so does its positioning wrapper) until the dialog closes, whatever its `z-index`.
+
+What to check in your code:
+
+- **Styles or tests that read `body.style.pointerEvents`.** Nothing sets it any more. To detect an open modal layer, query `[data-reka-internal-backdrop]`, or check the component's `data-state="open"`. A test that asserted `document.body.style.pointerEvents === 'none'` now asserts that the backdrop exists.
+- **Workarounds that restored `pointer-events: auto`** on `<body>` or on a third-party widget so it stayed clickable next to a dialog: remove them. If the widget sits *below* the backdrop in the stacking order, give it a higher `z-index` than your overlay content.
+- **Tests that click an arbitrary element to dismiss a modal `Dialog`.** Press the overlay, the backdrop (`[data-reka-internal-backdrop]`) or `document.body` instead. In a real browser, a click "on" an element under a modal layer lands on the backdrop; with Playwright, pass `force: true` to click through the actionability check.
+- **CSS that targets the overlay's direct sibling** (`.overlay + .content`): the backdrop now sits between them. Use `~` or a class.
+- **Page chrome with a higher `z-index` than your overlays.** A sticky header at `z-index: 50` stays clickable over a dialog whose content has `z-index: 10`. As Base UI recommends, give your app root its own stacking context, so nothing inside it can rise above overlays portaled to `<body>`:
+
+  ```css
+  #app {
+    isolation: isolate;
+  }
+  ```
+
+### Page scroll lock
+
+`useBodyScrollLock` (and every modal layer that uses it) is now an overflow-based lock ported from Base UI's `useScrollLock`:
+
+- It hides the overflow of the element that scrolls the page (`<html>` when it is its own scroll container, `<body>` otherwise) instead of always `<body>`, and restores the original inline styles exactly when the last lock releases.
+- It keeps the layout from shifting with `scrollbar-gutter: stable`. Where that is unsupported it pins `<body>`'s size and sets `data-reka-scroll-locked` on `<html>` instead. With overlay scrollbars (macOS, mobile) and on iOS it only hides the overflow. It never adds `padding-right` to `<body>`, never sets `--scrollbar-width` on `<html>`, and no longer intercepts `touchmove` on iOS.
+- Nested and stacked overlays share one reference-counted lock. It applies and releases a macrotask after the change, so a hand-off between two overlays in the same tick does not unlock in between, and it waits for a lock that another library still holds instead of saving it as the page's original state.
+- The lock only engages once the component has mounted, so server rendering never touches the page.
+- A modal `Dialog`, `AlertDialog` or `Drawer` locks scroll whenever it is open, with or without an overlay part. In v2 only `DialogOverlay` / `DrawerOverlay` locked it, so a modal dialog without an overlay left the page scrollable and a `Drawer` with `modal="trap-focus"` and an overlay locked it. A `Drawer` with `modal="trap-focus"` no longer locks scroll.
+
+What to check in your code:
+
+- **`var(--scrollbar-width)`** in your styles: the variable is gone. Fixed-position elements no longer need the compensation that the variable fed, because the gutter stays reserved. Remove the `padding-right: var(--scrollbar-width)` / `right: var(--scrollbar-width)` rules.
+- **Styles or tests that read `body.style.overflow` or `body.style.paddingRight`** while an overlay is open: read `getComputedStyle(document.body).overflowY` (or the `<html>` one when `<html>` scrolls), and expect no padding. In tests, the lock applies a macrotask after the overlay opens: wait with `vi.waitFor` or a short timeout before asserting.
+- **`ConfigProvider`'s `scrollBody`**: `true` (the default) uses the behaviour above. `false` only hides the overflow, as before. `{ padding, margin }` still offsets `<body>` by the given amounts (`true` meaning the scrollbar width) and is the escape hatch if your layout relied on the v2 padding.
+- **A modal dialog that should leave the page scrollable**: set `:modal="false"` (or `modal="trap-focus"` on a `Drawer`). Omitting the overlay no longer does it.
+
+### `modal` defaults
+
+The defaults already match Base UI and do not change: `Dialog`, `AlertDialog`, `Drawer`, `DropdownMenu` and `ContextMenu` are modal, `Popover` is not, `Select` locks scroll and blocks outside pointer events (`bodyLock` and `disableOutsidePointerEvents` default to `true`) and `Combobox` does neither. `Menubar` menus stay non-modal.
+
+## Menu wrapper contexts
+
+These changes only affect custom parts and tests built on the contexts the menu wrappers provide. Components used through their props, events and `v-model` work as before.
+
+- **Menubar root context.** On `injectMenubarRootContext()`, `modelValue` is now a readonly ref: assigning `modelValue.value` no longer opens or closes a menu. Call `onMenuOpen(value)`, `onMenuClose()` or `onMenuToggle(value)` instead. Each one accepts an optional reason and native event, and returns `false` when the change was cancelled or did not change the value.
+- **`MenubarRoot` emit type.** `update:modelValue` is typed `[value: string, details: ChangeEventDetails<MenubarChangeReason>]`. v2 declared it as `[value: boolean]`, although the payload was always the open menu's value (`''` when every menu is closed). A wrapper that re-declares the emit needs the new tuple.
+- **No inner `MenuRoot`.** `DropdownMenuRoot`, `ContextMenuRoot` and `MenubarMenu` provide the Menu contexts themselves, through `useDropdownMenu()`, `useContextMenu()` and `useMenubarMenu()`. A test that looked up a `MenuRoot` component under them finds nothing; assert on the wrapper root's events instead.
+- **Dropdown ids are set by the root.** The `DropdownMenuRoot` context fills in `triggerId` and `contentId` up front, so a custom trigger or content that assigned them keeps the root's ids. Pass `id` to the part if you need a specific one.
+
+## Form input contexts
+
+These changes only affect custom parts built on the root contexts of the form-input families. Components used through their props, events and `v-model` work as before.
+
+- **`modelValue` is read-only** on the `PinInputRoot`, `RatingRoot`, `TagsInputRoot`, `TagGroupRoot` and `EditableRoot` contexts, so assigning `modelValue.value` no longer changes the value. Call the context method instead:
+  - PinInput: `setModelValue(value)` or `updateModelValueAt(index, value)` (both new).
+  - Rating: `changeModelValue(value)`.
+  - TagsInput: `onAddValue(text)`, `onRemoveValue(index)`, or the new `onAddValues(texts)` and `onClear()`.
+  - TagGroup: `toggleSelection(value)`.
+  - Editable: set `inputValue.value`, then call `submit()`.
+- **Reasons and return values.** Those methods accept an optional reason and native event, and the ones that change the model return `false` when the change was cancelled or did not change the value. On TagGroup, `removeTags(value, withSelection, reason?, event?)` and the item context's `remove(event?)` take the same optional arguments.
+- **NumberField** keeps a writable `modelValue` on its context. Assigning it now runs `beforeUpdate:modelValue` / `update:modelValue` with the `'imperative-action'` reason. `handleIncrease`, `handleDecrease`, `handleMinMaxValue` and `applyInputValue` take an optional trailing reason and native event; `applyInputValue` returns `false` when the change was cancelled or did not change the value, and the other three return nothing.
+
+## TagsInput, PinInput and Editable events
+
+In v2, `TagsInputRoot` and `PinInputRoot` kept a local copy of the model (a passive, deep `v-model`) and emitted `update:modelValue` from a watcher on the next tick, as did an uncontrolled `EditableRoot`. They now emit from the interaction, and a controlled model is owned by the parent, which changes the following:
+
+- **TagsInput events.** `addTag` and `removeTag` now fire after `update:modelValue` (v2 fired them first), and do not fire when `beforeUpdate:modelValue` cancels the change. With `v-model` the bound array is already updated when they run; with `:model-value` and your own handler, `update:modelValue` is only a request, so read the tag from the event payload if the handler may not apply it. A cancelled add keeps the typed text in the input. `invalid` fires for each rejected tag before `beforeUpdate:modelValue`, and stays fired when the change is then cancelled.
+- **TagsInput paste.** A pasted list is added in one `update:modelValue` carrying every new tag. v2 emitted once per tag. `invalid` and `addTag` still fire once per tag.
+- **In-place changes.** Calling `push` or `splice` on an array bound to `TagsInputRoot` or `PinInputRoot` no longer emits `update:modelValue`. Assign a new array instead.
+- **Controlled TagsInput and PinInput.** With `:model-value` and no `update:model-value` handler, the tags or digits no longer change locally. Update the bound value in the handler, or use `v-model`. When the parent does not apply a change, TagsInput keeps the typed text in the input, and PinInput puts the digit back and does not move focus.
+- **Uncontrolled Editable.** On a submit that changes the value, the order is now `beforeUpdate:modelValue`, `update:modelValue`, `update:state` (`'submit'`), `submit`; v2 emitted `update:modelValue` on the next tick, after the other two. A controlled Editable already emitted in this order. For both, a submit cancelled in `beforeUpdate:modelValue` keeps the field in edit mode, and neither `update:state` nor `submit` fires. A submit with an unchanged value emits no `update:modelValue` but still leaves edit mode and fires `update:state` and `submit`.
+
+## Select
+
+`SelectRoot` is built on `useSelectRoot()` and one composable per part: `useSelectTrigger()`, `useSelectValue()`, `useSelectContent()`, `useSelectItem()`, `useSelectItemText()` and `useSelectItemIndicator()`. The DOM is the same. What changed:
+
+- **Change details.** `update:modelValue` and `update:open` receive a `ChangeEventDetails` second argument, and the cancellable `beforeUpdate:modelValue` and `beforeUpdate:open` are new. See [Change events carry details](#change-events-carry-details). Cancelling the value of an item press keeps the content open.
+- **No emit for an unchanged value.** Pressing the selected item of a single select closes the content but no longer emits `update:modelValue`, also when `by` matches a different object. Changing an uncontrolled model array in place no longer emits either. Assign a new array instead.
+- **`update:modelValue` is typed by `multiple`**: `T[]` when `multiple` is set, `T` (as in v2) when it is absent, either while it is a plain `boolean`. No interaction clears a single select, so it never emits `null`. The runtime payload is unchanged.
+- **Typing on the closed trigger selects.** With focus on a closed `SelectTrigger`, typing selects the next item whose text starts with the typed characters, as a native `<select>` does (reason `typeahead`). In v2 it did nothing. A `multiple` select is unchanged.
+- **The trigger closes a `popper` select.** In `popper` position the trigger stays clickable above the backdrop, and pressing it while open closes the content (reason `trigger-press`).
+- **Item texts are remembered.** `SelectValue` keeps showing the text of a selected item after its `SelectItemText` unmounts. The new `displayValue` prop on `SelectRoot` resolves the text without the items.
+- **A closed select renders its items only when needed.** v2 kept every item of a closed select mounted in full in a hidden fragment, so the trigger could show the selected text. v3 renders them there in a lightweight form (value, text and `disabled` only), and only while something needs them: a selected value with no label from `items`, a typed character on the closed trigger (for typeahead, until focus leaves the trigger), or a select with a `name` inside a form (the hidden native `<select>` options; in idle time with `items`, whose options are there without the render). Focusing the trigger renders nothing. While rendered they stay live: added, removed or moved items, new texts and `disabled` changes reach the trigger, the closed typeahead and the native `<select>` while closed, also for an item in a deactivated `KeepAlive` branch or a `Teleport`. When nothing needs them they unmount, and the texts stay remembered. A change to your template while they aren't rendered isn't seen until they render again; the remembered texts stay. Items each in their own shadow root keep their texts live, but their order among those roots isn't tracked. When items have no common ancestor below `<body>` or a shadow root, a moved wrapper around them isn't noticed. The `SelectPortal` of a closed select renders nothing until the first open, as in [Closed popups render no portal](#closed-popups-render-no-portal), so a template ref on `SelectContent` is `undefined` until then, and the closed items are not in the document.
+- **The `items` prop** on `SelectRoot` (new, from [Base UI](https://base-ui.com/react/components/select)) lists the options as data: a record of value to label, an array of `{ value, label, disabled? }`, or an array of `{ label?, items }` groups. With it, the trigger, the closed typeahead and the hidden native `<select>` read the labels from it, so a selected value needs no closed render. The items are still rendered in the content as before; `items` only describes them, and rendered items it does not list still count. While the items aren't rendered, `disabled` comes only from `items`: a `disabled` set only on a `SelectItem` can't be known, so any typed character that `items` answers can select that option, and its native option stays enabled. Set it in `items` as well. When `items` lists only some options, or in another order, the typeahead's order can change once the items render. See [Listing the items as data](../components/select.md#listing-the-items-as-data).
+- **The hidden native `<select>`** marks the selected options with `selected` instead of receiving a `value`. A `multiple` select now submits every selected value with its form. The options are the remembered item texts plus the selected values, and autofill passes the option's own value, objects included. After a refetch it passes the new object, except when the object's fields are all identical: the older copy can stay then, and only its identity differs. The exception is a record in `items`: its keys are strings, so an autofill that arrives before the items have rendered passes the string key. Use the array shape for values that are not strings.
+- **Content ids** derive from the root's id: `reka-select-v-0-content` instead of `reka-select-content-v-1`. Selectors and snapshots that hard-code the old id need updating.
+- **Root context.** This affects custom parts built on `injectSelectRootContext()`:
+  - `modelValue` and `open` are read-only `ComputedRef`s. Call `onValueChange(value, reason?, event?)`, `setModelValue(value, reason?, event?)` or `onOpenChange(open, reason?, event?)` instead. Each returns `false` when the change was cancelled or did not change the state.
+  - `optionsSet`, `onOptionAdd` and `onOptionRemove` are replaced by the `labels` registry (`register`, `get`, `entries`).
+  - `contentId` is set from the start instead of by `SelectTrigger`.
+  - New: `baseId`, `isSelected`, `pressItem`, `selectedLabels`, `displayValue`, `getNavigationIntent`.
+  - On `injectSelectItemContext()`, `value` is read live from the item's prop.
+- **New and additive:** `items`, `displayValue` and `getNavigationIntent` on `SelectRoot`, the `selectedLabels` slot prop on `SelectValue` (an alias of `selectedLabel`), and the composables.
+
+## Date and time fields
+
+`DateFieldRoot`, `TimeFieldRoot`, `DateRangeFieldRoot`, `TimeRangeFieldRoot`, `DatePickerRoot` and `DateRangePickerRoot` are built on `useDateField()`, `useTimeField()`, `useDateRangeField()`, `useTimeRangeField()`, `useDatePicker()` and `useDateRangePicker()`. Their `modelValue` and `placeholder` follow [Change events carry details](#change-events-carry-details), and so does `startValue` on `DateRangePickerRoot`. The rendered elements are the same. Attributes can come in a different order, and the time zone segment's `data-readonly` value changes (below), so update snapshots.
+
+What changed:
+
+- **The picker roots no longer render a `PopoverRoot`.** `DatePickerRoot` and `DateRangePickerRoot` provide the Popover context themselves, through the `usePopover()` the picker composables compose, so `open` has one model. A test that looked up a `PopoverRoot` component under a picker finds nothing; assert on the picker root's `update:open` instead.
+- **One change, one event pair.** A date typed in `DatePickerField` or picked in `DatePickerCalendar` emits `beforeUpdate:modelValue` and `update:modelValue` once, from the picker root, with the reason of the part that made it. `details.cancel()` on the picker root cancels the typed change too.
+- **A cancelled typed change keeps the typed segments.** Cancelling `beforeUpdate:modelValue` keeps the last committed value, but the segments keep what the user typed. A year is typed one digit at a time and every digit commits, so a guard such as "no dates before 2000" cancels 0002, 0020 and 0202 and accepts 2024. The segments follow the model only when it actually changes: a controlled parent that ignores an update (an `update:modelValue` handler that does not write the value) leaves them showing the typed value, as in v2.
+- **`null` is a controlled empty value.** `:model-value="null"` keeps a field or picker controlled and empty, and a controlled-empty `DatePickerRoot` keeps its calendar controlled too: a pick the parent does not accept is not shown as selected. `CalendarRoot` treats `null` the same way, as v2 did. For a controlled `null`, `modelValue` on the `DateFieldRoot`, `TimeFieldRoot` and `DatePickerRoot` contexts reads `undefined`; the `DateRangeFieldRoot` and `TimeRangeFieldRoot` contexts have no `modelValue` and read `undefined` from `startValue` and `endValue`; `modelValue` on the `DateRangePickerRoot` context reads the empty range `{ start: undefined, end: undefined }`. Clearing a field emits `undefined` (a single field) or `{ start: undefined, end: undefined }` (a range). The range roots' `modelValue` slot prop is typed `DateRange` / `TimeRange` (v2: `DateRange | null` / `TimeRange | undefined`), and is `{ start: undefined, end: undefined }` when empty.
+- **No event for an unchanged value.** Setting the model to a value equal to the current one (the same date in the same calendar, compared by value) emits nothing. `DateRangePickerRoot` compares both ends.
+- **`update:startValue` carries details.** `RangeCalendarRoot` and `DateRangePickerRoot` emit `update:startValue(date, details)` with the press reason and event. On `DateRangePickerRoot`, `beforeUpdate:startValue` is new; cancelling it only suppresses that `update:startValue`. The calendar's anchor still moves, because the next press needs it.
+- **`TimeFieldRoot` emits a time placeholder** when its placeholder is a time (a `Temporal.PlainTime`, see [Temporal instead of `@internationalized/date`](#temporal-instead-of-internationalized-date)). v2 converted it to a `CalendarDateTime` before emitting `update:placeholder`.
+- **Root contexts.** On the field and picker root contexts, `modelValue` and `placeholder` (and `startValue` / `endValue` on the range field contexts) are writable computeds: assigning them still works and reports `'imperative-action'`. New on every context: `setModelValue(value, reason?, event?)` and `setPlaceholder(value, reason?, event?)`, plus `setRangeValue(type, value, reason?, event?)` on the range field contexts. Each returns `false` when the change was cancelled or did not change the value. On the picker contexts, `onDateChange` and `onPlaceholderChange` take the same optional reason and event and return a boolean, and `onStartValueChange(date, details?)` takes the calendar's details.
+- **Segment attributes.** The time zone segment renders `data-readonly=""` instead of `data-readonly="true"`. Select it with `[data-readonly]`.
+- **The default placeholder of `DateFieldRoot`, `DateRangeFieldRoot`, `DatePickerRoot` and `DateRangePickerRoot` uses the `ConfigProvider` locale** when the root has no `locale` prop and no `placeholder`. v2 built it from the prop alone. The placeholder carries the locale's calendar system, and typed values are built from it, so under `<ConfigProvider locale="th-TH">` (or `fa-IR`, `ar-SA`, and other locales with a non-Gregorian default) a field emits dates in that calendar: a Buddhist `Temporal.PlainDate` whose `.year` is 2567 for 2024, and the year segment is typed in that calendar too. This matches passing the same `locale` to the field directly. To keep Gregorian values, pass an ISO `placeholder` (`Temporal.Now.plainDateISO()`) or `locale="en-US"`, or convert with `value.withCalendar('iso8601')`. `TimeFieldRoot` and `TimeRangeFieldRoot` are unaffected: their default placeholder is a `Temporal.PlainTime`, which has no calendar, and a `PlainDateTime` or `ZonedDateTime` placeholder or model keeps the calendar it was created with.
+
+New and additive:
+
+- **`isTimeUnavailable` on `TimeFieldRoot`**, as on `TimeRangeFieldRoot`. It receives the time as a date-time (a `Temporal.PlainTime` is placed on today's date) and marks the field invalid when it returns `true`.
+- **`stepSnapping` on `DateRangeFieldRoot`, `TimeRangeFieldRoot` and `DateRangePickerRoot`**, as on the single fields. `DatePickerRoot` and `DateRangePickerRoot` now pass `stepSnapping` on to their field; v2 accepted it on `DatePickerRoot` but never applied it.
+- **The composables.** A field built without the components binds `root.attrs` on a container and one `createInputSurface(part)` per segment. `useDatePicker()` / `useDateRangePicker()` return `getFieldProps()` and `getCalendarProps()`, which make a `useDateField()` / `useCalendar()` (or the range ones) the picker's field and calendar.
+
+## Splitter layout model
+
+`SplitterGroup` has a `layout` model. Bind `v-model:layout` to read or set every panel size at once, in each panel's `sizeUnit` (the values `@layout` reports). A controlled layout takes precedence over `defaultSize`, and `autoSaveId` storage is neither read nor written while it is controlled. `update:layout(value, details)` fires only when the layout changes, with one of these reasons:
+
+- `drag`: a pointer drag on a resize handle;
+- `keyboard`: arrow keys, Home/End, or Enter toggling a collapse;
+- `panel-change`: the initial layout, a layout restored from `storage`, panels being added, removed or reconfigured, or a controlled layout corrected to fit the constraints;
+- `group-resize`: `px` panels keeping their size while the group resizes;
+- `imperative-action`: the panel `collapse()`, `expand()` and `resize()` methods.
+
+Only `drag`, `keyboard` and `imperative-action` run the cancellable `beforeUpdate:layout`. `panel-change` and `group-resize` are structural: the group must always hold a valid layout, so they are always applied and emitted, and cannot be cancelled. A controlled layout that breaks the constraints is applied as corrected and the correction emitted once; one whose length differs from the panel count is ignored, with a development warning. In controlled mode a user change is applied, and `@layout`, the panel events and `getSize()` follow, only once the parent passes it back.
+
+`@layout` is unchanged and still fires for every applied layout. Two Splitter behaviours change:
+
+- **Enter on a resize handle** now emits `@layout` and the panel `collapse` / `expand` / `resize` events. v2 toggled the collapse without them.
+- **`data-resize-handle-active="keyboard"`** is now set while a handle has focus; v2 never set it. Use `[data-resize-handle-active="pointer"]` for drag-only styles.
+
+Two fixes in neighbouring families:
+
+- **`ToolbarSeparator`** now runs perpendicular to its toolbar, as in Radix: a horizontal toolbar renders a vertical separator (`data-orientation="vertical"`, `aria-orientation="vertical"`). v2 passed the toolbar's own orientation.
+- **`AvatarFallback`** with `:delay-ms="0"` now renders immediately; v2 never rendered it.
+
+## Progress has no change model
+
+`ProgressRoot` displays a value; it never changes it, so it gets no `beforeUpdate:modelValue` or change details. An invalid `modelValue` (negative, above `max`, `NaN`) now renders as indeterminate, and an invalid `max` as `100`, straight away; v2 rendered the invalid value until the parent applied the correction. The value is validated against the corrected `max`, so lowering `max` below the value also renders indeterminate and emits `update:modelValue(null)`. `ProgressRoot` still emits `update:modelValue(null)` or `update:max(100)` once when it corrects a prop, and `update:modelValue` is now typed `[value: number | null]` (v2 declared `[value: string[] | undefined]`).
+
+## NavigationMenu
+
+`NavigationMenuRoot` and `NavigationMenuSub` are built on `useNavigationMenu()` and `useNavigationMenuSub()`, with one composable per part: `useNavigationMenuItem()`, `useNavigationMenuTrigger()`, `useNavigationMenuContent()`, `useNavigationMenuLink()`, `useNavigationMenuIndicator()` and `useNavigationMenuViewport()`. The DOM is the same. What changed:
+
+- **Change details.** `update:modelValue` receives a `ChangeEventDetails` second argument, and the cancellable `beforeUpdate:modelValue` is new on both roots. See [Change events carry details](#change-events-carry-details). Cancelling a close (Escape, an outside press, a link) keeps the content open and leaves focus where it is.
+- **No emit for an unchanged value.** A controlled menu no longer emits `update:modelValue` with the value it already has, for example when a dismissed menu is dismissed again. An uncontrolled menu emits during the interaction instead of on the next tick.
+- **Trigger ids** (`id`, `aria-controls`) are rendered from the first render, server-side included, instead of after mount.
+- **`NavigationMenuContent` outside events.** `pointerDownOutside` and `focusOutside` are emitted once per interaction; v2 emitted each of them twice. `interactOutside` now fires for an outside press as well as for focus moving outside (v2 only emitted it, twice, for the focus move), and `event.preventDefault()` in it keeps the menu open, as on the other dismissable components.
+- **Hover and press.** A press on a trigger whose hover open was cancelled now opens the menu (`trigger-press`); v2 ignored a click within 300ms of the pointer arriving even when the hover open never happened.
+- **Root context.** This affects custom parts built on `injectNavigationMenuContext()`:
+  - `modelValue` is a read-only ref, as are `dir`, `disableClickTrigger`, `disableHoverTrigger` and `unmountOnHide`. Call `onItemSelect(value, reason?, event?)` or `onItemDismiss(reason?, event?)` instead of assigning `modelValue`. Both return `false` when the change was cancelled or did not change the value.
+  - `onTriggerEnter(value, event?)`, `onTriggerLeave(event?)` and `onContentLeave(event?)` accept the native event, reported as `details.event` when the delayed change commits.
+- **New and additive:** the composables, and the `NavigationMenuContext` and `NavigationMenuItemContext` types.
+
+## Toast
+
+`ToastProvider`, `ToastRoot` and `ToastViewport` are built on `useToastProvider()`, `useToastRoot()`, `useToastTimer()`, `useToastSwipe()` and `useToastViewport()`. The DOM is the same. What changed:
+
+- **Change details.** `update:open` on `ToastRoot` receives a `ChangeEventDetails` second argument, and the cancellable `beforeUpdate:open` is new. See [Change events carry details](#change-events-carry-details). This includes toasts from the toast manager.
+- **No emit for an unchanged value.** A toast from the manager no longer emits a second `update:open` when its timer runs out after it was already closed. An uncontrolled toast emits during the interaction instead of on the next tick.
+- **Cancelled closes.** A cancelled timeout keeps the toast open and restarts its timer with the full `duration`, so the toast asks again later (pause and resume work on the restarted timer). The same happens when a controlled parent ignores a timeout's `update:open`; v2 left that toast open with no timer. A cancelled swipe snaps the toast back (`data-swipe="cancel"`). A cancelled keyboard close does not move focus to the viewport.
+- **Toast manager.** `onClose` receives the details of the close (`details.reason`, `details.event`); existing callbacks that take no argument keep working. `close(id)` on the manager closes a rendered toast through its `ToastRoot`, so `beforeUpdate:open` (cancellable) and `update:open` fire with `'imperative-action'`; before, it closed the toast without emitting.
+- **Root context.** `injectToastRootContext().onClose(event?, reason?)` takes an optional reason (`'imperative-action'` by default) and returns `false` when the toast was already closed or the close was cancelled. `ToastClose` closes with `close-press` and `ToastAction` with `action-press`.
+- **Provider context.** The `ToastProviderContext` type is exported. Its `label`, `duration`, `disableSwipe`, `swipeDirection` and `swipeThreshold` are read-only refs, and the unused `isFocusedToastEscapeKeyDownRef` is gone.
+- **New and additive:** the composables.
+
+## Exit animations wait for CSS transitions
+
+`Presence`, which mounts and unmounts every content, overlay, indicator and toast, now waits for CSS **transitions** as well as CSS animations before it unmounts an element (#2827). It reads what is running from `element.getAnimations()`, as Base UI does. See the [Animation guide](./animation#animating-with-css-transitions).
+
+- **Exits that used to be instant can now play.** In v2 a closing element unmounted immediately unless its `animation-name` changed, so a `transition` on it (including Tailwind `transition-*` utilities, or a `transition: all` written for hover states) never ran on close. In v3 the element stays mounted, with `data-state="closed"`, until every transition and animation on it has finished. Only the element's own transitions count, not those of its descendants; infinite animations are ignored. Nothing changes for an element with no transition or animation, and keyframe animations keep working as before.
+- **New `data-starting-style` and `data-ending-style` attributes.** The managed element carries `data-starting-style` for the first frame after an open mounts it, and `data-ending-style` from the close until its exit finishes. Style the enter and exit states with them to animate with plain transitions. They are not rendered where Web Animations are unavailable (jsdom), so unit-test snapshots do not change; real-browser snapshots taken mid-animation do.
+- **`update:openComplete` on every root with an `open` model.** `DialogRoot`, `AlertDialogRoot`, `PopoverRoot`, `TooltipRoot`, `HoverCardRoot`, `DropdownMenuRoot`, `DropdownMenuSub`, `ContextMenuRoot`, `ContextMenuSub`, `MenubarMenu`, `MenubarSub`, `SelectRoot`, `ComboboxRoot`, `AutocompleteRoot`, `DatePickerRoot`, `DateRangePickerRoot`, `CollapsibleRoot`, `AccordionItem` and `ToastRoot` emit it once the content's open (`true`) or close (`false`) animations finish, like `DrawerRoot` already did. `NavigationMenuRoot` emits it when its `NavigationMenuViewport` opens or closes. The root composables take it as `onOpenComplete`, and their contexts have an optional `notifyOpenComplete(value)`, so custom context objects keep working.
+- **`DrawerRoot`'s `update:openComplete`** now comes from `DrawerContent`'s `Presence`: it fires after all of the popup's transitions and animations finish instead of on the first `transitionend` / `animationend` of any property, it also fires when there is nothing to animate, and it fires after opening as well as after closing.
+- **`forceMount`** content of Popover, Tooltip, HoverCard, the menus, Select, Combobox, Toast, Drawer and Collapsible still renders all the time, and now also gets the lifecycle attributes and reports `update:openComplete`.
+- **Everything running on the element is waited for**, as in Base UI: a hover transition still running when the content closes delays the unmount, a paused animation holds the element mounted, and a close in a background tab completes when the tab's animations run again. There is no timeout.
+- **`Presence`** gains the `appear` prop (stamp `data-starting-style` on the initial render, read once; `SelectContent`, `MenuSubContent` and `ToastRoot` use it) and the `complete` event. Its `after-enter` event now fires once the enter transitions and animations have finished.
+
+## Closed popups render no portal
+
+A closed popup does no work for its content, as in Base UI. The portal of a closed Dialog, AlertDialog, Drawer, Popover, HoverCard, Tooltip, DropdownMenu, ContextMenu, Menubar, Combobox or Select renders nothing until the popup first opens: no Teleport anchors in `<body>`, and no content or overlay component. From the first open on, the portal stays rendered, so closing, reopening and exit animations work as before, and the first open still enters from `data-starting-style`. The content mounts in the same update as the open, so a `watch(open, …, { flush: 'post' })` or `onUpdated` sees it on the first open too, and a submenu trigger's `aria-controls` names its content from the first open on.
+
+- **Only content parts are deferred.** The portal renders right away, as in v2, when it holds anything besides its family's content and overlay parts (an element, a `<Transition>`, your own component), when the portal or one of those parts has `forceMount`, or when the root keeps its content mounted (`unmountOnHide: false` on Dialog and Combobox).
+- **Template refs.** A template ref on a content or overlay part inside such a portal is `undefined` until the popup first opens. Read it after opening or in a `watch` on the ref, or add `force-mount` to the portal if the content must exist while closed.
+- **Indicators.** An unchecked `CheckboxIndicator` or `RadioGroupIndicator`, and an unselected `SelectItemIndicator` or menu item indicator, mounts no `Presence` until it is first shown.
+
+## Detached triggers
+
+New and additive, so nothing to migrate. `PopoverTrigger`, `DialogTrigger`, `AlertDialogTrigger` and `DropdownMenuTrigger` can render outside their root: create a handle with `createPopoverHandle()`, `createDialogHandle()`, `createAlertDialogHandle()` or `createDropdownMenuHandle()` and pass it to the `handle` prop of the root and of each trigger. A trigger's `payload` reaches the root's default slot, and the popup anchors to and returns focus to the trigger that opened it. The handle also opens and closes the popup from code, reporting `'imperative-action'`. Without a `handle` the components behave as before. See the Detached triggers section on the [Popover](../components/popover#detached-triggers), [Dialog](../components/dialog#detached-triggers), [AlertDialog](../components/alert-dialog#detached-triggers) and [DropdownMenu](../components/dropdown-menu#detached-triggers) pages.
+
+`ChangeEventDetails` gains an optional `trigger` element. It is set when a detached trigger's press opens, switches or closes the popup, or `handle.open(triggerId)` opens it. Code that builds details with `createChangeEventDetails()` or reads them is unaffected.
+
+## Shadow DOM
+
+Components rendered inside an open shadow root (a custom element, a micro-frontend mounted with `attachShadow()`) work there without workarounds. See the [Shadow DOM](./shadow-dom) guide. What changed:
+
+- **Portals stay in the shadow root.** A portal rendered inside a shadow root teleports into that shadow root by default instead of into `document.body`, so the shadow root's styles apply to the content and its `aria-*` id references resolve. A string `to` (or `ConfigProvider`'s `teleportTo`) is looked up inside the shadow root first, then in the document; `to="body"` still targets the document body. Move styles for portalled content that you loaded into the document into the shadow root, or keep the old placement with `teleportTo="body"`. Tests that found that content through `document` should query the shadow root, unless the portal targets `body` or another element outside it.
+- **`aria-hidden` inside the shadow root.** A modal layer also hides its siblings inside the shadow root from assistive technology, not only the page around the shadow host. With modals open in two shadow roots, the most recently opened one stays exposed, as in the light DOM.
+- **Scroll dismissal.** `TooltipContent` and `HoverCardContent` close when a scroll container inside the shadow root, or the page, scrolls their trigger.
+- **`forceMount` portals on the first render (light DOM too).** A portal with `forceMount` and the default target (no `to`, or a selector) that renders during the app's first client render mounts its content right after the portal mounts (a microtask later), like a portal without `forceMount`, instead of during that render: only then is it known which root the content belongs in. A parent's template ref to that content is therefore still `undefined` in the parent's `onMounted`; read it after `await nextTick()`, in a `watch` on the ref, or in the content's own `onMounted`. A test that queries that content synchronously after `mount()` needs an `await nextTick()` too. Portals with `disabled` or an element `to`, server rendering, hydration and portals created after the app mounted are unchanged.
+- **Fixed in the shadow DOM:** Combobox mouse selection, focus trapping and focus guards, outside-press and focus-outside dismissal, and `aria-*` id lookups. Workarounds for these (patches, `stopPropagation()` on touch events, re-parenting portalled content) can be removed.
+- **Web components and slots.** Pointer, focus and dismissal checks follow the tree the page renders: a press inside a web component (an icon element in a trigger, a Splitter handle or a popup) counts as a press on the element around it, and light-DOM content a custom element slots into a popup counts as inside the popup.
+
+## Drawer, Tree and Combobox corrections
+
+These come from the review of the Alpha components for their Stable release ([#2789](https://github.com/unovue/reka-ui/issues/2789)).
+
+- **`DrawerContent` with `force-mount`** returns focus to the trigger (or `finalFocus`) when the drawer closes, as `DialogContent` does, if focus is still inside the popup or on `<body>`. Focus the app already moved elsewhere stays there (Base UI's rule). v2 left focus inside the hidden content.
+- **`DrawerRoot` change events.** `update:open` fires after the change, with `ChangeEventDetails`; cancel in the new `beforeUpdate:open`. `details.cancel()` inside `update:open` no longer has an effect (a development warning says so). `update:snapPoint` now carries `details` (`reason: 'swipe'` for a swipe) and the new `beforeUpdate:snapPoint` can cancel a snap. Cancelling the `null` snap-point request from a swipe past the last point keeps the drawer open; a cancelled swipe close, or one a controlled `open` ignores, restores the previous snap point. Closing the drawer resets the snap point to `defaultSnapPoint`, else the first snap point, as in Base UI. A controlled `snapPoint` now latches: once bound, the drawer only reports changes and does not write its own. `DrawerOpenChangeDetails` is a deprecated alias of `ChangeEventDetails<DrawerOpenChangeReason>`.
+- **Drawer part names follow Base UI.** `DrawerPopup` and `DrawerBackdrop` (and `DrawerPopupProps`, `DrawerPopupEmits`, `DrawerBackdropProps`) are the canonical names; `DrawerContent` and `DrawerOverlay` (and their types) keep working as deprecated aliases. `DrawerHandle` is renamed `DrawerGrabber` (`DrawerHandleProps` → `DrawerGrabberProps`, `Drawer.Handle` → `Drawer.Grabber` in the namespaced import, `useDrawer().handle` → `.grabber`), because `DrawerHandle` is reserved for the detached-trigger handle, as in Base UI and `createDialogHandle()`.
+- **`AutocompleteRoot` item values.** `AutocompleteRoot` takes the item value type as a generic, `T` (`string` by default): `displayValue` is `(value: T) => string`, `filter` is `ListboxFilterFunction<T>`, the `highlight` payload's `value` is `T` and the exposed `highlightItem` takes `T`. With string items nothing changes; with other item values, type these from the item.
+- **`propagateSelect` and `bubbleSelect` with a custom `getChildren`.** `TreeRoot` now reads every level of descendants through `getChildren`. v2 used it for the first level only and read `item.children` below it, so with another children key (`getChildren: item => item.nodes`) grandchildren were neither selected with their ancestor nor counted for its indeterminate state.
+- **`TreeRoot` warns** in development when `propagateSelect` or `bubbleSelect` is set without `multiple`; both have always required it and were ignored.
+- **Combobox and Autocomplete blur reset.** With `resetSearchTermOnBlur`, the reset runs a tick after the popup closes. Typing within that tick drops it, even when `beforeUpdate:open` cancels the reopen the typing requests; v2 still ran it and wiped the text being typed. Another open request within that tick (a quick second click, a focus) drops it once the popup opens, and a controlled parent that sets `open` back to `true` keeps the text too. A cancelled click or focus still resets the input.
+
+## Change details coverage
+
+Every stateful part now follows [Change events carry details](#change-events-carry-details). This last batch is mostly additive:
+
+- **Menu checkbox items and radio groups.** `DropdownMenuCheckboxItem`, `ContextMenuCheckboxItem`, `MenubarCheckboxItem` and the matching `*RadioGroup` parts emit `beforeUpdate:modelValue` (cancellable) and `update:modelValue(value, details)`. The reason is `'item-press'` for a click, Enter or Space on the item, exported as `MenuCheckboxItemChangeReason` and `MenuRadioGroupChangeReason`, and `details.event` is the click. Pressing the radio item that is already checked no longer emits `update:modelValue`. The `select` event of every menu item now carries the click as `event.detail.originalEvent`.
+- **`ListboxRoot` emit typing.** `update:modelValue` and `beforeUpdate:modelValue` are typed by `multiple`, as on `ComboboxRoot` and `SelectRoot`: `T[]` with `multiple`, `T | undefined` without it, the union while `multiple` is a plain `boolean`. The new `ListboxModelValue<T, M>` type names it. A handler typed for the v2 union keeps compiling.
+- **`useFilter` follows the locale.** `useFilter()`, and with it the default Combobox and Autocomplete filter, compares strings in the `ConfigProvider` locale instead of always `'en'`. Under a locale whose search collation keeps some accented letters apart (`de`, `sv`, `da`, `fi`, …), `contains('ä', 'a')` is now `false` even with `sensitivity: 'base'`. Pass a function `filter` or wrap the component in `<ConfigProvider locale="en">` to keep the old matching.
+- **Virtualization.** `SelectVirtualizer` is new: it virtualizes a long `SelectContent` list with `position="popper"`, and under item-aligned positioning it renders the options without virtualization and warns in development. `ListboxVirtualizer`, `ComboboxVirtualizer` and `SelectVirtualizer` accept grouped options with the new `grouped` prop: `options` is then a list of `{ label, options, disabled? }` groups (exported as `VirtualGroup`), and a `group` slot renders the header rows. Without `grouped`, `options` is always flat. Headers are skipped by keyboard navigation, are not counted in `aria-setsize` / `aria-posinset`, and stay mounted while any option of their group is rendered, so the option's `aria-describedby` resolves. While closed, `SelectVirtualizer` renders the selected options, so `SelectValue` shows their `SelectItemText` even when they were never scrolled into view. Object options need `text-content`, which gives each option its text for typeahead and filtering. Separately, the virtualizers no longer register a label for every option, and on long lists a key `by` (`by="id"`) is expected: `by` only decides which values are equal, and a function `by` compares them one by one.
+- **Input text.** `ComboboxInput` and `AutocompleteInput` emit `update:modelValue(text, details)` for the text in the input, with `ComboboxInputChangeReason` (also exported as `AutocompleteInputChangeReason`): `'input-change'` (typing), `'input-clear'` (reset to `''` when the popup closed without a selection), `'clear-press'` (`ComboboxCancel`), `'escape-key'` (reset when Escape closed the popup), `'item-press'` (a selection wrote its text) and `'none'` (any other reset, such as following a value the parent set). `ComboboxInput` also emits `beforeUpdate:modelValue`; `details.cancel()` keeps the current text. `AutocompleteInput` has no `beforeUpdate`, because its text is the Autocomplete value. `ComboboxCancel` now also clears the `ComboboxInput` `v-model`, not only the element's text. `FieldControl` emits `update:modelValue(value, details)` with `details.reason === 'none'` and the native `input` event, and has no `beforeUpdate`, as in Base UI.
+- **An uncontrolled Autocomplete value ignores `cancel()`.** Without `v-model` on `AutocompleteRoot`, `details.cancel()` in `beforeUpdate:modelValue` no longer keeps the text: Base UI's Autocomplete writes an uncontrolled value before its change callback runs. Bind `v-model` to veto typed text.
+
+These keep a single-argument `update:*` on purpose:
+
+- **Filters.** `ListboxFilter` and `DropdownMenuFilter` mirror the text of a native `<input>`, like `<input v-model>`.
+- **`RovingFocusGroup`** `update:currentTabStopId`, which tracks the focusable item rather than user-facing state.
+- **Derived notifications** that have no matching prop: `update:color` and `update:hex` on the color roots, `update:state` on `EditableRoot`, `update:validModelValue` on `RangeCalendarRoot`, and `update:openComplete` on the roots with an `open` model (see [Exit animations wait for CSS transitions](#exit-animations-wait-for-css-transitions)).
+- **`ProgressRoot`**, as described above.
+
+## Temporal instead of `@internationalized/date` {#temporal-instead-of-internationalized-date}
+
+The date components (Calendar, RangeCalendar, DateField, DateRangeField, DatePicker, DateRangePicker, TimeField and TimeRangeField) take and emit [Temporal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal) values. Reka UI no longer depends on `@internationalized/date`. See [Dates & Times](./dates) for how the components work with Temporal.
+
+```ts
+// v2
+import type { DateValue } from '@internationalized/date'
+import type { Ref } from 'vue'
+import { CalendarDate, getLocalTimeZone, today } from '@internationalized/date'
+import { ref } from 'vue'
+
+const value = ref(new CalendarDate(2024, 7, 10)) as Ref<DateValue>
+const start = today(getLocalTimeZone())
+```
+
+```ts
+// v3
+import type { DateValue } from 'reka-ui'
+import { ref } from 'vue'
+
+const value = ref<DateValue>(new Temporal.PlainDate(2024, 7, 10))
+const start = Temporal.Now.plainDateISO()
+```
+
+### Load Temporal
+
+Reka UI reads the global `Temporal` and does not bundle a polyfill. On runtimes without native Temporal, install one and load it before the app mounts. Load it on the server too when you render there, and in your test setup.
+
+```sh
+npm install temporal-polyfill-lite
+```
+
+```ts
+// main.ts
+import { install } from 'temporal-polyfill-lite/shim'
+
+install(false) // keeps the native Temporal when the browser has one
+```
+
+Use `temporal-polyfill-lite/calendars-full/shim` if you use calendars other than `iso8601` and `gregory`, or serve locales whose default calendar is not Gregorian (`th`, `fa`, `ar-SA`, …). A date component that mounts without a global `Temporal` throws an error saying so. With server rendering, load the polyfill on the server too (in Nuxt, a universal plugin): see [Server-side rendering](/docs/guides/dates#server-side-rendering).
+
+The types come from TypeScript 6's `esnext.temporal` lib: use TypeScript 6 with `"lib": ["ESNext", "DOM", "DOM.Iterable"]`. `@vue/tsconfig` sets `lib` to `ES2022`, without Temporal, so override it in your own `tsconfig`. On TypeScript 5, add `import 'temporal-polyfill-lite/types/global'` to a `.d.ts` file. Without either, `skipLibCheck: true` turns `DateValue` into `any` without an error.
+
+### Types
+
+| v2 (`@internationalized/date`) | v3 (Temporal) |
+| --- | --- |
+| `CalendarDate` | `Temporal.PlainDate` |
+| `CalendarDateTime` | `Temporal.PlainDateTime` |
+| `ZonedDateTime` | `Temporal.ZonedDateTime` |
+| `Time` | `Temporal.PlainTime` |
+| `DateValue` from `@internationalized/date` | `DateValue` from `reka-ui` (`PlainDate \| PlainDateTime \| ZonedDateTime`) |
+
+`TimeValue` is `Temporal.PlainTime | Temporal.PlainDateTime | Temporal.ZonedDateTime`. Every `modelValue`, `placeholder`, `minValue`, `maxValue`, matcher argument, slot prop and emitted value uses these types.
+
+### Behavior changes
+
+- **Years in calendars with eras.** A Temporal value's `year` is the arithmetic year, and `eraYear` is the year of the era: Reiwa 6 has `year` 2024 and `eraYear` 6, and 1 BCE has `year` 0 and `eraYear` 1. `@internationalized/date`'s `year` was the year of the era. The fields' year segment still shows and edits the year of the era.
+- **ISO, not Gregorian.** New values for Gregorian locales (the default placeholder, today) use the `iso8601` calendar where v2 used `gregory`. They display the same, but `calendarId` is `'iso8601'` and `era` is `undefined`. Locales with another default calendar still get it.
+- **Era codes.** `era` is a lower-case Temporal era code. An `iso8601` value has no era (`undefined`), and the codes of some calendars changed: `gregory` uses `ce` / `bce` (v2: `AD` / `BC`), `roc` uses `roc` / `broc` (v2: `minguo` / `before_minguo`), and `buddhist`, `persian`, `islamic-*` and `hebrew` use `be`, `ap`, `ah` and `am` (v2: upper case). Japanese era names (`reiwa`, `heisei`, …) are unchanged. Compare `era` against the new codes, and show `formatter.part(value, 'era')` rather than the code to users.
+- **First day of the week.** It comes from `Intl.Locale.prototype.getWeekInfo()`, with a CLDR table as fallback. A few regions differ from v2, for example `AE` now starts on Monday. `weekStartsOn` still overrides it.
+- **Not in templates.** Vue templates only see an allow-list of globals, and `Temporal` is not on it. Create values in `<script setup>` and bind them by name instead of writing `:min-value="new Temporal.PlainDate(2024, 1, 1)"`.
+- **No comparison operators.** Temporal values throw on `valueOf()`, so `<`, `>` and `+date` throw, and `===` compares identity. Use the `compare` of the values' type (`Temporal.PlainDateTime.compare(a, b)` for two `PlainDateTime`s), `a.equals(b)`, or `compareDateValues(a, b)` from `reka-ui/date` for values of any type. `Temporal.PlainDate.compare` reads only the date of a `PlainDateTime` or `ZonedDateTime`.
+- **Unchanged:** form input values, `data-value` attributes and the `ZonedDateTime` daylight saving handling. Form values and `data-value` are ISO strings without a calendar annotation, as v2's `toString()` produced.
+
+### Functions and methods
+
+| v2 | v3 |
+| --- | --- |
+| `new CalendarDate(2024, 7, 10)` | `new Temporal.PlainDate(2024, 7, 10)` |
+| `new CalendarDate(new JapaneseCalendar(), 'reiwa', 6, 5, 1)` | `Temporal.PlainDate.from({ calendar: 'japanese', era: 'reiwa', eraYear: 6, month: 5, day: 1 })` |
+| `new Time(9, 30)` | `new Temporal.PlainTime(9, 30)` |
+| `parseDate(s)`, `parseDateTime(s)`, `parseTime(s)`, `parseZonedDateTime(s)` | `Temporal.PlainDate.from(s)`, `Temporal.PlainDateTime.from(s)`, `Temporal.PlainTime.from(s)`, `Temporal.ZonedDateTime.from(s)` |
+| `parseAbsolute(s, tz)` | `Temporal.Instant.from(s).toZonedDateTimeISO(tz)` |
+| `today(tz)`, `now(tz)`, `getLocalTimeZone()` | `Temporal.Now.plainDateISO(tz)`, `Temporal.Now.zonedDateTimeISO(tz)`, `Temporal.Now.timeZoneId()` |
+| `value.toDate(tz)` | `toDate(value, tz)` from `reka-ui/date` |
+| `toZoned(value, tz)` | `value.toZonedDateTime(tz)` for a `PlainDate` (the start of that day) or a `PlainDateTime`; `value.withTimeZone(tz)` for a `ZonedDateTime` |
+| `toCalendarDate(value)` | `toPlainDate(value)` from `reka-ui/date` (Temporal's `PlainDate` has no `toPlainDate()` method) |
+| `toCalendarDateTime(date, time)` | `date.toPlainDateTime(time)` for a `PlainDate`; `toPlainDateTime(value)` from `reka-ui/date` for any `DateValue` |
+| `toCalendar(value, new GregorianCalendar())` | `value.withCalendar('gregory')` |
+| `value.calendar.identifier` | `value.calendarId` |
+| `value.set({ month: 8 })` | `value.with({ month: 8 })` |
+| `value.cycle('month', 1)` | `cycleField(value, 'month', 1)` from `reka-ui/date` |
+| `value.copy()` | not needed: Temporal values are immutable |
+| `a.compare(b)` | `compareDateValues(a, b)` from `reka-ui/date`, or the `compare` of both values' type (`Temporal.PlainDateTime.compare(a, b)`). Both return `-1`, `0` or `1`, where v2 returned a difference: test the sign |
+| `isSameDay`, `isSameMonth`, `isToday`, `startOfMonth`, `endOfMonth`, `startOfWeek`, `getDayOfWeek` | the functions of the same names in `reka-ui/date` |
+| `isWeekend(value, locale)` | `isWeekend(value, locale)` from `reka-ui/date` (Friday and Saturday in `he-IL`, `ar-SA`, …) |
+| `value.timeZone` | `value.timeZoneId` |
+| `value instanceof CalendarDate` | `isPlainDate(value)` from `reka-ui/date` (also `isPlainDateTime`, `isZonedDateTime`, `isPlainTime`) |
+| `isCalendarDateTime(value)` from `reka-ui/date` | `isPlainDateTime(value)` (the old name is a deprecated alias) |
+| `formatter.custom(value.toDate(tz), options)` | `formatter.custom(value, options)`: `useDateFormatter` accepts Temporal values |

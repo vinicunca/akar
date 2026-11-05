@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { TreeRootEmits, TreeRootProps } from '..';
-import { Icon } from '@iconify/vue';
-import { useForwardPropsEmits } from '@/shared';
-import { TreeItem, TreeRoot } from '..';
+import type { TreeRootEmits, TreeRootProps } from '..'
+import { Icon } from '@iconify/vue'
+import { useForwardPropsEmits } from '@/shared'
+import { TreeItem, TreeRoot } from '..'
 
-const props = defineProps<Omit<TreeRootProps, 'items' | 'getKey'>>();
-const emits = defineEmits<TreeRootEmits>();
+const props = defineProps<Omit<TreeRootProps, 'items' | 'getKey'>>()
+const emits = defineEmits<TreeRootEmits>()
 
-const forwarded = useForwardPropsEmits(props, emits);
+const forwarded = useForwardPropsEmits(props, emits)
 
 const items = [
   { title: 'index.vue', icon: 'vue' },
@@ -63,7 +63,7 @@ const items = [
       },
     ],
   },
-];
+]
 </script>
 
 <template>

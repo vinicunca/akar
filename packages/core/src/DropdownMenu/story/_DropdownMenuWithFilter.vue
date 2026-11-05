@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref } from 'vue'
 import {
   DropdownMenuContent,
   DropdownMenuFilter,
@@ -7,35 +7,34 @@ import {
   DropdownMenuPortal,
   DropdownMenuRoot,
   DropdownMenuTrigger,
-} from '..';
+} from '..'
 
 const props = defineProps<{
-  defaultOpen?: boolean;
-  disabledFilter?: boolean;
-}>();
+  defaultOpen?: boolean
+  disabledFilter?: boolean
+}>()
 
-const toggleState = ref(props.defaultOpen ?? false);
-const filterText = ref('');
+const toggleState = ref(props.defaultOpen ?? false)
+const filterText = ref('')
 
 const items = [
   { value: 'new-tab', label: 'New Tab' },
   { value: 'new-window', label: 'New Window' },
   { value: 'bookmarks', label: 'Show Bookmarks' },
   { value: 'history', label: 'Show History' },
-];
+]
 
 const filteredItems = computed(() => {
-  if (!filterText.value) {
-    return items;
-  }
-  return items.filter((item) =>
+  if (!filterText.value)
+    return items
+  return items.filter(item =>
     item.label.toLowerCase().includes(filterText.value.toLowerCase()),
-  );
-});
+  )
+})
 
 defineExpose({
   filterText,
-});
+})
 </script>
 
 <template>

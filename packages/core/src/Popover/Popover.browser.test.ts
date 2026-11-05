@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
-import { userEvent } from 'vitest/browser';
-import { defineComponent, h } from 'vue';
-import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from '.';
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+import { userEvent } from 'vitest/browser'
+import { defineComponent, h } from 'vue'
+import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from '.'
 
 function mountPopover(contentProps: Record<string, unknown> = {}) {
   const Fixture = defineComponent({
@@ -17,12 +17,12 @@ function mountPopover(contentProps: Record<string, unknown> = {}) {
           }, () => 'Content')),
         ]),
         h('button', { 'data-testid': 'outside', 'style': 'position: fixed; top: 0; left: 0;' }, 'Outside'),
-      ]);
+      ])
     },
-  });
-  mount(Fixture, { attachTo: document.body });
-  const get = (id: string) => document.querySelector<HTMLElement>(`[data-testid="${id}"]`);
-  return { get };
+  })
+  mount(Fixture, { attachTo: document.body })
+  const get = (id: string) => document.querySelector<HTMLElement>(`[data-testid="${id}"]`)
+  return { get }
 }
 
 describe('given a Popover, in a real browser', () => {
@@ -31,37 +31,35 @@ describe('given a Popover, in a real browser', () => {
     ['bottom', 8],
     ['top', 0],
   ] as const)('positions the content on the %s side with sideOffset %s', async (side, sideOffset) => {
-    const { get } = mountPopover({ side, sideOffset });
+    const { get } = mountPopover({ side, sideOffset })
 
-    await userEvent.click(get('trigger')!);
-    await expect.poll(() => get('content')?.getAttribute('data-side')).toBe(side);
+    await userEvent.click(get('trigger')!)
+    await expect.poll(() => get('content')?.getAttribute('data-side')).toBe(side)
 
     await expect.poll(() => {
-      const trigger = get('trigger')!.getBoundingClientRect();
-      const content = get('content')!.getBoundingClientRect();
-      return Math.round(side === 'bottom'
-        ? content.top - trigger.bottom
-        : trigger.top - content.bottom);
-    }).toBe(sideOffset);
+      const trigger = get('trigger')!.getBoundingClientRect()
+      const content = get('content')!.getBoundingClientRect()
+      return Math.round(side === 'bottom' ? content.top - trigger.bottom : trigger.top - content.bottom)
+    }).toBe(sideOffset)
 
-    const trigger = get('trigger')!.getBoundingClientRect();
-    const content = get('content')!.getBoundingClientRect();
+    const trigger = get('trigger')!.getBoundingClientRect()
+    const content = get('content')!.getBoundingClientRect()
     // Centre-aligned by default.
-    expect(Math.round(content.left + content.width / 2)).toBe(Math.round(trigger.left + trigger.width / 2));
-  });
+    expect(Math.round(content.left + content.width / 2)).toBe(Math.round(trigger.left + trigger.width / 2))
+  })
 
   it('closes on an outside click and on Escape', async () => {
-    const { get } = mountPopover();
+    const { get } = mountPopover()
 
-    await userEvent.click(get('trigger')!);
-    await expect.poll(() => get('content')).not.toBeNull();
-    await userEvent.click(get('outside')!);
-    await expect.poll(() => get('content')).toBeNull();
+    await userEvent.click(get('trigger')!)
+    await expect.poll(() => get('content')).not.toBeNull()
+    await userEvent.click(get('outside')!)
+    await expect.poll(() => get('content')).toBeNull()
 
-    await userEvent.click(get('trigger')!);
-    await expect.poll(() => get('content')).not.toBeNull();
-    await userEvent.keyboard('{Escape}');
-    await expect.poll(() => get('content')).toBeNull();
-    expect(document.activeElement).toBe(get('trigger'));
-  });
-});
+    await userEvent.click(get('trigger')!)
+    await expect.poll(() => get('content')).not.toBeNull()
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => get('content')).toBeNull()
+    expect(document.activeElement).toBe(get('trigger'))
+  })
+})

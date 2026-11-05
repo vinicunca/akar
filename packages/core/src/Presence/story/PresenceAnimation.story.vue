@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
-import { Presence } from '..';
-import Animation from './_Animation.vue';
-import Toggle from './_Toggle.vue';
+import { ref, watchEffect } from 'vue'
+import { Presence } from '..'
+import Animation from './_Animation.vue'
+import Toggle from './_Toggle.vue'
 
-const node = ref<HTMLElement>();
-const timerRef = ref(0);
-const open = ref(false);
-const animate = ref(false);
+const node = ref<HTMLElement>()
+const timerRef = ref(0)
+const open = ref(false)
+const animate = ref(false)
 
 watchEffect(() => {
   if (open.value) {
-    timerRef.value = window.setTimeout(() => {
-      animate.value = true;
-    }, 150);
-  } else {
-    animate.value = false;
-    window.clearTimeout(timerRef.value);
+    timerRef.value = window.setTimeout(() => (animate.value = true), 150)
   }
-});
+  else {
+    animate.value = false
+    window.clearTimeout(timerRef.value)
+  }
+})
 </script>
 
 <template>

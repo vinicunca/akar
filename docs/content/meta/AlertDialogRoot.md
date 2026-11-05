@@ -1,0 +1,117 @@
+<!-- This file was automatically generated. Do not edit it manually -->
+
+<llm-exclude>
+<PropsTable :data="[
+  {
+    'name': 'defaultOpen',
+    'description': '<p>The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.</p>\n',
+    'type': 'boolean',
+    'required': false,
+    'default': 'false'
+  },
+  {
+    'name': 'defaultTriggerId',
+    'description': '<p>The id of the trigger that owns a dialog that starts open (with <code>defaultOpen</code> and a <code>handle</code>).</p>\n',
+    'type': 'string | null',
+    'required': false
+  },
+  {
+    'name': 'handle',
+    'description': '<p>A handle from <code>createAlertDialogHandle()</code> that connects detached\n<code>AlertDialogTrigger</code>s to this Root and controls it imperatively.</p>\n',
+    'type': 'AlertDialogHandle&lt;Payload&gt;',
+    'required': false
+  },
+  {
+    'name': 'open',
+    'description': '<p>The controlled open state of the dialog. Can be binded as <code>v-model:open</code>.</p>\n',
+    'type': 'boolean',
+    'required': false
+  },
+  {
+    'name': 'triggerId',
+    'description': '<p>The id of the trigger that owns the dialog, for a controlled dialog with\ndetached triggers. Use with <code>open</code>.</p>\n',
+    'type': 'string | null',
+    'required': false
+  },
+  {
+    'name': 'unmountOnHide',
+    'description': '<p>When set to <code>false</code>, the dialog content will not be unmounted when closed, but instead hidden with CSS. &lt;br&gt;\nUseful for SEO or when you want to improve performance by not remounting the component on every open.</p>\n',
+    'type': 'boolean',
+    'required': false,
+    'default': 'true'
+  }
+]" />
+
+<EmitsTable :data="[
+  {
+    'name': 'beforeUpdate:open',
+    'description': '<p>Called before the open state changes; <code>details.cancel()</code> keeps the current state.</p>\n',
+    'type': '[value: boolean, details: ChangeEventDetails&lt;DialogOpenChangeReason, Event&gt;]'
+  },
+  {
+    'name': 'update:open',
+    'description': '<p>Event handler called when the open state of the dialog changes.</p>\n',
+    'type': '[value: boolean, details: ChangeEventDetails&lt;DialogOpenChangeReason, Event&gt;]'
+  },
+  {
+    'name': 'update:openComplete',
+    'description': '<p>Event handler called after the open or close animations of the content have finished.</p>\n',
+    'type': '[value: boolean]'
+  }
+]" />
+
+<SlotsTable :data="[
+  {
+    'name': 'open',
+    'description': '<p>Current open state</p>\n',
+    'type': 'boolean'
+  },
+  {
+    'name': 'close',
+    'description': '<p>Close the dialog</p>\n',
+    'type': '(): void'
+  },
+  {
+    'name': 'payload',
+    'description': '<p>The <code>payload</code> of the detached trigger that opened the dialog, or from <code>handle.openWithPayload()</code></p>\n',
+    'type': 'Payload'
+  },
+  {
+    'name': 'activeTriggerId',
+    'description': '<p>The id of the detached trigger that opened the dialog</p>\n',
+    'type': 'string | null'
+  }
+]" />
+</llm-exclude>
+
+<llm-only>
+
+**Props**
+
+| Name | Description | Type | Required | Default |
+| --- | --- | --- | --- | --- |
+| `defaultOpen` | The open state of the dialog when it is initially rendered. Use when you do not need to control its open state. | `boolean` | No | `false` |
+| `defaultTriggerId` | The id of the trigger that owns a dialog that starts open (with `defaultOpen` and a `handle`). | `string \| null` | No | - |
+| `handle` | A handle from `createAlertDialogHandle()` that connects detached `AlertDialogTrigger`s to this Root and controls it imperatively. | `AlertDialogHandle<Payload>` | No | - |
+| `open` | The controlled open state of the dialog. Can be binded as `v-model:open`. | `boolean` | No | - |
+| `triggerId` | The id of the trigger that owns the dialog, for a controlled dialog with detached triggers. Use with `open`. | `string \| null` | No | - |
+| `unmountOnHide` | When set to `false`, the dialog content will not be unmounted when closed, but instead hidden with CSS. \<br> Useful for SEO or when you want to improve performance by not remounting the component on every open. | `boolean` | No | `true` |
+
+**Events**
+
+| Name | Description | Type |
+| --- | --- | --- |
+| `beforeUpdate:open` | Called before the open state changes; `details.cancel()` keeps the current state. | `[value: boolean, details: ChangeEventDetails<DialogOpenChangeReason, Event>]` |
+| `update:open` | Event handler called when the open state of the dialog changes. | `[value: boolean, details: ChangeEventDetails<DialogOpenChangeReason, Event>]` |
+| `update:openComplete` | Event handler called after the open or close animations of the content have finished. | `[value: boolean]` |
+
+**Slots**
+
+| Name | Description | Type |
+| --- | --- | --- |
+| `open` | Current open state | `boolean` |
+| `close` | Close the dialog | `(): void` |
+| `payload` | The `payload` of the detached trigger that opened the dialog, or from `handle.openWithPayload()` | `Payload` |
+| `activeTriggerId` | The id of the detached trigger that opened the dialog | `string \| null` |
+
+</llm-only>

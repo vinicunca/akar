@@ -1,24 +1,12 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { ComboboxAnchor, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { ComboboxAnchor, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxSeparator, ComboboxTrigger, ComboboxViewport } from '..'
 
-const v = ref('Carrot');
-const selectedValue = ref(undefined);
-const options = [
-  'Apple',
-  'Banana',
-  'Blueberry',
-  'Grapes',
-  'Pineapple',
-];
-const vegetables = [
-  'Aubergine',
-  'Broccoli',
-  'Carrot',
-  'Courgette',
-  'Leek',
-];
+const v = ref('Carrot')
+const selectedValue = ref(undefined)
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
+const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 </script>
 
 <template>

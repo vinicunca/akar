@@ -1,39 +1,40 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { useDebounceFn, useFetch } from '@vueuse/core';
-import { ref } from 'vue';
-import { ComboboxAnchor, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..';
+import { Icon } from '@iconify/vue'
+import { useDebounceFn, useFetch } from '@vueuse/core'
+import { ref } from 'vue'
+import { ComboboxAnchor, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..'
 
-const value = ref('');
-const query = ref('');
+const value = ref('')
+const query = ref('')
 
 const { data, execute, isFetching } = useFetch('https://jsonplaceholder.typicode.com/comments', {
   immediate: false,
   initialData: [],
   afterFetch: (ctx) => {
-    ctx.data = (ctx.data?.filter((i) => i.name.toLowerCase().includes(query.value.toLowerCase())) ?? []).map((i) => i.name);
-    return ctx;
+    ctx.data = (ctx.data?.filter((i: { name: string }) => i.name.toLowerCase().includes(query.value.toLowerCase())) ?? []).map((i: { name: string }) => i.name)
+    return ctx
   },
 
-}).get().json<Array<string>>();
+}).get().json<string[]>()
 
 const executeDebounced = useDebounceFn(() => {
   if (!query.value) {
-    return;
+    return
   }
 
-  execute();
+  execute()
 }, 1000, {
   rejectOnCancel: true,
-});
+})
 
 function onQueryUpdate(val: string) {
-  query.value = val;
+  query.value = val
 
   if (val) {
-    executeDebounced();
-  } else {
-    data.value = [];
+    executeDebounced()
+  }
+  else {
+    data.value = []
   }
 }
 </script>

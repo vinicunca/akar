@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..';
+import { onMounted, ref } from 'vue'
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..'
 
-const panelRef = ref<InstanceType<typeof SplitterPanel>>();
+const panelRef = ref<InstanceType<typeof SplitterPanel>>()
 
 onMounted(() => {
   // eslint-disable-next-line no-console
-  console.log(panelRef.value?.$el);
+  console.log(panelRef.value?.$el)
   // eslint-disable-next-line no-console
-  console.log(panelRef.value?.getSize());
-});
+  console.log(panelRef.value?.getSize())
+})
 </script>
 
 <template>
   <Story
     title="Splitter/Action"
-    :layout="{ type: 'single', width: '100%', iframe: false }"
+    :layout="{ type: 'single', iframe: false }"
   >
     <Variant title="default">
       <div>

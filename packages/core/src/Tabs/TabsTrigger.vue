@@ -1,83 +1,68 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import type { StringOrNumber } from '@/shared/types';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import type { StringOrNumber } from '@/shared/types'
+import { useForwardElement } from '@/shared'
 
 export interface TabsTriggerProps extends PrimitiveProps {
   /** A unique value that associates the trigger with a content. */
-  value: StringOrNumber;
+  value: StringOrNumber
   /** When `true`, prevents the user from interacting with the tab. */
-  disabled?: boolean;
+  disabled?: boolean
+  /**
+   * Id of the element, which the content with the same `value` points its
+   * `aria-labelledby` at. Defaults to one derived from the Root's id and `value`.
+   */
+  id?: string
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Primitive } from '@/Primitive';
-import { RovingFocusItem } from '@/RovingFocus';
-import { injectTabsRootContext } from './TabsRoot.vue';
-import { makeContentId, makeTriggerId } from './utils';
+import { mergeProps } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { useRovingFocusItem } from '@/RovingFocus/useRovingFocusItem'
+import { injectTabsRootContext } from './TabsRoot.vue'
+import { getTabsTriggerSurface } from './useTabs'
+import { useTabsPartId } from './utils'
+
+defineOptions({
+  // `$attrs` are merged under the roving and trigger bindings: the precedence
+  // the former `RovingFocusItem` wrapper gave them.
+  inheritAttrs: false,
+})
 
 const props = withDefaults(defineProps<TabsTriggerProps>(), {
   disabled: false,
   as: 'button',
-});
+})
 
-const { forwardRef } = useForwardExpose();
-const rootContext = injectTabsRootContext();
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectTabsRootContext()
+useTabsPartId(rootContext.customTriggerIds, () => props.value, () => props.id)
 
-const triggerId = computed(() => makeTriggerId(rootContext.baseId, props.value));
-const contentId = computed(() => rootContext.contentIds.value.has(props.value)
-  ? makeContentId(rootContext.baseId, props.value)
-  : undefined);
+// id/aria/data-state + the mousedown/keydown/focus handlers all come from the
+// shared surface builder (single source with `useTabs()`); the roving item
+// (arrow-key nav, as a composable) and the tag-dependent `type` stay in the SFC.
+const surface = getTabsTriggerSurface(rootContext, () => props.value, () => props.disabled)
 
-const isSelected = computed(() => props.value === rootContext.modelValue.value);
+const roving = useRovingFocusItem({
+  element: currentElement,
+  focusable: () => !props.disabled,
+  active: () => surface.state.value.state === 'checked',
+})!
+
+function renderAttrs(attrs: Record<string, unknown>) {
+  const own = surface.attrs.value
+  return mergeProps(attrs, roving.attrs(), { type: props.as === 'button' ? 'button' : undefined, ...own, id: props.id || own.id })
+}
 </script>
 
 <template>
-  <RovingFocusItem
-    as-child
-    :focusable="!disabled"
-    :active="isSelected"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="renderAttrs($attrs)"
   >
-    <Primitive
-      :id="triggerId"
-      :ref="forwardRef"
-      role="tab"
-      :type="as === 'button' ? 'button' : undefined"
-      :as="as"
-      :as-child="asChild"
-      :aria-selected="isSelected ? 'true' : 'false'"
-      :aria-controls="contentId"
-      :data-state="isSelected ? 'active' : 'inactive'"
-      :disabled="disabled"
-      :data-disabled="disabled ? '' : undefined"
-      :data-orientation="rootContext.orientation.value"
-      @mousedown="(event: MouseEvent) => {
-        if (event.defaultPrevented) return;
-        // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
-        // but not when the control key is pressed (avoiding MacOS right click)
-        if (!disabled && event.button === 0 && event.ctrlKey === false) {
-          rootContext.changeModelValue(value);
-        }
-        else {
-          // prevent focus to avoid accidental activation
-          event.preventDefault();
-        }
-      }"
-      @keydown.enter.space="(event: KeyboardEvent) => {
-        if (!event.defaultPrevented) rootContext.changeModelValue(value);
-      }"
-      @focus="() => {
-        // handle 'automatic' activation if necessary
-        // ie. activate tab following focus
-        const isAutomaticActivation = rootContext.activationMode !== 'manual';
-        if (!isSelected && !disabled && isAutomaticActivation) {
-          rootContext.changeModelValue(value);
-        }
-      }"
-    >
-      <slot />
-    </Primitive>
-  </RovingFocusItem>
+    <slot />
+  </component>
 </template>

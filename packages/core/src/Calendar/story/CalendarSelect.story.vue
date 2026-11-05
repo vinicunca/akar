@@ -1,86 +1,26 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { createCalendar, getLocalTimeZone, toCalendar, today } from '@internationalized/date';
-import { computed, ref } from 'vue';
-import { Label } from '@/Label';
-import { SelectContent, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectLabel, SelectPortal, SelectRoot, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SelectViewport } from '@/Select';
-import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from '..';
+import { Icon } from '@iconify/vue'
+import { computed, ref } from 'vue'
+import { toCalendar } from '@/date'
+import { Label } from '@/Label'
+import { SelectContent, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectLabel, SelectPortal, SelectRoot, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SelectViewport } from '@/Select'
+import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from '..'
 
 const preferences = [
   { locale: 'en-US', label: 'Default', ordering: 'gregory' },
-  {
-    label: 'Arabic (Algeria)',
-    locale: 'ar-DZ',
-    territories: 'DJ DZ EH ER IQ JO KM LB LY MA MR OM PS SD SY TD TN YE',
-    ordering: 'gregory islamic islamic-civil islamic-tbla',
-  },
-  {
-    label: 'Arabic (United Arab Emirates)',
-    locale: 'ar-AE',
-    territories: 'AE BH KW QA',
-    ordering: 'gregory islamic-umalqura islamic islamic-civil islamic-tbla',
-  },
-  {
-    label: 'Arabic (Egypt)',
-    locale: 'AR-EG',
-    territories: 'EG',
-    ordering: 'gregory coptic islamic islamic-civil islamic-tbla',
-  },
-  {
-    label: 'Arabic (Saudi Arabia)',
-    locale: 'ar-SA',
-    territories: 'SA',
-    ordering: 'islamic-umalqura gregory islamic islamic-rgsa',
-  },
-  {
-    label: 'Farsi (Iran)',
-    locale: 'fa-IR',
-    territories: 'IR',
-    ordering: 'persian gregory islamic islamic-civil islamic-tbla',
-  },
-  {
-    label: 'Farsi (Afghanistan)',
-    locale: 'fa-AF',
-    territories: 'AF IR',
-    ordering: 'persian gregory islamic islamic-civil islamic-tbla',
-  },
-  {
-    label: 'Amharic (Ethiopia)',
-    locale: 'am-ET',
-    territories: 'ET',
-    ordering: 'gregory ethiopic ethioaa',
-  },
-  {
-    label: 'Hebrew (Israel)',
-    locale: 'he-IL',
-    territories: 'IL',
-    ordering: 'gregory hebrew islamic islamic-civil islamic-tbla',
-  },
-  {
-    label: 'Hindi (India)',
-    locale: 'hi-IN',
-    territories: 'IN',
-    ordering: 'gregory indian',
-  },
-  {
-    label: 'Japanese (Japan)',
-    locale: 'ja-JP',
-    territories: 'JP',
-    ordering: 'gregory japanese',
-  },
-  {
-    label: 'Thai (Thailand)',
-    locale: 'th-TH',
-    territories: 'TH',
-    ordering: 'buddhist gregory',
-  },
-  {
-    label: 'Chinese (Taiwan)',
-    locale: 'zh-TW',
-    territories: 'TW',
-    ordering: 'gregory roc chinese',
-  },
-];
+  { label: 'Arabic (Algeria)', locale: 'ar-DZ', territories: 'DJ DZ EH ER IQ JO KM LB LY MA MR OM PS SD SY TD TN YE', ordering: 'gregory islamic islamic-civil islamic-tbla' },
+  { label: 'Arabic (United Arab Emirates)', locale: 'ar-AE', territories: 'AE BH KW QA', ordering: 'gregory islamic-umalqura islamic islamic-civil islamic-tbla' },
+  { label: 'Arabic (Egypt)', locale: 'AR-EG', territories: 'EG', ordering: 'gregory coptic islamic islamic-civil islamic-tbla' },
+  { label: 'Arabic (Saudi Arabia)', locale: 'ar-SA', territories: 'SA', ordering: 'islamic-umalqura gregory islamic islamic-rgsa' },
+  { label: 'Farsi (Iran)', locale: 'fa-IR', territories: 'IR', ordering: 'persian gregory islamic islamic-civil islamic-tbla' },
+  { label: 'Farsi (Afghanistan)', locale: 'fa-AF', territories: 'AF IR', ordering: 'persian gregory islamic islamic-civil islamic-tbla' },
+  { label: 'Amharic (Ethiopia)', locale: 'am-ET', territories: 'ET', ordering: 'gregory ethiopic ethioaa' },
+  { label: 'Hebrew (Israel)', locale: 'he-IL', territories: 'IL', ordering: 'gregory hebrew islamic islamic-civil islamic-tbla' },
+  { label: 'Hindi (India)', locale: 'hi-IN', territories: 'IN', ordering: 'gregory indian' },
+  { label: 'Japanese (Japan)', locale: 'ja-JP', territories: 'JP', ordering: 'gregory japanese' },
+  { label: 'Thai (Thailand)', locale: 'th-TH', territories: 'TH', ordering: 'buddhist gregory' },
+  { label: 'Chinese (Taiwan)', locale: 'zh-TW', territories: 'TW', ordering: 'gregory roc chinese' },
+]
 
 const calendars = [
   { key: 'gregory', name: 'Gregorian' },
@@ -96,22 +36,20 @@ const calendars = [
   { key: 'coptic', name: 'Coptic' },
   { key: 'ethiopic', name: 'Ethiopic' },
   { key: 'ethioaa', name: 'Ethiopic (Amete Alem)' },
-];
+]
 
-const locale = ref(preferences[0].locale);
-const calendar = ref(calendars[0].key);
+const locale = ref(preferences[0].locale)
+const calendar = ref(calendars[0].key)
 
-const pref = computed(() => preferences.find((p) => p.locale === locale.value));
-const preferredCalendars = computed(() => pref.value
-  ? pref.value.ordering.split(' ').map((p) => calendars.find((c) => c.key === p)).filter(Boolean)
-  : [calendars[0]]);
-const otherCalendars = computed(() => calendars.filter((c) => !preferredCalendars.value.some((p) => p!.key === c.key)));
+const pref = computed(() => preferences.find(p => p.locale === locale.value))
+const preferredCalendars = computed(() => pref.value ? pref.value.ordering.split(' ').map(p => calendars.find(c => c.key === p)).filter(Boolean) : [calendars[0]])
+const otherCalendars = computed(() => calendars.filter(c => !preferredCalendars.value.some(p => p!.key === c.key)))
 
 function updateLocale(newLocale: string) {
-  locale.value = newLocale;
-  calendar.value = pref.value!.ordering.split(' ')[0];
+  locale.value = newLocale
+  calendar.value = pref.value!.ordering.split(' ')[0]
 }
-const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalendar(calendar.value)));
+const value = computed(() => toCalendar(Temporal.Now.plainDateISO(), calendar.value))
 </script>
 
 <template>
@@ -294,6 +232,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
             <CalendarGrid
               v-for="month in grid"
               :key="month.value.toString()"
+              :value="month.value"
               class="w-full border-collapse select-none space-y-1"
             >
               <CalendarGridHead>
@@ -316,12 +255,11 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
                   <CalendarCell
                     v-for="weekDate in weekDates"
                     :key="weekDate.toString()"
-                    :date="weekDate"
+                    :value="weekDate"
                     class="relative text-center text-sm"
                   >
                     <CalendarCellTrigger
-                      :day="weekDate"
-                      :month="month.value"
+                      :value="weekDate"
                       class="relative flex items-center justify-center whitespace-nowrap rounded-lg border border-transparent bg-transparent text-sm font-normal text-black w-8 h-8 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black hover:border-black data-[selected]:bg-black data-[selected]:font-medium data-[outside-view]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-grass9 data-[selected]:before:bg-white"
                     />
                   </CalendarCell>

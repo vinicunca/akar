@@ -1,15 +1,13 @@
-import type { VNode } from 'vue';
-import { Fragment } from 'vue';
+import type { VNode } from 'vue'
+import { Fragment } from 'vue'
 
-export function renderSlotFragments(children?: Array<VNode>): Array<VNode> {
-  if (!children) {
-    return [];
-  }
+export function renderSlotFragments(children?: VNode[]): VNode[] {
+  if (!children)
+    return []
   return children.flatMap((child) => {
-    if (child.type === Fragment) {
-      return renderSlotFragments(child.children as Array<VNode>);
-    }
+    if (child.type === Fragment)
+      return renderSlotFragments(child.children as VNode[])
 
-    return [child];
-  });
+    return [child]
+  })
 }

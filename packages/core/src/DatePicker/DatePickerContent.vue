@@ -1,32 +1,42 @@
 <script lang="ts">
-import type { PopoverContentEmits, PopoverContentProps, PopoverPortalProps } from '..';
-import { computed } from 'vue';
-import { handleCalendarInitialFocus } from '@/shared/date';
-import { PopoverContent, PopoverPortal, useForwardPropsEmits } from '..';
+import type { PopoverContentEmits, PopoverContentProps, PopoverPortalProps } from '..'
+import { computed } from 'vue'
+import { handleCalendarInitialFocus } from '@/shared/date'
+import { PopoverContent, PopoverPortal, useForwardPropsEmits } from '..'
 
 export interface DatePickerContentProps extends PopoverContentProps {
   /**
    * Props to control the portal wrapped around the content.
    */
-  portal?: PopoverPortalProps;
+  portal?: PopoverPortalProps
 }
-export type DatePickerContentEmits = PopoverContentEmits;
+export type DatePickerContentEmits = PopoverContentEmits
 </script>
 
 <script setup lang="ts">
-const props = defineProps<DatePickerContentProps>();
-const emits = defineEmits<DatePickerContentEmits>();
+import { injectFieldForControl, provideFieldControlOwner } from '@/Field/useFieldControl'
+import { useForwardElement } from '@/shared'
+
+const props = defineProps<DatePickerContentProps>()
+const emits = defineEmits<DatePickerContentEmits>()
 
 const propsToForward = computed(() => ({
   ...props,
   portal: undefined,
-}));
-const forwarded = useForwardPropsEmits(propsToForward, emits);
+}))
+const forwarded = useForwardPropsEmits(propsToForward, emits)
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+
+// The picker's field is the composed date field's: a control in the calendar leaves it alone.
+provideFieldControlOwner(injectFieldForControl())
 </script>
 
 <template>
   <PopoverPortal v-bind="portal">
     <PopoverContent
+      :ref="forwardRef"
       v-bind="{ ...forwarded, ...$attrs }"
       @open-auto-focus="event => {
         emits('openAutoFocus', event)

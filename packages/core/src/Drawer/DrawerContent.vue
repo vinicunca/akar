@@ -1,104 +1,107 @@
 <script lang="ts">
-import type { DrawerContentImplEmits, DrawerContentImplProps } from './DrawerContentImpl.vue';
+import type { DrawerContentImplEmits, DrawerContentImplProps } from './DrawerContentImpl.vue'
 
-export type DrawerContentEmits = DrawerContentImplEmits;
-export interface DrawerContentProps extends Omit<DrawerContentImplProps, 'trapFocus'> {
-  forceMount?: boolean;
+export type DrawerPopupEmits = Omit<DrawerContentImplEmits, 'closeAutoFocus'> & {
+  /**
+   * Event handler called when focus moves back on close (to the trigger, or `finalFocus`). Can be prevented. Not
+   * emitted for a `forceMount` popup, which stays mounted: it returns focus itself on close, while focus is still
+   * inside it or on `<body>`; use `finalFocus` to change or turn off that return.
+   */
+  closeAutoFocus: [event: Event]
 }
+// `trapFocus` and `disableOutsidePointerEvents` follow `modal` on the root; the
+// popup sets both itself.
+export interface DrawerPopupProps extends Omit<DrawerContentImplProps, 'trapFocus' | 'disableOutsidePointerEvents'> {
+  forceMount?: boolean
+  /**
+   * Id of the element, which the trigger's `aria-controls` points at.
+   * Auto-generated when not provided.
+   */
+  id?: string
+}
+/** @deprecated Use `DrawerPopupEmits`; `DrawerContent` is a deprecated alias of `DrawerPopup`. */
+export type DrawerContentEmits = DrawerPopupEmits
+/** @deprecated Use `DrawerPopupProps`; `DrawerContent` is a deprecated alias of `DrawerPopup`. */
+export type DrawerContentProps = DrawerPopupProps
 </script>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { Presence } from '@/Presence';
-import { isHTMLElement, useEmitAsProps, useForwardExpose, useHideOthers } from '@/shared';
-import DrawerContentImpl from './DrawerContentImpl.vue';
-import { injectDrawerRootContext } from './DrawerRoot.vue';
+import { computed, watch } from 'vue'
+import { Presence } from '@/Presence'
+import { useBodyScrollLock, useEmitAsProps, useForwardElement, useHideOthers, usePartId } from '@/shared'
+import { isPortalOpening } from '@/Teleport/portalGate'
+import DrawerContentImpl from './DrawerContentImpl.vue'
+import { injectDrawerRootContext } from './DrawerRoot.vue'
+import { useDrawerContentModality } from './useDrawer'
 
-const props = withDefaults(
-  defineProps<DrawerContentProps>(),
-  {
-    initialFocus: true,
-    finalFocus: true,
-  },
-);
-const emits = defineEmits<DrawerContentEmits>();
+const props = withDefaults(defineProps<DrawerPopupProps>(), {
+  initialFocus: true,
+  finalFocus: true,
+})
+const emits = defineEmits<DrawerPopupEmits>()
 
-const rootContext = injectDrawerRootContext();
-const emitsAsProps = useEmitAsProps(emits);
-const { forwardRef, currentElement } = useForwardExpose();
-const hasInteractedOutside = ref(false);
-const hasPointerDownOutside = ref(false);
+const rootContext = injectDrawerRootContext()
+// Forwarded as the element's `id` (merged after the surface's context id);
+// mirrored into the context for the trigger's `aria-controls`.
+const contentId = usePartId(() => props.id, rootContext, 'contentId')
+const emitsAsProps = useEmitAsProps(emits)
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
 
-// Modality tiers:
-//   true           → full modal (focus trap + hide others + outside pointer events blocked)
-//   'trap-focus'   → traps focus but does NOT block outside pointer events
-//   false          → non-modal
-const isFullModal = computed(() => rootContext.modal.value === true);
-const isTrapFocusOnly = computed(() => rootContext.modal.value === 'trap-focus');
-const shouldTrapFocus = computed(() => (isFullModal.value || isTrapFocusOnly.value) && rootContext.open.value);
-const shouldHideOthers = computed(() => isFullModal.value ? currentElement.value : undefined);
-useHideOthers(shouldHideOthers);
+// Modality tiers (`true` / `'trap-focus'` / `false`) and their focus-return /
+// outside-interaction handlers come from the composable; Presence and
+// `useHideOthers` stay here.
+const {
+  isFullModal,
+  shouldTrapFocus,
+  onCloseAutoFocusModal,
+  onPointerDownOutsideModal,
+  onFocusOutsideModal,
+  onCloseAutoFocusNonModal,
+  onInteractOutsideNonModal,
+  onCloseWhileMounted,
+} = useDrawerContentModality({
+  rootContext,
+  contentElement: currentElement,
+  finalFocus: () => props.finalFocus,
+})
 
-function finalFocusElement() {
-  if (props.finalFocus === false) {
-    return undefined;
-  }
-  if (isHTMLElement(props.finalFocus)) {
-    return props.finalFocus;
-  }
-  return rootContext.triggerElement.value;
-}
+// A `forceMount`ed content stays mounted on close, so `FocusScope` never
+// unmounts and `close-auto-focus` never fires: return focus here instead,
+// as `DialogContentModal` / `DialogContentNonModal` do.
+watch(() => rootContext.open.value, (isOpen, wasOpen) => {
+  if (props.forceMount && wasOpen && !isOpen)
+    onCloseWhileMounted()
+}, { flush: 'post' })
+// Only while open: a `forceMount`ed drawer that is closed hides nothing and
+// mounts no backdrop.
+const shouldHideOthers = computed(() => isFullModal.value && rootContext.open.value ? currentElement.value : undefined)
+useHideOthers(shouldHideOthers)
 
-// Non-modal handlers defined as named functions so the refs are accessed via
-// `.value` explicitly and the reads/writes are unambiguous.
-function onCloseAutoFocusNonModal(e: Event) {
-  if (!e.defaultPrevented) {
-    if (!hasInteractedOutside.value) {
-      finalFocusElement()?.focus();
-    }
-    e.preventDefault();
-  }
-  hasInteractedOutside.value = false;
-  hasPointerDownOutside.value = false;
-}
-
-function onInteractOutsideNonModal(e: any) {
-  if (!e.defaultPrevented) {
-    hasInteractedOutside.value = true;
-    if (e.detail.originalEvent.type === 'pointerdown') {
-      hasPointerDownOutside.value = true;
-    }
-  }
-  const target = e.target as HTMLElement;
-  if (rootContext.triggerElement.value?.contains(target)) {
-    e.preventDefault();
-  }
-  if (e.detail.originalEvent.type === 'focusin' && hasPointerDownOutside.value) {
-    e.preventDefault();
-  }
-}
+// BaseUI parity (`useDialogRoot`): only a fully modal drawer locks page scroll,
+// with or without a `DrawerOverlay`; `'trap-focus'` leaves the page scrollable.
+const scrollLocked = useBodyScrollLock(isFullModal.value && rootContext.open.value)
+watch(() => isFullModal.value && rootContext.open.value, (locked) => {
+  scrollLocked.value = locked
+})
 </script>
 
 <template>
-  <Presence :present="forceMount || rootContext.open.value">
+  <Presence
+    :appear="isPortalOpening(rootContext)"
+    :present="rootContext.open.value"
+    :force-mount="forceMount"
+    @complete="rootContext.notifyOpenComplete"
+  >
     <DrawerContentImpl
       v-if="isFullModal"
       :ref="forwardRef"
-      v-bind="{ ...props, ...emitsAsProps, ...$attrs }"
+      v-bind="{ ...props, ...emitsAsProps, ...$attrs, id: contentId }"
       :trap-focus="shouldTrapFocus"
-      :disable-outside-pointer-events="true"
-      @close-auto-focus="(e: Event) => {
-        if (!e.defaultPrevented) {
-          e.preventDefault()
-          finalFocusElement()?.focus()
-        }
-      }"
-      @pointer-down-outside="(e: any) => {
-        const orig = e.detail.originalEvent
-        const isRightClick = orig.button === 2 || (orig.button === 0 && orig.ctrlKey)
-        if (isRightClick) e.preventDefault()
-      }"
-      @focus-outside="(e: Event) => e.preventDefault()"
+      :disable-outside-pointer-events="rootContext.open.value"
+      @close-auto-focus="onCloseAutoFocusModal"
+      @pointer-down-outside="onPointerDownOutsideModal"
+      @focus-outside="onFocusOutsideModal"
     >
       <slot />
     </DrawerContentImpl>
@@ -106,7 +109,7 @@ function onInteractOutsideNonModal(e: any) {
     <DrawerContentImpl
       v-else
       :ref="forwardRef"
-      v-bind="{ ...props, ...emitsAsProps, ...$attrs }"
+      v-bind="{ ...props, ...emitsAsProps, ...$attrs, id: contentId }"
       :trap-focus="shouldTrapFocus"
       :disable-outside-pointer-events="false"
       @close-auto-focus="onCloseAutoFocusNonModal"

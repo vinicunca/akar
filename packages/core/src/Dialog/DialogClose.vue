@@ -1,28 +1,33 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
+import type { PrimitiveProps } from '@/Primitive'
 
 export interface DialogCloseProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
-import { injectDialogRootContext } from './DialogRoot.vue';
+import { renderAs } from '@/Primitive/renderAs'
+import { useForwardElement } from '@/shared'
+import { injectDialogRootContext } from './DialogRoot.vue'
+import { getDialogCloseSurface } from './useDialog'
 
-const props = withDefaults(defineProps<DialogCloseProps>(), {
+withDefaults(defineProps<DialogCloseProps>(), {
   as: 'button',
-});
+})
 
-useForwardExpose();
-const rootContext = injectDialogRootContext();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectDialogRootContext()
+// `onClick` → `onOpenChange(false, 'close-press')` from the shared surface builder.
+const close = getDialogCloseSurface(rootContext)
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     :type="as === 'button' ? 'button' : undefined"
-    @click="rootContext.onOpenChange(false)"
+    v-bind="close.attrs.value"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

@@ -1,88 +1,86 @@
-/* eslint-disable sonarjs/regex-complexity */
-import type { Color, HSBColor, HSLColor, RGBColor } from './types';
-import { isString } from '@vinicunca/perkakas';
+import type { Color, HSBColor, HSLColor, RGBColor } from './types'
 
-const HEX3_RE = /^[0-9A-F]{3}$/i;
-const HEX6_RE = /^[0-9A-F]{6}$/i;
-const HEX8_RE = /^[0-9A-F]{8}$/i;
-const RGB_RE = /rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)/;
-const HSL_RE = /hsla?\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*(?:,\s*([\d.]+)\s*)?\)/;
-const HSB_RE = /hsb[av]?\(\s*([\d.]+)\s*,\s*([\d.]+)%?\s*,\s*([\d.]+)%?\s*(?:,\s*([\d.]+)\s*)?\)/;
+const HEX3_RE = /^[0-9A-F]{3}$/i
+const HEX6_RE = /^[0-9A-F]{6}$/i
+const HEX8_RE = /^[0-9A-F]{8}$/i
+const RGB_RE = /rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)/
+const HSL_RE = /hsla?\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*(?:,\s*([\d.]+)\s*)?\)/
+const HSB_RE = /hs[bv]a?\(\s*([\d.]+)\s*,\s*([\d.]+)%?\s*,\s*([\d.]+)%?\s*(?:,\s*([\d.]+)\s*)?\)/
 
 /**
  * Parses a color string into a Color object.
  * Supports hex (#rrggbb, #rgb), rgb(), hsl(), and hsb()/hsv() formats.
  */
 export function parseColor(value: string): Color {
-  const trimmed = value.trim().toLowerCase();
+  const trimmed = value.trim().toLowerCase()
 
   // Hex format
   if (trimmed.startsWith('#')) {
-    return parseHex(trimmed);
+    return parseHex(trimmed)
   }
 
   // rgb() format
   if (trimmed.startsWith('rgb')) {
-    return parseRgb(trimmed);
+    return parseRgb(trimmed)
   }
 
   // hsl() format
   if (trimmed.startsWith('hsl')) {
-    return parseHsl(trimmed);
+    return parseHsl(trimmed)
   }
 
   // hsb() or hsv() format
   if (trimmed.startsWith('hsb') || trimmed.startsWith('hsv')) {
-    return parseHsb(trimmed);
+    return parseHsb(trimmed)
   }
 
-  throw new Error(`Unable to parse color: ${value}`);
+  throw new Error(`Unable to parse color: ${value}`)
 }
 
 function parseHex(hex: string): RGBColor {
-  let normalized = hex.slice(1);
+  let normalized = hex.slice(1)
 
   // Validate hex format (3, 6, or 8 hex digits)
   if (!HEX3_RE.test(normalized) && !HEX6_RE.test(normalized) && !HEX8_RE.test(normalized)) {
-    throw new Error(`Invalid hex color: ${hex}. Expected format: #RGB, #RRGGBB, or #RRGGBBAA`);
+    throw new Error(`Invalid hex color: ${hex}. Expected format: #RGB, #RRGGBB, or #RRGGBBAA`)
   }
 
   // Expand shorthand (e.g., #f00 -> #ff0000)
   if (normalized.length === 3) {
-    normalized = normalized.split('').map((c) => c + c).join('');
+    normalized = normalized.split('').map(c => c + c).join('')
   }
 
   // Handle 6-digit hex
   if (normalized.length === 6) {
-    const bigint = parseInt(normalized, 16);
+    const bigint = parseInt(normalized, 16)
     return {
       space: 'rgb',
       r: (bigint >> 16) & 255,
       g: (bigint >> 8) & 255,
       b: bigint & 255,
       alpha: 1,
-    };
+    }
   }
 
   // Handle 8-digit hex (with alpha)
   if (normalized.length === 8) {
-    const bigint = parseInt(normalized, 16);
+    const bigint = parseInt(normalized, 16)
     return {
       space: 'rgb',
       r: (bigint >> 24) & 255,
       g: (bigint >> 16) & 255,
       b: (bigint >> 8) & 255,
       alpha: (bigint & 255) / 255,
-    };
+    }
   }
 
-  throw new Error(`Invalid hex color: ${hex}`);
+  throw new Error(`Invalid hex color: ${hex}`)
 }
 
 function parseRgb(rgb: string): RGBColor {
-  const match = rgb.match(RGB_RE);
+  const match = rgb.match(RGB_RE)
   if (!match) {
-    throw new Error(`Invalid RGB color: ${rgb}`);
+    throw new Error(`Invalid RGB color: ${rgb}`)
   }
 
   return {
@@ -90,16 +88,14 @@ function parseRgb(rgb: string): RGBColor {
     r: parseFloat(match[1]),
     g: parseFloat(match[2]),
     b: parseFloat(match[3]),
-    alpha: match[4]
-      ? parseFloat(match[4])
-      : 1,
-  };
+    alpha: match[4] ? parseFloat(match[4]) : 1,
+  }
 }
 
 function parseHsl(hsl: string): HSLColor {
-  const match = hsl.match(HSL_RE);
+  const match = hsl.match(HSL_RE)
   if (!match) {
-    throw new Error(`Invalid HSL color: ${hsl}`);
+    throw new Error(`Invalid HSL color: ${hsl}`)
   }
 
   return {
@@ -107,16 +103,14 @@ function parseHsl(hsl: string): HSLColor {
     h: parseFloat(match[1]),
     s: parseFloat(match[2]),
     l: parseFloat(match[3]),
-    alpha: match[4]
-      ? parseFloat(match[4])
-      : 1,
-  };
+    alpha: match[4] ? parseFloat(match[4]) : 1,
+  }
 }
 
 function parseHsb(hsb: string): HSBColor {
-  const match = hsb.match(HSB_RE);
+  const match = hsb.match(HSB_RE)
   if (!match) {
-    throw new Error(`Invalid HSB color: ${hsb}`);
+    throw new Error(`Invalid HSB color: ${hsb}`)
   }
 
   return {
@@ -124,10 +118,8 @@ function parseHsb(hsb: string): HSBColor {
     h: parseFloat(match[1]),
     s: parseFloat(match[2]),
     b: parseFloat(match[3]),
-    alpha: match[4]
-      ? parseFloat(match[4])
-      : 1,
-  };
+    alpha: match[4] ? parseFloat(match[4]) : 1,
+  }
 }
 
 /**
@@ -135,10 +127,10 @@ function parseHsb(hsb: string): HSBColor {
  * If already a Color, returns it. If a string, parses it.
  */
 export function normalizeColor(value: string | Color): Color {
-  if (isString(value)) {
-    return parseColor(value);
+  if (typeof value === 'string') {
+    return parseColor(value)
   }
-  return value;
+  return value
 }
 
 /**
@@ -146,9 +138,10 @@ export function normalizeColor(value: string | Color): Color {
  */
 export function isValidColor(value: string): boolean {
   try {
-    parseColor(value);
-    return true;
-  } catch {
-    return false;
+    parseColor(value)
+    return true
+  }
+  catch {
+    return false
   }
 }

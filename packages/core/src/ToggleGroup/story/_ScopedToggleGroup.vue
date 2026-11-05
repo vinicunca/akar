@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ToggleGroupItem, ToggleGroupRoot } from '..';
+import { ToggleGroupItem, ToggleGroupRoot } from '..'
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { SelectRootEmits, SelectRootProps } from '..';
-import { Icon } from '@iconify/vue';
-import { useForwardPropsEmits } from '@/shared';
+import type { SelectRootEmits, SelectRootProps } from '..'
+import { Icon } from '@iconify/vue'
+import { useForwardPropsEmits } from '@/shared'
 import {
   SelectContent,
   SelectGroup,
@@ -16,19 +16,13 @@ import {
   SelectTrigger,
   SelectValue,
   SelectViewport,
-} from '..';
+} from '..'
 
-const props = withDefaults(defineProps<SelectRootProps & { options?: Array<any> }>(), {
-  options: () => [
-    'Apple',
-    'Banana',
-    'Blueberry',
-    'Grapes',
-    'Pineapple',
-  ],
-});
-const emits = defineEmits<SelectRootEmits>();
-const forwarded = useForwardPropsEmits(props, emits);
+const props = withDefaults(defineProps<SelectRootProps & { options?: any[] }>(), {
+  options: () => ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple'],
+})
+const emits = defineEmits<SelectRootEmits>()
+const forwarded = useForwardPropsEmits(props, emits)
 </script>
 
 <template>

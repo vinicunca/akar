@@ -1,40 +1,23 @@
-import type { AcceptableValue } from '@/shared/types';
-import { isDeepEqual, isFunction, isString } from '@vinicunca/perkakas';
+import type { AcceptableValue } from '@/shared/types'
 
-export const OPEN_KEYS = [' ', 'Enter', 'ArrowUp', 'ArrowDown'];
-export const SELECTION_KEYS = [' ', 'Enter'];
-export const CONTENT_MARGIN = 10;
+// `compare` / `valueComparator` moved to `@/shared/compare` (#2824); re-exported so existing imports keep working.
+export { compare, valueComparator } from '@/shared'
 
-export function valueComparator<T>(value: T | Array<T> | undefined, currentValue: T, comparator?: string | ((a: T, b: T) => boolean)) {
-  if (value === undefined) {
-    return false;
-  } else if (Array.isArray(value)) {
-    return value.some((val) => compare(val, currentValue, comparator));
-  } else {
-    return compare(value, currentValue, comparator);
-  }
+export const OPEN_KEYS = [' ', 'Enter', 'ArrowUp', 'ArrowDown']
+export const SELECTION_KEYS = [' ', 'Enter']
+export const CONTENT_MARGIN = 10
+
+/**
+ * How far a scroll button moves: one item. The selected item's height, or the
+ * first rendered option's when that item is detached (a `SelectVirtualizer`
+ * recycles its rows) or missing.
+ */
+export function getScrollStep(viewport: HTMLElement, selectedItem?: HTMLElement) {
+  if (selectedItem?.isConnected)
+    return selectedItem.offsetHeight
+  return viewport.querySelector<HTMLElement>('[role=option]')?.offsetHeight ?? 0
 }
 
-export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((a: T, b: T) => boolean)) {
-  if (value === undefined || currentValue === undefined) {
-    return false;
-  }
-
-  if (isString(value)) {
-    return value === currentValue;
-  }
-
-  if (isFunction(comparator)) {
-    return comparator(value, currentValue);
-  }
-
-  if (isString(comparator)) {
-    return value?.[comparator as keyof T] === currentValue?.[comparator as keyof T];
-  }
-
-  return isDeepEqual(value, currentValue);
-}
-
-export function shouldShowPlaceholder(value?: AcceptableValue | Array<AcceptableValue>): boolean {
-  return value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 0);
+export function shouldShowPlaceholder(value?: AcceptableValue | AcceptableValue[]): boolean {
+  return value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 0)
 }

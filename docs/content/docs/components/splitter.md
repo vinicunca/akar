@@ -1,0 +1,381 @@
+---
+title: Splitter
+description: A component that divides your layout into resizable sections.
+name: splitter
+aria: https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/
+---
+
+# Splitter
+
+<Description>
+A component that divides your layout into resizable sections.
+</Description>
+
+<ComponentPreview name="Splitter" />
+
+## Features
+
+<Highlights
+  :features="[
+    'Supports keyboard interaction.',
+    'Supports horizontal/vertical layout.',
+    'Supports nested layout.',
+    'Supports Right to Left direction.',
+    'Can resize across another panel.',
+    'Can be mounted conditionally.',
+    'Supports percent and pixel sizing.'
+  ]"
+/>
+
+## Installation
+
+Install the component from your command line.
+
+<InstallationTabs value="reka-ui" />
+
+## Anatomy
+
+Import all parts and piece them together.
+
+```vue
+<script setup>
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
+</script>
+
+<template>
+  <SplitterGroup>
+    <SplitterPanel />
+    <SplitterResizeHandle />
+  </SplitterGroup>
+</template>
+```
+
+## API Reference
+
+### Group
+
+Contains all the parts of a Splitter.
+
+<!-- @include: @/meta/SplitterGroup.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-orientation]',
+      values: ['vertical', 'horizontal'],
+    },
+    {
+      attribute: '[data-state]',
+      values: ['open', 'closed'],
+    },
+  ]"
+/>
+
+### Panel
+
+A collapsible section.
+
+<!-- @include: @/meta/SplitterPanel.md -->
+
+### Resize Handle
+
+Handle that use for resizing.
+
+<!-- @include: @/meta/SplitterResizeHandle.md -->
+
+<DataAttributesTable
+  :data="[
+    {
+      attribute: '[data-state]',
+      values: ['drag', 'hover', 'inactive'],
+    },
+    {
+      attribute: '[data-disabled]',
+      values: 'Present when disabled',
+    },
+    {
+      attribute: '[data-orientation]',
+      values: ['vertical', 'horizontal'],
+    }
+  ]"
+/>
+
+## Examples
+
+### Collapsible
+
+Use the `collapsible` prop to allow the panel to collapse into `collapsedSize` when `minSize` is reached.
+
+(`collapsedSize` and `minSize` props are required.)
+
+```vue line=4-6
+<template>
+  <SplitterGroup>
+    <SplitterPanel
+      collapsible
+      :collapsed-size="10"
+      :min-size="35"
+    >
+      Panel A
+    </SplitterPanel>
+    <SplitterResizeHandle />
+    <SplitterPanel>
+      Panel B
+    </SplitterPanel>
+  </SplitterGroup>
+</template>
+```
+
+### Persist in localStorage
+
+Use the `autoSaveId` prop to save the layout data into `localStorage`.
+
+```vue line=2
+<template>
+  <SplitterGroup auto-save-id="any-id">
+    …
+  </SplitterGroup>
+</template>
+```
+
+### Persist layout with SSR
+
+By default, Splitter uses `localStorage` to persist layouts. With server rendering, this can cause a flicker when the default layout (rendered on the server) is replaced with the persisted layout (in `localStorage`). The way to avoid this flicker is to also persist the layout with a cookie like so:
+
+```vue line=3,,8-9,11,15
+<!-- with Nuxt -->
+<script setup lang="ts">
+const layout = useCookie<number[]>('splitter:layout')
+</script>
+
+<template>
+  <SplitterGroup
+    direction="horizontal"
+    @layout="layout = $event"
+  >
+    <SplitterPanel :default-size="layout[0]">
+      …
+    </SplitterPanel>
+    <SplitterResizeHandle />
+    <SplitterPanel :default-size="layout[1]">
+      …
+    </SplitterPanel>
+  </SplitterGroup>
+</template>
+```
+
+### Controlled layout
+
+Bind `v-model:layout` to read or set every panel size at once. Each entry is in its panel's `sizeUnit`, the same values `@layout` reports. A controlled layout takes precedence over `defaultSize`, and `autoSaveId` storage is neither read nor written while the layout is controlled.
+
+`update:layout` receives a second `details` argument whose `reason` is `drag`, `keyboard` (arrow keys, Home/End and the Enter collapse toggle), `panel-change` (the initial layout, a restored saved layout, panels being added, removed or reconfigured, or a controlled layout corrected to fit the constraints), `group-resize` (`px` panels keeping their size while the group resizes) or `imperative-action` (the panel `collapse()`, `expand()` and `resize()` methods). It fires only when the layout changes.
+
+Only `drag`, `keyboard` and `imperative-action` are cancellable: call `details.cancel()` in `beforeUpdate:layout` to veto them. `panel-change` and `group-resize` are structural: they skip `beforeUpdate:layout`, are always applied, and are emitted so the model follows, because the group must always hold a valid layout.
+
+The layout you pass is a request:
+
+- It must fill the group. Sizes that break a panel's constraints, or do not add up to the whole group, are corrected; the group applies the corrected layout and emits it once with reason `panel-change`. With mixed units the `px` entries are converted first, so `[200, 50]` (a 200px panel and a 50% panel) in a 1000px group is 20% + 50% and is rescaled to fill the group.
+- An array whose length differs from the number of panels is ignored, with a warning in development.
+- In controlled mode a drag, key press or panel method emits `update:layout` and waits: the group, `@layout`, the panel `@resize` / `@collapse` / `@expand` events and `getSize()` reflect the change only after the parent passes the new layout back. Without an `update:layout` handler the panels do not move.
+
+```vue line=2,6-9,15-16
+<script setup lang="ts">
+import type { ChangeEventDetails, SplitterLayoutChangeReason } from 'reka-ui'
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'reka-ui'
+import { ref } from 'vue'
+
+const layout = ref([30, 70])
+
+function onBeforeUpdate(_value: number[], details: ChangeEventDetails<SplitterLayoutChangeReason>) {
+  if (details.reason === 'keyboard')
+    details.cancel()
+}
+</script>
+
+<template>
+  <SplitterGroup
+    v-model:layout="layout"
+    direction="horizontal"
+    @before-update:layout="onBeforeUpdate"
+  >
+    <SplitterPanel>Panel A</SplitterPanel>
+    <SplitterResizeHandle />
+    <SplitterPanel>Panel B</SplitterPanel>
+  </SplitterGroup>
+</template>
+```
+
+### Collapse/Expand programmatically
+
+Sometimes panels need to resize or collapse/expand in response to user actions. `SplitterPanel` exposes the `collapse` and `expand` methods to achieve this.
+
+```vue line=2,7,14
+<script setup lang="ts">
+const panelRef = ref<InstanceType<typeof SplitterPanel>>()
+</script>
+
+<template>
+  <button
+    @click="panelRef?.isCollapsed ? panelRef?.expand() : panelRef?.collapse() "
+  >
+    {{ panelRef?.isCollapsed ? 'Expand' : 'Collapse' }}
+  </button>
+
+  <SplitterGroup>
+    <SplitterPanel
+      ref="panelRef"
+      collapsible
+      :collapsed-size="10"
+      :min-size="35"
+    >
+      …
+    </SplitterPanel>
+    <SplitterResizeHandle />
+    <SplitterPanel>
+      …
+    </SplitterPanel>
+  </SplitterGroup>
+</template>
+```
+
+### Pixel sizing
+
+Use `sizeUnit="px"` when you need a panel to stay a fixed pixel width (great for sidebars) even if the parent container resizes. All sizing props (`defaultSize`, `minSize`, `maxSize`, `collapsedSize`) are interpreted using the chosen unit.
+
+```vue line=4-10
+<template>
+  <SplitterGroup direction="horizontal">
+    <SplitterPanel
+      size-unit="px"
+      :default-size="240"
+      :min-size="160"
+      :max-size="320"
+    >
+      Fixed-width sidebar
+    </SplitterPanel>
+    <SplitterResizeHandle />
+    <SplitterPanel>
+      Flexible content
+    </SplitterPanel>
+  </SplitterGroup>
+</template>
+```
+
+Pixel-sized panels also work with persistence (`autoSaveId`) and collapse/expand APIs; sizes are restored using the correct unit.
+
+### Custom handle
+
+Customize the handle by passing any element as the slot.
+
+ ```vue line=6-8
+<template>
+   <SplitterGroup>
+     <SplitterPanel>
+       …
+     </SplitterPanel>
+     <SplitterResizeHandle>
+       <Icon icon="radix-icons-drag-handle-dots-2" />
+     </SplitterResizeHandle>
+     <SplitterPanel>
+       …
+     </SplitterPanel>
+   </SplitterGroup>
+</template>
+```
+
+### SSR
+
+Splitter component heavily relies on unique `id`, however for Vue<3.4 we don't have a reliable way of generating [SSR-friendly `id`](https://github.com/vuejs/rfcs/discussions/557).
+
+Thus, if you are using Nuxt or other SSR framework, you are required to manually add the `id` for all Splitter components. Alternatively, you can wrap the component with `<ClientOnly>`.
+
+```vue
+<template>
+  <SplitterGroup id="group-1">
+    <SplitterPanel id="group-1-panel-1">
+      …
+    </SplitterPanel>
+    <SplitterResizeHandle id="group-1-resize-1">
+      <Icon icon="radix-icons-drag-handle-dots-2" />
+    </SplitterResizeHandle>
+    <SplitterPanel id="group-1-panel-2">
+      …
+    </SplitterPanel>
+  </SplitterGroup>
+</template>
+```
+
+## Headless composable
+
+`useSplitter` owns the group: the layout model, constraints, `storage`, and drag and keyboard resizing. `useSplitterPanel` and `useSplitterResizeHandle` register a panel and a handle with the group's `context`. Bind each surface's `attrs.value` to its element and pass the group and handle elements in.
+
+```vue
+<script setup lang="ts">
+import { useSplitter, useSplitterPanel, useSplitterResizeHandle } from 'reka-ui'
+import { ref } from 'vue'
+
+const groupEl = ref<HTMLElement | null>(null)
+const handleEl = ref<HTMLElement | null>(null)
+
+const splitter = useSplitter({ id: 'editor', direction: 'horizontal', element: groupEl })
+const sidebar = useSplitterPanel(splitter.context, { id: 'sidebar', minSize: 20 })
+const handle = useSplitterResizeHandle(splitter.context, { id: 'editor-handle', element: handleEl })
+const main = useSplitterPanel(splitter.context, { id: 'main' })
+</script>
+
+<template>
+  <div ref="groupEl" v-bind="splitter.root.attrs.value">
+    <div v-bind="sidebar.root.attrs.value">
+      Sidebar
+    </div>
+    <div ref="handleEl" v-bind="handle.root.attrs.value" />
+    <div v-bind="main.root.attrs.value">
+      Main
+    </div>
+  </div>
+</template>
+```
+
+`useSplitter` takes `layout` with `onUpdate` for a controlled layout, `onBeforeUpdate(value, details)` to cancel a `drag`, `keyboard` or `imperative-action` change, and `onLayout` for the `@layout` notification. The composables are experimental and register watchers, so call them inside `setup()`. Pass stable `id`s when rendering on the server.
+
+## Real-world examples
+
+- [Splitter IDE Layout](/examples/splitter-ide-layout): Nest Splitter groups into an editor layout with collapsible panels and sizes persisted across reloads.
+
+## Accessibility
+
+Adheres to the [Window Splitter WAI-ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter).
+
+### Keyboard Interactions
+
+<KeyboardTable :data="[
+    {
+      keys: ['Enter'],
+      description: 'If the primary pane is not collapsed, collapses the pane. If the pane is collapsed, restores the splitter to its previous position.',
+    },
+    {
+      keys: ['ArrowDown'],
+      description: 'Moves a horizontal splitter down.',
+    },
+    {
+      keys: ['ArrowUp'],
+      description: 'Moves a horizontal splitter up.',
+    },
+    {
+      keys: ['ArrowRight'],
+      description: 'Moves a vertical splitter to the right.',
+    },
+    {
+      keys: ['ArrowLeft'],
+      description: 'Moves a vertical splitter to the left.',
+    },
+    {
+      keys: ['Home'],
+      description: 'Moves splitter to the position that gives the primary pane its smallest allowed size. ',
+    },
+    {
+      keys: ['End'],
+      description: 'Moves splitter to the position that gives the primary pane its largest allowed size.',
+    }]" />
+
+In a right-to-left layout (`dir="rtl"` on `SplitterGroup`, or on a [`ConfigProvider`](/docs/utilities/config-provider) around it), `ArrowLeft` on a horizontal handle grows the panel before it and `ArrowRight` shrinks it. A `dir` prop on `SplitterGroup` is also rendered as its `dir` attribute, so the panels are laid out right to left. Without the prop, the group renders no `dir` attribute and its panels follow the page's direction: with only a `ConfigProvider`, set `dir="rtl"` on `<html>` or a parent element too. See [Internationalization](/docs/guides/i18n#what-changes-in-rtl).

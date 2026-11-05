@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import Presence from '../Presence';
-import Toggle from './_Toggle.vue';
+import { ref } from 'vue'
+import Presence from '../Presence'
+import Toggle from './_Toggle.vue'
 
 defineOptions({
   inheritAttrs: false,
-});
-const open = ref(false);
-const node = ref<HTMLElement>();
+})
+const open = ref(false)
+const node = ref<HTMLElement>()
 </script>
 
 <template>

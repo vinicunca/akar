@@ -1,27 +1,21 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { computed, ref, watch } from 'vue';
-import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '@/Combobox';
-import { useFilter } from '@/shared';
-import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..';
+import { Icon } from '@iconify/vue'
+import { computed, ref, watch } from 'vue'
+import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '@/Combobox'
+import { useFilter } from '@/shared'
+import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..'
 
-const { contains } = useFilter({ sensitivity: 'base' });
+const { contains } = useFilter({ sensitivity: 'base' })
 
-const query = ref('');
-const values = ref(['Apple']);
-const options = [
-  'Apple',
-  'Banana',
-  'Blueberry',
-  'Grapes',
-  'Pineapple',
-];
+const query = ref('')
+const values = ref(['Apple'])
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 
-const filteredOptions = computed(() => options.filter((option) => contains(option, query.value) && !values.value.includes(option)));
+const filteredOptions = computed(() => options.filter(option => contains(option, query.value) && !values.value.includes(option)))
 
 watch(values, () => {
-  query.value = '';
-}, { deep: true });
+  query.value = ''
+}, { deep: true })
 </script>
 
 <template>

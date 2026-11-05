@@ -1,29 +1,26 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from 'vue';
-import { useForwardExpose } from '@/shared';
-import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
-import ScrollAreaScrollbarImpl from './ScrollAreaScrollbarImpl.vue';
-import { injectScrollAreaScrollbarVisibleContext } from './ScrollAreaScrollbarVisible.vue';
-import { getThumbSize } from './utils';
+import { onMounted, onUnmounted } from 'vue'
+import { useForwardElement } from '@/shared'
+import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue'
+import ScrollAreaScrollbarImpl from './ScrollAreaScrollbarImpl.vue'
+import { injectScrollAreaScrollbarVisibleContext } from './ScrollAreaScrollbarVisible.vue'
+import { getScrollAreaThumbSizeVar } from './useScrollArea'
 
-const rootContext = injectScrollAreaRootContext();
-const scrollbarVisibleContext = injectScrollAreaScrollbarVisibleContext();
+const rootContext = injectScrollAreaRootContext()
+const scrollbarVisibleContext = injectScrollAreaScrollbarVisibleContext()
 
-const { forwardRef, currentElement: scrollbarElement } = useForwardExpose();
+const { forwardRef, currentElement: scrollbarElement, expose } = useForwardElement()
+defineExpose(expose)
 
 onMounted(() => {
-  if (scrollbarElement.value) {
-    rootContext.onScrollbarXChange(scrollbarElement.value);
-  }
-});
-
+  if (scrollbarElement.value)
+    rootContext.onScrollbarXChange(scrollbarElement.value)
+})
 // Clear the registration on unmount so consumers (e.g. ScrollAreaCorner) don't
 // hold a stale reference once the scrollbar is removed (e.g. between hover cycles).
 onUnmounted(() => {
-  rootContext.onScrollbarXChange(null);
-});
-
-const sizes = computed(() => scrollbarVisibleContext.sizes.value);
+  rootContext.onScrollbarXChange(null)
+})
 </script>
 
 <template>
@@ -33,9 +30,9 @@ const sizes = computed(() => scrollbarVisibleContext.sizes.value);
     data-orientation="horizontal"
     :style="{
       bottom: 0,
-      left: rootContext.dir.value === 'rtl' ? 'var(--akar-scroll-area-corner-width)' : 0,
-      right: rootContext.dir.value === 'ltr' ? 'var(--akar-scroll-area-corner-width)' : 0,
-      ['--akar-scroll-area-thumb-width' as any]: sizes ? `${getThumbSize(sizes)}px` : undefined,
+      left: rootContext.dir.value === 'rtl' ? 'var(--reka-scroll-area-corner-width)' : 0,
+      right: rootContext.dir.value === 'ltr' ? 'var(--reka-scroll-area-corner-width)' : 0,
+      ...getScrollAreaThumbSizeVar(scrollbarVisibleContext, true),
     }"
     @on-drag-scroll="scrollbarVisibleContext.onDragScroll($event.x)"
   >

@@ -1,42 +1,53 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface RadioGroupIndicatorProps extends PrimitiveProps {
   /**
    * Used to force mounting when more control is needed. Useful when
    * controlling animation with Vue animation libraries.
    */
-  forceMount?: boolean;
+  forceMount?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { Presence } from '@/Presence';
-import { Primitive } from '@/Primitive';
-import { injectRadioGroupItemContext } from './RadioGroupItem.vue';
+import { mergeProps } from 'vue'
+import { Presence } from '@/Presence'
+import { renderAs } from '@/Primitive/renderAs'
+import { useLingeringPresence } from '@/shared/useLingeringPresence'
+import { injectRadioGroupItemContext } from './RadioGroupItem.vue'
+import { getRadioGroupIndicatorSurface } from './useRadioGroup'
 
-withDefaults(defineProps<RadioGroupIndicatorProps>(), {
+const props = withDefaults(defineProps<RadioGroupIndicatorProps>(), {
   as: 'span',
-});
+})
 
-const { forwardRef } = useForwardExpose();
-const itemContext = injectRadioGroupItemContext();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const itemContext = injectRadioGroupItemContext()
+// Same derivation as a standalone consumer — one source for `data-state` / `data-disabled`.
+const indicator = getRadioGroupIndicatorSurface(itemContext)
+
+// Mounts no `Presence` while not shown; see `useLingeringPresence`.
+const shown = () => props.forceMount || itemContext.checked.value
+const lingering = useLingeringPresence(shown)
 </script>
 
 <template>
   <Presence
-    :present="forceMount || itemContext.checked.value"
+    v-if="lingering.mounted()"
+    :present="shown()"
+    :appear="lingering.appear()"
+    @vue:mounted="lingering.onMounted"
+    @complete="lingering.onComplete"
   >
-    <Primitive
+    <component
+      :is="renderAs(as, asChild)"
       :ref="forwardRef"
-      :data-state="itemContext.checked.value ? 'checked' : 'unchecked'"
-      :data-disabled="itemContext.disabled.value ? '' : undefined"
-      :as-child="asChild"
-      :as="as"
-      v-bind="$attrs"
+      v-bind="mergeProps(indicator.attrs.value, $attrs)"
     >
       <slot />
-    </Primitive>
+    </component>
   </Presence>
 </template>

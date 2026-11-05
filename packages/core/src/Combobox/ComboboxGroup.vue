@@ -1,54 +1,44 @@
 <script lang="ts">
-import type { ListboxGroupProps } from '@/Listbox';
-import { computed, onMounted, onUnmounted } from 'vue';
-import { createContext, useId } from '@/shared';
-import { injectComboboxRootContext } from './ComboboxRoot.vue';
+import type { ListboxGroupProps } from '@/Listbox'
+import { createContext, useForwardElement, useId } from '@/shared'
 
 export interface ComboboxGroupProps extends ListboxGroupProps {}
 
 type ComboboxGroupContext = {
-  id: string;
-  labelId: string;
-};
+  id: string
+  labelId: string
+}
 
 export const [injectComboboxGroupContext, provideComboboxGroupContext]
-  = createContext<ComboboxGroupContext>('ComboboxGroup');
+  = createContext<ComboboxGroupContext>('ComboboxGroup')
 </script>
 
 <script setup lang="ts">
-import { ListboxGroup } from '@/Listbox';
+import { reactive } from 'vue'
+import { ListboxGroup } from '@/Listbox'
 
-const props = defineProps<ComboboxGroupProps>();
-const id = useId(undefined, 'akar-combobox-group');
-const rootContext = injectComboboxRootContext();
+const props = defineProps<ComboboxGroupProps>()
+const id = useId(undefined, 'reka-combobox-group')
 
-const isRender = computed(() => rootContext.ignoreFilter.value
-  ? true
-  : !rootContext.filterSearch.value
-      ? true
-      : rootContext.filterState.value.groups.has(id));
-
-const context = provideComboboxGroupContext({
+// Reactive: the label sets `labelId` once it sets up, and the group's
+// `aria-labelledby` follows, whenever that is (a label rendered later, or one
+// that is its own custom element).
+const context = provideComboboxGroupContext(reactive({
   id,
   labelId: '',
-});
+}))
 
-onMounted(() => {
-  if (!rootContext.allGroups.value.has(id)) {
-    rootContext.allGroups.value.set(id, new Set());
-  }
-});
-onUnmounted(() => {
-  rootContext.allGroups.value.delete(id);
-});
+// `ListboxGroup` hides itself (`hidden`, still mounted) while the filter leaves none of its items.
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <ListboxGroup
     :id="id"
+    :ref="forwardRef"
     :aria-labelledby="context.labelId"
     v-bind="props"
-    :hidden="isRender ? undefined : true"
   >
     <slot />
   </ListboxGroup>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { DateValue } from '@internationalized/date';
-import type { DateRangePickerRootProps } from '..';
-import { Label } from '@/Label';
+import type { DateRangePickerRootProps } from '..'
+import type { DateValue } from '@/date'
+import { Label } from '@/Label'
 import {
   DateRangePickerCalendar,
   DateRangePickerCell,
@@ -20,9 +20,9 @@ import {
   DateRangePickerPrev,
   DateRangePickerRoot,
   DateRangePickerTrigger,
-} from '..';
+} from '..'
 
-const props = defineProps<{ dateFieldProps?: DateRangePickerRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>();
+const props = defineProps<{ dateFieldProps?: DateRangePickerRootProps, emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>()
 </script>
 
 <template>
@@ -79,6 +79,7 @@ const props = defineProps<{ dateFieldProps?: DateRangePickerRootProps; emits?: {
         <DateRangePickerGrid
           v-for="month in grid"
           :key="month.value.toString()"
+          :value="month.value"
           :data-testid="`grid-${month.value.month}`"
         >
           <DateRangePickerGridHead :data-testid="`grid-head-${month.value.month}`">
@@ -101,12 +102,11 @@ const props = defineProps<{ dateFieldProps?: DateRangePickerRootProps; emits?: {
               <DateRangePickerCell
                 v-for="(weekDate, d) in weekDates"
                 :key="weekDate.toString()"
-                :date="weekDate"
+                :value="weekDate"
                 :data-testid="`cell-${weekDate.month}-${d}`"
               >
                 <DateRangePickerCellTrigger
-                  :day="weekDate"
-                  :month="month.value"
+                  :value="weekDate"
                   :data-testid="`date-${weekDate.month}-${weekDate.day}`"
                 />
               </DateRangePickerCell>

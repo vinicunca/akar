@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import Editable from './_DummyEditable.vue';
+import { ref } from 'vue'
+import Editable from './_DummyEditable.vue'
 
-const defaultValue = 'Default value';
-const modelValue = ref(defaultValue);
+const defaultValue = 'Default value'
+const modelValue = ref(defaultValue)
 </script>
 
 <template>
   <Story
     title="Editable/Chromatic"
-    :layout="{ type: 'grid', width: '50%', iframe: false }"
+    :layout="{ type: 'grid', width: '50%' }"
   >
     <Variant title="Uncontrolled (modelValue)">
       <Editable :default-value="defaultValue" />

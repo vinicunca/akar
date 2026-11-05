@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ColorFieldInput, ColorFieldRoot } from '../';
-import ColorField from './_ColorField.vue';
+import { ColorFieldInput, ColorFieldRoot } from '../'
+import ColorField from './_ColorField.vue'
 </script>
 
 <template>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { DismissableLayer } from '..';
-import DismissableBox from './_DismissableBox.vue';
+import { ref } from 'vue'
+import { DismissableLayer } from '..'
+import DismissableBox from './_DismissableBox.vue'
 
-const open = ref(false);
-const buttonRef = ref<HTMLElement>();
+const open = ref(false)
+const buttonRef = ref<HTMLElement>()
 </script>
 
 <template>
@@ -25,7 +25,7 @@ const buttonRef = ref<HTMLElement>();
       @dismiss="open = false"
       @focus-outside.prevent
       @pointer-down-outside="
-        (ev) => {
+        (ev: Event) => {
           if (ev.target === buttonRef) {
             ev.preventDefault();
           }

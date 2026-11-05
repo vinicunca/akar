@@ -2,33 +2,35 @@
 import type {
   MenuRadioItemEmits,
   MenuRadioItemProps,
-} from '@/Menu';
-import { useForwardExpose, useForwardPropsEmits } from '@/shared';
+} from '@/Menu'
+import { useForwardElement, useForwardPropsEmits } from '@/shared'
 
-export type DropdownMenuRadioItemEmits = MenuRadioItemEmits;
+export type DropdownMenuRadioItemEmits = MenuRadioItemEmits
 
 export interface DropdownMenuRadioItemProps extends MenuRadioItemProps {}
 </script>
 
 <script setup lang="ts">
-import { MenuRadioItem } from '@/Menu';
+import { MenuRadioItem } from '@/Menu'
 
-const props = defineProps<DropdownMenuRadioItemProps>();
-const emits = defineEmits<DropdownMenuRadioItemEmits>();
+const props = defineProps<DropdownMenuRadioItemProps>()
+const emits = defineEmits<DropdownMenuRadioItemEmits>()
 
 defineSlots<{
   default?: (props: {
     /** Current checked state */
-    checked: boolean;
-  }) => any;
-}>();
+    checked: boolean
+  }) => any
+}>()
 
-const forwarded = useForwardPropsEmits(props, emits);
-useForwardExpose();
+const forwarded = useForwardPropsEmits(props, emits)
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <MenuRadioItem
+    :ref="forwardRef"
     v-slot="slotProps"
     v-bind="forwarded"
   >

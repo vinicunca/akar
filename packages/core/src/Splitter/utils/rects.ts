@@ -1,8 +1,8 @@
 export interface Rectangle {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  x: number
+  y: number
+  width: number
+  height: number
 }
 
 export function intersects(
@@ -16,14 +16,15 @@ export function intersects(
       && rectOne.x + rectOne.width > rectTwo.x
       && rectOne.y < rectTwo.y + rectTwo.height
       && rectOne.y + rectOne.height > rectTwo.y
-    );
-  } else {
+    )
+  }
+  else {
     return (
       rectOne.x <= rectTwo.x + rectTwo.width
       && rectOne.x + rectOne.width >= rectTwo.x
       && rectOne.y <= rectTwo.y + rectTwo.height
       && rectOne.y + rectOne.height >= rectTwo.y
-    );
+    )
   }
 }
 
@@ -38,7 +39,7 @@ export function getIntersectingRectangle(
       y: 0,
       width: 0,
       height: 0,
-    };
+    }
   }
 
   return {
@@ -50,5 +51,5 @@ export function getIntersectingRectangle(
     height:
       Math.min(rectOne.y + rectOne.height, rectTwo.y + rectTwo.height)
       - Math.max(rectOne.y, rectTwo.y),
-  };
+  }
 }

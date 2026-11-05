@@ -1,28 +1,36 @@
 export {
   default as TooltipArrow,
   type TooltipArrowProps,
-} from './TooltipArrow.vue';
+} from './TooltipArrow.vue'
 export {
   default as TooltipContent,
   type TooltipContentEmits,
   type TooltipContentProps,
-} from './TooltipContent.vue';
+} from './TooltipContent.vue'
 export {
   default as TooltipPortal,
   type TooltipPortalProps,
-} from './TooltipPortal.vue';
+} from './TooltipPortal.vue'
 export {
   injectTooltipProviderContext,
   default as TooltipProvider,
   type TooltipProviderProps,
-} from './TooltipProvider.vue';
+} from './TooltipProvider.vue'
 export {
   injectTooltipRootContext,
+  type TooltipOpenChangeReason,
   default as TooltipRoot,
   type TooltipRootEmits,
   type TooltipRootProps,
-} from './TooltipRoot.vue';
+} from './TooltipRoot.vue'
 export {
   default as TooltipTrigger,
   type TooltipTriggerProps,
-} from './TooltipTrigger.vue';
+} from './TooltipTrigger.vue'
+export {
+  type TooltipContentState,
+  type TooltipTriggerState,
+  useTooltip,
+  type UseTooltipProps,
+  type UseTooltipReturn,
+} from './useTooltip'

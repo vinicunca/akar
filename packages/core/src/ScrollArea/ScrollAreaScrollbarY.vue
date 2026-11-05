@@ -1,29 +1,26 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from 'vue';
-import { useForwardExpose } from '@/shared';
-import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
-import ScrollAreaScrollbarImpl from './ScrollAreaScrollbarImpl.vue';
-import { injectScrollAreaScrollbarVisibleContext } from './ScrollAreaScrollbarVisible.vue';
-import { getThumbSize } from './utils';
+import { onMounted, onUnmounted } from 'vue'
+import { useForwardElement } from '@/shared'
+import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue'
+import ScrollAreaScrollbarImpl from './ScrollAreaScrollbarImpl.vue'
+import { injectScrollAreaScrollbarVisibleContext } from './ScrollAreaScrollbarVisible.vue'
+import { getScrollAreaThumbSizeVar } from './useScrollArea'
 
-const rootContext = injectScrollAreaRootContext();
-const scrollbarVisibleContext = injectScrollAreaScrollbarVisibleContext();
+const rootContext = injectScrollAreaRootContext()
+const scrollbarVisibleContext = injectScrollAreaScrollbarVisibleContext()
 
-const { forwardRef, currentElement: scrollbarElement } = useForwardExpose();
+const { forwardRef, currentElement: scrollbarElement, expose } = useForwardElement()
+defineExpose(expose)
 
 onMounted(() => {
-  if (scrollbarElement.value) {
-    rootContext.onScrollbarYChange(scrollbarElement.value);
-  }
-});
-
+  if (scrollbarElement.value)
+    rootContext.onScrollbarYChange(scrollbarElement.value)
+})
 // Clear the registration on unmount so consumers (e.g. ScrollAreaCorner) don't
 // hold a stale reference once the scrollbar is removed (e.g. between hover cycles).
 onUnmounted(() => {
-  rootContext.onScrollbarYChange(null);
-});
-
-const sizes = computed(() => scrollbarVisibleContext.sizes.value);
+  rootContext.onScrollbarYChange(null)
+})
 </script>
 
 <template>
@@ -35,8 +32,8 @@ const sizes = computed(() => scrollbarVisibleContext.sizes.value);
       top: 0,
       right: rootContext.dir.value === 'ltr' ? 0 : undefined,
       left: rootContext.dir.value === 'rtl' ? 0 : undefined,
-      bottom: 'var(--akar-scroll-area-corner-height)',
-      ['--akar-scroll-area-thumb-height' as any]: sizes ? `${getThumbSize(sizes)}px` : undefined,
+      bottom: 'var(--reka-scroll-area-corner-height)',
+      ...getScrollAreaThumbSizeVar(scrollbarVisibleContext, false),
     }"
     @on-drag-scroll="scrollbarVisibleContext.onDragScroll($event.y)"
   >

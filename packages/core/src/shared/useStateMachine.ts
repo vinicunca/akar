@@ -1,18 +1,18 @@
-import type { Ref } from 'vue';
-import { ref } from 'vue';
+import type { Ref } from 'vue'
+import { ref } from 'vue'
 
 interface Machine<S> {
-  [k: string]: { [k: string]: S };
+  [k: string]: { [k: string]: S }
 }
-type MachineState<T> = keyof T;
-type MachineEvent<T> = keyof UnionToIntersection<T[keyof T]>;
+type MachineState<T> = keyof T
+type MachineEvent<T> = keyof UnionToIntersection<T[keyof T]>
 
 // 🤯 https://fettblog.eu/typescript-union-to-intersection/
 type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (
   x: infer R,
 ) => any
   ? R
-  : never;
+  : never
 
 /**
  * The `useStateMachine` function is a TypeScript function that creates a state machine and returns the
@@ -29,20 +29,20 @@ export function useStateMachine<M>(
   initialState: MachineState<M>,
   machine: M & Machine<MachineState<M>>,
 ) {
-  const state = ref(initialState) as Ref<MachineState<M>>;
+  const state = ref(initialState) as Ref<MachineState<M>>
 
   function reducer(event: MachineEvent<M>) {
     // @ts-expect-error  state.value is keyof M
-    const nextState = machine[state.value][event];
-    return nextState ?? state.value;
+    const nextState = machine[state.value][event]
+    return nextState ?? state.value
   }
 
   const dispatch = (event: MachineEvent<M>) => {
-    state.value = reducer(event);
-  };
+    state.value = reducer(event)
+  }
 
   return {
     state,
     dispatch,
-  };
+  }
 }

@@ -1,16 +1,24 @@
 <script lang="ts">
-import type { PopoverArrowProps } from '..';
-import { PopoverArrow } from '..';
+import type { PopoverArrowProps } from '..'
+import { PopoverArrow } from '..'
 
 export interface DatePickerArrowProps extends PopoverArrowProps {}
 </script>
 
 <script setup lang="ts">
-const props = defineProps<DatePickerArrowProps>();
+import { useForwardElement } from '@/shared'
+
+const props = defineProps<DatePickerArrowProps>()
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <PopoverArrow v-bind="props">
+  <PopoverArrow
+    :ref="forwardRef"
+    v-bind="props"
+  >
     <slot />
   </PopoverArrow>
 </template>

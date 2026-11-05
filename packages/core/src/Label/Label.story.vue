@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Label } from '.';
+import { Label } from '.'
 </script>
 
 <template>

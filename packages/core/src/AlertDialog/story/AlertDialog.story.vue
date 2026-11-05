@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AlertDialog from './_AlertDialog.vue';
+import AlertDialog from './_AlertDialog.vue'
 </script>
 
 <template>

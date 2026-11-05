@@ -1,28 +1,22 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { useFilter } from '@/shared';
-import { TagsInputInput, TagsInputItem, TagsInputItemText, TagsInputRoot } from '@/TagsInput';
-import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxRoot, ComboboxViewport } from '..';
+import { computed, ref } from 'vue'
+import { useFilter } from '@/shared'
+import { TagsInputInput, TagsInputItem, TagsInputItemText, TagsInputRoot } from '@/TagsInput'
+import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxRoot, ComboboxViewport } from '..'
 
 const props = withDefaults(defineProps<{
-  addOnBlur?: boolean;
+  addOnBlur?: boolean
 }>(), {
   addOnBlur: false,
-});
+})
 
-const { contains } = useFilter({ sensitivity: 'base' });
+const { contains } = useFilter({ sensitivity: 'base' })
 
-const query = ref('');
-const values = ref<Array<string>>([]);
-const options = [
-  'Apple',
-  'Banana',
-  'Blueberry',
-  'Grapes',
-  'Pineapple',
-];
+const query = ref('')
+const values = ref<string[]>([])
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
 
-const filteredOptions = computed(() => options.filter((option) => contains(option, query.value) && !values.value.includes(option)));
+const filteredOptions = computed(() => options.filter(option => contains(option, query.value) && !values.value.includes(option)))
 </script>
 
 <template>

@@ -1,41 +1,44 @@
 <script setup lang="ts">
-import type { DialogContentImplEmits, DialogContentImplProps } from './DialogContentImpl.vue';
-import { computed, ref, watch } from 'vue';
-import { useEmitAsProps, useForwardExpose } from '@/shared';
-import DialogContentImpl from './DialogContentImpl.vue';
-import { injectDialogRootContext } from './DialogRoot.vue';
+import type { DialogContentImplEmits, DialogContentImplProps } from './DialogContentImpl.vue'
+import { computed, ref, watch } from 'vue'
+import { useEmitAsProps, useForwardElement } from '@/shared'
+import { getPopupRootStore } from '@/shared/popupHandle'
+import DialogContentImpl from './DialogContentImpl.vue'
+import { injectDialogRootContext } from './DialogRoot.vue'
 
-const props = defineProps<DialogContentImplProps & { present: boolean }>();
-const emits = defineEmits<DialogContentImplEmits>();
+const props = defineProps<DialogContentImplProps & { present: boolean }>()
+const emits = defineEmits<DialogContentImplEmits>()
 
-const emitsAsProps = useEmitAsProps(emits);
-useForwardExpose();
+const emitsAsProps = useEmitAsProps(emits)
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 
-const rootContext = injectDialogRootContext();
-const hasInteractedOutsideRef = ref(false);
-const hasPointerDownOutsideRef = ref(false);
+const rootContext = injectDialogRootContext()
+const handleStore = getPopupRootStore(rootContext)
+const hasInteractedOutsideRef = ref(false)
+const hasPointerDownOutsideRef = ref(false)
 
 const forwardedProps = computed(() => {
-  const { present: _, ...rest } = props;
-  return rest;
-});
+  const { present: _, ...rest } = props
+  return rest
+})
 
 // When `unmountOnHide` is `false` the content stays mounted on close, so
 // `close-auto-focus` never fires. Restore focus to the trigger manually once
 // the content is no longer present, unless the user interacted outside.
 watch(() => props.present, (isPresent, wasPresent) => {
   if (!isPresent && wasPresent) {
-    if (!hasInteractedOutsideRef.value) {
-      rootContext.triggerElement.value?.focus();
-    }
-    hasInteractedOutsideRef.value = false;
-    hasPointerDownOutsideRef.value = false;
+    if (!hasInteractedOutsideRef.value)
+      rootContext.triggerElement.value?.focus()
+    hasInteractedOutsideRef.value = false
+    hasPointerDownOutsideRef.value = false
   }
-});
+})
 </script>
 
 <template>
   <DialogContentImpl
+    :ref="forwardRef"
     v-bind="{ ...forwardedProps, ...emitsAsProps }"
     :present="present"
     :trap-focus="false"
@@ -66,6 +69,13 @@ watch(() => props.present, (isPresent, wasPresent) => {
       const target = event.target as HTMLElement;
       const targetIsTrigger = rootContext.triggerElement.value?.contains(target);
       if (targetIsTrigger) event.preventDefault();
+
+      // Another detached trigger of the same handle: its click moves the open
+      // dialog there (Base UI), so this press is not a dismissal.
+      if (handleStore?.handle.value && handleStore.containsTrigger(target)) {
+        event.preventDefault();
+        hasInteractedOutsideRef = false;
+      }
 
       // On Safari if the trigger is inside a container with tabIndex={0}, when clicked
       // we will get the pointer down outside event on the trigger, but then a subsequent

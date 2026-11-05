@@ -1,5 +1,5 @@
-const { blackA, green, mauve, violet, red, indigo, purple, grass, teal } = require('@radix-ui/colors');
-const plugin = require('tailwindcss/plugin');
+const { blackA, green, mauve, violet, red, indigo, purple, grass, teal } = require('@radix-ui/colors')
+const plugin = require('tailwindcss/plugin')
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -44,10 +44,10 @@ export default {
         },
         slideDown: {
           from: { height: 0 },
-          to: { height: 'var(--akar-accordion-content-height)' },
+          to: { height: 'var(--reka-accordion-content-height)' },
         },
         slideUp: {
-          from: { height: 'var(--akar-accordion-content-height)' },
+          from: { height: 'var(--reka-accordion-content-height)' },
           to: { height: 0 },
         },
         enterFromRight: {
@@ -106,10 +106,10 @@ export default {
   plugins: [
     plugin(({ matchUtilities }) => {
       matchUtilities({
-        perspective: (value) => ({
+        perspective: value => ({
           perspective: value,
         }),
-      });
+      })
     }),
   ],
-};
+}

@@ -1,31 +1,41 @@
 export {
   default as EditableArea,
   type EditableAreaProps,
-} from './EditableArea.vue';
+} from './EditableArea.vue'
 export {
   default as EditableCancelTrigger,
   type EditableCancelTriggerProps,
-} from './EditableCancelTrigger.vue';
+} from './EditableCancelTrigger.vue'
 export {
   default as EditableEditTrigger,
   type EditableEditTriggerProps,
-} from './EditableEditTrigger.vue';
+} from './EditableEditTrigger.vue'
 export {
   default as EditableInput,
   type EditableInputProps,
-} from './EditableInput.vue';
+} from './EditableInput.vue'
 export {
   default as EditablePreview,
   type EditablePreviewProps,
-} from './EditablePreview.vue';
+} from './EditablePreview.vue'
 export {
   default as EditableRoot,
   type EditableRootEmits,
   type EditableRootProps,
   injectEditableRootContext,
-} from './EditableRoot.vue';
+} from './EditableRoot.vue'
 
 export {
   default as EditableSubmitTrigger,
   type EditableSubmitTriggerProps,
-} from './EditableSubmitTrigger.vue';
+} from './EditableSubmitTrigger.vue'
+export {
+  type EditableAreaState,
+  type EditableChangeReason,
+  type EditableInputState,
+  type EditablePreviewState,
+  type EditableTriggerState,
+  useEditable,
+  type UseEditableProps,
+  type UseEditableReturn,
+} from './useEditable'

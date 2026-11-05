@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
 import {
   NavigationMenuContent,
   NavigationMenuIndicator,
@@ -10,10 +10,10 @@ import {
   NavigationMenuRoot,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-} from '..';
-import NavigationMenuListItem from './_NavigationMenuListItem.vue';
+} from '..'
+import NavigationMenuListItem from './_NavigationMenuListItem.vue'
 
-const currentTrigger = ref('');
+const currentTrigger = ref('')
 </script>
 
 <template>
@@ -50,9 +50,9 @@ const currentTrigger = ref('');
                       >
                         <img
                           class="w-16"
-                          src="https://vinicunca.dev/logo.svg"
+                          src="https://reka-ui.com/logo.svg"
                         >
-                        <div class="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">Akar</div>
+                        <div class="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">Reka UI</div>
                         <p class="text-mauve4 text-[14px] leading-[1.3]">Unstyled, accessible components for Vue.</p>
                       </a>
                     </NavigationMenuLink>
@@ -102,7 +102,7 @@ const currentTrigger = ref('');
                     title="Getting started"
                     href="/docs/primitives/overview/getting-started"
                   >
-                    A quick tutorial to get you up and running with Akar.
+                    A quick tutorial to get you up and running with Reka UI.
                   </NavigationMenuListItem>
                   <NavigationMenuListItem
                     title="Styling"
@@ -126,7 +126,7 @@ const currentTrigger = ref('');
                     title="Releases"
                     href="/docs/primitives/overview/releases"
                   >
-                    Akar releases and their changelogs.
+                    Reka UI releases and their changelogs.
                   </NavigationMenuListItem>
                 </ul>
               </NavigationMenuContent>
@@ -135,14 +135,14 @@ const currentTrigger = ref('');
             <NavigationMenuItem>
               <NavigationMenuLink
                 class="text-grass11 hover:bg-green3 focus:shadow-green7 block select-none rounded-[4px] px-3 py-2 text-sm font-medium leading-none no-underline outline-none focus:shadow-[0_0_0_2px]"
-                href="https://github.com/vinicunca/akar"
+                href="https://github.com/unovue/reka-ui"
               >
                 GitHub
               </NavigationMenuLink>
             </NavigationMenuItem>
 
             <NavigationMenuIndicator
-              class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
+              class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--reka-navigation-menu-indicator-size] translate-x-[--reka-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
             >
               <div class="relative top-[70%] h-[12px] w-[12px] rotate-[45deg] bg-white border" />
             </NavigationMenuIndicator>
@@ -150,7 +150,7 @@ const currentTrigger = ref('');
 
           <div class="perspective-[2000px] absolute top-full left-0 flex w-full justify-center ">
             <NavigationMenuViewport
-              class="data-[state=open]:animate-scaleIn data-[state=closed]:animate-scaleOut relative mt-[10px] h-[var(--akar-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-xl bg-white transition-[width,_height] duration-300 sm:w-[var(--akar-navigation-menu-viewport-width)] border shadow-sm"
+              class="data-[state=open]:animate-scaleIn data-[state=closed]:animate-scaleOut relative mt-[10px] h-[var(--reka-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-xl bg-white transition-[width,_height] duration-300 sm:w-[var(--reka-navigation-menu-viewport-width)] border shadow-sm"
             />
           </div>
         </NavigationMenuRoot>

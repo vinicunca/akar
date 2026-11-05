@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { TimeRangeFieldRootEmits, TimeRangeFieldRootProps } from '..';
-import { useForwardPropsEmits } from '@/shared';
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from '..';
+import type { TimeRangeFieldRootEmits, TimeRangeFieldRootProps } from '..'
+import { useForwardPropsEmits } from '@/shared'
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from '..'
 
-const props = defineProps<TimeRangeFieldRootProps>();
-const emits = defineEmits<TimeRangeFieldRootEmits>();
-const forwarded = useForwardPropsEmits(props, emits);
+const props = defineProps<TimeRangeFieldRootProps>()
+const emits = defineEmits<TimeRangeFieldRootEmits>()
+const forwarded = useForwardPropsEmits(props, emits)
 </script>
 
 <template>

@@ -2,17 +2,16 @@ export default function debounce<T extends Function>(
   callback: T,
   durationMs = 10,
 ) {
-  let timeoutId: NodeJS.Timeout | null = null;
+  let timeoutId: NodeJS.Timeout | null = null
 
   const callable = (...args: any) => {
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
-    }
+    if (timeoutId !== null)
+      clearTimeout(timeoutId)
 
     timeoutId = setTimeout(() => {
-      callback(...args);
-    }, durationMs);
-  };
+      callback(...args)
+    }, durationMs)
+  }
 
-  return callable as unknown as T;
+  return callable as unknown as T
 }

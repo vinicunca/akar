@@ -1,16 +1,24 @@
 <script lang="ts">
-import type { PopoverCloseProps } from '..';
-import { PopoverClose } from '..';
+import type { PopoverCloseProps } from '..'
+import { PopoverClose } from '..'
 
 export interface DatePickerCloseProps extends PopoverCloseProps {}
 </script>
 
 <script setup lang="ts">
-const props = defineProps<DatePickerCloseProps>();
+import { useForwardElement } from '@/shared'
+
+const props = defineProps<DatePickerCloseProps>()
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <PopoverClose v-bind="props">
+  <PopoverClose
+    :ref="forwardRef"
+    v-bind="props"
+  >
     <slot />
   </PopoverClose>
 </template>

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { DismissableLayer } from '..';
-import DummyDialog from './_DummyDialog.vue';
-import DummyPopover from './_DummyPopover.vue';
+import { ref } from 'vue'
+import { DismissableLayer } from '..'
+import DummyDialog from './_DummyDialog.vue'
+import DummyPopover from './_DummyPopover.vue'
 
 function handleAlert() {
   // eslint-disable-next-line no-alert
-  alert('Alert');
+  alert('Alert')
 }
 
-const open = ref(false);
+const open = ref(false)
 </script>
 
 <template>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   PopoverContent,
   PopoverPortal,
   PopoverRoot,
   PopoverTrigger,
-} from '..';
+} from '..'
 
-const boundary = ref<HTMLElement>();
+const boundary = ref<HTMLElement>()
 </script>
 
 <template>
@@ -38,8 +38,8 @@ const boundary = ref<HTMLElement>();
                 padding: '8px',
                 color: 'white',
                 backgroundColor: 'black',
-                width: 'var(--akar-popper-available-width)',
-                height: 'var(--akar-popper-available-height)',
+                width: 'var(--reka-popper-available-width)',
+                height: 'var(--reka-popper-available-height)',
               }"
             >
               out of bound out of bound out of bound out of bound out of bound

@@ -1,49 +1,123 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose, useId } from '@/shared';
+import type { PopoverHandle } from './handle'
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement, useId, usePartId } from '@/shared'
 
-export interface PopoverTriggerProps extends PrimitiveProps {}
+export interface PopoverTriggerProps<Payload = unknown> extends PrimitiveProps {
+  /**
+   * A handle from `createPopoverHandle()` that connects this trigger to a
+   * `PopoverRoot` rendered elsewhere (outside this trigger's tree or portal).
+   */
+  handle?: PopoverHandle<Payload>
+  /** Passed to the Root's default slot while this trigger owns the popover. Requires a `handle`. */
+  payload?: Payload
+  /**
+   * Id of the element, which the content's `aria-labelledby` points at. With a
+   * `handle`, also the id the Root's `triggerId` refers to. Auto-generated when
+   * not provided.
+   */
+  id?: string
+}
 </script>
 
-<script setup lang="ts">
-import { onMounted } from 'vue';
-import { PopperAnchor } from '@/Popper';
-import { Primitive } from '@/Primitive';
-import { injectPopoverRootContext } from './PopoverRoot.vue';
+<script setup lang="ts" generic="Payload = unknown">
+import { computed, mergeProps, watch } from 'vue'
+import { usePopperAnchor } from '@/Popper/usePopperAnchor'
+import { renderAs } from '@/Primitive/renderAs'
+import { getPopupRootStore, usePopupHandleTrigger } from '@/shared/popupHandle'
+import { injectPopoverRootContext } from './PopoverRoot.vue'
+import { getPopoverOwnTriggerSlot, getPopoverTriggerSurface } from './usePopover'
 
-const props = withDefaults(defineProps<PopoverTriggerProps>(), {
+defineOptions({
+  // `$attrs` are merged under the part's own bindings: the precedence the
+  // former `<PopperAnchor as-child>` wrapper gave them.
+  inheritAttrs: false,
+})
+
+const props = withDefaults(defineProps<PopoverTriggerProps<Payload>>(), {
   as: 'button',
-});
+})
 
-const rootContext = injectPopoverRootContext();
+// A detached trigger (`handle`) may render outside any `PopoverRoot`.
+const rootContext = injectPopoverRootContext(props.handle ? null : undefined)
 
-const { forwardRef, currentElement: triggerElement } = useForwardExpose();
+const { forwardRef, currentElement: triggerElement, expose } = useForwardElement()
+defineExpose(expose)
 
-rootContext.triggerId ||= useId(undefined, 'akar-popover-trigger');
-rootContext.contentId ||= useId(undefined, 'akar-popover-content');
-onMounted(() => {
-  rootContext.triggerElement.value = triggerElement.value;
-});
+// Detached triggers (#2826): this trigger registers with the handle (its own,
+// or its Root's) and derives its own open state, so only the trigger that
+// opened the popover reports `aria-expanded` / `aria-controls`. The shared
+// surface builder runs against that per-trigger view of the context.
+// Only a trigger that joins a handle at setup draws its own id (an extra
+// `useId()` call would shift every later generated id in handle-less trees);
+// one whose Root gets a `handle` later uses the Root's trigger id. The `id`
+// prop wins.
+const detached = usePopupHandleTrigger<Payload>({
+  handle: () => props.handle,
+  rootContext,
+  attrId: () => props.id,
+  generatedId: props.handle || getPopupRootStore(rootContext)?.handle.value ? useId(undefined, 'reka-popover-trigger') : undefined,
+  element: triggerElement,
+  payload: () => props.payload,
+})
+// The handle's view of the trigger surface, built only once a handle is used.
+let detachedTrigger: ReturnType<typeof getPopoverTriggerSurface> | undefined
+function getDetachedTrigger() {
+  return detachedTrigger ??= getPopoverTriggerSurface({
+    get triggerId() {
+      return detached.id.value
+    },
+    get contentId() {
+      return detached.contentId.value!
+    },
+    open: detached.open,
+    onOpenToggle: (reason, event) => detached.store.value?.pressTrigger(detached.id.value, 'toggle', reason, event) ?? false,
+  } as Parameters<typeof getPopoverTriggerSurface>[0])
+}
+
+// id/aria/data-state + the toggling `onClick` all come from the shared surface
+// builder (single source with `usePopover()`); the popper anchor (skipped
+// when a `PopoverAnchor` is present), the element registration and the
+// tag-dependent `type` stay in the SFC. Listener order is unchanged: `$attrs`
+// merge BEFORE the element's own props, so a consumer `@click` still runs
+// before the surface's `onClick`.
+const trigger = rootContext ? getPopoverTriggerSurface(rootContext) : getDetachedTrigger()
+
+// Without a `handle`, the trigger renders its own id (its `id` prop, else the
+// Root's generated trigger id) and mirrors it into the Root, so the content's
+// `aria-labelledby` follows.
+const ownTriggerSlot = rootContext ? getPopoverOwnTriggerSlot(rootContext) : undefined
+const ownTriggerId = ownTriggerSlot ? usePartId(() => props.id, ownTriggerSlot, 'triggerId') : undefined
+const attrs = computed(() => detached.enabled.value
+  ? getDetachedTrigger().attrs.value
+  : ownTriggerId ? { ...trigger.attrs.value, id: ownTriggerId.value } : trigger.attrs.value)
+
+// The popper's anchor, unless a `PopoverAnchor` is (or the trigger is detached).
+const anchor = usePopperAnchor({
+  consumerAttrs: true,
+  element: triggerElement,
+  enabled: () => !detached.enabled.value && !rootContext?.hasCustomAnchor.value,
+})
+
+// Write this trigger's element into the Root's existing `triggerElement` ref
+// (never replace the ref: with a `handle` it is a writable computed that
+// resolves to the active detached trigger, and the write only sets the Root's
+// own fallback). Watched, so an `asChild` element swap stays in sync.
+if (rootContext) {
+  watch(triggerElement, (element, previous) => {
+    // On unmount, clear it only if it still holds this trigger's element.
+    if (element || rootContext.triggerElement.value === previous)
+      rootContext.triggerElement.value = element
+  }, { immediate: true })
+}
 </script>
 
 <template>
   <component
-    :is="rootContext.hasCustomAnchor.value ? Primitive : PopperAnchor"
-    as-child
+    :is="renderAs(as, props.asChild)"
+    :ref="forwardRef"
+    v-bind="mergeProps(anchor.consumerAttrs($attrs), attrs, { type: as === 'button' ? 'button' : undefined })"
   >
-    <Primitive
-      :id="rootContext.triggerId"
-      :ref="forwardRef"
-      :type="as === 'button' ? 'button' : undefined"
-      aria-haspopup="dialog"
-      :aria-expanded="rootContext.open.value"
-      :aria-controls="rootContext.open.value ? rootContext.contentId : undefined"
-      :data-state="rootContext.open.value ? 'open' : 'closed'"
-      :as="as"
-      :as-child="props.asChild"
-      @click="rootContext.onOpenToggle"
-    >
-      <slot />
-    </Primitive>
+    <slot />
   </component>
 </template>

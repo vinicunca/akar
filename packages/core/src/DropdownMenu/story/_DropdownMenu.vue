@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type {
   DropdownMenuItemEmits,
-} from '..';
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { useEmitAsProps } from '@/shared';
+} from '..'
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { useEmitAsProps } from '@/shared'
 import {
   DropdownMenuArrow,
   DropdownMenuCheckboxItem,
@@ -18,15 +18,15 @@ import {
   DropdownMenuRoot,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '..';
+} from '..'
 
-const props = defineProps<{ defaultOpen?: boolean }>();
+const props = defineProps<{ defaultOpen?: boolean }>()
 
-const emits = defineEmits<DropdownMenuItemEmits>();
-const toggleState = ref(props.defaultOpen ?? false);
-const checkboxOne = ref(false);
-const checkboxTwo = ref(false);
-const person = ref('pedro');
+const emits = defineEmits<DropdownMenuItemEmits>()
+const toggleState = ref(props.defaultOpen ?? false)
+const checkboxOne = ref(false)
+const checkboxTwo = ref(false)
+const person = ref('pedro')
 
 function handleClick() {
   // alert("hello!");
@@ -35,7 +35,7 @@ function handleClick() {
 function handleCheck(ev: any) {
   // checkboxOne.value = ev;
   // eslint-disable-next-line no-console
-  console.log(ev);
+  console.log(ev)
 }
 </script>
 

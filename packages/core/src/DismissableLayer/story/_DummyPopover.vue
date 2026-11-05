@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { FocusScope } from '@/FocusScope';
-import { PopperAnchor, PopperArrow, PopperContent, PopperRoot } from '@/Popper';
-import { DismissableLayer } from '..';
+import { ref } from 'vue'
+import { FocusScope } from '@/FocusScope'
+import { PopperAnchor, PopperArrow, PopperContent, PopperRoot } from '@/Popper'
+import { DismissableLayer } from '..'
 
 withDefaults(
   defineProps<{
-    openLabel?: string;
-    closeLabel?: string;
-    trapped?: boolean;
-    disableOutsidePointerEvents?: boolean;
-    color?: string;
+    openLabel?: string
+    closeLabel?: string
+    trapped?: boolean
+    disableOutsidePointerEvents?: boolean
+    color?: string
   }>(),
   {
     openLabel: 'Open',
@@ -19,10 +19,10 @@ withDefaults(
     disableOutsidePointerEvents: false,
     color: 'white',
   },
-);
+)
 
-const open = ref(false);
-const openButtonRef = ref();
+const open = ref(false)
+const openButtonRef = ref()
 </script>
 
 <template>

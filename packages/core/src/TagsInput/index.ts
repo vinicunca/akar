@@ -1,28 +1,28 @@
 export {
   default as TagsInputClear,
   type TagsInputClearProps,
-} from './TagsInputClear.vue';
+} from './TagsInputClear.vue'
 
 export {
   default as TagsInputInput,
   type TagsInputInputProps,
-} from './TagsInputInput.vue';
+} from './TagsInputInput.vue'
 
 export {
   injectTagsInputItemContext,
   default as TagsInputItem,
   type TagsInputItemProps,
-} from './TagsInputItem.vue';
+} from './TagsInputItem.vue'
 
 export {
   default as TagsInputItemDelete,
   type TagsInputItemDeleteProps,
-} from './TagsInputItemDelete.vue';
+} from './TagsInputItemDelete.vue'
 
 export {
   default as TagsInputItemText,
   type TagsInputItemTextProps,
-} from './TagsInputItemText.vue';
+} from './TagsInputItemText.vue'
 
 export {
   type AcceptableInputValue,
@@ -30,4 +30,18 @@ export {
   default as TagsInputRoot,
   type TagsInputRootEmits,
   type TagsInputRootProps,
-} from './TagsInputRoot.vue';
+} from './TagsInputRoot.vue'
+
+export {
+  type TagsInputChangeReason,
+  type TagsInputClearState,
+  type TagsInputInputState,
+  type TagsInputItemState,
+  type TagsInputItemSurfaceOptions,
+  type TagsInputItemSurfaces,
+  type TagsInputItemTextState,
+  type TagsInputRootState,
+  useTagsInput,
+  type UseTagsInputProps,
+  type UseTagsInputReturn,
+} from './useTagsInput'

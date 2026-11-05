@@ -1,532 +1,297 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '@/shared/types';
-import { KEY_CODES } from '@vinicunca/perkakas';
-import { usePrimitiveElement } from '@/Primitive';
-import { getFocusIntent } from '@/RovingFocus/utils';
-import { createContext, findValuesBetween, useDirection, useFormControl, useTypeahead } from '@/shared';
-import { Primitive } from '..';
+import type { EventHook } from '@vueuse/core'
+import type { ComputedRef, Ref, ShallowRef } from 'vue'
+import type { ListboxChangeReason, ListboxFilterFunction, ListboxFilterItem, ListboxHighlightScroll, ListboxLabelRegistry, ListboxNavigationIntent, ListboxVirtualKeydown } from './useListbox'
+import type { FieldControlBinding } from '@/Field/useFieldControl'
+import type { PrimitiveProps } from '@/Primitive'
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared'
+import type { KeyedSelector } from '@/shared/createKeyedSelector'
+import type { SelectionSelector } from '@/shared/selectionSelector'
+import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '@/shared/types'
+import {
+  usePrimitiveElement,
+} from '@/Primitive'
+import { createContext, mergeExpose, useDirection, useFormControl } from '@/shared'
 
-type ListboxRootContext<T> = {
-  modelValue: Ref<T | Array<T> | undefined>;
-  onValueChange: (val: T) => void;
-  multiple: Ref<boolean>;
-  orientation: Ref<DataOrientation>;
-  dir: Ref<Direction>;
-  disabled: Ref<boolean>;
-  highlightOnHover: Ref<boolean>;
-  loop: Ref<boolean>;
-  highlightedElement: Ref<HTMLElement | null>;
-  isVirtual: Ref<boolean>;
-  virtualFocusHook: EventHook<{ event?: Event; scroll: boolean }>;
-  virtualKeydownHook: EventHook<KeyboardEvent>;
-  virtualHighlightHook: EventHook<any>;
-  by?: string | ((a: T, b: T) => boolean);
-  firstValue?: Ref<T | undefined>;
-  selectionBehavior?: Ref<'toggle' | 'replace'>;
+export type ListboxRootContext<T> = {
+  modelValue: Ref<T | Array<T> | undefined>
+  /** Returns `false` when the value is unchanged or the change was cancelled. */
+  onValueChange: (val: T, reason?: ListboxChangeReason | BaseChangeReason, event?: Event) => boolean
+  multiple: Ref<boolean>
+  orientation: Ref<DataOrientation>
+  dir: Ref<Direction>
+  disabled: Ref<boolean>
+  highlightOnHover: Ref<boolean>
+  loop: Ref<boolean>
+  highlightedElement: Ref<HTMLElement | null>
+  /** `highlightedElement` as a keyed selector: items read their own cell. */
+  highlight?: KeyedSelector<HTMLElement>
+  /** The selection as a keyed selector: items read their own cell. */
+  selection?: SelectionSelector<T>
+  isVirtual: Ref<boolean>
+  virtualFocusHook: EventHook<{ event?: Event, scroll: boolean }>
+  virtualKeydownHook: EventHook<ListboxVirtualKeydown>
+  virtualHighlightHook: EventHook<any>
+  by?: string | ((a: T, b: T) => boolean)
+  firstValue?: Ref<T | undefined>
+  selectionBehavior?: Ref<'toggle' | 'replace'>
 
-  focusable: Ref<boolean>;
+  focusable: Ref<boolean>
 
-  onLeave: (event: Event) => void;
-  onEnter: (event: Event) => void;
-  changeHighlight: (el: HTMLElement, scrollIntoView?: boolean, focus?: boolean) => void;
-  onKeydownNavigation: (event: KeyboardEvent) => void;
-  onKeydownEnter: (event: KeyboardEvent) => void;
-  onKeydownTypeAhead: (event: KeyboardEvent) => void;
-  onCompositionStart: () => void;
-  onCompositionEnd: () => void;
-  highlightFirstItem: () => void;
-};
+  onLeave: (event: Event) => void
+  onEnter: (event: Event) => void
+  changeHighlight: (el: HTMLElement, scrollIntoView?: boolean, focus?: boolean) => void
+  /** Returns `true` when the key was handled, so the caller prevents the default only then. Pass an already-resolved `intent` to skip resolving it again. */
+  onKeydownNavigation: (event: KeyboardEvent, intent?: ListboxNavigationIntent | null) => boolean
+  onKeydownEnter: (event: KeyboardEvent) => void
+  onKeydownTypeAhead: (event: KeyboardEvent) => void
+  onCompositionStart: () => void
+  onCompositionEnd: () => void
+  highlightFirstItem: () => void
+
+  /** The sticky label registry (#2824): by-aware, last write wins, never auto-removed. */
+  labels: ListboxLabelRegistry<T>
+  highlightItem: (value: T) => void
+  highlightSelected: (event?: Event, scroll?: boolean) => Promise<void>
+  /**
+   * The resolved navigation intent of a keydown (`getNavigationIntent` override first, then the default mapping):
+   * `null` when the override opted the key out, `undefined` when no mapping knows it.
+   */
+  getNavigationIntent: (event: KeyboardEvent) => ListboxNavigationIntent | null | undefined
+
+  /** The search term the `filter` runs against (#2824 item 7). */
+  filterSearch: Readonly<Ref<string>>
+  /** What `ListboxFilter` calls with its value. */
+  setFilterSearch: (search: string) => void
+  /** `true` while a `filter` is set and the search term is not empty. */
+  isFilterActive: Readonly<Ref<boolean>>
+  /** Whether a value with this text matches; always `true` while filtering is inactive. */
+  filterOption: (value: T, text: string) => boolean
+  /** A mounted item registers here (keyed by an internal id); the returned function unregisters it. */
+  registerFilterItem: (id: string, item: ListboxFilterItem<T>) => () => void
+  /** Whether the registered item is filtered out (never in virtual mode, where the virtualizer filters its options). */
+  isFilteredOut: (id: string) => boolean
+  /** Whether every registered item of the group is filtered out. */
+  isGroupFilteredOut: (groupId: string) => boolean
+  /** Set by `ListboxVirtualizer` to its number of matching options. */
+  virtualFilterCount: Ref<number | undefined>
+}
 
 export const [injectListboxRootContext, provideListboxRootContext]
-  = createContext<ListboxRootContext<AcceptableValue>>('ListboxRoot');
+  = createContext<ListboxRootContext<AcceptableValue>>('ListboxRoot')
 
-/** Controls highlight scrolling while a parent composite is being positioned. */
-type ListboxHighlightScrollContext = {
-  suppressHighlightScroll: Readonly<Ref<boolean>>;
-  onHighlightScrollRequest: (scroll: (() => void) | undefined) => void;
-};
+/**
+ * A listbox's participation in an ancestor `FieldRoot`: the root owns the
+ * value and the registration, `ListboxContent` (the `role="listbox"` element)
+ * carries the field's id, label and aria wiring. `null` outside a Field.
+ * @internal
+ */
+export interface ListboxFieldContext {
+  field: FieldControlBinding
+  /** The `ListboxContent` element. */
+  contentElement: ShallowRef<HTMLElement | undefined>
+}
+
+export const [injectListboxFieldContext, provideListboxFieldContext]
+  = createContext<ListboxFieldContext | null>('ListboxRoot', 'ListboxFieldContext')
 
 export const [injectListboxHighlightScrollContext, provideListboxHighlightScrollContext]
-  = createContext<ListboxHighlightScrollContext>('ListboxHighlightScroll');
+  = createContext<ListboxHighlightScroll>('ListboxHighlightScroll')
 
 export interface ListboxRootProps<T = AcceptableValue> extends PrimitiveProps, FormFieldProps {
   /** The controlled value of the listbox. Can be binded with `v-model`. */
-  modelValue?: T | Array<T>;
+  modelValue?: T | Array<T>
   /** The value of the listbox when initially rendered. Use when you do not need to control the state of the Listbox */
-  defaultValue?: T | Array<T>;
+  defaultValue?: T | Array<T>
   /** Whether multiple options can be selected or not. */
-  multiple?: boolean;
+  multiple?: boolean
   /** The orientation of the listbox. <br>Mainly so arrow navigation is done accordingly (left & right vs. up & down) */
-  orientation?: DataOrientation;
+  orientation?: DataOrientation
   /** The reading direction of the listbox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode. */
-  dir?: Direction;
+  dir?: Direction
   /** When `true`, prevents the user from interacting with listbox */
-  disabled?: boolean;
+  disabled?: boolean
   /**
    * How multiple selection should behave in the collection.
    * @defaultValue 'toggle'
    */
-  selectionBehavior?: 'toggle' | 'replace';
+  selectionBehavior?: 'toggle' | 'replace'
   /** When `true`, hover over item will trigger highlight */
-  highlightOnHover?: boolean;
+  highlightOnHover?: boolean
   /** When `true`, keyboard navigation will loop from last item to first, and vice versa. */
-  loop?: boolean;
-  /** Use this to compare objects by a particular field, or pass your own comparison function for complete control over how objects are compared. */
-  by?: string | ((a: T, b: T) => boolean);
+  loop?: boolean
+  /** Use this to compare objects by a particular field, or pass your own comparison function for complete control over how values are compared (a function runs for every value, strings included). Read once at setup: changing it after mount has no effect. */
+  by?: string | ((a: T, b: T) => boolean)
+  /**
+   * Resolves what a keydown means for keyboard navigation. Return `undefined` to fall back to the default mapping
+   * (arrows, Home, End, PageUp, PageDown — orientation and reading-direction aware), `null` to opt the key out (for
+   * Enter this also skips the selection), or `'select'` to select the highlighted item as Enter does. `ListboxFilter`
+   * never passes unmodified printable keys (they stay text input), and Space on a focused item already selects it, so a
+   * `'select'` intent for Space does not select it twice.
+   */
+  getNavigationIntent?: (event: KeyboardEvent) => ListboxNavigationIntent | null | undefined
+  /**
+   * Filters the items by the `ListboxFilter` search term: called as `filter(text, search, value)` with the item's
+   * `textValue` (or text content; in a `ListboxVirtualizer`, `textContent(option)`), it returns whether the item
+   * matches. Items that do not match are not rendered, so keyboard navigation, typeahead and select-all skip them.
+   * Omitted or `null`, the listbox does not filter (filter the items yourself, or on a server).
+   */
+  filter?: ListboxFilterFunction<T> | null
 }
 
-export type ListboxRootEmits<T = AcceptableValue> = {
+/**
+ * The model of a listbox: an array when `multiple` is `true`, a single value (or `undefined` once a single selection
+ * is cleared) when it is absent or `false`, either while it is a plain `boolean` (#2824 item 4).
+ */
+export type ListboxModelValue<T, M extends boolean = boolean> = boolean extends M ? T | T[] | undefined : M extends true ? T[] : T | undefined
+
+export type ListboxRootEmits<T = AcceptableValue, M extends boolean = boolean> = {
+  /** Event handler called before the value changes; call `details.cancel()` to keep the current value. The value is an array when `multiple`, and `undefined` when a single selection is cleared. */
+  'beforeUpdate:modelValue': [value: ListboxModelValue<T, M>, details: ChangeEventDetails<ListboxChangeReason>]
   /** Event handler called when the value changes. */
-  'update:modelValue': [value: T];
+  'update:modelValue': [value: ListboxModelValue<T, M>, details: ChangeEventDetails<ListboxChangeReason>]
   /** Event handler when highlighted element changes. */
-  'highlight': [payload: { ref: HTMLElement; value: T } | undefined];
+  'highlight': [payload: { ref: HTMLElement, value: T } | undefined]
   /** Event handler called when container is being focused. Can be prevented. */
-  'entryFocus': [event: CustomEvent];
+  'entryFocus': [event: CustomEvent]
   /** Event handler called when the mouse leave the container */
-  'leave': [event: Event];
-};
+  'leave': [event: Event]
+}
 </script>
 
-<script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
-import type { EventHook } from '@vueuse/core';
-import type { Ref } from 'vue';
-import { createEventHook, useVModel } from '@vueuse/core';
-import { isClient } from '@vueuse/shared';
-import { nextTick, ref, toRefs, watch } from 'vue';
-import { useCollection } from '@/Collection';
-import { VisuallyHiddenInput } from '@/VisuallyHidden';
-import { compare } from './utils';
+<script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue, M extends boolean = false">
+import { mergeProps, ref, shallowRef, toRef, toRefs, watch } from 'vue'
+import { useCollection } from '@/Collection'
+import { useFieldControl } from '@/Field/useFieldControl'
+import { useFieldFocusWithin } from '@/Field/useFieldFocusWithin'
+import { renderAs } from '@/Primitive/renderAs'
+import { VisuallyHiddenInput } from '@/VisuallyHidden'
+import { useListboxRoot } from './useListbox'
 
-const props = withDefaults(defineProps<ListboxRootProps>(), {
+const props = withDefaults(defineProps<ListboxRootProps & { multiple?: M }>(), {
   selectionBehavior: 'toggle',
   orientation: 'vertical',
-});
-const emits = defineEmits<ListboxRootEmits>();
+})
+// Typed by `multiple` only (#2824 item 4); the props are not generic over `T`,
+// so the value type stays `AcceptableValue` as in v2.
+const emits = defineEmits<ListboxRootEmits<AcceptableValue, M>>()
 
 defineSlots<{
   default?: (props: {
     /** Current active value */
-    modelValue: typeof modelValue.value;
-  }) => any;
-}>();
+    modelValue: typeof modelValue.value
+  }) => any
+}>()
 
-const { multiple, highlightOnHover, loop, orientation, disabled, selectionBehavior, dir: propDir } = toRefs(props);
-const { getItems, getItem } = useCollection<{ value: T }>({ isProvider: true });
-const { handleTypeaheadSearch } = useTypeahead();
-const { primitiveElement, currentElement } = usePrimitiveElement();
-const dir = useDirection(propDir);
-
-const highlightScrollContext = injectListboxHighlightScrollContext(null);
+const { dir: propDir } = toRefs(props)
+const { getItems, getItem } = useCollection<{ value: T }>({ isProvider: true })
+const { primitiveElement, currentElement, expose } = usePrimitiveElement()
+// `dir` resolution (ConfigProvider-aware) stays in the shell; the composable
+// owns the model (`useControllableState` via `useListSelection`), the emits,
+// the highlight/keyboard brain and the context.
+const dir = useDirection(propDir)
+const highlightScrollContext = injectListboxHighlightScrollContext(null)
 
 // Prevent nested Listbox roots from inheriting this root's scroll coordination.
 provideListboxHighlightScrollContext({
   suppressHighlightScroll: ref(false),
   onHighlightScrollRequest: () => {},
-});
+})
 
-const isFormControl = useFormControl(currentElement);
+const isFormControl = useFormControl(currentElement)
 
-const firstValue = ref<T>();
-const isUserAction = ref(false);
-const focusable = ref(true);
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? (multiple.value
-    ? []
-    : undefined),
-  passive: (props.modelValue === undefined) as false,
-  deep: true,
-}) as Ref<T | Array<T> | undefined>;
+// Optional Field participation: `null` outside a `FieldRoot`, so every
+// binding below is inert without a Field. The root owns the value;
+// `ListboxContent` carries the field's id, label and aria wiring.
+// The ref is only created inside a Field, so a standalone listbox allocates nothing.
+let fieldContent: ShallowRef<HTMLElement | undefined> | undefined
+const field = useFieldControl({
+  // Getters read bindings that are retained anyway, not the composable's
+  // return object: capturing it in a closure would keep it alive per instance.
+  // The content renders its own `id`, else the field's.
+  id: () => fieldContent?.value?.id || undefined,
+  element: () => fieldContent?.value,
+  getValue: () => modelValue.value,
+  required: () => props.required,
+})
+if (field)
+  fieldContent = shallowRef()
+const resolvedDisabled = field ? () => field.disabled(props.disabled) : () => props.disabled
 
-function onValueChange(val: T) {
-  isUserAction.value = true;
-  if (props.multiple) {
-    const modelArray = Array.isArray(modelValue.value)
-      ? [...modelValue.value]
-      : [];
-    const index = modelArray.findIndex((i) => compare(i, val, props.by));
-    if (props.selectionBehavior === 'toggle') {
-      index === -1
-        ? modelArray.push(val)
-        : modelArray.splice(index, 1);
-      modelValue.value = modelArray;
-    } else {
-      modelValue.value = [val];
-      firstValue.value = val;
-    }
-  } else {
-    if (props.selectionBehavior === 'toggle') {
-      if (compare(modelValue.value, val, props.by)) {
-        modelValue.value = undefined;
-      } else {
-        modelValue.value = val;
-      }
-    } else {
-      modelValue.value = val;
-    }
-  }
-  setTimeout(() => {
-    isUserAction.value = false;
-  }, 1);
-}
+const listbox = useListboxRoot<AcceptableValue>({
+  modelValue: () => props.modelValue,
+  defaultValue: props.defaultValue,
+  multiple: () => props.multiple,
+  orientation: () => props.orientation,
+  dir,
+  disabled: resolvedDisabled,
+  selectionBehavior: () => props.selectionBehavior,
+  highlightOnHover: () => props.highlightOnHover,
+  loop: () => props.loop,
+  by: props.by,
+  getNavigationIntent: event => props.getNavigationIntent?.(event),
+  filter: toRef(() => props.filter) as Ref<ListboxFilterFunction<AcceptableValue> | null | undefined>,
+  // `useCollection` (the item registry) stays in the shell — injected as the collection seam.
+  getItems,
+  getItem,
+  highlightScroll: highlightScrollContext,
+  element: currentElement,
+  emit: emits,
+  // The Field hears its own commits by reason (`change`): user input, or, for
+  // a programmatic one (`setModelValue` and the like), only the watcher below,
+  // which also reports a parent-driven change.
+  onUpdate: field?.change,
+  onHighlight: payload => emits('highlight', payload),
+  onEntryFocus: event => emits('entryFocus', event),
+  onLeave: event => emits('leave', event),
+})
+const { root, context, highlightedElement, highlightFirstItem, highlightSelected, filterState } = listbox
 
-const highlightedElement = ref<HTMLElement | null>(null);
-const previousElement = ref<HTMLElement | null>(null);
-const isVirtual = ref(false);
-const isComposing = ref(false);
-const virtualFocusHook = createEventHook<{ event?: Event; scroll: boolean }>();
-const virtualKeydownHook = createEventHook<KeyboardEvent>();
-const virtualHighlightHook = createEventHook<T>();
+// The composable is typed over `AcceptableValue` (the props are); narrow once
+// here for the slot payload and the exposed `highlightItem`, as before.
+const modelValue = listbox.modelValue as ComputedRef<ListboxModelValue<T, M>>
+const highlightItem = listbox.highlightItem as (value: T) => void
 
-function getCollectionItem() {
-  return getItems().map((i) => i.ref).filter((i) => i.dataset.disabled !== '');
-}
-
-function changeHighlight(el: HTMLElement, scrollIntoView = true, focus?: boolean) {
-  if (!el) {
-    return;
-  }
-
-  highlightedElement.value = el;
-  const suppressHighlightScroll = highlightScrollContext?.suppressHighlightScroll.value ?? false;
-  if (focus ?? focusable.value) {
-    if (suppressHighlightScroll) {
-      highlightedElement.value.focus({ preventScroll: true });
-    } else {
-      highlightedElement.value.focus();
-    }
-  }
-
-  if (suppressHighlightScroll) {
-    highlightScrollContext?.onHighlightScrollRequest(scrollIntoView
-      ? () => {
-          const element = highlightedElement.value;
-          if (element?.isConnected) {
-            element.scrollIntoView({ block: 'nearest' });
-          }
-        }
-      : undefined);
-  } else if (scrollIntoView) {
-    highlightedElement.value.scrollIntoView({ block: 'nearest' });
-  }
-
-  const highlightedItem = getItem(el);
-  emits('highlight', highlightedItem);
-}
-
-function highlightItem(value: T) {
-  if (isVirtual.value) {
-    // @ts-expect-error known type issue https://github.com/vueuse/vueuse/issues/4610
-    virtualHighlightHook.trigger(value);
-  } else {
-    const item = getItems().find((i) => compare(i.value, value, props.by));
-    if (item) {
-      highlightedElement.value = item.ref;
-      changeHighlight(item.ref);
-    }
-  }
-}
-
-function onKeydownEnter(event: KeyboardEvent) {
-  if (highlightedElement.value && highlightedElement.value.isConnected) {
-    // Modifier combos (e.g. Ctrl+Enter) are not handled here —
-    // let them bubble so parent listeners can react (e.g. submit a form).
-    if (event.ctrlKey || event.metaKey || event.altKey) {
-      return;
-    }
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (!isComposing.value) {
-      highlightedElement.value.click();
-    }
-  }
-}
-
-function onKeydownTypeAhead(event: KeyboardEvent) {
-  if (!focusable.value) {
-    return;
-  }
-  isUserAction.value = true;
-  if (isVirtual.value) {
-    virtualKeydownHook.trigger(event);
-  } else {
-    const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
-
-    if (isMetaKey && event.key === 'a' && multiple.value) {
-      const collection = getItems();
-      const values = collection.map((i) => i.value);
-      modelValue.value = [...values];
-      event.preventDefault();
-      const lastItem = collection.at(-1);
-      if (lastItem) {
-        changeHighlight(lastItem.ref);
-      }
-    } else if (!isMetaKey) {
-      const el = handleTypeaheadSearch(event.key, getItems());
-      if (el) {
-        changeHighlight(el);
-      }
-    }
-  }
-  setTimeout(() => {
-    isUserAction.value = false;
-  }, 1);
-}
-
-function onCompositionStart() {
-  isComposing.value = true;
-}
-function onCompositionEnd() {
-  nextTick(() => {
-    isComposing.value = false;
-  });
-}
-
-function highlightFirstItem() {
-  nextTick(() => {
-    const event = new KeyboardEvent('keydown', { key: 'PageUp' });
-    onKeydownNavigation(event);
-  });
-}
-
-function onLeave(event: Event) {
-  const el = highlightedElement.value;
-
-  if ((el as Node)?.isConnected) {
-    previousElement.value = el;
-  }
-
-  highlightedElement.value = null;
-  emits('leave', event);
-}
-
-function onEnter(event: Event) {
-  const entryFocusEvent = new CustomEvent('listbox.entryFocus', { bubbles: false, cancelable: true });
-  event.currentTarget?.dispatchEvent(entryFocusEvent);
-  emits('entryFocus', entryFocusEvent);
-
-  if (entryFocusEvent.defaultPrevented) {
-    return;
-  }
-
-  if (previousElement.value) {
-    changeHighlight(previousElement.value);
-  } else {
-    const el = getCollectionItem()?.[0];
-    changeHighlight(el);
-  }
-}
-
-function isAtVirtualBoundary(intent: 'prev' | 'next') {
-  // A virtualized list only renders a window of items. Only wrap when that
-  // window reaches the end of the full options list; any rendered items past
-  // the highlighted one are disabled.
-  const rendered = getItems(true).map((i) => i.ref);
-  const edge = intent === 'next'
-    ? rendered.at(-1)
-    : rendered[0];
-  if (!edge) {
-    return false;
-  }
-  const position = Number(edge.getAttribute('aria-posinset'));
-  const size = Number(edge.getAttribute('aria-setsize'));
-  return intent === 'next'
-    ? position === size
-    : position === 1;
-}
-
-function onKeydownNavigation(event: KeyboardEvent) {
-  const intent = getFocusIntent(event, orientation.value, dir.value);
-  if (!intent) {
-    return;
-  }
-
-  let collection = getCollectionItem();
-  if (highlightedElement.value) {
-    if (intent === 'last') {
-      collection.reverse();
-    } else if (intent === 'prev' || intent === 'next') {
-      if (intent === 'prev') {
-        collection.reverse();
-      }
-
-      const currentIndex = collection.indexOf(highlightedElement.value);
-      const shouldLoop = loop.value && currentIndex === collection.length - 1;
-      if (shouldLoop && isVirtual.value) {
-        if (isAtVirtualBoundary(intent)) {
-          // Let the virtualizer scroll to and highlight the opposite end.
-          const key = intent === 'next'
-            ? KEY_CODES.HOME
-            : KEY_CODES.END;
-          return virtualKeydownHook.trigger(new KeyboardEvent('keydown', { key, shiftKey: event.shiftKey }));
-        }
-        collection = [];
-      } else {
-        collection = shouldLoop
-          ? collection.slice(0, 1)
-          : collection.slice(currentIndex + 1);
-      }
-    }
-    handleMultipleReplace(event, collection[0]);
-  }
-
-  if (collection.length) {
-    const index = !highlightedElement.value && intent === 'prev'
-      ? collection.length - 1
-      : 0;
-    changeHighlight(collection[index]);
-  }
-
-  if (isVirtual.value) {
-    return virtualKeydownHook.trigger(event);
-  }
-}
-
-function handleMultipleReplace(event: KeyboardEvent, targetEl: HTMLElement) {
-  if (isVirtual.value || props.selectionBehavior !== 'replace' || !multiple.value || !Array.isArray(modelValue.value)) {
-    return;
-  }
-  const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
-  if (isMetaKey && !event.shiftKey) {
-    return;
-  }
-
-  if (event.shiftKey) {
-    const collection = getItems().filter((i) => i.ref.dataset.disabled !== '');
-    let lastValue = collection.find((i) => i.ref === targetEl)?.value;
-
-    if (event.key === KEY_CODES.END) {
-      lastValue = collection.at(-1)?.value;
-    } else if (event.key === KEY_CODES.HOME) {
-      lastValue = collection[0]?.value;
-    }
-
-    if (!lastValue || !firstValue.value) {
-      return;
-    }
-
-    const values = findValuesBetween(collection.map((i) => i.value), firstValue.value, lastValue);
-    modelValue.value = values;
-  }
-}
-
-async function highlightSelected(event?: Event, scroll = true) {
-  // highlightSelected is called inside a watch with immediate set to true.
-  // This results in code execution during SSR.
-  // Ensure this code only runs in a browser environment, since it performs
-  // DOM-only side effects (focus, scrollIntoView, synthetic KeyboardEvent).
-  if (!isClient) {
-    return;
-  }
-  await nextTick();
-  if (isVirtual.value) {
-    // Trigger on nextTick for Virtualizer to be mounted.
-    // `scroll` is `false` on the initial mount highlight, so the virtualizer sets
-    // its roving-tabindex target without focusing/scrolling — otherwise a
-    // virtualized Listbox below the fold would pull the page to it on load.
-    virtualFocusHook.trigger({ event, scroll });
-  } else {
-    const collection = getCollectionItem();
-    const item = collection.find((i) => i.dataset.state === 'checked');
-
-    // On the initial (mount) highlight we only set the roving-tabindex target.
-    // Focusing/scrolling here would scroll the page to a Listbox the user never
-    // interacted with (e.g. one below the fold). Later highlights scroll as before.
-    const focus = scroll ? undefined : false;
-
-    if (item) {
-      changeHighlight(item, scroll, focus);
-    } else if (collection.length) {
-      changeHighlight(collection[0], scroll, focus);
-    }
-  }
-}
-
-// `false` until the initial (mount) modelValue highlight has been queued.
-// Flipped synchronously in the watcher so the "is this the mount highlight?"
-// decision never depends on nextTick ordering, which differs between a client
-// mount and SSR hydration. The intent travels with the call as an argument
-// rather than via a shared flag released on a later tick.
-let hasHighlightedOnMount = false;
-
-// watch for only programmatic changes
-watch(modelValue, () => {
-  if (!isUserAction.value) {
-    const scroll = hasHighlightedOnMount;
-    hasHighlightedOnMount = true;
-
-    nextTick(() => {
-      highlightSelected(undefined, scroll);
-    });
-  }
-}, { immediate: true, deep: true });
-
-defineExpose({
+defineExpose(mergeExpose(expose, {
   highlightedElement,
   highlightItem,
   highlightFirstItem,
   highlightSelected,
   getItems,
-});
+  /** The filtering result: `{ search, active, count }`. */
+  filtered: filterState,
+}))
 
-provideListboxRootContext({
-  modelValue,
-  // @ts-expect-error ignoring
-  onValueChange,
-  multiple,
-  orientation,
-  dir,
-  disabled,
-  highlightOnHover,
-  loop,
-  highlightedElement,
-  isVirtual,
-  virtualFocusHook,
-  virtualKeydownHook,
-  virtualHighlightHook,
-  by: props.by,
-  firstValue,
-  selectionBehavior,
+provideListboxRootContext(context)
+if (field)
+  provideListboxFieldContext({ field, contentElement: fieldContent! })
+// Only shadow an ancestor listbox's wiring; otherwise providing nothing already reads as `null`.
+else if (injectListboxFieldContext(null))
+  provideListboxFieldContext(null)
 
-  focusable,
-  onLeave,
-  onEnter,
-  changeHighlight,
-  onKeydownEnter,
-  onKeydownNavigation,
-  onKeydownTypeAhead,
-  onCompositionStart,
-  onCompositionEnd,
-  highlightFirstItem,
-});
+if (field)
+  watch(modelValue, value => field.sync(value))
+
+// The field is focused while focus is anywhere in the listbox (the content,
+// an item, a `ListboxFilter`), and blurred once it leaves.
+const focusWithin = useFieldFocusWithin(field, currentElement as Ref<HTMLElement | undefined>)
+const fieldFocusHandlers = focusWithin && { onFocusin: focusWithin.onFocusin, onFocusout: focusWithin.onFocusout }
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, asChild)"
     ref="primitiveElement"
-    :as="as"
-    :as-child="asChild"
-    :dir="dir"
-    :data-disabled="disabled ? '' : undefined"
-    @pointerleave="onLeave"
-    @focusout="async (event: FocusEvent) => {
-      const target = (event.relatedTarget || event.target) as HTMLElement | null
-      await nextTick()
-      if (highlightedElement && currentElement && !currentElement.contains(target)) {
-        onLeave(event)
-      }
-    }"
+    v-bind="fieldFocusHandlers ? mergeProps(root.attrs.value, fieldFocusHandlers) : root.attrs.value"
   >
     <slot :model-value="modelValue" />
 
     <VisuallyHiddenInput
-      v-if="isFormControl && name"
-      :name="name"
+      v-if="isFormControl && (field ? field.name(name) : name)"
+      :name="(field ? field.name(name) : name)!"
       :value="modelValue"
-      :disabled="disabled"
-      :required="required"
+      :disabled="resolvedDisabled()"
+      :required="field ? field.required(required) : required"
     />
-  </Primitive>
+  </component>
 </template>

@@ -1,106 +1,95 @@
 <script lang="ts">
 export interface TreeVirtualizerProps {
   /** Number of items rendered outside the visible area */
-  overscan?: number;
+  overscan?: number
   /** Estimated size (in px) of each item */
-  estimateSize?: number | ((index: number) => number);
+  estimateSize?: number | ((index: number) => number)
   /** Text content for each item to achieve type-ahead feature */
-  textContent?: (item: Record<string, any>) => string;
+  textContent?: (item: Record<string, any>) => string
 }
 </script>
 
 <script setup lang="ts">
-import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual';
-import type { Ref } from 'vue';
-import type { FlattenedItem } from './TreeRoot.vue';
-import { useVirtualizer } from '@tanstack/vue-virtual';
-import { isFunction, KEY_CODES } from '@vinicunca/perkakas';
-import { refAutoReset, useParentElement } from '@vueuse/core';
-import { cloneVNode, computed, nextTick, useSlots } from 'vue';
-import { useCollection } from '@/Collection';
-import { MAP_KEY_TO_FOCUS_INTENT } from '@/RovingFocus/utils';
-import { getActiveElement } from '@/shared';
-import { getNextMatch } from '@/shared/useTypeahead';
-import { injectTreeRootContext } from './TreeRoot.vue';
+import type { VirtualItem, Virtualizer } from '@tanstack/vue-virtual'
+import type { Ref } from 'vue'
+import type { FlattenedItem } from './TreeRoot.vue'
+import { useVirtualizer } from '@tanstack/vue-virtual'
+import { refAutoReset, useParentElement } from '@vueuse/core'
+import { cloneVNode, computed, nextTick, useSlots } from 'vue'
+import { useCollection } from '@/Collection'
+import { MAP_KEY_TO_FOCUS_INTENT } from '@/RovingFocus/utils'
+import { getActiveElement, useForwardElement } from '@/shared'
+import { isDisabledItem } from '@/shared/isDisabledItem'
+import { getNextMatch } from '@/shared/useTypeahead'
+import { injectTreeRootContext } from './TreeRoot.vue'
 
-const props = defineProps<TreeVirtualizerProps>();
+const props = defineProps<TreeVirtualizerProps>()
 
 defineSlots<{
   default?: (props: {
-    item: FlattenedItem<Record<string, any>>;
-    virtualizer: Virtualizer<Element | Window, Element>;
-    virtualItem: VirtualItem;
-  }) => any;
-}>();
+    item: FlattenedItem<Record<string, any>>
+    virtualizer: Virtualizer<Element | Window, Element>
+    virtualItem: VirtualItem
+  }) => any
+}>()
 
-const slots = useSlots();
-const rootContext = injectTreeRootContext();
-const parentEl = useParentElement() as Ref<HTMLElement>;
-const { getItems } = useCollection();
+const slots = useSlots()
+const rootContext = injectTreeRootContext()
+const parentEl = useParentElement() as Ref<HTMLElement>
+const { getItems } = useCollection()
 
 // Reset `search` 1 second after it was last updated
-const search = refAutoReset('', 1000);
+const search = refAutoReset('', 1000)
 const optionsWithMetadata = computed(() => {
   const parseTextContent = (option: Record<string, any>) => {
-    if (props.textContent) {
-      return props.textContent(option);
-    } else {
-      return option.toString().toLowerCase();
-    }
-  };
+    if (props.textContent)
+      return props.textContent(option)
+    else
+      return option.toString().toLowerCase()
+  }
 
   return rootContext.expandedItems.value.map((option, index) => ({
     index,
     textContent: parseTextContent(option.value),
-  }));
-});
+  }))
+})
 
 // set virtual true when this component mounted
-rootContext.isVirtual.value = true;
+rootContext.isVirtual.value = true
 
 const padding = computed(() => {
-  const el = parentEl.value;
+  const el = parentEl.value
   if (!el) {
-    return { start: 0, end: 0 };
-  } else {
-    const styles = window.getComputedStyle(el);
+    return { start: 0, end: 0 }
+  }
+  else {
+    const styles = window.getComputedStyle(el)
     return {
       start: Number.parseFloat(styles.paddingBlockStart || styles.paddingTop),
       end: Number.parseFloat(styles.paddingBlockEnd || styles.paddingBottom),
-    };
+    }
   }
-});
+})
 
 const virtualizer = useVirtualizer(
   {
-    get scrollPaddingStart() {
-      return padding.value.start;
-    },
-    get scrollPaddingEnd() {
-      return padding.value.end;
-    },
-    get count() {
-      return rootContext.expandedItems.value.length ?? 0;
-    },
-    get horizontal() {
-      return false;
-    },
+    get scrollPaddingStart() { return padding.value.start },
+    get scrollPaddingEnd() { return padding.value.end },
+    get count() { return rootContext.expandedItems.value.length ?? 0 },
+    get horizontal() { return false },
     getItemKey(index) {
-      return index + rootContext.getKey(rootContext.expandedItems.value[index].value);
+      return index + rootContext.getKey(rootContext.expandedItems.value[index].value)
     },
     estimateSize(index) {
-      if (isFunction(props.estimateSize)) {
-        return props.estimateSize(index);
-      }
+      if (typeof props.estimateSize === 'function')
+        return props.estimateSize(index)
 
-      return props.estimateSize ?? 28;
+      return props.estimateSize ?? 28
     },
-    getScrollElement() {
-      return parentEl.value;
-    },
+    getScrollElement() { return parentEl.value },
     overscan: props.overscan ?? 12,
   },
-);
+)
 
 const virtualizedItems = computed(() => virtualizer.value.getVirtualItems().map((item) => {
   return {
@@ -119,100 +108,90 @@ const virtualizedItems = computed(() => virtualizer.value.getVirtualItems().map(
         overflowAnchor: 'none',
       },
     }),
-  };
-}));
+  }
+}))
 
 function scrollToIndexAndFocus(index: number) {
-  virtualizer.value.scrollToIndex(index, { align: 'start' });
+  virtualizer.value.scrollToIndex(index, { align: 'start' })
   requestAnimationFrame(() => {
-    const item = parentEl.value.querySelector(`[data-index="${index}"]`) as HTMLElement;
-    if (item instanceof HTMLElement) {
-      item.focus();
-    }
-  });
+    const item = parentEl.value.querySelector(`[data-index="${index}"]`) as HTMLElement
+    if (item instanceof HTMLElement)
+      item.focus()
+  })
 }
 
 rootContext.virtualKeydownHook.on((event) => {
-  const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
-  const isTabKey = event.key === 'Tab' && !isMetaKey;
-  if (isTabKey) {
-    return;
-  }
+  const isMetaKey = event.altKey || event.ctrlKey || event.metaKey
+  const isTabKey = event.key === 'Tab' && !isMetaKey
+  if (isTabKey)
+    return
 
-  let intent = MAP_KEY_TO_FOCUS_INTENT[event.key];
+  let intent = MAP_KEY_TO_FOCUS_INTENT[event.key]
 
   // Only a window of items is rendered, so wrapping is resolved against the
   // full list of expanded items rather than by the roving focus group.
-  if (rootContext.loop.value && !isMetaKey && (event.key === KEY_CODES.ARROW_UP || event.key === KEY_CODES.ARROW_DOWN)) {
-    const isDown = event.key === KEY_CODES.ARROW_DOWN;
-    const rendered = getItems(true).map((i) => i.ref);
-    const enabled = rendered.filter((i) => i.dataset.disabled !== '');
-    const edgeEnabled = isDown
-      ? enabled.at(-1)
-      : enabled[0];
-    const edgeIndex = Number((isDown
-      ? rendered.at(-1)
-      : rendered[0])?.getAttribute('data-index'));
-    const boundaryIndex = isDown
-      ? rootContext.expandedItems.value.length - 1
-      : 0;
+  if (rootContext.loop.value && !isMetaKey && (event.key === 'ArrowUp' || event.key === 'ArrowDown')) {
+    const isDown = event.key === 'ArrowDown'
+    const rendered = getItems(true).map(i => i.ref)
+    const enabled = rendered.filter(i => !isDisabledItem(i))
+    const edgeEnabled = isDown ? enabled.at(-1) : enabled[0]
+    const edgeIndex = Number((isDown ? rendered.at(-1) : rendered[0])?.getAttribute('data-index'))
+    const boundaryIndex = isDown ? rootContext.expandedItems.value.length - 1 : 0
     // Wrap from the outermost enabled item once the window reaches the end of the list.
-    if (edgeEnabled && edgeEnabled === getActiveElement() && edgeIndex === boundaryIndex) {
-      intent = isDown ? 'first' : 'last';
-    }
+    if (edgeEnabled && edgeEnabled === getActiveElement() && edgeIndex === boundaryIndex)
+      intent = isDown ? 'first' : 'last'
   }
 
   if (['first', 'last'].includes(intent)) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const index = intent === 'first'
-      ? 0
-      : rootContext.expandedItems.value.length - 1;
-    virtualizer.value.scrollToIndex(index);
+    const index = intent === 'first' ? 0 : rootContext.expandedItems.value.length - 1
+    virtualizer.value.scrollToIndex(index)
     requestAnimationFrame(() => {
-      const items = getItems().filter((i) => i.ref.dataset.disabled !== '');
-      if (!items.length) {
-        return;
-      }
-      const item = intent === 'first'
-        ? items[0]
-        : items.at(-1)!;
-      item.ref.focus();
-    });
-  } else if (intent === 'prev' && event.key !== 'ArrowUp') {
-    const currentElement = getActiveElement() as HTMLElement;
-    const currentIndex = Number(currentElement.getAttribute('data-index'));
-    const currentLevel = Number(currentElement.getAttribute('data-indent'));
-    const list = rootContext.expandedItems.value.slice(0, currentIndex).map((item, index) => ({ ...item, index })).reverse();
+      const items = getItems().filter(i => !isDisabledItem(i.ref))
+      if (!items.length)
+        return
+      const item = intent === 'first' ? items[0] : items.at(-1)!
+      item.ref.focus()
+    })
+  }
+  else if (intent === 'prev' && event.key !== 'ArrowUp') {
+    const currentElement = getActiveElement() as HTMLElement
+    const currentIndex = Number(currentElement.getAttribute('data-index'))
+    const currentLevel = Number(currentElement.getAttribute('data-indent'))
+    const list = rootContext.expandedItems.value.slice(0, currentIndex).map((item, index) => ({ ...item, index })).reverse()
 
-    const parentItem = list.find((item) => item.level === (currentLevel - 1));
-    if (parentItem) {
-      scrollToIndexAndFocus(parentItem.index);
-    }
-  } else if (!intent && !isMetaKey) {
-    search.value += event.key;
-    const currentIndex = Number(getActiveElement()?.getAttribute('data-index'));
-    const currentMatch = optionsWithMetadata.value[currentIndex].textContent;
-    const filteredOptions = optionsWithMetadata.value.map((i) => i.textContent);
-    const next = getNextMatch(filteredOptions, search.value, currentMatch);
+    const parentItem = list.find(item => item.level === (currentLevel - 1))
+    if (parentItem)
+      scrollToIndexAndFocus(parentItem.index)
+  }
+  else if (!intent && !isMetaKey) {
+    search.value += event.key
+    const currentIndex = Number(getActiveElement()?.getAttribute('data-index'))
+    const currentMatch = optionsWithMetadata.value[currentIndex].textContent
+    const filteredOptions = optionsWithMetadata.value.map(i => i.textContent)
+    const next = getNextMatch(filteredOptions, search.value, currentMatch)
 
-    const nextMatch = optionsWithMetadata.value.find((option) => option.textContent === next);
-    if (nextMatch) {
-      scrollToIndexAndFocus(nextMatch.index);
-    }
+    const nextMatch = optionsWithMetadata.value.find(option => option.textContent === next)
+    if (nextMatch)
+      scrollToIndexAndFocus(nextMatch.index)
   }
 
   nextTick(() => {
-    if (event.shiftKey && intent) {
-      rootContext.handleMultipleReplace(intent, getActiveElement(), getItems, rootContext.expandedItems.value.map((i) => i.value));
-    }
-  });
-});
+    // The keydown travels with the write, so a Shift range reports `'range-select'` with it.
+    if (event.shiftKey && intent)
+      rootContext.handleMultipleReplace(intent, getActiveElement(), getItems, rootContext.expandedItems.value.map(i => i.value), event)
+  })
+})
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <div
-    data-akar-virtualizer
+    :ref="forwardRef"
+    data-reka-virtualizer
     :style="{
       position: 'relative',
       width: '100%',

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
+import { Icon } from '@iconify/vue'
 import {
   PopoverArrow,
   PopoverContent,
   PopoverPortal,
   PopoverRoot,
   PopoverTrigger,
-} from '..';
+} from '..'
 </script>
 
 <template>

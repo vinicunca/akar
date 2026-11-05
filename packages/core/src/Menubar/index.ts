@@ -1,78 +1,95 @@
+// The reason unions of the root and sub parts (`update:open`) and of the
+// checkbox item and radio group (`update:modelValue`) belong to the
+// underlying Menu family, which is not a root export of the package.
+export { type MenuCheckboxItemChangeReason, type MenuOpenChangeReason, type MenuRadioGroupChangeReason } from '../Menu'
 export {
   default as MenubarArrow,
   type MenubarArrowProps,
-} from './MenubarArrow.vue';
+} from './MenubarArrow.vue'
 export {
   default as MenubarCheckboxItem,
   type MenubarCheckboxItemEmits,
   type MenubarCheckboxItemProps,
-} from './MenubarCheckboxItem.vue';
+} from './MenubarCheckboxItem.vue'
 export {
   default as MenubarContent,
   type MenubarContentEmits,
   type MenubarContentProps,
-} from './MenubarContent.vue';
+} from './MenubarContent.vue'
 export {
   default as MenubarGroup,
   type MenubarGroupProps,
-} from './MenubarGroup.vue';
+} from './MenubarGroup.vue'
 export {
   default as MenubarItem,
   type MenubarItemEmits,
   type MenubarItemProps,
-} from './MenubarItem.vue';
+} from './MenubarItem.vue'
 export {
   default as MenubarItemIndicator,
   type MenubarItemIndicatorProps,
-} from './MenubarItemIndicator.vue';
+} from './MenubarItemIndicator.vue'
 export {
   default as MenubarLabel,
   type MenubarLabelProps,
-} from './MenubarLabel.vue';
+} from './MenubarLabel.vue'
 export {
   injectMenubarMenuContext,
   default as MenubarMenu,
+  type MenubarMenuEmits,
   type MenubarMenuProps,
-} from './MenubarMenu.vue';
+} from './MenubarMenu.vue'
 export {
   default as MenubarPortal,
   type MenubarPortalProps,
-} from './MenubarPortal.vue';
+} from './MenubarPortal.vue'
 export {
   default as MenubarRadioGroup,
   type MenubarRadioGroupEmits,
   type MenubarRadioGroupProps,
-} from './MenubarRadioGroup.vue';
+} from './MenubarRadioGroup.vue'
 export {
   default as MenubarRadioItem,
   type MenubarRadioItemEmits,
   type MenubarRadioItemProps,
-} from './MenubarRadioItem.vue';
+} from './MenubarRadioItem.vue'
 export {
   injectMenubarRootContext,
   default as MenubarRoot,
   type MenubarRootEmits,
   type MenubarRootProps,
-} from './MenubarRoot.vue';
+} from './MenubarRoot.vue'
 export {
   default as MenubarSeparator,
   type MenubarSeparatorProps,
-} from './MenubarSeparator.vue';
+} from './MenubarSeparator.vue'
 export {
   default as MenubarSub,
   type MenubarSubEmits,
   type MenubarSubProps,
-} from './MenubarSub.vue';
+} from './MenubarSub.vue'
 export {
   default as MenubarSubContent,
   type MenubarSubContentEmits,
   type MenubarSubContentProps,
-} from './MenubarSubContent.vue';
+} from './MenubarSubContent.vue'
 export {
   default as MenubarSubTrigger,
   type MenubarSubTriggerProps,
-} from './MenubarSubTrigger.vue';
+} from './MenubarSubTrigger.vue'
 export {
   default as MenubarTrigger,
   type MenubarTriggerProps,
-} from './MenubarTrigger.vue';
+} from './MenubarTrigger.vue'
+export {
+  type MenubarChangeReason,
+  type MenubarCollectionItem,
+  type MenubarContentSurface,
+  type MenubarTriggerState,
+  useMenubar,
+  useMenubarMenu,
+  type UseMenubarMenuOptions,
+  type UseMenubarMenuReturn,
+  type UseMenubarProps,
+  type UseMenubarReturn,
+} from './useMenubar'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ColorSlider from './_ColorSlider.vue';
-import ColorSliderCompound from './_ColorSliderCompound.vue';
+import ColorSlider from './_ColorSlider.vue'
+import ColorSliderCompound from './_ColorSliderCompound.vue'
 </script>
 
 <template>

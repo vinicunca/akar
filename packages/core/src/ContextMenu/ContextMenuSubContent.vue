@@ -2,36 +2,38 @@
 import type {
   MenuSubContentEmits,
   MenuSubContentProps,
-} from '@/Menu';
+} from '@/Menu'
 
-export type ContextMenuSubContentEmits = MenuSubContentEmits;
+export type ContextMenuSubContentEmits = MenuSubContentEmits
 export interface ContextMenuSubContentProps extends MenuSubContentProps {}
 </script>
 
 <script setup lang="ts">
-import { MenuSubContent } from '@/Menu';
-import { useForwardExpose, useForwardPropsEmits } from '@/shared';
+import { MenuSubContent } from '@/Menu'
+import { useForwardElement, useForwardPropsEmits } from '@/shared'
 
-const props = defineProps<ContextMenuSubContentProps>();
+const props = defineProps<ContextMenuSubContentProps>()
 
-const emits = defineEmits<ContextMenuSubContentEmits>();
-const forwarded = useForwardPropsEmits(props, emits);
-useForwardExpose();
+const emits = defineEmits<ContextMenuSubContentEmits>()
+const forwarded = useForwardPropsEmits(props, emits)
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <MenuSubContent
+    :ref="forwardRef"
     v-bind="forwarded"
     :style="{
-      '--akar-context-menu-content-transform-origin':
-        'var(--akar-popper-transform-origin)',
-      '--akar-context-menu-content-available-width':
-        'var(--akar-popper-available-width)',
-      '--akar-context-menu-content-available-height':
-        'var(--akar-popper-available-height)',
-      '--akar-context-menu-trigger-width': 'var(--akar-popper-anchor-width)',
-      '--akar-context-menu-trigger-height':
-        'var(--akar-popper-anchor-height)',
+      '--reka-context-menu-content-transform-origin':
+        'var(--reka-popper-transform-origin)',
+      '--reka-context-menu-content-available-width':
+        'var(--reka-popper-available-width)',
+      '--reka-context-menu-content-available-height':
+        'var(--reka-popper-available-height)',
+      '--reka-context-menu-trigger-width': 'var(--reka-popper-anchor-width)',
+      '--reka-context-menu-trigger-height':
+        'var(--reka-popper-anchor-height)',
     }"
   >
     <slot />

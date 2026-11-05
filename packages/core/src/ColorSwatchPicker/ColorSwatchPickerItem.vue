@@ -1,66 +1,65 @@
 <script lang="ts">
-import type { Ref } from 'vue';
-import type { ListboxItemEmits, ListboxItemProps } from '@/Listbox';
-import { createContext, useForwardPropsEmits } from '@/shared';
+import type { Ref } from 'vue'
+import type { ColorSwatchPickerValue } from './useColorSwatchPicker'
+import type { ListboxItemEmits, ListboxItemProps } from '@/Listbox'
+import { createContext, useForwardElement, useForwardPropsEmits } from '@/shared'
 
-export interface ColorSwatchPickerItemProps extends ListboxItemProps {
-/**
- * The color to display in the swatch as a hex string.
- * Example: `#16a372` or `#ff5733`.
- */
-  value: string;
+export interface ColorSwatchPickerItemProps extends ListboxItemProps<ColorSwatchPickerValue> {
+  /**
+   * The color of the swatch, as a color string or a `Color` object.
+   * Example: `#16a372` or `{ space: 'hsl', h: 158, s: 76, l: 36, alpha: 1 }`.
+   * Values are compared structurally, so `#ff0000` and the equivalent `Color` select the same item.
+   */
+  value: ColorSwatchPickerValue
 }
 
-export type ColorSwatchPickerItemEmits = ListboxItemEmits;
+export type ColorSwatchPickerItemEmits = ListboxItemEmits
 
 export interface ColorSwatchPickerItemContext {
-  color: Ref<string>;
+  color: Ref<ColorSwatchPickerValue>
 }
 
 export const [injectColorSwatchPickerItemContext, provideColorSwatchPickerItemContext]
-  = createContext<ColorSwatchPickerItemContext>('ColorSwatchPickerItem', 'ColorSwatchPickerItemContext');
+  = createContext<ColorSwatchPickerItemContext>('ColorSwatchPickerItem', 'ColorSwatchPickerItemContext')
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue';
-import { ListboxItem } from '@/Listbox';
-import { getColorName } from '@/shared/color';
+import { mergeProps, toRef } from 'vue'
+import { ListboxItem } from '@/Listbox'
+import { getColorSwatchPickerItemSurface } from './useColorSwatchPicker'
 
-const props = defineProps<ColorSwatchPickerItemProps>();
+const props = defineProps<ColorSwatchPickerItemProps>()
 
-const emits = defineEmits<ColorSwatchPickerItemEmits>();
+const emits = defineEmits<ColorSwatchPickerItemEmits>()
 
 defineSlots<{
   default?: (props: {
     /** Whether the item is currently selected */
-    selected: boolean;
-  }) => any;
-}>();
+    selected: boolean
+  }) => any
+}>()
 
-const { value } = toRefs(props);
+// `toRef`, not `toRefs`: only `value` is needed as a ref (one ref, not one per prop).
+const value = toRef(props, 'value')
 
-const forwarded = useForwardPropsEmits(props, emits);
+const forwarded = useForwardPropsEmits(props, emits)
 
-const colorLabel = computed(() => {
-  try {
-    return getColorName(value.value);
-  } catch {
-    return value.value;
-  }
-});
+const item = getColorSwatchPickerItemSurface(value)
 
 provideColorSwatchPickerItemContext({
   color: value,
-});
+})
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <ListboxItem
+    :ref="forwardRef"
     v-slot="slotProps"
-    v-bind="forwarded"
-    :aria-label="colorLabel"
-    :data-color="value"
-    :style="{ '--akar-color-swatch-picker-item-color': value }"
+    v-bind="mergeProps(forwarded, item.attrs.value)"
+    :value="value"
   >
     <slot v-bind="slotProps" />
   </ListboxItem>

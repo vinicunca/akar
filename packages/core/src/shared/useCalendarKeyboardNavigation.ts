@@ -1,8 +1,8 @@
-import type { DateValue } from '@internationalized/date';
-import type { WeekStartsOn } from '@/date';
-import { toCalendar, toCalendarDate } from '@internationalized/date';
-import { nextTick } from 'vue';
-import { getDaysInMonth, getLastFirstDayOfWeek, getNextLastDayOfWeek } from '@/date';
+import type { WeekStartsOn } from '@/date'
+import type { DateValue } from '@/date/types'
+import { nextTick } from 'vue'
+import { getDaysInMonth, getLastFirstDayOfWeek, getNextLastDayOfWeek } from '@/date'
+import { compareDateValues, compareDays, toCalendar, toIsoString, toPlainDate } from '@/date/temporal'
 
 /**
  * Upper bound on focus-search steps when skipping over disabled/unavailable
@@ -10,96 +10,80 @@ import { getDaysInMonth, getLastFirstDayOfWeek, getNextLastDayOfWeek } from '@/d
  * consecutive blocked days (more than three weeks) while guaranteeing the
  * recursion terminates if no focusable day can be found.
  */
-export const MAX_FOCUS_RETRIES = 24;
+export const MAX_FOCUS_RETRIES = 24
 
 interface FocusDateOptions {
-  parentElement: HTMLElement;
-  target: DateValue;
-  directionSign: number;
-  minValue?: DateValue;
-  maxValue?: DateValue;
-  onPlaceholderChange: (date: DateValue) => void;
-  allowOutsideView?: boolean;
+  parentElement: HTMLElement
+  target: DateValue
+  directionSign: number
+  minValue?: DateValue
+  maxValue?: DateValue
+  onPlaceholderChange: (date: DateValue) => void
+  allowOutsideView?: boolean
 }
 
 interface FocusWeekBoundaryOptions extends Omit<FocusDateOptions, 'target' | 'directionSign'> {
-  baseDate: DateValue;
-  boundary: 'start' | 'end';
-  locale: string;
-  weekStartsOn: WeekStartsOn;
+  baseDate: DateValue
+  boundary: 'start' | 'end'
+  locale: string
+  weekStartsOn: WeekStartsOn
 }
 
 interface FocusPaginationOptions extends Omit<FocusDateOptions, 'target' | 'directionSign'> {
-  baseDate: DateValue;
-  isNext: boolean;
-  isYear: boolean;
-  isOutsideVisibleView: (date: DateValue) => boolean;
-  isNextButtonDisabled: (customPageFn?: (date: DateValue) => DateValue) => boolean;
-  isPrevButtonDisabled: (customPageFn?: (date: DateValue) => DateValue) => boolean;
-  nextPage: (customPageFn?: (date: DateValue) => DateValue) => void;
-  prevPage: (customPageFn?: (date: DateValue) => DateValue) => void;
+  baseDate: DateValue
+  isNext: boolean
+  isYear: boolean
+  isOutsideVisibleView: (date: DateValue) => boolean
+  isNextButtonDisabled: (customPageFn?: (date: DateValue) => DateValue) => boolean
+  isPrevButtonDisabled: (customPageFn?: (date: DateValue) => DateValue) => boolean
+  nextPage: (customPageFn?: (date: DateValue) => DateValue) => void
+  prevPage: (customPageFn?: (date: DateValue) => DateValue) => void
 }
 
 export function focusWeekBoundary(options: FocusWeekBoundaryOptions) {
-  const { baseDate, boundary, locale, weekStartsOn } = options;
+  const { baseDate, boundary, locale, weekStartsOn } = options
   const target = boundary === 'start'
     ? getLastFirstDayOfWeek(baseDate, weekStartsOn, locale)
-    : getNextLastDayOfWeek(baseDate, weekStartsOn, locale);
+    : getNextLastDayOfWeek(baseDate, weekStartsOn, locale)
   // The sign points outward toward the boundary; clamp/fallback logic in
   // `focusDate` turns it inward when the boundary day itself is not focusable.
-  const directionSign = boundary === 'start'
-    ? -1
-    : 1;
-  focusDate({
-    ...options,
-    target,
-    directionSign,
-    allowOutsideView: true,
-  });
+  const directionSign = boundary === 'start' ? -1 : 1
+  focusDate({ ...options, target, directionSign, allowOutsideView: true })
 }
 
 export function focusPagination(options: FocusPaginationOptions) {
-  const { baseDate, isNext, isYear, isOutsideVisibleView } = options;
-  const amount = isNext
-    ? 1
-    : -1;
+  const { baseDate, isNext, isYear, isOutsideVisibleView } = options
+  const amount = isNext ? 1 : -1
   const target = clampTargetDate(
     getTargetMonthDay(baseDate, isYear ? 'year' : 'month', amount),
     options.minValue,
     options.maxValue,
-  );
+  )
 
   const customPageFn = (date: DateValue) => {
-    const pageDate = isYear
-      ? date.add({ years: amount })
-      : date.add({ months: amount });
-    return pageDate.set({ day: 1 });
-  };
-
-  if (isOutsideVisibleView(target)) {
-    if (isNext && !options.isNextButtonDisabled(customPageFn)) {
-      options.nextPage(customPageFn);
-    } else if (!isNext && !options.isPrevButtonDisabled(customPageFn)) {
-      options.prevPage(customPageFn);
-    }
+    const pageDate = isYear ? date.add({ years: amount }) : date.add({ months: amount })
+    return pageDate.with({ day: 1 })
   }
 
-  focusDate({ ...options, target, directionSign: amount });
+  if (isOutsideVisibleView(target)) {
+    if (isNext && !options.isNextButtonDisabled(customPageFn))
+      options.nextPage(customPageFn)
+    else if (!isNext && !options.isPrevButtonDisabled(customPageFn))
+      options.prevPage(customPageFn)
+  }
+
+  focusDate({ ...options, target, directionSign: amount })
 }
 
 export function getTargetMonthDay(date: DateValue, unit: 'month' | 'year', amount: number): DateValue {
-  const targetBase = date.add(unit === 'month'
-    ? { months: amount }
-    : { years: amount });
-  const daysInTargetMonth = getDaysInMonth(targetBase);
-  const targetDay = Math.min(date.day, daysInTargetMonth);
-  return targetBase.set({ day: targetDay });
+  const targetBase = date.add(unit === 'month' ? { months: amount } : { years: amount })
+  const daysInTargetMonth = getDaysInMonth(targetBase)
+  const targetDay = Math.min(date.day, daysInTargetMonth)
+  return targetBase.with({ day: targetDay })
 }
 
 /** Compares the calendar days of two dates, ignoring their time and type. */
-function compareDay(date: DateValue, reference: DateValue) {
-  return toCalendarDate(date).compare(toCalendarDate(reference));
-}
+const compareDay = compareDays
 
 /**
  * Moves `date` to the day of `bound`. The result keeps the type, time and
@@ -107,31 +91,24 @@ function compareDay(date: DateValue, reference: DateValue) {
  * the placeholder and not from `minValue` / `maxValue`.
  */
 function setDay(date: DateValue, bound: DateValue): DateValue {
-  const day = toCalendar(toCalendarDate(bound), date.calendar);
-  return date.set({
-    era: day.era,
-    year: day.year,
-    month: day.month,
-    day: day.day,
-  });
+  const day = toCalendar(toPlainDate(bound), date.calendarId)
+  return date.with({ year: day.year, month: day.month, day: day.day })
 }
 
 export function clampTargetDate(date: DateValue, minValue?: DateValue, maxValue?: DateValue): DateValue {
-  let candidateDay = date;
+  let candidateDay = date
 
-  if (minValue && compareDay(candidateDay, minValue) < 0) {
-    candidateDay = setDay(candidateDay, minValue);
-  }
+  if (minValue && compareDay(candidateDay, minValue) < 0)
+    candidateDay = setDay(candidateDay, minValue)
 
-  if (maxValue && compareDay(candidateDay, maxValue) > 0) {
-    candidateDay = setDay(candidateDay, maxValue);
-  }
+  if (maxValue && compareDay(candidateDay, maxValue) > 0)
+    candidateDay = setDay(candidateDay, maxValue)
 
-  return candidateDay;
+  return candidateDay
 }
 
 function focusDate(options: FocusDateOptions) {
-  const clampedTarget = clampTargetDate(options.target, options.minValue, options.maxValue);
+  const clampedTarget = clampTargetDate(options.target, options.minValue, options.maxValue)
 
   // Determine the direction to search when the target day is not focusable:
   // - clamped to minValue from negative movement -> +1 (inward from the lower bound)
@@ -140,23 +117,23 @@ function focusDate(options: FocusDateOptions) {
   //   within the current week instead of spilling into the adjacent week
   // - unclamped pagination -> keep travelling in the navigation direction
   // - otherwise -> 0 (no search)
-  let safeDirection = 0;
-  const isClampedToMin = options.minValue && clampedTarget.compare(options.minValue) === 0;
-  const isClampedToMax = options.maxValue && clampedTarget.compare(options.maxValue) === 0;
-  const wasClamped = isClampedToMin || isClampedToMax;
+  let safeDirection = 0
+  const isClampedToMin = options.minValue && compareDay(clampedTarget, options.minValue) === 0
+  const isClampedToMax = options.maxValue && compareDay(clampedTarget, options.maxValue) === 0
+  const wasClamped = isClampedToMin || isClampedToMax
 
   if (!wasClamped) {
-    safeDirection = options.allowOutsideView
-      ? -options.directionSign
-      : options.directionSign;
-  } else if (isClampedToMin && options.directionSign < 0) {
-    safeDirection = 1;
-  } else if (isClampedToMax && options.directionSign > 0) {
-    safeDirection = -1;
+    safeDirection = options.allowOutsideView ? -options.directionSign : options.directionSign
+  }
+  else if (isClampedToMin && options.directionSign < 0) {
+    safeDirection = 1
+  }
+  else if (isClampedToMax && options.directionSign > 0) {
+    safeDirection = -1
   }
 
-  options.onPlaceholderChange(clampedTarget);
-  nextTick(() => tryFocusDate(options.parentElement, clampedTarget, safeDirection, 0, options));
+  options.onPlaceholderChange(clampedTarget)
+  nextTick(() => tryFocusDate(options.parentElement, clampedTarget, safeDirection, 0, options))
 }
 
 function tryFocusDate(
@@ -166,41 +143,35 @@ function tryFocusDate(
   retries: number,
   options: FocusDateOptions,
 ) {
-  if (retries >= MAX_FOCUS_RETRIES) {
-    return;
-  }
+  if (retries >= MAX_FOCUS_RETRIES)
+    return
 
   // With multiple months, a date can render both in its own grid and as an
   // outside-view copy in a neighbouring grid; always prefer the in-month cell.
-  const valueSelector = `[data-value='${target.toString()}']`;
+  const valueSelector = `[data-value='${toIsoString(target)}']`
   const candidateDay = parentElement.querySelector<HTMLElement>(`${valueSelector}:not([data-outside-view])`)
-    ?? (options.allowOutsideView
-      ? parentElement.querySelector<HTMLElement>(valueSelector)
-      : null);
+    ?? (options.allowOutsideView ? parentElement.querySelector<HTMLElement>(valueSelector) : null)
 
   if (!candidateDay) {
-    nextTick(() => tryFocusDate(parentElement, target, directionSign, retries + 1, options));
-    return;
+    nextTick(() => tryFocusDate(parentElement, target, directionSign, retries + 1, options))
+    return
   }
 
   if (candidateDay.hasAttribute('data-disabled') || candidateDay.hasAttribute('data-unavailable')) {
-    if (!directionSign) {
-      return;
-    }
+    if (!directionSign)
+      return
 
-    const nextTarget = clampTargetDate(target.add({ days: directionSign }), options.minValue, options.maxValue);
-    if (nextTarget.compare(target) === 0) {
-      return;
-    }
+    const nextTarget = clampTargetDate(target.add({ days: directionSign }), options.minValue, options.maxValue)
+    if (compareDateValues(nextTarget, target) === 0)
+      return
 
-    options.onPlaceholderChange(nextTarget);
-    nextTick(() => tryFocusDate(parentElement, nextTarget, directionSign, retries + 1, options));
-    return;
+    options.onPlaceholderChange(nextTarget)
+    nextTick(() => tryFocusDate(parentElement, nextTarget, directionSign, retries + 1, options))
+    return
   }
 
-  if (options.allowOutsideView && candidateDay.hasAttribute('data-outside-view') && !candidateDay.hasAttribute('tabindex')) {
-    candidateDay.setAttribute('tabindex', '-1');
-  }
+  if (options.allowOutsideView && candidateDay.hasAttribute('data-outside-view') && !candidateDay.hasAttribute('tabindex'))
+    candidateDay.setAttribute('tabindex', '-1')
 
-  candidateDay.focus();
+  candidateDay.focus()
 }

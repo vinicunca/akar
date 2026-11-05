@@ -1,0 +1,171 @@
+import type { ComputedRef, MaybeRefOrGetter, Ref } from 'vue'
+import type { By } from './compare'
+import type { BaseChangeReason, ChangeEventDetails } from './types'
+import { computed, ref, toRaw, toValue } from 'vue'
+import { compare, valueComparator } from './compare'
+import { isNullish } from './nullish'
+import { useControllableState } from './useControllableState'
+
+export interface UseListSelectionOptions<T, R extends string = string> {
+  /**
+   * Controlled value. A getter/ref resolving to `undefined` is uncontrolled;
+   * a writable `Ref` (with no `emit`/`onUpdate`) is written back ("ref-owned").
+   */
+  modelValue?: MaybeRefOrGetter<T | T[] | undefined>
+  /** Initial value when uncontrolled. Defaults to `[]` when `multiple`, else `undefined`. */
+  defaultValue?: T | T[]
+  /** Whether several values can be selected at once. @defaultValue `false` */
+  multiple?: MaybeRefOrGetter<boolean | undefined>
+  /**
+   * Identity strategy (a key or an equality function; a function runs for
+   * every value, strings included). A plain value read once at setup, NOT a
+   * getter: a comparison function would otherwise be mistaken for a getter by
+   * `toValue`.
+   */
+  by?: By<T>
+  /**
+   * `'toggle'` adds/removes the value (and clears a single selection when it
+   * is re-selected); `'replace'` always selects the value.
+   * @defaultValue `'toggle'`
+   */
+  selectionBehavior?: MaybeRefOrGetter<'toggle' | 'replace' | undefined>
+  /** Model name for the emits. @defaultValue `'modelValue'` */
+  name?: string
+  /** Component `emit`; receives `beforeUpdate:<name>` then `update:<name>`. */
+  emit?: (event: any, ...args: any[]) => void
+  /** Called before a change commits; `details.cancel()` vetoes it. */
+  onBeforeUpdate?: (value: T | T[] | undefined, details: ChangeEventDetails<R>) => void
+  /** Called after a change commits. */
+  onUpdate?: (value: T | T[] | undefined, details: ChangeEventDetails<R>) => void
+}
+
+export interface UseListSelectionReturn<T, R extends string = string> {
+  modelValue: ComputedRef<T | T[] | undefined>
+  /** Write the whole model; returns `false` when unchanged or cancelled. */
+  setModelValue: (value: T | T[] | undefined, reason?: R | BaseChangeReason, event?: Event) => boolean
+  /**
+   * Select a value following `multiple` / `selectionBehavior`; returns `false`
+   * when unchanged or cancelled.
+   */
+  select: (value: T, reason?: R | BaseChangeReason, event?: Event) => boolean
+  /** Whether `value` is (part of) the current selection, matched with `by`. */
+  isSelected: (value: T) => boolean
+  /** Anchor of a `'replace'` selection — the value the last non-cancelled replace press targeted (range selections start here). */
+  firstValue: Ref<T | undefined>
+  isControlled: ComputedRef<boolean>
+  lastChangeDetails: Readonly<Ref<ChangeEventDetails<R>>>
+}
+
+/** `Object.is` on the raw values (a reactive proxy is its target). */
+function isSameValue(a: unknown, b: unknown) {
+  return Object.is(toRaw(a), toRaw(b))
+}
+
+/** `isSameValue`, applied entry by entry to two arrays — the change-only rule for a multiple selection. */
+function isSameSelection<T>(a: T | T[] | undefined, b: T | T[] | undefined) {
+  if (Array.isArray(a) && Array.isArray(b))
+    return a.length === b.length && a.every((value, index) => isSameValue(value, b[index]))
+  return isSameValue(a, b)
+}
+
+/**
+ * The single/multiple selection model shared by Listbox (and later Combobox
+ * and Select, #2824), on top of `useControllableState`. `select` is ported
+ * verbatim from `ListboxRoot.vue`'s `onValueChange`: multiple + toggle
+ * adds/removes the value, multiple + replace selects `[value]` and records it
+ * as the range anchor, single + toggle clears a re-selected value.
+ *
+ * A multiple selection is compared entry by entry (`Object.is` on each), so
+ * re-selecting the current value in `'replace'` mode emits nothing — the same
+ * change-only rule as a single value (v2 emitted a fresh array every time).
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle pure
+ */
+export function useListSelection<T, R extends string = string>(options: UseListSelectionOptions<T, R> = {}): UseListSelectionReturn<T, R> {
+  const { by } = options
+  const selectionBehavior = () => toValue(options.selectionBehavior) ?? 'toggle'
+  const multiple = () => toValue(options.multiple) ?? false
+
+  const { state, setState, lastChangeDetails, isControlled } = useControllableState<T | T[] | undefined, R>({
+    prop: options.modelValue,
+    // Evaluated once. Only `undefined` falls back, so an explicit `null` default is kept.
+    defaultValue: () => options.defaultValue !== undefined ? options.defaultValue : (multiple() ? [] : undefined),
+    name: options.name ?? 'modelValue',
+    emit: options.emit,
+    onBeforeUpdate: options.onBeforeUpdate,
+    onUpdate: options.onUpdate,
+    isEqual: isSameSelection,
+  })
+  // A multiple selection is always an array: a controlled parent clearing the
+  // model to `undefined` / `null` reads `[]`, so `T[]` typings hold.
+  const modelValue = computed(() => {
+    const value = state.value
+    return multiple() && isNullish(value) ? [] : value
+  }) as ComputedRef<T | T[] | undefined>
+
+  const firstValue = ref<T>() as Ref<T | undefined>
+
+  function setModelValue(value: T | T[] | undefined, reason: R | BaseChangeReason = 'imperative-action', event?: Event) {
+    // A context write of `undefined` / `null` clears a multiple selection to `[]`.
+    return setState(multiple() && isNullish(value) ? [] : value, reason, event)
+  }
+
+  function select(val: T, reason: R | BaseChangeReason = 'imperative-action', event?: Event) {
+    if (multiple()) {
+      const modelArray = Array.isArray(modelValue.value) ? [...modelValue.value] : []
+      const index = modelArray.findIndex(i => compare(i, val, by))
+      if (selectionBehavior() === 'toggle') {
+        index === -1 ? modelArray.push(val) : modelArray.splice(index, 1)
+        return setState(modelArray, reason, event)
+      }
+      else {
+        // The range anchor follows every press that is not cancelled: a
+        // committed replace, and a re-press of the current selection (a no-op
+        // write, so `setState` reports `false` for it as well). A cancelled
+        // `beforeUpdate` keeps the previous anchor with the previous selection.
+        // A no-op write returns before touching `lastChangeDetails`; a cancelled
+        // one records its details, which tells the two `false`s apart (a
+        // ref-owned `undefined` model treats a write of its default as real).
+        // Re-pressing the sole selected value through a different instance
+        // that `by` matches is a no-op. `by` sees the same (reactive) entries
+        // `isSelected` compares; the same value (or its proxy) takes the
+        // `setState` path below, where `isSameSelection` compares raw values.
+        const selected = modelValue.value
+        if (Array.isArray(selected) && selected.length === 1 && !isSameValue(selected[0], val) && compare(selected[0], val, by)) {
+          firstValue.value = val
+          return false
+        }
+        const current = toRaw(selected)
+        const isCurrent = isSameSelection([val], current)
+        const detailsBefore = lastChangeDetails.value
+        const changed = setState([val], reason, event)
+        if (changed || (isCurrent && lastChangeDetails.value === detailsBefore))
+          firstValue.value = val
+        return changed
+      }
+    }
+    else {
+      if (selectionBehavior() === 'toggle') {
+        if (compare(modelValue.value as T | undefined, val, by))
+          return setState(undefined, reason, event)
+        else
+          return setState(val, reason, event)
+      }
+      else {
+        // A re-press of the selected value is a no-op, matched with `by` (a
+        // different instance of the same object must not emit).
+        const current = modelValue.value as T | undefined
+        if (!isNullish(current) && !isSameValue(current, val) && compare(current, val, by))
+          return false
+        return setState(val, reason, event)
+      }
+    }
+  }
+
+  function isSelected(value: T) {
+    return valueComparator(modelValue.value, value, by)
+  }
+
+  return { modelValue, setModelValue, select, isSelected, firstValue, isControlled, lastChangeDetails }
+}

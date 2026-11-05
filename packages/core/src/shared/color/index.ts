@@ -1,5 +1,5 @@
 // Channel operations
-export { getChannelName, getChannelRange, getChannelValue, setChannelValue, setChannelValues } from './channel';
+export { getChannelColorSpace, getChannelName, getChannelRange, getChannelValue, setChannelValue, setChannelValues } from './channel'
 
 // Conversion
 export {
@@ -11,13 +11,18 @@ export {
   convertToHsb,
   convertToHsl,
   convertToRgb,
-} from './convert';
+  convertToSpace,
+} from './convert'
 
 // Gradients
-export { getAreaBackgroundStyle, getAreaGradient, getSliderBackgroundStyle, getSliderGradient } from './gradient';
+export { getAreaBackgroundStyle, getAreaGradient, getSliderBackgroundStyle, getSliderGradient, getSliderGradientDirection } from './gradient'
+export type { SliderGradientLayout } from './gradient'
+
+// Equality
+export { isEqualColor } from './isEqualColor'
 
 // Parsing
-export { isValidColor, normalizeColor, parseColor } from './parse';
+export { isValidColor, normalizeColor, parseColor } from './parse'
 
 // Types
 export type {
@@ -29,7 +34,7 @@ export type {
   HSBColor,
   HSLColor,
   RGBColor,
-} from './types';
+} from './types'
 
 // Legacy utilities (keeping for backwards compatibility)
-export { getColorContrast, getColorName, hexToHSL, hexToRGB } from './utils';
+export { getColorContrast, getColorName, hexToHSL, hexToRGB } from './utils'

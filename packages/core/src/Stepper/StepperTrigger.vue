@@ -1,94 +1,50 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
-import { computed, onMounted, onUnmounted } from 'vue';
-import { getActiveElement, useArrowNavigation, useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { onMounted, onUnmounted } from 'vue'
+import { useForwardElement } from '@/shared'
 
 export interface StepperTriggerProps extends PrimitiveProps {
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { injectStepperItemContext } from './StepperItem.vue';
-import { injectStepperRootContext } from './StepperRoot.vue';
+import { Primitive } from '@/Primitive'
+import { injectStepperItemContext } from './StepperItem.vue'
+import { injectStepperRootContext } from './StepperRoot.vue'
+import { getStepperTriggerSurface } from './useStepper'
 
 withDefaults(defineProps<StepperTriggerProps>(), {
   as: 'button',
-});
+})
 
-const rootContext = injectStepperRootContext();
-const itemContext = injectStepperItemContext();
+const rootContext = injectStepperRootContext()
+const itemContext = injectStepperItemContext()
 
-const stepperItems = computed(() => Array.from(rootContext.totalStepperItems.value));
+// data-state/tabindex/aria and the mousedown/keydown handlers come from the
+// shared surface builder (single source with `useStepper().getItem`); the
+// tag-dependent `type` and the trigger registration stay in the SFC.
+const surface = getStepperTriggerSurface(rootContext, itemContext)
 
-function handleMouseDown(event: MouseEvent) {
-  if (itemContext.disabled.value) {
-    return;
-  }
-  if (rootContext.linear.value) {
-    if (itemContext.step.value <= rootContext.modelValue.value! || itemContext.step.value === rootContext.modelValue.value! + 1) {
-      if (event.ctrlKey === false) {
-        rootContext.changeModelValue(itemContext.step.value);
-        return;
-      }
-    }
-  } else {
-    if (event.ctrlKey === false) {
-      rootContext.changeModelValue(itemContext.step.value);
-      return;
-    }
-  }
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
 
-  // prevent focus to avoid accidental activation
-  event.preventDefault();
-}
-
-function handleKeyDown(event: KeyboardEvent) {
-  event.preventDefault();
-
-  if (itemContext.disabled.value) {
-    return;
-  }
-
-  if ((event.key === KEY_CODES.ENTER || event.key === ' ') && !event.ctrlKey && !event.shiftKey) {
-    rootContext.changeModelValue(itemContext.step.value);
-  }
-
-  if (isIncludedIn(event.key, [
-    KEY_CODES.ARROW_LEFT,
-    KEY_CODES.ARROW_RIGHT,
-    KEY_CODES.ARROW_UP,
-    KEY_CODES.ARROW_DOWN,
-  ])) {
-    useArrowNavigation(event, getActiveElement() as HTMLElement, undefined, {
-      itemsArray: stepperItems.value,
-      focus: true,
-      loop: false,
-      arrowKeyOptions: rootContext.orientation.value,
-      dir: rootContext.dir.value,
-    });
-  }
-}
-
-const { forwardRef, currentElement } = useForwardExpose();
-
-let registeredElement: HTMLElement | null = null;
+let registeredElement: HTMLElement | null = null
 
 onMounted(() => {
-  registeredElement = currentElement.value;
-
+  registeredElement = currentElement.value
   if (registeredElement) {
-    rootContext.totalStepperItems.value.add(registeredElement);
+    rootContext.itemDisabled.set(registeredElement, () => itemContext.disabled.value)
+    rootContext.totalStepperItems.value.add(registeredElement)
   }
-});
+})
 
 onUnmounted(() => {
   if (registeredElement) {
-    rootContext.totalStepperItems.value.delete(registeredElement);
-    registeredElement = null;
+    rootContext.totalStepperItems.value.delete(registeredElement)
+    rootContext.itemDisabled.delete(registeredElement)
+    registeredElement = null
   }
-});
+})
 </script>
 
 <template>
@@ -97,15 +53,7 @@ onUnmounted(() => {
     :type="as === 'button' ? 'button' : undefined"
     :as="as"
     :as-child="asChild"
-    :data-state="itemContext.state.value"
-    :disabled="itemContext.disabled.value || !itemContext.isFocusable.value ? '' : undefined"
-    :data-disabled="itemContext.disabled.value || !itemContext.isFocusable.value ? '' : undefined"
-    :data-orientation="rootContext.orientation.value"
-    :tabindex="itemContext.isFocusable.value ? 0 : -1"
-    :aria-describedby="itemContext.descriptionId"
-    :aria-labelledby="itemContext.titleId"
-    @mousedown.left="handleMouseDown"
-    @keydown.enter.space.left.right.up.down="handleKeyDown"
+    v-bind="surface.attrs.value"
   >
     <slot />
   </Primitive>

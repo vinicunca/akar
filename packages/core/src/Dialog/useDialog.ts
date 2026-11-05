@@ -1,0 +1,310 @@
+import type { ComputedRef, MaybeRefOrGetter, Ref } from 'vue'
+import type { DialogOpenChangeReason, DialogRootContext } from './DialogRoot.vue'
+import type { DialogHandle } from './handle'
+import type { BaseChangeReason, ChangeEventDetails, DisclosureState, PartSurface } from '@/shared'
+import type { PopupRootStore } from '@/shared/popupHandle'
+import { computed, ref, toValue } from 'vue'
+import { createPartSurface, disclosureState, setGeneratedIds, useControllableState } from '@/shared'
+import { createPopupRootStore, setPopupRootStore } from '@/shared/popupHandle'
+
+// =============================================================================
+// Headless composable for the Dialog (overlay) family — issue #2723.
+//
+// Overlay-root contract (validated on Menu): the root renders no attrs, so
+// `useDialog()` returns `{ state, methods, context }` plus the per-part surfaces
+// that begin at Trigger/Content. Every part surface is a PURE derivation from
+// the root context (`get<Part>Surface(context)`), shared by the part SFCs (which
+// inject the context) and by `useDialog()` itself — one derivation, two callers.
+//
+// What a pure composable cannot absorb stays in the SFCs: `Presence` (mount/
+// unmount + `unmountOnHide`), `FocusScope`/`DismissableLayer` (trap + dismiss),
+// `useHideOthers`/`useBodyScrollLock`, the Teleport portal, and the tag-dependent
+// `type` binding.
+// =============================================================================
+
+/** Semantic state of the trigger part; `state` → `data-state="open|closed"`. */
+export type DialogTriggerState = { state: DisclosureState }
+/** Semantic state of the content part; `state` → `data-state="open|closed"`. */
+export type DialogContentState = { state: DisclosureState }
+/** Semantic state of the overlay part; `state` → `data-state="open|closed"`. */
+export type DialogOverlayState = { state: DisclosureState }
+
+/** Standalone `useDialog()` calls without a `baseId` draw `reka-dialog-<n>` from here. */
+let dialogCount = 0
+
+/**
+ * The trigger surface (`aria-haspopup`/`aria-expanded`/`aria-controls` +
+ * `onClick` → `onOpenToggle('trigger-press')`), derived purely from the context.
+ * The `type` binding is tag-dependent and stays in the SFC.
+ */
+export function getDialogTriggerSurface(
+  context: Pick<DialogRootContext, 'open' | 'contentId' | 'onOpenToggle'>,
+): PartSurface<DialogTriggerState> {
+  return createPartSurface<DialogTriggerState>(
+    () => ({
+      'aria-haspopup': 'dialog',
+      'aria-expanded': context.open.value || false,
+      'aria-controls': context.open.value ? context.contentId : undefined,
+      'onClick': (event: MouseEvent) => context.onOpenToggle('trigger-press', event),
+    }),
+    () => ({ state: disclosureState(context.open.value) }),
+  )
+}
+
+/** The close surface: `onClick` → `onOpenChange(false, 'close-press')`; renders no `data-*`. */
+export function getDialogCloseSurface(
+  context: Pick<DialogRootContext, 'onOpenChange'>,
+): PartSurface<Record<string, never>> {
+  return createPartSurface<Record<string, never>>(
+    () => ({
+      onClick: (event: MouseEvent) => context.onOpenChange(false, 'close-press', event),
+    }),
+    () => ({}),
+  )
+}
+
+/**
+ * The content surface (`id`/`role="dialog"`/`aria-labelledby`/`aria-describedby`
+ * + `data-state`), derived purely from the context. The FocusScope/
+ * DismissableLayer wrappers, the `@dismiss` forwarding and the a11y warnings
+ * stay in `DialogContentImpl`.
+ */
+export function getDialogContentSurface(
+  context: Pick<DialogRootContext, 'open' | 'contentId' | 'titleId' | 'descriptionId'>,
+): PartSurface<DialogContentState> {
+  return createPartSurface<DialogContentState>(
+    () => ({
+      'id': context.contentId,
+      'role': 'dialog',
+      'aria-describedby': context.descriptionId,
+      'aria-labelledby': context.titleId,
+    }),
+    () => ({ state: disclosureState(context.open.value) }),
+  )
+}
+
+/** The overlay surface: state only (`data-state`); scroll-lock + pointerdown guard stay in the SFC. */
+export function getDialogOverlaySurface(
+  context: Pick<DialogRootContext, 'open'>,
+): PartSurface<DialogOverlayState> {
+  return createPartSurface<DialogOverlayState>(
+    () => ({}),
+    () => ({ state: disclosureState(context.open.value) }),
+  )
+}
+
+/** The title surface: the `id` the content's `aria-labelledby` points at. */
+export function getDialogTitleSurface(
+  context: Pick<DialogRootContext, 'titleId'>,
+): PartSurface<Record<string, never>> {
+  return createPartSurface<Record<string, never>>(
+    () => ({ id: context.titleId }),
+    () => ({}),
+  )
+}
+
+/** The description surface: the `id` the content's `aria-describedby` points at. */
+export function getDialogDescriptionSurface(
+  context: Pick<DialogRootContext, 'descriptionId'>,
+): PartSurface<Record<string, never>> {
+  return createPartSurface<Record<string, never>>(
+    () => ({ id: context.descriptionId }),
+    () => ({}),
+  )
+}
+
+export interface UseDialogProps<Payload = unknown> {
+  /**
+   * Connects detached `DialogTrigger`s (#2826): focus returns to, and the
+   * `payload` comes from, whichever trigger opened the dialog.
+   */
+  handle?: MaybeRefOrGetter<DialogHandle<Payload> | undefined>
+  /** Controlled id of the trigger that owns the dialog (with a `handle`). */
+  triggerId?: MaybeRefOrGetter<string | null | undefined>
+  /** Id of the trigger that owns a dialog that starts open (with a `handle`). */
+  defaultTriggerId?: string | null
+  /**
+   * Controlled open state. A getter/ref resolving to `undefined` is uncontrolled;
+   * a writable `Ref` (with no `emit`/`onUpdate`) is written back ("ref-owned").
+   */
+  open?: MaybeRefOrGetter<boolean | undefined>
+  /** Initial open state when uncontrolled. @defaultValue `false` */
+  defaultOpen?: boolean
+  /**
+   * The modality of the dialog. When `true`, interaction with outside elements
+   * is disabled and only dialog content is visible to screen readers.
+   * @defaultValue `true`
+   */
+  modal?: MaybeRefOrGetter<boolean | undefined>
+  /**
+   * When `false`, the content is hidden with CSS instead of unmounted on close.
+   * @defaultValue `true`
+   */
+  unmountOnHide?: MaybeRefOrGetter<boolean | undefined>
+  /**
+   * Base id the content/title/description ids derive from (`<baseId>-content`,
+   * `<baseId>-title`, `<baseId>-description`). Defaults to `reka-dialog-<n>`
+   * from a per-call counter, which is NOT stable across server and client: SSR
+   * consumers must pass a stable `baseId` (the SFC hands its
+   * `useId(undefined, 'reka-dialog')`).
+   */
+  baseId?: string
+  /** Component `emit`; receives `beforeUpdate:open` then `update:open`. */
+  emit?: (event: any, ...args: any[]) => void
+  /** Called before a change commits; `details.cancel()` vetoes it. */
+  onBeforeUpdate?: (value: boolean, details: ChangeEventDetails<DialogOpenChangeReason>) => void
+  /** Called after a change commits. */
+  onUpdate?: (value: boolean, details: ChangeEventDetails<DialogOpenChangeReason>) => void
+  /**
+   * Called once the content's open (`true`) or close (`false`) transitions and
+   * animations have finished (`update:openComplete`), reported by `DialogContent`'s
+   * `Presence` through `context.notifyOpenComplete`.
+   */
+  onOpenComplete?: (value: boolean) => void
+}
+
+export interface UseDialogReturn<Payload = unknown> {
+  open: ComputedRef<boolean>
+  /** The `payload` of the trigger that opened the dialog, or from `handle.openWithPayload()`. */
+  payload: ComputedRef<Payload | undefined>
+  /** The id of the trigger that opened the dialog (with a `handle`), kept after close. */
+  activeTriggerId: ComputedRef<string | null>
+  /** The detached-trigger store the Root attaches to its `handle`. */
+  handleStore: PopupRootStore<Payload>
+  modal: ComputedRef<boolean>
+  unmountOnHide: ComputedRef<boolean>
+  /** Returns `false` when the change was a no-op or cancelled via `beforeUpdate:open`. */
+  onOpenChange: (value: boolean, reason?: DialogOpenChangeReason | BaseChangeReason, event?: Event) => boolean
+  /** Returns `false` when the change was a no-op or cancelled via `beforeUpdate:open`. */
+  onOpenToggle: (reason?: DialogOpenChangeReason | BaseChangeReason, event?: Event) => boolean
+  /** Returns `false` when the change was a no-op or cancelled via `beforeUpdate:open`. */
+  openModal: (reason?: DialogOpenChangeReason | BaseChangeReason, event?: Event) => boolean
+  /** Details of the last change attempt; initially `{ reason: 'none' }`. */
+  lastChangeDetails: Readonly<Ref<ChangeEventDetails<DialogOpenChangeReason>>>
+  isControlled: ComputedRef<boolean>
+  trigger: PartSurface<DialogTriggerState>
+  close: PartSurface<Record<string, never>>
+  content: PartSurface<DialogContentState>
+  overlay: PartSurface<DialogOverlayState>
+  title: PartSurface<Record<string, never>>
+  description: PartSurface<Record<string, never>>
+  /** The `DialogRootContext` value — the SFC provides this verbatim. */
+  context: DialogRootContext
+}
+
+/**
+ * Headless Dialog logic. The `.vue` shells compose this; a standalone consumer
+ * gets the open model (with `beforeUpdate`/`update` details), ids and the
+ * aria/role/`data-state` surfaces, but must still wrap the content in
+ * `Presence` + `FocusScope`/`DismissableLayer` (or their own equivalents) for
+ * mount/unmount, focus trapping and dismissal — those are component families
+ * a pure composable cannot absorb (see the #2723 recipe's "Overlay families").
+ *
+ * SSR-safe (no `document`/`window` at call scope) and callable outside
+ * `setup()` — computed-only; every mount-bound behaviour stays in the SFCs.
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle pure
+ */
+export function useDialog<Payload = unknown>(props: UseDialogProps<Payload> = {}): UseDialogReturn<Payload> {
+  const baseId = props.baseId ?? `reka-dialog-${++dialogCount}`
+
+  // Every open/close path (trigger, close button, dismiss) goes through one
+  // `setState` so `beforeUpdate:open` can cancel it and the details reach the consumer.
+  const { state: open, setState, lastChangeDetails, isControlled } = useControllableState<boolean, DialogOpenChangeReason>({
+    prop: props.open,
+    defaultValue: props.defaultOpen ?? false,
+    name: 'open',
+    emit: props.emit,
+    onBeforeUpdate: props.onBeforeUpdate,
+    onUpdate: props.onUpdate,
+  })
+  const modal = computed<boolean>(() => toValue(props.modal) ?? true)
+  const unmountOnHide = computed<boolean>(() => toValue(props.unmountOnHide) ?? true)
+
+  // Writable: a part's `id` prop replaces its generated id here, so the paired
+  // `aria-controls` / `aria-labelledby` / `aria-describedby` follow it.
+  const contentId = ref(`${baseId}-content`)
+  const titleId = ref(`${baseId}-title`)
+  const descriptionId = ref(`${baseId}-description`)
+
+  const handleStore = createPopupRootStore<Payload>({
+    handle: () => toValue(props.handle),
+    open,
+    setState,
+    baseId,
+    contentId: () => contentId.value,
+    triggerId: props.triggerId,
+    defaultTriggerId: props.defaultTriggerId,
+  })
+  // With a `handle`, focus returns to whichever detached trigger opened the
+  // dialog; without one (or for `openWithPayload()`), to the element recorded
+  // by the trigger / the content on open.
+  const ownTriggerElement = ref<HTMLElement>()
+  const triggerElement = computed<HTMLElement | undefined>({
+    get: () => (handleStore.handle.value && handleStore.activeTriggerElement.value) || ownTriggerElement.value,
+    set: (element) => {
+      ownTriggerElement.value = element
+    },
+  })
+  const contentElement = ref<HTMLElement>()
+
+  function onOpenChange(value: boolean, reason?: DialogOpenChangeReason | BaseChangeReason, event?: Event): boolean {
+    return setState(value, reason, event)
+  }
+  function onOpenToggle(reason?: DialogOpenChangeReason | BaseChangeReason, event?: Event): boolean {
+    return setState(!open.value, reason, event)
+  }
+  function openModal(reason?: DialogOpenChangeReason | BaseChangeReason, event?: Event): boolean {
+    return setState(true, reason, event)
+  }
+
+  const context: DialogRootContext = {
+    open,
+    modal: modal as Ref<boolean>,
+    unmountOnHide: unmountOnHide as Ref<boolean>,
+    openModal,
+    onOpenChange,
+    onOpenToggle,
+    triggerElement,
+    contentElement,
+    get contentId() { return contentId.value },
+    set contentId(value) { contentId.value = value },
+    get titleId() { return titleId.value },
+    set titleId(value) { titleId.value = value },
+    get descriptionId() { return descriptionId.value },
+    set descriptionId(value) { descriptionId.value = value },
+    notifyOpenComplete: value => props.onOpenComplete?.(value),
+  }
+  setGeneratedIds(context, { contentId: contentId.value, titleId: titleId.value, descriptionId: descriptionId.value })
+  setPopupRootStore(context, handleStore)
+
+  // The part surfaces are for standalone consumers (the part SFCs build their
+  // own from the context), so each is built on first read.
+  let trigger: PartSurface<DialogTriggerState> | undefined
+  let close: PartSurface<Record<string, never>> | undefined
+  let content: PartSurface<DialogContentState> | undefined
+  let overlay: PartSurface<DialogOverlayState> | undefined
+  let title: PartSurface<Record<string, never>> | undefined
+  let description: PartSurface<Record<string, never>> | undefined
+  return {
+    open,
+    get payload() { return handleStore.payload },
+    get activeTriggerId() { return handleStore.activeTriggerId },
+    handleStore,
+    modal,
+    unmountOnHide,
+    onOpenChange,
+    onOpenToggle,
+    openModal,
+    lastChangeDetails,
+    isControlled,
+    get trigger() { return trigger ??= getDialogTriggerSurface(context) },
+    get close() { return close ??= getDialogCloseSurface(context) },
+    get content() { return content ??= getDialogContentSurface(context) },
+    get overlay() { return overlay ??= getDialogOverlaySurface(context) },
+    get title() { return title ??= getDialogTitleSurface(context) },
+    get description() { return description ??= getDialogDescriptionSurface(context) },
+    context,
+  }
+}

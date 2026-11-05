@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { RadioGroupIndicator, RadioGroupItem, RadioGroupRoot } from '..';
+import { ref } from 'vue'
+import { RadioGroupIndicator, RadioGroupItem, RadioGroupRoot } from '..'
 
 defineProps<{
-  disabled?: boolean;
-}>();
-const radioStateSingle = ref('default');
+  disabled?: boolean
+}>()
+const radioStateSingle = ref('default')
 </script>
 
 <template>

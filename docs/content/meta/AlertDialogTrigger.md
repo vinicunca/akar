@@ -1,0 +1,51 @@
+<!-- This file was automatically generated. Do not edit it manually -->
+
+<llm-exclude>
+<PropsTable :data="[
+  {
+    'name': 'as',
+    'description': '<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n',
+    'type': 'AsTag | Component',
+    'required': false,
+    'default': '\'button\''
+  },
+  {
+    'name': 'asChild',
+    'description': '<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\'https://www.reka-ui.com/docs/guides/composition\'>Composition</a> guide for more details.</p>\n',
+    'type': 'boolean',
+    'required': false
+  },
+  {
+    'name': 'handle',
+    'description': '<p>A handle from <code>createAlertDialogHandle()</code> that connects this trigger to an\n<code>AlertDialogRoot</code> rendered elsewhere (outside this trigger\'s tree or portal).</p>\n',
+    'type': 'AlertDialogHandle&lt;Payload&gt;',
+    'required': false
+  },
+  {
+    'name': 'id',
+    'description': '<p>Id of the element. With a <code>handle</code>, also the id the Root\'s <code>triggerId</code> refers to.</p>\n',
+    'type': 'string',
+    'required': false
+  },
+  {
+    'name': 'payload',
+    'description': '<p>Passed to the Root\'s default slot while this trigger owns the dialog. Requires a <code>handle</code>.</p>\n',
+    'type': 'Payload',
+    'required': false
+  }
+]" />
+</llm-exclude>
+
+<llm-only>
+
+**Props**
+
+| Name | Description | Type | Required | Default |
+| --- | --- | --- | --- | --- |
+| `as` | The element or component this component should render as. Can be overwritten by `asChild`. | `AsTag \| Component` | No | `"button"` |
+| `asChild` | Change the default rendered element for the one passed as a child, merging their props and behavior. Read our Composition guide for more details. | `boolean` | No | - |
+| `handle` | A handle from `createAlertDialogHandle()` that connects this trigger to an `AlertDialogRoot` rendered elsewhere (outside this trigger's tree or portal). | `AlertDialogHandle<Payload>` | No | - |
+| `id` | Id of the element. With a `handle`, also the id the Root's `triggerId` refers to. | `string` | No | - |
+| `payload` | Passed to the Root's default slot while this trigger owns the dialog. Requires a `handle`. | `Payload` | No | - |
+
+</llm-only>

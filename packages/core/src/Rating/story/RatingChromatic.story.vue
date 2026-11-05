@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Rating from './_Rating.vue';
+import Rating from './_Rating.vue'
 </script>
 
 <template>

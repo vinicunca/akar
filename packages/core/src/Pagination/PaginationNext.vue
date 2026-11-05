@@ -1,31 +1,32 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface PaginationNextProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Primitive } from '@/Primitive';
-import { injectPaginationRootContext } from './PaginationRoot.vue';
+import { renderAs } from '@/Primitive/renderAs'
+import { injectPaginationRootContext } from './PaginationRoot.vue'
+import { getPaginationNavigationSurface } from './usePagination'
 
-const props = withDefaults(defineProps<PaginationNextProps>(), { as: 'button' });
+withDefaults(defineProps<PaginationNextProps>(), { as: 'button' })
 
-useForwardExpose();
-const rootContext = injectPaginationRootContext();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectPaginationRootContext()
 
-const disabled = computed((): boolean => rootContext.page.value === rootContext.pageCount.value || rootContext.disabled.value);
+// aria-label, disabled and the click handler come from the shared surface builder.
+const surface = getPaginationNavigationSurface(rootContext, 'next')
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
-    aria-label="Next Page"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     :type="as === 'button' ? 'button' : undefined"
-    :disabled
-    @click="!disabled && rootContext.onPageChange(rootContext.page.value + 1)"
+    v-bind="surface.attrs.value"
   >
     <slot>Next page</slot>
-  </Primitive>
+  </component>
 </template>

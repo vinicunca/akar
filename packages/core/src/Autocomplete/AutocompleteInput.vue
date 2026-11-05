@@ -1,139 +1,129 @@
 <script lang="ts">
-import type { ListboxFilterEmits, ListboxFilterProps } from '@/Listbox';
+import type { ComboboxInputChangeReason, ComboboxOpenChangeReason } from '@/Combobox/useCombobox'
+import type { ListboxFilterProps } from '@/Listbox'
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared'
 
-export type AutocompleteInputEmits = ListboxFilterEmits;
+export type AutocompleteInputEmits = {
+  /**
+   * Event handler called when the input text changes. The text is the Autocomplete value: veto typing with
+   * `beforeUpdate:modelValue` on `AutocompleteRoot`.
+   */
+  'update:modelValue': [value: string, details: ChangeEventDetails<ComboboxInputChangeReason>]
+}
 export interface AutocompleteInputProps extends ListboxFilterProps {}
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { nextTick, onMounted, watch } from 'vue';
-import { injectComboboxRootContext } from '@/Combobox/ComboboxRoot.vue';
-import { ListboxFilter } from '@/Listbox';
-import { injectListboxRootContext } from '@/Listbox/ListboxRoot.vue';
-import { usePrimitiveElement } from '@/Primitive';
-import { useComposing } from '@/shared';
-import { injectAutocompleteRootContext } from './AutocompleteRoot.vue';
+import { mergeProps, onMounted, onUnmounted, watch } from 'vue'
+import { injectComboboxRootContext } from '@/Combobox/ComboboxRoot.vue'
+import { createComboboxInputSurface } from '@/Combobox/useCombobox'
+import { getComboboxInputFieldAttrs, injectComboboxFieldContext } from '@/Combobox/useComboboxField'
+import { renderAsEmpty, rendersChildren } from '@/Primitive/renderAs'
+import { useControllableState, useForwardElement } from '@/shared'
+import { injectAutocompleteRootContext } from './AutocompleteRoot.vue'
+
+// `$attrs` are merged in the render (as the fall-through did) so the Field's
+// aria ids can be merged with the consumer's.
+defineOptions({ inheritAttrs: false })
 
 const props = withDefaults(defineProps<AutocompleteInputProps>(), {
   as: 'input',
-});
-const emits = defineEmits<AutocompleteInputEmits>();
+})
+const emits = defineEmits<AutocompleteInputEmits>()
 
-const rootContext = injectComboboxRootContext();
-const autocompleteContext = injectAutocompleteRootContext();
-const listboxContext = injectListboxRootContext();
-const { primitiveElement, currentElement } = usePrimitiveElement();
+defineSlots<{
+  default?: (props: {
+    /** Current input values */
+    modelValue: typeof modelValue.value
+  }) => any
+}>()
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  passive: (props.modelValue === undefined) as false,
-});
+const rootContext = injectComboboxRootContext()
+const autocompleteContext = injectAutocompleteRootContext()
+const fieldContext = injectComboboxFieldContext(null)
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
 
-if (autocompleteContext.modelValue.value) {
-  modelValue.value = autocompleteContext.modelValue.value;
-}
+// The input text, with change details (#2828). It has no `beforeUpdate` of its
+// own: the text is the Autocomplete value, which `AutocompleteRoot` vetoes.
+const { state: modelValue, setState: setText } = useControllableState<string, ComboboxInputChangeReason>({
+  prop: () => props.modelValue,
+  defaultValue: '',
+  name: 'modelValue',
+  emit: (event: string, value: string, details: ChangeEventDetails<ComboboxInputChangeReason>) => {
+    if (event === 'update:modelValue')
+      emits('update:modelValue', value, details)
+  },
+})
+
+if (autocompleteContext.modelValue.value)
+  setText(autocompleteContext.modelValue.value, 'none')
+
+// The Combobox input surface; the typed text is also the Autocomplete value.
+const surface = createComboboxInputSurface(rootContext, {
+  modelValue,
+  setText: (value, event) => {
+    setText(value, 'input-change', event)
+    return true
+  },
+  disabled: () => props.disabled,
+  // `false` (a cancelled `beforeUpdate:modelValue`) restores the input; an
+  // unchanged value is not a veto.
+  onTextChange: (value, event) => autocompleteContext.onModelValueChange(value, 'input-change', event)
+    || value === (autocompleteContext.modelValue.value ?? ''),
+})
 
 onMounted(() => {
-  if (currentElement.value) {
-    rootContext.onInputElementChange(currentElement.value as HTMLInputElement);
-  }
-});
+  // The input owns the keyboard: the items are highlighted, never focused.
+  rootContext.focusable.value = false
+  if (currentElement.value)
+    rootContext.onInputElementChange(currentElement.value as HTMLInputElement)
+  setTimeout(() => {
+    if (props.autoFocus)
+      currentElement.value?.focus()
+  }, 1)
+})
 
-const { isComposing, shouldDeferInput, handleCompositionStart, handleCompositionUpdate, handleCompositionEnd } = useComposing((event) => {
-  const el = event.target as HTMLInputElement;
-  if (el) {
-    processInputValue(el.value);
-  }
-});
+onUnmounted(() => {
+  rootContext.focusable.value = true
+})
 
-function handleKeyDown(ev: KeyboardEvent) {
-  if (isComposing.value) {
-    return;
-  }
-
-  ev.preventDefault();
-  if (!rootContext.open.value) {
-    rootContext.onOpenChange(true);
-  }
-}
-
-function processInputValue(value: string) {
-  if (!rootContext.open.value) {
-    rootContext.onOpenChange(true);
-    nextTick(() => {
-      if (value) {
-        rootContext.filterSearch.value = value;
-        listboxContext.highlightFirstItem();
-      }
-    });
-  } else {
-    rootContext.filterSearch.value = value;
-  }
-  // Autocomplete-specific: update root's modelValue with the typed text
-  autocompleteContext.modelValue.value = value;
-}
-
-function handleInput(event: InputEvent) {
-  if (shouldDeferInput.value) {
-    return;
-  }
-  processInputValue((event.target as HTMLInputElement).value);
-}
-
-function handleFocus() {
-  if (rootContext.openOnFocus.value && !rootContext.open.value) {
-    rootContext.onOpenChange(true);
-  }
-}
-
-function handleClick() {
-  if (rootContext.openOnClick.value && !rootContext.open.value) {
-    rootContext.onOpenChange(true);
-  }
-}
-
-// When root's modelValue changes externally (e.g. item click, programmatic), sync the input display
+// When the value changes elsewhere (an item press, a clear, the parent), show it in the input.
 watch(autocompleteContext.modelValue, (newVal) => {
-  const text = newVal ?? '';
+  const text = newVal ?? ''
   if (modelValue.value !== text) {
-    modelValue.value = text;
+    const reason = rootContext.lastChangeDetails.value.reason
+    setText(text, reason === 'item-press' || reason === 'clear-press' ? reason : 'none')
   }
-});
+})
 
-// Restore input text when root triggers resetSearchTerm (e.g. on blur with resetSearchTermOnBlur)
-rootContext.onResetSearchTerm(() => {
-  modelValue.value = autocompleteContext.modelValue.value ?? '';
-});
+rootContext.onClearInput((event?: Event) => {
+  setText('', 'clear-press', event)
+})
+
+// Restore the input text when the root resets it (closing with `resetSearchTermOnBlur`).
+rootContext.onResetSearchTerm((closeReason?: ComboboxOpenChangeReason | BaseChangeReason) => {
+  const text = autocompleteContext.modelValue.value ?? ''
+  setText(text, closeReason === 'escape-key' ? 'escape-key' : text === '' ? 'input-clear' : 'none')
+})
 
 watch(rootContext.filterState, (_newValue, oldValue) => {
-  if (!rootContext.isVirtual.value && (oldValue.count === 0)) {
-    listboxContext.highlightFirstItem();
-  }
-});
+  if (!rootContext.isVirtual.value && oldValue.count === 0)
+    rootContext.highlightFirstItem()
+})
 </script>
 
 <template>
-  <ListboxFilter
-    ref="primitiveElement"
-    v-model="modelValue"
-    :as="as"
-    :as-child="asChild"
-    :auto-focus="autoFocus"
-    :disabled="disabled"
-    :aria-expanded="rootContext.open.value"
-    :aria-controls="rootContext.contentId"
-    :aria-activedescendant="rootContext.open.value ? listboxContext.highlightedElement.value?.id : undefined"
-    aria-autocomplete="list"
-    role="combobox"
-    autocomplete="off"
-    @click="handleClick"
-    @input="handleInput"
-    @keydown.down.up="handleKeyDown"
-    @focus="handleFocus"
-    @compositionstart="handleCompositionStart"
-    @compositionupdate="handleCompositionUpdate"
-    @compositionend="handleCompositionEnd"
+  <component
+    :is="renderAsEmpty(as, asChild)"
+    :ref="forwardRef"
+    v-bind="fieldContext ? getComboboxInputFieldAttrs(fieldContext, surface.attrs.value, $attrs) : mergeProps(surface.attrs.value, $attrs)"
   >
-    <slot />
-  </ListboxFilter>
+    <template
+      v-if="rendersChildren(as, asChild)"
+      #default
+    >
+      <slot :model-value="modelValue" />
+    </template>
+  </component>
 </template>

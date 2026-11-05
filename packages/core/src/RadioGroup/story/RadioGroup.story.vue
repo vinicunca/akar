@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { RadioGroupIndicator, RadioGroupItem, RadioGroupRoot } from '..';
+import { ref } from 'vue'
+import { RadioGroupIndicator, RadioGroupItem, RadioGroupRoot } from '..'
 
-const radioStateSingle = ref('compact');
+const radioStateSingle = ref('compact')
 </script>
 
 <template>

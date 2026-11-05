@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from '..';
+import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from '..'
 
 function alert(message: string) {
-  alert(message);
+  alert(message)
 }
 </script>
 

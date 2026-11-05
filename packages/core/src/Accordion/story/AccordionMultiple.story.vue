@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   AccordionContent,
   AccordionHeader,
   AccordionItem,
   AccordionRoot,
   AccordionTrigger,
-} from '..';
+} from '..'
 
-const selectedValue = ref(['item-1', 'item-2']);
+const selectedValue = ref(['item-1', 'item-2'])
 </script>
 
 <template>

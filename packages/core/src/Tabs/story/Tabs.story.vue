@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger } from '..';
+import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger } from '..'
 </script>
 
 <template>
@@ -16,15 +16,15 @@ import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger } from '..'
           class="shrink-0 flex border-b border-mauve6 relative"
           aria-label="Manage your account"
         >
-          <TabsIndicator class="absolute bg-violet11 left-0 h-[2px] bottom-0 w-[--akar-tabs-indicator-size] translate-x-[--akar-tabs-indicator-position] rounded-full  transition-[width,transform] duration-300" />
+          <TabsIndicator class="absolute bg-violet11 left-0 h-[2px] bottom-0 w-[--reka-tabs-indicator-size] translate-x-[--reka-tabs-indicator-position] rounded-full  transition-[width,transform] duration-300" />
           <TabsTrigger
-            class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-mauve11 select-none rounded-tl-md   hover:text-violet11 focus-visible:shadow-[0_0_0_2px] data-[state=active]:text-violet11 outline-none cursor-default"
+            class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-mauve11 select-none rounded-tl-md   hover:text-violet11 focus-visible:shadow-[0_0_0_2px] data-[state=checked]:text-violet11 outline-none cursor-default"
             value="tab1"
           >
             Account
           </TabsTrigger>
           <TabsTrigger
-            class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-mauve11 select-none rounded-tr-md hover:text-violet11 focus-visible:shadow-[0_0_0_2px] data-[state=active]:text-violet11 outline-none cursor-default"
+            class="bg-white px-5 h-[45px] flex-1 flex items-center justify-center text-[15px] leading-none text-mauve11 select-none rounded-tr-md hover:text-violet11 focus-visible:shadow-[0_0_0_2px] data-[state=checked]:text-violet11 outline-none cursor-default"
             value="tab2"
           >
             Password

@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import type { ListboxRootEmits, ListboxRootProps } from '..';
-import { computed, ref } from 'vue';
-import { useForwardPropsEmits } from '@/shared';
-import { countryList } from '@/shared/constant';
-import { ListboxContent, ListboxItem, ListboxRoot } from '..';
+import type { ListboxRootEmits, ListboxRootProps } from '..'
+import { computed, ref } from 'vue'
+import { useForwardPropsEmits } from '@/shared'
+import { countryList } from '@/shared/constant'
+import { ListboxContent, ListboxItem, ListboxRoot } from '..'
 
-const props = defineProps<ListboxRootProps>();
-const emits = defineEmits<ListboxRootEmits>();
+const props = defineProps<ListboxRootProps>()
+const emits = defineEmits<ListboxRootEmits>()
 
-const forwarded = useForwardPropsEmits(props, emits);
+const forwarded = useForwardPropsEmits(props, emits)
 
-const filterText = ref('');
+const filterText = ref('')
 const filteredOptions = computed(() => {
-  const options = countryList.map((a) => ({ label: a, value: a }));
-  return filterText.value
-    ? options.filter((item) => item.label.toLowerCase().includes(filterText.value.toLowerCase()))
-    : options;
-});
+  const options = countryList.map(a => ({ label: a, value: a }))
+  return filterText.value ? options.filter(item => item.label.toLowerCase().includes(filterText.value.toLowerCase())) : options
+})
 </script>
 
 <template>

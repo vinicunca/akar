@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue';
-import { useDrawerVirtualKeyboard } from './composables/useDrawerVirtualKeyboard';
-import { injectDrawerRootContext } from './DrawerRoot.vue';
+import { computed, watch } from 'vue'
+import { useDrawerVirtualKeyboard } from './composables/useDrawerVirtualKeyboard'
+import { injectDrawerRootContext } from './DrawerRoot.vue'
 
 /**
  * Makes the drawer react to the software keyboard. Renderless — mirrors Base
  * UI's `Drawer.VirtualKeyboardProvider`.
  */
 defineSlots<{
-  default?: () => any;
-}>();
+  default?: () => any
+}>()
 
-const rootContext = injectDrawerRootContext();
+const rootContext = injectDrawerRootContext()
 
 useDrawerVirtualKeyboard({
   enabled: computed(() => rootContext.open.value),
@@ -20,7 +20,7 @@ useDrawerVirtualKeyboard({
   elementRef: rootContext.viewportElement,
   modal: computed(() => rootContext.modal.value === true),
   nestedDrawerOpen: computed(() => rootContext.nestedOpenDrawerCount.value > 0),
-});
+})
 
 if (process.env.NODE_ENV !== 'production') {
   // `DrawerContent` registers on mount, after the `DrawerViewport` wrapping it
@@ -29,10 +29,10 @@ if (process.env.NODE_ENV !== 'production') {
   watch(rootContext.contentElement, (content) => {
     if (content && !rootContext.viewportElement.value) {
       console.warn(
-        'Warning: `DrawerVirtualKeyboardProvider` requires a `DrawerViewport` around `DrawerContent`.',
-      );
+        `Warning: \`DrawerVirtualKeyboardProvider\` requires a \`DrawerViewport\` around \`DrawerContent\`.`,
+      )
     }
-  }, { immediate: true, flush: 'post' });
+  }, { immediate: true, flush: 'post' })
 }
 </script>
 

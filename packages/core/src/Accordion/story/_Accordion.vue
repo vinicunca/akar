@@ -2,21 +2,21 @@
 import type {
   AccordionRootEmits,
   AccordionRootProps,
-} from '..';
-import { ref } from 'vue';
-import { useEmitAsProps } from '@/shared';
+} from '..'
+import { ref } from 'vue'
+import { useEmitAsProps } from '@/shared'
 import {
   AccordionContent,
   AccordionHeader,
   AccordionItem,
   AccordionRoot,
   AccordionTrigger,
-} from '..';
+} from '..'
 
-withDefaults(defineProps<{ type?: AccordionRootProps['type'] }>(), { type: 'single' });
-const emits = defineEmits<AccordionRootEmits>();
-const values = ['One', 'Two', 'Three', 'Four'];
-const count = ref(1);
+withDefaults(defineProps<{ type?: AccordionRootProps['type'] }>(), { type: 'single' })
+const emits = defineEmits<AccordionRootEmits>()
+const values = ['One', 'Two', 'Three', 'Four']
+const count = ref(1)
 </script>
 
 <template>

@@ -1,24 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { MenuCheckboxItem, MenuItemIndicator, MenuSeparator } from '..';
-import MenuWithAnchor from './_MenuWithAnchor.vue';
-import TickIcon from './_TickIcon.vue';
+import { ref } from 'vue'
+import { MenuCheckboxItem, MenuItemIndicator, MenuSeparator } from '..'
+import MenuWithAnchor from './_MenuWithAnchor.vue'
+import TickIcon from './_TickIcon.vue'
 
-const options = [
-  'Crows',
-  'Ravens',
-  'Magpies',
-  'Jackdaws',
-];
+const options = ['Crows', 'Ravens', 'Magpies', 'Jackdaws']
 
-const selection = ref<Array<string>>([]);
+const selection = ref<string[]>([])
 
 function handleSelectAll() {
-  if (selection.value.length === options.length) {
-    selection.value = [];
-  } else {
-    selection.value = options;
-  }
+  if (selection.value.length === options.length)
+    selection.value = []
+  else selection.value = options
 }
 </script>
 

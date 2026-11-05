@@ -1,50 +1,51 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface SelectScrollDownButtonProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { ref, watch, watchEffect } from 'vue';
-import { injectSelectContentContext } from './SelectContentImpl.vue';
-import { injectSelectItemAlignedPositionContext } from './SelectItemAlignedPosition.vue';
-import SelectScrollButtonImpl from './SelectScrollButtonImpl.vue';
+import { ref, watch, watchEffect } from 'vue'
+import { injectSelectContentContext } from './SelectContentImpl.vue'
+import SelectScrollButtonImpl from './SelectScrollButtonImpl.vue'
+import { injectSelectItemAlignedPositionContext } from './useSelectItemAlignedPosition'
+import { getScrollStep } from './utils'
 
-defineProps<SelectScrollDownButtonProps>();
+defineProps<SelectScrollDownButtonProps>()
 
-const contentContext = injectSelectContentContext();
+const contentContext = injectSelectContentContext()
 const alignedPositionContext
   = contentContext.position === 'item-aligned'
     ? injectSelectItemAlignedPositionContext()
-    : undefined;
+    : undefined
 
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
 
-const canScrollDown = ref(false);
+const canScrollDown = ref(false)
 
 watchEffect((cleanupFn) => {
   if (contentContext.viewport?.value && contentContext.isPositioned?.value) {
-    const viewport = contentContext.viewport.value;
+    const viewport = contentContext.viewport.value
 
     function handleScroll() {
-      const maxScroll = viewport.scrollHeight - viewport.clientHeight;
+      const maxScroll = viewport.scrollHeight - viewport.clientHeight
       // we use Math.ceil here because if the UI is zoomed-in
       // `scrollTop` is not always reported as an integer
-      canScrollDown.value = Math.ceil(viewport.scrollTop) < maxScroll;
+      canScrollDown.value = Math.ceil(viewport.scrollTop) < maxScroll
     }
-    handleScroll();
-    viewport.addEventListener('scroll', handleScroll);
+    handleScroll()
+    viewport.addEventListener('scroll', handleScroll)
 
-    cleanupFn(() => viewport.removeEventListener('scroll', handleScroll));
+    cleanupFn(() => viewport.removeEventListener('scroll', handleScroll))
   }
-});
+})
 
 watch(currentElement, () => {
-  if (currentElement.value) {
-    alignedPositionContext?.onScrollButtonChange(currentElement.value);
-  }
-});
+  if (currentElement.value)
+    alignedPositionContext?.onScrollButtonChange(currentElement.value)
+})
 </script>
 
 <template>
@@ -54,8 +55,8 @@ watch(currentElement, () => {
     @auto-scroll="
       () => {
         const { viewport, selectedItem } = contentContext;
-        if (viewport?.value && selectedItem?.value) {
-          viewport.value.scrollTop = viewport.value.scrollTop + selectedItem.value.offsetHeight;
+        if (viewport?.value) {
+          viewport.value.scrollTop = viewport.value.scrollTop + getScrollStep(viewport.value, selectedItem?.value);
         }
       }
     "

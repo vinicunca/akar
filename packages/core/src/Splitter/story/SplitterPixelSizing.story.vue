@@ -1,27 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..';
+import { ref } from 'vue'
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..'
 
-const isShowingExtra = ref(true);
-const collapsibleOpen = ref(true);
-const collapsiblePanelRef = ref<InstanceType<typeof SplitterPanel> | null>(null);
+const isShowingExtra = ref(true)
+const collapsibleOpen = ref(true)
+const collapsiblePanelRef = ref<InstanceType<typeof SplitterPanel> | null>(null)
 
 function handleCollapsed() {
-  collapsibleOpen.value = false;
+  collapsibleOpen.value = false
 }
 
 function handleExpanded() {
-  collapsibleOpen.value = true;
+  collapsibleOpen.value = true
 }
 
 function toggleCollapsible() {
-  if (collapsibleOpen.value) {
-    collapsiblePanelRef.value?.collapse?.();
-  } else {
-    collapsiblePanelRef.value?.expand?.();
-  }
+  if (collapsibleOpen.value)
+    collapsiblePanelRef.value?.collapse?.()
+  else
+    collapsiblePanelRef.value?.expand?.()
 
-  collapsibleOpen.value = !collapsibleOpen.value;
+  collapsibleOpen.value = !collapsibleOpen.value
 }
 </script>
 
@@ -149,7 +148,6 @@ function toggleCollapsible() {
               :min-size="140"
               :max-size="260"
               class="flex items-center justify-center bg-blackA8 rounded-lg"
-              :data-state="collapsibleOpen ? 'expanded' : 'collapsed'"
               @collapse="handleCollapsed"
               @expand="handleExpanded"
             >

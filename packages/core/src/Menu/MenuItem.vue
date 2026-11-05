@@ -1,89 +1,48 @@
 <script lang="ts">
-import type { MenuItemImplProps } from './MenuItemImpl.vue';
-import { useForwardExpose } from '@/shared';
+import type { MenuItemImplProps } from './MenuItemImpl.vue'
+import { useForwardElement } from '@/shared'
 
 export type MenuItemEmits = {
   /**
    * Event handler called when the user selects an item (via mouse or keyboard). <br>
    *  Calling `event.preventDefault` in this handler will prevent the menu from closing when selecting that item.
    */
-  select: [event: Event];
-};
+  select: [event: Event]
+}
 
 export interface MenuItemProps extends MenuItemImplProps {}
 </script>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
-import { injectMenuContentContext } from './MenuContentImpl.vue';
-import MenuItemImpl from './MenuItemImpl.vue';
-import { injectMenuRootContext } from './MenuRoot.vue';
-import { ITEM_SELECT, SELECTION_KEYS } from './utils';
+import { mergeProps } from 'vue'
+import { injectMenuContentContext } from './MenuContentImpl.vue'
+import MenuItemImpl from './MenuItemImpl.vue'
+import { injectMenuRootContext } from './MenuRoot.vue'
+import { createMenuItemSelectSurface } from './useMenu'
 
-const props = defineProps<MenuItemProps>();
-const emits = defineEmits<MenuItemEmits>();
+const props = defineProps<MenuItemProps>()
+const emits = defineEmits<MenuItemEmits>()
 
-const { forwardRef, currentElement } = useForwardExpose();
-const rootContext = injectMenuRootContext();
-const contentContext = injectMenuContentContext();
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectMenuRootContext()
+const contentContext = injectMenuContentContext()
 
-const isPointerDownRef = ref(false);
-
-async function handleSelect() {
-  const menuItem = currentElement.value;
-  if (!props.disabled && menuItem) {
-    const itemSelectEvent = new CustomEvent(ITEM_SELECT, {
-      bubbles: true,
-      cancelable: true,
-    });
-    emits('select', itemSelectEvent);
-    // let select event finish
-    await nextTick();
-    if (itemSelectEvent.defaultPrevented) {
-      isPointerDownRef.value = false;
-    } else {
-      rootContext.onClose();
-    }
-  }
-}
+// The select layer (click/pointer/keydown + the close-on-select protocol). Merged
+// onto MenuItemImpl so its handlers chain with the base surface's. `onSelect` is a
+// callback channel — the cancelable CustomEvent token, not a merged DOM listener.
+const select = createMenuItemSelectSurface(rootContext, {
+  disabled: () => props.disabled,
+  currentElement,
+  onSelect: event => emits('select', event),
+  searchRef: contentContext.searchRef,
+})
 </script>
 
 <template>
   <MenuItemImpl
-    v-bind="props"
+    v-bind="mergeProps(props, select.props.value)"
     :ref="forwardRef"
-    @click="handleSelect"
-    @pointerdown="
-      () => {
-        isPointerDownRef = true;
-      }
-    "
-    @pointerup="
-      async (event: PointerEvent) => {
-        await nextTick();
-        if (event.defaultPrevented) return;
-        // Pointer down can move to a different menu item which should activate it on pointer up.
-        // We dispatch a click for selection to allow composition with click based triggers and to
-        // prevent Firefox from getting stuck in text selection mode when the menu closes.
-        if (!isPointerDownRef) (event.currentTarget as HTMLElement)?.click();
-      }
-    "
-    @keydown="
-      async (event: KeyboardEvent) => {
-        const isTypingAhead = contentContext.searchRef.value !== '';
-        if (disabled || (isTypingAhead && event.key === ' ')) return;
-        if (SELECTION_KEYS.includes(event.key)) {
-          (event.currentTarget as HTMLElement)?.click();
-          /**
-           * We prevent default browser behaviour for selection keys as they should trigger
-           * a selection only:
-           * - prevents space from scrolling the page.
-           * - if keydown causes focus to move, prevents keydown from firing on the new target.
-           */
-          event.preventDefault();
-        }
-      }
-    "
   >
     <slot />
   </MenuItemImpl>

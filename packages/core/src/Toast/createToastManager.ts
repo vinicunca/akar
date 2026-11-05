@@ -1,65 +1,72 @@
-import type { ReferenceElement } from '@floating-ui/vue';
-import type { ToastPositionerProps } from './ToastPositioner.vue';
-import { isClient } from '@vueuse/shared';
+import type { ReferenceElement } from '@floating-ui/vue'
+import type { ToastPositionerProps } from './ToastPositioner.vue'
+import type { ToastOpenChangeReason } from './useToast'
+import type { ChangeEventDetails } from '@/shared'
+import { isClient } from '@vueuse/shared'
 
 /**
  * The status of a toast. `loading` toasts are never dismissed automatically.
  * `promise()` sets `loading`, then `success` or `error`.
  */
-export type ToastStatus = 'loading' | 'success' | 'error' | (string & {});
+export type ToastStatus = 'loading' | 'success' | 'error' | (string & {})
 
 export interface ToastActionOptions {
   /** The text rendered inside `ToastAction` when it has no slot content. */
-  label?: string;
+  label?: string
   /** A short description of an alternate way to carry out the action, for screen reader users. */
-  altText: string;
+  altText: string
   /**
    * Whether the action should close the toast when clicked.
    * @defaultValue true
    */
-  closeOnClick?: boolean;
+  closeOnClick?: boolean
   /** Called when the action is clicked. */
-  onClick?: (event: MouseEvent) => void;
+  onClick?: (event: MouseEvent) => void
 }
 
 export interface ToastPositionerOptions extends Omit<ToastPositionerProps, 'toast' | 'anchor' | 'as' | 'asChild'> {
   /** The element to position the toast against. */
-  anchor?: ReferenceElement | null;
+  anchor?: ReferenceElement | null
 }
 
 export interface ToastObject<Data extends object = any> {
   /** The unique identifier for the toast. */
-  id: string;
+  id: string
   /** Whether the toast is open. Closed toasts stay in the list until their exit animation ends. */
-  open: boolean;
+  open: boolean
   /** The title of the toast. Rendered by `ToastTitle` when it has no slot content. */
-  title?: string;
+  title?: string
   /** The description of the toast. Rendered by `ToastDescription` when it has no slot content. */
-  description?: string;
+  description?: string
   /**
    * The sensitivity of the toast for accessibility purposes. Overrides the `type` prop of `ToastRoot`.
    * `foreground` toasts are announced immediately, `background` toasts politely.
    */
-  type?: 'foreground' | 'background';
+  type?: 'foreground' | 'background'
   /** The status of the toast. Exposed as `data-status` on `ToastRoot`. */
-  status?: ToastStatus;
+  status?: ToastStatus
   /**
    * Time in milliseconds before the toast is dismissed automatically. Overrides
    * the `duration` of `ToastRoot` and `ToastProvider`. `0` or `Infinity` keeps it open.
    */
-  duration?: number;
+  duration?: number
   /** Props for `ToastAction` inside the toast. */
-  actionProps?: ToastActionOptions;
+  actionProps?: ToastActionOptions
   /** Props for `ToastPositioner`, used to anchor the toast to an element. */
-  positionerProps?: ToastPositionerOptions;
+  positionerProps?: ToastPositionerOptions
   /** Custom data for the toast. */
-  data?: Data;
-  /** Called when the toast is closed. */
-  onClose?: () => void;
+  data?: Data
+  /**
+   * Called when the toast is closed, with the details of the close: the same
+   * object `update:open` receives. `details.reason` is the `ToastOpenChangeReason`
+   * (`'timeout'`, `'close-press'`, `'action-press'`, `'swipe'`, `'escape-key'`),
+   * or `'imperative-action'` for `close(id)`.
+   */
+  onClose?: (details: ChangeEventDetails<ToastOpenChangeReason>) => void
   /** Called when the toast is removed from the list, after its exit animation. */
-  onRemove?: () => void;
+  onRemove?: () => void
   /** Increments whenever the toast is updated, or added again with the same `id`. */
-  updateKey: number;
+  updateKey: number
 }
 
 export interface ToastAddOptions<Data extends object = any> extends Omit<ToastObject<Data>, 'id' | 'open' | 'updateKey'> {
@@ -67,7 +74,7 @@ export interface ToastAddOptions<Data extends object = any> extends Omit<ToastOb
    * The unique identifier for the toast. Adding a toast with an existing `id`
    * updates it in place and restarts its dismiss timer.
    */
-  id?: string;
+  id?: string
 }
 
 export interface ToastUpdateOptions<Data extends object = any> extends Partial<Omit<ToastObject<Data>, 'id' | 'open' | 'updateKey'>> {}
@@ -75,65 +82,65 @@ export interface ToastUpdateOptions<Data extends object = any> extends Partial<O
 type ToastPromiseState<Value, Data extends object>
   = | string
     | ToastUpdateOptions<Data>
-    | ((value: Value) => string | ToastUpdateOptions<Data>);
+    | ((value: Value) => string | ToastUpdateOptions<Data>)
 
 export interface ToastPromiseOptions<Value, Data extends object = any> {
-  loading: string | ToastAddOptions<Data>;
-  success: ToastPromiseState<Value, Data>;
-  error: ToastPromiseState<any, Data>;
+  loading: string | ToastAddOptions<Data>
+  success: ToastPromiseState<Value, Data>
+  error: ToastPromiseState<any, Data>
 }
 
 export interface ToastManager<Data extends object = any> {
   /** Adds a toast and returns its `id`. */
-  add: <T extends Data = Data>(options: ToastAddOptions<T>) => string;
-  /** Closes the toast with the given `id`, or every toast when no `id` is given. */
-  close: (id?: string) => void;
+  add: <T extends Data = Data>(options: ToastAddOptions<T>) => string
+  /**
+   * Closes the toast with the given `id`, or every toast when no `id` is given.
+   * A rendered toast closes through its `ToastRoot`: `beforeUpdate:open` (which
+   * can cancel it) and `update:open` fire with the reason `'imperative-action'`.
+   */
+  close: (id?: string) => void
   /** Updates an open toast. */
   update: <T extends Data = Data>(
     id: string,
     updates: ToastUpdateOptions<T> | ((prevToast: ToastObject<T>) => ToastUpdateOptions<T>),
-  ) => void;
+  ) => void
   /** Shows a `loading` toast that turns into a `success` or `error` toast when the promise settles. */
   promise: <Value, T extends Data = Data>(
     promise: Promise<Value>,
     options: ToastPromiseOptions<Value, T>,
-  ) => Promise<Value>;
+  ) => Promise<Value>
 }
 
-type ToastUpdater = ToastUpdateOptions | ((prevToast: ToastObject) => ToastUpdateOptions);
+type ToastUpdater = ToastUpdateOptions | ((prevToast: ToastObject) => ToastUpdateOptions)
 
 export type ToastManagerEvent
-  = | { action: 'add'; options: ToastAddOptions & { id: string } }
-    | { action: 'close'; id?: string }
-    | { action: 'update'; id: string; updates: ToastUpdater };
+  = | { action: 'add', options: ToastAddOptions & { id: string } }
+    | { action: 'close', id?: string }
+    | { action: 'update', id: string, updates: ToastUpdater }
 
-export const TOAST_MANAGER_SUBSCRIBE = Symbol('ToastManagerSubscribe');
+export const TOAST_MANAGER_SUBSCRIBE = Symbol('ToastManagerSubscribe')
 
 export interface GlobalToastManager<Data extends object = any> extends ToastManager<Data> {
   /**
    * Used by `ToastProvider` to receive the manager's events.
    * @internal
    */
-  [TOAST_MANAGER_SUBSCRIBE]: (listener: (event: ToastManagerEvent) => void) => () => void;
+  [TOAST_MANAGER_SUBSCRIBE]: (listener: (event: ToastManagerEvent) => void) => () => void
 }
 
-let count = 0;
+let count = 0
 
 export function generateToastId() {
-  count = (count + 1) % Number.MAX_SAFE_INTEGER;
-  return `akar-toast-${count}`;
+  count = (count + 1) % Number.MAX_SAFE_INTEGER
+  return `reka-toast-${count}`
 }
 
 function resolvePromiseState<Value, Data extends object>(
   state: ToastPromiseState<Value, Data>,
   value?: Value,
 ): ToastUpdateOptions<Data> {
-  const resolved = typeof state === 'function'
-    ? state(value as Value)
-    : state;
-  return typeof resolved === 'string'
-    ? { description: resolved }
-    : resolved;
+  const resolved = typeof state === 'function' ? state(value as Value) : state
+  return typeof resolved === 'string' ? { description: resolved } : resolved
 }
 
 export function runToastPromise<Value, Data extends object>(
@@ -142,27 +149,19 @@ export function runToastPromise<Value, Data extends object>(
   add: ToastManager<Data>['add'],
   update: ToastManager<Data>['update'],
 ): Promise<Value> {
-  const loading = typeof options.loading === 'string'
-    ? { description: options.loading }
-    : options.loading;
-  const id = add({ ...loading, status: 'loading' });
+  const loading = typeof options.loading === 'string' ? { description: options.loading } : options.loading
+  const id = add({ ...loading, status: 'loading' })
 
   return promise.then(
     (value) => {
-      update(id, {
-        ...resolvePromiseState(options.success, value),
-        status: 'success',
-      });
-      return value;
+      update(id, { ...resolvePromiseState(options.success, value), status: 'success' })
+      return value
     },
     (error) => {
-      update(id, {
-        ...resolvePromiseState(options.error, error),
-        status: 'error',
-      });
-      throw error;
+      update(id, { ...resolvePromiseState(options.error, error), status: 'error' })
+      throw error
     },
-  );
+  )
 }
 
 /**
@@ -170,53 +169,47 @@ export function runToastPromise<Value, Data extends object>(
  * Pass it to the `toastManager` prop of `ToastProvider`.
  */
 export function createToastManager<Data extends object = any>(): GlobalToastManager<Data> {
-  const listeners = new Set<(event: ToastManagerEvent) => void>();
+  const listeners = new Set<(event: ToastManagerEvent) => void>()
   // Toasts added before any `ToastProvider` has mounted are kept until one subscribes.
   // Only on the client: a module-level manager is shared between SSR requests.
-  let pending: Array<ToastManagerEvent> = [];
+  let pending: ToastManagerEvent[] = []
 
   function emit(event: ToastManagerEvent) {
     if (listeners.size === 0) {
-      if (isClient) {
-        pending.push(event);
-      }
-      return;
+      if (isClient)
+        pending.push(event)
+      return
     }
-    listeners.forEach((listener) => {
-      listener(event);
-    });
+    listeners.forEach(listener => listener(event))
   }
 
   const manager: ToastManager<Data> = {
     add(options) {
-      const id = options.id ?? generateToastId();
-      emit({
-        action: 'add',
-        options: { ...options, id },
-      });
-      return id;
+      const id = options.id ?? generateToastId()
+      emit({ action: 'add', options: { ...options, id } })
+      return id
     },
     close(id) {
-      emit({ action: 'close', id });
+      emit({ action: 'close', id })
     },
     update(id, updates) {
-      emit({ action: 'update', id, updates: updates as ToastUpdater });
+      emit({ action: 'update', id, updates: updates as ToastUpdater })
     },
     promise(promise, options) {
-      return runToastPromise(promise, options, manager.add, manager.update);
+      return runToastPromise(promise, options, manager.add, manager.update)
     },
-  };
+  }
 
   return {
     ...manager,
     [TOAST_MANAGER_SUBSCRIBE](listener) {
-      listeners.add(listener);
-      const queued = pending;
-      pending = [];
-      queued.forEach(listener);
+      listeners.add(listener)
+      const queued = pending
+      pending = []
+      queued.forEach(listener)
       return () => {
-        listeners.delete(listener);
-      };
+        listeners.delete(listener)
+      }
     },
-  };
+  }
 }

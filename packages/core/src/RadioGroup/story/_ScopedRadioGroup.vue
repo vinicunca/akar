@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RadioGroupItem, RadioGroupRoot } from '..';
+import { RadioGroupItem, RadioGroupRoot } from '..'
 </script>
 
 <template>

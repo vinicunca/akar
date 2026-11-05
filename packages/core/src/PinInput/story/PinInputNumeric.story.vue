@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { PinInputInput, PinInputRoot } from '..';
+import { ref } from 'vue'
+import { PinInputInput, PinInputRoot } from '..'
 
-const value = ref<Array<number>>([]);
+const value = ref<number[]>([])
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
 import {
   SelectContent,
   SelectGroup,
@@ -16,28 +16,16 @@ import {
   SelectTrigger,
   SelectValue,
   SelectViewport,
-} from '..';
+} from '..'
 
-const options = [
-  'Apple',
-  'Banana',
-  'Blueberry',
-  'Grapes',
-  'Pineapple',
-];
-const vegetables = [
-  'Aubergine',
-  'Broccoli',
-  'Carrot',
-  'Courgette',
-  'Leek',
-];
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
+const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
-const data = ref({});
+const data = ref({})
 
 function handleChange(event: any) {
-  const formData = new FormData(event.target);
-  data.value = Object.fromEntries((formData as any).entries());
+  const formData = new FormData(event.target)
+  data.value = Object.fromEntries((formData as any).entries())
 }
 </script>
 

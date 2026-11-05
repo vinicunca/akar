@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { reactive, ref } from 'vue';
+import { Icon } from '@iconify/vue'
+import { reactive, ref } from 'vue'
 import {
   NavigationMenuContent,
   NavigationMenuIndicator,
@@ -9,15 +9,15 @@ import {
   NavigationMenuList,
   NavigationMenuRoot,
   NavigationMenuTrigger,
-} from '..';
-import LinkGroup from './_LinkGroup.vue';
-import StoryFrame from './_StoryFrame.vue';
+} from '..'
+import LinkGroup from './_LinkGroup.vue'
+import StoryFrame from './_StoryFrame.vue'
 
-const currentTrigger = ref('');
+const currentTrigger = ref('')
 const state = reactive({
   delayDuration: 600,
   skipDelayDuration: 1000,
-});
+})
 </script>
 
 <template>
@@ -110,7 +110,7 @@ const state = reactive({
             </NavigationMenuItem>
 
             <NavigationMenuIndicator
-              class="absolute bg-green10 left-0 h-[2px] bottom-0 w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] rounded-full transition-[width,transform] duration-300"
+              class="absolute bg-green10 left-0 h-[2px] bottom-0 w-[--reka-navigation-menu-indicator-size] translate-x-[--reka-navigation-menu-indicator-position] rounded-full transition-[width,transform] duration-300"
             />
           </NavigationMenuList>
         </NavigationMenuRoot>

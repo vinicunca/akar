@@ -78,13 +78,13 @@ const supportedLocales = [
   'uk',
   'zh-CN',
   'zh-TW',
-] as const;
+] as const
 
-const placeholderFields = ['year', 'month', 'day'] as const;
+const placeholderFields = ['year', 'month', 'day'] as const
 
-type PlaceholderField = (typeof placeholderFields)[number];
-export type SupportedLocale = (typeof supportedLocales)[number];
-export type PlaceholderMap = Record<SupportedLocale, Record<PlaceholderField, string>>;
+type PlaceholderField = (typeof placeholderFields)[number]
+export type SupportedLocale = (typeof supportedLocales)[number]
+export type PlaceholderMap = Record<SupportedLocale, Record<PlaceholderField, string>>
 
 const placeholders: PlaceholderMap = {
   'ach': { year: 'mwaka', month: 'dwe', day: 'nino' },
@@ -162,63 +162,60 @@ const placeholders: PlaceholderMap = {
   'uk': { year: 'рррр', month: 'мм', day: 'дд' },
   'zh-CN': { year: '年', month: '月', day: '日' },
   'zh-TW': { year: '年', month: '月', day: '日' },
-};
+}
 
 function getPlaceholderObj(locale: SupportedLocale | (string & {})) {
   if (!isSupportedLocale(locale)) {
-    const localeLanguage = getLocaleLanguage(locale);
-    if (!isSupportedLocale(localeLanguage)) {
-      return placeholders.en;
-    } else {
-      return placeholders[localeLanguage];
-    }
-  } else {
-    return placeholders[locale];
+    const localeLanguage = getLocaleLanguage(locale)
+    if (!isSupportedLocale(localeLanguage))
+      return placeholders.en
+
+    else
+      return placeholders[localeLanguage]
+  }
+  else {
+    return placeholders[locale]
   }
 }
 
-type Field = 'era' | 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'dayPeriod';
+type Field = 'era' | 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'dayPeriod'
 
 export function getPlaceholder(
   field: Field,
   value: string,
   locale: SupportedLocale | (string & {}),
 ) {
-  if (isPlaceholderField(field)) {
-    return getPlaceholderObj(locale)[field];
-  }
+  if (isPlaceholderField(field))
+    return getPlaceholderObj(locale)[field]
 
-  if (isDefaultField(field)) {
-    return value;
-  }
+  if (isDefaultField(field))
+    return value
 
-  if (isTimeField(field)) {
-    return '––';
-  }
+  if (isTimeField(field))
+    return '––'
 
-  return '';
+  return ''
 }
 
 function isSupportedLocale(locale: string): locale is SupportedLocale {
-  return supportedLocales.includes(locale as SupportedLocale);
+  return supportedLocales.includes(locale as SupportedLocale)
 }
 
 function isPlaceholderField(field: unknown): field is PlaceholderField {
-  return placeholderFields.includes(field as PlaceholderField);
+  return placeholderFields.includes(field as PlaceholderField)
 }
 
 function isTimeField(field: unknown): field is 'hour' | 'minute' | 'second' {
-  return field === 'hour' || field === 'minute' || field === 'second';
+  return field === 'hour' || field === 'minute' || field === 'second'
 }
 
 function isDefaultField(field: unknown): field is 'era' | 'dayPeriod' {
-  return field === 'era' || field === 'dayPeriod';
+  return field === 'era' || field === 'dayPeriod'
 }
 
 function getLocaleLanguage(locale: string) {
-  if (Intl.Locale) {
-    return new Intl.Locale(locale).language;
-  }
+  if (Intl.Locale)
+    return new Intl.Locale(locale).language
 
-  return locale.split('-')[0];
+  return locale.split('-')[0]
 }

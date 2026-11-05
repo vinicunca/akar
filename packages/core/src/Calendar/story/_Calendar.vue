@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import type { DateValue } from '@internationalized/date';
-import type { CalendarRootProps } from '..';
-import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from '..';
+import type { CalendarRootProps } from '..'
+import type { DateValue } from '@/date'
+import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from '..'
 
-const props = defineProps<{ calendarProps?: CalendarRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>();
+const props = defineProps<{ calendarProps?: CalendarRootProps, emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>()
 
 function pagingFunc(date: DateValue, sign: -1 | 1) {
-  if (sign === -1) {
-    return date.subtract({ years: 1 });
-  }
-  return date.add({ years: 1 });
+  if (sign === -1)
+    return date.subtract({ years: 1 })
+  return date.add({ years: 1 })
 }
 </script>
 
@@ -41,6 +40,7 @@ function pagingFunc(date: DateValue, sign: -1 | 1) {
     <CalendarGrid
       v-for="(month, gridIndex) in grid"
       :key="month.value.toString()"
+      :value="month.value"
       :data-testid="`grid-${month.value.month}`"
     >
       <CalendarGridHead :data-testid="`grid-head-${month.value.month}`">
@@ -65,11 +65,10 @@ function pagingFunc(date: DateValue, sign: -1 | 1) {
             v-for="(weekDate, d) in weekDates"
             :key="weekDate.toString()"
             :data-testid="`cell-${weekDate.month}-${d}`"
-            :date="weekDate"
+            :value="weekDate"
           >
             <CalendarCellTrigger
-              :day="weekDate"
-              :month="month.value"
+              :value="weekDate"
               :data-testid="`date-${props.calendarProps?.numberOfMonths ?? 1 > 1 ? `${gridIndex}-` : ''}${weekDate.month}-${weekDate.day}`"
             />
           </CalendarCell>

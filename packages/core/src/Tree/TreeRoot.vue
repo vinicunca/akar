@@ -1,338 +1,183 @@
 <script lang="ts">
-import type { Direction } from '@/shared/types';
-import { createContext, getActiveElement, useDirection, useSelectionBehavior, useTypeahead } from '@/shared';
-import { flatten } from './utils';
+import type { KeyedSelector } from '@/shared/createKeyedSelector'
+import type { Direction } from '@/shared/types'
+import { createContext, useDirection, useForwardElement } from '@/shared'
 
 export interface TreeRootProps<T = Record<string, any>, U extends Record<string, any> = Record<string, any>, M extends boolean = false> extends PrimitiveProps {
   /** The controlled value of the tree. Can be binded with `v-model`. */
-  modelValue?: M extends true ? Array<U> : U;
+  modelValue?: M extends true ? U[] : U
   /** The value of the tree when initially rendered. Use when you do not need to control the state of the tree */
-  defaultValue?: M extends true ? Array<U> : U;
+  defaultValue?: M extends true ? U[] : U
   /** List of items */
-  items?: Array<T>;
+  items?: T[]
   /** The controlled value of the expanded item. Can be binded with `v-model`. */
-  expanded?: Array<string>;
+  expanded?: string[]
   /** The value of the expanded tree when initially rendered. Use when you do not need to control the state of the expanded tree */
-  defaultExpanded?: Array<string>;
-  /** This function is passed the index of each item and should return a unique key for that item */
-  getKey: (val: T) => string;
-  /** This function is passed the index of each item and should return a list of children for that item */
-  getChildren?: (val: T) => Array<T> | undefined;
+  defaultExpanded?: string[]
+  /** Returns a unique key for an item. Keys identify items in the selection and in `expanded`, so they must be strings: convert a numeric id with `String(item.id)`. */
+  getKey: (val: T) => string
+  /** Returns an item's children. `undefined` marks a leaf. An array, even an empty one, marks a branch that can be expanded: return `[]` for children that are loaded when the item expands. */
+  getChildren?: (val: T) => T[] | undefined
   /** How multiple selection should behave in the collection. */
-  selectionBehavior?: 'toggle' | 'replace';
+  selectionBehavior?: 'toggle' | 'replace'
   /** Whether multiple options can be selected or not.  */
-  multiple?: M | boolean;
+  multiple?: M | boolean
   /** The reading direction of the listbox when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode. */
-  dir?: Direction;
+  dir?: Direction
   /** When `true`, prevents the user from interacting with tree  */
-  disabled?: boolean;
+  disabled?: boolean
   /** When `true`, selecting parent will select the descendants. Requires `multiple` to be `true`. */
-  propagateSelect?: boolean;
+  propagateSelect?: boolean
   /** When `true`, selecting children will update the parent state. Requires `multiple` to be `true`. */
-  bubbleSelect?: boolean;
+  bubbleSelect?: boolean
   /** When `true`, keyboard navigation will loop from last item to first, and vice versa. */
-  loop?: boolean;
+  loop?: boolean
 }
 
 export type TreeRootEmits<T = Record<string, any>, M extends boolean = false> = {
-  'update:modelValue': [val: M extends true ? Array<T> : T];
-  'update:expanded': [val: Array<string>];
-};
+  /** Event handler called before the selection changes; call `details.cancel()` to keep the current selection. */
+  'beforeUpdate:modelValue': [val: M extends true ? T[] : T, details: ChangeEventDetails<TreeChangeReason>]
+  /** Event handler called when the selection changes. */
+  'update:modelValue': [val: M extends true ? T[] : T, details: ChangeEventDetails<TreeChangeReason>]
+  /** Event handler called before the expanded items change; call `details.cancel()` to keep them. */
+  'beforeUpdate:expanded': [val: string[], details: ChangeEventDetails<TreeExpandedChangeReason>]
+  /** Event handler called when the expanded items change. */
+  'update:expanded': [val: string[], details: ChangeEventDetails<TreeExpandedChangeReason>]
+}
 
-interface TreeRootContext<T = Record<string, any>> {
-  modelValue: Ref<T | Array<T>>;
-  selectedKeys: Ref<Array<string>>;
-  onSelect: (val: T) => void;
-  expanded: Ref<Array<string>>;
-  onToggle: (val: T) => void;
-  items: Ref<Array<T>>;
-  expandedItems: Ref<Array<T>>;
-  getKey: (val: T) => string;
-  getChildren: (val: T) => Array<T> | undefined;
-  multiple: Ref<boolean>;
-  disabled: Ref<boolean>;
-  dir: Ref<Direction>;
-  propagateSelect: Ref<boolean>;
-  bubbleSelect: Ref<boolean>;
-  loop: Ref<boolean>;
-  isVirtual: Ref<boolean>;
-  virtualKeydownHook: EventHook<KeyboardEvent>;
+export interface TreeRootContext<T = Record<string, any>> {
+  /** Read-only: call `onSelect` to change the selection. */
+  modelValue: Readonly<Ref<T | T[] | undefined>>
+  selectedKeys: Readonly<Ref<string[]>>
+  /** Returns `false` when the selection is unchanged or the change was cancelled. */
+  onSelect: (val: T, reason?: TreeChangeReason | BaseChangeReason, event?: Event) => boolean
+  /** Writes the whole selection in one change (no toggle rules), e.g. a select-all part. Returns `false` when unchanged or cancelled. */
+  setModelValue: (value: T | T[] | undefined, reason?: TreeChangeReason | BaseChangeReason, event?: Event) => boolean
+  /** Read-only: call `onToggle` to expand or collapse an item. */
+  expanded: Readonly<Ref<string[]>>
+  /** `expanded` as a keyed selector: items read their own cell. */
+  expandedSelector?: KeyedSelector<string>
+  /** `selectedKeys` as a keyed selector: items read their own cell. */
+  selectedSelector?: KeyedSelector<string>
+  /** Returns `false` when the item has no children, or the change was cancelled. */
+  onToggle: (val: T, reason?: TreeExpandedChangeReason | BaseChangeReason, event?: Event) => boolean
+  /** Writes the expanded keys in one change, e.g. an expand-all part. Returns `false` when unchanged or cancelled. */
+  setExpanded: (value: string[], reason?: TreeExpandedChangeReason | BaseChangeReason, event?: Event) => boolean
+  /** The `items` prop; `undefined` when none was passed. */
+  items: Readonly<Ref<T[] | undefined>>
+  expandedItems: Readonly<Ref<FlattenedItem<T>[]>>
+  getKey: (val: T) => string
+  getChildren: (val: T) => T[] | undefined
+  multiple: Readonly<Ref<boolean>>
+  disabled: Readonly<Ref<boolean>>
+  dir: Readonly<Ref<Direction>>
+  propagateSelect: Readonly<Ref<boolean>>
+  bubbleSelect: Readonly<Ref<boolean>>
+  loop: Readonly<Ref<boolean>>
+  isVirtual: Ref<boolean>
+  virtualKeydownHook: EventHook<KeyboardEvent>
 
-  handleMultipleReplace: ReturnType<typeof useSelectionBehavior>['handleMultipleReplace'];
+  /** Extends a `multiple` + `'replace'` selection to the focused item; reports `'range-select'`. */
+  handleMultipleReplace: (intent: TreeNavigationIntent, currentElement: HTMLElement | Element | null, getItems: () => TreeCollectionItem[], options: T[], event?: Event) => boolean
 }
 
 export type FlattenedItem<T> = {
-  _id: string;
-  index: number;
-  value: T;
-  level: number;
-  hasChildren: boolean;
-  parentItem?: T;
+  _id: string
+  index: number
+  value: T
+  level: number
+  hasChildren: boolean
+  parentItem?: T
   bind: {
-    value: T;
-    level: number;
-    [key: string]: any;
-  };
-};
+    value: T
+    level: number
+    [key: string]: any
+  }
+}
 
-export const [injectTreeRootContext, provideTreeRootContext] = createContext<TreeRootContext<any>>('TreeRoot');
+export const [injectTreeRootContext, provideTreeRootContext] = createContext<TreeRootContext<any>>('TreeRoot')
 </script>
 
 <script setup lang="ts" generic="T extends Record<string, any>, U extends Record<string, any>, M extends boolean = false">
-import type { EventHook } from '@vueuse/core';
-import type { Ref } from 'vue';
-import type { PrimitiveProps } from '@/Primitive';
-import { createEventHook, useVModel } from '@vueuse/core';
-import { computed, nextTick, ref, toRefs } from 'vue';
-import { Primitive } from '@/Primitive';
-import { RovingFocusGroup } from '@/RovingFocus';
-import { MAP_KEY_TO_FOCUS_INTENT } from '@/RovingFocus/utils';
+import type { EventHook } from '@vueuse/core'
+import type { Ref } from 'vue'
+import type { TreeChangeReason, TreeCollectionItem, TreeExpandedChangeReason, TreeNavigationIntent } from './useTree'
+import type { PrimitiveProps } from '@/Primitive'
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared'
+import { mergeProps } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { useRovingFocusGroup } from '@/RovingFocus/useRovingFocusGroup'
+import { useTree } from './useTree'
+
+defineOptions({
+  // `$attrs` are merged under the roving and root bindings: the precedence
+  // the former `<RovingFocusGroup as-child>` wrapper gave them.
+  inheritAttrs: false,
+})
 
 const props = withDefaults(defineProps<TreeRootProps<T, U, M>>(), {
   as: 'ul',
   selectionBehavior: 'toggle',
   getChildren: (val: T) => val.children,
-});
-const emits = defineEmits<TreeRootEmits<U, M>>();
+})
+const emits = defineEmits<TreeRootEmits<U, M>>()
 
 defineSlots<{
   default?: (props: {
-    flattenItems: Array<FlattenedItem<T>>;
-    modelValue: M extends true ? Array<U> : U;
-    expanded: typeof expanded.value;
-  }) => any;
-}>();
+    flattenItems: FlattenedItem<T>[]
+    modelValue: M extends true ? U[] : U
+    expanded: string[]
+  }) => any
+}>()
 
-const { items, multiple, disabled, propagateSelect, dir: propDir, bubbleSelect, loop } = toRefs(props);
-const { handleTypeaheadSearch } = useTypeahead();
-const dir = useDirection(propDir);
-const rovingFocusGroupRef = ref<InstanceType<typeof RovingFocusGroup>>();
+// `dir` resolution (ConfigProvider-aware) and the roving group (arrow-key
+// focus) stay in the shell; the composable owns both models
+// (`useControllableState`), the flattened items, typeahead and range selection.
+const dir = useDirection(() => props.dir)
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
 
-// Virtualizer
-const isVirtual = ref(false);
-const virtualKeydownHook = createEventHook<KeyboardEvent>();
-
-const modelValue = useVModel(props, 'modelValue', emits, {
-  // @ts-expect-error idk
-  defaultValue: props.defaultValue ?? (multiple.value
-    ? []
-    : undefined),
-  passive: true,
-  deep: true,
-}) as Ref<U | Array<U>>;
-
-const expanded = useVModel(props, 'expanded', emits, {
-  // @ts-expect-error idk
-  defaultValue: props.defaultExpanded ?? [],
-  passive: (props.expanded === undefined) as false,
-  deep: true,
-}) as Ref<Array<string>>;
-
-const { onSelectItem, handleMultipleReplace } = useSelectionBehavior(modelValue, props);
-
-const selectedKeys = computed(() => {
-  if (multiple.value && Array.isArray(modelValue.value)) {
-    return modelValue.value.map((i) => props.getKey(i as any));
-  } else {
-    return [
-      props.getKey(modelValue.value as any ?? {}),
-    ];
-  }
-});
-
-function flattenItems(items: Array<T>, level: number = 1, parentItem?: T): Array<FlattenedItem<T>> {
-  return items.reduce((acc: Array<FlattenedItem<T>>, item: T, index: number) => {
-    const key = props.getKey(item);
-    const children = props.getChildren(item);
-    const isExpanded = expanded.value.includes(key);
-
-    const flattenedItem: FlattenedItem<T> = {
-      _id: key,
-      value: item,
-      index,
-      level,
-      parentItem,
-      hasChildren: !!children,
-      bind: {
-        'value': item,
-        level,
-        'aria-setsize': items.length,
-        'aria-posinset': index + 1,
-      },
-    };
-    acc.push(flattenedItem);
-
-    if (children && isExpanded) {
-      acc.push(...flattenItems(children, level + 1, item));
-    }
-
-    return acc;
-  }, []);
-}
-
-const expandedItems = computed(() => {
-  const items = props.items;
-  const expandedKeys = expanded.value.map((i) => i);
-  return flattenItems(items ?? []);
-});
-
-/**
- * A form control rendered inside a tree item — an inline rename, a per-row
- * filter or picker — owns its own keys. Without this, typing into it drives
- * tree typeahead and selection, moving focus to another row mid-edit. `select`
- * counts too: it consumes character keys for its own option typeahead and
- * Shift+Arrow to extend a multiple selection.
- *
- * Same idea as the guard in `MenuContentImpl`, widened past `input`/`textarea`.
- */
-const KEY_OWNING_TAGS = ['input', 'textarea', 'select'];
-
-function isKeyDownInFormField(event: KeyboardEvent) {
-  const target = event.target as HTMLElement | null;
-  if (!target) {
-    return false;
-  }
-  return KEY_OWNING_TAGS.includes(target.tagName.toLowerCase()) || target.isContentEditable;
-}
-
-function handleKeydown(event: KeyboardEvent) {
-  if (isKeyDownInFormField(event)) {
-    return;
-  }
-
-  if (isVirtual.value) {
-    virtualKeydownHook.trigger(event);
-  } else {
-    const collections = rovingFocusGroupRef.value?.getItems() ?? [];
-    handleTypeaheadSearch(event.key, collections);
-  }
-}
-
-function handleKeydownNavigation(event: KeyboardEvent) {
-  if (isVirtual.value || isKeyDownInFormField(event)) {
-    return;
-  }
-
-  const intent = MAP_KEY_TO_FOCUS_INTENT[event.key];
-  nextTick(() => {
-    handleMultipleReplace(
-      intent,
-      getActiveElement(),
-      rovingFocusGroupRef.value?.getItems!,
-      expandedItems.value.map((i) => i.value),
-    );
-  });
-}
-
-function handleBubbleSelect(item: FlattenedItem<T>) {
-  if (item.parentItem != null && Array.isArray(modelValue.value) && props.multiple) {
-    const parentItem = expandedItems.value.find((i) => {
-      return item.parentItem != null && props.getKey(i.value) === props.getKey(item.parentItem);
-    });
-
-    if (parentItem != null) {
-      const areAllChilredOfParentSelected = props.getChildren(parentItem.value)?.every((i) => modelValue.value.find((v: any) => props.getKey(v) === props.getKey(i)));
-
-      if (areAllChilredOfParentSelected) {
-        modelValue.value = [...modelValue.value, parentItem.value as any];
-      } else {
-        modelValue.value = modelValue.value.filter((v: any) => props.getKey(v) !== props.getKey(parentItem.value));
-      }
-
-      handleBubbleSelect(parentItem);
-    }
-  }
-}
-
-provideTreeRootContext({
-  modelValue,
-  selectedKeys,
-  onSelect: (val) => {
-    const condition = (baseValue: U) => props.getKey(baseValue as any ?? {}) === props.getKey(val);
-    const exist = props.multiple && Array.isArray(modelValue.value)
-      ? modelValue.value?.findIndex(condition) !== -1
-      : undefined;
-    onSelectItem(val, condition);
-
-    if (props.bubbleSelect && props.multiple && Array.isArray(modelValue.value)) {
-      const item = expandedItems.value.find((i) => {
-        return props.getKey(i.value) === props.getKey(val);
-      });
-      if (item != null) {
-        handleBubbleSelect(item);
-      }
-    }
-
-    if (props.propagateSelect && props.multiple && Array.isArray(modelValue.value)) {
-      const children = flatten<U, any>(props.getChildren(val) ?? []);
-
-      if (exist) {
-        // remove all child
-        modelValue.value = [...modelValue.value]
-          .filter((i) => !children.some((child) => props.getKey(i as any ?? {}) === props.getKey(child as any)));
-      } else {
-        // select all child
-        modelValue.value = [
-          ...modelValue.value,
-          ...children,
-        ];
-      }
-    }
-  },
-  expanded,
-  onToggle(val) {
-    const children = val
-      ? props.getChildren(val)
-      : undefined;
-    if (!children) {
-      return;
-    }
-
-    const key = props.getKey(val) ?? val;
-    if (expanded.value.includes(key)) {
-      expanded.value = expanded.value.filter((val) => val !== key);
-    } else {
-      expanded.value = [...expanded.value, key];
-    }
-  },
-  getKey: props.getKey,
-  getChildren: props.getChildren,
-  items,
-  expandedItems,
-  disabled,
-  multiple,
+const { modelValue, expanded, flattenItems, root, context } = useTree<T>({
+  items: () => props.items,
+  getKey: val => props.getKey(val),
+  getChildren: val => props.getChildren(val),
+  modelValue: () => props.modelValue as T | T[] | undefined,
+  defaultValue: props.defaultValue as T | T[] | undefined,
+  expanded: () => props.expanded,
+  defaultExpanded: props.defaultExpanded,
+  multiple: () => props.multiple,
+  selectionBehavior: () => props.selectionBehavior,
+  disabled: () => props.disabled,
   dir,
-  propagateSelect,
-  bubbleSelect,
-  loop,
+  propagateSelect: () => props.propagateSelect,
+  bubbleSelect: () => props.bubbleSelect,
+  loop: () => props.loop,
+  getItems: () => roving.getItems(),
+  emit: emits,
+})
 
-  isVirtual,
-  virtualKeydownHook,
-  handleMultipleReplace,
-});
+provideTreeRootContext(context)
+
+const isVirtual = context.isVirtual
+const roving = useRovingFocusGroup({
+  consumerAttrs: true,
+  element: currentElement,
+  orientation: () => 'vertical',
+  dir: () => dir.value,
+  loop: () => props.loop && !isVirtual.value,
+})
 </script>
 
 <template>
-  <RovingFocusGroup
-    ref="rovingFocusGroupRef"
-    as-child
-    orientation="vertical"
-    :dir="dir"
-    :loop="loop && !isVirtual"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="mergeProps(roving.consumerAttrs($attrs), roving.attrs(), root.attrs.value)"
   >
-    <Primitive
-      role="tree"
-      :as="as"
-      :as-child="asChild"
-      :aria-multiselectable="multiple ? true : undefined"
-      @keydown="handleKeydown"
-      @keydown.up.down.shift="handleKeydownNavigation"
-    >
-      <slot
-        :flatten-items="expandedItems"
-        :model-value="modelValue as M extends true ? U[] : U"
-        :expanded="expanded"
-      />
-    </Primitive>
-  </RovingFocusGroup>
+    <slot
+      :flatten-items="flattenItems"
+      :model-value="modelValue as M extends true ? U[] : U"
+      :expanded="expanded"
+    />
+  </component>
 </template>

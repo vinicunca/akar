@@ -1,0 +1,782 @@
+---
+title: Custom elements
+description: Use Reka UI primitives outside Vue, as standard custom elements, from plain HTML, React, Svelte or any other framework.
+---
+
+# Custom elements
+
+<Description>
+Use Reka UI primitives outside Vue, as standard custom elements, from plain HTML, React, Svelte or any other framework.
+</Description>
+
+<Callout type="warning" title="Experimental">
+
+`reka-ui/elements` is experimental. Its API may change before it is marked stable.
+
+</Callout>
+
+## Overview
+
+`reka-ui/elements` turns Reka UI parts into custom elements. Each part gets a tag named `<reka-<family>-<part>>`, so `DialogContent` becomes `<reka-dialog-content>`. The elements run the same Vue components you would use in a Vue app, so keyboard handling, focus management, ARIA and `data-*` state behave the same way.
+
+Vue is still a dependency: it is bundled into your page, but your app does not need to use it.
+
+## Quick start
+
+Register the families you need once, then write the tags in your HTML. Importing `reka-ui/elements` registers nothing by itself.
+
+```ts
+// main.ts
+import { defineRekaElements, dialogElements, switchElements } from 'reka-ui/elements'
+
+defineRekaElements([dialogElements, switchElements])
+```
+
+```html
+<label for="airplane">Airplane mode</label>
+<reka-switch-root id="airplane" name="airplane" class="switch">
+  <reka-switch-thumb class="thumb"></reka-switch-thumb>
+</reka-switch-root>
+
+<reka-dialog-root>
+  <reka-dialog-trigger class="button">Edit profile</reka-dialog-trigger>
+  <reka-dialog-portal>
+    <reka-dialog-overlay class="overlay"></reka-dialog-overlay>
+    <reka-dialog-content class="content">
+      <reka-dialog-title>Edit profile</reka-dialog-title>
+      <reka-dialog-description>Make changes to your profile.</reka-dialog-description>
+      <reka-dialog-close class="button">Save</reka-dialog-close>
+    </reka-dialog-content>
+  </reka-dialog-portal>
+</reka-dialog-root>
+
+<script type="module" src="./main.ts"></script>
+```
+
+```css
+/* Until the script has defined them, the elements are plain unknown elements:
+   hide them, so closed content does not flash on load. */
+reka-dialog-portal:not(:defined),
+reka-switch-thumb:not(:defined) {
+  display: none;
+}
+
+.switch {
+  display: inline-block;
+  width: 42px;
+  height: 24px;
+  border-radius: 9999px;
+  background: #ccc;
+}
+.switch[data-state='checked'] {
+  background: #111;
+}
+.thumb {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: white;
+  transform: translateX(2px);
+  transition: transform 100ms;
+}
+.thumb[data-state='checked'] {
+  transform: translateX(20px);
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.4);
+}
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 24px;
+  background: white;
+}
+```
+
+<Callout type="info" title="A bundler is required">
+
+The `reka-ui` package is published as ES modules that reference `process.env.NODE_ENV`, like most Vue libraries. Load it through a bundler (Vite, Rollup, webpack, esbuild, …). A CDN or `<script>`-only build is not available yet.
+
+</Callout>
+
+## Supported families
+
+| Family | Register with | Tags |
+| --- | --- | --- |
+| Accordion | `accordionElements` | `reka-accordion-root`, `-item`, `-header`, `-trigger`, `-content` |
+| Alert Dialog | `alertDialogElements` | `reka-alert-dialog-root`, `-trigger`, `-portal`, `-overlay`, `-content`, `-title`, `-description`, `-cancel`, `-action` |
+| AspectRatio | `aspectRatioElements` | `reka-aspect-ratio` |
+| Autocomplete | `autocompleteElements` | `reka-autocomplete-root`, `-input`, `-anchor`, `-trigger`, `-cancel`, `-portal`, `-content`, `-viewport`, `-empty`, `-item`, `-item-indicator`, `-group`, `-label`, `-separator` |
+| Avatar | `avatarElements` | `reka-avatar-root`, `-fallback` (no `AvatarImage`, see [limitations](#limitations)) |
+| Calendar | `calendarElements` | `reka-calendar-root`, `-header`, `-heading`, `-prev`, `-next`, `-grid`, `-grid-head`, `-grid-body`, `-grid-row`, `-head-cell`, `-cell`, `-cell-trigger`, `-view`, `-view-trigger` |
+| Checkbox | `checkboxElements` | `reka-checkbox-root`, `-indicator`, `reka-checkbox-group-root` |
+| Collapsible | `collapsibleElements` | `reka-collapsible-root`, `-trigger`, `-content` |
+| Color area | `colorAreaElements` | `reka-color-area-root`, `-area`, `-thumb` |
+| Color field | `colorFieldElements` | `reka-color-field-root`, `-input` |
+| Color slider | `colorSliderElements` | `reka-color-slider-root`, `-track`, `-thumb` |
+| Color swatch | `colorSwatchElements` | `reka-color-swatch` |
+| Color swatch picker | `colorSwatchPickerElements` | `reka-color-swatch-picker-root`, `-item`, `-item-swatch`, `-item-indicator` |
+| Combobox | `comboboxElements` | `reka-combobox-root`, `-input`, `-anchor`, `-trigger`, `-cancel`, `-portal`, `-content`, `-viewport`, `-empty`, `-item`, `-item-indicator`, `-group`, `-label`, `-separator`, `-arrow` |
+| ConfigProvider | `configProviderElements` | `reka-config-provider` |
+| Context Menu | `contextMenuElements` | `reka-context-menu-root`, `-trigger`, `-portal`, `-content`, `-arrow`, `-item`, `-group`, `-label`, `-checkbox-item`, `-radio-group`, `-radio-item`, `-item-indicator`, `-separator`, `-sub`, `-sub-trigger`, `-sub-content` |
+| Date field | `dateFieldElements` | `reka-date-field-root`, `-input` |
+| Date picker | `datePickerElements` | `reka-date-picker-root`, `-field`, `-input`, `-trigger`, `-anchor`, `-content`, `-arrow`, `-close`, `-calendar`, and the calendar parts (`-header`, `-heading`, `-prev`, `-next`, `-grid`, …, `-view-trigger`) |
+| Date range field | `dateRangeFieldElements` | `reka-date-range-field-root`, `-input` |
+| Date range picker | `dateRangePickerElements` | `reka-date-range-picker-root` and the same parts as the date picker |
+| Dialog | `dialogElements` | `reka-dialog-root`, `-trigger`, `-portal`, `-overlay`, `-content`, `-title`, `-description`, `-close` |
+| Drawer | `drawerElements` | `reka-drawer-root`, `-trigger`, `-portal`, `-backdrop`, `-viewport`, `-popup`, `-title`, `-description`, `-close`, `-grabber`, `-swipe-area`, `-provider`, `-indent`, `-indent-background`, `-virtual-keyboard-provider` |
+| Dropdown Menu | `dropdownMenuElements` | `reka-dropdown-menu-root`, `-trigger`, `-portal`, `-content`, `-filter`, `-arrow`, `-item`, `-group`, `-label`, `-checkbox-item`, `-radio-group`, `-radio-item`, `-item-indicator`, `-separator`, `-sub`, `-sub-trigger`, `-sub-content` |
+| Editable | `editableElements` | `reka-editable-root`, `-area`, `-input`, `-preview`, `-edit-trigger`, `-submit-trigger`, `-cancel-trigger` |
+| Field | `fieldElements` | `reka-field-root`, `-label`, `-description`, `-error` (no `FieldControl` or `FieldValidity`) |
+| Form | `formElements` | `reka-form-root` |
+| Hover Card | `hoverCardElements` | `reka-hover-card-root`, `-trigger`, `-portal`, `-content`, `-arrow` |
+| Listbox | `listboxElements` | `reka-listbox-root`, `-content`, `-filter`, `-item`, `-item-indicator`, `-group`, `-group-label` |
+| Menubar | `menubarElements` | `reka-menubar-root`, `-menu`, `-trigger`, `-portal`, `-content`, `-arrow`, `-item`, `-group`, `-label`, `-checkbox-item`, `-radio-group`, `-radio-item`, `-item-indicator`, `-separator`, `-sub`, `-sub-trigger`, `-sub-content` |
+| Navigation Menu | `navigationMenuElements` | `reka-navigation-menu-root`, `-sub`, `-list`, `-item`, `-trigger`, `-content`, `-link`, `-indicator`, `-viewport` |
+| Number field | `numberFieldElements` | `reka-number-field-root`, `-input`, `-increment`, `-decrement` |
+| Pagination | `paginationElements` | `reka-pagination-root`, `-list`, `-list-item`, `-first`, `-prev`, `-next`, `-last`, `-ellipsis` |
+| Pin input | `pinInputElements` | `reka-pin-input-root`, `-input` |
+| Popover | `popoverElements` | `reka-popover-root`, `-trigger`, `-anchor`, `-portal`, `-content`, `-arrow`, `-close` |
+| Progress | `progressElements` | `reka-progress-root`, `-indicator` |
+| RadioGroup | `radioGroupElements` | `reka-radio-group-root`, `-item`, `-indicator` |
+| Range calendar | `rangeCalendarElements` | `reka-range-calendar-root` and the same parts as the calendar |
+| Rating | `ratingElements` | `reka-rating-root`, `-item`, `-item-indicator` |
+| ScrollArea | `scrollAreaElements` | `reka-scroll-area-root`, `-viewport`, `-scrollbar`, `-thumb`, `-corner` |
+| Select | `selectElements` | `reka-select-root`, `-trigger`, `-value`, `-icon`, `-portal`, `-content`, `-viewport`, `-scroll-up-button`, `-scroll-down-button`, `-item`, `-item-text`, `-item-indicator`, `-group`, `-label`, `-separator`, `-arrow` |
+| Separator | `separatorElements` | `reka-separator` |
+| Slider | `sliderElements` | `reka-slider-root`, `-track`, `-range`, `-thumb` |
+| Splitter | `splitterElements` | `reka-splitter-group`, `-panel`, `-resize-handle` |
+| Stepper | `stepperElements` | `reka-stepper-root`, `-item`, `-trigger`, `-indicator`, `-title`, `-description`, `-separator` |
+| Switch | `switchElements` | `reka-switch-root`, `-thumb` |
+| Tabs | `tabsElements` | `reka-tabs-root`, `-list`, `-trigger`, `-content`, `-indicator` |
+| TagGroup | `tagGroupElements` | `reka-tag-group-root`, `-item`, `-item-text`, `-item-delete` |
+| TagsInput | `tagsInputElements` | `reka-tags-input-root`, `-input`, `-item`, `-item-text`, `-item-delete`, `-clear` |
+| Time field | `timeFieldElements` | `reka-time-field-root`, `-input` |
+| Time range field | `timeRangeFieldElements` | `reka-time-range-field-root`, `-input` |
+| Toast | `toastElements` | `reka-toast-provider`, `-viewport`, `-root`, `-title`, `-description`, `-action`, `-close`, `-portal`, `-positioner`, `-arrow` |
+| Toggle | `toggleElements` | `reka-toggle` |
+| ToggleGroup | `toggleGroupElements` | `reka-toggle-group-root`, `-item` |
+| Toolbar | `toolbarElements` | `reka-toolbar-root`, `-button`, `-separator`, `-toggle-group`, `-toggle-item` (no `ToolbarLink`) |
+| Tooltip | `tooltipElements` | `reka-tooltip-provider`, `reka-tooltip-root`, `-trigger`, `-portal`, `-content`, `-arrow` |
+| Tree | `treeElements` | `reka-tree-root`, `-item` |
+| VisuallyHidden | `visuallyHiddenElements` | `reka-visually-hidden` |
+
+Some parts render more than their own element in Vue. As elements:
+
+- **Wrappers take the element's place.** `<reka-aspect-ratio>` is the content, inside the sizing wrapper it renders. `<reka-scroll-area-viewport>` is the content too: the scrolling viewport is a wrapper around it, so style it through `[data-reka-scroll-area-viewport]` (it needs a size, like `width: 100%; height: 100%`).
+- **Stylesheets** a part renders (`ScrollAreaViewport` hides the native scrollbars) go to the document's `<head>`, or into the shadow root the element is in, and are removed with the part.
+- **`<reka-stepper-root>`** appends its "Step 2 of 4" live region inside itself, as its last child.
+- **Default content isn't rendered.** Your children replace a part's default slot, so its fallback text (`PaginationNext`'s "Next page", `StepperIndicator`'s "Step 1", `FieldError`'s messages) never shows: write it yourself.
+- **Scoped slots don't render.** A part gives you its [slot props](#children-instead-of-slots) instead. `PaginationList` doesn't render its pages for you: write the `<reka-pagination-list-item>`s (and ellipses) yourself, and update them from `update-page`.
+
+Props, events and data attributes are the ones documented on each component page, mapped as described below.
+
+## Registration
+
+```ts
+import {
+  defineAllRekaElements,
+  defineDialogElements,
+  defineRekaElements,
+  tabsElements,
+} from 'reka-ui/elements'
+
+// Several families at once. Returns the tags.
+defineRekaElements([tabsElements])
+
+// One family.
+defineDialogElements()
+
+// A custom prefix: <acme-dialog-root>, <acme-dialog-content>, …
+defineDialogElements({ prefix: 'acme' })
+
+// Every supported family. This bundles all of them.
+defineAllRekaElements()
+```
+
+- Registration is explicit. Importing the module has no side effects, and a bundler drops the families you never import.
+- Registering is idempotent. A tag that is already defined is skipped, so calling it from several entry points (or from two copies of `reka-ui` on one page) is safe.
+- Order does not matter. Elements find each other when they are connected, whichever was defined first. An element whose ancestors are not defined yet works on its own, and moves under them when they are defined. A part that cannot work alone (a trigger without its root) waits for one, with a warning in development.
+- Properties set on an element before its tag was defined are kept.
+
+| Option | Default | |
+| --- | --- | --- |
+| `prefix` | `'reka'` | Tag prefix. |
+| `events` | `{ bubbles: false, composed: false }` | How events are dispatched. See [events](#events). |
+| `shadowRoot` | `false` | `true` or `{ mode }`. See [Shadow DOM](#shadow-dom). |
+| `styles` | `[]` | Stylesheets adopted by every shadow root. |
+
+## Props: attributes and properties
+
+Every prop is available as a **property** in camelCase (`el.modelValue`, `el.defaultOpen`). Simple props are also available as **attributes** in kebab-case:
+
+| Prop type | Attribute | Example |
+| --- | --- | --- |
+| `boolean` | Like an HTML boolean attribute: present means `true`, whatever its value, and absent means the default. | `<reka-dialog-root default-open>` |
+| `boolean` that defaults to `true` | Also `"false"`, the only way to turn it off with an attribute. | `<reka-dialog-root modal="false">`, `<reka-tabs-list loop="false">` |
+| `number` | Parsed with `Number()` | `<reka-popover-content side-offset="8">` |
+| `string` | As is | `<reka-tabs-root default-value="account">` |
+| `boolean \| 'indeterminate'` (Checkbox and Switch values) | A value, not a flag: `""` or `"true"`, `"false"`, `"indeterminate"` | `<reka-checkbox-root default-value="indeterminate">` |
+| `number[]` (Slider values) | Numbers separated by spaces or commas, one per thumb | `<reka-slider-root default-value="20 80">` |
+| Dates (`DateValue`) | An ISO 8601 string, see [dates and times](#dates-and-times) | `<reka-calendar-root default-value="2026-10-14">` |
+| Date and time ranges | Two ISO 8601 strings separated by `/` | `<reka-range-calendar-root default-value="2026-10-05/2026-10-07">` |
+| Colors (`string \| Color`) | Any CSS color string, parsed by the component | `<reka-color-field-root default-value="#ff0000">` |
+| Arrays, objects, elements, functions | None, property only | `accordion.modelValue = ['a', 'b']` |
+
+`disabled="false"` is disabled, as on any HTML element. `open`, `required` and every other native attribute name work the same way. To control a boolean as `false`, set the property:
+
+```js
+const accordion = document.querySelector('reka-accordion-root')
+accordion.type = 'multiple'
+accordion.modelValue = ['a', 'b']
+
+collapsible.open = false // controlled and closed
+```
+
+Elements do not reflect props back to attributes, with one exception: `disabled` reflects both ways, like a native control's. `el.disabled = true` sets the attribute, and `el.disabled` is `true` whenever the attribute is present. It is your setting only. Whether the part is actually disabled (by its own prop, a disabled root, or a `<fieldset disabled>`) shows in `data-disabled` and `aria-disabled`. Read other state from the `data-*` and ARIA attributes the part renders, or from events.
+
+`id`, `dir` and `hidden` are native `HTMLElement` properties, so they stay attribute-driven. So does `part` (the date field segment prop), which is also the [shadow parts](https://developer.mozilla.org/docs/Web/HTML/Global_attributes/part) attribute: set `part="day"` as an attribute.
+
+### Dates and times
+
+Date values are [Temporal](https://tc39.es/proposal-temporal/docs/) objects, as in the Vue components, so the page needs a global `Temporal` (native, or a polyfill loaded first). As properties, they take and give Temporal objects, and events carry them:
+
+```js
+calendar.modelValue = Temporal.PlainDate.from('2026-10-14')
+calendar.addEventListener('update-model-value', (event) => {
+  console.log(event.detail.value.toString()) // '2026-10-15'
+})
+```
+
+As attributes (`model-value`, `default-value`, `placeholder`, `default-placeholder`, `min-value`, `max-value`, and the `value` of grids and cells), they take an ISO 8601 string, parsed into the most specific type it describes:
+
+| Attribute value | Parsed with |
+| --- | --- |
+| `2026-10-14` | `Temporal.PlainDate.from()` |
+| `2026-10-14T09:30` | `Temporal.PlainDateTime.from()` |
+| `2026-10-14T09:30+02:00[Europe/Paris]` (with a time zone) | `Temporal.ZonedDateTime.from()` |
+| `09:30` (time fields only) | `Temporal.PlainTime.from()` |
+| `2026-10-05/2026-10-07` (range parts) | Each side as above, into `{ start, end }` |
+
+An invalid string is ignored, with a warning in development, and an empty one clears the value. Each Temporal type's `toString()` gives back a string in this format.
+
+### Colors
+
+Color props take a CSS color string as an attribute (`#ff0000`, `rgb(…)`, `hsl(…)`, a named color) and either a string or a `Color` object as a property. Events carry what the Vue component emits: `Color` objects for the color area, field and slider, and strings for the swatch picker.
+
+### Values of any type
+
+Collections (Listbox, Combobox, Select, Tree, TagGroup, …) take values of any type, as in Vue. An attribute gives a string (`<reka-listbox-item value="apple">`). Set the property for anything else: an object, a number, an array of selected values with `multiple`.
+
+```js
+const root = document.querySelector('reka-listbox-root')
+const [ada, grace] = root.querySelectorAll('reka-listbox-item')
+ada.value = { id: 1, name: 'Ada' }
+grace.value = { id: 2, name: 'Grace' }
+
+// Compared with `by` (a field name, or a function set as a property).
+root.setAttribute('by', 'id')
+root.modelValue = { id: 2 } // Grace is selected
+```
+
+Functions are properties only: `filter`, `displayValue`, `getKey`, `convertValue`, `getNavigationIntent`, and the like.
+
+A few props are read once, when the part sets up: `by` (Listbox, Combobox, Select) and `displayValue` (Combobox). Required props (`getKey` on a tree root, `value` on items) are needed from the start too. Set them before the element is connected, as Vue passes props on creation: create the element, set its properties, then insert it. Properties set before the tags are defined are kept, so `defineRekaElements()` after setting them also works. An element connected without a required prop logs Vue's "Missing required prop" warning.
+
+```js
+const tree = document.createElement('reka-tree-root')
+tree.items = files
+tree.getKey = file => file.path
+document.querySelector('#files').append(tree)
+```
+
+## Events
+
+Each Vue emit becomes a `CustomEvent`. The name is the emit name in kebab-case, with `:` replaced by `-`:
+
+| Vue emit | Event |
+| --- | --- |
+| `update:modelValue` | `update-model-value` |
+| `update:open` | `update-open` |
+| `beforeUpdate:open` | `before-update-open` |
+| `escapeKeyDown` | `escape-key-down` |
+
+```js
+const root = document.querySelector('reka-collapsible-root')
+
+root.addEventListener('update-open', (event) => {
+  console.log(event.detail.value) // true or false
+})
+```
+
+- `event.detail` is `{ value, details }`. `value` is the emit's first argument, and `details` is the second one when the emit has one (the change details of `update-*` and `before-update-*` events, for example).
+- Only events whose default can be prevented are `cancelable`. `preventDefault()` on a `before-update-*` event cancels the change (`details.cancel()`), and on an event that carries a DOM event (`escape-key-down`, `pointer-down-outside`, …) it prevents that event's default. `update-*` events report a change that already happened, and are not cancelable.
+- Events do not bubble by default, since every part fires its own and `update-model-value` would be ambiguous on an ancestor. Listen on the element itself, or register with `events: { bubbles: true, composed: true }` to listen higher up (`composed` also crosses shadow roots).
+
+```js
+// Keep the dialog open until the form is valid.
+dialogRoot.addEventListener('before-update-open', (event) => {
+  if (!event.detail.value && !form.checkValidity())
+    event.preventDefault()
+})
+```
+
+**Controlled state** works the same way as in Vue. Set `modelValue` or `open`, then update it from the event:
+
+```js
+switchRoot.modelValue = false
+switchRoot.addEventListener('update-model-value', (event) => {
+  switchRoot.modelValue = event.detail.value
+})
+```
+
+**Uncontrolled state is kept when you move the element.** Removed from the page and added back, or moved elsewhere, an element comes back with the value it had, not its default. There are two exceptions, both matching Vue:
+
+- An element unmounted with its parent part (a switch in a collapsible's content that closes) starts over when that part renders again.
+- An open overlay (a dialog, popover, menu, hover card or tooltip root, a submenu) does not reopen after a move, and a menubar or navigation menu does not keep its open item.
+
+A form reset brings an element back to its default.
+
+## The element is the part
+
+Each element renders its part onto itself instead of rendering a child element. `<reka-dialog-trigger>` gets `role="button"`, `aria-haspopup`, `aria-expanded`, `data-state`, `tabindex` and the click and keyboard handlers. You style the element directly:
+
+```css
+reka-dialog-trigger[data-state='open'] { … }
+reka-tabs-trigger[data-disabled] { … }
+reka-accordion-content[data-state='closed'] { … }
+```
+
+- `as` and `asChild` are not available. The element replaces them.
+- Parts whose default element carries meaning get that meaning added. Button parts get `role="button"`, `tabindex="0"`, and activate on Enter and Space. Headings get `role="heading"` and `aria-level`. Lists get `role="list"` and `role="listitem"`. A link part (`<reka-navigation-menu-link href="…">`) gets `role="link"` and `tabindex="0"` while it has an `href`, activates on Enter, and follows its `href` (and `target`) on a click you don't `preventDefault()`, like an `<a>`. Put a real `<a href>` inside instead if you need everything a link does (the context menu, middle click).
+- Arrow parts (`<reka-popover-arrow>`, `<reka-tooltip-arrow>`, the menus', the hover card's and the date pickers') render their `<svg>` inside the element, which is the positioned box: an SVG element can't be a custom element. `width`, `height` and `rounded` apply to the SVG, which inherits `fill` from the element: `reka-popover-arrow { fill: white }`. Your own children, if any, stay next to it.
+- The inputs of the number field, color field and pin input render onto the `<input>` you put inside the element, like the other [input parts](#text-fields) (one is created if there is none). The element stays a plain container, and the input gets the role, value and handlers. Give the input its `aria-label`. It is given back as it was when the part unmounts.
+- Custom elements are `display: inline` by default. Set `display` for parts that need a box (a switch, a dialog content).
+- Your own attributes, classes and styles are kept. Classes and styles merge with the part's. An attribute the part renders (`data-state`, `aria-expanded`, …) belongs to the part while it is rendered: if you change it meanwhile, the part's value stays, and yours is what remains when the part unmounts. The `role`, `tabindex` and `aria-level` added for native semantics (above) give way to yours.
+- Ids are yours. Parts that other parts point to (a collapsible or tab content, a dialog title, a trigger) and form controls render the `id` you set, and `aria-controls` / `aria-labelledby` follow it. Without one, the part generates an id while it is rendered.
+- A copy made with `cloneNode()` starts from your attributes, not from the rendered state of the element it was copied from. While mounted, an element carries a `data-reka-owned` attribute, and the nodes a part renders into or next to it a `data-reka-relocated` one, that make this work. They are internal: don't style or script against them.
+
+Portals move the element. `<reka-dialog-portal>` and what it contains are moved to `<body>` while mounted, and moved back when they unmount. Inside a shadow root they move to that shadow root instead, so your shadow styles still apply. Set `to` to choose another target: a selector is looked up in the element's shadow root first, then in the document. Move the root into or out of a shadow root and the portal follows it there.
+
+Each element runs its own small Vue app, mounted when the element is connected. The portal's target is resolved from where the element sits before that first render, so a `force-mount` portal is already in place once the element is connected, with no extra render or scheduler turn. A `to` selector that matches nothing yet is resolved once the portal mounts, as in Vue.
+
+### Parts that are not rendered
+
+A part that is not rendered (closed content, an inactive tab panel) gets `data-reka-unmounted`, `inert` and `hidden`, and Reka hides it with `display: none`. A `hidden` or `inert` you set yourself is yours: Reka doesn't add or remove it, even if you set it while the part is closed.
+
+This is the one place elements differ from the Vue components. In Vue, closed content is not in the DOM at all. As an element, its children are yours, so they stay where you put them, hidden and inert. Fields inside are left out of their form's data, as they would be in Vue. Reka elements inside unmount, and mount again when the part renders.
+
+`force-mount` content stays rendered, so you can animate it with `data-state`.
+
+## Forms
+
+Parts with a `name` (Switch, Checkbox, Checkbox group, Toggle, RadioGroup and its items, ToggleGroup, Toolbar toggle group, FieldRoot, Number field, Pin input, Slider, Rating, the color area, field, slider and swatch picker, the date and time fields and their range versions, the date pickers, and the roots of Listbox, Combobox, Autocomplete, Select, TagsInput and Editable) are [form-associated](https://html.spec.whatwg.org/multipage/custom-elements.html#form-associated-custom-elements):
+
+- they submit their value with their form, wherever you move them, and with a form they are not inside through the `form` attribute (`form="checkout"`); their `form` property is the form, like a native control's;
+- `<label for>` labels them, `<fieldset disabled>` disables them, and resetting the form resets them, firing `update-model-value` (or the part's other model events) when the value changes, so what you render from it follows;
+- they are validated with it: a `required` checkbox left unchecked makes the form invalid, and matches `:invalid`;
+- `<reka-field-root>` is the exception: it submits nothing itself, and its own validation (`invalid`, custom validators) doesn't reach the form's `checkValidity()`. That runs through `<reka-form-root>` (see [Field and Form](#field-and-form)). The control inside the field is still validated natively;
+- they submit the same names as the Vue components (a checkbox group named `toppings` submits `toppings[0]`, `toppings[1]`, …, and so does a `multiple` listbox or combobox, or a tags input; object values submit their fields, `fruit[0][id]`; a slider named `volume` submits `volume[0]`, a date field its ISO date, a color area its `x-name` and `y-name` channels);
+- a select submits through the native `<select>` the Vue component renders, so `required` and `autocomplete` behave the same, and a `multiple` select named `fruit` submits one `fruit` entry per selected value, like `<select multiple>`;
+- a radio group with nothing checked submits an empty value, as in Vue;
+- in a date picker, the `-field` element submits the root's `name`, and a restored form state (back/forward navigation) comes back as Temporal values;
+- nothing is added next to them: the hidden inputs the Vue components render are not in the document.
+
+Form participation needs `ElementInternals` (Safari 16.4 and later). Without it, the elements work but do not submit.
+
+### Field and Form
+
+`<reka-form-root>` can't be a `<form>` itself. Put a native `<form novalidate>` inside it: the form root handles the `submit` and `reset` events that bubble up from it, validates its fields, focuses the first invalid control and blocks the submission while any field is invalid. `novalidate` leaves validation to Reka, so the browser doesn't show its own bubbles first.
+
+```html
+<reka-form-root>
+  <form novalidate>
+    <reka-field-root name="terms" required>
+      <reka-field-label>Accept the terms</reka-field-label>
+      <reka-checkbox-root></reka-checkbox-root>
+      <reka-field-description>Required to continue.</reka-field-description>
+      <reka-field-error match="valueMissing">Accept the terms to continue.</reka-field-error>
+    </reka-field-root>
+    <button>Submit</button>
+  </form>
+</reka-form-root>
+```
+
+- Listen to `form-submit` for the values (`event.detail.value`). As in Vue, listening to it prevents the native submission, and only while you listen: the form root knows whether the element has a `form-submit` listener. It only sees listeners added once `<reka-form-root>` is defined: the DOM does not list the listeners an element had before, so call `defineRekaElements()` (or `await customElements.whenDefined('reka-form-root')`) before adding yours. With `events: { bubbles: true }`, the form root cannot see a listener on an ancestor, so it always treats `form-submit` as listened to and never submits natively. (`submit` also works, but the native `submit` event bubbles to the form root too: check `event instanceof CustomEvent`.)
+- Server errors go in the `errors` property: `formRoot.errors = { terms: 'Not accepted.' }`.
+- `<reka-field-label>` is never a native `<label>`. It labels the control through `aria-labelledby` and focuses it when clicked, like `FieldLabel` with `nativeLabel` set to `false`.
+- The control must be a Reka element that takes part in a field (`<reka-checkbox-root>`). `FieldControl` renders a native `<input>`, which a custom element can't be.
+- `<reka-field-error>` shows and hides, but its messages come from you: write one per constraint, with `match` (`match="valueMissing"`, or `match` alone to always show).
+
+## Text fields
+
+A custom element can't be a text field. Parts that render an `<input>` in Vue (`ComboboxInput`, `AutocompleteInput`, `ListboxFilter`, `DropdownMenuFilter`, `TagsInputInput`, `EditableInput`) render onto the `<input>` (or `<textarea>`) you put inside them, like `asChild` over it. Without one, the element creates an `<input>`.
+
+```html
+<reka-combobox-input>
+  <input id="fruit" placeholder="Pick a fruit" autocomplete="off">
+</reka-combobox-input>
+```
+
+- The `<input>` gets the role, ARIA, value and listeners. Put your own attributes on it (`id` for `<label for>`, `placeholder`, `class`), and style it rather than the element.
+- The element keeps the part's props (`disabled`, `model-value`, `auto-focus`) and fires its events (`update-model-value`).
+- Removed, the element gives the input back as it was. A `disabled` you set on the input stays, as do your attributes.
+- Replace the input and the part moves to the new one.
+
+## Menus, tooltips and toasts
+
+- **Controlled items.** Checkbox items and radio groups are controlled in Vue too (they take `modelValue`, not `defaultValue`): set `modelValue` (or the `model-value` attribute), and write back the value from `update-model-value`.
+
+  ```js
+  bookmarks.addEventListener('update-model-value', (event) => {
+    bookmarks.modelValue = event.detail.value
+  })
+  ```
+
+- **Typeahead** matches an item's text content, which includes the text of an `-item-indicator` inside it even while the indicator is hidden. Give such items a `text-value`.
+- **Display.** Custom elements are inline: give the menu parts a box (`[role=menu], [role^=menuitem] { display: block }`), as you would the content of a dialog.
+- **Tooltip delay grouping** works through `<reka-tooltip-provider>`, around any number of tooltips.
+- **Detached triggers.** A trigger outside its root (`createDialogHandle()`, `createAlertDialogHandle()`, `createDropdownMenuHandle()`, …) takes the handle as a property, set before or after the element is connected: it renders once it has one. Menu triggers have no `id` prop: open them from the handle with their generated `trigger.id`, or set an `id` attribute.
+- **Toasts.** Declare `<reka-toast-root>`s in `<reka-toast-provider>`; they move into the `<reka-toast-viewport>` while open. For the imperative manager (`createToastManager()`), set it as the provider's `toastManager` property and render the list it reports: the provider dispatches `update-toasts` with the current toasts, and you render one `<reka-toast-root>` per toast with the toast object as its `toast` property.
+
+  ```js
+  provider.toastManager = manager
+  provider.addEventListener('update-toasts', (event) => {
+    render(event.detail.value) // one <reka-toast-root> per toast, `el.toast = item`
+  })
+  ```
+
+A few parts render an element that has to be in the document next to them: the navigation menu trigger's focus proxy (Tab from an open trigger into its content in the viewport) and the toast's screen-reader announcement. These go right after the element while they are rendered, and nowhere else. (`<reka-stepper-root>`'s live region goes inside the element instead, as its last child.)
+
+## Children instead of slots
+
+Child elements and text work like the default slot. Elements cannot render scoped slots for you, but they give you their slot props: `el.slotProps` is a read-only snapshot of what the part passes to its default slot (`undefined` until it renders), and a `slot-props-change` event is dispatched after the part renders with new ones (it never bubbles). Most parts are fully usable from `data-*` attributes and events. A few build their content from slot props, and you render it from them:
+
+**Calendars.** The root's `grid` holds the months on display (`{ value, rows }`, `rows` being weeks of Temporal dates), and `weekDays` their headings. Render grid elements from them, giving each grid its month's `value` (it tells which days are outside that month) and each cell its date, as ISO strings:
+
+```js
+const calendar = document.querySelector('reka-calendar-root')
+let rendered
+
+function renderGrid() {
+  const { grid, weekDays } = calendar.slotProps
+  // The slot props change on every arrow key (the focused date); the grid
+  // only when the page turns.
+  if (grid === rendered)
+    return
+  rendered = grid
+  calendar.querySelector('.months').innerHTML = grid.map(month => `
+    <reka-calendar-grid value="${month.value}">
+      <reka-calendar-grid-head>
+        <reka-calendar-grid-row>${weekDays.map(day => `<reka-calendar-head-cell>${day}</reka-calendar-head-cell>`).join('')}</reka-calendar-grid-row>
+      </reka-calendar-grid-head>
+      <reka-calendar-grid-body>${month.rows.map(week => `
+        <reka-calendar-grid-row>${week.map(date => `
+          <reka-calendar-cell value="${date}">
+            <reka-calendar-cell-trigger value="${date}">${date.day}</reka-calendar-cell-trigger>
+          </reka-calendar-cell>`).join('')}
+        </reka-calendar-grid-row>`).join('')}
+      </reka-calendar-grid-body>
+    </reka-calendar-grid>`).join('')
+}
+
+calendar.addEventListener('slot-props-change', renderGrid)
+if (calendar.slotProps)
+  renderGrid()
+```
+
+Keyboard navigation moves focus into the new page once you have rendered it.
+
+This renders the day view. With `-view-trigger`, put each view in its own `<reka-calendar-view view="day">`, `view="month"` or `view="year"`, and render it from that element's `slotProps.grid` the same way. Only the active view renders, so the others have no slot props, and a view's `slot-props-change` tells you it became active. Month and year pages have no week days: skip the head row, and label each cell yourself (`date.toLocaleString(locale, { month: 'short' })`, `date.year`), since a cell trigger's default text is fallback content. In a date picker, the calendar is `<reka-date-picker-calendar>`, rendered when the content opens: render its grid the same way, then focus the selected cell (`[data-selected]`) yourself, since the content's initial focus runs before your grid exists.
+
+**Date and time fields.** The root's `segments` lists the segments to render, one input element per segment, with the segment's `part` (an attribute, see above) and its text. In range fields, `segments.start` and `segments.end` are rendered with `type="start"` and `type="end"`:
+
+```js
+const field = document.querySelector('reka-date-field-root')
+
+function renderSegments() {
+  const { segments } = field.slotProps
+  const inputs = field.querySelectorAll('reka-date-field-input')
+  if (inputs.length === segments.length && segments.every((s, i) => inputs[i].getAttribute('part') === s.part)) {
+    // Same segments: update their text, so the focused one keeps focus.
+    segments.forEach((s, i) => (inputs[i].textContent = s.value))
+    return
+  }
+  field.replaceChildren(...segments.map((s) => {
+    const input = document.createElement('reka-date-field-input')
+    input.setAttribute('part', s.part)
+    input.textContent = s.value
+    return input
+  }))
+}
+
+field.addEventListener('slot-props-change', renderSegments)
+// Already rendered (the elements were defined first): render it now too.
+if (field.slotProps)
+  renderSegments()
+```
+
+Values in `slotProps` are the part's own (Temporal dates, colors): treat them as read-only.
+
+Some parts show text of their own when you give them no children, as the Vue components' slot fallbacks do: `<reka-select-value>` shows the selected labels or its `placeholder`, `<reka-editable-preview>` the value or its placeholder, `<reka-tags-input-item-text>` the tag's `displayValue`, and an empty `<reka-combobox-item>` its value. Give them children, now or later, and yours are shown instead; remove them and the text comes back.
+
+Where a Vue template renders from slot props, render from events instead:
+
+| Vue slot prop | As elements |
+| --- | --- |
+| `TreeRoot`'s `flattenItems` | Render a `<reka-tree-item>` per visible item: set `value` (the item) and `level`, and render the children of the keys in `update-expanded`. See below. |
+| `TagsInputRoot`'s `modelValue` | Render a `<reka-tags-input-item value="…">` per tag from `update-model-value`. |
+| `ListboxItem` / `ComboboxItem`'s `selected`, `SelectItem`'s `selected` | `[data-state='checked']` / `aria-selected` on the item, or an `*-item-indicator`. |
+| `TreeItem`'s `isExpanded`, `isSelected` | `[data-expanded]`, `[data-selected]`, `aria-expanded`. |
+| `SelectValue`'s `selectedLabel` | The element's own text, or `update-model-value`. |
+| `EditableRoot`'s `isEditing`, `modelValue` | `update:state` → `update-state`, `update-model-value`, and `[data-placeholder-shown]` on the preview. |
+
+A tree renders its visible items from `items` and the expanded keys. Keep the existing elements where they are, so focus stays on them:
+
+```js
+const tree = document.createElement('reka-tree-root')
+tree.items = files
+tree.getKey = file => file.path
+document.querySelector('#files').append(tree)
+
+function render(expanded) {
+  const visible = (items, level) => items.flatMap(item => [
+    { item, level },
+    ...(item.children && expanded.includes(item.path) ? visible(item.children, level + 1) : []),
+  ])
+  const existing = new Map(Array.from(tree.children, el => [el.value.path, el]))
+  let previous = null
+  for (const { item, level } of visible(tree.items, 1)) {
+    let el = existing.get(item.path)
+    existing.delete(item.path)
+    if (!el) {
+      el = document.createElement('reka-tree-item')
+      el.value = item
+      el.setAttribute('level', level)
+      el.textContent = item.name
+      tree.insertBefore(el, previous ? previous.nextSibling : tree.firstChild)
+    }
+    previous = el
+  }
+  existing.forEach(el => el.remove())
+}
+
+tree.addEventListener('update-expanded', event => render(event.detail.value))
+render([])
+```
+
+In a framework, render the same list from its state (React's `useState`, Svelte's `$state`) instead.
+
+### Collections follow the DOM
+
+Items register with their collection in DOM order: insert, remove or reorder `<reka-listbox-item>`s (or any other items) and keyboard navigation, typeahead and Home/End follow the new order. A filtered-out item is unrendered like closed content (hidden, `data-reka-unmounted`), and its group hides when none of its items match.
+
+## Context across elements
+
+Context passes through the DOM the way it passes through components in Vue. An element mounts once the nearest Reka element above it has rendered its part, and it injects the contexts provided there. That is how `<reka-dialog-trigger>` finds its `<reka-dialog-root>`.
+
+- Elements find their parent with the [Context Community Protocol](https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md): a `context-request` event, answered by the nearest Reka element above. Elements defined later announce themselves with `context-provider`, and the elements below them move over.
+- Nesting must follow the component structure. A part has to be a DOM descendant of the parts it depends on, though other elements may sit in between.
+- Moved under another root, an element remounts there.
+- Context crosses shadow roots: an element inside a shadow root finds the Reka element hosting it.
+- Context is shared within one copy of `reka-ui`. Elements from two copies on one page nest freely (a switch from one inside a collapsible from the other), but a part can't use another copy's family context (a trigger from one copy inside a dialog root from the other). It stays unrendered, with a warning in development.
+
+## ConfigProvider
+
+`<reka-config-provider>` provides `dir`, `locale`, `nonce`, `scroll-body` and `teleport-to` to the Reka elements inside it, as `ConfigProvider` does in Vue, through the same context lookup, so other elements and shadow roots may sit in between:
+
+```html
+<reka-config-provider dir="rtl" teleport-to="#overlays">
+  <reka-toolbar-root aria-label="Formatting">…</reka-toolbar-root>
+  <reka-dialog-root>…</reka-dialog-root>
+</reka-config-provider>
+```
+
+Changing an attribute updates the elements below. A part's own prop wins (`<reka-toggle-group-root dir="ltr">`, `<reka-dialog-portal to="body">`). Inside a shadow root, a `teleport-to` selector is looked up in the shadow root first, then in the document. `use-id` is a function, so it's a property only.
+
+## Shadow DOM
+
+Elements render in the light DOM by default. You can give every element a shadow root, for encapsulated `:host` styles:
+
+```ts
+const sheet = new CSSStyleSheet()
+sheet.replaceSync(`:host([data-state='checked']) { background: black; }`)
+
+defineSwitchElements({ prefix: 'my', shadowRoot: true, styles: [sheet] })
+```
+
+The shadow root holds a single default `<slot>`, and children stay in the light DOM, so ARIA id references, `<label for>`, form participation and focus behave the same as without it. Nothing is rendered inside it, so it gives you `:host(...)` styling only: there are no `::part()`s to style. Only `mode` is supported (`delegatesFocus` would take focus away from the element, which is the focusable part).
+
+You can also place Reka elements inside your own components' shadow roots. Parent lookup, active-element tracking, outside-click detection, focus trapping and portals all work across shadow boundaries ([Shadow DOM support](https://github.com/unovue/reka-ui/issues/2725)). Portaled content stays in the shadow root it was rendered in.
+
+## TypeScript
+
+Element types for the default-prefixed tags are opt-in, through a types-only entry:
+
+```ts
+// reka-elements.d.ts
+/// <reference types="reka-ui/elements/global" />
+```
+
+`document.querySelector('reka-switch-root')` is then typed with the switch's props as properties, and `addEventListener('update-model-value', …)` with the event's `detail`.
+
+`reka-ui/elements/global` has no JavaScript: reference it from a `.d.ts` file or with `import type {} from 'reka-ui/elements/global'`, not with a runtime `import`. With a custom prefix, declare your tags from `RekaElementTagNameMap` yourself.
+
+## Custom Elements Manifest
+
+The package ships a [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest) (schema 2.1.0) for editors, documentation tools and linters. `package.json` points to it (`"customElements": "dist/custom-elements.json"`), and it is exported as `reka-ui/custom-elements.json`.
+
+It is generated at build time from the registry `defineRekaElements()` reads, so it lists every element of every family, with the default `reka` prefix:
+
+- **Attributes**, with the value each one takes (`'horizontal' | 'vertical'`, a boolean flag, an ISO 8601 string for a date) and the property it sets.
+- **Properties**, with their TypeScript types, including the ones that have no attribute (`handle`, `filter`, …).
+- **Events**, typed as `RekaElementEvent<Value, Details>`. The cancelable ones (`before-update-*`, and the ones that carry a DOM event) say so.
+- **Descriptions and defaults** from the component's API reference.
+
+The element classes are created by `defineRekaElements()`. Their names in the manifest (`DialogRootElement`, …) identify the tags: they are not exports.
+
+**VS Code.** [`custom-element-vs-code-integration`](https://www.npmjs.com/package/custom-element-vs-code-integration) turns the manifest into HTML custom data, for tag and attribute completion, attribute values and hover docs in HTML files:
+
+```js
+// scripts/reka-vscode-data.mjs
+import { readFileSync } from 'node:fs'
+import { createRequire } from 'node:module'
+import { generateVsCodeCustomElementData } from 'custom-element-vs-code-integration'
+
+const require = createRequire(import.meta.url)
+const manifest = JSON.parse(readFileSync(require.resolve('reka-ui/custom-elements.json'), 'utf8'))
+generateVsCodeCustomElementData(manifest, { outdir: '.vscode', cssFileName: null })
+```
+
+```json
+// .vscode/settings.json
+{
+  "html.customData": ["./.vscode/vscode.html-custom-data.json"]
+}
+```
+
+**Storybook.** With the web components framework, give the manifest to `setCustomElementsManifest()`. A story whose `component` is a tag (`component: 'reka-dialog-root'`) gets its attributes, properties and events in the args table, and its description on the docs page:
+
+```ts
+// .storybook/preview.ts
+import { setCustomElementsManifest } from '@storybook/web-components'
+import manifest from 'reka-ui/custom-elements.json'
+
+setCustomElementsManifest(manifest)
+```
+
+With a custom prefix, the manifest still names the `reka-` tags.
+
+## React
+
+React 19 sets props as properties on custom elements when one exists, and listens to custom events with `on<event-type>`, in the event's own casing:
+
+```tsx
+import { useState } from 'react'
+import { defineSwitchElements } from 'reka-ui/elements'
+
+defineSwitchElements()
+
+export function AirplaneMode() {
+  const [checked, setChecked] = useState(false)
+  return (
+    <reka-switch-root
+      modelValue={checked}
+      onupdate-model-value={(event: CustomEvent) => setChecked(event.detail.value)}
+    >
+      <reka-switch-thumb />
+    </reka-switch-root>
+  )
+}
+```
+
+`onUpdateModelValue` does not work: React would listen to an event named `UpdateModelValue`. The JSX typings reject it and name the prop to use:
+
+```ts
+// reka-elements.d.ts
+/// <reference types="reka-ui/elements/react" />
+```
+
+For another JSX framework, or a custom prefix, build the declarations from `RekaIntrinsicElements<YourAttributes>`.
+
+React 18 passes everything as string attributes and does not listen to custom events. Use a ref:
+
+```tsx
+const ref = useRef<HTMLElement & { modelValue: boolean }>(null)
+
+useEffect(() => {
+  const el = ref.current!
+  el.modelValue = checked
+  const onUpdate = (event: Event) => setChecked((event as CustomEvent).detail.value)
+  el.addEventListener('update-model-value', onUpdate)
+  return () => el.removeEventListener('update-model-value', onUpdate)
+}, [checked])
+```
+
+In React 18, `disabled={false}` becomes `disabled="false"`, which is disabled. Leave the prop out instead: `disabled={isDisabled || undefined}`.
+
+Server-rendered elements hydrate without mismatches: nothing is added next to them. Portals are the exception: a defined `<reka-dialog-portal>`, `<reka-popover-portal>`, `<reka-select-portal>` or `<reka-combobox-portal>` moves to `<body>` as soon as it connects, before React has hydrated the spot it was rendered in. When the server-rendered tree contains portals, define those families after hydration, for example in an effect:
+
+```tsx
+useEffect(() => {
+  defineDialogElements()
+}, [])
+```
+
+## Svelte
+
+Svelte 5 sets props as properties when they exist on the element, and `on<event-type>` adds event listeners:
+
+```svelte
+<script>
+  import { defineCollapsibleElements } from 'reka-ui/elements'
+
+  defineCollapsibleElements()
+  let open = $state(false)
+</script>
+
+<reka-collapsible-root open={open} onupdate-open={e => (open = e.detail.value)}>
+  <reka-collapsible-trigger>Details</reka-collapsible-trigger>
+  <reka-collapsible-content>…</reka-collapsible-content>
+</reka-collapsible-root>
+```
+
+## Vue
+
+In a Vue app, use the components directly. If you do render the elements from Vue templates, mark them as custom elements:
+
+```ts
+// vite.config.ts
+vue({
+  template: { compilerOptions: { isCustomElement: tag => tag.startsWith('reka-') } },
+})
+```
+
+Bind props in camelCase (`:modelValue="checked"`, or `:modelValue.prop` to force a property). Vue sets a camelCase binding as the element's property, but a kebab-case one as an attribute, which turns the value into a string. `.prop` does not camelize: `:model-value.prop` sets a property named `model-value`, so add `.camel` (`:model-value.camel.prop`).
+
+## Limitations
+
+- **Families.** Every public family is available, except `Label` (below). The utility components (`Primitive`, `Presence`, `FocusScope`, `RovingFocusGroup`, `Viewport`) are building blocks for Vue components and have no elements.
+- **Parts a custom element can't be.** These parts render a native element whose behaviour a custom element can't take on, so they aren't available:
+  - `Label`: a `<label>`. Its `for` only labels a control when it's on a native `<label>`. Use a native `<label for>`: it labels Reka form elements, which are form-associated. (`<reka-field-label>` works, through `aria-labelledby`.)
+  - `AvatarImage`: an `<img>`. A custom element can't display an image source. `<reka-avatar-root>` and `<reka-avatar-fallback>` work.
+  - `ToolbarLink`: an `<a>`. A custom element can't be a link (navigation, middle click, the link context menu). Put a native `<a>` in the toolbar next to it; it isn't part of the arrow-key navigation.
+  - `FieldControl`: an `<input>` (see [Field and Form](#field-and-form)).
+  - `FieldValidity` renders nothing but a scoped slot.
+- **Drawer.** `DrawerContent` and `DrawerOverlay` (deprecated aliases of `DrawerPopup` and `DrawerBackdrop`) are not included.
+- **Toast text from the toast object.** In Vue, `ToastTitle`, `ToastDescription` and `ToastAction` fall back to the toast object's `title`, `description` and action label. As elements, put that text in the elements yourself.
+- **Virtualizers.** `ListboxVirtualizer`, `ComboboxVirtualizer`, `SelectVirtualizer` and `TreeVirtualizer` render each visible row from a scoped slot (`option`, `virtualItem`) and position the rows they create, which elements can't render for you. Render the rows yourself, with your own virtualization, or use the Vue components.
+- **Tag groups.** Delete and Backspace on a tag, and its delete button, always dispatch `remove`: the element can't tell whether you listen to it, where the Vue component only makes tags removable with a `@remove` listener. Remove the tags from the DOM in your listener. Rows need a `gridcell` child for a valid grid, which the Vue component adds: wrap a tag's content in `<span role="gridcell">`.
+- **Props read once.** See [values of any type](#values-of-any-type): set `by`, `displayValue` and required props before the element is connected.
+- **Rendered content.** A part that renders its content from slot props in Vue (calendar grids, date field segments) needs you to render it from [`slotProps`](#children-instead-of-slots). Text a part renders as fallback content (the calendar heading's month name, a cell's day number) is not rendered: an element's children are yours. The heading's text is in its own slot props: `heading.slotProps.headingValue`, updated with `slot-props-change` on the heading.
+- **Calendar grids and axe.** The grid is a `role="application"` table, as in Vue. An element's row and cell roles are explicit, so axe's `aria-required-parent` rule flags them, where it doesn't check the implicit roles of the Vue component's `<tr>` and `<td>`.
+- **Date fields and `<label for>`.** A label focuses the field element, not its first segment.
+- **Temporal.** Date families need a global `Temporal`, like the Vue components.
+- **SSR.** Server rendering and declarative shadow DOM are not supported. Elements render on the client after they are defined.
+- **Bundler required.** See the [quick start](#quick-start).
+- **Vue version.** Tested on Vue 3.5. With older versions generated ids are not unique between elements, and a warning says so in development.

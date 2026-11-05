@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { computed, ref } from 'vue';
-import { useFilter } from '@/shared';
-import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..';
+import { Icon } from '@iconify/vue'
+import { computed, ref } from 'vue'
+import { useFilter } from '@/shared'
+import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..'
 
 const people = [
   { id: 1, name: 'Durward Reynolds' },
@@ -10,24 +10,18 @@ const people = [
   { id: 3, name: 'Therese Wunsch' },
   { id: 4, name: 'Benedict Kessler' },
   { id: 5, name: 'Katelyn Rohan' },
-];
+]
 
-const vegetables = [
-  'Aubergine',
-  'Broccoli',
-  'Carrot',
-  'Courgette',
-  'Leek',
-].map((v, i) => ({ id: i, name: v }));
+const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek'].map((v, i) => ({ id: i, name: v }))
 
-const { contains } = useFilter({ sensitivity: 'base' });
-const v1 = ref(people[0]);
-const searchTerm1 = ref('');
-const filteredPeople = computed(() => people.filter((i) => contains(i.name, searchTerm1.value)));
+const { contains } = useFilter({ sensitivity: 'base' })
+const v1 = ref(people[0])
+const searchTerm1 = ref('')
+const filteredPeople = computed(() => people.filter(i => contains(i.name, searchTerm1.value)))
 
-const v2 = ref(vegetables[0]);
-const searchTerm2 = ref('');
-const filteredVege = computed(() => vegetables.filter((i) => contains(i.name, searchTerm2.value)));
+const v2 = ref(vegetables[0])
+const searchTerm2 = ref('')
+const filteredVege = computed(() => vegetables.filter(i => contains(i.name, searchTerm2.value)))
 </script>
 
 <template>

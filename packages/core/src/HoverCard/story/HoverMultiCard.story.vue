@@ -4,7 +4,7 @@ import {
   HoverCardPortal,
   HoverCardRoot,
   HoverCardTrigger,
-} from '..';
+} from '..'
 </script>
 
 <template>

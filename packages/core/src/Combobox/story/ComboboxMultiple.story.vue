@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { computed, ref } from 'vue';
-import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..';
+import { Icon } from '@iconify/vue'
+import { computed, ref } from 'vue'
+import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..'
 
 const people = [
   { id: 1, name: 'Durward Reynolds' },
@@ -9,16 +9,16 @@ const people = [
   { id: 3, name: 'Therese Wunsch' },
   { id: 4, name: 'Benedict Kessler' },
   { id: 5, name: 'Katelyn Rohan' },
-];
+]
 
-const searchTerm = ref('');
-const v = ref([people[0]]);
+const searchTerm = ref('')
+const v = ref([people[0]])
 
-const filteredPeople = computed(() => people.filter((i) => i.name.toLowerCase().includes(searchTerm.value.toLowerCase())));
+const filteredPeople = computed(() => people.filter(i => i.name.toLowerCase().includes(searchTerm.value.toLowerCase())))
 
 function handleUpdate(ev: any) {
   // eslint-disable-next-line no-console
-  console.log(ev);
+  console.log(ev)
 }
 </script>
 

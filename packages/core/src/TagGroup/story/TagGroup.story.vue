@@ -1,21 +1,15 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { TagGroupItem, TagGroupItemDelete, TagGroupItemText, TagGroupRoot } from '..';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { TagGroupItem, TagGroupItemDelete, TagGroupItemText, TagGroupRoot } from '..'
 
-const initialTags = [
-  'News',
-  'Travel',
-  'Gaming',
-  'Shopping',
-  'Sports',
-];
-const tags = ref([...initialTags]);
-const selected = ref<Array<string>>([]);
-const single = ref<string>();
+const initialTags = ['News', 'Travel', 'Gaming', 'Shopping', 'Sports']
+const tags = ref([...initialTags])
+const selected = ref<string[]>([])
+const single = ref<string>()
 
-function onRemove(values: Array<string>) {
-  tags.value = tags.value.filter((tag) => !values.includes(tag));
+function onRemove(values: string[]) {
+  tags.value = tags.value.filter(tag => !values.includes(tag))
 }
 </script>
 

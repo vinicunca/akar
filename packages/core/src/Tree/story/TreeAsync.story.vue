@@ -1,78 +1,66 @@
 <script setup lang="ts">
-import type { TreeItemToggleEvent } from '..';
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { TreeItem, TreeRoot } from '..';
+import type { TreeItemToggleEvent } from '..'
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { TreeItem, TreeRoot } from '..'
 
 interface TreeNode {
-  id: string;
-  name: string;
-  children?: Array<TreeNode>;
+  id: string
+  name: string
+  children?: TreeNode[]
 }
 
 const initialData = [
   { id: '1', name: 'Node 1', children: [] },
-  {
-    id: '2',
-    name: 'Node 2',
-    children: [
-      { id: '5', name: 'Child Node 5' },
-    ],
-  },
+  { id: '2', name: 'Node 2', children: [
+    { id: '5', name: 'Child Node 5' },
+  ] },
   { id: '3', name: 'Node 3', children: [] },
   { id: '4', name: 'Plain Node' },
-];
+]
 
-const treeData = ref(initialData);
-const loadingIds = ref<Set<string>>(new Set());
+const treeData = ref(initialData)
+const loadingIds = ref<Set<string>>(new Set())
 
-function addChildrenToNode(tree: Array<TreeNode>, targetId: string, newChildren: Array<TreeNode>): boolean {
+function addChildrenToNode(tree: TreeNode[], targetId: string, newChildren: TreeNode[]): boolean {
   for (const node of tree) {
     if (node.id === targetId) {
-      node.children = node.children
-        ? [
-            ...node.children,
-            ...newChildren,
-          ]
-        : newChildren;
-      return true;
+      node.children = node.children ? [...node.children, ...newChildren] : newChildren
+      return true
     }
     if (node.children && node.children.length > 0) {
-      const found = addChildrenToNode(node.children, targetId, newChildren);
-      if (found) {
-        return true;
-      }
+      const found = addChildrenToNode(node.children, targetId, newChildren)
+      if (found)
+        return true
     }
   }
-  return false;
+  return false
 }
 
 function fetchData(value: TreeNode) {
   return new Promise<void>((resolve) => {
     if ((value.children?.length ?? 0) > 0) {
-      // eslint-disable-next-line no-promise-executor-return
-      return resolve();
+      return resolve()
     }
 
     setTimeout(() => {
       addChildrenToNode(treeData.value, value.id, [
         { id: `${value.id}-0`, name: `Child Node ${`${value.id}-0`}`, children: [] },
         { id: `${value.id}-1`, name: 'Plain Node' },
-      ]);
-      return resolve();
-    }, 1000);
-  });
+      ])
+      return resolve()
+    }, 1000)
+  })
 }
 
 async function fetchChildren(ev: TreeItemToggleEvent<TreeNode>) {
-  const value = ev.detail.value;
-  if (!value?.children) {
-    return;
-  }
+  const value = ev.detail.value
+  if (!value?.children)
+    return
 
-  loadingIds.value.add(value.id);
-  await fetchData(value);
-  loadingIds.value.delete(value.id);
+  loadingIds.value.add(value.id)
+  await fetchData(value)
+  loadingIds.value.delete(value.id)
 }
 </script>
 

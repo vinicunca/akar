@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..'
 
 const people = ref([
   { id: 1, name: 'Durward Reynolds' },
   { id: 2, name: 'Kenton Towne' },
-]);
+])
 
-function displayValue(value: { id: number; name: string }) {
-  return `123${value.name}`;
+function displayValue(value: { id: number, name: string }) {
+  return `123${value.name}`
 }
 
 function convertValue(value: string) {
-  return { id: people.value.length + 1, name: value };
+  return { id: people.value.length + 1, name: value }
 }
 </script>
 

@@ -1,7 +1,7 @@
-import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
-import { defineComponent, h, nextTick, reactive } from 'vue';
-import { useCollection } from './Collection';
+import { mount } from '@vue/test-utils'
+import { describe, expect, it, vi } from 'vitest'
+import { defineComponent, h, nextTick, reactive } from 'vue'
+import { useCollection } from './Collection'
 
 // Characterization tests for `useCollection`.
 // These assert on the RETURNED values/order of `getItems()`, `reactiveItems`
@@ -9,8 +9,8 @@ import { useCollection } from './Collection';
 // rewrite, rather than locking in implementation details.
 
 interface ItemConfig {
-  value: string;
-  disabled?: boolean;
+  value: string
+  disabled?: boolean
 }
 
 // Builds a parent component that acts as the collection provider and renders
@@ -26,16 +26,16 @@ interface ItemConfig {
 //     * each `CollectionItem` renders a single `<div>` child.
 // - `attachTo: document.body` is required because `getItems()` orders by DOM
 //   order via `querySelectorAll`, which needs a connected document.
-function createWrapper(initialItems: Array<ItemConfig>) {
+function createWrapper(initialItems: ItemConfig[]) {
   // Reactive so tests can mutate (e.g. remove an item) and re-render.
-  const items = reactive<Array<ItemConfig>>([...initialItems]);
+  const items = reactive<ItemConfig[]>([...initialItems])
 
-  let collection!: ReturnType<typeof useCollection>;
+  let collection!: ReturnType<typeof useCollection>
 
   const Parent = defineComponent({
     setup() {
-      collection = useCollection({ key: 'test', isProvider: true });
-      const { CollectionSlot, CollectionItem } = collection;
+      collection = useCollection({ key: 'test', isProvider: true })
+      const { CollectionSlot, CollectionItem } = collection
 
       return () =>
         h(CollectionSlot, null, {
@@ -43,7 +43,7 @@ function createWrapper(initialItems: Array<ItemConfig>) {
             h(
               'div',
               { 'data-testid': 'collection-root' },
-              items.map((item) =>
+              items.map(item =>
                 h(
                   CollectionItem,
                   { key: item.value, value: item.value },
@@ -53,25 +53,23 @@ function createWrapper(initialItems: Array<ItemConfig>) {
                         'data-testid': item.value,
                         // When disabled, expose `data-disabled=""` on the real
                         // element so `ref.dataset.disabled === ''`.
-                        ...(item.disabled
-                          ? { 'data-disabled': '' }
-                          : {}),
+                        ...(item.disabled ? { 'data-disabled': '' } : {}),
                       }, item.value),
                   },
                 ),
               ),
             ),
-        });
+        })
     },
-  });
+  })
 
-  const wrapper = mount(Parent, { attachTo: document.body });
+  const wrapper = mount(Parent, { attachTo: document.body })
 
   return {
     wrapper,
     items,
     getCollection: () => collection,
-  };
+  }
 }
 
 describe('useCollection', () => {
@@ -80,17 +78,17 @@ describe('useCollection', () => {
       { value: 'a' },
       { value: 'b' },
       { value: 'c' },
-    ]);
-    await nextTick();
+    ])
+    await nextTick()
 
-    const { reactiveItems, itemMapSize } = getCollection();
+    const { reactiveItems, itemMapSize } = getCollection()
 
-    expect(itemMapSize.value).toBe(3);
-    expect(reactiveItems.value).toHaveLength(3);
-    expect(reactiveItems.value.map((i) => i.value).sort()).toEqual(['a', 'b', 'c']);
+    expect(itemMapSize.value).toBe(3)
+    expect(reactiveItems.value).toHaveLength(3)
+    expect(reactiveItems.value.map(i => i.value).sort()).toEqual(['a', 'b', 'c'])
 
-    wrapper.unmount();
-  });
+    wrapper.unmount()
+  })
 
   it('getItems() returns items in DOM order even when registration order differs', async () => {
     // Registration order (watchEffect firing) is not guaranteed to match DOM
@@ -100,123 +98,224 @@ describe('useCollection', () => {
       { value: 'first' },
       { value: 'second' },
       { value: 'third' },
-    ]);
-    await nextTick();
+    ])
+    await nextTick()
 
-    const { getItems } = getCollection();
-    expect(getItems().map((i) => i.value)).toEqual(['first', 'second', 'third']);
+    const { getItems } = getCollection()
+    expect(getItems().map(i => i.value)).toEqual(['first', 'second', 'third'])
 
     // Sanity-check ordering reflects actual DOM order.
     const rendered = Array.from(
-      document.querySelectorAll('[data-akar-collection-item]'),
-    ).map((el) => (el as HTMLElement).dataset.testid);
-    expect(getItems().map((i) => i.value)).toEqual(rendered);
+      document.querySelectorAll('[data-reka-collection-item]'),
+    ).map(el => (el as HTMLElement).dataset.testid)
+    expect(getItems().map(i => i.value)).toEqual(rendered)
 
-    wrapper.unmount();
-  });
+    wrapper.unmount()
+  })
 
   it('filters out items with data-disabled="" by default, includes them with getItems(true)', async () => {
     const { getCollection, wrapper } = createWrapper([
       { value: 'a' },
       { value: 'b', disabled: true },
       { value: 'c' },
-    ]);
-    await nextTick();
+    ])
+    await nextTick()
 
-    const { getItems } = getCollection();
+    const { getItems } = getCollection()
 
     // Disabled item excluded by default.
-    expect(getItems().map((i) => i.value)).toEqual(['a', 'c']);
+    expect(getItems().map(i => i.value)).toEqual(['a', 'c'])
 
     // Included (in DOM order) when requested.
-    expect(getItems(true).map((i) => i.value)).toEqual(['a', 'b', 'c']);
+    expect(getItems(true).map(i => i.value)).toEqual(['a', 'b', 'c'])
 
-    wrapper.unmount();
-  });
+    wrapper.unmount()
+  })
 
   it('removes an item from the map when it unmounts', async () => {
     const { getCollection, items, wrapper } = createWrapper([
       { value: 'a' },
       { value: 'b' },
       { value: 'c' },
-    ]);
-    await nextTick();
+    ])
+    await nextTick()
 
-    const { getItems, itemMapSize } = getCollection();
-    expect(itemMapSize.value).toBe(3);
-    expect(getItems().map((i) => i.value)).toEqual(['a', 'b', 'c']);
+    const { getItems, itemMapSize } = getCollection()
+    expect(itemMapSize.value).toBe(3)
+    expect(getItems().map(i => i.value)).toEqual(['a', 'b', 'c'])
 
     // Remove the middle item, triggering CollectionItem unmount + cleanup.
-    const idx = items.findIndex((i) => i.value === 'b');
-    items.splice(idx, 1);
-    await nextTick();
+    const idx = items.findIndex(i => i.value === 'b')
+    items.splice(idx, 1)
+    await nextTick()
 
-    expect(itemMapSize.value).toBe(2);
-    expect(getItems().map((i) => i.value)).toEqual(['a', 'c']);
+    expect(itemMapSize.value).toBe(2)
+    expect(getItems().map(i => i.value)).toEqual(['a', 'c'])
 
-    wrapper.unmount();
-  });
+    wrapper.unmount()
+  })
 
   it('looks up registered items by element and preserves disabled filtering', async () => {
     const { getCollection, wrapper } = createWrapper([
       { value: 'enabled' },
       { value: 'disabled', disabled: true },
-    ]);
-    await nextTick();
+    ])
+    await nextTick()
 
-    const { getItem, getItems } = getCollection();
-    const enabled = wrapper.get<HTMLElement>('[data-testid=enabled]').element;
-    const disabled = wrapper.get<HTMLElement>('[data-testid=disabled]').element;
+    const { getItem, getItems } = getCollection()
+    const enabled = wrapper.get<HTMLElement>('[data-testid=enabled]').element
+    const disabled = wrapper.get<HTMLElement>('[data-testid=disabled]').element
 
-    expect(getItem(enabled)).toBe(getItems().find((item) => item.ref === enabled));
-    expect(getItem(disabled)).toBeUndefined();
-    expect(getItem(disabled, true)).toBe(getItems(true).find((item) => item.ref === disabled));
-    expect(getItem(document.createElement('div'))).toBeUndefined();
+    expect(getItem(enabled)).toBe(getItems().find(item => item.ref === enabled))
+    expect(getItem(disabled)).toBeUndefined()
+    expect(getItem(disabled, true)).toBe(getItems(true).find(item => item.ref === disabled))
+    expect(getItem(document.createElement('div'))).toBeUndefined()
 
-    wrapper.unmount();
-  });
+    wrapper.unmount()
+  })
 
   it('finds detached registered items but not unmounted items', async () => {
+    const { getCollection, items, wrapper } = createWrapper([{ value: 'item' }])
+    await nextTick()
+
+    const { getItem, getItems } = getCollection()
+    const element = wrapper.get<HTMLElement>('[data-testid=item]').element
+    const item = getItems()[0]
+    element.remove()
+    expect(getItem(element)).toBe(item)
+
+    wrapper.element.appendChild(element)
+    items.splice(0, 1)
+    await nextTick()
+    expect(getItem(element)).toBeUndefined()
+
+    wrapper.unmount()
+  })
+
+  it('getItems() follows a keyed v-for reorder', async () => {
     const { getCollection, items, wrapper } = createWrapper([
-      { value: 'item' },
-    ]);
-    await nextTick();
+      { value: 'a' },
+      { value: 'b' },
+      { value: 'c' },
+    ])
+    await nextTick()
+    const { getItems } = getCollection()
+    expect(getItems().map(i => i.value)).toEqual(['a', 'b', 'c'])
 
-    const { getItem, getItems } = getCollection();
-    const element = wrapper.get<HTMLElement>('[data-testid=item]').element;
-    const item = getItems()[0];
-    element.remove();
-    expect(getItem(element)).toBe(item);
+    // A keyed reorder moves the existing elements: no item (un)registers.
+    items.reverse()
+    await nextTick()
+    expect(getItems().map(i => i.value)).toEqual(['c', 'b', 'a'])
 
-    wrapper.element.appendChild(element);
-    items.splice(0, 1);
-    await nextTick();
-    expect(getItem(element)).toBeUndefined();
+    wrapper.unmount()
+  })
 
-    wrapper.unmount();
-  });
+  it('getItems() places an item inserted in the middle in DOM order', async () => {
+    const { getCollection, items, wrapper } = createWrapper([
+      { value: 'a' },
+      { value: 'c' },
+    ])
+    await nextTick()
+    const { getItems } = getCollection()
+    expect(getItems().map(i => i.value)).toEqual(['a', 'c'])
+
+    items.splice(1, 0, { value: 'b' })
+    await nextTick()
+    expect(getItems().map(i => i.value)).toEqual(['a', 'b', 'c'])
+
+    wrapper.unmount()
+  })
+
+  it('getItems() reuses the cached order until the collection changes', async () => {
+    const { getCollection, items, wrapper } = createWrapper([
+      { value: 'a' },
+      { value: 'b' },
+    ])
+    await nextTick()
+    const { getItems } = getCollection()
+    getItems()
+
+    const root = wrapper.get('[data-testid=collection-root]').element
+    const spy = vi.spyOn(root, 'querySelectorAll')
+    for (let i = 0; i < 5; i++)
+      expect(getItems().map(i => i.value)).toEqual(['a', 'b'])
+    expect(spy).not.toHaveBeenCalled()
+
+    items.push({ value: 'c' })
+    await nextTick()
+    expect(getItems().map(i => i.value)).toEqual(['a', 'b', 'c'])
+    expect(spy).toHaveBeenCalledTimes(1)
+
+    spy.mockRestore()
+    wrapper.unmount()
+  })
+
+  it('getItems() sees a `data-disabled` change and hands out copies', async () => {
+    const { getCollection, items, wrapper } = createWrapper([
+      { value: 'a' },
+      { value: 'b' },
+    ])
+    await nextTick()
+    const { getItems } = getCollection()
+    const first = getItems()
+    first.reverse()
+    expect(getItems().map(i => i.value)).toEqual(['a', 'b'])
+
+    items[1].disabled = true
+    await nextTick()
+    expect(getItems().map(i => i.value)).toEqual(['a'])
+    expect(getItems(true).map(i => i.value)).toEqual(['a', 'b'])
+
+    wrapper.unmount()
+  })
+
+  it('treats any `data-disabled` value as disabled, like `:not([data-disabled])`', async () => {
+    const { getCollection, wrapper } = createWrapper([
+      { value: 'a' },
+      { value: 'b' },
+      { value: 'c' },
+    ])
+    await nextTick()
+    document.querySelector('[data-testid=b]')!.setAttribute('data-disabled', 'true')
+    document.querySelector('[data-testid=c]')!.setAttribute('data-disabled', 'false')
+    await nextTick()
+    const { getItems, getItem } = getCollection()
+    expect(getItems().map(i => i.value)).toEqual(['a'])
+    expect(getItems(true).map(i => i.value)).toEqual(['a', 'b', 'c'])
+    expect(getItem(document.querySelector<HTMLElement>('[data-testid=b]')!)).toBeUndefined()
+    wrapper.unmount()
+  })
+
+  it('returns plain `{ ref, value }` items', async () => {
+    const { getCollection, wrapper } = createWrapper([{ value: 'a' }])
+    await nextTick()
+    const [item] = getCollection().getItems()
+    expect(Object.keys(item).sort()).toEqual(['ref', 'value'])
+    expect(Object.getPrototypeOf(item)).toBe(Object.prototype)
+    wrapper.unmount()
+  })
 
   it('getItems() returns [] when no CollectionSlot element is mounted', async () => {
     // A provider context whose `collectionRef` is never set (no CollectionSlot
     // currentElement). `getItems()` short-circuits to `[]`.
-    let collection!: ReturnType<typeof useCollection>;
+    let collection!: ReturnType<typeof useCollection>
 
     const Parent = defineComponent({
       setup() {
-        collection = useCollection({ key: 'empty', isProvider: true });
+        collection = useCollection({ key: 'empty', isProvider: true })
         // Render nothing collection-related: no CollectionSlot is mounted.
-        return () => h('div', 'no-collection');
+        return () => h('div', 'no-collection')
       },
-    });
+    })
 
-    const wrapper = mount(Parent, { attachTo: document.body });
-    await nextTick();
+    const wrapper = mount(Parent, { attachTo: document.body })
+    await nextTick()
 
-    expect(collection.getItem(document.createElement('div'))).toBeUndefined();
-    expect(collection.getItems()).toEqual([]);
-    expect(collection.getItems(true)).toEqual([]);
-    expect(collection.itemMapSize.value).toBe(0);
+    expect(collection.getItem(document.createElement('div'))).toBeUndefined()
+    expect(collection.getItems()).toEqual([])
+    expect(collection.getItems(true)).toEqual([])
+    expect(collection.itemMapSize.value).toBe(0)
 
-    wrapper.unmount();
-  });
-});
+    wrapper.unmount()
+  })
+})

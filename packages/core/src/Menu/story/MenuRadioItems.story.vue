@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   MenuItem,
   MenuItemIndicator,
   MenuRadioGroup,
   MenuRadioItem,
   MenuSeparator,
-} from '..';
-import MenuWithAnchor from './_MenuWithAnchor.vue';
-import TickIcon from './_TickIcon.vue';
+} from '..'
+import MenuWithAnchor from './_MenuWithAnchor.vue'
+import TickIcon from './_TickIcon.vue'
 
-const files = ['README.md', 'index.js', 'page.css'];
+const files = ['README.md', 'index.js', 'page.css']
 
-const selectedFiles = ref(files[1]);
+const selectedFiles = ref(files[1])
 
 function handleSelect(text: string) {
   // eslint-disable-next-line no-console
-  console.log({ text });
+  console.log({ text })
 }
 </script>
 

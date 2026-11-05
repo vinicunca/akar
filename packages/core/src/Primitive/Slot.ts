@@ -1,25 +1,37 @@
-import { cloneVNode, Comment, defineComponent, mergeProps } from 'vue';
-import { renderSlotFragments } from '@/shared';
+import { cloneVNode, Comment, defineComponent, getCurrentInstance, mergeProps } from 'vue'
+import { renderSlotFragments } from '@/shared/renderSlotFragments'
+import { useForwardElement } from '@/shared/useForwardElement'
 
 export const Slot = defineComponent({
   name: 'PrimitiveSlot',
   inheritAttrs: false,
-  setup(_, { attrs, slots }) {
+  // `setup()` only, as in `Primitive`: a setup-context parameter makes Vue
+  // allocate a context (with an attrs proxy and an `expose` closure) per
+  // instance. The instance holds the same attrs and slots objects.
+  setup() {
+    const instance = getCurrentInstance()!
+    const { attrs, slots } = instance
+    // Track the element the attrs land on (the first non-comment child) through
+    // a ref merged into the cloned child, so `Slot` satisfies the element-first
+    // contract itself: a parent ref on `<Slot>` resolves `element` reactively,
+    // following `v-if` swaps of the child without any `onUpdated` resync.
+    const { forwardRef: setTarget, expose: elementExpose } = useForwardElement()
+    // What the setup context's `expose()` does.
+    instance.exposed = elementExpose
+
     return () => {
-      if (!slots.default) {
-        return null;
-      }
+      if (!slots.default)
+        return null
 
-      const children = renderSlotFragments(slots.default());
-      const firstNonCommentChildrenIndex = children.findIndex((child) => child.type !== Comment);
-      if (firstNonCommentChildrenIndex === -1) {
-        return children;
-      }
+      const children = renderSlotFragments(slots.default())
+      const firstNonCommentChildrenIndex = children.findIndex(child => child.type !== Comment)
+      if (firstNonCommentChildrenIndex === -1)
+        return children
 
-      const firstNonCommentChildren = children[firstNonCommentChildrenIndex];
+      const firstNonCommentChildren = children[firstNonCommentChildrenIndex]
 
       // Remove props ref from being inferred
-      delete firstNonCommentChildren.props?.ref;
+      delete firstNonCommentChildren.props?.ref
 
       // Manually merge props to ensure `firstNonCommentChildren.props`
       // has higher priority than `attrs` and can override `attrs`.
@@ -27,15 +39,15 @@ export const Slot = defineComponent({
       // prioritize `attrs` and override `firstNonCommentChildren.props`.
       const mergedProps = firstNonCommentChildren.props
         ? mergeProps(attrs, firstNonCommentChildren.props)
-        : attrs;
-      const cloned = cloneVNode({ ...firstNonCommentChildren, props: {} }, mergedProps);
+        : attrs
+      // `mergeRef = true` keeps the child's own template ref alongside ours.
+      const cloned = cloneVNode({ ...firstNonCommentChildren, props: {} }, { ...mergedProps, ref: setTarget }, true)
 
-      if (children.length === 1) {
-        return cloned;
-      }
+      if (children.length === 1)
+        return cloned
 
-      children[firstNonCommentChildrenIndex] = cloned;
-      return children;
-    };
+      children[firstNonCommentChildrenIndex] = cloned
+      return children
+    }
   },
-});
+})

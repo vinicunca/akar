@@ -5,4 +5,4 @@ export {
   type FormRootEmits,
   type FormRootProps,
   injectFormRootContext,
-} from './FormRoot.vue';
+} from './FormRoot.vue'

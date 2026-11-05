@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..';
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..'
 </script>
 
 <template>
   <Story
     title="Splitter/Chromatic"
-    :layout="{ type: 'grid', width: '100%', iframe: false }"
+    :layout="{ type: 'grid', width: '100%' }"
   >
     <Variant title="Horizontal">
       <div class="w-full h-48">

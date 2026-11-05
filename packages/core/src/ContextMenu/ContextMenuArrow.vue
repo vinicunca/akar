@@ -1,24 +1,28 @@
 <script lang="ts">
-import type { MenuArrowProps } from '@/Menu';
-import { useForwardExpose } from '@/shared';
+import type { MenuArrowProps } from '@/Menu'
+import { useForwardElement } from '@/shared'
 
 export interface ContextMenuArrowProps extends MenuArrowProps {}
 </script>
 
 <script setup lang="ts">
-import { MenuArrow } from '@/Menu';
+import { MenuArrow } from '@/Menu'
 
 const props = withDefaults(defineProps<ContextMenuArrowProps>(), {
   width: 10,
   height: 5,
   as: 'svg',
-});
+})
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <MenuArrow v-bind="props">
+  <MenuArrow
+    :ref="forwardRef"
+    v-bind="props"
+  >
     <slot />
   </MenuArrow>
 </template>

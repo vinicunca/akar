@@ -1,64 +1,94 @@
-type DataOrientation = 'vertical' | 'horizontal';
-type Direction = 'ltr' | 'rtl';
-type SingleOrMultipleType = 'single' | 'multiple';
+type DataOrientation = 'vertical' | 'horizontal'
+type Direction = 'ltr' | 'rtl'
+type SingleOrMultipleType = 'single' | 'multiple'
 
-interface SingleOrMultipleProps<T = AcceptableValue | Array<AcceptableValue>> {
+interface SingleOrMultipleProps<T = AcceptableValue | AcceptableValue[]> {
   /**
    * Determines whether a "single" or "multiple" items can be selected at a time.
    *
    * This prop will overwrite the inferred type from `modelValue` and `defaultValue`.
    */
-  type?: SingleOrMultipleType;
+  type?: SingleOrMultipleType
 
   /**
    * The controlled value of the active item(s).
    *
    * Use this when you need to control the state of the items. Can be binded with `v-model`
    */
-  modelValue?: T;
+  modelValue?: T
 
   /**
    * The default active value of the item(s).
    *
    * Use when you do not need to control the state of the item(s).
    */
-  defaultValue?: T;
+  defaultValue?: T
 }
 
 /**
  * if padding or margin is number, it will be in px
- * if padding or margin is true, it will be var(--scrollbar-width)
+ * if padding or margin is true, it will be the measured scrollbar width
  * otherwise, it will be passed string
  */
 type ScrollBodyOption = {
-  padding?: boolean | number | string;
-  margin?: boolean | number | string;
-};
+  padding?: boolean | number | string
+  margin?: boolean | number | string
+}
 
 // Exclude `boolean` type to prevent type casting
 // reference: https://vuejs.org/guide/components/props.html#boolean-casting
-type AcceptableValue = string | number | bigint | Record<string, any> | null;
-type ArrayOrWrapped<T> = T extends Array<any> ? T : Array<T>;
-type StringOrNumber = string | number;
+type AcceptableValue = string | number | bigint | Record<string, any> | null
+type ArrayOrWrapped<T> = T extends any[] ? T : Array<T>
+type StringOrNumber = string | number
 
 // Temporary solution for InstanceType complains about generic components. Reference: https://github.com/vuejs/language-tools/issues/3206#issuecomment-2188687250
-import type { DefineComponent } from 'vue';
+import type { DefineComponent } from 'vue'
 
-type GenericComponentInstance<T> = T extends new (...args: Array<any>) => infer R
+type GenericComponentInstance<T> = T extends new (...args: any[]) => infer R
   ? R
-  : T extends (...args: Array<any>) => infer R
+  : T extends (...args: any[]) => infer R
     ? R extends { __ctx?: infer K }
       ? Exclude<K, void> extends { expose: (...args: infer Y) => void }
         ? Y[0] & InstanceType<DefineComponent>
         : any
       : any
-    : any;
+    : any
 
 interface FormFieldProps {
   /** The name of the field. Submitted with its owning form as part of a name/value pair. */
-  name?: string;
+  name?: string
   /** When `true`, indicates that the user must set the value before the owning form can be submitted. */
-  required?: boolean;
+  required?: boolean
 }
 
-export type { AcceptableValue, ArrayOrWrapped, DataOrientation, Direction, FormFieldProps, GenericComponentInstance, ScrollBodyOption, SingleOrMultipleProps, SingleOrMultipleType, StringOrNumber };
+export type { AcceptableValue, ArrayOrWrapped, DataOrientation, Direction, FormFieldProps, GenericComponentInstance, ScrollBodyOption, SingleOrMultipleProps, SingleOrMultipleType, StringOrNumber }
+
+/**
+ * Reasons every model change can carry, regardless of family. Families extend
+ * this with their own union (e.g. `DialogOpenChangeReason`) via the `Reason`
+ * type parameter of `ChangeEventDetails`.
+ */
+type BaseChangeReason = 'imperative-action' | 'none'
+
+/**
+ * Second argument of every `beforeUpdate:<name>` / `update:<name>` emit (#2828).
+ * `cancel()` is only honoured synchronously during `beforeUpdate`.
+ */
+interface ChangeEventDetails<Reason extends string = string, E extends Event = Event> {
+  readonly reason: Reason | BaseChangeReason
+  /** Native event that caused the change, if any. */
+  readonly event?: E
+  /**
+   * The trigger element of a popup with detached triggers (`handle`, #2826),
+   * set only when a trigger press opens, switches or closes the popup, or the
+   * handle opens it for a trigger (`handle.open(triggerId)`). It is `undefined`
+   * for every other change, including `handle.close()`, Escape, outside
+   * presses, Close parts and item selection (as in Base UI).
+   */
+  readonly trigger?: Element
+  /** Prevent the change. Synchronous; honoured only during `beforeUpdate` / `onBeforeUpdate`. */
+  cancel: () => void
+  readonly isCanceled: boolean
+}
+
+export type { BaseChangeReason, ChangeEventDetails }

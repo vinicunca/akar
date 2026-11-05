@@ -1,34 +1,39 @@
 <script lang="ts">
-import type { DrawerOverlayImplProps } from './DrawerOverlayImpl.vue';
+import type { DrawerOverlayImplProps } from './DrawerOverlayImpl.vue'
 
-export interface DrawerOverlayProps extends DrawerOverlayImplProps {
+export interface DrawerBackdropProps extends DrawerOverlayImplProps {
   /** Keep mounted for animation control. */
-  forceMount?: boolean;
+  forceMount?: boolean
   /** Render even when inside a nested drawer. @default false */
-  forceRender?: boolean;
+  forceRender?: boolean
 }
+/** @deprecated Use `DrawerBackdropProps`; `DrawerOverlay` is a deprecated alias of `DrawerBackdrop`. */
+export type DrawerOverlayProps = DrawerBackdropProps
 </script>
 
 <script setup lang="ts">
-import { Presence } from '@/Presence';
-import { useForwardExpose } from '@/shared';
-import DrawerOverlayImpl from './DrawerOverlayImpl.vue';
-import { injectDrawerRootContext } from './DrawerRoot.vue';
+import { Presence } from '@/Presence'
+import { useForwardElement } from '@/shared'
+import { isPortalOpening } from '@/Teleport/portalGate'
+import DrawerOverlayImpl from './DrawerOverlayImpl.vue'
+import { injectDrawerRootContext } from './DrawerRoot.vue'
 
-const props = withDefaults(defineProps<DrawerOverlayProps>(), {
+const props = withDefaults(defineProps<DrawerBackdropProps>(), {
   forceMount: false,
   forceRender: false,
-});
+})
 
-const rootContext = injectDrawerRootContext();
-const isNested = !!rootContext.notifyParentHasNestedDrawer;
-const { forwardRef } = useForwardExpose();
+const rootContext = injectDrawerRootContext()
+const isNested = !!rootContext.notifyParentHasNestedDrawer
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
   <Presence
-    v-if="rootContext.modal.value && (!isNested || props.forceRender)"
-    :present="props.forceMount || rootContext.open.value"
+    v-if="rootContext.modal.value && (!isNested || forceRender)"
+    :appear="isPortalOpening(rootContext)"
+    :present="forceMount || rootContext.open.value"
   >
     <DrawerOverlayImpl
       v-bind="$attrs"

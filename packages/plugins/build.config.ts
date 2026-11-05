@@ -1,4 +1,4 @@
-import { defineBuildConfig } from 'unbuild';
+import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig([
   {
@@ -10,9 +10,6 @@ export default defineBuildConfig([
     externals: [
       '@nuxt/schema',
     ],
-    rollup: {
-      emitCJS: true,
-    },
   },
   {
     name: 'Unplugin-vue-component Resolver',
@@ -23,9 +20,6 @@ export default defineBuildConfig([
     externals: [
       'unplugin-vue-components',
     ],
-    rollup: {
-      emitCJS: true,
-    },
   },
   {
     name: 'Namespaced',
@@ -34,10 +28,7 @@ export default defineBuildConfig([
     clean: false,
     declaration: 'node16',
     externals: [
-      'akar',
+      'reka-ui',
     ],
-    rollup: {
-      emitCJS: true,
-    },
   },
-]);
+])

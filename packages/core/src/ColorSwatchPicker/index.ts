@@ -1,17 +1,20 @@
 export {
   default as ColorSwatchPickerItem,
   type ColorSwatchPickerItemProps,
-} from './ColorSwatchPickerItem.vue';
+} from './ColorSwatchPickerItem.vue'
 export {
   default as ColorSwatchPickerItemIndicator,
   type ColorSwatchPickerItemIndicatorProps,
-} from './ColorSwatchPickerItemIndicator.vue';
+} from './ColorSwatchPickerItemIndicator.vue'
 export {
   default as ColorSwatchPickerItemSwatch,
   type ColorSwatchPickerItemSwatchProps,
-} from './ColorSwatchPickerItemSwatch.vue';
+} from './ColorSwatchPickerItemSwatch.vue'
 export {
   default as ColorSwatchPickerRoot,
   type ColorSwatchPickerRootEmits,
   type ColorSwatchPickerRootProps,
-} from './ColorSwatchPickerRoot.vue';
+} from './ColorSwatchPickerRoot.vue'
+
+export { useColorSwatchPicker } from './useColorSwatchPicker'
+export type { ColorSwatchPickerChangeReason, ColorSwatchPickerItemIndicatorState, ColorSwatchPickerItemState, ColorSwatchPickerItemSwatchState, ColorSwatchPickerModelValue, ColorSwatchPickerRootState, ColorSwatchPickerValue, UseColorSwatchPickerProps, UseColorSwatchPickerReturn } from './useColorSwatchPicker'

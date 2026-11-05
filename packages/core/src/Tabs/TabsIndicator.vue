@@ -1,81 +1,81 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { computed, ref, watch, watchPostEffect } from 'vue';
-import { useForwardExpose } from '@/shared';
-import { injectTabsRootContext } from './TabsRoot.vue';
+import type { PrimitiveProps } from '@/Primitive'
+import { computed, ref, watch, watchPostEffect } from 'vue'
+import { mergeExpose, useForwardElement } from '@/shared'
+import { injectTabsRootContext } from './TabsRoot.vue'
 
 export interface TabsIndicatorProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { isNumber } from '@vinicunca/perkakas';
-import { useMounted, useResizeObserver } from '@vueuse/core';
-import { Primitive } from '@/Primitive';
+import { useMounted, useResizeObserver } from '@vueuse/core'
+import { renderAs } from '@/Primitive/renderAs'
 
-const props = defineProps<TabsIndicatorProps>();
-const context = injectTabsRootContext();
-defineExpose({
+defineProps<TabsIndicatorProps>()
+const context = injectTabsRootContext()
+const { forwardRef, expose } = useForwardElement()
+defineExpose(mergeExpose(expose, {
   updateIndicatorStyle,
-});
-useForwardExpose();
+}))
 
-const isMounted = useMounted();
+const isMounted = useMounted()
 
 interface IndicatorStyle {
-  size: number | null;
-  thickness: number | null;
-  position: number | null;
+  size: number | null
+  thickness: number | null
+  position: number | null
 }
 const indicatorStyle = ref<IndicatorStyle>({
   size: null,
   thickness: null,
   position: null,
-});
-const tabs = ref<Array<HTMLElement>>([]);
+})
+const tabs = ref<Array<HTMLElement>>([])
 
 watch(() => [context.modelValue.value, context?.dir.value], () => {
-  updateIndicatorStyle();
-}, { immediate: true, flush: 'post' });
+  updateIndicatorStyle()
+}, { immediate: true, flush: 'post' })
 
 watchPostEffect(() => {
-  tabs.value = Array.from(context.tabsList.value?.querySelectorAll<HTMLElement>('[role="tab"]') || []);
-});
+  tabs.value = Array.from(context.tabsList.value?.querySelectorAll<HTMLElement>('[role="tab"]') || [])
+})
 
-useResizeObserver(computed(() => [context.tabsList.value, ...tabs.value]), updateIndicatorStyle);
+useResizeObserver(computed(() => [context.tabsList.value, ...tabs.value]), updateIndicatorStyle)
 
 function updateIndicatorStyle() {
-  const activeTab = context.tabsList.value?.querySelector<HTMLButtonElement>('[role="tab"][data-state="active"]');
+  const activeTab = context.tabsList.value?.querySelector<HTMLButtonElement>('[role="tab"][data-state="checked"]')
 
-  if (!activeTab) {
-    return;
-  }
+  if (!activeTab)
+    return
 
   if (context.orientation.value === 'horizontal') {
     indicatorStyle.value = {
       size: activeTab.offsetWidth,
-      position: activeTab.offsetLeft,
       thickness: activeTab.offsetHeight,
-    };
-  } else {
+      position: activeTab.offsetLeft,
+    }
+  }
+  else {
     indicatorStyle.value = {
       size: activeTab.offsetHeight,
-      position: activeTab.offsetTop,
       thickness: activeTab.offsetWidth,
-    };
+      position: activeTab.offsetTop,
+    }
   }
 }
 </script>
 
 <template>
-  <Primitive
-    v-if="isMounted && isNumber(indicatorStyle.size)"
-    v-bind="props"
+  <component
+    :is="renderAs(as, asChild)"
+    v-if="isMounted && typeof indicatorStyle.size === 'number'"
+    :ref="forwardRef"
     :style="{
-      '--akar-tabs-indicator-size': `${indicatorStyle.size}px`,
-      '--akar-tabs-indicator-position': `${indicatorStyle.position}px`,
-      '--akar-tabs-indicator-thickness': `${indicatorStyle.thickness}px`,
+      '--reka-tabs-indicator-size': `${indicatorStyle.size}px`,
+      '--reka-tabs-indicator-thickness': `${indicatorStyle.thickness}px`,
+      '--reka-tabs-indicator-position': `${indicatorStyle.position}px`,
     }"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

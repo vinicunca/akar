@@ -1,22 +1,33 @@
 {
+  // Enable the ESLint flat config support
+  // (remove this if your ESLint extension above v3.0.5)
+  "eslint.experimental.useFlatConfig": true,
+
+  // Disable the default formatter, use ESLint instead
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+
+  // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
-  "editor.formatOnSave": false,
-  "emmet.showSuggestionsAsSnippets": true,
-  "emmet.triggerExpansionOnTab": true,
-  "emmet.includeLanguages": {
-    "typescriptreact": "html",
-    "postcss": "css"
-  },
 
-  "eslint.lintTask.enable": true,
-  "eslint.lintTask.command": "pnpm lint",
+  // Silent the stylistic rules in you IDE, but still auto fix them
+  "eslint.rules.customizations": [
+    { "rule": "style/*", "severity": "off" },
+    { "rule": "format/*", "severity": "off" },
+    { "rule": "*-indent", "severity": "off" },
+    { "rule": "*-spacing", "severity": "off" },
+    { "rule": "*-spaces", "severity": "off" },
+    { "rule": "*-order", "severity": "off" },
+    { "rule": "*-dangle", "severity": "off" },
+    { "rule": "*-newline", "severity": "off" },
+    { "rule": "*quotes", "severity": "off" },
+    { "rule": "*semi", "severity": "off" }
+  ],
 
-  "eslint.codeAction.showDocumentation": {
-    "enable": true
-  },
+  // Enable ESLint for all supported languages
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -25,25 +36,8 @@
     "vue",
     "html",
     "markdown",
-    "mdc",
     "json",
     "jsonc",
-    "yaml",
-    "toml",
-    "xml",
-    "gql",
-    "graphql",
-    "astro",
-    "svelte",
-    "css",
-    "less",
-    "scss",
-    "pcss",
-    "postcss"
-  ],
-  "typescript.tsdk": "node_modules/typescript/lib",
-
-  "unocss.root": [
-    "./docs"
+    "yaml"
   ]
 }

@@ -1,0 +1,93 @@
+<!-- This file was automatically generated. Do not edit it manually -->
+
+<llm-exclude>
+<PropsTable :data="[
+  {
+    'name': 'as',
+    'description': '<p>The element or component this component should render as. Can be overwritten by <code>asChild</code>.</p>\n',
+    'type': 'AsTag | Component',
+    'required': false,
+    'default': '\'div\''
+  },
+  {
+    'name': 'asChild',
+    'description': '<p>Change the default rendered element for the one passed as a child, merging their props and behavior.</p>\n<p>Read our <a href=\'https://www.reka-ui.com/docs/guides/composition\'>Composition</a> guide for more details.</p>\n',
+    'type': 'boolean',
+    'required': false
+  },
+  {
+    'name': 'defaultValue',
+    'description': '<p>The value of the menu that should be open when initially rendered. Use when you do not need to control the value state.</p>\n',
+    'type': 'string',
+    'required': false
+  },
+  {
+    'name': 'dir',
+    'description': '<p>The reading direction of the combobox when applicable.</p>\n<p>If omitted, inherits globally from <code>ConfigProvider</code> or assumes LTR (left-to-right) reading mode.</p>\n',
+    'type': '\'ltr\' | \'rtl\'',
+    'required': false
+  },
+  {
+    'name': 'loop',
+    'description': '<p>When <code>true</code>, keyboard navigation will loop from last item to first, and vice versa.</p>\n',
+    'type': 'boolean',
+    'required': false,
+    'default': 'false'
+  },
+  {
+    'name': 'modelValue',
+    'description': '<p>The controlled value of the menu to open. Can be used as <code>v-model</code>.</p>\n',
+    'type': 'string',
+    'required': false
+  }
+]" />
+
+<EmitsTable :data="[
+  {
+    'name': 'beforeUpdate:modelValue',
+    'description': '<p>Called before the value changes; <code>details.cancel()</code> keeps the current value.</p>\n',
+    'type': '[value: string, details: ChangeEventDetails&lt;MenuOpenChangeReason, Event&gt;]'
+  },
+  {
+    'name': 'update:modelValue',
+    'description': '<p>Event handler called when the value changes.</p>\n',
+    'type': '[value: string, details: ChangeEventDetails&lt;MenuOpenChangeReason, Event&gt;]'
+  }
+]" />
+
+<SlotsTable :data="[
+  {
+    'name': 'modelValue',
+    'description': '<p>Current input values</p>\n',
+    'type': 'string'
+  }
+]" />
+</llm-exclude>
+
+<llm-only>
+
+**Props**
+
+| Name | Description | Type | Required | Default |
+| --- | --- | --- | --- | --- |
+| `as` | The element or component this component should render as. Can be overwritten by `asChild`. | `AsTag \| Component` | No | `"div"` |
+| `asChild` | Change the default rendered element for the one passed as a child, merging their props and behavior. Read our Composition guide for more details. | `boolean` | No | - |
+| `defaultValue` | The value of the menu that should be open when initially rendered. Use when you do not need to control the value state. | `string` | No | - |
+| `dir` | The reading direction of the combobox when applicable. If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode. | `"ltr" \| "rtl"` | No | - |
+| `loop` | When `true`, keyboard navigation will loop from last item to first, and vice versa. | `boolean` | No | `false` |
+| `modelValue` | The controlled value of the menu to open. Can be used as `v-model`. | `string` | No | - |
+
+**Events**
+
+| Name | Description | Type |
+| --- | --- | --- |
+| `beforeUpdate:modelValue` | Called before the value changes; `details.cancel()` keeps the current value. | `[value: string, details: ChangeEventDetails<MenuOpenChangeReason, Event>]` |
+| `update:modelValue` | Event handler called when the value changes. | `[value: string, details: ChangeEventDetails<MenuOpenChangeReason, Event>]` |
+
+**Slots**
+
+| Name | Description | Type |
+| --- | --- | --- |
+| `modelValue` | Current input values | `string` |
+
+</llm-only>

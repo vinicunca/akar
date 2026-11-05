@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..';
+import { ref } from 'vue'
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '..'
 
-const isShowingA = ref(false);
-const isShowingB = ref(false);
+const isShowingA = ref(false)
+const isShowingB = ref(false)
 </script>
 
 <template>
   <Story
     title="Splitter/Conditional"
-    :layout="{ type: 'single', width: '100%', iframe: false }"
+    :layout="{ type: 'single', iframe: false }"
   >
     <Variant title="default">
       <div class="w-full">

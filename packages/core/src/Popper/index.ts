@@ -1,15 +1,15 @@
 export {
   default as PopperAnchor,
   type PopperAnchorProps,
-} from './PopperAnchor.vue';
+} from './PopperAnchor.vue'
 export {
   default as PopperArrow,
   type PopperArrowProps,
-} from './PopperArrow.vue';
+} from './PopperArrow.vue'
 export {
   default as PopperContent,
   type PopperContentProps,
   PopperContentPropsDefaultValue,
-} from './PopperContent.vue';
-export { injectPopperRootContext, default as PopperRoot } from './PopperRoot.vue';
-export * from './utils';
+} from './PopperContent.vue'
+export { injectPopperRootContext, default as PopperRoot } from './PopperRoot.vue'
+export * from './utils'

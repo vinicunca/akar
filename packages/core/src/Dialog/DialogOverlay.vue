@@ -1,39 +1,42 @@
 <script lang="ts">
-import type { DialogOverlayImplProps } from './DialogOverlayImpl.vue';
-import { useForwardExpose } from '@/shared';
-import DialogOverlayImpl from './DialogOverlayImpl.vue';
+import type { DialogOverlayImplProps } from './DialogOverlayImpl.vue'
+import { useForwardElement } from '@/shared'
+import DialogOverlayImpl from './DialogOverlayImpl.vue'
 
 export interface DialogOverlayProps extends DialogOverlayImplProps {
   /**
    * Used to force mounting when more control is needed. Useful when
    * controlling animation with Vue animation libraries.
    */
-  forceMount?: boolean;
+  forceMount?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Presence } from '@/Presence';
-import { injectDialogRootContext } from './DialogRoot.vue';
+import { computed } from 'vue'
+import { Presence } from '@/Presence'
+import { isPortalOpening } from '@/Teleport/portalGate'
+import { injectDialogRootContext } from './DialogRoot.vue'
 
-const props = defineProps<DialogOverlayProps>();
-const rootContext = injectDialogRootContext();
+const props = defineProps<DialogOverlayProps>()
+const rootContext = injectDialogRootContext()
 
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 
 // See `DialogContent.vue`: when the overlay is kept mounted across open/close it
 // must report the real presence state, otherwise `DialogOverlayImpl` keeps the
 // body scroll locked after the dialog is dismissed.
 const staysMounted = computed(
   () => props.forceMount || !rootContext.unmountOnHide.value,
-);
+)
 </script>
 
 <template>
   <Presence
     v-if="rootContext?.modal.value"
     v-slot="{ present }"
+    :appear="isPortalOpening(rootContext)"
     :present="rootContext.open.value"
     :force-mount="staysMounted"
   >

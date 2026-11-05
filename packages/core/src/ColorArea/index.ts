@@ -1,14 +1,18 @@
 export {
   default as ColorAreaArea,
   type ColorAreaAreaProps,
-} from './ColorAreaArea.vue';
+} from './ColorAreaArea.vue'
 export {
   default as ColorAreaRoot,
   type ColorAreaRootEmits,
   type ColorAreaRootProps,
   injectColorAreaRootContext,
-} from './ColorAreaRoot.vue';
+} from './ColorAreaRoot.vue'
 export {
   default as ColorAreaThumb,
   type ColorAreaThumbProps,
-} from './ColorAreaThumb.vue';
+} from './ColorAreaThumb.vue'
+
+export { useColorArea } from './useColorArea'
+export type { ColorAreaAxis, ColorAreaChangeReason, ColorAreaRootState, UseColorAreaProps, UseColorAreaReturn } from './useColorArea'
+export type { ColorAreaAreaState, ColorAreaInputAnchor, ColorAreaInputState, ColorAreaThumbState } from './useColorArea'

@@ -1,24 +1,21 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
-import { validatePanelGroupLayout } from './validation';
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { validatePanelGroupLayout } from './validation'
 
 afterEach(() => {
-  vi.restoreAllMocks();
-});
+  vi.restoreAllMocks()
+})
 
 describe('validatePanelGroupLayout', () => {
   it('should validate an empty group silently', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const result = validatePanelGroupLayout({ layout: [], panelConstraints: [] });
-    expect(result).toEqual([]);
-    expect(warn).not.toHaveBeenCalled();
-  });
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const result = validatePanelGroupLayout({ layout: [], panelConstraints: [] })
+    expect(result).toEqual([])
+    expect(warn).not.toHaveBeenCalled()
+  })
 
   it('should throw when the layout length does not match the panel constraints', () => {
     expect(() =>
-      validatePanelGroupLayout({
-        layout: [50, 50],
-        panelConstraints: [],
-      }),
-    ).toThrow('Invalid 0 panel layout');
-  });
-});
+      validatePanelGroupLayout({ layout: [50, 50], panelConstraints: [] }),
+    ).toThrow('Invalid 0 panel layout')
+  })
+})

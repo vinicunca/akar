@@ -1,11 +1,40 @@
-import type { AnyFn } from '@vueuse/shared';
-import { camelize, getCurrentInstance, toHandlerKey } from 'vue';
+import type { AnyFn } from '@vueuse/shared'
+import type { ComponentInternalInstance } from 'vue'
+import { camelize, getCurrentInstance, toHandlerKey } from 'vue'
+
+interface DeclaredEvents {
+  /** The `emits` option these were read from: a definition patched in place (HMR) gets a new one. */
+  source: unknown
+  names: string[]
+  /** The `onX` key each event is forwarded under. */
+  keys: string[]
+}
+
+/** Declared events per component definition, built once instead of per instance. */
+const declaredEvents = new WeakMap<object, DeclaredEvents>()
+
+function getDeclaredEvents(vm: ComponentInternalInstance | null): DeclaredEvents | undefined {
+  const type = vm?.type as { emits?: unknown } | undefined
+  if (!type)
+    return undefined
+  const source = type.emits
+  let events = declaredEvents.get(type)
+  if (!events || events.source !== source) {
+    const names = Array.isArray(source) ? source as string[] : Object.keys(source ?? {})
+    events = { source, names, keys: names.map(name => toHandlerKey(camelize(name))) }
+    declaredEvents.set(type, events)
+  }
+  return events
+}
 
 // Vue doesn't have emits forwarding, in order to bind the emits we have to convert events into `onXXX` handlers
 // issue: https://github.com/vuejs/core/issues/5917
 /**
  * The `useEmitAsProps` function is a TypeScript utility that converts emitted events into props for a
  * Vue component.
+ *
+ * Every declared event gets a handler, built once per instance (a bound
+ * `emit`, so the object is stable across renders).
  *
  * @template Name - The event name string union type.
  * @template Fn - The emit function type.
@@ -18,49 +47,49 @@ import { camelize, getCurrentInstance, toHandlerKey } from 'vue';
  * call the `emit` function with the corresponding event name and arguments.
  */
 export function useEmitAsProps<Name extends string, Fn extends AnyFn = AnyFn>(emit: Emit<Name, Fn>) {
-  const vm = getCurrentInstance();
+  const vm = getCurrentInstance()
+  const events = getDeclaredEvents(vm)
+  const result: Record<string, AnyFn> = {}
 
-  const events = vm?.type.emits as Array<Name>;
-  const result: Record<string, any> = {};
-
-  if (!events?.length) {
+  if (!events?.names.length) {
     console.warn(
       `No emitted event found. Please check component: ${vm?.type.__name}`,
-    );
+    )
+    return result as EmitAsProps<Fn>
   }
 
-  events?.forEach((ev) => {
-    result[toHandlerKey(camelize(ev))] = (...arg: any) => emit(ev, ...arg);
-  });
+  const { names, keys } = events
+  for (let i = 0; i < names.length; i++)
+    result[keys[i]] = (emit as AnyFn).bind(null, names[i])
 
-  return result as EmitAsProps<Fn>;
+  return result as EmitAsProps<Fn>
 }
 
-export type EmitAsProps<T extends AnyFn> = Expand<Partial<MergeUnion<EmitUnion<OverloadUnion<T>>>>>;
+export type EmitAsProps<T extends AnyFn> = Expand<Partial<MergeUnion<EmitUnion<OverloadUnion<T>>>>>
 
-export type Emit<Name extends string, Fn extends AnyFn> = IsEmit<Name, Fn> extends true ? Fn : never;
+export type Emit<Name extends string, Fn extends AnyFn> = IsEmit<Name, Fn> extends true ? Fn : never
 
 type IsEmit<Name extends string, Fn extends AnyFn>
   = OverloadUnion<Fn> extends infer T extends AnyFn
-    ? Parameters<T> extends [name: Name, ...args: Array<any>]
+    ? Parameters<T> extends [name: Name, ...args: any[]]
       ? [ReturnType<T>] extends [void]
           ? true
           : false
       : false
-    : false;
+    : false
 
 type Expand<T> = {
   [K in keyof T]: T[K]
-} & {};
+} & {}
 
 type MergeUnion<T> = {
   [K in T extends any ? keyof T : never]: T extends { [P in K]: any } ? T[K] : never;
-};
+}
 
 type EmitUnion<Fn extends AnyFn>
   = Fn extends (name: infer Name extends string, ...args: infer Args) => infer Return
     ? { [K in HandlerKey<Name>]: (...args: Args) => Return }
-    : unknown;
+    : unknown
 
 // Types for prop keys
 
@@ -70,7 +99,7 @@ type WordChar
     | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M'
     | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
     | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
-    | '_';
+    | '_'
 
 /**
  * Type-safe converter for camelize(string) from Vue package
@@ -82,36 +111,34 @@ export type Camelize<S extends string>
         ? `${Camelize<Prefix>}${Uppercase<Char>}${Camelize<After>}`
         : `${Camelize<Prefix>}-${Camelize<Rest>}`
       : S
-    : S;
+    : S
 
-type HandlerKey<Name extends string> = Camelize<`on-${Name}`>;
+type HandlerKey<Name extends string> = Camelize<`on-${Name}`>
 
 // Overload-walking types, adapted from the package-private helpers in @vue/shared
 
-type OverloadProps<TOverload> = Pick<TOverload, keyof TOverload>;
-
-type Signature<TArgs extends Array<any>, TReturn> = (...args: TArgs) => TReturn;
+type Signature<TArgs extends any[], TReturn> = (...args: TArgs) => TReturn
 
 type IsEqual<A, B>
-  = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false;
+  = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false
 
 /**
  * `Required<T>` strips `void` together with `undefined` from formerly-optional elements,
  * leaving `never`; those elements originated from `void` parameters, so restore them.
  */
-type RequiredVoidArgs<TArgs extends Array<any>> = {
+type RequiredVoidArgs<TArgs extends any[]> = {
   [K in keyof TArgs]: [TArgs[K]] extends [never] ? void : TArgs[K]
-};
+}
 
 /**
  * Whether intersecting `TSignature` in front of `TOverload` removes the last signature of `TOverload`.
  * TypeScript de-duplicates identical call signatures in an intersection, so when the last signature
  * is still the one described by `TArgs`/`TReturn` the reconstruction was not identical to it.
  */
-type RemovesLastSignature<TOverload, TSignature extends AnyFn, TArgs extends Array<any>, TReturn>
+type RemovesLastSignature<TOverload, TSignature extends AnyFn, TArgs extends any[], TReturn>
   = (TSignature & TOverload) extends (...args: infer TNextArgs) => infer TNextReturn
     ? IsEqual<[TNextArgs, TNextReturn], [TArgs, TReturn]> extends true ? false : true
-    : false;
+    : false
 
 /**
  * Rebuilds the last signature of `TOverload` (inferred as `TArgs`/`TReturn`) so that TypeScript
@@ -123,12 +150,12 @@ type RemovesLastSignature<TOverload, TSignature extends AnyFn, TArgs extends Arr
  * forever and TypeScript reports "Type instantiation is excessively deep and possibly infinite".
  * Resolves to `never` when no reconstruction matches.
  */
-type LastSignature<TOverload, TArgs extends Array<any>, TReturn>
+type LastSignature<TOverload, TArgs extends any[], TReturn>
   = RemovesLastSignature<TOverload, Signature<TArgs, TReturn>, TArgs, TReturn> extends true
     ? Signature<TArgs, TReturn>
     : RemovesLastSignature<TOverload, Signature<RequiredVoidArgs<Required<TArgs>>, TReturn>, TArgs, TReturn> extends true
       ? Signature<RequiredVoidArgs<Required<TArgs>>, TReturn>
-      : never;
+      : never
 
 type OverloadUnionRecursive<
   TOverload,
@@ -139,16 +166,18 @@ type OverloadUnionRecursive<
     : LastSignature<TOverload, TArgs, TReturn> extends infer TSignature extends AnyFn
       ? [TSignature] extends [never]
           // The last signature cannot be removed: stop instead of recursing forever and fall back to a loose signature.
-          ? (name: string, ...args: Array<any>) => void
+          ? (name: string, ...args: any[]) => void
+          // Unlike @vue/shared, the accumulator carries only signatures (no `Pick` of the overload's
+          // properties): the extra mapped type per step hit TS2589 on roots with 11+ emits.
           : | OverloadUnionRecursive<
               TPartialOverload & TOverload,
-              TPartialOverload & TSignature & OverloadProps<TOverload>
+              TPartialOverload & TSignature
           >
           | TSignature
       : never
-  : never;
+  : never
 
-type OverloadUnion<TOverload extends (...args: Array<any>) => any> = Exclude<
+type OverloadUnion<TOverload extends (...args: any[]) => any> = Exclude<
   OverloadUnionRecursive<(() => never) & TOverload>,
   TOverload extends () => never ? never : () => never
->;
+>

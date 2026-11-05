@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ToastArrow, ToastPositioner, ToastRoot, ToastTitle, ToastViewport, useToastManager } from '..';
+import { ToastArrow, ToastPositioner, ToastRoot, ToastTitle, ToastViewport, useToastManager } from '..'
 
-const { toasts } = useToastManager();
+const { toasts } = useToastManager()
 </script>
 
 <template>

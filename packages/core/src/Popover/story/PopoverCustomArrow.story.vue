@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
 import {
   PopoverArrow,
   PopoverClose,
@@ -8,10 +8,10 @@ import {
   PopoverPortal,
   PopoverRoot,
   PopoverTrigger,
-} from '..';
-import CustomArrowSvg from './CustomArrowSvg.vue';
+} from '..'
+import CustomArrowSvg from './CustomArrowSvg.vue'
 
-const toggleState = ref(false);
+const toggleState = ref(false)
 </script>
 
 <template>

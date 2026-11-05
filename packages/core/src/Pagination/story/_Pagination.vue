@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { PaginationEllipsisProps, PaginationFirstProps, PaginationLastProps, PaginationListItemProps, PaginationListProps, PaginationNextProps, PaginationPrevProps, PaginationRootProps } from '..';
-import { computed } from 'vue';
-import { PaginationEllipsis, PaginationFirst, PaginationLast, PaginationList, PaginationListItem, PaginationNext, PaginationPrev, PaginationRoot } from '..';
+import type { PaginationEllipsisProps, PaginationFirstProps, PaginationLastProps, PaginationListItemProps, PaginationListProps, PaginationNextProps, PaginationPrevProps, PaginationRootProps } from '..'
+import { computed } from 'vue'
+import { PaginationEllipsis, PaginationFirst, PaginationLast, PaginationList, PaginationListItem, PaginationNext, PaginationPrev, PaginationRoot } from '..'
 
 const props = defineProps<{
-  root?: PaginationRootProps;
-  list?: PaginationListProps;
+  root?: Partial<PaginationRootProps>
+  list?: PaginationListProps
 
-  first?: PaginationFirstProps;
-  prev?: PaginationPrevProps;
+  first?: PaginationFirstProps
+  prev?: PaginationPrevProps
 
-  listItem?: Partial<PaginationListItemProps>;
-  ellipsis?: PaginationEllipsisProps;
+  listItem?: Partial<PaginationListItemProps>
+  ellipsis?: PaginationEllipsisProps
 
-  next?: PaginationNextProps;
-  last?: PaginationLastProps;
-}>();
+  next?: PaginationNextProps
+  last?: PaginationLastProps
+}>()
 
-const rootProps = computed(() => ({ total: 100, ...props.root }));
+const rootProps = computed(() => ({ total: 100, ...props.root }))
 </script>
 
 <template>

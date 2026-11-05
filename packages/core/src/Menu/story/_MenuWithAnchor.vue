@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { MenuProps } from '..';
-import { useVModel } from '@vueuse/core';
+import type { MenuProps } from '..'
+import { useVModel } from '@vueuse/core'
 import {
   MenuAnchor,
   MenuContent,
   MenuPortal,
 
   MenuRoot,
-} from '..';
+} from '..'
 
 interface Props extends MenuProps {}
 const props = withDefaults(defineProps<Props>(), {
   open: true,
-});
+})
 
-const open = useVModel(props, 'open');
+const open = useVModel(props, 'open')
 </script>
 
 <template>

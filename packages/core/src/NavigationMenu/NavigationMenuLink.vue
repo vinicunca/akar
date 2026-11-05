@@ -1,7 +1,7 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useCollection } from '@/Collection';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { COLLECTION_ITEM_ATTRS, useCollectionItem } from '@/Collection/Collection'
+import { useForwardElement } from '@/shared'
 
 export type NavigationMenuLinkEmits = {
   /**
@@ -9,60 +9,57 @@ export type NavigationMenuLinkEmits = {
    *
    * Calling `event.preventDefault` in this handler will prevent the navigation menu from closing when selecting that link.
    */
-  select: [payload: CustomEvent<{ originalEvent: Event }>];
-};
+  select: [payload: CustomEvent<{ originalEvent: Event }>]
+}
 export interface NavigationMenuLinkProps extends PrimitiveProps {
   /** Used to identify the link as the currently active page. */
-  active?: boolean;
+  active?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { EVENT_ROOT_CONTENT_DISMISS, LINK_SELECT } from './utils';
+import { getCurrentInstance, mergeProps } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { useNavigationMenuLink } from './useNavigationMenu'
+
+defineOptions({
+  // `$attrs` are merged under the part's own bindings: the precedence the
+  // former `CollectionItem` wrapper gave them.
+  inheritAttrs: false,
+})
 
 const props = withDefaults(defineProps<NavigationMenuLinkProps>(), {
   as: 'a',
-});
+})
 
-const emits = defineEmits<NavigationMenuLinkEmits>();
+const emits = defineEmits<NavigationMenuLinkEmits>()
 
-const { CollectionItem } = useCollection({ key: 'NavigationMenu' });
-useForwardExpose();
-
-async function handleClick(ev: MouseEvent) {
-  const linkSelectEvent = new CustomEvent(LINK_SELECT, {
-    bubbles: true,
-    cancelable: true,
-    detail: {
-      originalEvent: ev,
-    },
-  });
-  emits('select', linkSelectEvent);
-
-  if (!linkSelectEvent.defaultPrevented && !ev.metaKey) {
-    const rootContentDismissEvent = new CustomEvent(
-      EVENT_ROOT_CONTENT_DISMISS,
-      {
-        bubbles: true,
-        cancelable: true,
-      },
-    );
-    ev.target?.dispatchEvent(rootContentDismissEvent);
-  }
+const { forwardRef, currentElement, expose } = useForwardElement()
+// A consumer `value` attr was the `CollectionItem` wrapper's prop: the
+// collection item's value, not an attribute (read through the instance
+// proxy, which tracks `$attrs`).
+const instance = getCurrentInstance()!
+useCollectionItem(currentElement, () => instance.proxy!.$attrs.value, { key: 'NavigationMenu' })
+function elementAttrs(attrs: Record<string, unknown>) {
+  if (!('value' in attrs))
+    return attrs
+  const { value: _, ...rest } = attrs
+  return rest
 }
+defineExpose(expose)
+
+const { link } = useNavigationMenuLink({
+  active: () => props.active,
+  onSelect: event => emits('select', event),
+})
 </script>
 
 <template>
-  <CollectionItem>
-    <Primitive
-      :as="as"
-      :data-active="active ? '' : undefined"
-      :aria-current="active ? 'page' : undefined"
-      :as-child="props.asChild"
-      @click="handleClick"
-    >
-      <slot />
-    </Primitive>
-  </CollectionItem>
+  <component
+    :is="renderAs(as, props.asChild)"
+    :ref="forwardRef"
+    v-bind="mergeProps(elementAttrs($attrs), COLLECTION_ITEM_ATTRS, link.attrs.value)"
+  >
+    <slot />
+  </component>
 </template>

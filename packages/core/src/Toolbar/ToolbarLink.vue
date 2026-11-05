@@ -1,31 +1,36 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface ToolbarLinkProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { RovingFocusItem } from '@/RovingFocus';
+import { mergeProps } from 'vue'
+import { renderAs } from '@/Primitive/renderAs'
+import { useRovingFocusItem } from '@/RovingFocus/useRovingFocusItem'
+import { getToolbarLinkSurface } from './useToolbar'
 
-const props = withDefaults(defineProps<ToolbarLinkProps>(), { as: 'a' });
-const { forwardRef } = useForwardExpose();
+defineOptions({
+  // `$attrs` are merged under the roving and part bindings: the precedence
+  // the former `RovingFocusItem` wrapper gave them.
+  inheritAttrs: false,
+})
+
+withDefaults(defineProps<ToolbarLinkProps>(), { as: 'a' })
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+const surface = getToolbarLinkSurface()
+// Arrow-key navigation (as a composable; the toolbar handles the keys).
+const roving = useRovingFocusItem({ element: currentElement })!
 </script>
 
 <template>
-  <RovingFocusItem
-    as-child
-    focusable
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="mergeProps($attrs, roving.attrs(), surface.attrs.value)"
   >
-    <Primitive
-      v-bind="props"
-      :ref="forwardRef"
-      @keydown="(event: KeyboardEvent) => {
-        if (event.key === ' ') (event.currentTarget as HTMLElement)?.click()
-      }"
-    >
-      <slot />
-    </Primitive>
-  </RovingFocusItem>
+    <slot />
+  </component>
 </template>

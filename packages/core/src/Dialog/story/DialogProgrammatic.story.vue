@@ -1,27 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { DialogContent, DialogOverlay, DialogRoot } from '..';
+import { ref } from 'vue'
+import { DialogContent, DialogOverlay, DialogRoot } from '..'
 
-const dialogAOpen = ref(false);
-const dialogBOpen = ref(false);
+const dialogAOpen = ref(false)
+const dialogBOpen = ref(false)
 
 function openA() {
-  dialogBOpen.value = false;
-  dialogAOpen.value = true;
+  dialogBOpen.value = false
+  dialogAOpen.value = true
 }
 function openB() {
-  dialogAOpen.value = false;
-  dialogBOpen.value = true;
+  dialogAOpen.value = false
+  dialogBOpen.value = true
 }
 function closeA(opened: boolean) {
-  if (opened) {
-    dialogAOpen.value = false;
-  }
+  if (opened)
+    dialogAOpen.value = false
 }
 function closeB(opened: boolean) {
-  if (opened) {
-    dialogBOpen.value = false;
-  }
+  if (opened)
+    dialogBOpen.value = false
 }
 </script>
 

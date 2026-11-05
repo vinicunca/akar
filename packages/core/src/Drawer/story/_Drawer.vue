@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerHandle,
+  DrawerGrabber,
   DrawerOverlay,
   DrawerPortal,
   DrawerRoot,
   DrawerTitle,
   DrawerTrigger,
-} from '..';
+} from '..'
 
 // Shared "default" drawer used by the Default story variant. All styles
 // (keyframes, .drawer-content-bottom, .drawer-handle, .drawer-overlay,
@@ -18,7 +18,7 @@ import {
 // block — do not duplicate them here or both rules compete and the
 // enter/exit keyframes collide with the drag transform on release
 // (the "bounce" bug).
-const open = ref(false);
+const open = ref(false)
 </script>
 
 <template>
@@ -29,7 +29,7 @@ const open = ref(false);
     <DrawerPortal>
       <DrawerOverlay class="drawer-overlay" />
       <DrawerContent class="drawer-content-bottom">
-        <DrawerHandle class="drawer-handle" />
+        <DrawerGrabber class="drawer-handle" />
         <div class="p-6">
           <DrawerTitle class="mb-2 text-xl font-semibold text-gray-900">
             Drawer Title

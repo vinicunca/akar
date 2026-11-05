@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { SwitchRoot, SwitchThumb } from '.';
+import { ref } from 'vue'
+import { SwitchRoot, SwitchThumb } from '.'
 
-const switchState = ref(true);
-const customStringState = ref<'on' | 'off'>('off');
-const customNumberState = ref<1 | 0>(0);
+const switchState = ref(true)
+const customStringState = ref<'on' | 'off'>('off')
+const customNumberState = ref<1 | 0>(0)
 </script>
 
 <template>

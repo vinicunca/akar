@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   NavigationMenuContent,
   NavigationMenuIndicator,
@@ -9,22 +9,22 @@ import {
   NavigationMenuRoot,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-} from '..';
-import NavigationMenuListItem from './_NavigationMenuListItem.vue';
+} from '..'
+import NavigationMenuListItem from './_NavigationMenuListItem.vue'
 
 export interface TestProps {
-  disableClickTrigger?: boolean;
-  disableHoverTrigger?: boolean;
-  disablePointerLeaveClose?: boolean;
+  disableClickTrigger?: boolean
+  disableHoverTrigger?: boolean
+  disablePointerLeaveClose?: boolean
 }
 
 const props = withDefaults(defineProps<TestProps>(), {
   disableClickTrigger: false,
   disableHoverTrigger: false,
   disablePointerLeaveClose: false,
-});
+})
 
-const currentTrigger = ref('');
+const currentTrigger = ref('')
 </script>
 
 <template>
@@ -75,7 +75,7 @@ const currentTrigger = ref('');
                   <div
                     class="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white"
                   >
-                    Akar
+                    Reka UI
                   </div>
                   <p class="text-mauve4 text-[14px] leading-[1.3]">
                     Unstyled, accessible components for Vue.
@@ -152,7 +152,7 @@ const currentTrigger = ref('');
                 title="Releases"
                 href="/docs/primitives/overview/releases"
               >
-                Akar releases and their changelogs.
+                Reka UI releases and their changelogs.
               </NavigationMenuListItem>
             </ul>
           </NavigationMenuContent>
@@ -168,7 +168,7 @@ const currentTrigger = ref('');
         </NavigationMenuItem>
 
         <NavigationMenuIndicator
-          class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
+          class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--reka-navigation-menu-indicator-size] translate-x-[--reka-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
         >
           <div class="relative top-[70%] h-[12px] w-[12px] rotate-[45deg] bg-white border" />
         </NavigationMenuIndicator>
@@ -178,7 +178,7 @@ const currentTrigger = ref('');
         class="perspective-[2000px] absolute top-full left-0 flex w-full justify-center"
       >
         <NavigationMenuViewport
-          class="data-[state=open]:animate-scaleIn data-[state=closed]:animate-scaleOut relative mt-[10px] h-[var(--akar-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-[6px] bg-white transition-[width,_height] duration-300 sm:w-[var(--akar-navigation-menu-viewport-width)]"
+          class="data-[state=open]:animate-scaleIn data-[state=closed]:animate-scaleOut relative mt-[10px] h-[var(--reka-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-[6px] bg-white transition-[width,_height] duration-300 sm:w-[var(--reka-navigation-menu-viewport-width)]"
         />
       </div>
     </NavigationMenuRoot>

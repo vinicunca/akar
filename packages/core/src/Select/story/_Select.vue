@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
 import {
   SelectContent,
   SelectGroup,
@@ -16,26 +16,14 @@ import {
   SelectTrigger,
   SelectValue,
   SelectViewport,
-} from '..';
+} from '..'
 
-const fruit = ref('');
+const fruit = ref('')
 
-const options = [
-  'Apple',
-  'Banana',
-  'Blueberry',
-  'Grapes',
-  'Pineapple',
-];
-const vegetables = [
-  'Aubergine',
-  'Broccoli',
-  'Carrot',
-  'Courgette',
-  'Leek',
-];
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
+const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
 
-const POSITION = ['item-aligned', 'popper'] as const;
+const POSITION = ['item-aligned', 'popper'] as const
 </script>
 
 <template>

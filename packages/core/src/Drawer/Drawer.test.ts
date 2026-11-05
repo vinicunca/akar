@@ -1,9 +1,9 @@
-import type { Mock, MockInstance } from 'vitest';
-import userEvent from '@testing-library/user-event';
-import { findByText, fireEvent, render } from '@testing-library/vue';
-import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
-import { axe } from 'vitest-axe';
-import { defineComponent, nextTick } from 'vue';
+import type { Mock, MockInstance } from 'vitest'
+import userEvent from '@testing-library/user-event'
+import { findByText, fireEvent, render } from '@testing-library/vue'
+import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest'
+import { axe } from 'vitest-axe'
+import { defineComponent, nextTick } from 'vue'
 import {
   DrawerClose,
   DrawerContent,
@@ -15,11 +15,11 @@ import {
   DrawerTrigger,
   DrawerViewport,
   DrawerVirtualKeyboardProvider,
-} from '.';
+} from '.'
 
-const OPEN_TEXT = 'Open Drawer';
-const CLOSE_TEXT = 'Close Drawer';
-const TITLE_TEXT = 'Drawer Title';
+const OPEN_TEXT = 'Open Drawer'
+const CLOSE_TEXT = 'Close Drawer'
+const TITLE_TEXT = 'Drawer Title'
 
 const DrawerTest = defineComponent({
   components: {
@@ -45,16 +45,10 @@ const DrawerTest = defineComponent({
       </DrawerPortal>
     </DrawerRoot>
   `,
-});
+})
 
 const NoTitleDrawerTest = defineComponent({
-  components: {
-    DrawerRoot,
-    DrawerTrigger,
-    DrawerPortal,
-    DrawerContent,
-    DrawerClose,
-  },
+  components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerContent, DrawerClose },
   template: `
     <DrawerRoot>
       <DrawerTrigger>${OPEN_TEXT}</DrawerTrigger>
@@ -65,120 +59,110 @@ const NoTitleDrawerTest = defineComponent({
       </DrawerPortal>
     </DrawerRoot>
   `,
-});
+})
 
 describe('given a default Drawer', () => {
-  let consoleWarnMock: MockInstance;
-  let consoleWarnMockFunction: Mock;
+  let consoleWarnMock: MockInstance
+  let consoleWarnMockFunction: Mock
 
   beforeEach(() => {
-    document.body.innerHTML = '';
-    consoleWarnMockFunction = vi.fn();
-    consoleWarnMock = vi.spyOn(console, 'warn').mockImplementation(consoleWarnMockFunction);
-  });
+    document.body.innerHTML = ''
+    consoleWarnMockFunction = vi.fn()
+    consoleWarnMock = vi.spyOn(console, 'warn').mockImplementation(consoleWarnMockFunction)
+  })
 
   afterEach(() => {
-    consoleWarnMock.mockRestore();
-    consoleWarnMockFunction.mockClear();
-  });
+    consoleWarnMock.mockRestore()
+    consoleWarnMockFunction.mockClear()
+  })
 
   it('should pass axe accessibility tests when closed', async () => {
-    render(DrawerTest);
-    expect(await axe(document.body)).toHaveNoViolations();
-  });
+    render(DrawerTest)
+    expect(await axe(document.body)).toHaveNoViolations()
+  })
 
   it('should pass axe accessibility tests when open', async () => {
-    const { getByText } = render(DrawerTest);
-    await fireEvent.click(getByText(OPEN_TEXT));
-    await nextTick();
-    expect(await axe(document.body)).toHaveNoViolations();
-  });
+    const { getByText } = render(DrawerTest)
+    await fireEvent.click(getByText(OPEN_TEXT))
+    await nextTick()
+    expect(await axe(document.body)).toHaveNoViolations()
+  })
 
   describe('after clicking the trigger', () => {
     it('should show drawer content', async () => {
-      const { getByText } = render(DrawerTest);
-      await fireEvent.click(getByText(OPEN_TEXT));
-      await nextTick();
-      const title = await findByText(document.body, TITLE_TEXT);
-      expect(document.body).toContainElement(title);
-    });
+      const { getByText } = render(DrawerTest)
+      await fireEvent.click(getByText(OPEN_TEXT))
+      await nextTick()
+      const title = await findByText(document.body, TITLE_TEXT)
+      expect(document.body).toContainElement(title)
+    })
 
     it('should close when close button is clicked', async () => {
-      const { getByText } = render(DrawerTest);
-      await fireEvent.click(getByText(OPEN_TEXT));
-      await nextTick();
-      const closeBtn = await findByText(document.body, CLOSE_TEXT);
-      await fireEvent.click(closeBtn);
-      await nextTick();
-      expect(document.body.innerHTML).not.toContain(CLOSE_TEXT);
-    });
+      const { getByText } = render(DrawerTest)
+      await fireEvent.click(getByText(OPEN_TEXT))
+      await nextTick()
+      const closeBtn = await findByText(document.body, CLOSE_TEXT)
+      await fireEvent.click(closeBtn)
+      await nextTick()
+      expect(document.body.innerHTML).not.toContain(CLOSE_TEXT)
+    })
 
     it('should close on Escape key', async () => {
-      const { getByText } = render(DrawerTest);
-      await fireEvent.click(getByText(OPEN_TEXT));
-      await nextTick();
-      await fireEvent.keyDown(document.activeElement!, { key: 'Escape' });
-      await nextTick();
-      expect(document.body.innerHTML).not.toContain(TITLE_TEXT);
-    });
+      const { getByText } = render(DrawerTest)
+      await fireEvent.click(getByText(OPEN_TEXT))
+      await nextTick()
+      await fireEvent.keyDown(document.activeElement!, { key: 'Escape' })
+      await nextTick()
+      expect(document.body.innerHTML).not.toContain(TITLE_TEXT)
+    })
 
     it('should have role="dialog" on content', async () => {
-      const { getByText } = render(DrawerTest);
-      await fireEvent.click(getByText(OPEN_TEXT));
-      await nextTick();
-      const dialog = document.querySelector('[role="dialog"]');
-      expect(dialog).not.toBeNull();
-    });
+      const { getByText } = render(DrawerTest)
+      await fireEvent.click(getByText(OPEN_TEXT))
+      await nextTick()
+      const dialog = document.querySelector('[role="dialog"]')
+      expect(dialog).not.toBeNull()
+    })
 
     it('should have aria-labelledby pointing to title', async () => {
-      const { getByText } = render(DrawerTest);
-      await fireEvent.click(getByText(OPEN_TEXT));
-      await nextTick();
-      const dialog = document.querySelector('[role="dialog"]');
-      const labelId = dialog?.getAttribute('aria-labelledby');
-      expect(labelId).toBeTruthy();
-      const titleEl = document.getElementById(labelId!);
-      expect(titleEl?.textContent).toBe(TITLE_TEXT);
-    });
+      const { getByText } = render(DrawerTest)
+      await fireEvent.click(getByText(OPEN_TEXT))
+      await nextTick()
+      const dialog = document.querySelector('[role="dialog"]')
+      const labelId = dialog?.getAttribute('aria-labelledby')
+      expect(labelId).toBeTruthy()
+      const titleEl = document.getElementById(labelId!)
+      expect(titleEl?.textContent).toBe(TITLE_TEXT)
+    })
 
     it('should have aria-describedby pointing to description', async () => {
-      const { getByText } = render(DrawerTest);
-      await fireEvent.click(getByText(OPEN_TEXT));
-      await nextTick();
-      const dialog = document.querySelector('[role="dialog"]');
-      const descId = dialog?.getAttribute('aria-describedby');
-      expect(descId).toBeTruthy();
-      const descEl = document.getElementById(descId!);
-      expect(descEl?.textContent).toBe('Description text');
-    });
-  });
+      const { getByText } = render(DrawerTest)
+      await fireEvent.click(getByText(OPEN_TEXT))
+      await nextTick()
+      const dialog = document.querySelector('[role="dialog"]')
+      const descId = dialog?.getAttribute('aria-describedby')
+      expect(descId).toBeTruthy()
+      const descEl = document.getElementById(descId!)
+      expect(descEl?.textContent).toBe('Description text')
+    })
+  })
 
   describe('when no title is provided', () => {
     it('should warn to the console', async () => {
-      render(NoTitleDrawerTest);
-      await fireEvent.click(document.querySelector('button')!);
-      await nextTick();
-      expect(consoleWarnMockFunction).toHaveBeenCalled();
-    });
-  });
-});
+      render(NoTitleDrawerTest)
+      await fireEvent.click(document.querySelector('button')!)
+      await nextTick()
+      expect(consoleWarnMockFunction).toHaveBeenCalled()
+    })
+  })
+})
 
 describe('update:open change event details', () => {
   const DrawerWithReason = defineComponent({
-    components: {
-      DrawerRoot,
-      DrawerTrigger,
-      DrawerPortal,
-      DrawerContent,
-      DrawerTitle,
-      DrawerClose,
-    },
+    components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerContent, DrawerTitle, DrawerClose },
     props: {
       onOpenChange: { type: Function, required: true },
-      modal: {
-        type: [Boolean, String],
-        default: true,
-      },
+      modal: { type: [Boolean, String], default: true },
     },
     template: `
       <DrawerRoot @update:open="onOpenChange" :modal="modal">
@@ -191,83 +175,62 @@ describe('update:open change event details', () => {
         </DrawerPortal>
       </DrawerRoot>
     `,
-  });
+  })
 
   beforeEach(() => {
-    document.body.innerHTML = '';
-  });
+    document.body.innerHTML = ''
+  })
 
   it('emits trigger-press reason on trigger click', async () => {
-    const onOpenChange = vi.fn();
-    const { getByText } = render(DrawerWithReason, {
-      props: { onOpenChange },
-    });
-    await fireEvent.click(getByText('Open'));
-    await nextTick();
-    expect(onOpenChange).toHaveBeenCalledWith(true, expect.objectContaining({ reason: 'trigger-press' }));
-  });
+    const onOpenChange = vi.fn()
+    const { getByText } = render(DrawerWithReason, { props: { onOpenChange } })
+    await fireEvent.click(getByText('Open'))
+    await nextTick()
+    expect(onOpenChange).toHaveBeenCalledWith(true, expect.objectContaining({ reason: 'trigger-press' }))
+  })
 
   it('emits close-press reason on close click', async () => {
-    const onOpenChange = vi.fn();
-    const { getByText } = render(DrawerWithReason, {
-      props: { onOpenChange },
-    });
-    await fireEvent.click(getByText('Open'));
-    await nextTick();
-    onOpenChange.mockClear();
-    await fireEvent.click(getByText('Close'));
-    await nextTick();
-    expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: 'close-press' }));
-  });
+    const onOpenChange = vi.fn()
+    const { getByText } = render(DrawerWithReason, { props: { onOpenChange } })
+    await fireEvent.click(getByText('Open'))
+    await nextTick()
+    onOpenChange.mockClear()
+    await fireEvent.click(getByText('Close'))
+    await nextTick()
+    expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: 'close-press' }))
+  })
 
   it('closes on a second trigger click (toggle)', async () => {
-    const onOpenChange = vi.fn();
-    const { getByText } = render(DrawerWithReason, {
-      props: { onOpenChange },
-    });
-    await fireEvent.click(getByText('Open'));
-    await nextTick();
-    onOpenChange.mockClear();
-    await fireEvent.click(getByText('Open'));
-    await nextTick();
-    expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: 'trigger-press' }));
-  });
+    const onOpenChange = vi.fn()
+    const { getByText } = render(DrawerWithReason, { props: { onOpenChange } })
+    await fireEvent.click(getByText('Open'))
+    await nextTick()
+    onOpenChange.mockClear()
+    await fireEvent.click(getByText('Open'))
+    await nextTick()
+    expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: 'trigger-press' }))
+  })
 
   it('closes on a second trigger click in non-modal mode', async () => {
-    const user = userEvent.setup();
-    const onOpenChange = vi.fn();
-    const { getByText } = render(DrawerWithReason, {
-      props: { onOpenChange, modal: false },
-    });
-    await user.click(getByText('Open'));
-    await nextTick();
-    onOpenChange.mockClear();
-    await user.click(getByText('Open'));
-    await nextTick();
-    expect(onOpenChange).toHaveBeenCalledTimes(1);
-    expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: 'trigger-press' }));
-  });
-});
+    const user = userEvent.setup()
+    const onOpenChange = vi.fn()
+    const { getByText } = render(DrawerWithReason, { props: { onOpenChange, modal: false } })
+    await user.click(getByText('Open'))
+    await nextTick()
+    onOpenChange.mockClear()
+    await user.click(getByText('Open'))
+    await nextTick()
+    expect(onOpenChange).toHaveBeenCalledTimes(1)
+    expect(onOpenChange).toHaveBeenCalledWith(false, expect.objectContaining({ reason: 'trigger-press' }))
+  })
+})
 
 describe('given a Drawer with focus props', () => {
   const DrawerWithFocusProps = defineComponent({
-    components: {
-      DrawerRoot,
-      DrawerTrigger,
-      DrawerPortal,
-      DrawerContent,
-      DrawerTitle,
-      DrawerClose,
-    },
+    components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerContent, DrawerTitle, DrawerClose },
     props: {
-      initialFocus: {
-        type: [Boolean, Object],
-        default: undefined,
-      },
-      finalFocus: {
-        type: [Boolean, Object],
-        default: undefined,
-      },
+      initialFocus: { type: [Boolean, Object], default: undefined },
+      finalFocus: { type: [Boolean, Object], default: undefined },
     },
     template: `
       <div>
@@ -284,17 +247,10 @@ describe('given a Drawer with focus props', () => {
         </DrawerRoot>
       </div>
     `,
-  });
+  })
 
   const DrawerWithoutFocusProps = defineComponent({
-    components: {
-      DrawerRoot,
-      DrawerTrigger,
-      DrawerPortal,
-      DrawerContent,
-      DrawerTitle,
-      DrawerClose,
-    },
+    components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerContent, DrawerTitle, DrawerClose },
     template: `
       <DrawerRoot>
         <DrawerTrigger>Open</DrawerTrigger>
@@ -307,133 +263,125 @@ describe('given a Drawer with focus props', () => {
         </DrawerPortal>
       </DrawerRoot>
     `,
-  });
+  })
 
   beforeEach(() => {
-    document.body.innerHTML = '';
-  });
+    document.body.innerHTML = ''
+  })
 
   it('keeps the default focus behaviour when neither prop is bound', async () => {
-    const user = userEvent.setup();
-    const { getByText, getByTestId } = render(DrawerWithoutFocusProps);
-    const trigger = getByText('Open');
-    await user.click(trigger);
-    await nextTick();
-    expect(document.activeElement).toBe(getByTestId('field'));
-    await user.click(getByText('Close'));
-    await nextTick();
-    expect(document.activeElement).toBe(trigger);
-  });
+    const user = userEvent.setup()
+    const { getByText, getByTestId } = render(DrawerWithoutFocusProps)
+    const trigger = getByText('Open')
+    await user.click(trigger)
+    await nextTick()
+    expect(document.activeElement).toBe(getByTestId('field'))
+    await user.click(getByText('Close'))
+    await nextTick()
+    expect(document.activeElement).toBe(trigger)
+  })
 
   it('focuses the first tabbable element on open by default', async () => {
-    const user = userEvent.setup();
-    const { getByText, getByTestId } = render(DrawerWithFocusProps);
-    await user.click(getByText('Open'));
-    await nextTick();
-    expect(document.activeElement).toBe(getByTestId('field'));
-  });
+    const user = userEvent.setup()
+    const { getByText, getByTestId } = render(DrawerWithFocusProps)
+    await user.click(getByText('Open'))
+    await nextTick()
+    expect(document.activeElement).toBe(getByTestId('field'))
+  })
 
   it('does not move focus on open when initialFocus is false', async () => {
-    const user = userEvent.setup();
-    const { getByText, getByTestId } = render(DrawerWithFocusProps, {
-      props: { initialFocus: false },
-    });
-    const trigger = getByText('Open');
-    await user.click(trigger);
-    await nextTick();
-    expect(document.activeElement).not.toBe(getByTestId('field'));
-    expect(document.activeElement).toBe(trigger);
-  });
+    const user = userEvent.setup()
+    const { getByText, getByTestId } = render(DrawerWithFocusProps, { props: { initialFocus: false } })
+    const trigger = getByText('Open')
+    await user.click(trigger)
+    await nextTick()
+    expect(document.activeElement).not.toBe(getByTestId('field'))
+    expect(document.activeElement).toBe(trigger)
+  })
 
   it('focuses the given element on open when initialFocus is an element', async () => {
-    const user = userEvent.setup();
-    const { getByText, getByTestId, rerender } = render(DrawerWithFocusProps);
-    await rerender({
-      initialFocus: getByTestId('outside'),
-    });
-    await user.click(getByText('Open'));
-    await nextTick();
-    expect(document.activeElement).toBe(getByTestId('outside'));
-  });
+    const user = userEvent.setup()
+    const { getByText, getByTestId, rerender } = render(DrawerWithFocusProps)
+    await rerender({ initialFocus: getByTestId('outside') })
+    await user.click(getByText('Open'))
+    await nextTick()
+    expect(document.activeElement).toBe(getByTestId('outside'))
+  })
 
   it('restores focus to the trigger on close by default', async () => {
-    const user = userEvent.setup();
-    const { getByText } = render(DrawerWithFocusProps);
-    const trigger = getByText('Open');
-    await user.click(trigger);
-    await nextTick();
-    await user.click(getByText('Close'));
-    await nextTick();
-    expect(document.activeElement).toBe(trigger);
-  });
+    const user = userEvent.setup()
+    const { getByText } = render(DrawerWithFocusProps)
+    const trigger = getByText('Open')
+    await user.click(trigger)
+    await nextTick()
+    await user.click(getByText('Close'))
+    await nextTick()
+    expect(document.activeElement).toBe(trigger)
+  })
 
   it('does not restore focus on close when finalFocus is false', async () => {
-    const user = userEvent.setup();
-    const { getByText } = render(DrawerWithFocusProps, {
-      props: { finalFocus: false },
-    });
-    const trigger = getByText('Open');
-    await user.click(trigger);
-    await nextTick();
-    await user.click(getByText('Close'));
-    await nextTick();
-    expect(document.activeElement).not.toBe(trigger);
-  });
+    const user = userEvent.setup()
+    const { getByText } = render(DrawerWithFocusProps, { props: { finalFocus: false } })
+    const trigger = getByText('Open')
+    await user.click(trigger)
+    await nextTick()
+    await user.click(getByText('Close'))
+    await nextTick()
+    expect(document.activeElement).not.toBe(trigger)
+  })
 
   it('focuses the given element on close when finalFocus is an element', async () => {
-    const user = userEvent.setup();
-    const { getByText, getByTestId, rerender } = render(DrawerWithFocusProps);
-    await rerender({
-      finalFocus: getByTestId('outside'),
-    });
-    await user.click(getByText('Open'));
-    await nextTick();
-    await user.click(getByText('Close'));
-    await nextTick();
-    expect(document.activeElement).toBe(getByTestId('outside'));
-  });
+    const user = userEvent.setup()
+    const { getByText, getByTestId, rerender } = render(DrawerWithFocusProps)
+    await rerender({ finalFocus: getByTestId('outside') })
+    await user.click(getByText('Open'))
+    await nextTick()
+    await user.click(getByText('Close'))
+    await nextTick()
+    expect(document.activeElement).toBe(getByTestId('outside'))
+  })
 
   describe('when the focus target belongs to another realm', () => {
     function createIframeButton() {
-      const iframe = document.createElement('iframe');
-      document.body.appendChild(iframe);
-      onTestFinished(() => iframe.remove());
-      const iframeDocument = iframe.contentDocument!;
-      const button = iframeDocument.createElement('button');
-      iframeDocument.body.appendChild(button);
-      return { button, iframeDocument };
+      const iframe = document.createElement('iframe')
+      document.body.appendChild(iframe)
+      onTestFinished(() => iframe.remove())
+      const iframeDocument = iframe.contentDocument!
+      const button = iframeDocument.createElement('button')
+      iframeDocument.body.appendChild(button)
+      return { button, iframeDocument }
     }
 
     it('focuses the given element on open', async () => {
-      const user = userEvent.setup();
-      const { getByText, rerender } = render(DrawerWithFocusProps);
-      const { button, iframeDocument } = createIframeButton();
-      expect(button instanceof HTMLElement).toBe(false);
-      await rerender({ initialFocus: button });
-      await user.click(getByText('Open'));
-      await nextTick();
-      expect(iframeDocument.activeElement).toBe(button);
-    });
+      const user = userEvent.setup()
+      const { getByText, rerender } = render(DrawerWithFocusProps)
+      const { button, iframeDocument } = createIframeButton()
+      expect(button instanceof HTMLElement).toBe(false)
+      await rerender({ initialFocus: button })
+      await user.click(getByText('Open'))
+      await nextTick()
+      expect(iframeDocument.activeElement).toBe(button)
+    })
 
     it('focuses the given element on close', async () => {
-      const user = userEvent.setup();
-      const { getByText, rerender } = render(DrawerWithFocusProps);
-      const { button, iframeDocument } = createIframeButton();
-      await rerender({ finalFocus: button });
-      await user.click(getByText('Open'));
-      await nextTick();
-      await user.click(getByText('Close'));
-      await nextTick();
-      expect(iframeDocument.activeElement).toBe(button);
-    });
-  });
-});
+      const user = userEvent.setup()
+      const { getByText, rerender } = render(DrawerWithFocusProps)
+      const { button, iframeDocument } = createIframeButton()
+      await rerender({ finalFocus: button })
+      await user.click(getByText('Open'))
+      await nextTick()
+      await user.click(getByText('Close'))
+      await nextTick()
+      expect(iframeDocument.activeElement).toBe(button)
+    })
+  })
+})
 
 describe('drawer with DrawerVirtualKeyboardProvider', () => {
-  const LAYOUT_HEIGHT = 800;
-  const originalInnerHeight = Object.getOwnPropertyDescriptor(window, 'innerHeight');
-  const originalOffsetHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetHeight')!;
-  let listeners: Set<() => void>;
+  const LAYOUT_HEIGHT = 800
+  const originalInnerHeight = Object.getOwnPropertyDescriptor(window, 'innerHeight')
+  const originalOffsetHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetHeight')!
+  let listeners: Set<() => void>
 
   const KeyboardDrawer = defineComponent({
     components: {
@@ -462,10 +410,10 @@ describe('drawer with DrawerVirtualKeyboardProvider', () => {
         </DrawerVirtualKeyboardProvider>
       </DrawerRoot>
     `,
-  });
+  })
 
   beforeEach(() => {
-    listeners = new Set();
+    listeners = new Set()
     Object.defineProperty(window, 'visualViewport', {
       configurable: true,
       writable: true,
@@ -476,61 +424,49 @@ describe('drawer with DrawerVirtualKeyboardProvider', () => {
         addEventListener: (_: string, listener: () => void) => listeners.add(listener),
         removeEventListener: (_: string, listener: () => void) => listeners.delete(listener),
       },
-    });
-    Object.defineProperty(window, 'innerHeight', { configurable: true, writable: true, value: LAYOUT_HEIGHT });
+    })
+    Object.defineProperty(window, 'innerHeight', { configurable: true, writable: true, value: LAYOUT_HEIGHT })
     // jsdom has no layout; the provider measures `100svh` with a probe element.
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
       configurable: true,
       get(this: HTMLElement) {
-        return this.style.height === '100svh'
-          ? LAYOUT_HEIGHT
-          : originalOffsetHeight.get!.call(this);
+        return this.style.height === '100svh' ? LAYOUT_HEIGHT : originalOffsetHeight.get!.call(this)
       },
-    });
-  });
+    })
+  })
 
   afterEach(() => {
-    vi.useRealTimers();
-    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', originalOffsetHeight);
+    vi.useRealTimers()
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', originalOffsetHeight)
     // @ts-expect-error - restoring the jsdom default
-    delete window.visualViewport;
-    if (originalInnerHeight) {
-      Object.defineProperty(window, 'innerHeight', originalInnerHeight);
-    } else {
+    delete window.visualViewport
+    if (originalInnerHeight)
+      Object.defineProperty(window, 'innerHeight', originalInnerHeight)
+    else
       // @ts-expect-error - restoring the jsdom default
-      delete window.innerHeight;
-    }
-  });
+      delete window.innerHeight
+  })
 
   it('publishes the keyboard inset on the viewport', async () => {
-    vi.useFakeTimers({ shouldAdvanceTime: true });
-    const { getByText, getByTestId } = render(KeyboardDrawer);
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    const { getByText, getByTestId } = render(KeyboardDrawer)
 
-    await fireEvent.click(getByText(OPEN_TEXT));
-    await nextTick();
-
-    getByTestId('field').focus();
+    await fireEvent.click(getByText(OPEN_TEXT))
     await nextTick()
-    ;(window.visualViewport as any).height = LAYOUT_HEIGHT - 300;
-    listeners.forEach((listener) => {
-      listener();
-    });
-    vi.advanceTimersByTime(100);
 
-    expect(getByTestId('viewport').style.getPropertyValue('--drawer-keyboard-inset')).toBe('300px');
-  });
+    getByTestId('field').focus()
+    await nextTick()
+    ;(window.visualViewport as any).height = LAYOUT_HEIGHT - 300
+    listeners.forEach(listener => listener())
+    vi.advanceTimersByTime(100)
+
+    expect(getByTestId('viewport').style.getPropertyValue('--drawer-keyboard-inset')).toBe('300px')
+  })
 
   it('warns when the drawer has no DrawerViewport to measure against', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
     const NoViewport = defineComponent({
-      components: {
-        DrawerRoot,
-        DrawerVirtualKeyboardProvider,
-        DrawerTrigger,
-        DrawerPortal,
-        DrawerContent,
-        DrawerTitle,
-      },
+      components: { DrawerRoot, DrawerVirtualKeyboardProvider, DrawerTrigger, DrawerPortal, DrawerContent, DrawerTitle },
       template: `
         <DrawerRoot>
           <DrawerVirtualKeyboardProvider>
@@ -543,28 +479,21 @@ describe('drawer with DrawerVirtualKeyboardProvider', () => {
           </DrawerVirtualKeyboardProvider>
         </DrawerRoot>
       `,
-    });
+    })
 
-    const { getByText } = render(NoViewport);
-    await fireEvent.click(getByText(OPEN_TEXT));
-    await nextTick();
-    await nextTick();
+    const { getByText } = render(NoViewport)
+    await fireEvent.click(getByText(OPEN_TEXT))
+    await nextTick()
+    await nextTick()
 
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('requires a `DrawerViewport`'));
-    warn.mockRestore();
-  });
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('requires a `DrawerViewport`'))
+    warn.mockRestore()
+  })
 
   it('does not warn when a drawer with a DrawerViewport starts open', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
     const OpenOnMount = defineComponent({
-      components: {
-        DrawerRoot,
-        DrawerVirtualKeyboardProvider,
-        DrawerPortal,
-        DrawerContent,
-        DrawerViewport,
-        DrawerTitle,
-      },
+      components: { DrawerRoot, DrawerVirtualKeyboardProvider, DrawerPortal, DrawerContent, DrawerViewport, DrawerTitle },
       template: `
         <DrawerRoot default-open>
           <DrawerVirtualKeyboardProvider>
@@ -578,31 +507,21 @@ describe('drawer with DrawerVirtualKeyboardProvider', () => {
           </DrawerVirtualKeyboardProvider>
         </DrawerRoot>
       `,
-    });
+    })
 
-    const { findByText } = render(OpenOnMount);
-    await findByText(TITLE_TEXT);
-    await nextTick();
+    const { findByText } = render(OpenOnMount)
+    await findByText(TITLE_TEXT)
+    await nextTick()
 
-    expect(warn).not.toHaveBeenCalled();
-    warn.mockRestore();
-  });
+    expect(warn).not.toHaveBeenCalled()
+    warn.mockRestore()
+  })
 
   it('forgets the viewport once it unmounts', async () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
     const ToggleableViewport = defineComponent({
-      components: {
-        DrawerRoot,
-        DrawerVirtualKeyboardProvider,
-        DrawerTrigger,
-        DrawerPortal,
-        DrawerContent,
-        DrawerViewport,
-        DrawerTitle,
-      },
-      props: {
-        withViewport: { type: Boolean, default: true },
-      },
+      components: { DrawerRoot, DrawerVirtualKeyboardProvider, DrawerTrigger, DrawerPortal, DrawerContent, DrawerViewport, DrawerTitle },
+      props: { withViewport: { type: Boolean, default: true } },
       template: `
         <DrawerRoot>
           <DrawerVirtualKeyboardProvider>
@@ -620,24 +539,71 @@ describe('drawer with DrawerVirtualKeyboardProvider', () => {
           </DrawerVirtualKeyboardProvider>
         </DrawerRoot>
       `,
-    });
+    })
 
-    const { getByText, rerender } = render(ToggleableViewport);
-    await fireEvent.click(getByText(OPEN_TEXT));
-    await nextTick();
-    await nextTick();
-    expect(warn).not.toHaveBeenCalled();
+    const { getByText, rerender } = render(ToggleableViewport)
+    await fireEvent.click(getByText(OPEN_TEXT))
+    await nextTick()
+    await nextTick()
+    expect(warn).not.toHaveBeenCalled()
 
-    await rerender({ withViewport: false });
-    await nextTick();
+    await rerender({ withViewport: false })
+    await nextTick()
     // Reopen so the provider re-checks for a viewport.
-    await fireEvent.keyDown(document.activeElement ?? document.body, { key: 'Escape' });
-    await nextTick();
-    await fireEvent.click(getByText(OPEN_TEXT));
-    await nextTick();
-    await nextTick();
+    await fireEvent.keyDown(document.activeElement ?? document.body, { key: 'Escape' })
+    await nextTick()
+    await fireEvent.click(getByText(OPEN_TEXT))
+    await nextTick()
+    await nextTick()
 
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('requires a `DrawerViewport`'));
-    warn.mockRestore();
-  });
-});
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('requires a `DrawerViewport`'))
+    warn.mockRestore()
+  })
+})
+
+// #2789: Drawer follows the v3 contract (#2828). `beforeUpdate:open` can cancel
+// a change before `v-model:open` is written; `update:open` reports it after.
+describe('beforeUpdate:open with v-model:open', () => {
+  const VModelDrawer = defineComponent({
+    components: { DrawerRoot, DrawerTrigger, DrawerPortal, DrawerContent, DrawerTitle },
+    props: {
+      onBefore: { type: Function, default: undefined },
+      onAfter: { type: Function, default: undefined },
+    },
+    data: () => ({ open: false }),
+    template: `
+      <DrawerRoot v-model:open="open" @before-update:open="(v, d) => onBefore?.(v, d)" @update:open="(v, d) => onAfter?.(v, d)">
+        <DrawerTrigger>Open</DrawerTrigger>
+        <DrawerPortal>
+          <DrawerContent aria-describedby="x"><DrawerTitle>T</DrawerTitle></DrawerContent>
+        </DrawerPortal>
+      </DrawerRoot>
+    `,
+  })
+
+  beforeEach(() => {
+    document.body.innerHTML = ''
+  })
+
+  it('a cancelled beforeUpdate:open keeps the v-model ref and the drawer closed', async () => {
+    const onAfter = vi.fn()
+    const { getByText, queryByRole, unmount } = render(VModelDrawer, {
+      props: { onBefore: (_v: boolean, d: { cancel: () => void }) => d.cancel(), onAfter },
+    })
+    await fireEvent.click(getByText('Open'))
+    await nextTick()
+    expect(queryByRole('dialog')).toBeNull()
+    expect(onAfter).not.toHaveBeenCalled()
+    unmount()
+  })
+
+  it('update:open fires after the change with its details', async () => {
+    const onAfter = vi.fn()
+    const { getByText, getByRole, unmount } = render(VModelDrawer, { props: { onAfter } })
+    await fireEvent.click(getByText('Open'))
+    await nextTick()
+    expect(getByRole('dialog')).toBeTruthy()
+    expect(onAfter).toHaveBeenCalledWith(true, expect.objectContaining({ reason: 'trigger-press', isCanceled: false }))
+    unmount()
+  })
+})

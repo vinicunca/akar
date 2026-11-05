@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import type { ComboboxInputProps, ComboboxRootProps } from '..';
-import { Icon } from '@iconify/vue';
-import { computed, ref } from 'vue';
-import { useFilter } from '@/shared';
-import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..';
+import type { ComboboxInputProps, ComboboxRootProps } from '..'
+import { Icon } from '@iconify/vue'
+import { computed, ref } from 'vue'
+import { useFilter } from '@/shared'
+import { ComboboxAnchor, ComboboxContent, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '..'
 
 const props = withDefaults(defineProps<ComboboxRootProps & { input?: ComboboxInputProps }>(), {
   unmountOnHide: true,
-});
+})
 const people = [
   { id: 1, name: 'Durward Reynolds' },
   { id: 2, name: 'Kenton Towne' },
   { id: 3, name: 'Therese Wunsch' },
   { id: 4, name: 'Benedict Kessler' },
   { id: 5, name: 'Katelyn Rohan' },
-];
-const v = ref<any>(people[0]);
-const open = ref(props.open);
+]
+const v = ref<any>(people[0])
+const open = ref(props.open)
 
-const query = ref('');
-const { startsWith } = useFilter({ sensitivity: 'base' });
-const filteredPeople = computed(() => people.filter((p) => startsWith(p.name, query.value)));
+const query = ref('')
+const { startsWith } = useFilter({ sensitivity: 'base' })
+const filteredPeople = computed(() => people.filter(p => startsWith(p.name, query.value)))
 </script>
 
 <template>

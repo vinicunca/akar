@@ -3,60 +3,45 @@ export interface HoverCardTriggerProps extends PopperAnchorProps {}
 </script>
 
 <script setup lang="ts">
-import type { PopperAnchorProps } from '@/Popper';
-import { PopperAnchor } from '@/Popper';
-import { Primitive } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
-import { injectHoverCardRootContext } from './HoverCardRoot.vue';
-import { excludeTouch } from './utils';
+import type { PopperAnchorProps } from '@/Popper'
+import { mergeProps } from 'vue'
+import { usePopperAnchor } from '@/Popper/usePopperAnchor'
+import { renderAs } from '@/Primitive/renderAs'
+import { useForwardElement } from '@/shared'
+import { injectHoverCardRootContext } from './HoverCardRoot.vue'
+import { getHoverCardTriggerSurface } from './useHoverCard'
 
-withDefaults(defineProps<HoverCardTriggerProps>(), {
+defineOptions({
+  // `$attrs` are merged under the part's own bindings: the precedence the
+  // former `<PopperAnchor as-child>` wrapper gave them.
+  inheritAttrs: false,
+})
+
+const props = withDefaults(defineProps<HoverCardTriggerProps>(), {
   as: 'a',
-});
+})
 
-const { forwardRef, currentElement } = useForwardExpose();
-const rootContext = injectHoverCardRootContext();
-rootContext.triggerElement = currentElement;
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectHoverCardRootContext()
+rootContext.triggerElement = currentElement
+usePopperAnchor({ element: currentElement, reference: () => props.reference })
 
-function handleLeave() {
-  setTimeout(() => {
-    if (!rootContext.isPointerInTransitRef.value && !rootContext.open.value) {
-      rootContext.onClose();
-    }
-  }, 0);
-}
-
-function handleTouch(event: PointerEvent) {
-  if (!rootContext.enableTouch.value || event.pointerType !== 'touch') {
-    return;
-  }
-
-  if (rootContext.open.value) {
-    rootContext.onDismiss();
-  } else {
-    rootContext.onOpenChange(true);
-  }
-}
+// `data-state`, the `data-grace-area-trigger` selector and the hover / leave /
+// touch / focus / blur listeners all come from the shared surface builder
+// (single source with `useHoverCard()`); the PopperAnchor wrapper and the
+// element registration above stay in the SFC. Listener order is unchanged:
+// `$attrs` merge BEFORE the element's own props, so a consumer
+// `@pointerenter` still runs before the surface's.
+const trigger = getHoverCardTriggerSurface(rootContext)
 </script>
 
 <template>
-  <PopperAnchor
-    as-child
-    :reference="reference"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="mergeProps($attrs, trigger.attrs.value)"
   >
-    <Primitive
-      :ref="forwardRef"
-      :as-child="asChild"
-      :as="as"
-      :data-state="rootContext.open.value ? 'open' : 'closed'"
-      data-grace-area-trigger
-      @pointerenter="excludeTouch(rootContext.onOpen)($event)"
-      @pointerleave="excludeTouch(handleLeave)($event)"
-      @pointerup="handleTouch"
-      @focus="rootContext.onOpen()"
-      @blur="rootContext.onClose()"
-    >
-      <slot />
-    </Primitive>
-  </PopperAnchor>
+    <slot />
+  </component>
 </template>

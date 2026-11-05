@@ -1,14 +1,14 @@
-import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
-import { findByText, fireEvent } from '@testing-library/vue';
-import { mount } from '@vue/test-utils';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { axe } from 'vitest-axe';
-import { defineComponent, h, nextTick, ref } from 'vue';
-import { ToastAction, ToastDescription, ToastProvider, ToastRoot, ToastTitle, ToastViewport } from '.';
-import Toast from './story/_Toast.vue';
-import { VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils';
+import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
+import { findByText, fireEvent } from '@testing-library/vue'
+import { mount } from '@vue/test-utils'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { axe } from 'vitest-axe'
+import { defineComponent, h, nextTick, ref } from 'vue'
+import { ToastAction, ToastDescription, ToastProvider, ToastRoot, ToastTitle, ToastViewport } from '.'
+import Toast from './story/_Toast.vue'
+import { VIEWPORT_PAUSE, VIEWPORT_RESUME } from './utils'
 
-const CLOSE_TEXT = 'Close';
+const CLOSE_TEXT = 'Close'
 
 const ToastWithAction = defineComponent({
   props: {
@@ -18,13 +18,13 @@ const ToastWithAction = defineComponent({
     },
   },
   setup() {
-    const open = ref(true);
-    const actionClicks = ref(0);
+    const open = ref(true)
+    const actionClicks = ref(0)
 
     return {
       open,
       actionClicks,
-    };
+    }
   },
   render() {
     return h(ToastProvider, null, {
@@ -32,57 +32,53 @@ const ToastWithAction = defineComponent({
         h(ToastRoot, {
           'open': this.open,
           'onUpdate:open': (value: boolean) => {
-            this.open = value;
+            this.open = value
           },
         }, {
           default: () => [
-            h(ToastDescription, null, {
-              default: () => 'Action available',
-            }),
+            h(ToastDescription, null, { default: () => 'Action available' }),
             h(ToastAction, {
               altText: 'Perform action',
               closeOnClick: this.closeOnClick,
               onClick: () => {
-                this.actionClicks += 1;
+                this.actionClicks += 1
               },
-            }, {
-              default: () => 'Undo',
-            }),
+            }, { default: () => 'Undo' }),
           ],
         }),
         h(ToastViewport),
       ],
-    });
+    })
   },
-});
+})
 
 describe('given a default Toast', () => {
-  let wrapper: VueWrapper<InstanceType<typeof Toast>>;
-  let trigger: DOMWrapper<HTMLElement>;
-  let closeButton: HTMLElement;
+  let wrapper: VueWrapper<InstanceType<typeof Toast>>
+  let trigger: DOMWrapper<HTMLElement>
+  let closeButton: HTMLElement
 
   beforeEach(() => {
-    document.body.innerHTML = '';
-    wrapper = mount(Toast, { attachTo: document.body });
-    trigger = wrapper.find('button');
-  });
+    document.body.innerHTML = ''
+    wrapper = mount(Toast, { attachTo: document.body })
+    trigger = wrapper.find('button')
+  })
 
   it('should have visible toast that is focusable', async () => {
     // Open toast
-    await fireEvent.click(trigger.element);
+    await fireEvent.click(trigger.element)
 
     // Wait for toast to appear in DOM
-    const toastText = await findByText(document.body, 'Scheduled: Catch up');
+    const toastText = await findByText(document.body, 'Scheduled: Catch up')
 
     // The visible toast element should be focusable
-    const toastElement = toastText.closest('li');
-    expect(toastElement).toBeTruthy();
-    expect(toastElement?.getAttribute('tabindex')).toBe('0');
-  });
+    const toastElement = toastText.closest('li')
+    expect(toastElement).toBeTruthy()
+    expect(toastElement?.getAttribute('tabindex')).toBe('0')
+  })
 
   it('should have focus proxies that are focusable but not aria-hidden', async () => {
-    await fireEvent.click(trigger.element);
-    await findByText(document.body, 'Scheduled: Catch up');
+    await fireEvent.click(trigger.element)
+    await findByText(document.body, 'Scheduled: Catch up')
 
     // The viewport renders head/tail focus proxies: tabbable sentinels
     // (tabindex="0") that catch focus entering or leaving the viewport and
@@ -90,179 +86,178 @@ describe('given a default Toast', () => {
     // otherwise axe reports an `aria-hidden-focus` violation.
     const proxies = Array.from(
       document.querySelectorAll<HTMLElement>('[tabindex="0"]'),
-    ).filter((el) => el.style.position === 'fixed');
+    ).filter(el => el.style.position === 'fixed')
 
-    expect(proxies).toHaveLength(2);
-    for (const proxy of proxies) {
-      expect(proxy.getAttribute('aria-hidden')).toBeNull();
-    }
-  });
+    expect(proxies).toHaveLength(2)
+    for (const proxy of proxies)
+      expect(proxy.getAttribute('aria-hidden')).toBeNull()
+  })
 
   it('should proxy focus out of the viewport on shift+Tab', async () => {
-    await fireEvent.click(trigger.element);
-    await findByText(document.body, 'Scheduled: Catch up');
+    await fireEvent.click(trigger.element)
+    await findByText(document.body, 'Scheduled: Catch up')
 
     // Shift+Tab on the focused viewport hands focus to the head proxy (through
     // its template ref) so the browser can move it on to the preceding
     // document. Focus arrives from inside the viewport, so the proxy must not
     // bounce it back onto a toast.
-    const viewport = document.querySelector<HTMLElement>('ol[tabindex="-1"]');
-    expect(viewport).toBeTruthy();
-    const headProxy = viewport!.previousElementSibling;
-    viewport!.focus();
-    await fireEvent.keyDown(viewport!, { key: 'Tab', shiftKey: true });
+    const viewport = document.querySelector<HTMLElement>('ol[tabindex="-1"]')
+    expect(viewport).toBeTruthy()
+    const headProxy = viewport!.previousElementSibling
+    viewport!.focus()
+    await fireEvent.keyDown(viewport!, { key: 'Tab', shiftKey: true })
 
-    expect(document.activeElement).toBe(headProxy);
-  });
+    expect(document.activeElement).toBe(headProxy)
+  })
 
   it('should pass axe accessibility tests', async () => {
-    expect(await axe(document.body)).toHaveNoViolations();
+    expect(await axe(document.body)).toHaveNoViolations()
 
     // open toast
-    wrapper.find('button').element.click();
-    await nextTick();
-    expect(await axe(document.body)).toHaveNoViolations();
-  });
+    wrapper.find('button').element.click()
+    await nextTick()
+    expect(await axe(document.body)).toHaveNoViolations()
+  })
 
   it('should announce title and description as plain text (not JSON)', async () => {
-    await fireEvent.click(trigger.element);
-    await findByText(document.body, 'Scheduled: Catch up');
+    await fireEvent.click(trigger.element)
+    await findByText(document.body, 'Scheduled: Catch up')
 
     // ToastAnnounce renders the live region on the next animation frame
     // (see ToastAnnounce.vue's useRafFn) — wait for two RAFs so it's
     // guaranteed to be in the DOM.
     await new Promise<void>((resolve) => {
-      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
-    });
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+    })
 
-    const liveRegion = document.querySelector('[role="alert"][aria-live]');
-    expect(liveRegion).toBeTruthy();
-    const text = liveRegion!.textContent ?? '';
+    const liveRegion = document.querySelector('[role="alert"][aria-live]')
+    expect(liveRegion).toBeTruthy()
+    const text = liveRegion!.textContent ?? ''
 
     // Vue's `{{ array }}` would JSON-stringify the announceTextContent
     // array — guard against that regression by asserting the live region
     // does not contain JSON syntax characters.
-    expect(text).not.toMatch(/[[\]"]/);
+    expect(text).not.toMatch(/[[\]"]/)
 
     // The toast title and description must both be part of the announced
     // text so screen-reader users actually hear the toast.
-    expect(text).toContain('Scheduled: Catch up');
-  });
+    expect(text).toContain('Scheduled: Catch up')
+  })
 
   it('should expose the live region to assistive technology (not aria-hidden)', async () => {
-    await fireEvent.click(trigger.element);
-    await findByText(document.body, 'Scheduled: Catch up');
+    await fireEvent.click(trigger.element)
+    await findByText(document.body, 'Scheduled: Catch up')
 
     await new Promise<void>((resolve) => {
-      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
-    });
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+    })
 
-    const liveRegion = document.querySelector('[role="alert"][aria-live]');
-    expect(liveRegion).toBeTruthy();
+    const liveRegion = document.querySelector('[role="alert"][aria-live]')
+    expect(liveRegion).toBeTruthy()
 
     // A live region inside an aria-hidden subtree is ignored by screen readers,
     // so the toast would never be announced.
-    expect(liveRegion!.closest('[aria-hidden="true"]')).toBeNull();
-  });
+    expect(liveRegion!.closest('[aria-hidden="true"]')).toBeNull()
+  })
 
   it('should remove viewport event listeners when the toast is dismissed', async () => {
-    await fireEvent.click(trigger.element);
-    await findByText(document.body, 'Scheduled: Catch up');
+    await fireEvent.click(trigger.element)
+    await findByText(document.body, 'Scheduled: Catch up')
 
     // The toast registers pause/resume listeners on the shared viewport while
     // it is mounted; dismissing it must tear them down so the detached toast
     // (and its listeners) can be garbage collected.
-    const viewport = document.querySelector('ol')!;
-    const removeEventListener = vi.spyOn(viewport, 'removeEventListener');
+    const viewport = document.querySelector('ol')!
+    const removeEventListener = vi.spyOn(viewport, 'removeEventListener')
 
-    const closeButton = await findByText(document.body, CLOSE_TEXT);
-    await fireEvent.click(closeButton);
-    await nextTick();
+    const closeButton = await findByText(document.body, CLOSE_TEXT)
+    await fireEvent.click(closeButton)
+    await nextTick()
 
-    expect(removeEventListener).toHaveBeenCalledWith(VIEWPORT_PAUSE, expect.any(Function));
-    expect(removeEventListener).toHaveBeenCalledWith(VIEWPORT_RESUME, expect.any(Function));
-  });
+    expect(removeEventListener).toHaveBeenCalledWith(VIEWPORT_PAUSE, expect.any(Function))
+    expect(removeEventListener).toHaveBeenCalledWith(VIEWPORT_RESUME, expect.any(Function))
+  })
 
   describe('after clicking the trigger', () => {
     beforeEach(async () => {
-      fireEvent.click(trigger.element);
-      closeButton = await findByText(document.body, CLOSE_TEXT);
-    });
+      fireEvent.click(trigger.element)
+      closeButton = await findByText(document.body, CLOSE_TEXT)
+    })
 
     it('should open the content', () => {
-      expect(document.body.innerHTML).toContain(closeButton.innerHTML);
-    });
+      expect(document.body.innerHTML).toContain(closeButton.innerHTML)
+    })
 
     describe('when clicking close button', () => {
       beforeEach(async () => {
-        await fireEvent.click(closeButton);
-      });
+        await fireEvent.click(closeButton)
+      })
 
       it('should close the content', () => {
-        expect(document.body.innerHTML).not.toContain(closeButton.innerHTML);
-      });
-    });
+        expect(document.body.innerHTML).not.toContain(closeButton.innerHTML)
+      })
+    })
 
     describe('when pressing escape', () => {
       beforeEach(() => {
-        fireEvent.keyDown(document.activeElement!, { key: 'Escape' });
-      });
+        fireEvent.keyDown(document.activeElement!, { key: 'Escape' })
+      })
 
       it('should close the content', () => {
-        expect(document.body.innerHTML).not.toContain(closeButton.innerHTML);
-      });
-    });
-  });
-});
+        expect(document.body.innerHTML).not.toContain(closeButton.innerHTML)
+      })
+    })
+  })
+})
 
 describe('given a Toast with an action', () => {
-  let wrapper: VueWrapper<InstanceType<typeof ToastWithAction>>;
+  let wrapper: VueWrapper<InstanceType<typeof ToastWithAction>>
 
   afterEach(() => {
-    wrapper.unmount();
-  });
+    wrapper.unmount()
+  })
 
   it('should close the toast when action is clicked by default', async () => {
-    wrapper = mount(ToastWithAction, { attachTo: document.body });
+    wrapper = mount(ToastWithAction, { attachTo: document.body })
 
-    const action = await findByText(document.body, 'Undo');
-    await fireEvent.click(action);
+    const action = await findByText(document.body, 'Undo')
+    await fireEvent.click(action)
 
-    expect(wrapper.vm.actionClicks).toBe(1);
-    expect(wrapper.vm.open).toBe(false);
-    expect(action.closest('li')?.getAttribute('data-state')).toBe('closed');
-  });
+    expect(wrapper.vm.actionClicks).toBe(1)
+    expect(wrapper.vm.open).toBe(false)
+    expect(action.closest('li')?.getAttribute('data-state')).toBe('closed')
+  })
 
   it('should keep the toast open when action closeOnClick is false', async () => {
     wrapper = mount(ToastWithAction, {
       attachTo: document.body,
       props: { closeOnClick: false },
-    });
+    })
 
-    const action = await findByText(document.body, 'Undo');
-    await fireEvent.click(action);
+    const action = await findByText(document.body, 'Undo')
+    await fireEvent.click(action)
 
-    expect(wrapper.vm.actionClicks).toBe(1);
-    expect(wrapper.vm.open).toBe(true);
-    expect(document.body.innerHTML).toContain('Action available');
-  });
+    expect(wrapper.vm.actionClicks).toBe(1)
+    expect(wrapper.vm.open).toBe(true)
+    expect(document.body.innerHTML).toContain('Action available')
+  })
 
   it('should move focus to the viewport when the action is activated by keyboard', async () => {
-    wrapper = mount(ToastWithAction, { attachTo: document.body });
+    wrapper = mount(ToastWithAction, { attachTo: document.body })
 
-    const action = await findByText(document.body, 'Undo');
-    const viewport = action.closest('ol');
-    action.focus();
+    const action = await findByText(document.body, 'Undo')
+    const viewport = action.closest('ol')
+    action.focus()
     // A click from Enter / Space has an empty `pointerType`. jsdom does not support PointerEvent.
-    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
-    Object.defineProperty(event, 'pointerType', { value: '' });
-    action.dispatchEvent(event);
-    await nextTick();
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true })
+    Object.defineProperty(event, 'pointerType', { value: '' })
+    action.dispatchEvent(event)
+    await nextTick()
 
-    expect(wrapper.vm.open).toBe(false);
-    expect(viewport).toHaveFocus();
-  });
-});
+    expect(wrapper.vm.open).toBe(false)
+    expect(viewport).toHaveFocus()
+  })
+})
 
 describe('given a ToastTitle and ToastDescription outside a managed toast', () => {
   // Vue only falls attrs through a fragment root in development, so a root that
@@ -274,10 +269,10 @@ describe('given a ToastTitle and ToastDescription outside a managed toast', () =
     const wrapper = mount(component, {
       attrs: { class: 'custom', id: 'custom-id' },
       slots: { default: 'Content' },
-    });
+    })
 
-    expect(wrapper.vm.$.subTree.el).toBeInstanceOf(HTMLElement);
-    expect(wrapper.element.outerHTML).toBe('<div class="custom" id="custom-id">Content</div>');
-    wrapper.unmount();
-  });
-});
+    expect(wrapper.vm.$.subTree.el).toBeInstanceOf(HTMLElement)
+    expect(wrapper.element.outerHTML).toBe('<div class="custom" id="custom-id">Content</div>')
+    wrapper.unmount()
+  })
+})

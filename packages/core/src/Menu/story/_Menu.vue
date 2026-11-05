@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { MenuItemEmits } from '..';
-import { MenuGroup, MenuItem, MenuLabel, MenuSeparator } from '..';
-import MenuWithAnchor from './_MenuWithAnchor.vue';
+import type { MenuItemEmits } from '..'
+import { MenuGroup, MenuItem, MenuLabel, MenuSeparator } from '..'
+import MenuWithAnchor from './_MenuWithAnchor.vue'
 
-const emits = defineEmits<MenuItemEmits>();
+const emits = defineEmits<MenuItemEmits>()
 
 const foodGroups: Array<{
-  label?: string;
-  foods: Array<{ value: string; label: string; disabled?: boolean }>;
+  label?: string
+  foods: Array<{ value: string, label: string, disabled?: boolean }>
 }> = [
   {
     label: 'Fruits',
@@ -45,7 +45,7 @@ const foodGroups: Array<{
       { value: 'chocolates', label: 'Chocolates' },
     ],
   },
-];
+]
 </script>
 
 <template>

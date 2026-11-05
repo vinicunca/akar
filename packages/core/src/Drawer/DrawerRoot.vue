@@ -1,14 +1,25 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { Ref } from 'vue'
 import type {
   DrawerSnapPoint,
   NestedSwipeProgressStore,
   SwipeDirection,
-} from './utils';
-import { createContext, useId } from '@/shared';
+} from './utils'
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared'
+import { createContext, useId } from '@/shared'
 
-export type DrawerModal = boolean | 'trap-focus';
+export type DrawerModal = boolean | 'trap-focus'
 
+/**
+ * Why the Drawer opened or closed; carried as `details.reason` (#2828).
+ *
+ * - `'trigger-press'`: `DrawerTrigger` was pressed.
+ * - `'close-press'`: `DrawerClose` (or the slot's `close`) was pressed.
+ * - `'escape-key'`: Escape dismissed the drawer.
+ * - `'outside-press'`: a press outside (or on the backdrop) dismissed it.
+ * - `'swipe'`: a swipe on the popup dismissed it, or one on `DrawerSwipeArea` opened it.
+ * - `'click'`, `'cancel'`: never reported; kept so existing type guards compile.
+ */
 export type DrawerOpenChangeReason
   = | 'swipe'
     | 'escape-key'
@@ -16,94 +27,113 @@ export type DrawerOpenChangeReason
     | 'click'
     | 'cancel'
     | 'trigger-press'
-    | 'close-press';
+    | 'close-press'
 
-export interface DrawerOpenChangeDetails {
-  reason?: DrawerOpenChangeReason;
-  /** Keeps the drawer in its current state. Call it while handling `update:open`. */
-  cancel: () => void;
-  /** Whether `cancel()` was called. */
-  readonly isCanceled: boolean;
-}
+/**
+ * Why the active snap point changed (Base UI uses the open reasons). A swipe
+ * reports `'swipe'`; the reset to the default snap point when the drawer closes
+ * reports the reason of the close.
+ */
+export type DrawerSnapPointChangeReason = DrawerOpenChangeReason
+
+/** @deprecated Use `ChangeEventDetails<DrawerOpenChangeReason>`. */
+export type DrawerOpenChangeDetails = ChangeEventDetails<DrawerOpenChangeReason>
 
 export interface DrawerRootProps {
   /** v-model:open */
-  open?: boolean;
-  defaultOpen?: boolean;
+  open?: boolean
+  defaultOpen?: boolean
   /**
    * Modality of the drawer.
    * - `true` (default): modal with focus trap, scroll lock, and outside-press dismiss
    * - `'trap-focus'`: traps focus but allows outside pointer events (non-modal side panels)
    * - `false`: non-modal
    */
-  modal?: DrawerModal;
+  modal?: DrawerModal
   /** Direction to swipe to dismiss. @default 'down' */
-  swipeDirection?: SwipeDirection;
+  swipeDirection?: SwipeDirection
   /** Preset snap positions (fractions 0-1, pixels >1, or '148px'/'30rem' strings) */
-  snapPoints?: Array<DrawerSnapPoint>;
+  snapPoints?: DrawerSnapPoint[]
   /** v-model:snapPoint */
-  snapPoint?: DrawerSnapPoint | null;
-  defaultSnapPoint?: DrawerSnapPoint | null;
+  snapPoint?: DrawerSnapPoint | null
+  defaultSnapPoint?: DrawerSnapPoint | null
   /**
    * When true, snaps to the next sequential snap point (one step at a time).
    * When false, snaps to the nearest snap point by distance.
    * @default false
    */
-  snapToSequentialPoints?: boolean;
+  snapToSequentialPoints?: boolean
 }
 
 export type DrawerRootEmits = {
-  'update:open': [value: boolean, details: DrawerOpenChangeDetails];
-  'update:openComplete': [value: boolean];
-  'update:snapPoint': [value: DrawerSnapPoint | null];
-};
+  /** Called before the open state changes (Base UI `onOpenChange`); `details.cancel()` keeps the current state. */
+  'beforeUpdate:open': [value: boolean, details: ChangeEventDetails<DrawerOpenChangeReason>]
+  /** Called when the open state changed. */
+  'update:open': [value: boolean, details: ChangeEventDetails<DrawerOpenChangeReason>]
+  /**
+   * Called once the popup's open (`true`) or close (`false`) transitions and animations have finished; on close, right
+   * before the popup unmounts. Infinite and cancelled animations are not waited for, and with none running it fires
+   * without waiting. A newer open change supersedes a pending one.
+   */
+  'update:openComplete': [value: boolean]
+  /**
+   * Called before the active snap point changes (Base UI `onSnapPointChange`); `details.cancel()` keeps the current
+   * snap point. Cancelling the `null` a swipe past the last snap point requests keeps the drawer open.
+   */
+  'beforeUpdate:snapPoint': [value: DrawerSnapPoint | null, details: ChangeEventDetails<DrawerSnapPointChangeReason>]
+  /** Called when the active snap point changed. */
+  'update:snapPoint': [value: DrawerSnapPoint | null, details: ChangeEventDetails<DrawerSnapPointChangeReason>]
+}
 
 export interface DrawerRootContext {
-  open: Readonly<Ref<boolean>>;
-  modal: Ref<DrawerModal>;
-  swipeDirection: Ref<SwipeDirection>;
-  snapPoints: Ref<Array<DrawerSnapPoint> | undefined>;
-  activeSnapPoint: Ref<DrawerSnapPoint | null | undefined>;
-  snapToSequentialPoints: Ref<boolean>;
-  popupHeight: Ref<number>;
-  frontmostHeight: Ref<number>;
-  hasNestedDrawer: Ref<boolean>;
-  nestedOpenDrawerCount: Ref<number>;
-  nestedSwiping: Ref<boolean>;
-  isSwiping: Ref<boolean>;
-  nestedSwipeProgressStore: NestedSwipeProgressStore;
-  /** Returns `false` when a listener canceled the change. */
-  onOpenChange: (value: boolean, reason?: DrawerOpenChangeReason) => boolean;
-  onOpenToggle: () => void;
-  notifyOpenComplete: (value: boolean) => void;
-  setActiveSnapPoint: (point: DrawerSnapPoint | null) => void;
-  onPopupHeightChange: (height: number) => void;
-  onNestedFrontmostHeightChange: (height: number) => void;
-  onNestedDrawerPresenceChange: (present: boolean) => void;
-  onNestedSwipingChange: (swiping: boolean) => void;
-  onNestedSwipeProgressChange: (progress: number) => void;
-  onSwipingChange: (swiping: boolean) => void;
-  notifyParentFrontmostHeight?: (height: number) => void;
-  notifyParentSwipingChange?: (swiping: boolean) => void;
-  notifyParentSwipeProgressChange?: (progress: number) => void;
-  notifyParentHasNestedDrawer?: (present: boolean) => void;
-  triggerElement: Ref<HTMLElement | undefined>;
-  contentElement: Ref<HTMLElement | undefined>;
-  viewportElement: Ref<HTMLElement | undefined>;
-  contentId: string;
-  titleId: string;
-  descriptionId: string;
+  open: Readonly<Ref<boolean>>
+  modal: Ref<DrawerModal>
+  swipeDirection: Ref<SwipeDirection>
+  snapPoints: Ref<DrawerSnapPoint[] | undefined>
+  activeSnapPoint: Readonly<Ref<DrawerSnapPoint | null | undefined>>
+  snapToSequentialPoints: Ref<boolean>
+  popupHeight: Ref<number>
+  frontmostHeight: Ref<number>
+  hasNestedDrawer: Ref<boolean>
+  nestedOpenDrawerCount: Ref<number>
+  nestedSwiping: Ref<boolean>
+  isSwiping: Ref<boolean>
+  nestedSwipeProgressStore: NestedSwipeProgressStore
+  /** Returns `false` when cancelled via `beforeUpdate:open`; an unchanged value returns `true`. */
+  onOpenChange: (value: boolean, reason?: DrawerOpenChangeReason | BaseChangeReason, event?: Event) => boolean
+  onOpenToggle: () => void
+  /** Called by the popup once its open/close transitions finish; emits `update:openComplete`. */
+  notifyOpenComplete?: (value: boolean) => void
+  /** Returns `false` when cancelled via `beforeUpdate:snapPoint`; an unchanged value returns `true`. */
+  setActiveSnapPoint: (point: DrawerSnapPoint | null, reason?: DrawerSnapPointChangeReason | BaseChangeReason, event?: Event) => boolean
+  onPopupHeightChange: (height: number) => void
+  onNestedFrontmostHeightChange: (height: number) => void
+  onNestedDrawerPresenceChange: (present: boolean) => void
+  onNestedSwipingChange: (swiping: boolean) => void
+  onNestedSwipeProgressChange: (progress: number) => void
+  onSwipingChange: (swiping: boolean) => void
+  notifyParentFrontmostHeight?: (height: number) => void
+  notifyParentSwipingChange?: (swiping: boolean) => void
+  notifyParentSwipeProgressChange?: (progress: number) => void
+  notifyParentHasNestedDrawer?: (present: boolean) => void
+  triggerElement: Ref<HTMLElement | undefined>
+  contentElement: Ref<HTMLElement | undefined>
+  viewportElement: Ref<HTMLElement | undefined>
+  /** The mounted `DrawerOverlay` element; a press on it dismisses a modal drawer. */
+  overlayElement: Ref<HTMLElement | undefined>
+  contentId: string
+  titleId: string
+  descriptionId: string
 }
 
 export const [injectDrawerRootContext, provideDrawerRootContext]
-  = createContext<DrawerRootContext>('DrawerRoot');
+  = createContext<DrawerRootContext>('DrawerRoot')
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { computed, onUnmounted, ref, toRefs, watch } from 'vue';
-import { injectDrawerProviderContext } from './DrawerProvider.vue';
-import { createNestedSwipeProgressStore } from './utils';
+import { onUnmounted, watch } from 'vue'
+import { injectDrawerProviderContext } from './DrawerProvider.vue'
+import { useDrawer } from './useDrawer'
 
 const props = withDefaults(defineProps<DrawerRootProps>(), {
   open: undefined,
@@ -114,159 +144,62 @@ const props = withDefaults(defineProps<DrawerRootProps>(), {
   snapPoint: undefined,
   defaultSnapPoint: undefined,
   snapToSequentialPoints: false,
-});
-const emit = defineEmits<DrawerRootEmits>();
+})
+const emit = defineEmits<DrawerRootEmits>()
 
 defineSlots<{
-  default?: (props: { open: boolean; close: () => void }) => any;
-}>();
-
-// Manual open state management — we need to pass optional details on emit
-const uncontrolledOpen = ref(props.defaultOpen);
-const open = computed<boolean>({
-  get: () => props.open ?? uncontrolledOpen.value,
-  set: (value) => {
-    uncontrolledOpen.value = value;
-  },
-});
-
-const activeSnapPoint = useVModel(props, 'snapPoint', emit, {
-  defaultValue: props.defaultSnapPoint ?? null,
-  passive: (props.snapPoint === undefined) as false,
-  eventName: 'update:snapPoint',
-}) as Ref<DrawerSnapPoint | null | undefined>;
-
-const { modal, swipeDirection, snapPoints, snapToSequentialPoints } = toRefs(props);
-
-const triggerElement = ref<HTMLElement>();
-const contentElement = ref<HTMLElement>();
-const viewportElement = ref<HTMLElement>();
-const popupHeight = ref(0);
-const frontmostHeight = ref(0);
-const hasNestedDrawer = ref(false);
-const nestedOpenDrawerCount = ref(0);
-const nestedSwiping = ref(false);
-const isSwiping = ref(false);
-const nestedSwipeProgressStore = createNestedSwipeProgressStore();
+  default?: (props: { open: boolean, close: () => void }) => any
+}>()
 
 // Optional parent context for nested drawer support
-const parentContext = injectDrawerRootContext(null);
+const parentContext = injectDrawerRootContext(null)
 
 // Optional provider context for drawer state tracking
-const providerContext = injectDrawerProviderContext(null);
+const providerContext = injectDrawerProviderContext(null)
 
-const contentId = useId(undefined, 'akar-drawer-content');
-const titleId = useId(undefined, 'akar-drawer-title');
-const descriptionId = useId(undefined, 'akar-drawer-description');
+// The composable owns the open and snap-point models (cancellable
+// `beforeUpdate:*`, then `update:*`), the nested-drawer bookkeeping and the context value; `useId`
+// (SSR-stable) stays in the shell and seeds the content/title/description ids.
+const { open, onOpenChange, context } = useDrawer({
+  open: () => props.open,
+  defaultOpen: props.defaultOpen,
+  modal: () => props.modal,
+  swipeDirection: () => props.swipeDirection,
+  snapPoints: () => props.snapPoints,
+  snapToSequentialPoints: () => props.snapToSequentialPoints,
+  snapPoint: () => props.snapPoint,
+  defaultSnapPoint: props.defaultSnapPoint,
+  baseId: useId(undefined, 'reka-drawer'),
+  emit,
+  onOpenComplete: value => emit('update:openComplete', value),
+  parentContext,
+  providerContext,
+})
 
-provideDrawerRootContext({
-  open,
-  modal,
-  swipeDirection,
-  snapPoints,
-  activeSnapPoint,
-  snapToSequentialPoints,
-  popupHeight,
-  frontmostHeight,
-  hasNestedDrawer,
-  nestedOpenDrawerCount,
-  nestedSwiping,
-  isSwiping,
-  nestedSwipeProgressStore,
-  onOpenChange: handleOpenChange,
-  onOpenToggle: handleOpenToggle,
-  notifyOpenComplete(value) {
-    emit('update:openComplete', value);
-  },
-  setActiveSnapPoint(point) {
-    activeSnapPoint.value = point;
-  },
-  onPopupHeightChange(h) {
-    popupHeight.value = h;
-    providerContext?.visualStateStore.set({ frontmostHeight: h });
-  },
-  onNestedFrontmostHeightChange(h) {
-    frontmostHeight.value = h;
-  },
-  onNestedDrawerPresenceChange(present) {
-    if (present) {
-      nestedOpenDrawerCount.value++;
-    } else {
-      nestedOpenDrawerCount.value = Math.max(0, nestedOpenDrawerCount.value - 1);
-    }
-    hasNestedDrawer.value = nestedOpenDrawerCount.value > 0;
-    parentContext?.notifyParentHasNestedDrawer?.(present);
-  },
-  onNestedSwipingChange(swiping) {
-    nestedSwiping.value = swiping;
-    parentContext?.notifyParentSwipingChange?.(swiping);
-  },
-  onNestedSwipeProgressChange(progress) {
-    nestedSwipeProgressStore.set(progress);
-    parentContext?.notifyParentSwipeProgressChange?.(progress);
-    providerContext?.visualStateStore.set({ swipeProgress: progress });
-  },
-  onSwipingChange(swiping) {
-    isSwiping.value = swiping;
-  },
-  notifyParentFrontmostHeight: parentContext?.onNestedFrontmostHeightChange,
-  notifyParentSwipingChange: parentContext?.onNestedSwipingChange,
-  notifyParentSwipeProgressChange: parentContext?.onNestedSwipeProgressChange,
-  notifyParentHasNestedDrawer: parentContext?.onNestedDrawerPresenceChange,
-  triggerElement,
-  contentElement,
-  viewportElement,
-  contentId,
-  titleId,
-  descriptionId,
-});
+provideDrawerRootContext(context)
 
 function handleClose() {
-  handleOpenChange(false, 'close-press');
+  onOpenChange(false, 'close-press')
 }
 
-function handleOpenChange(value: boolean, reason?: DrawerOpenChangeReason) {
-  if (open.value === value) {
-    return true;
-  }
-  let isCanceled = false;
-  const details: DrawerOpenChangeDetails = {
-    reason,
-    cancel() {
-      isCanceled = true;
-    },
-    get isCanceled() {
-      return isCanceled;
-    },
-  };
-  emit('update:open', value, details);
-  if (isCanceled) {
-    return false;
-  }
-  uncontrolledOpen.value = value;
-  return true;
-}
-
-function handleOpenToggle() {
-  handleOpenChange(!open.value, 'trigger-press');
-}
-
-// Sync open state with DrawerProvider
+// Sync open state with DrawerProvider (provider coupling stays in the shell).
+// Keyed by the generated content id: a `DrawerPopup` `id` can change the context's.
+const providerKey = context.contentId
 watch(open, (isOpen) => {
   if (isOpen) {
-    providerContext?.setDrawerOpen(contentId, true);
-  } else {
-    providerContext?.setDrawerOpen(contentId, false);
+    providerContext?.setDrawerOpen(providerKey, true)
   }
-}, { immediate: true });
+  else {
+    providerContext?.setDrawerOpen(providerKey, false)
+  }
+}, { immediate: true })
 
-// `update:openComplete` is emitted by DrawerContentImpl after the popup's
-// enter/exit transition actually finishes (via transitionend/animationend on
-// the popup element). DrawerRoot just exposes the notify hook through context.
+// `update:openComplete` is emitted once `DrawerContent`'s `Presence` reports
+// that the popup's enter/exit transitions and animations finished (#2827).
 
 onUnmounted(() => {
-  providerContext?.removeDrawer(contentId);
-});
+  providerContext?.removeDrawer(providerKey)
+})
 </script>
 
 <template>

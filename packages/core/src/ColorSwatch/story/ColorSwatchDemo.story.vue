@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ColorSwatch } from '..';
+import { ColorSwatch } from '..'
 
-const swatchClass = 'w-8 h-8 rounded ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--akar-color-swatch-color)]';
+const swatchClass = 'w-8 h-8 rounded ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--reka-color-swatch-color)]'
 </script>
 
 <template>
@@ -70,7 +70,7 @@ const swatchClass = 'w-8 h-8 rounded ring-1 ring-inset ring-black/15 dark:ring-w
       <div class="flex gap-2 items-center">
         <ColorSwatch
           color="#0090FF"
-          class="w-4 h-4 rounded-sm ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--akar-color-swatch-color)]"
+          class="w-4 h-4 rounded-sm ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--reka-color-swatch-color)]"
         />
         <ColorSwatch
           color="#0090FF"
@@ -78,7 +78,7 @@ const swatchClass = 'w-8 h-8 rounded ring-1 ring-inset ring-black/15 dark:ring-w
         />
         <ColorSwatch
           color="#0090FF"
-          class="w-12 h-12 rounded-lg ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--akar-color-swatch-color)]"
+          class="w-12 h-12 rounded-lg ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--reka-color-swatch-color)]"
         />
       </div>
     </Variant>

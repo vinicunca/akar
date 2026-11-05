@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { TreeItem, TreeRoot } from '..';
-import { items } from './constants';
+import { Icon } from '@iconify/vue'
+import { TreeItem, TreeRoot } from '..'
+import { items } from './constants'
 </script>
 
 <template>

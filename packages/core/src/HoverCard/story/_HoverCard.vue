@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   HoverCardArrow,
   HoverCardContent,
   HoverCardPortal,
   HoverCardRoot,
   HoverCardTrigger,
-} from '..';
+} from '..'
 
 withDefaults(defineProps<{ enableTouch?: boolean }>(), {
   enableTouch: false,
-});
+})
 
-const hoverState = ref(false);
+const hoverState = ref(false)
 </script>
 
 <template>

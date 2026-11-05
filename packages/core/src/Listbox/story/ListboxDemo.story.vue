@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { countryList } from '@/shared/constant';
-import { ListboxContent, ListboxItem, ListboxRoot } from '..';
+import { computed, ref } from 'vue'
+import { countryList } from '@/shared/constant'
+import { ListboxContent, ListboxItem, ListboxRoot } from '..'
 
-const filterText = ref('');
+const filterText = ref('')
 const filteredOptions = computed(() => {
-  const options = countryList.map((a) => ({ label: a, value: a }));
-  return filterText.value
-    ? options.filter((item) => item.label.toLowerCase().includes(filterText.value.toLowerCase()))
-    : options;
-});
+  const options = countryList.map(a => ({ label: a, value: a }))
+  return filterText.value ? options.filter(item => item.label.toLowerCase().includes(filterText.value.toLowerCase())) : options
+})
 </script>
 
 <template>

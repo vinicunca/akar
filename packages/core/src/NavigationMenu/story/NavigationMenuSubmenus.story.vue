@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
 import {
   NavigationMenuContent,
   NavigationMenuIndicator,
@@ -11,11 +11,11 @@ import {
   NavigationMenuSub,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-} from '..';
-import LinkGroup from './_LinkGroup.vue';
-import StoryFrame from './_StoryFrame.vue';
+} from '..'
+import LinkGroup from './_LinkGroup.vue'
+import StoryFrame from './_StoryFrame.vue'
 
-const currentTrigger = ref('');
+const currentTrigger = ref('')
 </script>
 
 <template>
@@ -120,7 +120,7 @@ const currentTrigger = ref('');
                     </NavigationMenuItem>
 
                     <NavigationMenuIndicator
-                      class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
+                      class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--reka-navigation-menu-indicator-size] translate-x-[--reka-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
                     >
                       <div class="relative top-[70%] h-[12px] w-[12px] rotate-[45deg] bg-white border" />
                     </NavigationMenuIndicator>
@@ -223,7 +223,7 @@ const currentTrigger = ref('');
                     </NavigationMenuItem>
 
                     <NavigationMenuIndicator
-                      class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
+                      class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--reka-navigation-menu-indicator-size] translate-x-[--reka-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
                     >
                       <div class="relative top-[70%] h-[12px] w-[12px] rotate-[45deg] bg-white border" />
                     </NavigationMenuIndicator>
@@ -244,14 +244,14 @@ const currentTrigger = ref('');
             </NavigationMenuItem>
 
             <NavigationMenuIndicator
-              class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--akar-navigation-menu-indicator-size] translate-x-[--akar-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
+              class="absolute data-[state=hidden]:opacity-0 duration-200 data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full w-[--reka-navigation-menu-indicator-size] translate-x-[--reka-navigation-menu-indicator-position] mt-[1px] z-[100] flex h-[10px] items-end justify-center overflow-hidden transition-[all,transform_250ms_ease]"
             >
               <div class="relative top-[70%] h-[12px] w-[12px] rotate-[45deg] bg-white border" />
             </NavigationMenuIndicator>
           </NavigationMenuList>
 
           <NavigationMenuViewport
-            class="absolute top-full border-t origin-[top_center] mt-[10px] w-[var(--akar-navigation-menu-viewport-width)] bg-white h-[var(--akar-navigation-menu-viewport-height)] transition-[height] overflow-hidden shadow-xl"
+            class="absolute top-full border-t origin-[top_center] mt-[10px] w-[var(--reka-navigation-menu-viewport-width)] bg-white h-[var(--reka-navigation-menu-viewport-height)] transition-[height] overflow-hidden shadow-xl"
           />
         </NavigationMenuRoot>
       </StoryFrame>

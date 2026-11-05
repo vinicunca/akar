@@ -1,11 +1,11 @@
 <br />
 <p align="center">
-  <a href=" https://github.com/vinicunca/akar">
-    <img src="https://vinicunca.dev/logo.svg" alt="Logo" width="150" />
+  <a href="https://github.com/unovue/reka-ui">
+    <img src="https://reka-ui.com/logo.svg" alt="Logo" width="150" />
   </a>
 
 <h1 align="center">
-Akar
+Reka UI
 </h1>
 
 <p align="center">
@@ -13,43 +13,44 @@ Craft accessible web apps with <a href="https://vuejs.org/">Vue</a>.
 <p>
 
 <p align="center">
-<a href="https://www.npmjs.com/package/akar" target="__blank"><img src="https://img.shields.io/npm/v/akar?style=flat&colorA=002438&colorB=41c399" alt="NPM version"></a>
-<a href="https://www.npmjs.com/package/akar" target="__blank"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/akar?flat&colorA=002438&colorB=41c399"></a>
-<a href=" https://github.com/vinicunca/akar" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/vinicunca/akar?flat&colorA=002438&colorB=41c399"></a>
+<a href="https://www.npmjs.com/package/reka-ui" target="__blank"><img src="https://img.shields.io/npm/v/reka-ui?style=flat&colorA=002438&colorB=41c399" alt="NPM version"></a>
+<a href="https://www.npmjs.com/package/reka-ui" target="__blank"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/reka-ui?flat&colorA=002438&colorB=41c399"></a>
+<a href="https://github.com/unovue/reka-ui" target="__blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/unovue/reka-ui?flat&colorA=002438&colorB=41c399"></a>
 </p>
 
 <p align="center">
-<a href="https://chat.vinicunca.dev"><b>Get involved!</b></a>
+<a href="https://chat.unovue.com"><b>Get involved!</b></a>
 </p>
 <p align="center">
- <a href="https://vinicunca.dev">Documentation</a> | <a href="https://vinicunca.dev/akar/overview/getting-started">Getting Started</a> | <a href="https://vinicunca.dev/examples">Examples</a> | <a href="https://vinicunca.dev/akar/overview/introduction">Why Akar?</a>
+ <a href="https://reka-ui.com">Documentation</a> | <a href="https://reka-ui.com/docs/overview/getting-started">Getting Started</a> | <a href="https://reka-ui.com/examples">Examples</a> | <a href="https://reka-ui.com/docs/overview/introduction">Why Reka UI?</a>
 </p>
+
+![hero image](https://reka-ui.com/og.jpg)
+ <em>design by: [icarusgkx](https://twitter.com/icarusgkx), [melkam](https://github.com/MellKam)</em>
 
 ## Installation
 
 ```bash
-pnpm add akar
+pnpm add reka-ui
 ```
-
 ```bash
-npm install akar
+npm install reka-ui
 ```
-
 ```bash
-yarn add akar
+yarn add reka-ui
 ```
 
 ## Documentation
 
-For full documentation, visit [vinicunca.dev](https://vinicunca.dev).
+For full documentation, visit [reka-ui.com](https://reka-ui.com).
 
 ## Releases
 
-For changelog, visit [releases](https://github.com/vinicunca/akar/releases).
+For changelog, visit [releases](https://github.com/unovue/reka-ui/releases).
 
 ## Contributing
 
-We would love to have your contributions! All PRs are welcome! We need help building the core components, docs, tests, stories! [Join our discord](https://chat.vinicunca.dev/) and we will get you up and running!
+We would love to have your contributions! All PRs are welcome! We need help building the core components, docs, tests, stories! [Join our discord](https://chat.unovue.com/) and we will get you up and running!
 
 ## Dev Setup
 
@@ -57,9 +58,9 @@ We would love to have your contributions! All PRs are welcome! We need help buil
 
 1. Clone the repo
 2. Run `pnpm i`
-3. Run `pnpm build` to run build `akar` locally
-4. Run `pnpm docs:dev` to run vitepress
-5. Open `http://localhost:5173`
+3. Run `pnpm build` to run build `reka-ui` locally
+3. Run `pnpm docs:dev` to run vitepress
+4. Open `http://localhost:5173`
 
 ### Package
 
@@ -69,11 +70,20 @@ We would love to have your contributions! All PRs are welcome! We need help buil
 4. Open `http://localhost:6006`
 5. Run `pnpm test` to test changes
 
+## Sponsors
+
+Reka UI is free and open source, made possible by our sponsors. If your company or product depends on Reka UI (directly, or through Nuxt UI, shadcn-vue and others), please consider [sponsoring through Open Collective](https://opencollective.com/unovue) (invoices available) or [GitHub Sponsors](https://github.com/sponsors/zernonia).
+
+<p align="center">
+  <a href="https://opencollective.com/unovue">
+    <img src="https://raw.githubusercontent.com/zernonia/sponsor/main/sponsorkit/sponsors.svg" alt="Sponsors">
+  </a>
+</p>
+
 ## Credits
 
 All credits go to these open-source works and resources
 
-- [Reka UI](https://reka-ui.com)
 - [Radix UI](https://radix-ui.com)
 - [React Spectrum](https://react-spectrum.adobe.com/index.html)
 - [Floating UI](https://floating-ui.com)

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { ColorSwatchPickerItem, ColorSwatchPickerItemIndicator, ColorSwatchPickerItemSwatch, ColorSwatchPickerRoot } from '..';
+import { ref } from 'vue'
+import { ColorSwatchPickerItem, ColorSwatchPickerItemIndicator, ColorSwatchPickerItemSwatch, ColorSwatchPickerRoot } from '..'
 
 const colors = [
   '#E5484D',
@@ -10,10 +10,10 @@ const colors = [
   '#30A46C',
   '#F76B15',
   '#FFE629',
-];
+]
 
-const selectedColor = ref('#0090FF');
-const selectedMultiple = ref(['#E5484D', '#30A46C']);
+const selectedColor = ref('#0090FF')
+const selectedMultiple = ref(['#E5484D', '#30A46C'])
 </script>
 
 <template>
@@ -33,7 +33,7 @@ const selectedMultiple = ref(['#E5484D', '#30A46C']);
           class="relative"
         >
           <ColorSwatchPickerItemSwatch
-            class="w-8 h-8 rounded cursor-pointer ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--akar-color-swatch-color)] peer"
+            class="w-8 h-8 rounded cursor-pointer ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--reka-color-swatch-color)] peer"
           />
           <ColorSwatchPickerItemIndicator class="absolute bottom-1 right-1 size-1 rounded-full bg-white peer-data-[color-contrast=dark]:bg-black" />
         </ColorSwatchPickerItem>
@@ -54,7 +54,7 @@ const selectedMultiple = ref(['#E5484D', '#30A46C']);
             class="relative"
           >
             <ColorSwatchPickerItemSwatch
-              class="w-8 h-8 rounded cursor-pointer ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--akar-color-swatch-color)] peer"
+              class="w-8 h-8 rounded cursor-pointer ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--reka-color-swatch-color)] peer"
             />
             <ColorSwatchPickerItemIndicator class="absolute bottom-1 right-1 size-1 rounded-full bg-white peer-data-[color-contrast=dark]:bg-black" />
           </ColorSwatchPickerItem>
@@ -80,7 +80,7 @@ const selectedMultiple = ref(['#E5484D', '#30A46C']);
             class="relative"
           >
             <ColorSwatchPickerItemSwatch
-              class="w-8 h-8 rounded cursor-pointer ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--akar-color-swatch-color)] peer"
+              class="w-8 h-8 rounded cursor-pointer ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--reka-color-swatch-color)] peer"
             />
             <ColorSwatchPickerItemIndicator class="absolute bottom-1 right-1 size-1 rounded-full bg-white peer-data-[color-contrast=dark]:bg-black" />
           </ColorSwatchPickerItem>
@@ -104,7 +104,7 @@ const selectedMultiple = ref(['#E5484D', '#30A46C']);
           class="relative"
         >
           <ColorSwatchPickerItemSwatch
-            class="w-8 h-8 rounded cursor-pointer ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--akar-color-swatch-color)] peer"
+            class="w-8 h-8 rounded cursor-pointer ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--reka-color-swatch-color)] peer"
           />
           <ColorSwatchPickerItemIndicator class="absolute bottom-1 right-1 size-1 rounded-full bg-white peer-data-[color-contrast=dark]:bg-black" />
         </ColorSwatchPickerItem>
@@ -124,7 +124,7 @@ const selectedMultiple = ref(['#E5484D', '#30A46C']);
           class="relative"
         >
           <ColorSwatchPickerItemSwatch
-            class="w-8 h-8 rounded ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--akar-color-swatch-color)] peer"
+            class="w-8 h-8 rounded ring-1 ring-inset ring-black/15 dark:ring-white/15 bg-[var(--reka-color-swatch-color)] peer"
           />
           <ColorSwatchPickerItemIndicator class="absolute bottom-1 right-1 size-1 rounded-full bg-white peer-data-[color-contrast=dark]:bg-black" />
         </ColorSwatchPickerItem>

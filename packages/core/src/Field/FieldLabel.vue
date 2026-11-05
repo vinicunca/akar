@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { LabelProps } from '@/Label';
+import type { LabelProps } from '@/Label'
 
 export interface FieldLabelProps extends LabelProps {
   /**
@@ -11,39 +11,38 @@ export interface FieldLabelProps extends LabelProps {
    * would forward clicks and `:hover` to the button.
    * @defaultValue true
    */
-  nativeLabel?: boolean;
+  nativeLabel?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted } from 'vue';
-import { Label } from '@/Label';
-import { useForwardExpose } from '@/shared';
-import { injectFieldRootContext } from './FieldRoot.vue';
+import { onBeforeUnmount, onMounted } from 'vue'
+import { Label } from '@/Label'
+import { useForwardElement } from '@/shared'
+import { injectFieldRootContext } from './FieldRoot.vue'
 
 const props = withDefaults(defineProps<FieldLabelProps>(), {
   nativeLabel: true,
-});
+})
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 
-const fieldContext = injectFieldRootContext();
+const fieldContext = injectFieldRootContext()
 
-let unregister: (() => void) | undefined;
+let unregister: (() => void) | undefined
 onMounted(() => {
-  unregister = fieldContext.registerLabel();
-});
-onBeforeUnmount(() => unregister?.());
+  unregister = fieldContext.registerLabel()
+})
+onBeforeUnmount(() => unregister?.())
 
 function handleClick(event: MouseEvent) {
-  if (props.nativeLabel) {
-    return;
-  }
+  if (props.nativeLabel)
+    return
   // Clicks on an interactive element inside the label are its own.
-  if ((event.target as HTMLElement | null)?.closest('button,input,select,textarea')) {
-    return;
-  }
-  fieldContext.focusControl();
+  if ((event.target as HTMLElement | null)?.closest('button,input,select,textarea'))
+    return
+  fieldContext.focusControl()
 }
 </script>
 
@@ -51,6 +50,7 @@ function handleClick(event: MouseEvent) {
   <Label
     v-bind="fieldContext.dataAttributes.value"
     :id="fieldContext.labelId.value ?? undefined"
+    :ref="forwardRef"
     :as="as"
     :as-child="asChild"
     :for="nativeLabel ? (props.for ?? fieldContext.getControlId()) : undefined"

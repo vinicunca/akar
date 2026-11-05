@@ -1,71 +1,76 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import type { StringOrNumber } from '@/shared/types';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import type { StringOrNumber } from '@/shared/types'
+import { useForwardElement } from '@/shared'
 
 export interface TabsContentProps extends PrimitiveProps {
   /** A unique value that associates the content with a trigger. */
-  value: StringOrNumber;
+  value: StringOrNumber
+  /**
+   * Id of the element, which the trigger with the same `value` points its
+   * `aria-controls` at. Defaults to one derived from the Root's id and `value`.
+   */
+  id?: string
   /**
    * Used to force mounting when more control is needed. Useful when
    * controlling animation with Vue animation libraries.
    */
-  forceMount?: boolean;
+  forceMount?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
-import { Presence } from '@/Presence';
-import { Primitive } from '@/Primitive';
-import { injectTabsRootContext } from './TabsRoot.vue';
-import { makeContentId, makeTriggerId } from './utils';
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { Presence } from '@/Presence'
+import { renderAs } from '@/Primitive/renderAs'
+import { onNextFrame } from '@/shared/timeout'
+import { injectTabsRootContext } from './TabsRoot.vue'
+import { getTabsContentSurface } from './useTabs'
+import { useTabsPartId } from './utils'
 
-const props = defineProps<TabsContentProps>();
+const props = defineProps<TabsContentProps>()
 
-const { forwardRef } = useForwardExpose();
-const rootContext = injectTabsRootContext();
-const triggerId = computed(() => makeTriggerId(rootContext.baseId, props.value));
-const contentId = computed(() => makeContentId(rootContext.baseId, props.value));
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const rootContext = injectTabsRootContext()
+useTabsPartId(rootContext.customContentIds, () => props.value, () => props.id)
 
-const isSelected = computed(() => props.value === rootContext.modelValue.value);
+// id/role/aria-labelledby/tabindex + data-state/data-orientation from the shared
+// surface builder (selection is read from its `state`, not re-derived); the
+// Presence wrapper, the registration lifecycle, `hidden`, and the
+// mount-animation `style` stay in the SFC.
+const surface = getTabsContentSurface(rootContext, () => props.value)
 
-const isMountAnimationPreventedRef = ref(isSelected.value);
+const isMountAnimationPreventedRef = ref(surface.state.value.state === 'checked')
 
 onMounted(() => {
-  rootContext.registerContent(props.value);
-  requestAnimationFrame(() => {
-    isMountAnimationPreventedRef.value = false;
-  });
-});
+  rootContext.registerContent(props.value)
+  onNextFrame(() => {
+    isMountAnimationPreventedRef.value = false
+  })
+})
 
 onBeforeUnmount(() => {
-  rootContext.unregisterContent(props.value);
-});
+  rootContext.unregisterContent(props.value)
+})
 </script>
 
 <template>
   <Presence
     v-slot="{ present }"
-    :present="forceMount || isSelected"
+    :present="forceMount || surface.state.value.state === 'checked'"
     force-mount
   >
-    <Primitive
-      :id="contentId"
+    <component
+      :is="renderAs(as, asChild)"
       :ref="forwardRef"
-      :as-child="asChild"
-      :as="as"
-      role="tabpanel"
-      :data-state="isSelected ? 'active' : 'inactive'"
-      :data-orientation="rootContext.orientation.value"
-      :aria-labelledby="triggerId"
       :hidden="!present"
-      tabindex="0"
+      v-bind="{ ...surface.attrs.value, id: props.id || surface.attrs.value.id }"
       :style="{
         animationDuration: isMountAnimationPreventedRef ? '0s' : undefined,
       }"
     >
       <slot v-if="rootContext.unmountOnHide.value ? present : true" />
-    </Primitive>
+    </component>
   </Presence>
 </template>

@@ -1,47 +1,44 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { computed } from 'vue';
-import { injectNumberFieldRootContext } from './NumberFieldRoot.vue';
-import { usePressedHold } from './utils';
+import type { PrimitiveProps } from '@/Primitive'
+import { getterRef, useForwardElement } from '@/shared'
+import { injectNumberFieldRootContext } from './NumberFieldRoot.vue'
+import { getNumberFieldButtonSurface, isNumberFieldButtonDisabled } from './useNumberField'
+import { usePressedHold } from './utils'
 
 export interface NumberFieldIncrementProps extends PrimitiveProps {
-  disabled?: boolean;
+  disabled?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import { Primitive, usePrimitiveElement } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs'
 
 const props = withDefaults(defineProps<NumberFieldIncrementProps>(), {
   as: 'button',
-});
+})
 
-const rootContext = injectNumberFieldRootContext();
-const isDisabled = computed(() => rootContext.disabled?.value || rootContext.readonly.value || props.disabled || rootContext.isIncreaseDisabled.value);
+const rootContext = injectNumberFieldRootContext()
+// A getter ref over the root's cached state (the same derivation the surface reads).
+const isDisabled = getterRef(() => isNumberFieldButtonDisabled(rootContext, 'increase', props.disabled))
 
-const { primitiveElement, currentElement } = usePrimitiveElement();
-const { isPressed, onTrigger } = usePressedHold({ target: currentElement, disabled: isDisabled });
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
+// Press-and-hold repeat (window pointer listeners) stays in the shell.
+const { isPressed, onTrigger } = usePressedHold({ target: currentElement, disabled: isDisabled })
+const button = getNumberFieldButtonSurface(rootContext, 'increase', { disabled: () => props.disabled, pressed: isPressed })
 
-onTrigger(() => {
-  rootContext.handleIncrease();
-});
+onTrigger((event) => {
+  rootContext.handleIncrease(1, 'increment-press', event)
+})
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
-    ref="primitiveElement"
-    tabindex="-1"
-    aria-label="Increase"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     :type="as === 'button' ? 'button' : undefined"
-    :style="{
-      userSelect: isPressed ? 'none' : undefined,
-    }"
-    :disabled="isDisabled ? '' : undefined"
-    :data-disabled="isDisabled ? '' : undefined"
-    :data-pressed="isPressed ? 'true' : undefined"
-    @contextmenu.prevent
+    v-bind="button.attrs.value"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

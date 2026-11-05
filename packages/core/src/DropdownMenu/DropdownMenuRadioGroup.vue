@@ -2,26 +2,30 @@
 import type {
   MenuRadioGroupEmits,
   MenuRadioGroupProps,
-} from '@/Menu';
+} from '@/Menu'
 
-export type DropdownMenuRadioGroupEmits = MenuRadioGroupEmits;
+export type DropdownMenuRadioGroupEmits = MenuRadioGroupEmits
 
 export interface DropdownMenuRadioGroupProps extends MenuRadioGroupProps {}
 </script>
 
 <script setup lang="ts">
-import { MenuRadioGroup } from '@/Menu';
-import { useEmitAsProps, useForwardExpose } from '@/shared';
+import { MenuRadioGroup } from '@/Menu'
+import { useEmitAsProps, useForwardElement } from '@/shared'
 
-const props = defineProps<MenuRadioGroupProps>();
-const emits = defineEmits<MenuRadioGroupEmits>();
+const props = defineProps<MenuRadioGroupProps>()
+const emits = defineEmits<MenuRadioGroupEmits>()
 
-const emitsAsProps = useEmitAsProps(emits);
-useForwardExpose();
+const emitsAsProps = useEmitAsProps(emits)
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <MenuRadioGroup v-bind="{ ...props, ...emitsAsProps }">
+  <MenuRadioGroup
+    :ref="forwardRef"
+    v-bind="{ ...props, ...emitsAsProps }"
+  >
     <slot />
   </MenuRadioGroup>
 </template>

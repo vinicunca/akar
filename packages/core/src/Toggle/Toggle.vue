@@ -1,118 +1,159 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import type { FormFieldProps } from '@/shared/types';
-import { useFormControl, useForwardExpose, useForwardScopeId } from '@/shared';
-import { injectToggleGroupRootContext } from '@/ToggleGroup/ToggleGroupRoot.vue';
-import VisuallyHiddenInput from '@/VisuallyHidden/VisuallyHiddenInput.vue';
+import type { ToggleChangeReason } from './useTogglePressed'
+import type { PrimitiveProps } from '@/Primitive'
+import type { ChangeEventDetails } from '@/shared'
+import type { FormFieldProps } from '@/shared/types'
+import { useFormControl, useForwardElement, useForwardScopeId } from '@/shared'
+import { injectToggleGroupRootContext } from '@/ToggleGroup/ToggleGroupRoot.vue'
+import VisuallyHiddenInput from '@/VisuallyHidden/VisuallyHiddenInput.vue'
 
 export type ToggleEmits = {
+  /** Event handler called before the value of the toggle changes; `details.cancel()` vetoes the change. */
+  'beforeUpdate:modelValue': [value: boolean, details: ChangeEventDetails<ToggleChangeReason>]
   /** Event handler called when the value of the toggle changes. */
-  'update:modelValue': [value: boolean];
-};
-
-export type DataState = 'on' | 'off';
+  'update:modelValue': [value: boolean, details: ChangeEventDetails<ToggleChangeReason>]
+}
 
 export interface ToggleProps extends PrimitiveProps, FormFieldProps {
   /**
    * The pressed state of the toggle when it is initially rendered. Use when you do not need to control its open state.
    */
-  defaultValue?: boolean;
+  defaultValue?: boolean
   /**
    * The controlled pressed state of the toggle. Can be bind as `v-model`.
    */
-  modelValue?: boolean | null;
+  modelValue?: boolean | null
   /**
    * When `true`, prevents the user from interacting with the toggle.
    */
-  disabled?: boolean;
+  disabled?: boolean
 }
 </script>
 
 <script setup lang="ts">
-import type { Ref } from 'vue';
-import { useVModel } from '@vueuse/core';
-import { computed } from 'vue';
-import { Primitive } from '@/Primitive';
+import { computed, mergeProps, useAttrs, watch } from 'vue'
+import { useFieldControl } from '@/Field/useFieldControl'
+import { renderAs } from '@/Primitive/renderAs'
+import { useTogglePressed } from './useTogglePressed'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
-const props = withDefaults(
-  defineProps<ToggleProps>(),
-  {
-    modelValue: undefined,
-    disabled: false,
-    as: 'button',
-  },
-);
+const props = withDefaults(defineProps<ToggleProps>(), {
+  modelValue: undefined,
+  disabled: false,
+  as: 'button',
+})
 
-const emits = defineEmits<ToggleEmits>();
+const emits = defineEmits<ToggleEmits>()
 
 defineSlots<{
   default?: (props: {
     /** Current value */
-    modelValue: typeof modelValue.value;
+    modelValue: typeof modelValue.value
     /** Current state */
-    state: typeof dataState.value;
+    state: typeof root.state.value.state
     /** Current pressed state */
-    pressed: typeof modelValue.value;
+    pressed: typeof modelValue.value
     /** Current disabled state */
-    disabled: boolean;
-  }) => any;
-}>();
+    disabled: boolean
+  }) => any
+}>()
 
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement()
+defineExpose(expose)
 // Hidden form input is a sibling (not nested) of the control to avoid the
 // `nested-interactive` a11y violation; forward the parent scope id for scoped styles.
-const scopeIdAttrs = useForwardScopeId();
-const toggleGroupContext = injectToggleGroupRootContext(null);
+const scopeIdAttrs = useForwardScopeId()
+const toggleGroupContext = injectToggleGroupRootContext(null)
+const attrs = useAttrs()
 
-const modelValue = useVModel(props, 'modelValue', emits, {
+// Optional Field participation: `null` outside a `FieldRoot`, so every
+// binding below is inert without a Field. A toggle in a `ToggleGroupRoot` is
+// one item of the group's value: the group is the field's control.
+const field = toggleGroupContext
+  ? null
+  : useFieldControl({
+      id: () => attrs.id as string | undefined,
+      element: () => currentElement.value as HTMLElement | undefined,
+      getValue: () => pressed.value,
+      required: () => props.required,
+      // A required toggle must be pressed.
+      isFilled: value => value === true,
+    })
+// Getters rather than computeds: cheap, and free for a standalone toggle.
+const resolvedName = () => field ? field.name(props.name) : props.name
+const resolvedRequired = () => field ? field.required(props.required) : props.required
+
+// Controlled/uncontrolled + `beforeUpdate:` / `update:` emits live in the
+// composable's `useControllableState` (`modelValue === undefined` → uncontrolled;
+// `null` is controlled and reads through, exactly as `useVModel` did).
+const { modelValue, pressed, disabled, root } = useTogglePressed({
+  modelValue: () => props.modelValue,
   defaultValue: props.defaultValue,
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<boolean>;
+  disabled: () => field ? field.disabled(props.disabled) : props.disabled,
+  emit: emits,
+  // The Field hears its own commits by reason (`change`): user input, or, for
+  // a programmatic one (`setModelValue` and the like), only the watcher below,
+  // which also reports a parent-driven change.
+  onUpdate: field?.change,
+})
 
-function togglePressed() {
-  modelValue.value = !modelValue.value;
+if (field)
+  watch(pressed, value => field.sync(value))
+
+const isFormControl = useFormControl(currentElement)
+
+// Listener order is part of the v2 contract: `v-bind="$attrs"` sat AFTER the
+// `aria-*` / `data-*` / `disabled` bindings (a consumer attribute wins) but
+// BEFORE `@click` (a consumer listener runs first and observes the pre-toggle
+// model). `mergeProps` chains same-named listeners in argument order, so the
+// composable's click handler is bound separately below, after `$attrs`.
+const rootAttrs = computed(() => {
+  const { onClick: _onClick, ...attrs } = root.attrs.value
+  return attrs
+})
+
+// `$attrs` isn't reactive, so the Field's wiring is read during render. Its
+// state attributes fill in what the toggle leaves unset;
+// its aria ids are merged with the consumer's.
+function renderAttrs(attrs: Record<string, unknown>) {
+  if (!field)
+    return mergeProps(rootAttrs.value, scopeIdAttrs, attrs)
+  return field.fillDataAttributes(mergeProps(
+    rootAttrs.value,
+    scopeIdAttrs,
+    attrs,
+    { id: field.id(), ...field.ariaAttrs(attrs, disabled.value), onFocus: field.onFocus, onBlur: field.onBlur },
+  ))
 }
-
-const dataState = computed<DataState>(() => {
-  return modelValue.value ? 'on' : 'off';
-});
-
-const isFormControl = useFormControl(currentElement);
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, props.asChild)"
     :ref="forwardRef"
     :type="as === 'button' ? 'button' : undefined"
-    :as-child="props.asChild"
-    :as="as"
-    :aria-pressed="modelValue"
-    :data-state="dataState"
-    :data-disabled="disabled ? '' : undefined"
-    :disabled="disabled"
-    v-bind="{ ...scopeIdAttrs, ...$attrs }"
-    @click="togglePressed"
+    v-bind="renderAttrs($attrs)"
+    @click="root.props.value.onClick"
   >
     <slot
       :model-value="modelValue"
       :disabled="disabled"
       :pressed="modelValue"
-      :state="dataState"
+      :state="root.state.value.state"
     />
-  </Primitive>
+  </component>
 
   <VisuallyHiddenInput
-    v-if="isFormControl && name && !toggleGroupContext"
+    v-if="isFormControl && resolvedName() && !toggleGroupContext"
     type="checkbox"
-    :name="name"
+    :name="resolvedName()!"
     :value="modelValue"
     :checked="!!modelValue"
     :disabled="disabled"
-    :required="required"
+    :required="resolvedRequired()"
     v-bind="scopeIdAttrs"
   />
 </template>

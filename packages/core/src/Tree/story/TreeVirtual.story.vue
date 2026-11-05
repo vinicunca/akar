@@ -1,23 +1,22 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { countryList } from '@/shared/constant';
-import { TreeItem, TreeRoot, TreeVirtualizer } from '..';
+import { Icon } from '@iconify/vue'
+import { countryList } from '@/shared/constant'
+import { TreeItem, TreeRoot, TreeVirtualizer } from '..'
 
-function groupCountriesByFirstLetter(countries: Array<string>) {
+function groupCountriesByFirstLetter(countries: string[]) {
   const grouped = countries.reduce((acc, country) => {
-    const firstLetter = country[0].toUpperCase();
-    if (!acc[firstLetter]) {
-      acc[firstLetter] = { title: firstLetter, children: [] };
-    }
+    const firstLetter = country[0].toUpperCase()
+    if (!acc[firstLetter])
+      acc[firstLetter] = { title: firstLetter, children: [] }
 
-    acc[firstLetter].children.push({ title: country });
-    return acc;
-  }, {} as { [key: string]: { title: string; children: Array<{ title: string }> } });
+    acc[firstLetter].children.push({ title: country })
+    return acc
+  }, {} as { [key: string]: { title: string, children: { title: string }[] } })
 
-  return Object.values(grouped);
+  return Object.values(grouped)
 }
 
-const items = groupCountriesByFirstLetter(countryList);
+const items = groupCountriesByFirstLetter(countryList)
 </script>
 
 <template>

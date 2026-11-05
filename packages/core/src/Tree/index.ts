@@ -4,15 +4,27 @@ export {
   type TreeItemProps,
   type SelectEvent as TreeItemSelectEvent,
   type ToggleEvent as TreeItemToggleEvent,
-} from './TreeItem.vue';
+} from './TreeItem.vue'
 export {
   type FlattenedItem,
   injectTreeRootContext,
   default as TreeRoot,
   type TreeRootEmits,
   type TreeRootProps,
-} from './TreeRoot.vue';
+} from './TreeRoot.vue'
 export {
   default as TreeVirtualizer,
   type TreeVirtualizerProps,
-} from './TreeVirtualizer.vue';
+} from './TreeVirtualizer.vue'
+export {
+  type TreeChangeReason,
+  type TreeCollectionItem,
+  type TreeExpandedChangeReason,
+  type TreeItemState,
+  type TreeItemStatus,
+  type TreeItemSurfaceOptions,
+  type TreeNavigationIntent,
+  useTree,
+  type UseTreeProps,
+  type UseTreeReturn,
+} from './useTree'

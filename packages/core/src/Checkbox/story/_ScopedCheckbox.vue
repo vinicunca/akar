@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CheckboxRoot } from '..';
+import { CheckboxRoot } from '..'
 </script>
 
 <template>

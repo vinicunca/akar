@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DialogContent, DialogOverlay, DialogRoot, DialogTrigger } from '..';
+import { DialogContent, DialogOverlay, DialogRoot, DialogTrigger } from '..'
 </script>
 
 <template>

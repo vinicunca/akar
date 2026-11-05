@@ -1,11 +1,11 @@
-import type { VueWrapper } from '@vue/test-utils';
-import { mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, it } from 'vitest';
-import { axe } from 'vitest-axe';
-import { AspectRatio } from '.';
+import type { VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { axe } from 'vitest-axe'
+import { AspectRatio } from '.'
 
 describe('given a default AspectRatio', async () => {
-  let wrapper: VueWrapper<InstanceType<typeof AspectRatio>>;
+  let wrapper: VueWrapper<InstanceType<typeof AspectRatio>>
 
   beforeEach(() => {
     wrapper = mount(AspectRatio, {
@@ -16,14 +16,14 @@ describe('given a default AspectRatio', async () => {
         alt="Landscape photograph by Tobias Tullius"
       >`,
       },
-    });
-  });
+    })
+  })
 
   it('should pass axe accessibility tests', async () => {
-    expect(await axe(wrapper.element)).toHaveNoViolations();
-  });
+    expect(await axe(wrapper.element)).toHaveNoViolations()
+  })
 
   it('should render as snapshot', () => {
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-});
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+})

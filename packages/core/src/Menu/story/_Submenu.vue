@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { MenuPortal, MenuSub, MenuSubContent, MenuSubTrigger } from '..';
+import { useVModel } from '@vueuse/core'
+import { MenuPortal, MenuSub, MenuSubContent, MenuSubTrigger } from '..'
 
 const props = defineProps<{
-  open: boolean;
-  disabled?: boolean;
-  heading?: string;
-}>();
+  open: boolean
+  disabled?: boolean
+  heading?: string
+}>()
 
-const open = useVModel(props, 'open');
+const open = useVModel(props, 'open')
 </script>
 
 <template>

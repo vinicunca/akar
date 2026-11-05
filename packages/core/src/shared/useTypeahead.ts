@@ -1,51 +1,51 @@
-import { refAutoReset } from '@vueuse/shared';
-import { getActiveElement } from './getActiveElement';
+import { getActiveElement } from './getActiveElement'
+import { autoResetRef } from './timeout'
 
 export function useTypeahead(callback?: (search: string) => void) {
   // Reset `search` 1 second after it was last updated
-  const search = refAutoReset('', 1000);
+  const search = autoResetRef('', 1000)
 
-  const handleTypeaheadSearch = (key: string, items: Array<{ ref: HTMLElement; value?: any }>) => {
-    search.value = search.value + key;
+  const handleTypeaheadSearch = (key: string, items: { ref: HTMLElement, value?: any }[]) => {
+    search.value = search.value + key
 
     if (callback) {
-      callback(key);
-    } else {
-      const currentItem = getActiveElement();
-      const itemsWithTextValue = items.map((item) => ({
+      callback(key)
+    }
+    else {
+      const currentItem = getActiveElement()
+      const itemsWithTextValue = items.map(item => ({
         ...item,
         textValue: item.value?.textValue ?? item.ref.textContent?.trim() ?? '',
-      }));
-      const currentMatch = itemsWithTextValue.find((item) => item.ref === currentItem);
-      const values = itemsWithTextValue.map((item) => item.textValue);
-      const nextMatch = getNextMatch(values, search.value, currentMatch?.textValue);
+      }))
+      const currentMatch = itemsWithTextValue.find(item => item.ref === currentItem)
+      const values = itemsWithTextValue.map(item => item.textValue)
+      const nextMatch = getNextMatch(values, search.value, currentMatch?.textValue)
 
-      const newItem = itemsWithTextValue.find((item) => item.textValue === nextMatch);
+      const newItem = itemsWithTextValue.find(item => item.textValue === nextMatch)
 
-      if (newItem) {
-        (newItem.ref as HTMLElement).focus();
-      }
-      return newItem?.ref;
+      if (newItem)
+        (newItem.ref as HTMLElement).focus()
+      return newItem?.ref
     }
-  };
+  }
 
   const resetTypeahead = () => {
-    search.value = '';
-  };
+    search.value = ''
+  }
 
   return {
     search,
     handleTypeaheadSearch,
     resetTypeahead,
-  };
+  }
 }
 
 /**
  * Wraps an array around itself at a given start index
  * Example: `wrapArray(['a', 'b', 'c', 'd'], 2) === ['c', 'd', 'a', 'b']`
  */
-export function wrapArray<T>(array: Array<T>, startIndex: number) {
-  return array.map((_, index) => array[(startIndex + index) % array.length]);
+export function wrapArray<T>(array: T[], startIndex: number) {
+  return array.map((_, index) => array[(startIndex + index) % array.length])
 }
 
 /**
@@ -66,25 +66,20 @@ export function wrapArray<T>(array: Array<T>, startIndex: number) {
  * don't want focus to move if the current match still matches.
  */
 export function getNextMatch(
-  values: Array<string>,
+  values: string[],
   search: string,
   currentMatch?: string,
 ) {
   const isRepeated
-    = search.length > 1 && Array.from(search).every((char) => char === search[0]);
-  const normalizedSearch = isRepeated ? search[0] : search;
-  const currentMatchIndex = currentMatch
-    ? values.indexOf(currentMatch)
-    : -1;
-  let wrappedValues = wrapArray(values, Math.max(currentMatchIndex, 0));
-  const excludeCurrentMatch = normalizedSearch.length === 1;
-  if (excludeCurrentMatch) {
-    wrappedValues = wrappedValues.filter((v) => v !== currentMatch);
-  }
-  const nextMatch = wrappedValues.find((value) =>
+    = search.length > 1 && Array.from(search).every(char => char === search[0])
+  const normalizedSearch = isRepeated ? search[0] : search
+  const currentMatchIndex = currentMatch ? values.indexOf(currentMatch) : -1
+  let wrappedValues = wrapArray(values, Math.max(currentMatchIndex, 0))
+  const excludeCurrentMatch = normalizedSearch.length === 1
+  if (excludeCurrentMatch)
+    wrappedValues = wrappedValues.filter(v => v !== currentMatch)
+  const nextMatch = wrappedValues.find(value =>
     value.toLowerCase().startsWith(normalizedSearch.toLowerCase()),
-  );
-  return nextMatch !== currentMatch
-    ? nextMatch
-    : undefined;
+  )
+  return nextMatch !== currentMatch ? nextMatch : undefined
 }

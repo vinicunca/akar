@@ -1,82 +1,46 @@
 <script lang="ts">
-import type { DateRangeType } from '@/DateRangeField/DateRangeFieldRoot.vue';
-import type { PrimitiveProps } from '@/Primitive';
-import type { SegmentPart } from '@/shared/date';
-import { computed, ref } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useDateField } from '@/shared/date/useDateField';
-import { injectTimeRangeFieldRootContext } from './TimeRangeFieldRoot.vue';
+import type { DateRangeType } from '@/DateRangeField/DateRangeFieldRoot.vue'
+import type { PrimitiveProps } from '@/Primitive'
+import type { SegmentPart } from '@/shared/date'
+import { Primitive } from '@/Primitive'
+import { renderAs } from '@/Primitive/renderAs'
+import { injectTimeRangeFieldRootContext } from './TimeRangeFieldRoot.vue'
+import { createTimeRangeFieldInputSurface } from './useTimeRangeField'
 
 export interface TimeRangeFieldInputProps extends PrimitiveProps {
   /** The part of the date to render */
-  part: SegmentPart;
+  part: SegmentPart
   /** The type of field to render (start or end) */
-  type: DateRangeType;
+  type: DateRangeType
 }
 </script>
 
 <script setup lang="ts">
-const props = defineProps<TimeRangeFieldInputProps>();
+import type { Component } from 'vue'
+import { h, useSlots } from 'vue'
+import { useForwardElement } from '@/shared'
 
-const rootContext = injectTimeRangeFieldRootContext();
+const props = defineProps<TimeRangeFieldInputProps>()
 
-const hasLeftFocus = ref(true);
-const lastKeyZero = ref(false);
+const rootContext = injectTimeRangeFieldRootContext()
 
-const {
-  handleSegmentClick,
-  handleSegmentKeydown,
-  attributes,
-  handleSegmentBeforeInput,
-  handleSegmentCompositionStart,
-  handleSegmentCompositionEnd,
-} = useDateField({
-  hasLeftFocus,
-  lastKeyZero,
-  placeholder: rootContext.placeholder,
-  hourCycle: rootContext.hourCycle,
-  step: rootContext.step,
-  segmentValues: rootContext.segmentValues[props.type],
-  formatter: rootContext.formatter,
-  part: props.part,
-  disabled: rootContext.disabled,
-  readonly: rootContext.readonly,
-  focusNext: rootContext.focusNext,
-  modelValue: props.type === 'start'
-    ? rootContext.startValue
-    : rootContext.endValue,
-});
+// Once per segment: the surface holds this segment's typing state.
+const input = createTimeRangeFieldInputSurface(rootContext, () => props.part, () => props.type)
 
-const disabled = computed(() => rootContext.disabled.value);
-const readonly = computed(() => rootContext.readonly.value);
-const isInvalid = computed(() => rootContext.isInvalid.value);
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const slots = useSlots()
+
+// The slot content goes straight into the element: no `<slot>` fragment, so
+// no empty anchor text nodes (this part renders once per segment).
+function renderRoot() {
+  // `Primitive` only for a consumer's `#render`, which it honours; `slots` hold it.
+  return slots.render
+    ? h(Primitive, { ref: forwardRef, as: props.as, asChild: props.asChild, ...input.attrs.value }, slots)
+    : h(renderAs(props.as, props.asChild) as Component, { ref: forwardRef, ...input.attrs.value }, slots)
+}
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="asChild"
-    v-bind="attributes"
-    :contenteditable="disabled || readonly ? false : part !== 'literal'"
-    :data-akar-time-field-segment="part"
-    :data-akar-time-range-field-segment-type="type"
-    :aria-disabled="disabled ? true : undefined"
-    :aria-readonly="readonly ? true : undefined"
-    :data-disabled="disabled ? '' : undefined"
-    :data-invalid="isInvalid ? '' : undefined"
-    :aria-invalid="isInvalid ? true : undefined"
-    v-on="part !== 'literal' ? {
-      mousedown: handleSegmentClick,
-      keydown: handleSegmentKeydown,
-      beforeinput: handleSegmentBeforeInput,
-      compositionstart: handleSegmentCompositionStart,
-      compositionend: handleSegmentCompositionEnd,
-      focusout: () => { hasLeftFocus = true },
-      focusin: (e: FocusEvent) => {
-        rootContext.setFocusedElement(e.target as HTMLElement)
-      },
-    } : {}"
-  >
-    <slot />
-  </Primitive>
+  <component :is="renderRoot()" />
 </template>

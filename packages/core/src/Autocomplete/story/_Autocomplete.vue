@@ -1,42 +1,21 @@
 <script setup lang="ts">
-import type { AutocompleteRootEmits, AutocompleteRootProps } from '..';
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { useForwardPropsEmits } from '@/shared';
-import { AutocompleteAnchor, AutocompleteContent, AutocompleteEmpty, AutocompleteGroup, AutocompleteInput, AutocompleteItem, AutocompleteLabel, AutocompleteRoot, AutocompleteSeparator, AutocompleteTrigger, AutocompleteViewport } from '..';
+import type { AutocompleteRootEmits, AutocompleteRootProps } from '..'
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { useForwardPropsEmits } from '@/shared'
+import { AutocompleteAnchor, AutocompleteContent, AutocompleteEmpty, AutocompleteGroup, AutocompleteInput, AutocompleteItem, AutocompleteLabel, AutocompleteRoot, AutocompleteSeparator, AutocompleteTrigger, AutocompleteViewport } from '..'
 
-const props = defineProps<AutocompleteRootProps>();
-const emits = defineEmits<AutocompleteRootEmits>();
+const props = defineProps<AutocompleteRootProps>()
+const emits = defineEmits<AutocompleteRootEmits>()
 
-const forwarded = useForwardPropsEmits(props, emits);
-const v = ref<string>(props.defaultValue ?? '');
+const forwarded = useForwardPropsEmits(props, emits)
+const v = ref<string>(props.defaultValue ?? '')
 
-const options = [
-  'Apple',
-  'Banana',
-  'Blueberry',
-  'Grapes',
-  'Pineapple',
-];
-const vegetables = [
-  'Aubergine',
-  'Broccoli',
-  'Carrot',
-  'Courgette',
-  'Leek',
-];
-const chinese = [
-  '苹果',
-  '香蕉',
-  '蓝莓',
-  '葡萄',
-  '菠萝',
-  '西瓜',
-  '草莓',
-  '芒果',
-];
+const options = ['Apple', 'Banana', 'Blueberry', 'Grapes', 'Pineapple']
+const vegetables = ['Aubergine', 'Broccoli', 'Carrot', 'Courgette', 'Leek']
+const chinese = ['苹果', '香蕉', '蓝莓', '葡萄', '菠萝', '西瓜', '草莓', '芒果']
 
-const open = ref(props.open);
+const open = ref(props.open)
 </script>
 
 <template>

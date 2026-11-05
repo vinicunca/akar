@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { RatingItem, RatingItemIndicator, RatingRoot } from '../';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { RatingItem, RatingItemIndicator, RatingRoot } from '../'
 
-const value = ref(3);
+const value = ref(3)
 </script>
 
 <template>
@@ -34,7 +34,7 @@ const value = ref(3);
               v-for="step in steps"
               :key="step"
               :step="step"
-              class="data-[state=active]:text-yellow-500 text-gray-400 absolute overflow-hidden w-[var(--akar-rating-item-step-width)] opacity-[var(--akar-rating-item-step-opacity)] z-[var(--akar-rating-item-step-z-index)]"
+              class="data-[state=checked]:text-yellow-500 text-gray-400 absolute overflow-hidden w-[var(--reka-rating-item-step-width)] opacity-[var(--reka-rating-item-step-opacity)] z-[var(--reka-rating-item-step-z-index)]"
             >
               <Icon
                 icon="radix-icons:star"

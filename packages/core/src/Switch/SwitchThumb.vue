@@ -1,28 +1,31 @@
 <script lang="ts">
-import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import type { PrimitiveProps } from '@/Primitive'
+import { useForwardElement } from '@/shared'
 
 export interface SwitchThumbProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { injectSwitchRootContext } from './SwitchRoot.vue';
+import { renderAs } from '@/Primitive/renderAs'
+import { injectSwitchRootContext } from './SwitchRoot.vue'
+import { getSwitchThumbSurface } from './useSwitch'
 
-withDefaults(defineProps<SwitchThumbProps>(), { as: 'span' });
+withDefaults(defineProps<SwitchThumbProps>(), { as: 'span' })
 
-const rootContext = injectSwitchRootContext();
+const rootContext = injectSwitchRootContext()
+// Same derivation as `useSwitch().thumb` — one source for `data-state` / `data-disabled`.
+const thumb = getSwitchThumbSurface(rootContext)
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
 </script>
 
 <template>
-  <Primitive
-    :data-state="rootContext.checked.value ? 'checked' : 'unchecked'"
-    :data-disabled="rootContext.disabled.value ? '' : undefined"
-    :as-child="asChild"
-    :as="as"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="thumb.attrs.value"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

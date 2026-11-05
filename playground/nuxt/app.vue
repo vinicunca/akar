@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ConfigProvider } from 'akar';
-import Card from './components/Card.vue';
+import { ConfigProvider } from 'reka-ui'
+import Card from './components/Card.vue'
 
-const fn = () => useId()!.replace(':', '_');
+const fn = () => useId()!.replace(':', '_')
 </script>
 
 <template>

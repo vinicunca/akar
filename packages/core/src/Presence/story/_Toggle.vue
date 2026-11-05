@@ -2,18 +2,16 @@
 const props = defineProps({
   open: Boolean,
   node: HTMLElement,
-});
+})
 
-const emits = defineEmits(['update:open']);
+const emits = defineEmits(['update:open'])
 
 function handleToggleVisibility() {
-  const node = props.node;
+  const node = props.node
   if (node) {
-    if (node.style.display === 'none') {
-      node.style.display = 'block';
-    } else {
-      node.style.display = 'none';
-    }
+    if (node.style.display === 'none')
+      node.style.display = 'block'
+    else node.style.display = 'none'
   }
 }
 </script>

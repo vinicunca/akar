@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
-import { FocusScope } from '@/FocusScope';
-import { DismissableLayer } from '..';
-import DismissableBox from './_DismissableBox.vue';
+import { reactive, ref } from 'vue'
+import { FocusScope } from '@/FocusScope'
+import { DismissableLayer } from '..'
+import DismissableBox from './_DismissableBox.vue'
 
-const open = ref(false);
+const open = ref(false)
 
 function handleClick() {
   // eslint-disable-next-line no-console
-  console.log('click');
+  console.log('click')
 }
 
 const state = reactive({
   isEscapeKeyDownPrevented: false,
   isPointerDownOutsidePrevented: false,
   isFocusOutsidePrevented: false,
-});
+})
 
-const openWithFocusScope = ref(false);
-const openButtonRef = ref<HTMLElement>();
+const openWithFocusScope = ref(false)
+const openButtonRef = ref<HTMLElement>()
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 import {
   SelectContent,
   SelectItem,
@@ -9,10 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
   SelectViewport,
-} from '..';
+} from '..'
 
-const open = ref(true);
-const mounted = ref(true);
+const open = ref(true)
+const mounted = ref(true)
 </script>
 
 <template>

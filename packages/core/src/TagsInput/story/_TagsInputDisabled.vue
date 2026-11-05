@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
-import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..';
+import { Icon } from '@iconify/vue'
+import { ref } from 'vue'
+import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '..'
 
-const modelValue = ref(['Disabled', 'Removable']);
-const isDisabled = (value: string) => value === 'Disabled';
+const modelValue = ref(['Disabled', 'Removable'])
+const isDisabled = (value: string) => value === 'Disabled'
 </script>
 
 <template>

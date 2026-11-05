@@ -1,82 +1,78 @@
-import { mount } from '@vue/test-utils';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { axe } from 'vitest-axe';
-import { defineComponent, nextTick, ref } from 'vue';
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '.';
-import Splitter from './story/_Splitter.vue';
+import { mount } from '@vue/test-utils'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { axe } from 'vitest-axe'
+import { defineComponent, nextTick, ref } from 'vue'
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '.'
+import Splitter from './story/_Splitter.vue'
 
 // Simple a11y test for now
 describe('test splitter functionalities', () => {
   beforeEach(() => {
-    document.body.innerHTML = '';
-  });
+    document.body.innerHTML = ''
+  })
 
   it('should pass axe accessibility tests', async () => {
-    const wrapper = mount(Splitter);
-    await nextTick();
+    const wrapper = mount(Splitter)
+    await nextTick()
     expect(await axe(wrapper.element, {
       rules: {
         'label': { enabled: false },
         'nested-interactive': { enabled: false },
       },
-    })).toHaveNoViolations();
-  });
-});
+    })).toHaveNoViolations()
+  })
+})
 
+// Regression test for https://github.com/unovue/reka-ui/issues/2509
 // Bug 1: nested sizeUnit="px" group ignores defaultSize due to a ResizeObserver
 // timing issue where the inner group is measured before the outer group's flex
 // layout completes, producing a near-zero container size at initialization.
-describe('nested px SplitterGroup layout re-initialization', () => {
-  const resizeCallbacks: Array<ResizeObserverCallback> = [];
+describe('nested px SplitterGroup layout re-initialization (issue #2509)', () => {
+  const resizeCallbacks: ResizeObserverCallback[] = []
 
   beforeEach(() => {
-    resizeCallbacks.length = 0;
+    resizeCallbacks.length = 0
     vi.stubGlobal('ResizeObserver', class MockResizeObserver {
-      private callback: ResizeObserverCallback;
+      private callback: ResizeObserverCallback
       constructor(callback: ResizeObserverCallback) {
-        this.callback = callback;
-        resizeCallbacks.push(callback);
+        this.callback = callback
+        resizeCallbacks.push(callback)
       }
 
       observe() {}
       unobserve() {}
       disconnect() {
-        const idx = resizeCallbacks.indexOf(this.callback);
-        if (idx !== -1) {
-          resizeCallbacks.splice(idx, 1);
-        }
+        const idx = resizeCallbacks.indexOf(this.callback)
+        if (idx !== -1)
+          resizeCallbacks.splice(idx, 1)
       }
-    });
-  });
+    })
+  })
 
   afterEach(() => {
-    vi.unstubAllGlobals();
-    document.body.innerHTML = '';
-  });
+    vi.unstubAllGlobals()
+    document.body.innerHTML = ''
+  })
 
   function fireResize(width: number) {
-    resizeCallbacks.forEach((cb) => {
+    resizeCallbacks.forEach(cb =>
       cb(
-        [
-          {
-            contentRect: { width, height: 600 },
-          } as ResizeObserverEntry,
-        ],
+        [{ contentRect: { width, height: 600 } } as ResizeObserverEntry],
         {} as ResizeObserver,
-      );
-    });
+      ),
+    )
   }
 
   it('should re-initialize layout when container grows from a tiny initial size', async () => {
     // This component starts with no panels so we can fire a ResizeObserver callback
     // with a tiny size BEFORE the panels register — replicating the exact timing
     // that occurs with nested SplitterGroups in a browser.
-    const showPanels = ref(false);
+    const showPanels = ref(false)
 
     const TestComponent = defineComponent({
       components: { SplitterGroup, SplitterPanel, SplitterResizeHandle },
       setup() {
-        return { showPanels };
+        return { showPanels }
       },
       template: `
         <SplitterGroup direction="horizontal">
@@ -87,53 +83,53 @@ describe('nested px SplitterGroup layout re-initialization', () => {
           </template>
         </SplitterGroup>
       `,
-    });
+    })
 
-    const wrapper = mount(TestComponent);
-    const splitterGroup = wrapper.findComponent(SplitterGroup);
+    const wrapper = mount(TestComponent)
+    const splitterGroup = wrapper.findComponent(SplitterGroup)
 
     // Simulate the inner group being measured while the outer group is still
     // laying out: container reports only 3.45px.
-    fireResize(3.45);
-    await nextTick();
+    fireResize(3.45)
+    await nextTick()
 
     // Now panels mount — they register with groupSizeInPixels already = 3.45.
     // The panelDataArrayChanged watcher will initialize a wrong layout.
-    showPanels.value = true;
-    await nextTick(); // re-render + registerPanel calls
-    await nextTick(); // panelDataArrayChanged watcher fires (wrong layout)
+    showPanels.value = true
+    await nextTick() // re-render + registerPanel calls
+    await nextTick() // panelDataArrayChanged watcher fires (wrong layout)
 
     // Outer group finishes layout: container jumps to its real size.
-    fireResize(923);
-    await nextTick(); // groupSizeInPixels watcher detects tiny initSize → triggers re-init
-    await nextTick(); // panelDataArrayChanged watcher fires with correct 923px size
+    fireResize(923)
+    await nextTick() // groupSizeInPixels watcher detects tiny initSize → triggers re-init
+    await nextTick() // panelDataArrayChanged watcher fires with correct 923px size
 
     // The most recent 'layout' event should contain the sidebar at ~200px
     // (i.e. 200 / 923 * 100 ≈ 21.67% converted back to px) and the content
     // panel absorbing the remainder as a percentage.
     // emitted() wraps each call as [args], so emitted()[n][0] is the layout array.
-    const events = splitterGroup.emitted('layout') as Array<[Array<number>]>;
-    expect(events).toBeDefined();
-    expect(events!.length).toBeGreaterThan(0);
+    const events = splitterGroup.emitted('layout') as [number[]][]
+    expect(events).toBeDefined()
+    expect(events!.length).toBeGreaterThan(0)
 
-    const lastLayout = events!.at(-1)![0];
+    const lastLayout = events!.at(-1)![0]
     // Sidebar panel (px): should be close to its 200px defaultSize
-    expect(lastLayout[0]).toBeCloseTo(200, 0);
+    expect(lastLayout[0]).toBeCloseTo(200, 0)
     // Content panel (%): should occupy the bulk of the remaining space
-    expect(lastLayout[1]).toBeGreaterThan(50);
-  });
+    expect(lastLayout[1]).toBeGreaterThan(50)
+  })
 
   // Regression test: with sizeUnit="px" the panel is visually collapsed but
   // data-state stays "expanded". px constraints are converted px→% and the
   // layout renormalized to sum to 100, so panelSize drifts from collapsedSize
   // by a float epsilon and the old strict `===` comparison failed.
   it('should set data-state="collapsed" for a collapsed px panel', async () => {
-    const showPanels = ref(false);
+    const showPanels = ref(false)
 
     const TestComponent = defineComponent({
       components: { SplitterGroup, SplitterPanel, SplitterResizeHandle },
       setup() {
-        return { showPanels };
+        return { showPanels }
       },
       // Group width 923px is intentionally indivisible by the px constraints so
       // the px→% conversion produces non-terminating decimals.
@@ -154,28 +150,59 @@ describe('nested px SplitterGroup layout re-initialization', () => {
           </template>
         </SplitterGroup>
       `,
-    });
+    })
 
-    const wrapper = mount(TestComponent);
-    await nextTick();
+    const wrapper = mount(TestComponent)
+    await nextTick()
 
     // Establish a real group size before the panels register, so px constraints
     // can be converted and the layout initialized with a defined panel size.
-    fireResize(923);
-    await nextTick();
+    fireResize(923)
+    await nextTick()
 
-    showPanels.value = true;
-    await nextTick(); // registerPanel
-    await nextTick(); // panelDataArrayChanged → layout init
+    showPanels.value = true
+    await nextTick() // registerPanel
+    await nextTick() // panelDataArrayChanged → layout init
 
-    const sidebar = wrapper.find('#sidebar');
-    expect(sidebar.attributes('data-state')).toBe('expanded')
+    const sidebar = wrapper.find('#sidebar')
+    expect(sidebar.attributes('data-state')).toBe('open')
 
     // Collapse via the public API; the panel reaches collapsedSize through
     // adjustLayoutByDelta, leaving panelSize a float-epsilon off collapsedSize.
-    ;(wrapper.vm.$refs.sidebar as { collapse: () => void }).collapse();
-    await nextTick();
+    ;(wrapper.vm.$refs.sidebar as { collapse: () => void }).collapse()
+    await nextTick()
 
-    expect(sidebar.attributes('data-state')).toBe('collapsed');
-  });
-});
+    expect(sidebar.attributes('data-state')).toBe('closed')
+  })
+
+  // Regression test for https://github.com/unovue/reka-ui/issues/3131
+  // Enter on the handle only updated the drawn layout, so data-state kept
+  // reporting the pre-Enter state and collapse()/expand() acted on it.
+  it('should update data-state when a panel is collapsed with Enter on the handle', async () => {
+    const TestComponent = defineComponent({
+      components: { SplitterGroup, SplitterPanel, SplitterResizeHandle },
+      template: `
+        <SplitterGroup direction="horizontal">
+          <SplitterPanel id="sidebar" collapsible :collapsed-size="0" :default-size="40" :min-size="20" />
+          <SplitterResizeHandle id="handle" />
+          <SplitterPanel id="content" />
+        </SplitterGroup>
+      `,
+    })
+
+    const wrapper = mount(TestComponent)
+    await nextTick()
+    fireResize(923)
+    await nextTick()
+    await nextTick()
+
+    const sidebar = wrapper.find('#sidebar')
+    expect(sidebar.attributes('data-state')).toBe('open')
+
+    await wrapper.find('#handle').trigger('keydown', { key: 'Enter' })
+    expect(sidebar.attributes('data-state')).toBe('closed')
+
+    await wrapper.find('#handle').trigger('keydown', { key: 'Enter' })
+    expect(sidebar.attributes('data-state')).toBe('open')
+  })
+})

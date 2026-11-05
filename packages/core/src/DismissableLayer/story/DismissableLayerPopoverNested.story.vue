@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import DummyPopover from './_DummyPopover.vue';
+import DummyPopover from './_DummyPopover.vue'
 
 function handleAlert() {
   // eslint-disable-next-line no-alert
-  alert('Alert');
+  alert('Alert')
 }
 </script>
 

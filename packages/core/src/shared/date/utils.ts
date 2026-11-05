@@ -1,6 +1,24 @@
-import type { Granularity } from './comparators';
-import type { DateInputType, DateStep, DateValue, HourCycle } from './types';
-import { defu } from 'defu';
+import type { Ref } from 'vue'
+import type { Granularity } from './comparators'
+import type { DateInputType, DateStep, DateValue, HourCycle } from './types'
+import { defu } from 'defu'
+import { nextTick, watch } from 'vue'
+import { toCalendar, toIsoString } from '@/date/temporal'
+import { getActiveElement } from '@/shared/getActiveElement'
+
+/**
+ * The value a range field submits in a form: `start - end` as ISO strings.
+ * A missing endpoint is empty (`2024-01-01 - `), and an empty range is an
+ * empty string, so `required` sees it as missing.
+ *
+ * @internal
+ */
+export function toRangeFormValue(range: { start?: DateValue | Temporal.PlainTime | null, end?: DateValue | Temporal.PlainTime | null }): string {
+  const { start, end } = range
+  if (!start && !end)
+    return ''
+  return `${start ? toIsoString(start) : ''} - ${end ? toIsoString(end) : ''}`
+}
 
 export function getOptsByGranularity(granularity: Granularity, hourCycle: HourCycle, isTimeValue: boolean = false) {
   const opts: Intl.DateTimeFormatOptions = {
@@ -13,34 +31,33 @@ export function getOptsByGranularity(granularity: Granularity, hourCycle: HourCy
     timeZoneName: 'short',
     hourCycle: normalizeHourCycle(hourCycle),
     hour12: normalizeHour12(hourCycle),
-  };
+  }
   if (isTimeValue) {
-    delete opts.year;
-    delete opts.month;
-    delete opts.day;
+    delete opts.year
+    delete opts.month
+    delete opts.day
   }
 
   if (granularity === 'day') {
-    delete opts.second;
-    delete opts.hour;
-    delete opts.minute;
-    delete opts.timeZoneName;
+    delete opts.second
+    delete opts.hour
+    delete opts.minute
+    delete opts.timeZoneName
   }
   if (granularity === 'hour') {
-    delete opts.minute;
-    delete opts.second;
+    delete opts.minute
+    delete opts.second
   }
 
-  if (granularity === 'minute') {
-    delete opts.second;
-  }
+  if (granularity === 'minute')
+    delete opts.second
 
-  return opts;
+  return opts
 }
 
 type GetDefaultDateStepProps = {
-  step?: DateStep;
-};
+  step?: DateStep
+}
 
 export function normalizeDateStep(props?: GetDefaultDateStepProps): DateStep {
   return defu(props?.step, {
@@ -51,80 +68,91 @@ export function normalizeDateStep(props?: GetDefaultDateStepProps): DateStep {
     minute: 1,
     second: 1,
     millisecond: 1,
-  } satisfies DateStep);
+  } satisfies DateStep)
 }
 
 export function handleCalendarInitialFocus(calendar: HTMLElement) {
-  const selectedDay = calendar.querySelector<HTMLElement>('[data-selected]');
-  if (selectedDay) {
-    return selectedDay.focus();
-  }
+  const selectedDay = calendar.querySelector<HTMLElement>('[data-selected]')
+  if (selectedDay)
+    return selectedDay.focus()
 
-  const today = calendar.querySelector<HTMLElement>('[data-today]');
-  if (today) {
-    return today.focus();
-  }
+  const today = calendar.querySelector<HTMLElement>('[data-today]')
+  if (today)
+    return today.focus()
 
-  const firstDay = calendar.querySelector<HTMLElement>('[data-value]:not([data-outside-view]):not([data-disabled])');
-  if (firstDay) {
-    return firstDay.focus();
-  }
+  const firstDay = calendar.querySelector<HTMLElement>('[data-value]:not([data-outside-view]):not([data-disabled])')
+  if (firstDay)
+    return firstDay.focus()
+}
+
+/**
+ * Keeps keyboard focus inside the calendar when the view changes. Selecting a
+ * month or year cell above the granularity drills down, which unmounts the
+ * focused cell; without this the focus falls back to `<body>`. Focus moves to
+ * the tabbable cell of the new view (the placeholder, else the first focusable
+ * cell). A view change that leaves the focus alone (the view trigger, a
+ * controlled `view`) is not touched.
+ *
+ * @lifecycle setup — installs a watcher.
+ */
+export function useCalendarViewFocus(calendar: Ref<HTMLElement | undefined>, view: Ref<unknown>) {
+  // Default (pre) flush: runs before the outgoing view is unmounted.
+  watch(view, () => {
+    const root = calendar.value
+    const active = root ? getActiveElement(root) : null
+    if (!root || !active || !root.contains(active) || !active.hasAttribute('data-reka-calendar-cell-trigger'))
+      return
+
+    nextTick(() => {
+      if (root.contains(getActiveElement(root)))
+        return
+      root.querySelector<HTMLElement>('[data-reka-calendar-cell-trigger][tabindex="0"]')?.focus()
+    })
+  })
 }
 
 export function normalizeHourCycle(hourCycle: HourCycle) {
-  if (hourCycle === 24) {
-    return 'h23';
-  }
-  if (hourCycle === 12) {
-    return 'h11';
-  }
-  return undefined;
+  if (hourCycle === 24)
+    return 'h23'
+  if (hourCycle === 12)
+    return 'h11'
+  return undefined
 }
 
 export function normalizeHour12(hourCycle: HourCycle) {
-  if (hourCycle === 24) {
-    return false;
-  }
-  if (hourCycle === 12) {
-    return true;
-  }
-  return undefined;
+  if (hourCycle === 24)
+    return false
+  if (hourCycle === 12)
+    return true
+  return undefined
 }
 
 export function getInputType(granularity: Granularity): DateInputType {
-  return granularity === 'day'
-    ? 'date'
-    : 'datetime-local';
+  return granularity === 'day' ? 'date' : 'datetime-local'
 }
 
 export function normalizeInputValue(date: DateValue | undefined, granularity: Granularity): string {
-  if (!date) {
-    return '';
-  }
+  if (!date)
+    return ''
 
-  const type = getInputType(granularity);
+  const type = getInputType(granularity)
 
-  const year = String(date.year).padStart(4, '0');
-  const month = String(date.month).padStart(2, '0');
-  const day = String(date.day).padStart(2, '0');
+  // Native date inputs take ISO fields, whatever calendar the value is in.
+  date = toCalendar(date, 'iso8601')
+  const year = String(date.year).padStart(4, '0')
+  const month = String(date.month).padStart(2, '0')
+  const day = String(date.day).padStart(2, '0')
 
-  if (type === 'date') {
-    return `${year}-${month}-${day}`;
-  }
+  if (type === 'date')
+    return `${year}-${month}-${day}`
 
-  const hour = String('hour' in date
-    ? date.hour
-    : 0).padStart(2, '0');
-  const minute = String('minute' in date
-    ? date.minute
-    : 0).padStart(2, '0');
+  const hour = String('hour' in date ? date.hour : 0).padStart(2, '0')
+  const minute = String('minute' in date ? date.minute : 0).padStart(2, '0')
 
   if (granularity === 'second') {
-    const second = String('second' in date
-      ? date.second
-      : 0).padStart(2, '0');
-    return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+    const second = String('second' in date ? date.second : 0).padStart(2, '0')
+    return `${year}-${month}-${day}T${hour}:${minute}:${second}`
   }
 
-  return `${year}-${month}-${day}T${hour}:${minute}`;
+  return `${year}-${month}-${day}T${hour}:${minute}`
 }

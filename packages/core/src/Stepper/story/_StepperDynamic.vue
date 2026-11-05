@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { StepperItem, StepperRoot, StepperTitle, StepperTrigger } from '..';
+import { computed } from 'vue'
+import { StepperItem, StepperRoot, StepperTitle, StepperTrigger } from '..'
 
 const props = withDefaults(defineProps<{ visibleSteps?: number }>(), {
   visibleSteps: 5,
-});
+})
 
-const allSteps = [1, 2, 3, 4, 5];
-const steps = computed(() => allSteps.slice(0, props.visibleSteps));
+const allSteps = [1, 2, 3, 4, 5]
+const steps = computed(() => allSteps.slice(0, props.visibleSteps))
 </script>
 
 <template>

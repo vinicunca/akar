@@ -1,40 +1,34 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
+import { Icon } from '@iconify/vue'
 
-import { StepperDescription, StepperIndicator, StepperItem, StepperRoot, StepperSeparator, StepperTitle, StepperTrigger } from '..';
+import { StepperDescription, StepperIndicator, StepperItem, StepperRoot, StepperSeparator, StepperTitle, StepperTrigger } from '..'
 
-const steps = [
-  {
-    step: 1,
-    title: 'Address',
-    description: 'Add your address here',
-    icon: 'radix-icons:home',
-  },
-  {
-    step: 2,
-    title: 'Shipping',
-    description: 'Set your preferred shipping method',
-    icon: 'radix-icons:archive',
-  },
-  {
-    step: 3,
-    title: 'Trade-in',
-    description: 'Add any trade-in items you have',
-    icon: 'radix-icons:update',
-  },
-  {
-    step: 4,
-    title: 'Payment',
-    description: 'Add any payment information you have',
-    icon: 'radix-icons:sketch-logo',
-  },
-  {
-    step: 5,
-    title: 'Checkout',
-    description: 'Confirm your order',
-    icon: 'radix-icons:check',
-  },
-];
+const steps = [{
+  step: 1,
+  title: 'Address',
+  description: 'Add your address here',
+  icon: 'radix-icons:home',
+}, {
+  step: 2,
+  title: 'Shipping',
+  description: 'Set your preferred shipping method',
+  icon: 'radix-icons:archive',
+}, {
+  step: 3,
+  title: 'Trade-in',
+  description: 'Add any trade-in items you have',
+  icon: 'radix-icons:update',
+}, {
+  step: 4,
+  title: 'Payment',
+  description: 'Add any payment information you have',
+  icon: 'radix-icons:sketch-logo',
+}, {
+  step: 5,
+  title: 'Checkout',
+  description: 'Confirm your order',
+  icon: 'radix-icons:check',
+}]
 </script>
 
 <template>
@@ -54,7 +48,7 @@ const steps = [
         >
           <StepperTrigger class="p-2 flex flex-col items-center text-center gap-2 focus:shadow-[0_0_0_2px] focus:shadow-green11 focus:outline-none rounded-md">
             <StepperIndicator
-              class="inline-flex items-center group-data-[disabled]:text-gray-400 group-data-[state=active]:bg-mauve12 group-data-[state=active]:text-white justify-center rounded-full text-grass11 w-10 h-10 shrink-0 bg-mauve6 group-data-[state=active]:shadow-mauve12 group-data-[state=completed]:bg-green9 group-data-[state=completed]:text-white group-data-[state=completed]:shadow-green9 shadow-[0_0_0_2px] "
+              class="inline-flex items-center group-data-[disabled]:text-gray-400 group-data-[state=current]:bg-mauve12 group-data-[state=current]:text-white justify-center rounded-full text-grass11 w-10 h-10 shrink-0 bg-mauve6 group-data-[state=current]:shadow-mauve12 group-data-[state=completed]:bg-green9 group-data-[state=completed]:text-white group-data-[state=completed]:shadow-green9 shadow-[0_0_0_2px] "
             >
               <Icon
                 :icon="item.icon"

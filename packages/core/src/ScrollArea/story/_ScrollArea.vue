@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { ScrollAreaRootProps } from '../ScrollAreaRoot.vue';
+import type { ScrollAreaRootProps } from '../ScrollAreaRoot.vue'
 import {
   ScrollAreaCorner,
   ScrollAreaRoot,
   ScrollAreaScrollbar,
   ScrollAreaThumb,
   ScrollAreaViewport,
-} from '..';
-import ScrollAreaCopy from './_ScrollAreaCopy.vue';
+} from '..'
+import ScrollAreaCopy from './_ScrollAreaCopy.vue'
 
-const props = defineProps<ScrollAreaRootProps>();
+const props = defineProps<ScrollAreaRootProps>()
 </script>
 
 <template>

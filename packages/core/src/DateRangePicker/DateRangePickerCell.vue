@@ -1,16 +1,27 @@
 <script lang="ts">
-import type { RangeCalendarCellProps } from '..';
-import { RangeCalendarCell } from '..';
+import type { RangeCalendarCellProps } from '..'
+import { RangeCalendarCell } from '..'
 
 export interface DateRangePickerCellProps extends RangeCalendarCellProps {}
 </script>
 
 <script setup lang="ts">
-const props = defineProps<DateRangePickerCellProps>();
+import { h, useSlots } from 'vue'
+import { useForwardElement } from '@/shared'
+
+const props = defineProps<DateRangePickerCellProps>()
+
+const { forwardRef, expose } = useForwardElement()
+defineExpose(expose)
+const slots = useSlots()
+
+// The slot content goes straight into the element: no `<slot>` fragment, so
+// no empty anchor text nodes (this part renders once per calendar cell).
+function renderRoot() {
+  return h(RangeCalendarCell, { ref: forwardRef, ...props }, slots)
+}
 </script>
 
 <template>
-  <RangeCalendarCell v-bind="props">
-    <slot />
-  </RangeCalendarCell>
+  <component :is="renderRoot()" />
 </template>

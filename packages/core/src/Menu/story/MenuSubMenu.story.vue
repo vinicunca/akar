@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { MenuItem, MenuSeparator } from '..';
-import MenuWithAnchor from './_MenuWithAnchor.vue';
-import Submenu from './_Submenu.vue';
+import { ref } from 'vue'
+import { MenuItem, MenuSeparator } from '..'
+import MenuWithAnchor from './_MenuWithAnchor.vue'
+import Submenu from './_Submenu.vue'
 
 function handleSelect(text: string) {
   // eslint-disable-next-line no-console
-  console.log({ text });
+  console.log({ text })
 }
 
-const open1 = ref(false);
-const open2 = ref(false);
+const open1 = ref(false)
+const open2 = ref(false)
 </script>
 
 <template>
