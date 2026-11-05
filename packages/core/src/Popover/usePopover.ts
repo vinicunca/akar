@@ -7,22 +7,22 @@ import { computed, ref, toValue } from 'vue';
 import { createPartSurface, disclosureState, setGeneratedIds, useControllableState } from '@/shared';
 import { createPopupRootStore, setPopupRootStore } from '@/shared/popupHandle';
 
-/**
- * =============================================================================
- * Headless composable for the Popover (overlay) family — issue #2723.
- *
- * Follows the overlay contract validated on Menu: the root renders NO attrs
- * (`PopoverRoot` is `<PopperRoot><slot/></PopperRoot>`), so `usePopover()`
- * returns state + the context object the SFC provides, and the surfaces begin
- * at Trigger / Close / Content. Unlike Menu's per-item factories, every Popover
- * part derives purely from the root context, so the builders are idempotent
- * `get<Part>Surface(context)` derivations — the SFCs (which inject the context)
- * and `usePopover()` share ONE derivation each. Positioning (`PopperAnchor` /
- * `PopperContent`), `Presence`, `FocusScope`, `DismissableLayer`, the portal and
- * the modal side-effects (`useHideOthers` / `useBodyScrollLock`) stay wrappers.
- * =============================================================================
- */
-export type PopoverTriggerState = { state: DisclosureState };
+// =============================================================================
+// Headless composable for the Popover (overlay) family — issue #2723.
+//
+// Follows the overlay contract validated on Menu: the root renders NO attrs
+// (`PopoverRoot` is `<PopperRoot><slot/></PopperRoot>`), so `usePopover()`
+// returns state + the context object the SFC provides, and the surfaces begin
+// at Trigger / Close / Content. Unlike Menu's per-item factories, every Popover
+// part derives purely from the root context, so the builders are idempotent
+// `get<Part>Surface(context)` derivations — the SFCs (which inject the context)
+// and `usePopover()` share ONE derivation each. Positioning (`PopperAnchor` /
+// `PopperContent`), `Presence`, `FocusScope`, `DismissableLayer`, the portal and
+// the modal side-effects (`useHideOthers` / `useBodyScrollLock`) stay wrappers.
+// =============================================================================
+
+/** Semantic state of the trigger part; `popupOpen` → `data-popup-open` while the popup is open (no `data-state`, so an `asChild` control keeps its own). */
+export type PopoverTriggerState = { popupOpen: boolean };
 export type PopoverContentState = { state: DisclosureState };
 
 /** Standalone `usePopover()` calls without a `baseId` draw `akar-popover-<n>` from here. */
@@ -56,9 +56,7 @@ export function getPopoverTriggerSurface(context: PopoverRootContext): PartSurfa
       'aria-controls': context.open.value ? context.contentId : undefined,
       'onClick': (event: MouseEvent) => context.onOpenToggle('trigger-press', event),
     }),
-    () => ({
-      state: disclosureState(context.open.value),
-    }),
+    () => ({ popupOpen: context.open.value }),
   );
 }
 

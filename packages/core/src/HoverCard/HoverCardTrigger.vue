@@ -30,7 +30,7 @@ usePopperAnchor({
   reference: () => props.reference,
 });
 
-// `data-state`, the `data-grace-area-trigger` selector and the hover / leave /
+// `data-popup-open`, the `data-grace-area-trigger` selector and the hover / leave /
 // touch / focus / blur listeners all come from the shared surface builder
 // (single source with `useHoverCard()`); the PopperAnchor wrapper and the
 // element registration above stay in the SFC. Listener order is unchanged:

@@ -113,9 +113,9 @@ describe('navigation menu elements', () => {
   it('opens on hover', async () => {
     const { learn } = await ready();
     await userEvent.hover(learn);
-    await vi.waitFor(() => expect(learn.getAttribute('data-state')).toBe('open'));
+    await vi.waitFor(() => expect(learn.hasAttribute('data-popup-open')).toBe(true));
     await userEvent.hover(query('#after'));
-    await vi.waitFor(() => expect(learn.getAttribute('data-state')).toBe('closed'));
+    await vi.waitFor(() => expect(learn.hasAttribute('data-popup-open')).toBe(false));
   });
 
   it('moves between triggers and links with the arrow keys, and tabs into an open content', async () => {
@@ -131,7 +131,7 @@ describe('navigation menu elements', () => {
     expect(document.activeElement).toBe(learn);
 
     await userEvent.keyboard('{Enter}');
-    await vi.waitFor(() => expect(learn.getAttribute('data-state')).toBe('open'));
+    await vi.waitFor(() => expect(learn.hasAttribute('data-popup-open')).toBe(true));
     // ArrowDown moves into the open content.
     await userEvent.keyboard('{ArrowDown}');
     await vi.waitFor(() => expect(document.activeElement).toBe(query('#stitches')));
@@ -140,7 +140,7 @@ describe('navigation menu elements', () => {
 
     // Escape closes and returns to the trigger.
     await userEvent.keyboard('{Escape}');
-    await vi.waitFor(() => expect(learn.getAttribute('data-state')).toBe('closed'));
+    await vi.waitFor(() => expect(learn.hasAttribute('data-popup-open')).toBe(false));
     expect(document.activeElement).toBe(learn);
   });
 
@@ -161,7 +161,7 @@ describe('navigation menu elements', () => {
     warn.mockRestore();
 
     await userEvent.keyboard('{Escape}');
-    await vi.waitFor(() => expect(learn.getAttribute('data-state')).toBe('closed'));
+    await vi.waitFor(() => expect(learn.hasAttribute('data-popup-open')).toBe(false));
     // Gone with the open state.
     expect(learn.parentElement!.querySelector('[aria-owns]')).toBeNull();
     expect(learn.nextElementSibling).toBe(query('[data-test=learn] ~ akar-navigation-menu-content'));
@@ -240,7 +240,7 @@ describe('what an open trigger renders next to itself', () => {
     await vi.waitFor(() => expect(document.activeElement).toBe(query('#stitches')));
 
     await userEvent.keyboard('{Escape}');
-    await vi.waitFor(() => expect(learn.getAttribute('data-state')).toBe('closed'));
+    await vi.waitFor(() => expect(learn.hasAttribute('data-popup-open')).toBe(false));
     expect(wrapper.querySelector('[aria-owns]')).toBeNull();
     expect(learn.parentElement!.parentElement!.querySelector('[aria-owns]')).toBeNull();
   });
