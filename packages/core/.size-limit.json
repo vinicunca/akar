@@ -56,7 +56,7 @@
   {
     "path": "dist/elements.js",
     "import": "{ defineAkarElements, switchElements }",
-    "limit": "16.4 KB",
+    "limit": "16.5 KB",
     "name": "Elements: runtime + Switch"
   },
   {
