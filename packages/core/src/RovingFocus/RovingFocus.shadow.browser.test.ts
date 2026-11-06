@@ -17,6 +17,7 @@ describe('given roving focus inside a shadow root, in a real browser', () => {
         h('button', { 'data-testid': 'before' }, 'Before'),
         h(TabsRoot, {
           'modelValue': tab.value,
+          'activationMode': 'automatic',
           'onUpdate:modelValue': (v: unknown) => {
             tab.value = v as string;
           },
