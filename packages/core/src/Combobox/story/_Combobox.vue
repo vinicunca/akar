@@ -11,7 +11,7 @@ const emits = defineEmits<ComboboxRootEmits>();
 const forwarded = useForwardPropsEmits(props, emits);
 const v = ref<any>(props.multiple
   ? []
-  : '');
+  : null);
 
 const options = [
   'Apple',
