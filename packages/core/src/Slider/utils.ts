@@ -1,5 +1,5 @@
 import type { ComputedRef } from 'vue';
-import { clamp } from '@vinicunca/perkakas';
+import { clamp, KEY_CODES } from '@vinicunca/perkakas';
 import { createContext } from '@/shared';
 
 export interface SliderOrientationPrivateProps {
@@ -125,39 +125,39 @@ export function roundValue(value: number, decimalCount: number) {
 
 export type Direction = 'ltr' | 'rtl';
 
-export const PAGE_KEYS = ['PageUp', 'PageDown'];
+export const PAGE_KEYS = [KEY_CODES.PAGE_UP, KEY_CODES.PAGE_DOWN];
 export const ARROW_KEYS = [
-  'ArrowUp',
-  'ArrowDown',
-  'ArrowLeft',
-  'ArrowRight',
+  KEY_CODES.ARROW_UP,
+  KEY_CODES.ARROW_DOWN,
+  KEY_CODES.ARROW_LEFT,
+  KEY_CODES.ARROW_RIGHT,
 ];
 
 type SlideDirection = 'from-left' | 'from-right' | 'from-bottom' | 'from-top';
 export const BACK_KEYS: Record<SlideDirection, Array<string>> = {
   'from-left': [
-    'Home',
-    'PageDown',
-    'ArrowDown',
-    'ArrowLeft',
+    KEY_CODES.HOME,
+    KEY_CODES.PAGE_DOWN,
+    KEY_CODES.ARROW_DOWN,
+    KEY_CODES.ARROW_LEFT,
   ],
   'from-right': [
-    'Home',
-    'PageDown',
-    'ArrowDown',
-    'ArrowRight',
+    KEY_CODES.HOME,
+    KEY_CODES.PAGE_DOWN,
+    KEY_CODES.ARROW_DOWN,
+    KEY_CODES.ARROW_RIGHT,
   ],
   'from-bottom': [
-    'Home',
-    'PageDown',
-    'ArrowDown',
-    'ArrowLeft',
+    KEY_CODES.HOME,
+    KEY_CODES.PAGE_DOWN,
+    KEY_CODES.ARROW_DOWN,
+    KEY_CODES.ARROW_LEFT,
   ],
   'from-top': [
-    'Home',
-    'PageUp',
-    'ArrowUp',
-    'ArrowLeft',
+    KEY_CODES.HOME,
+    KEY_CODES.PAGE_UP,
+    KEY_CODES.ARROW_UP,
+    KEY_CODES.ARROW_LEFT,
   ],
 };
 
