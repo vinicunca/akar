@@ -178,4 +178,34 @@ describe('nested px SplitterGroup layout re-initialization', () => {
 
     expect(sidebar.attributes('data-state')).toBe('collapsed');
   });
+
+  // Enter on the handle only updated the drawn layout, so data-state kept
+  // reporting the pre-Enter state and collapse()/expand() acted on it.
+  it('should update data-state when a panel is collapsed with Enter on the handle', async () => {
+    const TestComponent = defineComponent({
+      components: { SplitterGroup, SplitterPanel, SplitterResizeHandle },
+      template: `
+        <SplitterGroup direction="horizontal">
+          <SplitterPanel id="sidebar" collapsible :collapsed-size="0" :default-size="40" :min-size="20" />
+          <SplitterResizeHandle id="handle" />
+          <SplitterPanel id="content" />
+        </SplitterGroup>
+      `,
+    });
+
+    const wrapper = mount(TestComponent);
+    await nextTick();
+    fireResize(923);
+    await nextTick();
+    await nextTick();
+
+    const sidebar = wrapper.find('#sidebar');
+    expect(sidebar.attributes('data-state')).toBe('expanded');
+
+    await wrapper.find('#handle').trigger('keydown', { key: 'Enter' });
+    expect(sidebar.attributes('data-state')).toBe('collapsed');
+
+    await wrapper.find('#handle').trigger('keydown', { key: 'Enter' });
+    expect(sidebar.attributes('data-state')).toBe('expanded');
+  });
 });
