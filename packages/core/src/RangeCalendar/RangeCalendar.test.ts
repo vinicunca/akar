@@ -1,14 +1,15 @@
-import type { DateValue } from '@internationalized/date';
 import type { RangeCalendarRootProps } from './RangeCalendarRoot.vue';
-import { CalendarDate, CalendarDateTime, toZoned } from '@internationalized/date';
+import type { DateValue } from '@/date';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render, waitFor } from '@testing-library/vue';
 import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+import { effectScope, nextTick, shallowRef } from 'vue';
 import { useTestKbd } from '@/shared';
 import { RangeCalendarHeader, RangeCalendarHeading, RangeCalendarNext, RangeCalendarPrev, RangeCalendarRoot } from '..';
 import RangeCalendar from './story/_RangeCalendar.vue';
+import { useRangeCalendar } from './useRangeCalendar';
 
 it('should pass axe accessibility tests', async () => {
   const wrapper = mount(RangeCalendar);
@@ -18,18 +19,18 @@ it('should pass axe accessibility tests', async () => {
 const kbd = useTestKbd();
 
 const calendarDateRange = {
-  start: new CalendarDate(1980, 1, 20),
-  end: new CalendarDate(1980, 1, 25),
+  start: new Temporal.PlainDate(1980, 1, 20),
+  end: new Temporal.PlainDate(1980, 1, 25),
 };
 
 const calendarDateTimeRange = {
-  start: new CalendarDateTime(1980, 1, 20, 12, 30, 0, 0),
-  end: new CalendarDateTime(1980, 1, 25, 12, 30, 0, 0),
+  start: new Temporal.PlainDateTime(1980, 1, 20, 12, 30, 0, 0),
+  end: new Temporal.PlainDateTime(1980, 1, 25, 12, 30, 0, 0),
 };
 
 const zonedDateTimeRange = {
-  start: toZoned(calendarDateTimeRange.start, 'America/New_York'),
-  end: toZoned(calendarDateTimeRange.end, 'America/New_York'),
+  start: calendarDateTimeRange.start.toZonedDateTime('America/New_York'),
+  end: calendarDateTimeRange.end.toZonedDateTime('America/New_York'),
 };
 
 const narrowWeekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -221,9 +222,9 @@ describe('rangeCalendar', () => {
   });
 
   it('keeps controlled end when parent preserves it after start edit', async () => {
-    const preservedEnd = new CalendarDate(1980, 1, 28);
+    const preservedEnd = new Temporal.PlainDate(1980, 1, 28);
     const controlledRange = {
-      start: new CalendarDate(1980, 1, 20),
+      start: new Temporal.PlainDate(1980, 1, 20),
       end: preservedEnd,
     };
 
@@ -294,7 +295,7 @@ describe('rangeCalendar', () => {
   it('caps highlighted range to maximumDays (forward)', async () => {
     const { getByTestId, calendar, user } = setup({
       calendarProps: {
-        placeholder: new CalendarDate(1980, 1, 20),
+        placeholder: new Temporal.PlainDate(1980, 1, 20),
         maximumDays: 5,
       },
     });
@@ -314,7 +315,7 @@ describe('rangeCalendar', () => {
   it('caps highlighted range to maximumDays (backward)', async () => {
     const { getByTestId, calendar, user } = setup({
       calendarProps: {
-        placeholder: new CalendarDate(1980, 1, 20),
+        placeholder: new Temporal.PlainDate(1980, 1, 20),
         maximumDays: 5,
       },
     });
@@ -378,8 +379,8 @@ describe('rangeCalendar', () => {
         RangeCalendarNext,
       },
       setup() {
-        const placeholder = new CalendarDate(1980, 1, 15);
-        const minValue = new CalendarDate(1980, 1, 1);
+        const placeholder = new Temporal.PlainDate(1980, 1, 15);
+        const minValue = new Temporal.PlainDate(1980, 1, 1);
         return { placeholder, minValue };
       },
       template: `
@@ -440,6 +441,7 @@ describe('rangeCalendar', () => {
     expect(heading).toHaveTextContent('January 1983');
   });
 
+  // 36 user clicks: needs more than the default 5s when the full suite runs in parallel
   it('always renders six weeks when `fixedWeeks` is `true`', async () => {
     const { getByTestId, calendar, user } = setup({
       calendarProps: {
@@ -463,13 +465,13 @@ describe('rangeCalendar', () => {
       expect(getNumberOfWeeks()).toBe(6);
       await user.click(nextButton);
     }
-  });
+  }, 20_000);
 
   it('should not allow navigation before the `minValue` (prev button)', async () => {
     const { getByTestId, user } = setup({
       calendarProps: {
         modelValue: calendarDateRange,
-        minValue: new CalendarDate(1979, 11, 25),
+        minValue: new Temporal.PlainDate(1979, 11, 25),
       },
     });
 
@@ -493,7 +495,7 @@ describe('rangeCalendar', () => {
     const { getByTestId, user } = setup({
       calendarProps: {
         modelValue: calendarDateRange,
-        maxValue: new CalendarDate(1980, 3, 25),
+        maxValue: new Temporal.PlainDate(1980, 3, 25),
       },
     });
 
@@ -553,7 +555,7 @@ describe('rangeCalendar', () => {
     const { getByTestId, user } = setup({
       calendarProps: {
         modelValue: calendarDateRange,
-        maxValue: new CalendarDate(1980, 3, 31),
+        maxValue: new Temporal.PlainDate(1980, 3, 31),
       },
     });
 
@@ -604,7 +606,7 @@ describe('rangeCalendar', () => {
     const { getByTestId, user } = setup({
       calendarProps: {
         modelValue: calendarDateRange,
-        minValue: new CalendarDate(1979, 12, 1),
+        minValue: new Temporal.PlainDate(1979, 12, 1),
       },
     });
 
@@ -712,7 +714,7 @@ describe('rangeCalendar', () => {
     const { getByTestId, user } = setup({
       calendarProps: {
         modelValue: calendarDateRange,
-        maxValue: new CalendarDate(1980, 2, 15),
+        maxValue: new Temporal.PlainDate(1980, 2, 15),
       },
     });
 
@@ -733,7 +735,7 @@ describe('rangeCalendar', () => {
     const { getByTestId, user } = setup({
       calendarProps: {
         modelValue: calendarDateRange,
-        minValue: new CalendarDate(1979, 12, 15),
+        minValue: new Temporal.PlainDate(1979, 12, 15),
       },
     });
 
@@ -773,7 +775,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 10),
+          placeholder: new Temporal.PlainDate(2024, 1, 10),
           weekStartsOn: 0,
         },
         emits: { 'onUpdate:modelValue': spy.emit },
@@ -792,7 +794,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 10),
+          placeholder: new Temporal.PlainDate(2024, 1, 10),
           weekStartsOn: 0,
         },
         emits: { 'onUpdate:modelValue': spy.emit },
@@ -811,7 +813,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2021, 1, 1),
+          placeholder: new Temporal.PlainDate(2021, 1, 1),
           weekStartsOn: 0,
         },
         emits: { 'onUpdate:modelValue': spy.emit },
@@ -830,7 +832,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2021, 1, 31),
+          placeholder: new Temporal.PlainDate(2021, 1, 31),
           weekStartsOn: 0,
         },
         emits: { 'onUpdate:modelValue': spy.emit },
@@ -849,7 +851,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 10),
+          placeholder: new Temporal.PlainDate(2024, 1, 10),
           weekStartsOn: 1,
         },
         emits: { 'onUpdate:modelValue': spy.emit },
@@ -868,7 +870,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 10),
+          placeholder: new Temporal.PlainDate(2024, 1, 10),
           weekStartsOn: 1,
         },
         emits: { 'onUpdate:modelValue': spy.emit },
@@ -887,7 +889,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 2, 15),
+          placeholder: new Temporal.PlainDate(2024, 2, 15),
         },
         emits: { 'onUpdate:modelValue': spy.emit },
       });
@@ -908,7 +910,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 15),
+          placeholder: new Temporal.PlainDate(2024, 1, 15),
         },
         emits: { 'onUpdate:modelValue': spy.emit },
       });
@@ -929,7 +931,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 3, 31),
+          placeholder: new Temporal.PlainDate(2024, 3, 31),
         },
         emits: { 'onUpdate:modelValue': spy.emit },
       });
@@ -950,7 +952,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 3, 15),
+          placeholder: new Temporal.PlainDate(2024, 3, 15),
         },
         emits: { 'onUpdate:modelValue': spy.emit },
       });
@@ -971,7 +973,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 3, 15),
+          placeholder: new Temporal.PlainDate(2024, 3, 15),
         },
         emits: { 'onUpdate:modelValue': spy.emit },
       });
@@ -992,7 +994,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 2, 29),
+          placeholder: new Temporal.PlainDate(2024, 2, 29),
         },
         emits: { 'onUpdate:modelValue': spy.emit },
       });
@@ -1013,7 +1015,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 2, 29),
+          placeholder: new Temporal.PlainDate(2024, 2, 29),
         },
         emits: { 'onUpdate:modelValue': spy.emit },
       });
@@ -1034,8 +1036,8 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 15),
-          minValue: new CalendarDate(2024, 1, 5),
+          placeholder: new Temporal.PlainDate(2024, 1, 15),
+          minValue: new Temporal.PlainDate(2024, 1, 5),
         },
         emits: { 'onUpdate:modelValue': spy.emit },
       });
@@ -1056,8 +1058,8 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 15),
-          maxValue: new CalendarDate(2024, 1, 20),
+          placeholder: new Temporal.PlainDate(2024, 1, 15),
+          maxValue: new Temporal.PlainDate(2024, 1, 20),
         },
         emits: { 'onUpdate:modelValue': spy.emit },
       });
@@ -1082,8 +1084,8 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 2, 15),
-          minValue: new CalendarDate(2024, 1, 20),
+          placeholder: new Temporal.PlainDate(2024, 2, 15),
+          minValue: new Temporal.PlainDate(2024, 1, 20),
           isDateUnavailable: (date: DateValue) => {
             // January 20th is unavailable
             return date.month === 1 && date.day === 20;
@@ -1115,8 +1117,8 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 15),
-          maxValue: new CalendarDate(2024, 2, 5),
+          placeholder: new Temporal.PlainDate(2024, 1, 15),
+          maxValue: new Temporal.PlainDate(2024, 2, 5),
           isDateUnavailable: (date: DateValue) => {
             // February 5th is unavailable
             return date.month === 2 && date.day === 5;
@@ -1145,8 +1147,8 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 2, 15),
-          minValue: new CalendarDate(2024, 1, 20),
+          placeholder: new Temporal.PlainDate(2024, 2, 15),
+          minValue: new Temporal.PlainDate(2024, 1, 20),
           isDateDisabled: (date: DateValue) => {
             // January 20th is disabled
             return date.month === 1 && date.day === 20;
@@ -1172,8 +1174,8 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 15),
-          maxValue: new CalendarDate(2024, 2, 5),
+          placeholder: new Temporal.PlainDate(2024, 1, 15),
+          maxValue: new Temporal.PlainDate(2024, 2, 5),
           isDateDisabled: (date: DateValue) => {
             // February 5th is disabled
             return date.month === 2 && date.day === 5;
@@ -1199,9 +1201,9 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 2, 15),
-          minValue: new CalendarDate(2024, 1, 10),
-          maxValue: new CalendarDate(2024, 1, 10),
+          placeholder: new Temporal.PlainDate(2024, 2, 15),
+          minValue: new Temporal.PlainDate(2024, 1, 10),
+          maxValue: new Temporal.PlainDate(2024, 1, 10),
           isDateUnavailable: (date: DateValue) => {
             // January 10th is unavailable (the only date in range)
             return date.month === 1 && date.day === 10;
@@ -1228,9 +1230,9 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 15),
-          minValue: new CalendarDate(2024, 1, 10),
-          maxValue: new CalendarDate(2024, 1, 10),
+          placeholder: new Temporal.PlainDate(2024, 1, 15),
+          minValue: new Temporal.PlainDate(2024, 1, 10),
+          maxValue: new Temporal.PlainDate(2024, 1, 10),
           isDateUnavailable: (date: DateValue) => {
             // January 10th is unavailable (the only date in range)
             return date.month === 1 && date.day === 10;
@@ -1256,7 +1258,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 10),
+          placeholder: new Temporal.PlainDate(2024, 1, 10),
           weekStartsOn: 0,
           isDateDisabled: (date: DateValue) => date.month === 1 && date.day === 7,
         },
@@ -1278,7 +1280,7 @@ describe('rangeCalendar', () => {
       const { getByTestId, user } = setup({
         calendarProps: {
           modelValue: calendarDateRange,
-          placeholder: new CalendarDate(2024, 1, 10),
+          placeholder: new Temporal.PlainDate(2024, 1, 10),
           weekStartsOn: 0,
           isDateDisabled: (date: DateValue) => date.month === 1 && date.day === 13,
         },
@@ -1313,13 +1315,13 @@ describe('numberOfMonths > 1', () => {
     const heading = getByTestId('heading');
     expect(heading).toHaveTextContent('January - February 1980');
 
-    const firstMonthDayDateStr = calendarDateRange.start.set({ day: 12 }).toString();
+    const firstMonthDayDateStr = calendarDateRange.start.with({ day: 12 }).toString();
     const firstMonthDay = getByTestId('date-0-1-12');
     expect(firstMonthDay).toHaveTextContent('12');
     expect(firstMonthDay).toHaveAttribute('data-value', firstMonthDayDateStr);
 
     const secondMonthDay = getByTestId('date-1-2-15');
-    const secondMonthDayDateStr = calendarDateRange.start.set({ day: 15, month: 2 }).toString();
+    const secondMonthDayDateStr = calendarDateRange.start.with({ day: 15, month: 2 }).toString();
     expect(secondMonthDay).toHaveTextContent('15');
     expect(secondMonthDay).toHaveAttribute('data-value', secondMonthDayDateStr);
 
@@ -1355,13 +1357,13 @@ describe('numberOfMonths > 1', () => {
     const heading = getByTestId('heading');
     expect(heading).toHaveTextContent('January - February 1980');
 
-    const firstMonthDayDateStr = calendarDateRange.start.set({ day: 12 }).toString();
+    const firstMonthDayDateStr = calendarDateRange.start.with({ day: 12 }).toString();
     const firstMonthDay = getByTestId('date-0-1-12');
     expect(firstMonthDay).toHaveTextContent('12');
     expect(firstMonthDay).toHaveAttribute('data-value', firstMonthDayDateStr);
 
     const secondMonthDay = getByTestId('date-1-2-15');
-    const secondMonthDayDateStr = calendarDateRange.start.set({ day: 15, month: 2 }).toString();
+    const secondMonthDayDateStr = calendarDateRange.start.with({ day: 15, month: 2 }).toString();
     expect(secondMonthDay).toHaveTextContent('15');
     expect(secondMonthDay).toHaveAttribute('data-value', secondMonthDayDateStr);
 
@@ -1386,7 +1388,7 @@ describe('numberOfMonths > 1', () => {
       calendarProps: {
         modelValue: calendarDateRange,
         numberOfMonths: 2,
-        maxValue: new CalendarDate(1980, 3, 15),
+        maxValue: new Temporal.PlainDate(1980, 3, 15),
       },
     });
 
@@ -1408,7 +1410,7 @@ describe('numberOfMonths > 1', () => {
       calendarProps: {
         modelValue: calendarDateRange,
         numberOfMonths: 2,
-        minValue: new CalendarDate(1979, 12, 15),
+        minValue: new Temporal.PlainDate(1979, 12, 15),
       },
     });
 
@@ -1473,7 +1475,7 @@ describe('numberOfMonths > 1', () => {
   it('end moves focus to the in-month day, not the outside-view copy in the previous grid', async () => {
     const { getByTestId, user } = setup({
       calendarProps: {
-        placeholder: new CalendarDate(2025, 9, 1),
+        placeholder: new Temporal.PlainDate(2025, 9, 1),
         numberOfMonths: 2,
         weekStartsOn: 0,
       },
@@ -1487,7 +1489,7 @@ describe('numberOfMonths > 1', () => {
   it('end moves focus to the in-month day when `disableDaysOutsideCurrentView` is set', async () => {
     const { getByTestId, user } = setup({
       calendarProps: {
-        placeholder: new CalendarDate(2025, 9, 1),
+        placeholder: new Temporal.PlainDate(2025, 9, 1),
         numberOfMonths: 2,
         weekStartsOn: 0,
         disableDaysOutsideCurrentView: true,
@@ -1504,7 +1506,7 @@ describe('handles maximumDays', () => {
   it('limits the maximum number of days that can be selected', async () => {
     const { getByTestId, user } = setup({
       calendarProps: {
-        placeholder: new CalendarDate(1980, 1, 15),
+        placeholder: new Temporal.PlainDate(1980, 1, 15),
         maximumDays: 5,
       },
     });
@@ -1536,13 +1538,13 @@ describe('handles maximumDays', () => {
   it('dynamically updates disabled dates based on the selection and clears constraints after completing a range', async () => {
     const { getByTestId, user, rerender } = setup({
       calendarProps: {
-        placeholder: new CalendarDate(1980, 1, 10),
+        placeholder: new Temporal.PlainDate(1980, 1, 10),
         maximumDays: 3,
       },
       emits: {
         'onUpdate:modelValue': (data) => rerender({
           calendarProps: {
-            placeholder: new CalendarDate(1980, 1, 10),
+            placeholder: new Temporal.PlainDate(1980, 1, 10),
             maximumDays: 3,
             modelValue: data,
           },
@@ -1583,7 +1585,7 @@ describe('handles maximumDays', () => {
   it('highlights dates within the maximum range identical to disabled dates range', async () => {
     const { getByTestId, user } = setup({
       calendarProps: {
-        placeholder: new CalendarDate(1980, 1, 15),
+        placeholder: new Temporal.PlainDate(1980, 1, 15),
         maximumDays: 4,
       },
     });
@@ -1603,7 +1605,7 @@ describe('handles maximumDays', () => {
   it('keeps backward highlight and disabled boundaries coherent with maximumDays', async () => {
     const { getByTestId, user } = setup({
       calendarProps: {
-        placeholder: new CalendarDate(1980, 1, 10),
+        placeholder: new Temporal.PlainDate(1980, 1, 10),
         maximumDays: 3,
       },
     });
@@ -1654,8 +1656,8 @@ describe('range calendar - tabindex states', () => {
     const { getByTestId } = setup({
       calendarProps: {
         modelValue: calendarDateRange,
-        minValue: new CalendarDate(1980, 1, 15),
-        maxValue: new CalendarDate(1980, 1, 18),
+        minValue: new Temporal.PlainDate(1980, 1, 15),
+        maxValue: new Temporal.PlainDate(1980, 1, 18),
       },
     });
 
@@ -1667,8 +1669,8 @@ describe('range calendar - tabindex states', () => {
     const { getByTestId } = setup({
       calendarProps: {
         modelValue: calendarDateRange,
-        minValue: new CalendarDate(1980, 1, 15),
-        maxValue: new CalendarDate(1980, 1, 21),
+        minValue: new Temporal.PlainDate(1980, 1, 15),
+        maxValue: new Temporal.PlainDate(1980, 1, 21),
       },
     });
 
@@ -1680,8 +1682,8 @@ describe('range calendar - tabindex states', () => {
     const { getByTestId } = setup({
       calendarProps: {
         modelValue: calendarDateRange,
-        minValue: new CalendarDate(1980, 1, 21),
-        maxValue: new CalendarDate(1980, 1, 26),
+        minValue: new Temporal.PlainDate(1980, 1, 21),
+        maxValue: new Temporal.PlainDate(1980, 1, 26),
       },
     });
 
@@ -1692,12 +1694,57 @@ describe('range calendar - tabindex states', () => {
   it('sets tabindex to 0 for first can tab selected date', async () => {
     const { getByTestId } = setup({
       calendarProps: {
-        placeholder: new CalendarDate(1980, 1, 20),
-        maxValue: new CalendarDate(1980, 1, 19),
+        placeholder: new Temporal.PlainDate(1980, 1, 20),
+        maxValue: new Temporal.PlainDate(1980, 1, 19),
       },
     });
 
     const firstCanTabSelectedDate = getByTestId('date-1-1');
     expect(firstCanTabSelectedDate).toHaveAttribute('tabindex', '0');
+  });
+});
+
+describe('update:startValue details', () => {
+  it('carries the press reason and event, and the placeholder follows with it', async () => {
+    const onStart = vi.fn();
+    const onPlaceholder = vi.fn();
+    const user = userEvent.setup();
+    const { getByTestId } = render(RangeCalendar, {
+      props: {
+        calendarProps: { 'modelValue': calendarDateRange, 'onUpdate:startValue': onStart, 'onUpdate:placeholder': onPlaceholder } as any,
+      },
+    });
+    await user.click(getByTestId('date-1-5'));
+    const [value, details] = onStart.mock.lastCall!;
+    expect(value.toString()).toBe('1980-01-05');
+    expect(details.reason).toBe('cell-press');
+    expect(details.event).toBeInstanceOf(MouseEvent);
+    expect(onPlaceholder).toHaveBeenLastCalledWith(new Temporal.PlainDate(1980, 1, 5), expect.objectContaining({ reason: 'cell-press' }));
+  });
+
+  it('a press that changes nothing leaves no reason behind for a later programmatic change', async () => {
+    const onStart = vi.fn();
+    const model = shallowRef<{ start: DateValue | undefined; end: DateValue | undefined }>({
+      start: new Temporal.PlainDate(1980, 1, 20),
+      end: undefined,
+    });
+    const calendar = effectScope().run(() => useRangeCalendar({
+      modelValue: () => model.value,
+      locale: 'en-US',
+      weekStartsOn: 0,
+      onUpdateStartValue: onStart,
+    }))!;
+    // A start without an end and no hovered day: the press only records itself.
+    calendar.select(new Temporal.PlainDate(1980, 1, 22), 'cell-press');
+    await nextTick();
+    expect(onStart).not.toHaveBeenCalled();
+
+    model.value = {
+      start: new Temporal.PlainDate(1980, 1, 5),
+      end: new Temporal.PlainDate(1980, 1, 9),
+    };
+    await nextTick();
+    await nextTick();
+    expect(onStart).toHaveBeenLastCalledWith(new Temporal.PlainDate(1980, 1, 5), expect.objectContaining({ reason: 'imperative-action' }));
   });
 });

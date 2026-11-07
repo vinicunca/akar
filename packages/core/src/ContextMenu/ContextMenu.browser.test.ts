@@ -78,7 +78,8 @@ describe('contextMenu trigger pointer-events, in a real browser', () => {
         }, () => h(DialogTitle, null, () => 'Dialog')))),
       ]),
     }), { attachTo: document.body });
-    await expect.poll(() => document.body.style.pointerEvents).toBe('none');
+    // v3 keeps the body interactive; the modal dialog blocks the page outside it instead.
+    await expect.poll(() => document.querySelector('[role="dialog"]')).not.toBeNull();
 
     await userEvent.click(get('trigger-d')!, { button: 'right', force: true });
     await new Promise((r) => setTimeout(r, 100));

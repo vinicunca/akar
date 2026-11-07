@@ -17,7 +17,8 @@ export interface MenuContentProps extends MenuRootContentTypeProps {
 
 <script setup lang="ts">
 import { Presence } from '@/Presence';
-import { useForwardPropsEmits } from '@/shared';
+import { useForwardElement, useForwardPropsEmits } from '@/shared';
+import { isPortalOpening } from '@/Teleport/portalGate';
 import { injectMenuContext, injectMenuRootContext } from './MenuRoot.vue';
 import MenuRootContentModal from './MenuRootContentModal.vue';
 import MenuRootContentNonModal from './MenuRootContentNonModal.vue';
@@ -28,10 +29,19 @@ const forwarded = useForwardPropsEmits(props, emits);
 
 const menuContext = injectMenuContext();
 const rootContext = injectMenuRootContext();
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
-  <Presence :present="forceMount || menuContext.open.value">
+  <Presence
+    :ref="forwardRef"
+    :appear="isPortalOpening(menuContext)"
+    :present="menuContext.open.value"
+    :force-mount="forceMount"
+    @complete="menuContext.notifyOpenComplete"
+  >
     <MenuRootContentModal
       v-if="rootContext.modal.value"
       v-bind="{ ...$attrs, ...forwarded }"

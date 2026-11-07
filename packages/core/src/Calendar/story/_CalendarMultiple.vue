@@ -1,15 +1,16 @@
 <script lang="ts" setup>
-import type { DateValue } from '@internationalized/date';
 import type { CalendarRootProps } from '..';
+import type { DateValue } from '@/date';
 import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from '..';
 
-const props = defineProps<{ calendarProps?: CalendarRootProps; emits?: { 'onUpdate:modelValue'?: (data: DateValue) => void } }>();
+const props = defineProps<{ calendarProps?: CalendarRootProps; emits?: { 'onUpdate:modelValue'?: (data: Array<DateValue>) => void } }>();
 </script>
 
 <template>
   <CalendarRoot
     v-slot="{ weekDays, grid }"
     v-bind="props.calendarProps"
+    multiple
     data-testid="calendar"
     v-on="{ 'update:modelValue': props.emits?.['onUpdate:modelValue'] }"
   >
@@ -26,6 +27,7 @@ const props = defineProps<{ calendarProps?: CalendarRootProps; emits?: { 'onUpda
     <CalendarGrid
       v-for="month in grid"
       :key="month.value.toString()"
+      :value="month.value"
       :data-testid="`grid-${month.value.month}`"
     >
       <CalendarGridHead :data-testid="`grid-head-${month.value.month}`">
@@ -50,11 +52,10 @@ const props = defineProps<{ calendarProps?: CalendarRootProps; emits?: { 'onUpda
             v-for="(weekDate, d) in weekDates"
             :key="weekDate.toString()"
             :data-testid="`cell-${weekDate.month}-${d}`"
-            :date="weekDate"
+            :value="weekDate"
           >
             <CalendarCellTrigger
-              :day="weekDate"
-              :month="month.value"
+              :value="weekDate"
               :data-testid="`date-${weekDate.month}-${weekDate.day}`"
             />
           </CalendarCell>

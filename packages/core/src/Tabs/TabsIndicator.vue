@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 import { computed, ref, watch, watchPostEffect } from 'vue';
-import { useForwardExpose } from '@/shared';
+import { mergeExpose, useForwardElement } from '@/shared';
 import { injectTabsRootContext } from './TabsRoot.vue';
 
 export interface TabsIndicatorProps extends PrimitiveProps {}
@@ -9,14 +9,14 @@ export interface TabsIndicatorProps extends PrimitiveProps {}
 
 <script setup lang="ts">
 import { useMounted, useResizeObserver } from '@vueuse/core';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 
-const props = defineProps<TabsIndicatorProps>();
+defineProps<TabsIndicatorProps>();
 const context = injectTabsRootContext();
-defineExpose({
+const { forwardRef, expose } = useForwardElement();
+defineExpose(mergeExpose(expose, {
   updateIndicatorStyle,
-});
-useForwardExpose();
+}));
 
 const isMounted = useMounted();
 
@@ -43,7 +43,7 @@ watchPostEffect(() => {
 useResizeObserver(computed(() => [context.tabsList.value, ...tabs.value]), updateIndicatorStyle);
 
 function updateIndicatorStyle() {
-  const activeTab = context.tabsList.value?.querySelector<HTMLButtonElement>('[role="tab"][data-state="active"]');
+  const activeTab = context.tabsList.value?.querySelector<HTMLButtonElement>('[role="tab"][data-state="checked"]');
 
   if (!activeTab) {
     return;
@@ -66,9 +66,10 @@ function updateIndicatorStyle() {
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, asChild)"
     v-if="isMounted && typeof indicatorStyle.size === 'number'"
-    v-bind="props"
+    :ref="forwardRef"
     :style="{
       '--akar-tabs-indicator-size': `${indicatorStyle.size}px`,
       '--akar-tabs-indicator-thickness': `${indicatorStyle.thickness}px`,
@@ -76,5 +77,5 @@ function updateIndicatorStyle() {
     }"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

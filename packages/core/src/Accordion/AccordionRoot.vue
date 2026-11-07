@@ -1,8 +1,10 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
+import type { AccordionChangeReason, UseAccordionReturn } from './useAccordion';
 import type { PrimitiveProps } from '@/Primitive';
+import type { ChangeEventDetails } from '@/shared';
 import type { AcceptableValue, DataOrientation, Direction, SingleOrMultipleProps, SingleOrMultipleType } from '@/shared/types';
-import { createContext, useDirection, useForwardExpose } from '@/shared';
+import { createContext, useDirection, useForwardElement } from '@/shared';
 
 export interface AccordionRootProps<T = string | Array<string>>
   extends PrimitiveProps, SingleOrMultipleProps<T> {
@@ -47,7 +49,9 @@ export type AccordionRootEmits<T extends SingleOrMultipleType = SingleOrMultiple
   /**
    * Event handler called when the expanded state of an item changes
    */
-  'update:modelValue': [value: (T extends 'single' ? string : Array<string>) | undefined];
+  'update:modelValue': [value: (T extends 'single' ? string : Array<string>) | undefined, details: ChangeEventDetails<AccordionChangeReason>];
+  /** Event handler called before a change; call details.cancel() to keep the current value. */
+  'beforeUpdate:modelValue': [value: (T extends 'single' ? string : Array<string>) | undefined, details: ChangeEventDetails<AccordionChangeReason>];
 };
 
 export type AccordionRootContext<P extends AccordionRootProps> = {
@@ -55,9 +59,9 @@ export type AccordionRootContext<P extends AccordionRootProps> = {
   direction: Ref<P['dir']>;
   orientation: P['orientation'];
   parentElement: Ref<HTMLElement | undefined>;
-  changeModelValue: (value: string) => void;
+  changeModelValue: UseAccordionReturn['changeModelValue'];
   isSingle: ComputedRef<boolean>;
-  modelValue: Ref<AcceptableValue | Array<AcceptableValue> | undefined>;
+  modelValue: ComputedRef<string | Array<string> | undefined>;
   collapsible: boolean;
   unmountOnHide: Ref<boolean>;
 };
@@ -67,9 +71,8 @@ export const [injectAccordionRootContext, provideAccordionRootContext]
 </script>
 
 <script setup lang="ts" generic="T extends (string | string[]), ExplicitType extends SingleOrMultipleType">
-import { toRefs } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useSingleOrMultipleValue } from '@/shared/useSingleOrMultipleValue';
+import { renderAs } from '@/Primitive/renderAs';
+import { useAccordion } from './useAccordion';
 
 const props = withDefaults(defineProps<AccordionRootProps<T>>(), {
   disabled: false,
@@ -83,36 +86,36 @@ const emits = defineEmits<AccordionRootEmits<ExplicitType>>();
 defineSlots<{
   default?: (props: {
     /** Current active value */
-    modelValue: typeof modelValue.value;
+    modelValue: AcceptableValue | Array<AcceptableValue> | undefined;
   }) => any;
 }>();
 
-const { dir, disabled, unmountOnHide } = toRefs(props);
-const direction = useDirection(dir);
+const direction = useDirection(() => props.dir);
 
-const { modelValue, changeModelValue, isSingle } = useSingleOrMultipleValue(props, emits);
+const { forwardRef, currentElement: parentElement, expose } = useForwardElement();
+defineExpose(expose);
 
-const { forwardRef, currentElement: parentElement } = useForwardExpose();
-
-provideAccordionRootContext({
-  disabled,
-  direction,
-  orientation: props.orientation,
+const { context, modelValue } = useAccordion({
+  modelValue: () => props.modelValue,
+  defaultValue: props.defaultValue,
+  emit: emits,
+  type: () => props.type,
+  collapsible: () => props.collapsible,
+  dir: direction,
+  disabled: () => props.disabled,
+  orientation: () => props.orientation,
   parentElement,
-  isSingle,
-  collapsible: props.collapsible,
-  modelValue,
-  changeModelValue,
-  unmountOnHide,
+  unmountOnHide: () => props.unmountOnHide,
 });
+
+provideAccordionRootContext(context);
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, asChild)"
     :ref="forwardRef"
-    :as-child="asChild"
-    :as="as"
   >
     <slot :model-value="modelValue" />
-  </Primitive>
+  </component>
 </template>

@@ -25,9 +25,9 @@ describe('given a default Rating', () => {
   });
 
   it('should have default selected', () => {
-    expect(radios[0].attributes('data-state')).toBe('active');
-    expect(radios[1].attributes('data-state')).toBeUndefined();
-    expect(radios[2].attributes('data-state')).toBeUndefined();
+    expect(radios[0].attributes('data-state')).toBe('checked');
+    expect(radios[1].attributes('data-state')).toBe('unchecked');
+    expect(radios[2].attributes('data-state')).toBe('unchecked');
   });
 
   describe('on keyboard navigation', () => {
@@ -43,8 +43,8 @@ describe('given a default Rating', () => {
     });
 
     it('should select next item on keydown', async () => {
-      expect(radios[0].attributes('data-state')).toBe('active');
-      expect(radios[1].attributes('data-state')).toBe('active');
+      expect(radios[0].attributes('data-state')).toBe('checked');
+      expect(radios[1].attributes('data-state')).toBe('checked');
       expect(radios[1].element).toBe(document.activeElement);
     });
 
@@ -52,8 +52,8 @@ describe('given a default Rating', () => {
       it('should select the first item again', async () => {
         await fireEvent.keyDown(document.activeElement!, { key: 'ArrowUp' });
         await sleep(0);
-        expect(radios[0].attributes('data-state')).toBe('active');
-        expect(radios[2].attributes('data-state')).toBeUndefined();
+        expect(radios[0].attributes('data-state')).toBe('checked');
+        expect(radios[2].attributes('data-state')).toBe('unchecked');
       });
     });
   });
@@ -76,17 +76,17 @@ describe('given a hoverable Rating', () => {
 
   it('should preview the hovered rating', async () => {
     await fireEvent.mouseEnter(radios[2].element);
-    expect(radios[1].attributes('data-state')).toBe('active');
-    expect(radios[2].attributes('data-state')).toBe('active');
+    expect(radios[1].attributes('data-state')).toBe('checked');
+    expect(radios[2].attributes('data-state')).toBe('checked');
   });
 
   it('should reset the preview to the model value on mouse leave', async () => {
     await fireEvent.mouseEnter(radios[2].element);
     await fireEvent.mouseLeave(root.element);
 
-    expect(radios[0].attributes('data-state')).toBe('active');
-    expect(radios[1].attributes('data-state')).toBeUndefined();
-    expect(radios[2].attributes('data-state')).toBeUndefined();
+    expect(radios[0].attributes('data-state')).toBe('checked');
+    expect(radios[1].attributes('data-state')).toBe('unchecked');
+    expect(radios[2].attributes('data-state')).toBe('unchecked');
   });
 });
 
@@ -108,13 +108,13 @@ describe('given disabled Rating', () => {
   });
 
   it('should have default selected', () => {
-    expect(radios[0].attributes('data-state')).toBe('active');
+    expect(radios[0].attributes('data-state')).toBe('checked');
   });
 
   it.each([
-    [0, 'active'],
-    [1, undefined],
-    [2, undefined],
+    [0, 'checked'],
+    [1, 'unchecked'],
+    [2, 'unchecked'],
   ])('should not select any item', async (input, output) => {
     await radios[input].trigger('click');
     expect(radios[input].attributes('data-state')).toBe(output);

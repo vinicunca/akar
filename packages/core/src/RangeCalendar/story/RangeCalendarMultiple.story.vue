@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { CalendarDate } from '@internationalized/date';
 import RangeCalendar from './_DummyRangeCalendar.vue';
 
 const defaultValue = {
-  start: new CalendarDate(2024, 2, 20),
-  end: new CalendarDate(2024, 2, 27),
+  start: new Temporal.PlainDate(2024, 2, 20),
+  end: new Temporal.PlainDate(2024, 2, 27),
 };
 </script>
 
 <template>
   <Story
     title="Range Calendar/Multiple"
-    :layout="{ type: 'grid', width: '100%', iframe: false }"
+    :layout="{ type: 'grid', width: '100%' }"
   >
     <Variant title="2 months">
       <RangeCalendar

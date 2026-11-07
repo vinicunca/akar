@@ -1,6 +1,19 @@
 <script lang="ts">
-import type { Ref } from 'vue';
-import { createContext, useForwardExpose } from '@/shared';
+import type { ComputedRef, Ref } from 'vue';
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared';
+import { createContext } from '@/shared';
+
+/** Why the hover card's `open` state changed (#2828); the `reason` of `ChangeEventDetails`. */
+export type HoverCardOpenChangeReason
+  = | 'trigger-hover'
+    | 'trigger-leave'
+    | 'trigger-focus'
+    | 'trigger-blur'
+    | 'trigger-press'
+    | 'content-hover'
+    | 'content-leave'
+    | 'escape-key'
+    | 'outside-press';
 
 export interface HoverCardRootProps {
   /** The open state of the hover card when it is initially rendered. Use when you do not need to control its open state. */
@@ -15,21 +28,38 @@ export interface HoverCardRootProps {
   enableTouch?: boolean;
 }
 export type HoverCardRootEmits = {
+  /** Event handler called before the open state of the hover card changes; `details.cancel()` keeps the current state. */
+  'beforeUpdate:open': [value: boolean, details: ChangeEventDetails<HoverCardOpenChangeReason>];
   /** Event handler called when the open state of the hover card changes. */
-  'update:open': [value: boolean];
+  'update:open': [value: boolean, details: ChangeEventDetails<HoverCardOpenChangeReason>];
+  /** Event handler called after the open or close animations of the content have finished. */
+  'update:openComplete': [value: boolean];
 };
 
 export interface HoverCardRootContext {
-  open: Ref<boolean>;
-  onOpenChange: (open: boolean) => void;
-  onOpen: () => void;
-  onClose: () => void;
-  onDismiss: () => void;
+  open: ComputedRef<boolean>;
+  /** Sets `open` immediately. Returns `false` when the change was a no-op or cancelled via `beforeUpdate:open`. */
+  onOpenChange: (value: boolean, reason?: HoverCardOpenChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /**
+   * Cancels a pending open or close and opens after `openDelay`. The change is deferred,
+   * so its outcome is only known when the timer fires; `reason`/`event` travel
+   * with it into `beforeUpdate:open` / `update:open`.
+   */
+  onOpen: (reason?: HoverCardOpenChangeReason | BaseChangeReason, event?: Event) => void;
+  /**
+   * Cancels a pending open and closes after `closeDelay`, unless text is being
+   * selected or the pointer is down on the content. Deferred like `onOpen`.
+   */
+  onClose: (reason?: HoverCardOpenChangeReason | BaseChangeReason, event?: Event) => void;
+  /** Cancels a pending open and closes immediately. Returns `false` when the change was a no-op or cancelled via `beforeUpdate:open`. */
+  onDismiss: (reason?: HoverCardOpenChangeReason | BaseChangeReason, event?: Event) => boolean;
   hasSelectionRef: Ref<boolean>;
   isPointerDownOnContentRef: Ref<boolean>;
   isPointerInTransitRef: Ref<boolean>;
   triggerElement: Ref<HTMLElement | undefined>;
   enableTouch: Ref<boolean>;
+  /** Called by the content once its open/close transitions finish; emits `update:openComplete`. */
+  notifyOpenComplete?: (value: boolean) => void;
 }
 
 export const [injectHoverCardRootContext, provideHoverCardRootContext]
@@ -37,9 +67,8 @@ export const [injectHoverCardRootContext, provideHoverCardRootContext]
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { ref, toRefs } from 'vue';
 import { PopperRoot } from '@/Popper';
+import { useHoverCard } from './useHoverCard';
 
 const props = withDefaults(defineProps<HoverCardRootProps>(), {
   defaultOpen: false,
@@ -57,52 +86,21 @@ defineSlots<{
   }) => any;
 }>();
 
-const { openDelay, closeDelay, enableTouch } = toRefs(props);
-
-useForwardExpose();
-const open = useVModel(props, 'open', emit, {
-  defaultValue: props.defaultOpen,
-  passive: (props.open === undefined) as false,
-}) as Ref<boolean>;
-
-const openTimerRef = ref(0);
-const closeTimerRef = ref(0);
-const hasSelectionRef = ref(false);
-const isPointerDownOnContentRef = ref(false);
-const isPointerInTransitRef = ref(false);
-const triggerElement = ref<HTMLElement>();
-
-function handleOpen() {
-  clearTimeout(closeTimerRef.value);
-  openTimerRef.value = window.setTimeout(() => open.value = true, openDelay.value);
-}
-
-function handleClose() {
-  clearTimeout(openTimerRef.value);
-  if (!hasSelectionRef.value && !isPointerDownOnContentRef.value) {
-    closeTimerRef.value = window.setTimeout(() => open.value = false, closeDelay.value);
-  }
-}
-
-function handleDismiss() {
-  clearTimeout(openTimerRef.value);
-  open.value = false;
-}
-
-provideHoverCardRootContext({
-  open,
-  onOpenChange(value) {
-    open.value = value;
-  },
-  onOpen: handleOpen,
-  onClose: handleClose,
-  onDismiss: handleDismiss,
-  hasSelectionRef,
-  isPointerDownOnContentRef,
-  isPointerInTransitRef,
-  triggerElement,
-  enableTouch,
+// Controlled/uncontrolled `open`, the `beforeUpdate:` / `update:` emits and the
+// `openDelay` / `closeDelay` timers all live in the composable (`open ===
+// undefined` → uncontrolled). The delays and `enableTouch` are handed in as
+// getters so a prop change is picked up by the next timer / tap.
+const { open, context } = useHoverCard({
+  open: () => props.open,
+  defaultOpen: props.defaultOpen,
+  openDelay: () => props.openDelay,
+  closeDelay: () => props.closeDelay,
+  enableTouch: () => props.enableTouch,
+  emit,
+  onOpenComplete: (value) => emit('update:openComplete', value),
 });
+
+provideHoverCardRootContext(context);
 </script>
 
 <template>

@@ -1,16 +1,45 @@
 <script lang="ts">
-import { isEqualDay } from '@internationalized/date';
+import type { CalendarGridData, CalendarUnit, DateValue, WeekStartsOn } from '@/date';
 import { RangeCalendarRoot } from '..';
 import { injectDateRangePickerRootContext } from './DateRangePickerRoot.vue';
 </script>
 
 <script setup lang="ts">
+import { useForwardElement } from '@/shared';
+
+defineSlots<{
+  default?: (props: {
+    /** The current date of the placeholder */
+    date: DateValue;
+    /** The rendered page(s) of the active view */
+    grid: Array<CalendarGridData>;
+    /** The days of the week (day view only) */
+    weekDays: Array<string>;
+    /** The start of the week */
+    weekStartsOn: WeekStartsOn;
+    /** The calendar locale */
+    locale: string;
+    /** Whether or not to always display 6 weeks in the calendar */
+    fixedWeeks: boolean;
+    /** The active view */
+    view: CalendarUnit;
+  }) => any;
+}>();
+
 const rootContext = injectDateRangePickerRootContext();
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
+
+// The range calendar is controlled by the picker. Its `beforeUpdate:modelValue`
+// runs the picker's change, so a pick emits once, from the picker, and a
+// cancel on the picker restores the calendar's last range.
 </script>
 
 <template>
   <RangeCalendarRoot
-    v-slot="{ weekDays, grid, date, weekStartsOn, locale, fixedWeeks }"
+    :ref="forwardRef"
+    v-slot="{ weekDays, grid, date, weekStartsOn, locale, fixedWeeks, view }"
     v-bind="{
       allowNonContiguousRanges: rootContext.allowNonContiguousRanges.value,
       isDateDisabled: rootContext.isDateDisabled,
@@ -30,20 +59,18 @@ const rootContext = injectDateRangePickerRootContext();
       dir: rootContext.dir.value,
       fixedDate: rootContext.fixedDate.value,
       maximumDays: rootContext.maximumDays?.value,
+      maximumLength: rootContext.maximumLength?.value,
+      maxView: rootContext.maxView.value,
+      yearsPerPage: rootContext.yearsPerPage.value,
+      columns: rootContext.columns.value,
     }"
     :model-value="rootContext.modelValue.value"
     :placeholder="rootContext.placeholder.value"
-    @update:start-value="(date) => {
-      rootContext.onStartValueChange(date)
-    }"
-    @update:model-value="(date) => {
-      if (date.start && rootContext.modelValue.value?.start && date.end && rootContext.modelValue.value?.end && isEqualDay(date.start, rootContext.modelValue.value?.start) && isEqualDay(date.end, rootContext.modelValue.value?.end)) return
-      rootContext.onDateChange(date)
-    }"
-    @update:placeholder="(date) => {
-      if (isEqualDay(date, rootContext.placeholder.value)) return
-      rootContext.onPlaceholderChange(date)
-    }"
+    :view="rootContext.view.value"
+    @update:start-value="rootContext.onStartValueChange"
+    @before-update:model-value="rootContext.onCalendarBeforeUpdate"
+    @update:placeholder="rootContext.onCalendarPlaceholderChange"
+    @update:view="(next, details) => rootContext.onViewChange(next, details)"
   >
     <slot
       :date="date"
@@ -52,6 +79,7 @@ const rootContext = injectDateRangePickerRootContext();
       :week-starts-on="weekStartsOn"
       :locale="locale"
       :fixed-weeks="fixedWeeks"
+      :view="view"
     />
   </RangeCalendarRoot>
 </template>

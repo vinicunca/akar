@@ -206,8 +206,8 @@ describe('given prop:type="always" ScrollArea thumb state', () => {
   });
 
   it.each([
-    { content: 500, state: 'hidden' },
-    { content: 2000, state: 'visible' },
+    { content: 500, state: 'closed' },
+    { content: 2000, state: 'open' },
   ])('sets data-state="$state" when the content height is $content', async ({ content, state }) => {
     Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, value: content });
     Object.defineProperty(HTMLElement.prototype, 'scrollWidth', { configurable: true, value: content });

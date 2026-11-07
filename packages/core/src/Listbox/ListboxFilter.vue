@@ -1,10 +1,11 @@
 <script lang="ts">
 import type { PrimitiveProps } from '..';
 import { useVModel } from '@vueuse/core';
-import { computed, onMounted, onUnmounted, ref, watchSyncEffect } from 'vue';
-import { usePrimitiveElement } from '@/Primitive';
+import { computed, onMounted, onUnmounted, ref, watch, watchSyncEffect } from 'vue';
+import {
+  usePrimitiveElement,
+} from '@/Primitive';
 import { useComposing } from '@/shared';
-import { Primitive } from '..';
 import { injectListboxRootContext } from './ListboxRoot.vue';
 
 export interface ListboxFilterProps extends PrimitiveProps {
@@ -22,6 +23,8 @@ export type ListboxFilterEmits = {
 </script>
 
 <script setup lang="ts">
+import { renderAsEmpty, rendersChildren } from '@/Primitive/renderAs';
+
 const props = withDefaults(defineProps<ListboxFilterProps>(), {
   as: 'input',
 });
@@ -41,7 +44,13 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 
 const rootContext = injectListboxRootContext();
 
-const { primitiveElement, currentElement } = usePrimitiveElement();
+// The root's `filter` (#2824 item 7) runs against this input's value; a no-op
+// for a listbox without one. Synchronous, so the items re-render in the same
+// flush as the input and `highlightFirstItem` below sees the filtered list.
+watch(modelValue, (value) => rootContext.setFilterSearch(value ?? ''), { immediate: true, flush: 'sync' });
+
+const { primitiveElement, currentElement, expose } = usePrimitiveElement();
+defineExpose(expose);
 const disabled = computed(() => props.disabled || rootContext.disabled.value || false);
 
 const activedescendant = ref<string | undefined>();
@@ -60,6 +69,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   rootContext.focusable.value = true;
+  rootContext.setFilterSearch('');
 });
 
 const { isComposing, shouldDeferInput, handleCompositionStart, handleCompositionUpdate, handleCompositionEnd } = useComposing((event) => {
@@ -86,8 +96,27 @@ function handleKeydownNavigation(event: KeyboardEvent) {
   if (isComposing.value) {
     return;
   }
-  event.preventDefault();
-  rootContext.onKeydownNavigation(event);
+  // Enter stays on `handleKeydownEnter` below; resolving it here too (as a
+  // `'select'` intent) would run the Enter path twice.
+  if (event.key === 'Enter') {
+    return;
+  }
+  // The filter is a text input: left/right (and their Shift variants) keep
+  // moving the caret even when a horizontal listbox maps them to prev/next
+  // (v2 never bound them here either).
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    return;
+  }
+  // An unmodified printable key (Space included) is text: it is never handed
+  // to `getNavigationIntent`, so a vim-style `j` mapping cannot swallow typing.
+  if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+    return;
+  }
+  // Was `@keydown.down.up.home.end`: the key list now lives in the navigation
+  // intent resolution, and the default is prevented only for a handled key.
+  if (rootContext.onKeydownNavigation(event)) {
+    event.preventDefault();
+  }
 }
 
 function handleKeydownEnter(event: KeyboardEvent) {
@@ -95,28 +124,36 @@ function handleKeydownEnter(event: KeyboardEvent) {
   if (isComposing.value) {
     return;
   }
+  // A `getNavigationIntent` override returning `null` opts Enter out too.
+  if (rootContext.getNavigationIntent(event) === null) {
+    return;
+  }
   rootContext.onKeydownEnter(event);
 }
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAsEmpty(as, asChild)"
     ref="primitiveElement"
-    :as="as"
-    :as-child="asChild"
     :value="modelValue"
     :disabled="disabled ? '' : undefined"
     :data-disabled="disabled ? '' : undefined"
     :aria-disabled="disabled ?? undefined"
     :aria-activedescendant="activedescendant"
     type="text"
-    @keydown.down.up.home.end="handleKeydownNavigation"
+    @keydown="handleKeydownNavigation"
     @keydown.enter="handleKeydownEnter"
     @input="handleInput"
     @compositionstart="onCompositionStart"
     @compositionupdate="handleCompositionUpdate"
     @compositionend="handleCompositionEnd"
   >
-    <slot :model-value="modelValue" />
-  </Primitive>
+    <template
+      v-if="rendersChildren(as, asChild)"
+      #default
+    >
+      <slot :model-value="modelValue" />
+    </template>
+  </component>
 </template>

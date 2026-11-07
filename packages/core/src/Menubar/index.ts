@@ -1,3 +1,7 @@
+// The reason unions of the root and sub parts (`update:open`) and of the
+// checkbox item and radio group (`update:modelValue`) belong to the
+// underlying Menu family, which is not a root export of the package.
+export { type MenuCheckboxItemChangeReason, type MenuOpenChangeReason, type MenuRadioGroupChangeReason } from '../Menu';
 export {
   default as MenubarArrow,
   type MenubarArrowProps,
@@ -32,6 +36,7 @@ export {
 export {
   injectMenubarMenuContext,
   default as MenubarMenu,
+  type MenubarMenuEmits,
   type MenubarMenuProps,
 } from './MenubarMenu.vue';
 export {
@@ -76,3 +81,15 @@ export {
   default as MenubarTrigger,
   type MenubarTriggerProps,
 } from './MenubarTrigger.vue';
+export {
+  type MenubarChangeReason,
+  type MenubarCollectionItem,
+  type MenubarContentSurface,
+  type MenubarTriggerState,
+  useMenubar,
+  useMenubarMenu,
+  type UseMenubarMenuOptions,
+  type UseMenubarMenuReturn,
+  type UseMenubarProps,
+  type UseMenubarReturn,
+} from './useMenubar';

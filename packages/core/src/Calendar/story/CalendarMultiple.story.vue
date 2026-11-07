@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { CalendarDate } from '@internationalized/date';
 import Calendar from './_DummyCalendar.vue';
 
-const defaultValue = new CalendarDate(2024, 2, 20);
+const defaultValue = new Temporal.PlainDate(2024, 2, 20);
 </script>
 
 <template>
   <Story
     title="Calendar/Multiple"
-    :layout="{ type: 'grid', width: '100%', iframe: false }"
+    :layout="{ type: 'grid', width: '100%' }"
   >
     <Variant title="2 months">
       <Calendar

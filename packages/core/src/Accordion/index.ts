@@ -8,6 +8,7 @@ export {
 } from './AccordionHeader.vue';
 export {
   default as AccordionItem,
+  type AccordionItemEmits,
   type AccordionItemProps,
   injectAccordionItemContext,
 } from './AccordionItem.vue';
@@ -21,3 +22,10 @@ export {
   default as AccordionTrigger,
   type AccordionTriggerProps,
 } from './AccordionTrigger.vue';
+export {
+  type AccordionChangeReason,
+  type AccordionPartState,
+  useAccordion,
+  type UseAccordionProps,
+  type UseAccordionReturn,
+} from './useAccordion';

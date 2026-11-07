@@ -1,127 +1,59 @@
 <script lang="ts">
-import { useForwardExpose, useId } from '@/shared';
+import type { DisclosureState } from '@/shared';
+import { useForwardElement } from '@/shared';
 
-export type TooltipTriggerDataState
-  = | 'closed'
-    | 'delayed-open'
-    | 'instant-open';
+export type TooltipTriggerDataState = DisclosureState;
 
 export interface TooltipTriggerProps extends PopperAnchorProps {}
 </script>
 
 <script setup lang="ts">
 import type { PopperAnchorProps } from '@/Popper';
-import { computed, ref, watch } from 'vue';
-import { PopperAnchor } from '@/Popper';
-import {
-  Primitive,
-} from '@/Primitive';
-import { injectTooltipProviderContext } from './TooltipProvider.vue';
+import { mergeProps, watch } from 'vue';
+import { usePopperAnchor } from '@/Popper/usePopperAnchor';
+import { renderAs } from '@/Primitive/renderAs';
 import { injectTooltipRootContext } from './TooltipRoot.vue';
+import { createTooltipTriggerSurface } from './useTooltip';
+
+defineOptions({
+  // `$attrs` are merged under the part's own bindings: the precedence the
+  // former `<PopperAnchor as-child>` wrapper gave them.
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<TooltipTriggerProps>(), {
   as: 'button',
 });
 const rootContext = injectTooltipRootContext();
-const providerContext = injectTooltipProviderContext();
 
-rootContext.contentId ||= useId(undefined, 'akar-tooltip-content');
+const { forwardRef, currentElement: triggerElement, expose } = useForwardElement();
+defineExpose(expose);
 
-const { forwardRef, currentElement: triggerElement } = useForwardExpose();
+// aria-describedby / data-state / data-delayed / the grace-area selector and
+// every pointer / focus / click listener come from the shared trigger factory
+// (single source with `useTooltip()`; called ONCE — it owns this instance's
+// pointer state). The content id is populated by the composable, so nothing is
+// back-filled onto the context here any more. Listener order is unchanged:
+// `$attrs` merge BEFORE the element's own props, so a consumer `@click`
+// still runs before the surface's `onClick`.
+const trigger = createTooltipTriggerSurface(rootContext);
 
-const isPointerDown = ref(false);
-const hasPointerMoveOpened = ref(false);
-
-const tooltipListeners = computed(() => {
-  if (rootContext.disabled.value) {
-    return {};
-  }
-
-  return {
-    click: handleClick,
-    focus: handleFocus,
-    pointermove: handlePointerMove,
-    pointerleave: handlePointerLeave,
-    pointerdown: handlePointerDown,
-    blur: handleBlur,
-  };
+usePopperAnchor({
+  element: triggerElement,
+  reference: () => props.reference,
 });
 
 watch(triggerElement, (el) => {
   rootContext.onTriggerChange(el);
 }, { immediate: true });
-
-function handlePointerUp() {
-  setTimeout(() => {
-    isPointerDown.value = false;
-  }, 1);
-}
-
-function handlePointerDown() {
-  if (rootContext.open && !rootContext.disableClosingTrigger.value) {
-    rootContext.onClose();
-  }
-  isPointerDown.value = true;
-  document.addEventListener('pointerup', handlePointerUp, { once: true });
-}
-
-function handlePointerMove(event: PointerEvent) {
-  if (event.pointerType === 'touch') {
-    return;
-  }
-  if (
-    !hasPointerMoveOpened.value && !providerContext.isPointerInTransitRef.value
-  ) {
-    rootContext.onTriggerEnter();
-    hasPointerMoveOpened.value = true;
-  }
-}
-
-function handlePointerLeave() {
-  rootContext.onTriggerLeave();
-  hasPointerMoveOpened.value = false;
-}
-
-function handleFocus(event: FocusEvent) {
-  if (isPointerDown.value) {
-    return;
-  }
-
-  if (rootContext.ignoreNonKeyboardFocus.value && !(event.target as HTMLElement).matches?.(':focus-visible')) {
-    return;
-  }
-
-  rootContext.onOpen();
-}
-
-function handleBlur() {
-  rootContext.onClose();
-}
-
-function handleClick() {
-  if (!rootContext.disableClosingTrigger.value) {
-    rootContext.onClose();
-  }
-}
 </script>
 
 <template>
-  <PopperAnchor
-    as-child
-    :reference="reference ?? triggerElement"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="mergeProps($attrs, trigger.attrs.value)"
   >
-    <Primitive
-      :ref="forwardRef"
-      :aria-describedby="
-        rootContext.open.value ? rootContext.contentId : undefined
-      "
-      :data-state="rootContext.stateAttribute.value"
-      :as="as"
-      :as-child="props.asChild"
-      data-grace-area-trigger
-      v-on="tooltipListeners"
-    >
-      <slot />
-    </Primitive>
-  </PopperAnchor>
+    <slot />
+  </component>
 </template>

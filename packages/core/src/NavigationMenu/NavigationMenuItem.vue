@@ -2,7 +2,7 @@
 import type { Ref } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
 import { useCollection } from '@/Collection';
-import { createContext, getActiveElement, useArrowNavigation, useForwardExpose, useId } from '@/shared';
+import { createContext, useForwardElement, useId } from '@/shared';
 
 export interface NavigationMenuItemProps extends PrimitiveProps {
   /**
@@ -30,127 +30,35 @@ export const [injectNavigationMenuItemContext, provideNavigationMenuItemContext]
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 import { injectNavigationMenuContext } from './NavigationMenuRoot.vue';
-import {
-  focusFirst,
-  getTabbableCandidates,
-  makeContentId,
-  removeFromTabOrder,
-} from './utils';
+import { useNavigationMenuItem } from './useNavigationMenu';
 
 const props = withDefaults(defineProps<NavigationMenuItemProps>(), {
   as: 'li',
 });
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 const { getItems } = useCollection({ key: 'NavigationMenu' });
 
 const context = injectNavigationMenuContext();
 
-const value = useId(props.value);
-const triggerRef = ref<HTMLElement>();
-const focusProxyRef = ref<HTMLElement>();
-
-const contentId = makeContentId(context.baseId, value);
-
-let restoreContentTabOrderRef: () => void = () => ({});
-
-const wasEscapeCloseRef = ref(false);
-async function handleContentEntry(side = 'start') {
-  const el = document.getElementById(contentId);
-  if (el) {
-    restoreContentTabOrderRef();
-    const candidates = getTabbableCandidates(el);
-    if (candidates.length) {
-      focusFirst(side === 'start'
-        ? candidates
-        : candidates.reverse());
-    }
-  }
-}
-
-function handleContentExit() {
-  const el = document.getElementById(contentId);
-  if (el) {
-    const candidates = getTabbableCandidates(el);
-    if (candidates.length) {
-      restoreContentTabOrderRef = removeFromTabOrder(candidates);
-    }
-  }
-}
-
-const itemContext = provideNavigationMenuItemContext({
-  value,
-  contentId,
-  triggerRef,
-  focusProxyRef,
-  wasEscapeCloseRef,
-  onEntryKeyDown: handleContentEntry,
-  onFocusProxyEnter: handleContentEntry,
-  onContentFocusOutside: handleContentExit,
-  onRootContentClose: handleContentExit,
+const { itemContext, item } = useNavigationMenuItem({
+  context,
+  value: useId(props.value),
+  getItems: () => getItems().map((i) => i.ref),
 });
 
-function handleClose() {
-  context.onItemDismiss();
-  itemContext.triggerRef.value?.focus();
-}
-
-function handleKeydown(ev: KeyboardEvent) {
-  const currentFocus = getActiveElement() as HTMLElement;
-  if (ev.keyCode === 32) {
-    // Only the trigger of this item toggles; links and nested items keep their own behaviour.
-    // `NavigationMenuTrigger` replaces `itemContext.triggerRef` with its element ref on mount.
-    if (ev.target !== itemContext.triggerRef.value) {
-      return;
-    }
-    if (ev.repeat) {
-      ev.preventDefault();
-      return;
-    }
-    if (context.modelValue.value === value) {
-      handleClose();
-      ev.preventDefault();
-      return;
-    } else {
-      (ev.target as HTMLElement).click();
-      ev.preventDefault();
-      return;
-    }
-  }
-
-  const itemsArray = getItems().filter((i) =>
-    i.ref.parentElement?.hasAttribute('data-menu-item'),
-  ).map((i) => i.ref);
-
-  // prevent triggering when the focus is on link
-  if (!itemsArray.includes(currentFocus)) {
-    return;
-  }
-
-  const newSelectedElement = useArrowNavigation(ev, currentFocus, undefined, {
-    itemsArray,
-    loop: false,
-  });
-
-  if (newSelectedElement) {
-    newSelectedElement?.focus();
-  }
-
-  ev.preventDefault();
-  ev.stopPropagation();
-}
+provideNavigationMenuItemContext(itemContext);
 </script>
 
 <template>
-  <Primitive
-    :as-child="asChild"
-    :as="as"
-    data-menu-item
-    @keydown.up.down.left.right.home.end.space="handleKeydown"
+  <component
+    :is="renderAs(as, asChild)"
+    v-bind="item.attrs.value"
+    :ref="forwardRef"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

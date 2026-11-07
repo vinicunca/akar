@@ -2,7 +2,7 @@
 import type { PopperContentProps } from '@/Popper';
 import type { PrimitiveProps } from '@/Primitive';
 import { defu } from 'defu';
-import { useForwardExpose } from '@/shared';
+import { useAncestorScroll, useForwardElement } from '@/shared';
 import { injectTooltipProviderContext } from './TooltipProvider.vue';
 
 export type TooltipContentImplEmits = {
@@ -42,26 +42,52 @@ export interface TooltipContentImplProps
 </script>
 
 <script setup lang="ts">
+import type { DismissableLayerDismissDetails, FocusOutsideEvent, PointerDownOutsideEvent } from '@/DismissableLayer';
 import { useEventListener } from '@vueuse/core';
-import { computed, onMounted } from 'vue';
-import { DismissableLayer } from '@/DismissableLayer';
+import { computed, getCurrentInstance, mergeProps, onMounted } from 'vue';
+import { DISMISSABLE_LAYER_WRAPPER, dismissableLayerOptions, useDismissableLayer } from '@/DismissableLayer/useDismissableLayer';
 import { PopperContent } from '@/Popper';
+import { splitWrapperAttrs } from '@/shared/splitWrapperAttrs';
 import { VisuallyHidden } from '@/VisuallyHidden';
 import { injectTooltipRootContext } from './TooltipRoot.vue';
+import { getTooltipContentSurface, getTooltipLabelSurface } from './useTooltip';
 import { TOOLTIP_OPEN } from './utils';
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<TooltipContentImplProps>(), {
   avoidCollisions: undefined,
   asChild: undefined,
   hideWhenDetached: undefined,
 });
+
 const emits = defineEmits<TooltipContentImplEmits>();
+
+const CONTENT_STYLE = {
+  '--akar-tooltip-content-transform-origin': 'var(--akar-popper-transform-origin)',
+  '--akar-tooltip-content-available-width': 'var(--akar-popper-available-width)',
+  '--akar-tooltip-content-available-height': 'var(--akar-popper-available-height)',
+  '--akar-tooltip-trigger-width': 'var(--akar-popper-anchor-width)',
+  '--akar-tooltip-trigger-height': 'var(--akar-popper-anchor-height)',
+};
 
 const rootContext = injectTooltipRootContext();
 const providerContext = injectTooltipProviderContext();
 
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 const ariaLabel = computed(() => props.ariaLabel || currentElement.value?.textContent);
+
+// data-state / data-delayed on the content and id / role="tooltip" on the
+// hidden label come from the shared surface builders (single source with
+// `useTooltip()`); the PopperContent positioning, the CSS variables, the
+// DismissableLayer wrapper and the scroll / TOOLTIP_OPEN listeners stay here.
+// `$attrs` and the positioning props merge AFTER the surface, as before, so a
+// consumer's explicit `data-state` still wins.
+const content = getTooltipContentSurface(rootContext);
+const label = getTooltipLabelSurface(rootContext);
 
 const popperContentProps = computed(() => {
   const { ariaLabel: _, ...restProps } = props;
@@ -79,52 +105,54 @@ const popperContentProps = computed(() => {
   } satisfies TooltipContentImplProps);
 });
 
+// Close the tooltip if the trigger is scrolled (also inside a shadow root)
+useAncestorScroll(rootContext.trigger, () => rootContext.onClose());
+
 onMounted(() => {
-  // Close the tooltip if the trigger is scrolled
-  useEventListener(window, 'scroll', (event) => {
-    const target = event.target as HTMLElement;
-    if (target?.contains(rootContext.trigger.value!)) {
-      rootContext.onClose();
-    }
-  }, { capture: true });
   // Close this tooltip if another one opens
-  useEventListener(document, TOOLTIP_OPEN, rootContext.onClose);
+  useEventListener(document, TOOLTIP_OPEN, () => rootContext.onClose());
 });
+
+// `focusOutside` is prevented below, so the layer only dismisses for
+// `escape-key` / `outside-press`; the guard keeps `TooltipOpenChangeReason` honest.
+function handleDismiss({ reason, event }: DismissableLayerDismissDetails) {
+  if (reason === 'focus-outside') {
+    return;
+  }
+  rootContext.onClose(reason, event);
+}
+
+// The content was `<DismissableLayer as-child>` around `PopperContent`; the
+// layer is a composable on its element now. `layerWrapper` is what the layer
+// received: its bindings with the content's attrs fallen through over them.
+// So consumer attrs named after its props and events still configure it,
+// and never render. (`$attrs` read through the instance proxy tracks.)
+const instance = getCurrentInstance()!;
+const layerWrapper = computed(() => splitWrapperAttrs(mergeProps({
+  asChild: true,
+  disableOutsidePointerEvents: false,
+  onEscapeKeyDown: (event: KeyboardEvent) => emits('escapeKeyDown', event),
+  onPointerDownOutside: (event: PointerDownOutsideEvent) => {
+    if (rootContext.disableClosingTrigger.value && rootContext.trigger.value?.contains(event.target as HTMLElement)) {
+      event.preventDefault();
+    }
+
+    emits('pointerDownOutside', event);
+  },
+  onFocusOutside: (event: FocusOutsideEvent) => event.preventDefault(),
+  onDismiss: handleDismiss,
+}, instance.proxy!.$attrs), DISMISSABLE_LAYER_WRAPPER));
+const layer = useDismissableLayer(dismissableLayerOptions(currentElement, () => layerWrapper.value));
 </script>
 
 <template>
-  <DismissableLayer
-    as-child
-    :disable-outside-pointer-events="false"
-    @escape-key-down="emits('escapeKeyDown', $event)"
-    @pointer-down-outside="(event) => {
-      if (rootContext.disableClosingTrigger.value && rootContext.trigger.value?.contains(event.target as HTMLElement))
-        event.preventDefault()
-
-      emits('pointerDownOutside', event)
-    }"
-    @focus-outside.prevent
-    @dismiss="rootContext.onClose()"
+  <PopperContent
+    :ref="forwardRef"
+    v-bind="mergeProps(mergeProps(layer.attrs(), layerWrapper.rest), mergeProps(content.attrs.value, { ...$attrs, ...popperContentProps }, { style: CONTENT_STYLE }))"
   >
-    <PopperContent
-      :ref="forwardRef"
-      :data-state="rootContext.stateAttribute.value"
-      v-bind="{ ...$attrs, ...popperContentProps }"
-      :style="{
-        '--akar-tooltip-content-transform-origin': 'var(--akar-popper-transform-origin)',
-        '--akar-tooltip-content-available-width': 'var(--akar-popper-available-width)',
-        '--akar-tooltip-content-available-height': 'var(--akar-popper-available-height)',
-        '--akar-tooltip-trigger-width': 'var(--akar-popper-anchor-width)',
-        '--akar-tooltip-trigger-height': 'var(--akar-popper-anchor-height)',
-      }"
-    >
-      <slot />
-      <VisuallyHidden
-        :id="rootContext.contentId"
-        role="tooltip"
-      >
-        {{ ariaLabel }}
-      </VisuallyHidden>
-    </PopperContent>
-  </DismissableLayer>
+    <slot />
+    <VisuallyHidden v-bind="label.attrs.value">
+      {{ ariaLabel }}
+    </VisuallyHidden>
+  </PopperContent>
 </template>

@@ -27,7 +27,11 @@ export interface ConfigProviderProps {
    */
   locale?: string;
   /**
-   * The global scroll body behavior of your application. This will be inherited by the related primitives.
+   * How modal primitives lock page scroll. `true` keeps the layout stable with
+   * `scrollbar-gutter: stable` (or by pinning `<body>`'s size where that is
+   * unsupported), `false` only hides the overflow, and `{ padding, margin }`
+   * hides the overflow and offsets `<body>` by the given amounts (`true` = the
+   * scrollbar width). The lock never touches `pointer-events`.
    * @type boolean | ScrollBodyOption
    */
   scrollBody?: boolean | ScrollBodyOption;
@@ -39,7 +43,8 @@ export interface ConfigProviderProps {
   /**
    * The global default teleport target for all portalled primitives (e.g. `Dialog`, `Popover`, `Tooltip`).
    * Individual `*Portal` components can still override this via their own `to` prop.
-   * Useful when rendering inside a custom element / shadow DOM.
+   * Without it, portals render into `body`, or into the shadow root they are rendered in.
+   * Inside a shadow root, a selector is looked up in the shadow root first, then in the document.
    * @type string | HTMLElement
    */
   teleportTo?: string | HTMLElement;

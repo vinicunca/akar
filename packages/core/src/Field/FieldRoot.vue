@@ -2,7 +2,7 @@
 import type { ComputedRef, Ref } from 'vue';
 import type { FieldValidateFn, FieldValidationMode, FieldValidityState } from './useFieldValidation';
 import type { PrimitiveProps } from '@/Primitive';
-import { createContext, useForwardExpose, useId } from '@/shared';
+import { mergeExpose, useForwardElement, useId } from '@/shared';
 
 export interface FieldRootProps extends PrimitiveProps {
   /**
@@ -145,15 +145,15 @@ export interface FieldRootContext {
   resetField: () => void;
 }
 
-export const [injectFieldRootContext, provideFieldRootContext]
-  = createContext<FieldRootContext>('FieldRoot');
+export { injectFieldRootContext, provideFieldRootContext } from './fieldRootContext';
 </script>
 
 <script setup lang="ts">
-import { isEqual } from 'ohash';
-import { computed, onBeforeUnmount, onMounted, ref, shallowRef, toRefs, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, shallowRef, toRef, watch } from 'vue';
 import { injectFormRootContext } from '@/Form/FormRoot.vue';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
+import { isEqual } from '@/shared/compare';
+import { provideFieldRootContext } from './fieldRootContext';
 import { createValidityState, useFieldValidation } from './useFieldValidation';
 
 const props = withDefaults(defineProps<FieldRootProps>(), {
@@ -175,7 +175,11 @@ defineSlots<{
   }) => any;
 }>();
 
-const { disabled, required, name } = toRefs(props);
+const disabled = toRef(props, 'disabled');
+
+const required = toRef(props, 'required');
+
+const name = toRef(props, 'name');
 
 const fieldId = ref(useId(undefined, 'akar-field'));
 const labelIdBase = useId(undefined, 'akar-field-label');
@@ -208,7 +212,7 @@ function shouldValidateOnChange() {
 }
 
 const control = shallowRef<FieldControlRegistration>();
-const initialValue = ref<unknown>(null);
+const initialValue = shallowRef<unknown>(null);
 let initialValueCaptured = false;
 
 const {
@@ -443,9 +447,13 @@ function registerControl(registration: FieldControlRegistration) {
   // A control mounted with a value (e.g. `<input value="…">`) is filled from the start.
   filled.value = isFilled(current);
   return () => {
-    if (control.value === registration) {
-      control.value = undefined;
+    if (control.value !== registration) {
+      return;
     }
+    control.value = undefined;
+    // A control that goes away can't hold focus, but not every browser fires
+    // `blur`/`focusout` for a removed element, so don't wait for one.
+    focused.value = false;
   };
 }
 
@@ -469,11 +477,11 @@ function validate(): boolean {
   return valid.value !== false;
 }
 
-defineExpose({
+const { forwardRef, expose } = useForwardElement();
+defineExpose(mergeExpose(expose, {
   /** Validates the field immediately, regardless of `validationMode`. Returns whether it's valid. */
   validate,
-});
-useForwardExpose();
+}));
 
 function resetField() {
   touchedState.value = false;
@@ -540,14 +548,14 @@ provideFieldRootContext({
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="asChild"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     v-bind="dataAttributes"
   >
     <slot
       :invalid="invalid"
       :errors="errors"
     />
-  </Primitive>
+  </component>
 </template>

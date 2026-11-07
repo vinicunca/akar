@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 
 export interface CheckboxIndicatorProps extends PrimitiveProps {
   /**
@@ -12,33 +12,44 @@ export interface CheckboxIndicatorProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import { mergeProps } from 'vue';
 import { Presence } from '@/Presence';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
+import { useLingeringPresence } from '@/shared/useLingeringPresence';
 import { injectCheckboxRootContext } from './CheckboxRoot.vue';
-import { getState, isIndeterminate } from './utils';
+import { getCheckboxIndicatorSurface } from './useCheckbox';
+import { isIndeterminate } from './utils';
 
-withDefaults(defineProps<CheckboxIndicatorProps>(), {
+const props = withDefaults(defineProps<CheckboxIndicatorProps>(), {
   as: 'span',
 });
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 
 const rootContext = injectCheckboxRootContext();
+// Same derivation as `useCheckbox().indicator` — one source for `data-state` / `data-disabled`.
+const indicator = getCheckboxIndicatorSurface(rootContext);
+
+// Mounts no `Presence` while not shown; see `useLingeringPresence`.
+const shown = () => props.forceMount || isIndeterminate(rootContext.state.value) || rootContext.state.value === true;
+const lingering = useLingeringPresence(shown);
 </script>
 
 <template>
   <Presence
-    :present="forceMount || isIndeterminate(rootContext.state.value) || rootContext.state.value === true"
+    v-if="lingering.mounted()"
+    :present="shown()"
+    :appear="lingering.appear()"
+    @vue:mounted="lingering.onMounted"
+    @complete="lingering.onComplete"
   >
-    <Primitive
+    <component
+      :is="renderAs(as, asChild)"
       :ref="forwardRef"
-      :data-state="getState(rootContext.state.value)"
-      :data-disabled="rootContext.disabled.value ? '' : undefined"
       :style="{ pointerEvents: 'none' }"
-      :as-child="asChild"
-      :as="as"
-      v-bind="$attrs"
+      v-bind="mergeProps(indicator.attrs.value, $attrs)"
     >
       <slot />
-    </Primitive>
+    </component>
   </Presence>
 </template>

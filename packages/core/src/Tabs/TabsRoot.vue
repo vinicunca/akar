@@ -1,13 +1,18 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import type { DataOrientation, Direction, StringOrNumber } from '../shared/types';
+import type { TabsChangeReason } from './useTabs';
 import type { PrimitiveProps } from '@/Primitive';
-import { useVModel } from '@vueuse/core';
-import { createContext, useDirection, useForwardExpose, useId } from '@/shared';
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared';
+import type { KeyedSelector } from '@/shared/createKeyedSelector';
+import { createContext, useDirection, useForwardElement, useId } from '@/shared';
 
 export interface TabsRootContext {
-  modelValue: Ref<StringOrNumber | undefined>;
-  changeModelValue: (value: StringOrNumber) => void;
+  modelValue: ComputedRef<StringOrNumber | undefined>;
+  /** `modelValue` as a keyed selector: triggers and contents read their own cell. */
+  selected?: KeyedSelector<StringOrNumber>;
+  /** Returns `false` when the value is unchanged or the change was cancelled. */
+  changeModelValue: (value: StringOrNumber, reason?: TabsChangeReason | BaseChangeReason, event?: Event) => boolean;
   orientation: Ref<DataOrientation>;
   dir: Ref<Direction>;
   unmountOnHide: Ref<boolean>;
@@ -15,6 +20,10 @@ export interface TabsRootContext {
   baseId: string;
   tabsList: Ref<HTMLElement | undefined>;
   contentIds: Ref<Set<StringOrNumber>>;
+  /** `TabsTrigger` `id` props by value; a value without one uses `makeTriggerId`. */
+  customTriggerIds: Ref<Map<StringOrNumber, string>>;
+  /** `TabsContent` `id` props by value; a value without one uses `makeContentId`. */
+  customContentIds: Ref<Map<StringOrNumber, string>>;
   registerContent: (value: StringOrNumber) => void;
   unregisterContent: (value: StringOrNumber) => void;
 }
@@ -49,8 +58,10 @@ export interface TabsRootProps<T extends StringOrNumber = StringOrNumber> extend
   unmountOnHide?: boolean;
 }
 export type TabsRootEmits<T extends StringOrNumber = StringOrNumber> = {
+  /** Event handler called before the value changes; call `details.cancel()` to keep the current value */
+  'beforeUpdate:modelValue': [payload: T, details: ChangeEventDetails<TabsChangeReason>];
   /** Event handler called when the value changes */
-  'update:modelValue': [payload: T];
+  'update:modelValue': [payload: T, details: ChangeEventDetails<TabsChangeReason>];
 };
 
 export const [injectTabsRootContext, provideTabsRootContext]
@@ -58,8 +69,8 @@ export const [injectTabsRootContext, provideTabsRootContext]
 </script>
 
 <script setup lang="ts" generic="T extends StringOrNumber = StringOrNumber">
-import { ref, shallowRef, toRefs } from 'vue';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
+import { useTabs } from './useTabs';
 
 const props = withDefaults(defineProps<TabsRootProps<T>>(), {
   orientation: 'horizontal',
@@ -71,52 +82,41 @@ const emits = defineEmits<TabsRootEmits<T>>();
 defineSlots<{
   default?: (props: {
     /** Current input values */
-    modelValue: typeof modelValue.value;
+    modelValue: T | undefined;
   }) => any;
 }>();
 
-const { orientation, unmountOnHide, dir: propDir } = toRefs(props);
-const dir = useDirection(propDir);
-useForwardExpose();
+// `dir` resolution (ConfigProvider-aware) stays in the shell; the composable
+// owns the controlled/uncontrolled model (`useControllableState`) and emits.
+const dir = useDirection(() => props.dir);
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 
-const modelValue = useVModel<TabsRootProps<T>, 'modelValue', 'update:modelValue'>(props, 'modelValue', emits, {
+const { root, context, modelValue } = useTabs({
+  modelValue: () => props.modelValue,
   defaultValue: props.defaultValue,
-  passive: (props.modelValue === undefined) as false,
-});
-
-const tabsList = ref<HTMLElement>();
-const contentIds = shallowRef<Set<StringOrNumber>>(new Set());
-
-provideTabsRootContext({
-  modelValue,
-  changeModelValue: (value: StringOrNumber) => {
-    modelValue.value = value as T;
-  },
-  orientation,
+  emit: emits,
+  orientation: () => props.orientation,
   dir,
-  unmountOnHide,
+  unmountOnHide: () => props.unmountOnHide,
   activationMode: props.activationMode,
+  // `useId` (SSR-stable id) stays in the shell — the composable derives ids from it.
   baseId: useId(undefined, 'akar-tabs'),
-  tabsList,
-  contentIds,
-  registerContent: (value: StringOrNumber) => {
-    contentIds.value = new Set([...contentIds.value, value]);
-  },
-  unregisterContent: (value: StringOrNumber) => {
-    const newSet = new Set(contentIds.value);
-    newSet.delete(value);
-    contentIds.value = newSet;
-  },
 });
+
+provideTabsRootContext(context);
+
+// The composable is untyped over `T`; narrow once here for the slot payload
+// (a `T | undefined` cast in the template reads as a deprecated filter to eslint).
+const slotModelValue = modelValue as ComputedRef<T | undefined>;
 </script>
 
 <template>
-  <Primitive
-    :dir="dir"
-    :data-orientation="orientation"
-    :as-child="asChild"
-    :as="as"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="root.attrs.value"
   >
-    <slot :model-value="modelValue" />
-  </Primitive>
+    <slot :model-value="slotModelValue" />
+  </component>
 </template>

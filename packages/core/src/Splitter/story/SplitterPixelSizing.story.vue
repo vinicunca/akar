@@ -149,7 +149,6 @@ function toggleCollapsible() {
               :min-size="140"
               :max-size="260"
               class="flex items-center justify-center bg-blackA8 rounded-lg"
-              :data-state="collapsibleOpen ? 'expanded' : 'collapsed'"
               @collapse="handleCollapsed"
               @expand="handleExpanded"
             >

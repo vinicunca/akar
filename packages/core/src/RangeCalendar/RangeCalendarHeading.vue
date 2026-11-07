@@ -1,30 +1,44 @@
 <script lang="ts">
+import type { CalendarUnit } from '@/date';
 import type { PrimitiveProps } from '@/Primitive';
 
 export interface RangeCalendarHeadingProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { getCalendarHeadingSurface } from '@/Calendar/useCalendar';
+import { renderAs } from '@/Primitive/renderAs';
+import { useForwardElement } from '@/shared';
 import { injectRangeCalendarRootContext } from './RangeCalendarRoot.vue';
 
 const props = withDefaults(defineProps<RangeCalendarHeadingProps>(), { as: 'div' });
 defineSlots<{
   default?: (props: {
-    /** Current month and year */
+    /** Heading of the active view: `September 2026`, `2026`, `2020 - 2031` */
     headingValue: string;
+    /** The active view */
+    view: CalendarUnit;
   }) => any;
 }>();
+
 const rootContext = injectRangeCalendarRootContext();
+const surface = getCalendarHeadingSurface(rootContext);
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
-    :data-disabled="rootContext.disabled.value ? '' : undefined"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="surface.attrs.value"
   >
-    <slot :heading-value="rootContext.headingValue.value">
+    <slot
+      :heading-value="rootContext.headingValue.value"
+      :view="rootContext.view.value"
+    >
       {{ rootContext.headingValue.value }}
     </slot>
-  </Primitive>
+  </component>
 </template>

@@ -21,11 +21,17 @@ export interface ToastActionProps extends ToastCloseProps {
 </script>
 
 <script setup lang="ts">
-import { computed, useSlots } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
-import ToastAnnounceExclude from './ToastAnnounceExclude.vue';
+import { computed, mergeProps, useSlots } from 'vue';
+import { renderAs } from '@/Primitive/renderAs';
+import { useForwardElement } from '@/shared';
 import { injectToastRootContext } from './ToastRootImpl.vue';
+
+defineOptions({
+  // `$attrs` are merged over the announce-exclude marks and under the part's
+  // own bindings: the order the former `<ToastAnnounceExclude as-child>`
+  // wrapper gave them.
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<ToastActionProps>(), {
   as: 'button',
@@ -33,7 +39,8 @@ const props = withDefaults(defineProps<ToastActionProps>(), {
 });
 
 const rootContext = injectToastRootContext();
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 const slots = useSlots();
 
 const actionProps = computed(() => rootContext.toast.value?.actionProps);
@@ -50,25 +57,18 @@ function handleClick(event: MouseEvent) {
   if (actionProps.value?.closeOnClick ?? props.closeOnClick)
   // Pass the event on, like `ToastClose`: a keyboard click hands focus to the viewport.
   {
-    rootContext.onClose(event as PointerEvent);
+    rootContext.onClose(event, 'action-press');
   }
 }
 </script>
 
 <template>
-  <ToastAnnounceExclude
+  <component
+    :is="renderAs(as, asChild)"
     v-if="isRendered && altText"
-    :alt-text="altText"
-    as-child
+    :ref="forwardRef"
+    v-bind="mergeProps({ 'data-akar-toast-announce-exclude': '', 'data-akar-toast-announce-alt': altText || undefined }, $attrs, { type: as === 'button' ? 'button' : undefined, onClick: handleClick })"
   >
-    <Primitive
-      :ref="forwardRef"
-      :as="as"
-      :as-child="asChild"
-      :type="as === 'button' ? 'button' : undefined"
-      @click="handleClick"
-    >
-      <slot>{{ actionProps?.label }}</slot>
-    </Primitive>
-  </ToastAnnounceExclude>
+    <slot>{{ actionProps?.label }}</slot>
+  </component>
 </template>

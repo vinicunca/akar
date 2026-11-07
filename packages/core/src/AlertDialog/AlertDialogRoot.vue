@@ -1,30 +1,76 @@
 <script lang="ts">
+import type { AlertDialogHandle } from './handle';
 import type {
   DialogRootEmits,
   DialogRootProps,
 } from '@/Dialog';
 
 export type AlertDialogEmits = DialogRootEmits;
-export interface AlertDialogProps extends Omit<DialogRootProps, 'modal'> {}
+export interface AlertDialogProps<Payload = unknown> extends Omit<DialogRootProps<Payload>, 'modal' | 'handle'> {
+  /**
+   * A handle from `createAlertDialogHandle()` that connects detached
+   * `AlertDialogTrigger`s to this Root and controls it imperatively.
+   */
+  handle?: AlertDialogHandle<Payload>;
+}
 </script>
 
-<script setup lang="ts">
-import { DialogRoot } from '@/Dialog';
-import { useForwardExpose, useForwardPropsEmits } from '@/shared';
+<script setup lang="ts" generic="Payload = unknown">
+import { provideDialogRootContext } from '@/Dialog/DialogRoot.vue';
+import { useId } from '@/shared';
+import { usePopupHandleAttachment } from '@/shared/popupHandle';
+import { useAlertDialog } from './useAlertDialog';
 
-const props = defineProps<AlertDialogProps>();
-const emits = defineEmits<AlertDialogEmits>();
+defineOptions({
+  inheritAttrs: false,
+});
 
-const forwarded = useForwardPropsEmits(props, emits);
-useForwardExpose();
+const props = withDefaults(defineProps<AlertDialogProps<Payload>>(), {
+  open: undefined,
+  defaultOpen: false,
+  unmountOnHide: true,
+  triggerId: undefined,
+  defaultTriggerId: undefined,
+});
+const emit = defineEmits<AlertDialogEmits>();
+
+defineSlots<{
+  default?: (props: {
+    /** Current open state */
+    open: boolean;
+    /** Close the dialog */
+    close: () => void;
+    /** The `payload` of the detached trigger that opened the dialog, or from `handle.openWithPayload()` */
+    payload: Payload | undefined;
+    /** The id of the detached trigger that opened the dialog */
+    activeTriggerId: string | null;
+  }) => any;
+}>();
+
+// `useAlertDialog` composes `useDialog` (modal forced on), so the Dialog parts
+// the AlertDialog parts render inject the same `DialogRootContext`.
+const { open, onOpenChange, context, payload, activeTriggerId, handleStore } = useAlertDialog<Payload>({
+  open: () => props.open,
+  defaultOpen: props.defaultOpen,
+  unmountOnHide: () => props.unmountOnHide,
+  baseId: useId(undefined, 'akar-alert-dialog'),
+  emit,
+  onOpenComplete: (value) => emit('update:openComplete', value),
+  handle: () => props.handle,
+  triggerId: () => props.triggerId,
+  defaultTriggerId: props.defaultTriggerId,
+});
+
+provideDialogRootContext(context);
+// Client-only: the Root's state reaches a (possibly module-scope) handle only once mounted.
+usePopupHandleAttachment(handleStore);
 </script>
 
 <template>
-  <DialogRoot
-    v-slot="slotProps"
-    v-bind="forwarded"
-    :modal="true"
-  >
-    <slot v-bind="slotProps" />
-  </DialogRoot>
+  <slot
+    :open="open"
+    :close="() => onOpenChange(false)"
+    :payload="payload"
+    :active-trigger-id="activeTriggerId"
+  />
 </template>

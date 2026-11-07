@@ -1,18 +1,23 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
+import type { MenuOpenChangeReason } from './useMenu';
 import type { Direction } from './utils';
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared';
 import { createContext, useDirection } from '@/shared';
-import { useIsUsingKeyboard } from '@/shared/useIsUsingKeyboard';
 
 export interface MenuContext {
-  open: Ref<boolean>;
-  onOpenChange: (open: boolean) => void;
+  open: ComputedRef<boolean>;
+  /** Returns `false` when the change was a no-op or cancelled via `beforeUpdate:open`. */
+  onOpenChange: (open: boolean, reason?: MenuOpenChangeReason | BaseChangeReason, event?: Event) => boolean;
   content: Ref<HTMLElement | undefined>;
   onContentChange: (content: HTMLElement | undefined) => void;
+  /** Called by the content once its open/close transitions finish; emits `update:openComplete`. */
+  notifyOpenComplete?: (value: boolean) => void;
 }
 
 export interface MenuRootContext {
-  onClose: () => void;
+  /** Returns `false` when the change was a no-op or cancelled via `beforeUpdate:open`. */
+  onClose: (reason?: MenuOpenChangeReason | BaseChangeReason, event?: Event) => boolean;
   dir: Ref<Direction>;
   isUsingKeyboardRef: Ref<boolean>;
   modal: Ref<boolean>;
@@ -21,6 +26,8 @@ export interface MenuRootContext {
 export interface MenuProps {
   /** The controlled open state of the menu. Can be used as `v-model:open`. */
   open?: boolean;
+  /** The open state of the menu when it is initially rendered. Use when you do not need to control its open state. */
+  defaultOpen?: boolean;
   /**
    * The reading direction of the combobox when applicable.
    *
@@ -30,13 +37,21 @@ export interface MenuProps {
   /**
    * The modality of the dropdown menu.
    *
-   * When set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.
+   * When `true`, page scroll is locked, the rest of the page (except the
+   * trigger) is covered by an internal backdrop that closes the menu on press,
+   * and only the menu content is visible to screen readers.
+   * @defaultValue true
    */
   modal?: boolean;
 }
 
 export type MenuEmits = {
-  'update:open': [payload: boolean];
+  /** Called before the open state changes; `details.cancel()` vetoes the change. */
+  'beforeUpdate:open': [payload: boolean, details: ChangeEventDetails<MenuOpenChangeReason>];
+  /** Event handler called when the open state of the menu changes. */
+  'update:open': [payload: boolean, details: ChangeEventDetails<MenuOpenChangeReason>];
+  /** Event handler called after the open or close animations of the content have finished. */
+  'update:openComplete': [value: boolean];
 };
 
 export const [injectMenuContext, provideMenuContext]
@@ -47,45 +62,32 @@ export const [injectMenuRootContext, provideMenuRootContext]
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import {
-  ref,
-  toRefs,
-} from 'vue';
+import { toRefs } from 'vue';
 import { PopperRoot } from '@/Popper';
+import { useMenuRoot } from './useMenu';
 
 const props = withDefaults(defineProps<MenuProps>(), {
-  open: false,
+  open: undefined,
+  defaultOpen: false,
   modal: true,
 });
 const emits = defineEmits<MenuEmits>();
+// `useDirection` (ConfigProvider-aware) stays in the shell; the composable owns
+// the controlled/uncontrolled `open` model and builds the two context objects.
 const { modal, dir: propDir } = toRefs(props);
 const dir = useDirection(propDir);
 
-const open = useVModel(props, 'open', emits);
-
-const content = ref<HTMLElement>();
-const isUsingKeyboardRef = useIsUsingKeyboard();
-
-provideMenuContext({
-  open,
-  onOpenChange: (value) => {
-    open.value = value;
-  },
-  content,
-  onContentChange: (element) => {
-    content.value = element;
-  },
-});
-
-provideMenuRootContext({
-  onClose: () => {
-    open.value = false;
-  },
-  isUsingKeyboardRef,
+const { menuContext, menuRootContext } = useMenuRoot({
+  open: () => props.open,
+  defaultOpen: props.defaultOpen,
   dir,
   modal,
+  emit: emits,
+  onOpenComplete: (value) => emits('update:openComplete', value),
 });
+
+provideMenuContext(menuContext);
+provideMenuRootContext(menuRootContext);
 </script>
 
 <template>

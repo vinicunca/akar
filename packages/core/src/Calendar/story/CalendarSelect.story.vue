@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import { createCalendar, getLocalTimeZone, toCalendar, today } from '@internationalized/date';
 import { computed, ref } from 'vue';
+import { toCalendar } from '@/date';
 import { Label } from '@/Label';
 import { SelectContent, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectLabel, SelectPortal, SelectRoot, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SelectViewport } from '@/Select';
 import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from '..';
@@ -111,7 +111,7 @@ function updateLocale(newLocale: string) {
   locale.value = newLocale;
   calendar.value = pref.value!.ordering.split(' ')[0];
 }
-const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalendar(calendar.value)));
+const value = computed(() => toCalendar(Temporal.Now.plainDateISO(), calendar.value));
 </script>
 
 <template>
@@ -294,6 +294,7 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
             <CalendarGrid
               v-for="month in grid"
               :key="month.value.toString()"
+              :value="month.value"
               class="w-full border-collapse select-none space-y-1"
             >
               <CalendarGridHead>
@@ -316,12 +317,11 @@ const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalenda
                   <CalendarCell
                     v-for="weekDate in weekDates"
                     :key="weekDate.toString()"
-                    :date="weekDate"
+                    :value="weekDate"
                     class="relative text-center text-sm"
                   >
                     <CalendarCellTrigger
-                      :day="weekDate"
-                      :month="month.value"
+                      :value="weekDate"
                       class="relative flex items-center justify-center whitespace-nowrap rounded-lg border border-transparent bg-transparent text-sm font-normal text-black w-8 h-8 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black hover:border-black data-[selected]:bg-black data-[selected]:font-medium data-[outside-view]:text-black/30 data-[selected]:text-white data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-grass9 data-[selected]:before:bg-white"
                     />
                   </CalendarCell>

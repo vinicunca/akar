@@ -1,40 +1,38 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
 
 export interface DismissableLayerBranchProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
-import { Primitive } from '@/Primitive';
-import { context } from './context';
+import { useRender } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
+import { registerBranch } from './layerStack';
 
 const props = defineProps<DismissableLayerBranchProps>();
 
-const { forwardRef, currentElement } = useForwardExpose();
-
-let registeredElement: HTMLElement | null = null;
-
+const { currentElement, elementRef, expose } = useRender({
+  as: () => props.as,
+  asChild: () => props.asChild,
+});
+defineExpose(expose);
+let unregisterBranch: (() => void) | undefined;
 onMounted(() => {
-  registeredElement = currentElement.value;
-  if (registeredElement) {
-    context.branches.add(registeredElement);
+  if (currentElement.value) {
+    unregisterBranch = registerBranch(currentElement.value);
   }
 });
 onUnmounted(() => {
-  if (registeredElement) {
-    context.branches.delete(registeredElement);
-    registeredElement = null;
-  }
+  unregisterBranch?.();
 });
 </script>
 
 <template>
-  <Primitive
-    :ref="forwardRef"
-    v-bind="props"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="elementRef"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

@@ -1,31 +1,32 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 
 export interface PaginationFirstProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 import { injectPaginationRootContext } from './PaginationRoot.vue';
+import { getPaginationNavigationSurface } from './usePagination';
 
-const props = withDefaults(defineProps<PaginationFirstProps>(), { as: 'button' });
+withDefaults(defineProps<PaginationFirstProps>(), { as: 'button' });
 
 const rootContext = injectPaginationRootContext();
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 
-const disabled = computed((): boolean => rootContext.page.value === 1 || rootContext.disabled.value);
+// aria-label, disabled and the click handler come from the shared surface builder.
+const surface = getPaginationNavigationSurface(rootContext, 'first');
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
-    aria-label="First Page"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     :type="as === 'button' ? 'button' : undefined"
-    :disabled
-    @click="!disabled && rootContext.onPageChange(1)"
+    v-bind="surface.attrs.value"
   >
     <slot>First page</slot>
-  </Primitive>
+  </component>
 </template>

@@ -11,12 +11,12 @@ export interface NavigationMenuIndicatorProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { useResizeObserver } from '@vueuse/core';
-import { computed, ref, watchEffect } from 'vue';
+import { mergeProps } from 'vue';
 import { Presence } from '@/Presence';
-import { Primitive } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { renderAs } from '@/Primitive/renderAs';
+import { useForwardElement } from '@/shared';
 import { injectNavigationMenuContext } from './NavigationMenuRoot.vue';
+import { useNavigationMenuIndicator } from './useNavigationMenu';
 
 defineOptions({
   inheritAttrs: false,
@@ -24,38 +24,11 @@ defineOptions({
 
 const props = defineProps<NavigationMenuIndicatorProps>();
 
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 const menuContext = injectNavigationMenuContext();
 
-const indicatorStyle = ref<{ size: number; position: number }>();
-const isHorizontal = computed(() => menuContext.orientation === 'horizontal');
-const isVisible = computed(() => !!menuContext.modelValue.value);
-const { activeTrigger } = menuContext;
-
-function handlePositionChange() {
-  if (!activeTrigger.value) {
-    return;
-  }
-
-  indicatorStyle.value = {
-    size: isHorizontal.value
-      ? activeTrigger.value.offsetWidth
-      : activeTrigger.value.offsetHeight,
-    position: isHorizontal.value
-      ? activeTrigger.value.offsetLeft
-      : activeTrigger.value.offsetTop,
-  };
-}
-
-watchEffect(() => {
-  if (!menuContext.modelValue.value) {
-    return;
-  }
-  handlePositionChange();
-});
-
-useResizeObserver(activeTrigger, handlePositionChange);
-useResizeObserver(menuContext.indicatorTrack, handlePositionChange);
+const { isVisible, indicator } = useNavigationMenuIndicator({ context: menuContext });
 </script>
 
 <template>
@@ -64,23 +37,13 @@ useResizeObserver(menuContext.indicatorTrack, handlePositionChange);
     :to="menuContext.indicatorTrack.value"
   >
     <Presence :present="forceMount || isVisible">
-      <Primitive
+      <component
+        :is="renderAs(as, props.asChild)"
+        v-bind="mergeProps(indicator.attrs.value, $attrs)"
         :ref="forwardRef"
-        aria-hidden="true"
-        :data-state="isVisible ? 'visible' : 'hidden'"
-        :data-orientation="menuContext.orientation"
-        :as-child="props.asChild"
-        :as="as"
-        :style="{
-          ...(indicatorStyle ? {
-            '--akar-navigation-menu-indicator-size': `${indicatorStyle.size}px`,
-            '--akar-navigation-menu-indicator-position': `${indicatorStyle.position}px`,
-          } : {}),
-        }"
-        v-bind="$attrs"
       >
         <slot />
-      </Primitive>
+      </component>
     </Presence>
   </Teleport>
 </template>

@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 import { defineComponent, h } from 'vue';
+import { isMacWebKit } from '@/test/browser';
 import { DialogClose, DialogContent, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger } from '.';
 
 function mountDialog() {
@@ -34,7 +35,8 @@ function mountDialog() {
 }
 
 describe('given a modal Dialog, in a real browser', () => {
-  it('traps Tab focus, closes on Escape and returns focus to the trigger', async () => {
+  // Tabs to a button or link: see `isMacWebKit`.
+  it.skipIf(isMacWebKit)('traps Tab focus, closes on Escape and returns focus to the trigger', async () => {
     const { get } = mountDialog();
 
     await userEvent.click(get('trigger')!);
@@ -58,7 +60,9 @@ describe('given a modal Dialog, in a real browser', () => {
 
     await userEvent.click(get('trigger')!);
     await expect.poll(() => get('content')).not.toBeNull();
-    expect(getComputedStyle(document.body).pointerEvents).toBe('none');
+    // <body> is never made inert (#2822): the overlay and the content's internal
+    // backdrop cover the page instead.
+    expect(getComputedStyle(document.body).pointerEvents).toBe('auto');
     // Hit testing is real here: the point over the outside button resolves to the overlay.
     const rect = get('outside')!.getBoundingClientRect();
     const hit = document.elementFromPoint(rect.left + 2, rect.top + 2);
@@ -66,7 +70,7 @@ describe('given a modal Dialog, in a real browser', () => {
 
     await userEvent.keyboard('{Escape}');
     await expect.poll(() => get('content')).toBeNull();
-    expect(getComputedStyle(document.body).pointerEvents).not.toBe('none');
+    expect(document.querySelector('[data-akar-internal-backdrop]')).toBeNull();
 
     await userEvent.click(get('outside')!);
     expect(onOutsideClick).toHaveBeenCalledTimes(1);

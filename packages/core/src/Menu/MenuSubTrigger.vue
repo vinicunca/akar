@@ -16,14 +16,20 @@ export interface MenuSubTriggerProps extends MenuItemImplProps {
 <script setup lang="ts">
 import type { ComponentPublicInstance } from 'vue';
 import { reactiveOmit } from '@vueuse/shared';
-import { nextTick, onUnmounted, ref, watch } from 'vue';
-import { useId } from '@/shared';
-import MenuAnchor from './MenuAnchor.vue';
+import { mergeProps, nextTick, onUnmounted, ref, watch } from 'vue';
+import { usePopperAnchor } from '@/Popper/usePopperAnchor';
+import { disclosureState, useForwardElement, useId } from '@/shared';
 import { injectMenuContentContext } from './MenuContentImpl.vue';
 import MenuItemImpl from './MenuItemImpl.vue';
 import { injectMenuContext, injectMenuRootContext } from './MenuRoot.vue';
 import { injectMenuSubContext } from './MenuSub.vue';
-import { getOpenState, isMouseEvent, SUB_OPEN_KEYS } from './utils';
+import { isMouseEvent, SELECTION_KEYS, SUB_OPEN_KEYS } from './utils';
+
+defineOptions({
+  // `$attrs` are merged under the part's own bindings: the precedence the
+  // former `MenuAnchor` (as-child) wrapper gave them.
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<MenuSubTriggerProps>(), {
   graceDuration: 300,
@@ -74,7 +80,7 @@ function handlePointerMove(event: PointerEvent) {
   if (!props.disabled && !menuContext.open.value && !openTimerRef.value) {
     contentContext.onPointerGraceIntentChange(null);
     openTimerRef.value = window.setTimeout(() => {
-      menuContext.onOpenChange(true);
+      menuContext.onOpenChange(true, 'trigger-hover', event);
       clearOpenTimer();
     }, 100);
   }
@@ -134,52 +140,62 @@ async function handleKeyDown(event: KeyboardEvent) {
     return;
   }
   if (SUB_OPEN_KEYS[rootContext.dir.value].includes(event.key)) {
-    menuContext.onOpenChange(true);
+    // Enter/Space activate the trigger; ArrowRight/ArrowLeft are list navigation.
+    const opened = menuContext.onOpenChange(true, SELECTION_KEYS.includes(event.key)
+      ? 'trigger-press'
+      : 'list-navigation', event);
+    // prevent window from scrolling
+    event.preventDefault();
+    // `false` is either "already open" (re-focus the content below) or a
+    // cancelled open (`beforeUpdate:open`) — never move focus into a closed submenu.
+    if (!opened && !menuContext.open.value) {
+      return;
+    }
 
     await nextTick();
     // The trigger may hold focus if opened via pointer interaction
     // so we ensure content is given focus again when switching to keyboard.
     menuContext.content.value?.focus();
-    // prevent window from scrolling
-    event.preventDefault();
+  }
+}
+
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
+const anchor = usePopperAnchor({ consumerAttrs: true, element: currentElement });
+
+function setTriggerRef(item: Element | ComponentPublicInstance | null) {
+  forwardRef(item);
+  if (item) {
+    subContext?.onTriggerChange((item as ComponentPublicInstance).$el);
   }
 }
 </script>
 
 <template>
-  <MenuAnchor as-child>
-    <MenuItemImpl
-      v-bind="itemProps"
-      :id="subContext.triggerId"
-      :ref="
-        (vnode: Element | ComponentPublicInstance | null) => {
-          if (!vnode) return undefined
-          // @ts-ignore
-          subContext?.onTriggerChange(vnode?.$el);
-          return undefined
-        }
-      "
-      aria-haspopup="menu"
-      :aria-expanded="menuContext.open.value"
-      :aria-controls="subContext.contentId"
-      :data-state="getOpenState(menuContext.open.value)"
-      @click="
-        async (event: MouseEvent) => {
-          if (props.disabled || event.defaultPrevented) return;
-          /**
-           * We manually focus because iOS Safari doesn't always focus on click (e.g. buttons)
-           * and we rely heavily on `onFocusOutside` for submenus to close when switching
-           * between separate submenus.
-           */
-          (event.currentTarget as HTMLElement)?.focus();
-          if (!menuContext.open.value) menuContext.onOpenChange(true);
-        }
-      "
-      @pointermove="handlePointerMove"
-      @pointerleave="handlePointerLeave"
-      @keydown="handleKeyDown"
-    >
-      <slot />
-    </MenuItemImpl>
-  </MenuAnchor>
+  <MenuItemImpl
+    v-bind="mergeProps(anchor.consumerAttrs($attrs), itemProps)"
+    :id="subContext.triggerId"
+    :ref="setTriggerRef"
+    aria-haspopup="menu"
+    :aria-expanded="menuContext.open.value"
+    :aria-controls="subContext.contentId"
+    :data-state="disclosureState(menuContext.open.value)"
+    @click="
+      async (event: MouseEvent) => {
+        if (props.disabled || event.defaultPrevented) return;
+        /**
+         * We manually focus because iOS Safari doesn't always focus on click (e.g. buttons)
+         * and we rely heavily on `onFocusOutside` for submenus to close when switching
+         * between separate submenus.
+         */
+        (event.currentTarget as HTMLElement)?.focus();
+        if (!menuContext.open.value) menuContext.onOpenChange(true, 'trigger-press', event);
+      }
+    "
+    @pointermove="handlePointerMove"
+    @pointerleave="handlePointerLeave"
+    @keydown="handleKeyDown"
+  >
+    <slot />
+  </MenuItemImpl>
 </template>

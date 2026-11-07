@@ -1,8 +1,9 @@
 import type { RenderResult } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
-import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { defineComponent, nextTick, onMounted, ref, useTemplateRef } from 'vue';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { defineComponent, nextTick, onMounted, ref, useTemplateRef, watch } from 'vue';
+import { getActiveElement } from '@/shared';
 import { FocusScope } from '.';
 import { ComboboxAnchor, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxPortal, ComboboxRoot, ComboboxTrigger, ComboboxViewport } from '../Combobox';
 import { DialogContent, DialogRoot, DialogTitle, DialogTrigger } from '../Dialog';
@@ -457,5 +458,148 @@ describe('focusScope', () => {
 
       expect(rendered.getByTestId('form-input')).toHaveFocus();
     });
+  });
+});
+
+describe('given a trapped FocusScope inside a shadow root', () => {
+  let host: HTMLElement;
+  let shadowRoot: ShadowRoot;
+  let inner1: HTMLInputElement;
+  let inner2: HTMLInputElement;
+  let outsideButton: HTMLButtonElement;
+
+  beforeEach(() => {
+    outsideButton = document.createElement('button');
+    document.body.appendChild(outsideButton);
+    host = document.createElement('div');
+    document.body.appendChild(host);
+    shadowRoot = host.attachShadow({ mode: 'open' });
+    const target = shadowRoot.appendChild(document.createElement('div'));
+
+    render(defineComponent({
+      components: { FocusScope },
+      template: `
+        <FocusScope as-child loop trapped>
+          <form><input name="one" /><input name="two" /></form>
+        </FocusScope>`,
+    }), { container: target });
+
+    inner1 = shadowRoot.querySelector('input[name="one"]')!;
+    inner2 = shadowRoot.querySelector('input[name="two"]')!;
+  });
+
+  afterEach(() => {
+    host.remove();
+    outsideButton.remove();
+  });
+
+  it('keeps focus on the inner element when focus moves within the scope', async () => {
+    inner1.focus();
+    inner2.focus();
+    await nextTick();
+    expect(getActiveElement()).toBe(inner2);
+  });
+
+  it('returns focus to the scope when focus escapes to a light-DOM element', async () => {
+    inner2.focus();
+    outsideButton.focus();
+    await nextTick();
+    expect(getActiveElement()).toBe(inner2);
+  });
+
+  it('focuses the container when the focused element is removed', async () => {
+    inner1.focus();
+    inner1.remove();
+    await nextTick();
+    expect(getActiveElement()).toBe(shadowRoot.querySelector('form'));
+  });
+});
+
+describe('given a trapped FocusScope rendered in an iframe', () => {
+  let iframe: HTMLIFrameElement;
+
+  afterEach(() => {
+    iframe.remove();
+  });
+
+  it('reads the iframe\'s focus, not the top document\'s, when a removal leaves its last focused element stale', async () => {
+    iframe = document.body.appendChild(document.createElement('iframe'));
+    const frameDocument = iframe.contentDocument!;
+    const target = frameDocument.body.appendChild(frameDocument.createElement('div'));
+    render(defineComponent({
+      components: { FocusScope },
+      template: `
+        <FocusScope as-child trapped>
+          <form data-testid="frame-scope"><input name="one" /><input name="two" /></form>
+        </FocusScope>`,
+    }), { container: target });
+    await nextTick();
+    await nextTick();
+    const one = frameDocument.querySelector<HTMLInputElement>('input[name="one"]')!;
+    const two = frameDocument.querySelector<HTMLInputElement>('input[name="two"]')!;
+    one.focus();
+
+    // Another scope pauses the trap, so its last focused element goes stale.
+    const outer = render(defineComponent({
+      components: { FocusScope },
+      template: '<FocusScope><button>outer</button></FocusScope>',
+    }));
+    await nextTick();
+    await nextTick();
+    two.focus();
+    expect(frameDocument.activeElement).toBe(two);
+
+    one.remove();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(frameDocument.activeElement).toBe(two);
+    outer.unmount();
+  });
+});
+
+describe('given a FocusScope that unmounts before its mount effect settles, inside a Dialog', () => {
+  it('leaves the Dialog\'s focus trap working', async () => {
+    const dialog = render(defineComponent({
+      components: { DialogRoot, DialogContent, DialogTitle },
+      template: `
+        <div>
+          <button data-testid="outside">outside</button>
+          <DialogRoot :open="true">
+            <DialogContent>
+              <DialogTitle>Title</DialogTitle>
+              <input data-testid="dialog-input" />
+            </DialogContent>
+          </DialogRoot>
+        </div>`,
+    }));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const input = document.querySelector<HTMLInputElement>('[data-testid="dialog-input"]')!;
+    input.focus();
+
+    // The scope's mount effect sees its element in the next flush and adds itself to
+    // the stack after a `nextTick`. A post-flush callback queued from another one runs
+    // after that effect, still within the flush, and unmounts the scope first.
+    const queueUnmount = ref(false);
+    const unmountInner = ref(false);
+    let inner: RenderResult | undefined;
+    const stops = [
+      watch(queueUnmount, () => {
+        unmountInner.value = true;
+      }, { flush: 'post' }),
+      watch(unmountInner, () => inner?.unmount(), { flush: 'post' }),
+    ];
+    inner = render(defineComponent({
+      components: { FocusScope },
+      template: '<FocusScope><button>inner</button></FocusScope>',
+    }));
+    queueUnmount.value = true;
+    await nextTick();
+    stops.forEach((stop) => stop());
+    await new Promise((resolve) => setTimeout(resolve, 10));
+
+    input.focus();
+    document.querySelector<HTMLButtonElement>('[data-testid="outside"]')!.focus();
+    await nextTick();
+    expect(input).toHaveFocus();
+    dialog.unmount();
   });
 });

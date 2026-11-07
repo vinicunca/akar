@@ -2,14 +2,14 @@
 import type { ComputedRef } from 'vue';
 import type { RadioProps } from './Radio.vue';
 import type { SelectEvent } from './utils';
-import { createContext, useForwardExpose, useForwardScopeId } from '@/shared';
+import { createContext, useForwardElement, useForwardScopeId } from '@/shared';
 
 export interface RadioGroupItemProps extends Omit<RadioProps, 'checked'> {}
 export type RadioGroupItemEmits = {
   select: [event: SelectEvent];
 };
 
-interface RadioGroupItemContext {
+export interface RadioGroupItemContext {
   disabled: ComputedRef<boolean>;
   checked: ComputedRef<boolean>;
 }
@@ -19,12 +19,12 @@ export const [injectRadioGroupItemContext, provideRadiogroupItemContext]
 </script>
 
 <script setup lang="ts">
-import { useEventListener } from '@vueuse/core';
-import { isEqual } from 'ohash';
-import { computed, ref } from 'vue';
-import { RovingFocusItem } from '@/RovingFocus';
+import { mergeProps } from 'vue';
+import { useRovingFocusItem } from '@/RovingFocus/useRovingFocusItem';
 import Radio from './Radio.vue';
 import { injectRadioGroupRootContext } from './RadioGroupRoot.vue';
+import { getRadioGroupItemState, preventEnterKeydown } from './useRadioGroup';
+import { isArrowKeyPressed } from './utils';
 
 defineOptions({
   inheritAttrs: false,
@@ -48,32 +48,18 @@ defineSlots<{
   }) => any;
 }>();
 
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 
 const rootContext = injectRadioGroupRootContext();
 
-const disabled = computed(() => rootContext.disabled.value || props.disabled);
-const required = computed(() => rootContext.required.value || props.required);
-const checked = computed(() => isEqual(rootContext.modelValue?.value, props.value));
+// checked (`isEqual(modelValue, value)`) and the group-inherited disabled/required
+// come from the state the shared surface builder derives from (single source with
+// `useRadioGroup()`); the leaf `Radio` binds the attrs from the same builder, so
+// only that state is read here and handed down as props.
+const { checked, disabled, required } = getRadioGroupItemState(rootContext, () => props.value, () => props.disabled, () => props.required);
 
 provideRadiogroupItemContext({ disabled, checked });
-
-const isArrowKeyPressed = ref(false);
-const ARROW_KEYS = [
-  'ArrowUp',
-  'ArrowDown',
-  'ArrowLeft',
-  'ArrowRight',
-];
-
-useEventListener('keydown', (event) => {
-  if (ARROW_KEYS.includes(event.key)) {
-    isArrowKeyPressed.value = true;
-  }
-});
-useEventListener('keyup', () => {
-  isArrowKeyPressed.value = false;
-});
 
 function handleFocus() {
   setTimeout(() => {
@@ -82,7 +68,7 @@ function handleFocus() {
      * and we need to 'check' it in that case. We click it to 'check' it (instead
      * of updating `context.value`) so that the radio change event fires.
      */
-    if (isArrowKeyPressed.value) {
+    if (isArrowKeyPressed()) {
       currentElement.value?.click();
     }
   }, 0);
@@ -91,32 +77,31 @@ function handleFocus() {
 // parent's scoped-style id is not auto-forwarded; pass it through manually so consumer
 // `<style scoped>` keeps working. (issue #2751)
 const scopeIdAttrs = useForwardScopeId();
+
+// Arrow-key navigation (as a composable; the group handles the keys).
+const roving = useRovingFocusItem({
+  element: currentElement,
+  focusable: () => !disabled.value,
+  active: () => checked.value,
+})!;
 </script>
 
 <template>
-  <RovingFocusItem
+  <Radio
+    v-bind="mergeProps(roving.attrs(), { ...scopeIdAttrs, ...$attrs, ...props })"
+    :ref="forwardRef"
     :checked="checked"
+    :required="required"
     :disabled="disabled"
-    as-child
-    :focusable="!disabled"
-    :active="checked"
+    @update:checked="(_checked, details) => rootContext.changeModelValue(value, 'item-press', details?.event)"
+    @select="emits('select', $event)"
+    @keydown="preventEnterKeydown"
+    @focus="handleFocus"
   >
-    <Radio
-      v-bind="{ ...scopeIdAttrs, ...$attrs, ...props }"
-      :ref="forwardRef"
+    <slot
       :checked="checked"
       :required="required"
       :disabled="disabled"
-      @update:checked="rootContext.changeModelValue(value)"
-      @select="emits('select', $event)"
-      @keydown.enter.prevent
-      @focus="handleFocus"
-    >
-      <slot
-        :checked="checked"
-        :required="required"
-        :disabled="disabled"
-      />
-    </Radio>
-  </RovingFocusItem>
+    />
+  </Radio>
 </template>

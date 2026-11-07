@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { onBeforeUnmount, ref, watchEffect } from 'vue';
+import type { PrimitiveProps } from '@/Primitive';
+import { getCurrentInstance, onBeforeUnmount, ref, watchEffect } from 'vue';
 import { useCollection } from '@/Collection';
-import { Primitive } from '@/Primitive';
-import { getActiveElement } from '@/shared';
+import { renderAs } from '@/Primitive/renderAs';
+import { getActiveElement, useForwardElement } from '@/shared';
 import { injectSelectContentContext } from './SelectContentImpl.vue';
 
 export type SelectScrollButtonImplEmits = {
@@ -47,15 +48,26 @@ function handlePointerMove() {
 }
 
 onBeforeUnmount(() => clearAutoScrollTimer());
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
+
+// Renders as its scroll button part (`SelectScrollUpButton` / `SelectScrollDownButton`) asks.
+const instance = getCurrentInstance();
+function getTag() {
+  const props = instance?.parent?.props as PrimitiveProps | undefined;
+  return renderAs(props?.as, props?.asChild);
+}
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="getTag()"
+    :ref="forwardRef"
     aria-hidden="true"
     :style="{
       flexShrink: 0,
     }"
-    v-bind="$parent?.$props"
     @pointerdown="handlePointerDown"
     @pointermove="handlePointerMove"
     @pointerleave="
@@ -65,5 +77,5 @@ onBeforeUnmount(() => clearAutoScrollTimer());
     "
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

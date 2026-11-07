@@ -1,6 +1,5 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import type { Ref } from 'vue';
-import type SliderImpl from './SliderImpl.vue';
 import { fireEvent } from '@testing-library/vue';
 import { flushPromises, mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -294,9 +293,9 @@ describe('given default Slider', () => {
   });
 
   describe('after pointerdown event on slider-impl', () => {
-    let sliderImpl: VueWrapper<InstanceType<typeof SliderImpl>>;
+    let sliderImpl: DOMWrapper<HTMLElement>;
     beforeEach(async () => {
-      sliderImpl = wrapper.findComponent('[data-slider-impl]') as any;
+      sliderImpl = wrapper.find('[data-slider-impl]');
       await fireEvent.pointerDown(sliderImpl.element, { clientX: 10, pointerId: 1 });
     });
 
@@ -567,6 +566,72 @@ describe('given a range slider whose thumbs change', () => {
 
       expect(value.value).toEqual([10, 80]);
       expect(document.activeElement).toBe(wrapper.find('[data-key="a"]').element);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+});
+
+describe('given a range slider whose thumb is reinserted before the focused one', () => {
+  it('should keep stepping the focused thumb with the keyboard', async () => {
+    const thumbs = ref(['a', 'b']);
+    const value = ref([20, 80]);
+    const wrapper = mountRangeSlider(thumbs, value);
+    try {
+      await nextTick();
+      await wrapper.find('[data-key="b"]').trigger('focus');
+      thumbs.value = ['b'];
+      value.value = [80];
+      await nextTick();
+      thumbs.value = ['a', 'b'];
+      value.value = [20, 80];
+      await nextTick();
+
+      await wrapper.find('[data-key="b"]').trigger('keydown', { key: 'ArrowRight' });
+
+      expect(value.value).toEqual([20, 81]);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+});
+
+describe('given a range slider with an asChild thumb that renders no element', () => {
+  it('should register the other thumbs', async () => {
+    const value = ref([20, 80]);
+    const errors: Array<unknown> = [];
+    const wrapper = mount(defineComponent(() => () => h(
+      SliderRoot,
+      {
+        'modelValue': value.value,
+        'onUpdate:modelValue': (v: Array<number> | undefined) => {
+          value.value = v!;
+        },
+      },
+      () => [
+        h(SliderTrack),
+        h(SliderThumb, { 'data-key': 'a' }),
+        h(SliderThumb, { asChild: true }, () => null),
+        h(SliderThumb, { 'data-key': 'b' }),
+      ],
+    )), {
+      attachTo: document.body,
+      global: {
+        config: {
+          errorHandler: (error) => errors.push(error),
+        },
+      },
+    });
+    try {
+      await nextTick();
+      const sliderImpl = wrapper.find('[data-slider-impl]').element;
+      vi.spyOn(sliderImpl, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 100, 20));
+
+      await fireEvent.pointerDown(sliderImpl, { clientX: 90, clientY: 10, pointerId: 1 });
+
+      expect(errors).toEqual([]);
+      expect(value.value).toEqual([20, 90]);
+      expect(document.activeElement).toBe(wrapper.find('[data-key="b"]').element);
     } finally {
       wrapper.unmount();
     }

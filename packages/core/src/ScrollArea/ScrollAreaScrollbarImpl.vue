@@ -14,7 +14,7 @@ export interface ScrollAreaScrollbarImplProps {
 import { useResizeObserver } from '@vueuse/core';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { Primitive } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { containsComposed, getEventTarget, getOwnerDocument, useForwardElement } from '@/shared';
 import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
 import { injectScrollAreaScrollbarContext } from './ScrollAreaScrollbar.vue';
 import { injectScrollAreaScrollbarVisibleContext } from './ScrollAreaScrollbarVisible.vue';
@@ -26,7 +26,8 @@ const rootContext = injectScrollAreaRootContext();
 const scrollbarVisibleContext = injectScrollAreaScrollbarVisibleContext();
 const scrollbarContext = injectScrollAreaScrollbarContext();
 
-const { forwardRef, currentElement: scrollbar } = useForwardExpose();
+const { forwardRef, currentElement: scrollbar, expose } = useForwardElement();
+defineExpose(expose);
 const prevWebkitUserSelectRef = ref('');
 const rectRef = ref<DOMRect>();
 
@@ -47,8 +48,8 @@ function handlePointerDown(event: PointerEvent) {
 
     // pointer capture doesn't prevent text selection in Safari
     // so we remove text selection manually when scrolling
-    prevWebkitUserSelectRef.value = document.body.style.webkitUserSelect;
-    document.body.style.webkitUserSelect = 'none';
+    prevWebkitUserSelectRef.value = getOwnerDocument(scrollbar.value).body.style.webkitUserSelect;
+    getOwnerDocument(scrollbar.value).body.style.webkitUserSelect = 'none';
     if (rootContext.viewport) {
       rootContext.viewport.value!.style.scrollBehavior = 'auto';
     }
@@ -67,7 +68,7 @@ function handlePointerUp(event: PointerEvent) {
     element.releasePointerCapture(event.pointerId);
   }
 
-  document.body.style.webkitUserSelect = prevWebkitUserSelectRef.value;
+  getOwnerDocument(scrollbar.value).body.style.webkitUserSelect = prevWebkitUserSelectRef.value;
   if (rootContext.viewport) {
     rootContext.viewport.value!.style.scrollBehavior = '';
   }
@@ -76,8 +77,12 @@ function handlePointerUp(event: PointerEvent) {
 }
 
 function handleWheel(event: WheelEvent) {
-  const element = event.target as HTMLElement;
-  const isScrollbarWheel = scrollbar.value?.contains(element);
+  // Document-level listener: read the composed target so a wheel over a
+  // shadow-mounted scrollbar isn't retargeted to the host (which would fail the
+  // containment check and break wheel scrolling).
+  const element = getEventTarget<HTMLElement>(event);
+  // Composed in both directions: also a web component inside the scrollbar.
+  const isScrollbarWheel = !!scrollbar.value && containsComposed(scrollbar.value, element);
   const maxScrollPos
     = scrollbarVisibleContext.sizes.value.content
       - scrollbarVisibleContext.sizes.value.viewport;
@@ -86,11 +91,13 @@ function handleWheel(event: WheelEvent) {
   }
 }
 
+let wheelDoc: Document | undefined;
 onMounted(() => {
-  document.addEventListener('wheel', handleWheel, { passive: false });
+  wheelDoc = getOwnerDocument(scrollbar.value);
+  wheelDoc.addEventListener('wheel', handleWheel, { passive: false });
 });
 onUnmounted(() => {
-  document.removeEventListener('wheel', handleWheel);
+  wheelDoc?.removeEventListener('wheel', handleWheel);
 });
 
 function handleSizeChange() {

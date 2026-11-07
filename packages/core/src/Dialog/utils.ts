@@ -1,5 +1,6 @@
-import type { Ref } from 'vue';
-import { onMounted } from 'vue';
+import type { MaybeRefOrGetter, Ref } from 'vue';
+import { onMounted, toValue } from 'vue';
+import { getElementByIdFrom } from '@/shared';
 
 const DEFAULT_TITLE_NAME = 'DialogTitle';
 const DEFAULT_CONTENT_NAME = 'DialogContent';
@@ -8,8 +9,8 @@ export type WarningProps = {
   titleName?: string;
   contentName?: string;
   componentLink?: string;
-  titleId: string;
-  descriptionId: string;
+  titleId: MaybeRefOrGetter<string>;
+  descriptionId: MaybeRefOrGetter<string>;
   contentElement: Ref<HTMLElement | undefined>;
 };
 
@@ -30,15 +31,15 @@ For more information, see https://vinicunca.dev/akar/components/${componentLink}
   const DESCRIPTION_MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby="undefined"\` for ${contentName}.`;
 
   onMounted(() => {
-    const hasTitle = document.getElementById(titleId);
+    const hasTitle = getElementByIdFrom(contentElement.value, toValue(titleId));
     if (!hasTitle) {
       console.warn(TITLE_MESSAGE);
     }
 
     const describedById = contentElement.value?.getAttribute('aria-describedby');
     // if we have an id and the user hasn't set aria-describedby="undefined"
-    if (descriptionId && describedById) {
-      const hasDescription = document.getElementById(descriptionId);
+    if (toValue(descriptionId) && describedById) {
+      const hasDescription = getElementByIdFrom(contentElement.value, toValue(descriptionId));
       if (!hasDescription) {
         console.warn(DESCRIPTION_MESSAGE);
       }

@@ -1,8 +1,10 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
 import type { AcceptableValue, DataOrientation, Direction, FormFieldProps, SingleOrMultipleProps } from '../shared/types';
+import type { ToggleGroupChangeReason } from './useToggleGroup';
 import type { PrimitiveProps } from '@/Primitive';
-import { createContext, useDirection, useFormControl, useForwardExpose } from '@/shared';
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared';
+import { createContext, useDirection, useFormControl, useForwardElement } from '@/shared';
 import VisuallyHiddenInput from '@/VisuallyHidden/VisuallyHiddenInput.vue';
 
 export interface ToggleGroupRootProps<T = AcceptableValue | Array<AcceptableValue>>
@@ -19,14 +21,17 @@ export interface ToggleGroupRootProps<T = AcceptableValue | Array<AcceptableValu
   loop?: boolean;
 }
 export type ToggleGroupRootEmits = {
+  /** Event handler called before the value changes; call `details.cancel()` to keep the current value. */
+  'beforeUpdate:modelValue': [payload: AcceptableValue | Array<AcceptableValue>, details: ChangeEventDetails<ToggleGroupChangeReason>];
   /** Event handler called when the value changes. */
-  'update:modelValue': [payload: AcceptableValue | Array<AcceptableValue>];
+  'update:modelValue': [payload: AcceptableValue | Array<AcceptableValue>, details: ChangeEventDetails<ToggleGroupChangeReason>];
 };
 
-interface ToggleGroupRootContext {
+export interface ToggleGroupRootContext {
   isSingle: ComputedRef<boolean>;
   modelValue: Ref<AcceptableValue | Array<AcceptableValue> | undefined>;
-  changeModelValue: (value: AcceptableValue) => void;
+  /** Returns `false` when the value is unchanged or the change was cancelled. */
+  changeModelValue: (value: AcceptableValue, reason?: ToggleGroupChangeReason | BaseChangeReason, event?: Event) => boolean;
   dir?: Ref<Direction>;
   orientation?: DataOrientation;
   loop: Ref<boolean>;
@@ -39,10 +44,18 @@ export const [injectToggleGroupRootContext, provideToggleGroupRootContext]
 </script>
 
 <script setup lang="ts">
-import { toRefs } from 'vue';
-import { Primitive } from '@/Primitive';
+import { mergeProps, useAttrs, watch } from 'vue';
+import { useFieldControl } from '@/Field/useFieldControl';
+import { useFieldFocusWithin } from '@/Field/useFieldFocusWithin';
+import { Slot } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 import { RovingFocusGroup } from '@/RovingFocus';
-import { useSingleOrMultipleValue } from '@/shared/useSingleOrMultipleValue';
+import { useToggleGroup } from './useToggleGroup';
+
+// A group switching `rovingFocus` swaps the template's wrapper, which re-mounts
+// the items (they decide once whether they rove), so the group stays a
+// wrapper here. Without roving focus `Slot` only passes `dir` and the consumer
+// attrs down, as `Primitive as-child` did.
 
 const props = withDefaults(defineProps<ToggleGroupRootProps>(), {
   loop: true,
@@ -58,47 +71,116 @@ defineSlots<{
   }) => any;
 }>();
 
-const { loop, rovingFocus, disabled, dir: propDir } = toRefs(props);
-const dir = useDirection(propDir);
-const { forwardRef, currentElement } = useForwardExpose();
+// `dir` resolution (ConfigProvider-aware) stays in the shell; the composable
+// owns the single/multiple model (`useControllableState`) and the emits.
+const dir = useDirection(() => props.dir);
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 
-const { modelValue, changeModelValue, isSingle } = useSingleOrMultipleValue(props, emits);
+const attrs = useAttrs();
+
+// The item a Field focuses (an invalid submit, a non-native label's click):
+// the first pressed one, else the first enabled one.
+function getFocusTarget() {
+  const items = Array.from(currentElement.value?.querySelectorAll<HTMLElement>('[aria-pressed]') ?? [])
+    .filter((item) => !item.hasAttribute('disabled') && !item.hasAttribute('data-disabled'));
+  return items.find((item) => item.getAttribute('aria-pressed') === 'true') ?? items[0];
+}
+
+// Optional Field participation: `null` outside a `FieldRoot`, so every
+// binding below is inert without a Field. The group is the field's control:
+// it takes the field's id and aria wiring, and its items don't.
+const field = useFieldControl({
+  id: () => attrs.id as string | undefined,
+  element: getFocusTarget,
+  getValue: () => modelValue.value,
+  required: () => props.required,
+  // An item's value can be `''`, which still counts as pressed.
+  isFilled: (value) => Array.isArray(value)
+    ? value.length > 0
+    : value !== undefined && value !== null,
+});
+// Getters rather than computeds: cheap, and free for a standalone group.
+function resolvedName() {
+  return field
+    ? field.name(props.name)
+    : props.name;
+}
+function resolvedRequired() {
+  return field
+    ? field.required(props.required)
+    : props.required;
+}
+function resolvedDisabled() {
+  return field
+    ? field.disabled(props.disabled)
+    : props.disabled;
+}
+
+const { modelValue, root, context } = useToggleGroup({
+  type: () => props.type,
+  modelValue: () => props.modelValue,
+  defaultValue: props.defaultValue,
+  emit: emits,
+  // The Field hears its own commits by reason (`change`): user input, or, for
+  // a programmatic one (`setModelValue` and the like), only the watcher below,
+  // which also reports a parent-driven change.
+  onUpdate: field?.change,
+  disabled: resolvedDisabled,
+  orientation: props.orientation,
+  dir,
+  loop: () => props.loop,
+  rovingFocus: () => props.rovingFocus,
+});
 const isFormControl = useFormControl(currentElement);
 
-provideToggleGroupRootContext({
-  isSingle,
-  modelValue,
-  changeModelValue,
-  dir,
-  orientation: props.orientation,
-  loop,
-  rovingFocus,
-  disabled,
-});
+provideToggleGroupRootContext(context);
+
+if (field) {
+  watch(modelValue, (value) => field.sync(value));
+}
+
+// Touched once focus leaves the whole group, not on every item-to-item move.
+const focusWithin = useFieldFocusWithin(field, currentElement as Ref<HTMLElement | undefined>);
+
+// The consumer's `$attrs` fall through to the wrapper, under these bindings,
+// so they're only read here for the Field's wiring: its aria ids are merged
+// with the consumer's, and its state attributes yield to the consumer's.
+function renderAttrs(attrs: Record<string, unknown>) {
+  if (!field) {
+    return root.attrs.value;
+  }
+  return field.fillDataAttributes(mergeProps(
+    root.attrs.value,
+    {
+      id: field.id(),
+      ...field.ariaAttrs(attrs, resolvedDisabled()),
+      onFocusin: focusWithin!.onFocusin,
+      onFocusout: focusWithin!.onFocusout,
+    },
+  ), Object.keys(attrs));
+}
 </script>
 
 <template>
   <component
-    :is="rovingFocus ? RovingFocusGroup : Primitive"
-    as-child
-    :orientation="rovingFocus ? orientation : undefined"
-    :dir="dir"
-    :loop="rovingFocus ? loop : undefined"
+    :is="rovingFocus ? RovingFocusGroup : Slot"
+    v-bind="rovingFocus ? { asChild: true, orientation, dir, loop } : { dir }"
   >
-    <Primitive
+    <component
+      :is="renderAs(as, asChild)"
       :ref="forwardRef"
-      role="group"
-      :as-child="asChild"
-      :as="as"
+      v-bind="renderAttrs($attrs)"
     >
       <slot :model-value="modelValue" />
 
       <VisuallyHiddenInput
-        v-if="isFormControl && name"
-        :name="name"
-        :required="required"
+        v-if="isFormControl && resolvedName()"
+        :name="resolvedName()!"
+        :required="resolvedRequired()"
+        :disabled="resolvedDisabled()"
         :value="modelValue"
       />
-    </Primitive>
+    </component>
   </component>
 </template>

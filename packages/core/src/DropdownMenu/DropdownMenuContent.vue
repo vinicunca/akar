@@ -10,11 +10,12 @@ export interface DropdownMenuContentProps extends MenuContentProps {}
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { MenuContent } from '@/Menu';
+import { provideMenuBackdropCutoutContext } from '@/Menu/MenuContentImpl.vue';
 import { omitEntryFocusListener } from '@/Menu/utils';
-import { useForwardExpose, useForwardPropsEmits, useId } from '@/shared';
+import { useForwardElement, useForwardPropsEmits } from '@/shared';
 import { injectDropdownMenuRootContext } from './DropdownMenuRoot.vue';
+import { createDropdownMenuContentSurface } from './useDropdownMenu';
 
 defineOptions({
   inheritAttrs: false,
@@ -23,34 +24,24 @@ defineOptions({
 const props = defineProps<DropdownMenuContentProps>();
 const emits = defineEmits<DropdownMenuContentEmits>();
 const forwarded = useForwardPropsEmits(props, emits);
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 
 const rootContext = injectDropdownMenuRootContext();
+// The trigger stays interactive through a modal menu's backdrop (Base UI).
+provideMenuBackdropCutoutContext(rootContext.triggerElement);
 
-const hasInteractedOutsideRef = ref(false);
-
-function handleCloseAutoFocus(event: Event) {
-  if (event.defaultPrevented) {
-    return;
-  }
-  if (!hasInteractedOutsideRef.value) {
-    setTimeout(() => {
-      rootContext.triggerElement.value?.focus();
-    }, 0);
-  }
-  hasInteractedOutsideRef.value = false;
-
-  // Always prevent auto focus because we either focus manually or want user agent focus
-  event.preventDefault();
-}
-
-rootContext.contentId ||= useId(undefined, 'akar-dropdown-menu-content');
+// `id`/`aria-labelledby` and the focus-restore / outside-interaction handlers
+// come from the composable. The surface's attrs (ids only, no handlers) spread
+// BEFORE the forwarded props and `$attrs`, so a consumer `id` still wins; its
+// handlers bind AFTER the forwarded emits, so they still see a consumer's
+// `preventDefault()`.
+const content = createDropdownMenuContentSurface(rootContext);
 </script>
 
 <template>
   <MenuContent
-    :id="rootContext.contentId"
-    :aria-labelledby="rootContext?.triggerId"
+    :ref="forwardRef"
     :style="{
       '--akar-dropdown-menu-content-transform-origin':
         'var(--akar-popper-transform-origin)',
@@ -62,17 +53,9 @@ rootContext.contentId ||= useId(undefined, 'akar-dropdown-menu-content');
       '--akar-dropdown-menu-trigger-height':
         'var(--akar-popper-anchor-height)',
     }"
-    v-bind="{ ...forwarded, ...omitEntryFocusListener($attrs) }"
-    @close-auto-focus="handleCloseAutoFocus"
-    @interact-outside="(event) => {
-      if (event.defaultPrevented) return
-
-      const originalEvent = event.detail.originalEvent as PointerEvent;
-      const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
-      const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-      if (!rootContext.modal.value || isRightClick) hasInteractedOutsideRef = true;
-      if (rootContext.triggerElement.value?.contains(event.target as HTMLElement)) event.preventDefault()
-    }"
+    v-bind="{ ...content.attrs.value, ...forwarded, ...omitEntryFocusListener($attrs) }"
+    @close-auto-focus="content.onCloseAutoFocus"
+    @interact-outside="content.onInteractOutside"
   >
     <slot />
   </MenuContent>

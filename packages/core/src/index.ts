@@ -15,6 +15,7 @@ export * from './Combobox';
 // utilities
 export * from './ConfigProvider';
 export * from './ContextMenu';
+export { type CalendarGridData, type CalendarPageFunction, type CalendarUnit, type Matcher } from './date';
 export * from './DateField';
 export * from './DatePicker';
 export * from './DateRangeField';
@@ -31,15 +32,13 @@ export * from './HoverCard';
 export * from './Label';
 export * from './Listbox';
 export * from './Menubar';
-export * from './MonthPicker';
-export * from './MonthRangePicker';
 export * from './NavigationMenu';
 export * from './NumberField';
 export * from './Pagination';
 export * from './PinInput';
 export * from './Popover';
 export * from './Presence';
-export { type AsTag, Primitive, type PrimitiveProps, Slot } from './Primitive';
+export { type AsTag, Primitive, type PrimitiveProps, type PrimitiveState, Slot, type StateAttributesMapping, useRender, type UseRenderOptions, type UseRenderReturn } from './Primitive';
 export * from './Progress';
 export * from './RadioGroup';
 export * from './RangeCalendar';
@@ -49,54 +48,65 @@ export * from './ScrollArea';
 export * from './Select';
 export * from './Separator';
 export {
+  type BaseChangeReason,
+  type ChangeEventDetails,
+  createChangeEventDetails,
   createContext,
   type DateRange,
   type DateValue,
+  type DisclosureState,
+  disclosureState,
+  type ElementExpose,
   type Formatter,
+  type MergeableRef,
+  mergeExpose,
+  type PartState,
+  type PartSurface,
+  type RefCleanup,
+  resolveRefTarget,
   type SegmentPart,
+  type SelectionState,
+  selectionState,
   type TimeValue,
+  type TriSelectionState,
   useBodyScrollLock,
+  useControllableState,
+  type UseControllableStateOptions,
+  type UseControllableStateReturn,
   useDateFormatter,
   useDirection,
   useEmitAsProps,
   useFilter,
+  useForwardElement,
+  type UseForwardElementReturn,
   useForwardExpose,
   useForwardProps,
   useForwardPropsEmits,
   useId,
   useLocale,
+  useMergedRefs,
   useStateMachine,
   withDefault,
 } from './shared';
-// Color utilities
+// Color utilities: parsing, comparison, conversion and formatting. Channel and
+// gradient helpers are internal to the Color components.
 export {
   type Color,
   type ColorChannel,
   type ColorFormat,
   type ColorSpace,
   colorToHex,
-  colorToHsb,
-  colorToHsl,
-  colorToRgb,
   colorToString,
   convertToHsb,
   convertToHsl,
   convertToRgb,
-  getAreaBackgroundStyle,
-  getAreaGradient,
-  getChannelName,
-  getChannelRange,
-  getChannelValue,
-  getSliderBackgroundStyle,
-  getSliderGradient,
   type HSBColor,
   type HSLColor,
+  isEqualColor,
   isValidColor,
   normalizeColor,
   parseColor,
   type RGBColor,
-  setChannelValue,
-  setChannelValues,
 } from './shared/color';
 export {
   type AcceptableValue,
@@ -127,8 +137,6 @@ export * from './Tooltip';
 export * from './Tree';
 export * from './Viewport';
 export { VisuallyHidden, type VisuallyHiddenProps } from './VisuallyHidden';
-export * from './YearPicker';
-export * from './YearRangePicker';
 export {
   type ReferenceElement,
 } from '@floating-ui/vue';

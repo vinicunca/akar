@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 
 export interface TagGroupItemTextProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
 import { watchEffect } from 'vue';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 import { injectTagGroupItemContext } from './TagGroupItem.vue';
 
 const props = withDefaults(defineProps<TagGroupItemTextProps>(), {
@@ -15,7 +15,8 @@ const props = withDefaults(defineProps<TagGroupItemTextProps>(), {
 });
 
 const itemContext = injectTagGroupItemContext();
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 
 watchEffect(() => {
   itemContext.textElement.value = currentElement.value;
@@ -23,11 +24,10 @@ watchEffect(() => {
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(props.as, props.asChild)"
     :ref="forwardRef"
-    :as="props.as"
-    :as-child="props.asChild"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

@@ -16,7 +16,7 @@ type Expect<T extends true> = T;
 type Equal<A, B>
   = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false;
 
-type Payload<E> = E extends { 'update:modelValue': [value: infer P] } ? P : never;
+type Payload<E> = E extends { 'update:modelValue': [value: infer P, ...Array<any>] } ? P : never;
 
 // Public types: `trueValue` and `falseValue` can have different types
 type _propsDefault = Expect<Equal<NonNullable<CheckboxRootProps['modelValue']>, boolean | 'indeterminate'>>;

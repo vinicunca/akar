@@ -1,8 +1,10 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { Ref, WritableComputedRef } from 'vue';
+import type { CollapsibleChangeReason } from './useCollapsible';
 import type { PrimitiveProps } from '@/Primitive';
-import { toRefs } from 'vue';
-import { createContext, useForwardExpose } from '@/shared';
+import type { ChangeEventDetails } from '@/shared';
+import { computed, toRef } from 'vue';
+import { createContext, mergeExpose, setGeneratedIds, useForwardElement, useId } from '@/shared';
 
 export interface CollapsibleRootProps extends PrimitiveProps {
   /** The open state of the collapsible when it is initially rendered. <br> Use when you do not need to control its open state. */
@@ -17,15 +19,22 @@ export interface CollapsibleRootProps extends PrimitiveProps {
 
 export type CollapsibleRootEmits = {
   /** Event handler called when the open state of the collapsible changes. */
-  'update:open': [value: boolean];
+  'update:open': [value: boolean, details: ChangeEventDetails<CollapsibleChangeReason>];
+  /** Called before a change; call details.cancel() to keep the current state. */
+  'beforeUpdate:open': [value: boolean, details: ChangeEventDetails<CollapsibleChangeReason>];
+  /** Event handler called after the open or close animations of the content have finished. */
+  'update:openComplete': [value: boolean];
 };
 
-interface CollapsibleRootContext {
+export interface CollapsibleRootContext {
   contentId: string;
   disabled?: Ref<boolean>;
   open: Ref<boolean>;
   unmountOnHide: Ref<boolean>;
-  onOpenToggle: () => void;
+  onOpenToggle: (event?: Event) => void;
+  onContentFound?: (event: Event) => void;
+  /** Called by the content once its open/close transitions finish; emits `update:openComplete`. */
+  notifyOpenComplete?: (value: boolean) => void;
 }
 
 export const [injectCollapsibleRootContext, provideCollapsibleRootContext]
@@ -33,8 +42,8 @@ export const [injectCollapsibleRootContext, provideCollapsibleRootContext]
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
+import { useCollapsible } from './useCollapsible';
 
 const props = withDefaults(defineProps<CollapsibleRootProps>(), {
   open: undefined,
@@ -51,38 +60,46 @@ defineSlots<{
   }) => any;
 }>();
 
-const open = useVModel(props, 'open', emit, {
-  defaultValue: props.defaultOpen,
-  passive: (props.open === undefined) as false,
-}) as Ref<boolean>;
+const disabled = toRef(props, 'disabled');
 
-const { disabled, unmountOnHide } = toRefs(props);
-
-provideCollapsibleRootContext({
-  contentId: '',
+const unmountOnHide = toRef(props, 'unmountOnHide');
+const { open, setOpen, root, context } = useCollapsible({
+  open: () => props.open,
+  defaultOpen: props.defaultOpen,
   disabled,
-  open,
   unmountOnHide,
-  onOpenToggle: () => {
-    if (disabled.value) {
-      return;
-    }
-
-    open.value = !open.value;
-  },
+  emit,
+  onOpenComplete: (value) => emit('update:openComplete', value),
+  baseId: '',
 });
 
-defineExpose({ open });
-useForwardExpose();
+// Allocated here rather than in CollapsibleContent: the trigger renders first and
+// reads it for `aria-controls`, so a content-allocated id re-rendered every
+// trigger right after mount (and SSR serialized it empty).
+context.contentId = useId(undefined, 'akar-collapsible-content');
+setGeneratedIds(context, { contentId: context.contentId });
+provideCollapsibleRootContext(context);
+
+// Writable like the previous `useVModel` ref: assigning requests a change through the model.
+// Created on first read: a ref that never reads `open` costs no computed.
+let exposedOpen: WritableComputedRef<boolean> | undefined;
+const { forwardRef, expose } = useForwardElement();
+defineExpose(mergeExpose(expose, {
+  get open() {
+    return exposedOpen ??= computed({
+      get: () => open.value,
+      set: (value) => setOpen(value, 'imperative-action'),
+    });
+  },
+}));
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="props.asChild"
-    :data-state="open ? 'open' : 'closed'"
-    :data-disabled="disabled ? '' : undefined"
+  <component
+    :is="renderAs(as, props.asChild)"
+    :ref="forwardRef"
+    v-bind="root.attrs.value"
   >
     <slot :open="open" />
-  </Primitive>
+  </component>
 </template>

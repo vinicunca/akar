@@ -1,3 +1,5 @@
+export * from './calendarCellIndex';
+export { type CellKeydownOptions, type CellNavigationHost, createCellFocusNavigation, getCellFocusNavigation } from './cellFocusNavigation';
 export {
   getDefaultDate,
   getDefaultTime,
@@ -21,6 +23,20 @@ export {
 export { getPlaceholder, type SupportedLocale } from './placeholders';
 export * from './segment';
 
+export {
+  bridgeChange,
+  createSegmentFieldRootSurface,
+  createSegmentFieldSegmentSurface,
+  editableSegments,
+  isSameTemporalValue,
+  type SegmentContents,
+  type SegmentFieldRootState,
+  type SegmentFieldSegmentContext,
+  type SegmentFieldSegmentState,
+  useSegmentFieldNavigation,
+  wasCanceled,
+  watchSegmentFieldLocale,
+} from './segmentField';
 export type {
   AnyExceptLiteral,
   DateAndTimeSegmentObj,
@@ -39,6 +55,7 @@ export type {
   TimeSegmentObj,
   TimeSegmentPart,
 } from './types';
-export { useDateField } from './useDateField';
+export { useCalendarGrid, type UseCalendarGridProps, type UseCalendarGridReturn } from './useCalendarGrid';
+export { type SegmentFieldChangeReason, useDateFieldSegment } from './useDateFieldSegment';
 export { useSegmentNavigation } from './useSegmentNavigation';
 export * from './utils';

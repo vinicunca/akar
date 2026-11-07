@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import { createContext, useForwardExpose, useId } from '@/shared';
+import { createContext, useId } from '@/shared';
 
 export interface MenubarMenuProps {
   /**
@@ -11,7 +11,12 @@ export interface MenubarMenuProps {
   value?: string;
 }
 
-type MenubarMenuContext = {
+export type MenubarMenuEmits = {
+  /** Event handler called after the open or close animations of the content have finished. */
+  'update:openComplete': [value: boolean];
+};
+
+export type MenubarMenuContext = {
   value: string;
   triggerId: string;
   triggerElement: Ref<HTMLElement | undefined>;
@@ -24,49 +29,33 @@ export const [injectMenubarMenuContext, provideMenubarMenuContext]
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-import { MenuRoot } from '@/Menu';
+import { provideMenuContext, provideMenuRootContext } from '@/Menu/MenuRoot.vue';
+import { PopperRoot } from '@/Popper';
 import { injectMenubarRootContext } from './MenubarRoot.vue';
+import { useMenubarMenu } from './useMenubar';
 
 const props = defineProps<MenubarMenuProps>();
+const emits = defineEmits<MenubarMenuEmits>();
 
 const value = useId(props.value);
 const rootContext = injectMenubarRootContext();
-useForwardExpose();
 
-const triggerElement = ref<HTMLElement>();
-const wasKeyboardTriggerOpenRef = ref(false);
-
-const open = computed(() => rootContext.modelValue.value === value);
-
-watch(open, () => {
-  if (!open.value) {
-    wasKeyboardTriggerOpenRef.value = false;
-  }
-});
-
-provideMenubarMenuContext({
+// `useMenubarMenu` composes `useMenuRoot` with `open` derived from the menubar
+// model; the Menu's close requests go back to the menubar with their reason.
+// The SSR-stable ids stay in the shell.
+const { context, menuContext, menuRootContext } = useMenubarMenu(rootContext, {
   value,
-  triggerElement,
-  triggerId: value,
-  contentId: '',
-  wasKeyboardTriggerOpenRef,
+  contentId: useId(undefined, 'akar-menubar-content'),
+  onOpenComplete: (value) => emits('update:openComplete', value),
 });
+
+provideMenuContext(menuContext);
+provideMenuRootContext(menuRootContext);
+provideMenubarMenuContext(context);
 </script>
 
 <template>
-  <MenuRoot
-    :open="open"
-    :modal="false"
-    :dir="rootContext.dir.value"
-    @update:open="
-      (value) => {
-        // Menu only calls `@update:open` when dismissing so we
-        // want to close our MenuBar based on the same events.
-        if (!value) rootContext.onMenuClose();
-      }
-    "
-  >
+  <PopperRoot>
     <slot />
-  </MenuRoot>
+  </PopperRoot>
 </template>

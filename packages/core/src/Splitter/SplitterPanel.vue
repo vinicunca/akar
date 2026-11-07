@@ -1,7 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useId } from '@/shared';
-import { PRECISION } from './utils/constants';
+import { mergeExpose, useForwardElement, useId } from '@/shared';
 
 export interface SplitterPanelProps extends PrimitiveProps {
   /** The size of panel when it is collapsed; interpreted using `sizeUnit`. */
@@ -64,9 +63,9 @@ export type PanelData = {
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, watch } from 'vue';
 import { Primitive } from '@/Primitive';
 import { injectPanelGroupContext } from './SplitterGroup.vue';
+import { useSplitterPanel } from './useSplitterPanel';
 
 const props = defineProps<SplitterPanelProps>();
 const emits = defineEmits<SplitterPanelEmits>();
@@ -93,100 +92,44 @@ if (panelGroupContext === null) {
   );
 }
 
-const { collapsePanel, expandPanel, getPanelSize, getPanelStyle, isPanelCollapsed, resizePanel, groupId, reevaluatePanelConstraints, registerPanel, unregisterPanel } = panelGroupContext;
-const panelId = useId(props.id, 'akar-splitter-panel');
-
-const panelDataRef = computed(() => ({
-  callbacks: {
-    onCollapse: () => emits('collapse'),
-    onExpand: () => emits('expand'),
-    onResize: (...args) => emits('resize', ...args),
-  },
-  constraints: {
-    collapsedSize: props.collapsedSize && Number.parseFloat(props.collapsedSize.toFixed(PRECISION)),
-    collapsible: props.collapsible,
-    defaultSize: props.defaultSize,
-    /** Panel id (unique within group); falls back to useId when not provided */
-    /** Panel id (unique within group); falls back to useId when not provided */
-    maxSize: props.maxSize,
-    minSize: props.minSize,
-    sizeUnit: props.sizeUnit ?? '%',
-  },
-  id: panelId,
+const { isCollapsed, isExpanded, collapse, expand, resize, getSize, root } = useSplitterPanel(panelGroupContext, {
+  id: useId(props.id, 'akar-splitter-panel'),
   idIsFromProps: props.id !== undefined,
-  order: props.order,
-}) satisfies PanelData);
-
-watch(() => panelDataRef.value.constraints, (constraints, prevConstraints) => {
-  // If constraints have changed, we should revisit panel sizes.
-  // This is uncommon but may happen if people are trying to implement pixel based constraints.
-  if (
-    prevConstraints.collapsedSize !== constraints.collapsedSize
-    || prevConstraints.collapsible !== constraints.collapsible
-    || prevConstraints.maxSize !== constraints.maxSize
-    || prevConstraints.minSize !== constraints.minSize
-    || prevConstraints.sizeUnit !== constraints.sizeUnit
-  ) {
-    reevaluatePanelConstraints(panelDataRef.value, prevConstraints);
-  }
-}, { deep: true });
-
-onMounted(() => {
-  registerPanel(panelDataRef.value);
+  collapsedSize: () => props.collapsedSize,
+  collapsible: () => props.collapsible,
+  defaultSize: () => props.defaultSize,
+  maxSize: () => props.maxSize,
+  minSize: () => props.minSize,
+  order: () => props.order,
+  sizeUnit: () => props.sizeUnit,
+  onCollapse: () => emits('collapse'),
+  onExpand: () => emits('expand'),
+  onResize: (size, prevSize) => emits('resize', size, prevSize),
 });
 
-onUnmounted(() => {
-  unregisterPanel(panelDataRef.value);
-});
-
-const style = computed(() => getPanelStyle(panelDataRef.value, props.defaultSize));
-/** Panel id (unique within group); falls back to useId when not provided */
-
-const isCollapsed = computed(() => isPanelCollapsed(panelDataRef.value));
-const isExpanded = computed(() => !isCollapsed.value);
-
-function collapse() {
-  collapsePanel(panelDataRef.value);
-}
-
-function expand() {
-  expandPanel(panelDataRef.value);
-}
-
-function resize(size: number) {
-  resizePanel(panelDataRef.value, size);
-}
-
-defineExpose({
+const { forwardRef, expose } = useForwardElement();
+defineExpose(mergeExpose(expose, {
   /** If panel is `collapsible`, collapse it fully. */
   collapse,
   /** If panel is currently collapsed, expand it to its most recent size. */
   expand,
   /** Gets the current size of the panel (in the panel's sizeUnit: percentage for '%', pixels for 'px'). */
-  getSize() {
-    return getPanelSize(panelDataRef.value);
-  },
+  getSize,
   /** Resize panel to the specified size (in the panel's sizeUnit: percentage for '%', pixels for 'px'). */
   resize,
   /** Returns `true` if the panel is currently collapsed */
   isCollapsed,
   /** Returns `true` if the panel is currently not collapsed */
   isExpanded,
-});
+}));
 </script>
 
 <template>
   <Primitive
-    :id="panelId"
-    :style="style"
+    :ref="forwardRef"
     :as="as"
     :as-child="asChild"
-    data-panel=""
-    :data-panel-collapsible="collapsible || undefined"
-    :data-panel-group-id="groupId"
-    :data-panel-id="panelId"
-    :data-panel-size=" Number.parseFloat(`${style.flexGrow}`).toFixed(1)"
-    :data-state="collapsible ? isCollapsed ? 'collapsed' : 'expanded' : undefined"
+    v-bind="root.attrs.value"
   >
     <slot
       :is-collapsed="isCollapsed"

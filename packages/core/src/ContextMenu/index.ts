@@ -1,3 +1,7 @@
+// The reason unions of the root and sub parts (`update:open`) and of the
+// checkbox item and radio group (`update:modelValue`) belong to the
+// underlying Menu family, which is not a root export of the package.
+export { type MenuCheckboxItemChangeReason, type MenuOpenChangeReason, type MenuRadioGroupChangeReason } from '../Menu';
 export {
   default as ContextMenuArrow,
   type ContextMenuArrowProps,
@@ -71,3 +75,14 @@ export {
   default as ContextMenuTrigger,
   type ContextMenuTriggerProps,
 } from './ContextMenuTrigger.vue';
+export {
+  type ContextMenuContentHandlers,
+  type ContextMenuOpenChangeReason,
+  type ContextMenuTriggerOptions,
+  type ContextMenuTriggerState,
+  type ContextMenuTriggerSurface,
+  type ContextMenuVirtualElement,
+  useContextMenu,
+  type UseContextMenuProps,
+  type UseContextMenuReturn,
+} from './useContextMenu';

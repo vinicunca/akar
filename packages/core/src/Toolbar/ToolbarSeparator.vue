@@ -5,22 +5,30 @@ export interface ToolbarSeparatorProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { useForwardExpose } from '@/shared';
-import BaseSeparator from '../shared/component/BaseSeparator.vue';
+import { renderAs } from '@/Primitive/renderAs';
+import { useSeparator } from '@/Separator/useSeparator';
+import { useForwardElement } from '@/shared';
 import { injectToolbarRootContext } from './ToolbarRoot.vue';
 
-const props = defineProps<ToolbarSeparatorProps>();
+defineProps<ToolbarSeparatorProps>();
 
 const rootContext = injectToolbarRootContext();
-useForwardExpose();
+const { root } = useSeparator({
+  orientation: () => rootContext.orientation.value === 'horizontal'
+    ? 'vertical'
+    : 'horizontal',
+});
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
-  <BaseSeparator
-    :orientation="rootContext.orientation.value"
-    :as-child="props.asChild"
-    :as="as"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="root.attrs.value"
   >
     <slot />
-  </BaseSeparator>
+  </component>
 </template>

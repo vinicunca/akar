@@ -125,21 +125,18 @@ describe('given a Combobox with unmountOnHide=false', () => {
     await wrapper.setProps({ bodyLock: true });
     const trigger = wrapper.find('[data-testid="persistent-trigger"]');
 
-    expect(document.body.style.overflow).not.toBe('hidden');
+    expect(document.body.style.overflowY).not.toBe('hidden');
     await trigger.trigger('click');
-    await nextTick();
-    expect(document.body.style.overflow).toBe('hidden');
+    await vi.waitFor(() => expect(document.body.style.overflowY).toBe('hidden'));
 
     await wrapper.setProps({ bodyLock: false });
-    await nextTick();
-    expect(document.body.style.overflow).not.toBe('hidden');
+    await vi.waitFor(() => expect(document.body.style.overflowY).not.toBe('hidden'));
 
     await wrapper.setProps({ bodyLock: true });
-    await nextTick();
-    expect(document.body.style.overflow).toBe('hidden');
+    await vi.waitFor(() => expect(document.body.style.overflowY).toBe('hidden'));
 
     document.activeElement?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-    await vi.waitFor(() => expect(document.body.style.overflow).not.toBe('hidden'));
+    await vi.waitFor(() => expect(document.body.style.overflowY).not.toBe('hidden'));
   });
 
   it('removes persistent portal content when the root unmounts', () => {
@@ -294,6 +291,17 @@ describe('given default Combobox', () => {
       input.element.value = 'Testing';
       await input.trigger('keydown', { key: 'Escape' });
       expect(input.element.value).toBe('Testing');
+    });
+
+    // #2789: the reset runs a tick after the close; a reopen inside that tick cancels it.
+    it('should keep text typed into a popup reopened before the reset runs', async () => {
+      const input = wrapper.find('input');
+      await input.trigger('keydown', { key: 'Escape' });
+      input.element.value = 'Ban';
+      await input.trigger('input');
+      await sleep(10);
+      expect(wrapper.find('[role=listbox]').exists()).toBe(true);
+      expect(input.element.value).toBe('Ban');
     });
 
     it('should remove aria-activedescendant when close', async () => {
@@ -1085,11 +1093,44 @@ describe('given a Combobox with popper content', () => {
       },
     }), { attachTo: document.body });
 
-    const content = () => document.querySelector<HTMLElement>('[role="listbox"]')?.closest('[data-side]');
+    const content = () => document.querySelector<HTMLElement>('[role="listbox"]')?.closest<HTMLElement>('[data-side]');
     await vi.waitFor(() => expect(content()?.dataset.side).toBe('bottom'));
 
     side.value = 'top';
     await vi.waitFor(() => expect(content()?.dataset.side).toBe('top'));
+    wrapper.unmount();
+  });
+});
+
+describe('given a single Combobox with a null model and an object comparator', () => {
+  it('renders items without passing null to `by`', async () => {
+    const items = [
+      { id: 1, name: 'Apple' },
+      { id: 2, name: 'Banana' },
+    ];
+    const by = vi.fn((a: { id: number }, b: { id: number }) => a.id === b.id);
+    const wrapper = mount(defineComponent({
+      setup() {
+        return () => h(ComboboxRoot<{ id: number; name: string }>, { modelValue: null, by, open: true }, {
+          default: () => [
+            h(ComboboxAnchor, null, {
+              default: () => h(ComboboxInput),
+            }),
+            h(ComboboxContent, null, {
+              default: () => h(ComboboxViewport, null, {
+                default: () => items.map((item) => h(ComboboxItem, { key: item.id, value: item }, {
+                  default: () => item.name,
+                })),
+              }),
+            }),
+          ],
+        });
+      },
+    }), { attachTo: document.body });
+
+    await vi.waitFor(() => expect(document.querySelectorAll('[role="option"]').length).toBe(2));
+    expect(document.querySelector('[role="option"][data-state="checked"]')).toBeNull();
+    expect(by.mock.calls.every((args) => args.every((arg) => arg !== null))).toBe(true);
     wrapper.unmount();
   });
 });
@@ -1099,13 +1140,13 @@ describe('comboboxContent with popper positioning', () => {
 
   const PopperCombobox = defineComponent({
     setup() {
-      const modelValue = ref('');
+      const modelValue = ref<string | null>('');
       const slotRenderCount = getSlotRenderCount();
       const options = Array.from({ length: 60 }, (_, index) => `Option ${index}`);
 
-      return () => h(ComboboxRoot, {
+      return () => h(ComboboxRoot<string>, {
         'modelValue': modelValue.value,
-        'onUpdate:modelValue': (value: string) => modelValue.value = value,
+        'onUpdate:modelValue': (value: string | null) => modelValue.value = value,
       }, {
         default: () => [
           h(ComboboxAnchor, null, {
@@ -1192,6 +1233,78 @@ describe('comboboxContent with popper positioning', () => {
   });
 });
 
+describe.each(['popper', 'inline'] as const)('filtering a Combobox with %s content', (position) => {
+  // How often each option's slot content rendered.
+  const renders = new Map<string, number>();
+  const options = Array.from({ length: 30 }, (_, index) => `Option ${index}`);
+
+  const FilterCombobox = defineComponent({
+    setup() {
+      return () => h(ComboboxRoot<string>, null, {
+        default: () => [
+          h(ComboboxAnchor, null, {
+            default: () => [
+              h(ComboboxInput),
+              h(ComboboxTrigger, null, {
+                default: () => 'Open',
+              }),
+            ],
+          }),
+          h(ComboboxContent, { position }, {
+            default: () => h(ComboboxViewport, null, {
+              default: () => options.map((option) => h(ComboboxItem, { key: option, value: option }, {
+                default: () => {
+                  renders.set(option, (renders.get(option) ?? 0) + 1);
+                  return option;
+                },
+              })),
+            }),
+          }),
+        ],
+      });
+    },
+  });
+
+  beforeEach(() => {
+    document.body.innerHTML = '';
+    renders.clear();
+  });
+
+  it('re-renders only the items whose visibility changed', async () => {
+    const wrapper = mount(FilterCombobox, { attachTo: document.body });
+    await wrapper.find('button').trigger('click');
+    await sleep(0);
+    await nextTick();
+    expect(wrapper.findAll('[role="option"]')).toHaveLength(30);
+
+    const input = wrapper.find('input');
+    // Every item keeps matching: none of them re-renders.
+    renders.clear();
+    for (const search of ['O', 'Op', 'Option', 'Option ']) {
+      await input.setValue(search);
+    }
+    await sleep(0);
+    await nextTick();
+    expect(wrapper.findAll('[role="option"]')).toHaveLength(30);
+    // The highlighted first item may update its highlight; nothing else renders.
+    expect([
+      ...renders.keys(),
+    ].filter((option) => option !== 'Option 0')).toEqual([]);
+
+    // Narrowing hides most items; the ones that stay visible do not re-render.
+    renders.clear();
+    await input.setValue('Option 2');
+    await sleep(0);
+    await nextTick();
+    const visible = wrapper.findAll('[role="option"]').map((option) => option.text());
+    expect(visible).toEqual([
+      'Option 2',
+      ...options.slice(20, 30),
+    ]);
+    expect(visible.filter((option) => option !== 'Option 2' && renders.has(option))).toEqual([]);
+  });
+});
+
 describe('combobox highlight scrolling with popper positioning', () => {
   const PopperContentStub = defineComponent({
     name: 'PopperContent',
@@ -1217,13 +1330,13 @@ describe('combobox highlight scrolling with popper positioning', () => {
       },
     },
     setup(props) {
-      const modelValue = ref<string>();
+      const modelValue = ref<string | null>();
       const open = ref(false);
 
-      return () => h(ComboboxRoot, {
+      return () => h(ComboboxRoot<string>, {
         'modelValue': modelValue.value,
         'open': open.value,
-        'onUpdate:modelValue': (value: string) => modelValue.value = value,
+        'onUpdate:modelValue': (value: string | null) => modelValue.value = value,
         'onUpdate:open': (value: boolean) => open.value = value,
       }, {
         default: () => [
@@ -1263,11 +1376,11 @@ describe('combobox highlight scrolling with popper positioning', () => {
 
   const InlineCombobox = defineComponent({
     setup() {
-      const modelValue = ref<string>();
+      const modelValue = ref<string | null>();
 
-      return () => h(ComboboxRoot, {
+      return () => h(ComboboxRoot<string>, {
         'modelValue': modelValue.value,
-        'onUpdate:modelValue': (value: string) => modelValue.value = value,
+        'onUpdate:modelValue': (value: string | null) => modelValue.value = value,
       }, {
         default: () => [
           h(ComboboxAnchor, null, {
@@ -1307,12 +1420,12 @@ describe('combobox highlight scrolling with popper positioning', () => {
           h(ComboboxPortal, null, {
             default: () => h(ComboboxContent, { position: 'popper' }, {
               default: () => h(ComboboxViewport, { style: 'height: 200px; overflow: auto' }, {
-                default: () => h(ComboboxVirtualizer, {
+                default: () => h(ComboboxVirtualizer<(typeof virtualOptions)[number]>, {
                   options: virtualOptions,
                   estimateSize: 25,
                   textContent: (option) => option.label,
                 }, {
-                  default: ({ option }) => h(ComboboxItem, { value: option }, {
+                  default: ({ option }: { option: (typeof virtualOptions)[number] }) => h(ComboboxItem, { value: option }, {
                     default: () => option.label,
                   }),
                 }),
@@ -1725,5 +1838,182 @@ describe('given a Combobox with `loop`', () => {
     await input.trigger('keydown', { key: 'End' });
     await input.trigger('keydown', { key: 'ArrowDown' });
     expect(highlighted()).toBe('Cherry');
+  });
+});
+
+describe('given a Combobox with a `beforeUpdate:modelValue` listener', () => {
+  // #2824: ComboboxRoot declares the event itself (v3 #2924 kept it off the
+  // inner ListboxRoot, which no longer exists), so the listener sees every
+  // change with the combobox's own reasons.
+  it('calls the listener with the change details before the value changes', async () => {
+    document.body.innerHTML = '';
+    const onBeforeUpdate = vi.fn();
+    const wrapper = mount(defineComponent({
+      components: {
+        ComboboxAnchor,
+        ComboboxContent,
+        ComboboxInput,
+        ComboboxItem,
+        ComboboxPortal,
+        ComboboxRoot,
+        ComboboxTrigger,
+        ComboboxViewport,
+      },
+      setup: () => ({ onBeforeUpdate }),
+      template: `<ComboboxRoot multiple :unmount-on-hide="false" data-testid="root" @before-update:model-value="onBeforeUpdate">
+  <ComboboxAnchor>
+    <ComboboxInput />
+    <ComboboxTrigger data-testid="trigger">Open</ComboboxTrigger>
+  </ComboboxAnchor>
+  <ComboboxPortal>
+    <ComboboxContent>
+      <ComboboxViewport>
+        <ComboboxItem value="Apple">Apple</ComboboxItem>
+      </ComboboxViewport>
+    </ComboboxContent>
+  </ComboboxPortal>
+</ComboboxRoot>`,
+    }), { attachTo: document.body });
+    await wrapper.find('[data-testid=trigger]').trigger('click');
+    await nextTick();
+    const item = document.querySelector('[role=option]') as HTMLElement;
+    item.click();
+    await nextTick();
+    expect(wrapper.findComponent(ComboboxRoot).emitted('update:modelValue')?.[0]?.[0]).toEqual(['Apple']);
+    expect(onBeforeUpdate).toHaveBeenCalledTimes(1);
+    expect(onBeforeUpdate.mock.calls[0][0]).toEqual(['Apple']);
+    expect(onBeforeUpdate.mock.calls[0][1].reason).toBe('item-press');
+    // Other attrs still reach the listbox root element.
+    expect(document.querySelector('[data-testid=root]')).not.toBeNull();
+    wrapper.unmount();
+  });
+});
+
+// #2789: the deferred `resetSearchTermOnBlur` reset must not wipe text typed
+// right after a close, even when `beforeUpdate:open` cancels the reopen.
+describe('combobox blur reset with a cancelled reopen', () => {
+  const Host = defineComponent({
+    components: {
+      ComboboxAnchor,
+      ComboboxContent,
+      ComboboxInput,
+      ComboboxItem,
+      ComboboxPortal,
+      ComboboxRoot,
+      ComboboxTrigger,
+      ComboboxViewport,
+    },
+    setup() {
+      const value = ref('Apple');
+      const allowOpen = ref(true);
+      function onBeforeOpen(open: boolean, details: { cancel: () => void }) {
+        if (open && !allowOpen.value) {
+          details.cancel();
+        }
+      }
+      return { value, allowOpen, onBeforeOpen };
+    },
+    template: `<ComboboxRoot v-model="value" @before-update:open="onBeforeOpen">
+  <ComboboxAnchor>
+    <ComboboxInput />
+    <ComboboxTrigger data-testid="trigger">Open</ComboboxTrigger>
+  </ComboboxAnchor>
+  <ComboboxPortal>
+    <ComboboxContent>
+      <ComboboxViewport>
+        <ComboboxItem value="Apple">Apple</ComboboxItem>
+        <ComboboxItem value="Banana">Banana</ComboboxItem>
+      </ComboboxViewport>
+    </ComboboxContent>
+  </ComboboxPortal>
+</ComboboxRoot>`,
+  });
+
+  it('keeps text typed right after Escape when the reopen is cancelled', async () => {
+    const wrapper = mount(Host, { attachTo: document.body });
+    const input = wrapper.find('input');
+    await wrapper.find('[data-testid=trigger]').trigger('click');
+    await nextTick()
+    ;(wrapper.vm as unknown as { allowOpen: boolean }).allowOpen = false;
+    await input.trigger('keydown', { key: 'Escape' });
+    input.element.value = 'Ban';
+    await input.trigger('input');
+    await sleep(10);
+    await nextTick();
+    expect(input.element.value).toBe('Ban');
+    wrapper.unmount();
+  });
+
+  it('still restores the selected value when a trigger reopen is cancelled', async () => {
+    const wrapper = mount(Host, { attachTo: document.body });
+    const input = wrapper.find('input');
+    await wrapper.find('[data-testid=trigger]').trigger('click');
+    await nextTick();
+    input.element.value = 'Ban';
+    await input.trigger('input');
+    await nextTick()
+    ;(wrapper.vm as unknown as { allowOpen: boolean }).allowOpen = false;
+    await input.trigger('keydown', { key: 'Escape' });
+    await wrapper.find('[data-testid=trigger]').trigger('click');
+    await sleep(10);
+    await nextTick();
+    expect(wrapper.find('[role=listbox]').exists()).toBe(false);
+    expect(input.element.value).toBe('Apple');
+    wrapper.unmount();
+  });
+});
+
+// #2789: a controlled parent can reopen through `open` alone, without an
+// `onOpenChange` call; the pending blur reset must not wipe the open input.
+describe('combobox blur reset with a controlled reopen', () => {
+  const Host = defineComponent({
+    components: {
+      ComboboxAnchor,
+      ComboboxContent,
+      ComboboxInput,
+      ComboboxItem,
+      ComboboxPortal,
+      ComboboxRoot,
+      ComboboxTrigger,
+      ComboboxViewport,
+    },
+    setup() {
+      const value = ref('Apple');
+      const open = ref(false);
+      return { value, open };
+    },
+    template: `<ComboboxRoot v-model="value" v-model:open="open">
+  <ComboboxAnchor>
+    <ComboboxInput />
+    <ComboboxTrigger data-testid="trigger">Open</ComboboxTrigger>
+  </ComboboxAnchor>
+  <ComboboxPortal>
+    <ComboboxContent>
+      <ComboboxViewport>
+        <ComboboxItem value="Apple">Apple</ComboboxItem>
+        <ComboboxItem value="Banana">Banana</ComboboxItem>
+      </ComboboxViewport>
+    </ComboboxContent>
+  </ComboboxPortal>
+</ComboboxRoot>`,
+  });
+
+  it('keeps the input text when the parent reopens before the reset runs', async () => {
+    const wrapper = mount(Host, { attachTo: document.body });
+    const vm = wrapper.vm as unknown as { open: boolean };
+    const input = wrapper.find('input');
+    await wrapper.find('[data-testid=trigger]').trigger('click');
+    await nextTick();
+    input.element.value = 'Ban';
+    await input.trigger('input');
+    await nextTick();
+    await input.trigger('keydown', { key: 'Escape' });
+    expect(vm.open).toBe(false);
+    vm.open = true;
+    await sleep(10);
+    await nextTick();
+    expect(vm.open).toBe(true);
+    expect(input.element.value).toBe('Ban');
+    wrapper.unmount();
   });
 });

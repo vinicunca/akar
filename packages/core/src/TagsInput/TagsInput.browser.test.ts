@@ -2,7 +2,8 @@ import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 import { defineComponent, h, ref } from 'vue';
-import { TagsInputInput, TagsInputItem, TagsInputItemText, TagsInputRoot } from '.';
+import { isMacWebKit } from '@/test/browser';
+import { TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText, TagsInputRoot } from '.';
 
 function mountInForm({ addOnTab = false } = {}) {
   const values = ref<Array<string>>([]);
@@ -10,7 +11,7 @@ function mountInForm({ addOnTab = false } = {}) {
   const Form = defineComponent({
     setup() {
       return () => h('form', { onSubmit }, [
-        h(TagsInputRoot, {
+        h(TagsInputRoot<string>, {
           addOnTab,
           'modelValue': values.value,
           'onUpdate:modelValue': (v: Array<string>) => {
@@ -61,12 +62,48 @@ describe('given a TagsInput inside a form, in a real browser', () => {
     expect(document.activeElement).toBe(input);
   });
 
-  it('moves focus on Tab when the draft is empty (addOnTab)', async () => {
+  // Tabs to a button or link: see `isMacWebKit`.
+  it.skipIf(isMacWebKit)('moves focus on Tab when the draft is empty (addOnTab)', async () => {
     const { input } = mountInForm({ addOnTab: true });
 
     await userEvent.click(input);
     await userEvent.keyboard('{Tab}');
 
     expect(document.activeElement).toBe(document.querySelector('button[type="submit"]'));
+  });
+});
+
+// Chromium fires `focusout` for a removed element; Firefox and WebKit fire nothing.
+describe('given a TagsInput whose focused tag is removed, in a real browser', () => {
+  it('stops reporting focus when the delete button holding it goes', async () => {
+    const values = ref(['vue', 'react']);
+    mount(defineComponent(() => () => h(TagsInputRoot<string>, {
+      'data-testid': 'root',
+      'modelValue': values.value,
+      'onUpdate:modelValue': (v: Array<string>) => {
+        values.value = v;
+      },
+    }, {
+      default: ({ modelValue }: { modelValue: Array<string> }) => [
+        ...modelValue.map((item) => h(TagsInputItem, { key: item, value: item }, () => [
+          h(TagsInputItemText),
+          h(TagsInputItemDelete, { 'data-testid': `delete-${item}` }, () => 'x'),
+        ])),
+        h(TagsInputInput, { placeholder: 'Add tag' }),
+      ],
+    })), { attachTo: document.body });
+    const root = () => document.querySelector('[data-testid="root"]')!;
+    const focused = () => root().hasAttribute('data-focused');
+    const deleteButton = document.querySelector<HTMLElement>('[data-testid="delete-vue"]')!;
+
+    deleteButton.focus();
+    await expect.poll(focused).toBe(true);
+    deleteButton.click();
+
+    await expect.poll(() => values.value).toEqual(['react']);
+    expect(document.querySelector('[data-testid="delete-vue"]')).toBeNull();
+    await expect.poll(focused).toBe(false);
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    expect(focused()).toBe(false);
   });
 });

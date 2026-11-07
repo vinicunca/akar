@@ -48,7 +48,9 @@ export {
   type ComboboxPortalProps,
 } from './ComboboxPortal.vue';
 export {
+  type ComboboxModelValue,
   default as ComboboxRoot,
+  type ComboboxRootContext,
   type ComboboxRootEmits,
   type ComboboxRootProps,
   injectComboboxRootContext,
@@ -69,3 +71,16 @@ export {
   default as ComboboxVirtualizer,
   type ComboboxVirtualizerProps,
 } from './ComboboxVirtualizer.vue';
+export {
+  type ComboboxChangeReason,
+  type ComboboxContentState,
+  type ComboboxInputChangeReason,
+  type ComboboxInputState,
+  type ComboboxItemState,
+  type ComboboxOpenChangeReason,
+  type ComboboxState,
+  type ComboboxTriggerState,
+  useComboboxRoot,
+  type UseComboboxRootProps,
+  type UseComboboxRootReturn,
+} from './useCombobox';

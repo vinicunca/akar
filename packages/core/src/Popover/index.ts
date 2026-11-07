@@ -1,3 +1,4 @@
+export { createPopoverHandle, PopoverHandle } from './handle';
 export {
   default as PopoverAnchor,
   type PopoverAnchorProps,
@@ -21,6 +22,7 @@ export {
 } from './PopoverPortal.vue';
 export {
   injectPopoverRootContext,
+  type PopoverOpenChangeReason,
   default as PopoverRoot,
   type PopoverRootEmits,
   type PopoverRootProps,
@@ -29,3 +31,10 @@ export {
   default as PopoverTrigger,
   type PopoverTriggerProps,
 } from './PopoverTrigger.vue';
+export {
+  type PopoverContentState,
+  type PopoverTriggerState,
+  usePopover,
+  type UsePopoverProps,
+  type UsePopoverReturn,
+} from './usePopover';

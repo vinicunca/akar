@@ -14,19 +14,19 @@
   {
     "path": "dist/index.js",
     "import": "{ SelectRoot, SelectTrigger, SelectContent, SelectItem, SelectViewport, SelectPortal }",
-    "limit": "27 KB",
+    "limit": "36.6 KB",
     "name": "Select"
   },
   {
     "path": "dist/index.js",
     "import": "{ ComboboxRoot, ComboboxInput, ComboboxContent, ComboboxItem, ComboboxVirtualizer }",
-    "limit": "33 KB",
+    "limit": "40.9 KB",
     "name": "Combobox"
   },
   {
     "path": "dist/index.js",
     "import": "{ CalendarRoot, CalendarHeader, CalendarGrid, CalendarCell, CalendarCellTrigger }",
-    "limit": "17 KB",
+    "limit": "21 KB",
     "name": "Calendar"
   },
   {
@@ -38,25 +38,43 @@
   {
     "path": "dist/index.js",
     "import": "{ TreeRoot, TreeItem, TreeVirtualizer }",
-    "limit": "13 KB",
+    "limit": "16.6 KB",
     "name": "Tree"
   },
   {
     "path": "dist/index.js",
     "import": "{ PopoverRoot, PopoverTrigger, PopoverContent, PopoverPortal }",
-    "limit": "21 KB",
+    "limit": "25.5 KB",
     "name": "Popover"
   },
   {
     "path": "dist/index.js",
     "import": "{ TooltipProvider, TooltipRoot, TooltipTrigger, TooltipContent }",
-    "limit": "19 KB",
+    "limit": "21.5 KB",
     "name": "Tooltip"
+  },
+  {
+    "path": "dist/elements.js",
+    "import": "{ defineAkarElements, switchElements }",
+    "limit": "16.4 KB",
+    "name": "Elements: runtime + Switch"
+  },
+  {
+    "path": "dist/elements.js",
+    "import": "{ defineAkarElements, dialogElements }",
+    "limit": "27.2 KB",
+    "name": "Elements: Dialog"
+  },
+  {
+    "path": "dist/elements.js",
+    "import": "{ defineAkarElements, akarElementFamilies }",
+    "limit": "198.3 KB",
+    "name": "Elements: all supported families"
   },
   {
     "path": "dist/index.js",
     "import": "*",
-    "limit": "163 KB",
+    "limit": "197.8 KB",
     "name": "Full library"
   }
 ]

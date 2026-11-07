@@ -1,20 +1,23 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
 import type { AcceptableValue } from '@/shared/types';
-import { useCollection } from '@/Collection';
-import { createContext, getActiveElement, handleAndDispatchCustomEvent, useForwardExpose, useId } from '@/shared';
+import { useCollectionItem } from '@/Collection';
+import { createContext, useForwardElement, useId } from '@/shared';
 
-interface SelectItemContext<T = AcceptableValue> {
-  value: T;
+export interface SelectItemContext<T = AcceptableValue> {
+  /** The item's value (read live from the prop). */
+  readonly value: T;
   textId: string;
   disabled: Ref<boolean>;
-  isSelected: Ref<boolean>;
+  isSelected: Ref<boolean> | ComputedRef<boolean>;
   onItemTextChange: (node: HTMLElement | undefined) => void;
 }
 
 export const [injectSelectItemContext, provideSelectItemContext]
   = createContext<SelectItemContext>('SelectItem');
+
+const DISABLED_ATTRS = Object.freeze({ 'data-disabled': '' });
 
 export type SelectEvent<T> = CustomEvent<{ originalEvent: PointerEvent | KeyboardEvent; value?: T }>;
 
@@ -40,17 +43,17 @@ export interface SelectItemProps<T = AcceptableValue> extends PrimitiveProps {
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
-import {
-  computed,
-  nextTick,
-  onMounted,
-  ref,
-  toRefs,
-} from 'vue';
-import { Primitive } from '@/Primitive';
+import { mergeProps, onMounted } from 'vue';
+import { renderAs } from '@/Primitive/renderAs';
 import { injectSelectContentContext } from './SelectContentImpl.vue';
 import { injectSelectRootContext } from './SelectRoot.vue';
-import { SELECTION_KEYS, valueComparator } from './utils';
+import { useSelectItem, useSelectItemLabel } from './useSelect';
+
+defineOptions({
+  // `$attrs` are merged under the item's own bindings: the precedence the
+  // former `CollectionItem` wrapper gave them.
+  inheritAttrs: false,
+});
 
 const props = defineProps<SelectItemProps>();
 
@@ -61,85 +64,11 @@ defineSlots<{
     selected: boolean;
   }) => any;
 }>();
-const { disabled } = toRefs(props);
 
 const rootContext = injectSelectRootContext();
 const contentContext = injectSelectContentContext();
-const { forwardRef, currentElement } = useForwardExpose();
-const { CollectionItem } = useCollection();
-
-const isSelected = computed(() => valueComparator(rootContext.modelValue?.value, props.value, rootContext.by));
-const isFocused = ref(false);
-const textValue = ref(props.textValue ?? '');
-const textId = useId(undefined, 'akar-select-item-text');
-
-const SELECT_SELECT = 'select.select';
-
-async function handleSelectCustomEvent(ev: PointerEvent | KeyboardEvent) {
-  if (ev.defaultPrevented) {
-    return;
-  }
-
-  const eventDetail = { originalEvent: ev, value: props.value as T };
-  handleAndDispatchCustomEvent(SELECT_SELECT, handleSelect, eventDetail);
-}
-
-async function handleSelect(ev: SelectEvent<T>) {
-  await nextTick();
-  emits('select', ev);
-  if (ev.defaultPrevented) {
-    return;
-  }
-
-  if (!disabled.value) {
-    rootContext.onValueChange(props.value);
-    if (!rootContext.multiple.value) {
-      rootContext.onOpenChange(false);
-    }
-  }
-}
-
-async function handlePointerMove(event: PointerEvent) {
-  await nextTick();
-  if (event.defaultPrevented) {
-    return;
-  }
-  if (disabled.value) {
-    contentContext.onItemLeave?.();
-  } else {
-    // even though safari doesn't support this option, it's acceptable
-    // as it only means it might scroll a few pixels when using the pointer.
-    (event.currentTarget as HTMLElement | null)?.focus({ preventScroll: true });
-  }
-}
-
-async function handlePointerLeave(event: PointerEvent) {
-  await nextTick();
-  if (event.defaultPrevented) {
-    return;
-  }
-  if (event.currentTarget === getActiveElement()) {
-    contentContext.onItemLeave?.();
-  }
-}
-
-async function handleKeyDown(event: KeyboardEvent) {
-  await nextTick();
-  if (event.defaultPrevented) {
-    return;
-  }
-  const isTypingAhead = contentContext.searchRef?.value !== '';
-  if (isTypingAhead && event.key === ' ') {
-    return;
-  }
-  if (SELECTION_KEYS.includes(event.key)) {
-    handleSelectCustomEvent(event);
-  }
-  // prevent page scroll if using the space key to select an item
-  if (event.key === ' ') {
-    event.preventDefault();
-  }
-}
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 
 if (props.value === '') {
   throw new Error(
@@ -147,54 +76,61 @@ if (props.value === '') {
   );
 }
 
-onMounted(() => {
-  if (!currentElement.value) {
-    return;
-  }
-  contentContext.itemRefCallback(
-    currentElement.value,
-    props.value,
-    props.disabled,
-  );
-});
+// A closed content's detached item only keeps its value, text and `disabled` live:
+// it renders lean (see `SelectClosedItems`).
+const lean = contentContext.harvest
+  ? useSelectItemLabel({
+      context: rootContext,
+      value: () => props.value,
+      disabled: () => props.disabled,
+      textValue: () => props.textValue,
+      element: () => currentElement.value,
+    })
+  : undefined;
+const full = lean
+  ? undefined
+  : useSelectItem({
+      context: rootContext,
+      contentContext,
+      value: () => props.value,
+      disabled: () => props.disabled,
+      textValue: props.textValue,
+      textId: useId(undefined, 'akar-select-item-text'),
+      onSelect: (event) => emits('select', event as SelectEvent<T>),
+    });
+const { isSelected, textValue, itemContext } = (lean ?? full)!;
+const item = full?.item;
 
-provideSelectItemContext({
-  value: props.value,
-  disabled,
-  textId,
-  isSelected,
-  onItemTextChange: (node) => {
-    textValue.value = ((textValue.value || node?.textContent) ?? '').trim();
-  },
-});
+// The detached item's attributes: the `data-disabled` the typeahead reads.
+function getLeanAttrs() {
+  return props.disabled ? DISABLED_ATTRS : undefined;
+}
+
+if (!lean) {
+  // Registered with the content's collection from setup; no wrapper component.
+  useCollectionItem(currentElement, () => ({ textValue: textValue.value, value: props.value }));
+  onMounted(() => {
+    if (!currentElement.value) {
+      return;
+    }
+    contentContext.itemRefCallback(
+      currentElement.value,
+      props.value,
+      props.disabled,
+    );
+  });
+}
+
+provideSelectItemContext(itemContext);
 </script>
 
 <template>
-  <CollectionItem :value="{ textValue }">
-    <Primitive
-      :ref="forwardRef"
-      role="option"
-      :aria-labelledby="textId"
-      :data-highlighted="isFocused ? '' : undefined"
-      :aria-selected="isSelected"
-      :data-state="isSelected ? 'checked' : 'unchecked'"
-      :aria-disabled="disabled || undefined"
-      :data-disabled="disabled ? '' : undefined"
-      :tabindex="disabled ? undefined : -1"
-      :as="as"
-      :as-child="asChild"
-      @focus="isFocused = true"
-      @blur="isFocused = false"
-      @pointerup="handleSelectCustomEvent"
-      @pointerdown="(event: PointerEvent) => {
-        (event.currentTarget as HTMLElement).focus({ preventScroll: true })
-      }"
-      @touchend.prevent.stop
-      @pointermove="handlePointerMove"
-      @pointerleave="handlePointerLeave"
-      @keydown="handleKeyDown"
-    >
-      <slot :selected="isSelected" />
-    </Primitive>
-  </CollectionItem>
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    data-akar-collection-item=""
+    v-bind="item ? mergeProps($attrs, item.attrs.value) : getLeanAttrs()"
+  >
+    <slot :selected="isSelected" />
+  </component>
 </template>

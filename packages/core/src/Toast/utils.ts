@@ -38,6 +38,7 @@ export function handleAndDispatchCustomEvent<
   }
 
   currentTarget.dispatchEvent(event);
+  return event;
 }
 
 export function isDeltaInDirection(delta: { x: number; y: number }, direction: SwipeDirection, threshold = 0) {

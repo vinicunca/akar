@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 
 export interface PaginationListItemProps extends PrimitiveProps {
   /** Value for the page */
@@ -9,30 +9,28 @@ export interface PaginationListItemProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 import { injectPaginationRootContext } from './PaginationRoot.vue';
+import { getPaginationListItemSurface } from './usePagination';
 
 const props = withDefaults(defineProps<PaginationListItemProps>(), { as: 'button' });
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 
 const rootContext = injectPaginationRootContext();
-const isSelected = computed(() => rootContext.page.value === props.value);
-
-const disabled = computed((): boolean => rootContext.disabled.value);
+// aria-current/data-selected/disabled and the click handler come from the
+// shared surface builder (single source with `usePagination().getListItemSurface`).
+const surface = getPaginationListItemSurface(rootContext, () => props.value);
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
-    data-type="page"
-    :aria-label="`Page ${value}`"
-    :aria-current="isSelected ? 'page' : undefined"
-    :data-selected="isSelected ? 'true' : undefined"
-    :disabled
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     :type="as === 'button' ? 'button' : undefined"
-    @click="!disabled && rootContext.onPageChange(value)"
+    :value="value"
+    v-bind="surface.attrs.value"
   >
     <slot>{{ value }}</slot>
-  </Primitive>
+  </component>
 </template>

@@ -11,6 +11,7 @@ import { SelectContent, SelectItem, SelectPortal, SelectRoot, SelectTrigger, Sel
 import Toolbar from './story/_Toolbar.vue';
 import ToolbarButton from './ToolbarButton.vue';
 import ToolbarRoot from './ToolbarRoot.vue';
+import ToolbarSeparator from './ToolbarSeparator.vue';
 import ToolbarToggleGroup from './ToolbarToggleGroup.vue';
 import ToolbarToggleItem from './ToolbarToggleItem.vue';
 
@@ -28,7 +29,7 @@ describe('given default Toolbar', () => {
   });
 
   it('should have default selected value', () => {
-    const selected = triggers.filter((i) => i.attributes('data-state') === 'on').map((i) => i.element);
+    const selected = triggers.filter((i) => i.attributes('data-state') === 'checked').map((i) => i.element);
     expect(selected.includes(triggers[4].element)).toBeTruthy();
   });
 
@@ -221,5 +222,29 @@ describe('given Toolbar items with their own key handling', () => {
 
     await userEvent.keyboard('[ArrowDown]');
     expect(document.activeElement).toBe(first);
+  });
+});
+
+describe('toolbarSeparator', () => {
+  it.each([
+    ['horizontal', 'vertical'],
+    ['vertical', 'horizontal'],
+  ] as const)('runs perpendicular to a %s toolbar', (toolbar, separator) => {
+    const wrapper = mount(ToolbarRoot, {
+      props: { orientation: toolbar },
+      slots: {
+        default: () => [
+          h(ToolbarButton, () => 'A'),
+          h(ToolbarSeparator, { id: 'sep' }),
+          h(ToolbarButton, () => 'B'),
+        ],
+      },
+    });
+    const sep = wrapper.find('#sep');
+    expect(sep.attributes('data-orientation')).toBe(separator);
+    expect(sep.attributes('aria-orientation')).toBe(separator === 'vertical'
+      ? 'vertical'
+      : undefined);
+    wrapper.unmount();
   });
 });

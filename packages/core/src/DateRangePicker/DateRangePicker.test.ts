@@ -1,9 +1,7 @@
-import type { DateValue } from '@internationalized/date';
-
 import type { DateRangePickerRootProps } from './DateRangePickerRoot.vue';
-import { CalendarDate, CalendarDateTime, toZoned } from '@internationalized/date';
+import type { DateValue } from '@/date';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/vue';
+import { render } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { ConfigProvider } from '@/ConfigProvider';
@@ -11,17 +9,17 @@ import { useTestKbd } from '@/shared';
 import DateRangePicker from './story/_DateRangePicker.vue';
 
 const calendarDate = {
-  start: new CalendarDate(2022, 1, 1),
-  end: new CalendarDate(2022, 3, 1),
+  start: new Temporal.PlainDate(2022, 1, 1),
+  end: new Temporal.PlainDate(2022, 3, 1),
 };
 
 const calendarDateTime = {
-  start: new CalendarDateTime(2022, 1, 1, 12, 30),
-  end: new CalendarDateTime(2022, 3, 1, 12, 30),
+  start: new Temporal.PlainDateTime(2022, 1, 1, 12, 30),
+  end: new Temporal.PlainDateTime(2022, 3, 1, 12, 30),
 };
 const zonedDateTime = {
-  start: toZoned(calendarDateTime.start, 'America/New_York'),
-  end: toZoned(calendarDateTime.end, 'America/New_York'),
+  start: calendarDateTime.start.toZonedDateTime('America/New_York'),
+  end: calendarDateTime.end.toZonedDateTime('America/New_York'),
 };
 
 const kbd = useTestKbd();
@@ -59,6 +57,13 @@ function setup(props: { dateFieldProps?: DateRangePickerRootProps; emits?: { 'on
 it('should pass axe accessibility tests', async () => {
   const { container } = setup();
   expect(await axe(container)).toHaveNoViolations();
+});
+
+it('should pass axe accessibility tests with the calendar open', async () => {
+  const { user, trigger, getByTestId, baseElement } = setup();
+  await user.click(trigger);
+  expect(getByTestId('calendar')).toBeInTheDocument();
+  expect(await axe(baseElement)).toHaveNoViolations();
 });
 
 describe('dateRangePicker', async () => {
@@ -230,7 +235,7 @@ describe('dateRangePicker', async () => {
 
     await user.click(trigger);
 
-    const popoverContent = await screen.findByTestId('popover-content');
+    const popoverContent = getByTestId('popover-content');
     expect(popoverContent).toBeVisible();
 
     const startDay = getByTestId('date-1-1');
@@ -250,7 +255,7 @@ describe('dateRangePicker', async () => {
 
     await user.click(trigger);
 
-    const popoverContent = await screen.findByTestId('popover-content');
+    const popoverContent = getByTestId('popover-content');
     expect(popoverContent).toBeVisible();
 
     const startDay = getByTestId('date-1-1');
@@ -269,21 +274,21 @@ describe('dateRangePicker', async () => {
           <ConfigProvider locale="de">
             <DateRangePicker :dateFieldProps="{
               modelValue: {
-                start: new CalendarDate(2024, 1, 15),
-                end: new CalendarDate(2024, 1, 20)
+                start: new Temporal.PlainDate(2024, 1, 15),
+                end: new Temporal.PlainDate(2024, 1, 20)
               }
             }" />
           </ConfigProvider>
         `,
         setup() {
-          return { CalendarDate };
+          return { Temporal };
         },
       });
 
       const trigger = getByTestId('trigger');
       await user.click(trigger);
 
-      const heading = await screen.findByTestId('heading');
+      const heading = getByTestId('heading');
       // German locale should display month name in German (e.g., "Januar" not "January")
       expect(heading).toHaveTextContent('Januar');
     });
@@ -296,22 +301,22 @@ describe('dateRangePicker', async () => {
           <ConfigProvider locale="de">
             <DateRangePicker :dateFieldProps="{
               modelValue: {
-                start: new CalendarDate(2024, 1, 15),
-                end: new CalendarDate(2024, 1, 20)
+                start: new Temporal.PlainDate(2024, 1, 15),
+                end: new Temporal.PlainDate(2024, 1, 20)
               },
               locale: 'en-US'
             }" />
           </ConfigProvider>
         `,
         setup() {
-          return { CalendarDate };
+          return { Temporal };
         },
       });
 
       const trigger = getByTestId('trigger');
       await user.click(trigger);
 
-      const heading = await screen.findByTestId('heading');
+      const heading = getByTestId('heading');
       // Even though ConfigProvider sets 'de', explicit prop should use 'en-US'
       expect(heading).toHaveTextContent('January');
     });
@@ -323,7 +328,7 @@ describe('dateRangePicker', async () => {
 
       await user.click(trigger);
 
-      const heading = await screen.findByTestId('heading');
+      const heading = getByTestId('heading');
       // Should use browser default locale (typically 'en' in test environment)
       // January 2022 should be displayed
       expect(heading).toHaveTextContent('January');

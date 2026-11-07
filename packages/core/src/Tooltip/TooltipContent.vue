@@ -1,15 +1,5 @@
 <script lang="ts">
 import type { TooltipContentImplEmits, TooltipContentImplProps } from './TooltipContentImpl.vue';
-import { defineAsyncComponent } from 'vue';
-
-const TooltipContentImpl = defineAsyncComponent({
-  loader: () => import('./TooltipContentImpl.vue'),
-  suspensible: false,
-});
-const TooltipContentHoverable = defineAsyncComponent({
-  loader: () => import('./TooltipContentHoverable.vue'),
-  suspensible: false,
-});
 
 export type TooltipContentEmits = TooltipContentImplEmits;
 
@@ -24,7 +14,10 @@ export interface TooltipContentProps extends TooltipContentImplProps {
 
 <script setup lang="ts">
 import { Presence } from '@/Presence';
-import { useForwardExpose, useForwardPropsEmits } from '@/shared';
+import { useForwardElement, useForwardPropsEmits } from '@/shared';
+import { isPortalOpening } from '@/Teleport/portalGate';
+import TooltipContentHoverable from './TooltipContentHoverable.vue';
+import TooltipContentImpl from './TooltipContentImpl.vue';
 import { injectTooltipRootContext } from './TooltipRoot.vue';
 
 const props = defineProps<TooltipContentProps>();
@@ -32,11 +25,17 @@ const emits = defineEmits<TooltipContentEmits>();
 
 const rootContext = injectTooltipRootContext();
 const forwarded = useForwardPropsEmits(props, emits);
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
-  <Presence :present="forceMount || rootContext.open.value">
+  <Presence
+    :appear="isPortalOpening(rootContext)"
+    :present="rootContext.open.value"
+    :force-mount="forceMount"
+    @complete="rootContext.notifyOpenComplete"
+  >
     <component
       :is="rootContext.disableHoverableContent.value ? TooltipContentImpl : TooltipContentHoverable"
       :ref="forwardRef"

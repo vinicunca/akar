@@ -1,8 +1,10 @@
 <script lang="ts">
 import type { Ref } from 'vue';
+import type { RadioGroupChangeReason } from './useRadioGroup';
 import type { PrimitiveProps } from '@/Primitive';
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared';
 import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '@/shared/types';
-import { createContext, useDirection, useFormControl, useForwardExpose } from '@/shared';
+import { createContext, useDirection, useFormControl, useForwardElement } from '@/shared';
 
 export interface RadioGroupRootProps extends PrimitiveProps, FormFieldProps {
   /** The controlled value of the radio item to check. Can be binded as `v-model`. */
@@ -23,13 +25,16 @@ export interface RadioGroupRootProps extends PrimitiveProps, FormFieldProps {
   loop?: boolean;
 }
 export type RadioGroupRootEmits = {
+  /** Event handler called before the radio group value changes; call `details.cancel()` to keep the current value */
+  'beforeUpdate:modelValue': [payload: AcceptableValue, details: ChangeEventDetails<RadioGroupChangeReason>];
   /** Event handler called when the radio group value changes */
-  'update:modelValue': [payload: AcceptableValue];
+  'update:modelValue': [payload: AcceptableValue, details: ChangeEventDetails<RadioGroupChangeReason>];
 };
 
-interface RadioGroupRootContext {
+export interface RadioGroupRootContext {
   modelValue?: Readonly<Ref<AcceptableValue | undefined>>;
-  changeModelValue: (value?: AcceptableValue) => void;
+  /** Returns `false` when the value is unchanged or the change was cancelled. */
+  changeModelValue: (value?: AcceptableValue, reason?: RadioGroupChangeReason | BaseChangeReason, event?: Event) => boolean;
   disabled: Ref<boolean>;
   loop: Ref<boolean>;
   orientation: Ref<DataOrientation | undefined>;
@@ -42,11 +47,20 @@ export const [injectRadioGroupRootContext, provideRadioGroupRootContext]
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { toRefs } from 'vue';
-import { Primitive } from '@/Primitive';
-import { RovingFocusGroup } from '@/RovingFocus';
+import { mergeProps, useAttrs, watch } from 'vue';
+import { useFieldControl } from '@/Field/useFieldControl';
+import { useFieldFocusWithin } from '@/Field/useFieldFocusWithin';
+import { renderAs } from '@/Primitive/renderAs';
+import { useRovingFocusGroup } from '@/RovingFocus/useRovingFocusGroup';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
+import { useRadioGroup } from './useRadioGroup';
+import { useArrowKeyListeners } from './utils';
+
+defineOptions({
+  // `$attrs` are merged under the roving and root bindings: the precedence
+  // the former `<RovingFocusGroup as-child>` wrapper gave them.
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<RadioGroupRootProps>(), {
   disabled: false,
@@ -64,55 +78,120 @@ defineSlots<{
   }) => any;
 }>();
 
-const { forwardRef, currentElement } = useForwardExpose();
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue,
-  passive: (props.modelValue === undefined) as false,
-});
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 
-const { disabled, loop, orientation, name, required, dir: propDir } = toRefs(props);
-const dir = useDirection(propDir);
+// `dir` resolution (ConfigProvider-aware) stays in the shell; the composable
+// owns the controlled/uncontrolled model (`useControllableState`) and emits.
+const dir = useDirection(() => props.dir);
 const isFormControl = useFormControl(currentElement);
+const attrs = useAttrs();
 
-provideRadioGroupRootContext({
-  modelValue,
-  changeModelValue: (value) => {
-    modelValue.value = value;
-  },
-  disabled,
-  loop,
-  orientation,
-  name: name?.value,
-  required,
+// The radio a Field focuses (an invalid submit, a non-native label's click):
+// the checked one, else the first enabled one.
+function getFocusTarget() {
+  const radios = Array.from(currentElement.value?.querySelectorAll<HTMLElement>('[role="radio"]') ?? [])
+    .filter((radio) => !radio.hasAttribute('disabled') && !radio.hasAttribute('data-disabled'));
+  return radios.find((radio) => radio.getAttribute('aria-checked') === 'true') ?? radios[0];
+}
+
+// Optional Field participation: `null` outside a `FieldRoot`, so every
+// binding below is inert without a Field. The group is the field's control:
+// it takes the field's id and aria wiring, and the radios inside don't.
+const field = useFieldControl({
+  id: () => attrs.id as string | undefined,
+  element: getFocusTarget,
+  getValue: () => modelValue.value,
+  required: () => props.required,
+  // A radio's value can be `''`, which still counts as a choice.
+  isFilled: (value) => value !== undefined && value !== null,
 });
+// Getters rather than computeds: cheap, and free for a standalone group.
+function resolvedName() {
+  return field
+    ? field.name(props.name)
+    : props.name;
+}
+function resolvedRequired() {
+  return field
+    ? field.required(props.required)
+    : props.required;
+}
+
+const { modelValue, disabled, root, context } = useRadioGroup({
+  modelValue: () => props.modelValue,
+  defaultValue: props.defaultValue,
+  emit: emits,
+  // The Field hears its own commits by reason (`change`): user input, or, for
+  // a programmatic one (`setModelValue` and the like), only the watcher below,
+  // which also reports a parent-driven change.
+  onUpdate: field?.change,
+  disabled: () => field
+    ? field.disabled(props.disabled)
+    : props.disabled,
+  required: resolvedRequired,
+  orientation: () => props.orientation,
+  loop: () => props.loop,
+  dir,
+  name: resolvedName,
+});
+
+provideRadioGroupRootContext(context);
+
+if (field) {
+  watch(modelValue, (value) => field.sync(value));
+}
+
+// Touched once focus leaves the whole group, not on every radio-to-radio move.
+const focusWithin = useFieldFocusWithin(field, currentElement as Ref<HTMLElement | undefined>);
+
+// Arrow-key navigation between the radios.
+const roving = useRovingFocusGroup({
+  consumerAttrs: true,
+  element: currentElement,
+  orientation: () => props.orientation,
+  dir: () => dir.value,
+  loop: () => props.loop,
+});
+
+// The window arrow-key flag the items read on focus (one shared pair of
+// listeners, not one per item).
+useArrowKeyListeners();
+
+// `$attrs` isn't reactive, so the Field's wiring is read during render. Its
+// state attributes fill in what the group leaves unset;
+// its aria ids are merged with the consumer's.
+function renderAttrs(attrs: Record<string, unknown>) {
+  const own = mergeProps(roving.consumerAttrs(attrs), roving.attrs(), root.attrs.value);
+  if (!field) {
+    return own;
+  }
+  return field.fillDataAttributes(mergeProps(
+    own,
+    {
+      id: field.id(),
+      ...field.ariaAttrs(attrs, disabled.value),
+      onFocusin: focusWithin!.onFocusin,
+      onFocusout: focusWithin!.onFocusout,
+    },
+  ));
+}
 </script>
 
 <template>
-  <RovingFocusGroup
-    as-child
-    :orientation="orientation"
-    :dir="dir"
-    :loop="loop"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="renderAttrs($attrs)"
   >
-    <Primitive
-      :ref="forwardRef"
-      role="radiogroup"
-      :data-disabled="disabled ? '' : undefined"
-      :as-child="asChild"
-      :as="as"
-      :aria-orientation="orientation"
-      :aria-required="required"
-      :dir="dir"
-    >
-      <slot :model-value="modelValue" />
+    <slot :model-value="modelValue" />
 
-      <VisuallyHiddenInput
-        v-if="isFormControl && name"
-        :required="required"
-        :disabled="disabled"
-        :value="modelValue"
-        :name="name"
-      />
-    </Primitive>
-  </RovingFocusGroup>
+    <VisuallyHiddenInput
+      v-if="isFormControl && resolvedName()"
+      :required="resolvedRequired()"
+      :disabled="disabled"
+      :value="modelValue"
+      :name="resolvedName()!"
+    />
+  </component>
 </template>

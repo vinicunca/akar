@@ -30,6 +30,7 @@ export {
 } from './ListboxItemIndicator.vue';
 export {
   injectListboxRootContext,
+  type ListboxModelValue,
   default as ListboxRoot,
   type ListboxRootEmits,
   type ListboxRootProps,
@@ -38,3 +39,16 @@ export {
   default as ListboxVirtualizer,
   type ListboxVirtualizerProps,
 } from './ListboxVirtualizer.vue';
+export {
+  type ListboxChangeReason,
+  type ListboxContentState,
+  type ListboxFilterFunction,
+  type ListboxFilterState,
+  type ListboxItemState,
+  type ListboxNavigationIntent,
+  type ListboxState,
+  useListboxRoot,
+  type UseListboxRootProps,
+  type UseListboxRootReturn,
+} from './useListbox';
+export { type VirtualGroup } from './useListVirtualizer';

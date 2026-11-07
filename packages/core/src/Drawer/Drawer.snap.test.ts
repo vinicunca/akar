@@ -4,7 +4,7 @@ import { defineComponent, nextTick, ref } from 'vue';
 import {
   DrawerClose,
   DrawerContent,
-  DrawerHandle,
+  DrawerGrabber,
   DrawerOverlay,
   DrawerPortal,
   DrawerRoot,
@@ -184,7 +184,7 @@ const SnapDrawer = defineComponent({
     DrawerPortal,
     DrawerOverlay,
     DrawerContent,
-    DrawerHandle,
+    DrawerGrabber,
     DrawerTitle,
     DrawerClose,
   },
@@ -210,7 +210,7 @@ const SnapDrawer = defineComponent({
       <DrawerPortal>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHandle />
+          <DrawerGrabber />
           <DrawerTitle>Snap Drawer</DrawerTitle>
           <DrawerClose>Close</DrawerClose>
         </DrawerContent>

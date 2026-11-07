@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 
 export interface ToolbarButtonProps extends PrimitiveProps {
   disabled?: boolean;
@@ -8,24 +8,43 @@ export interface ToolbarButtonProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { RovingFocusItem } from '@/RovingFocus';
+import { mergeProps } from 'vue';
+import { renderAs } from '@/Primitive/renderAs';
+import { useRovingFocusItem } from '@/RovingFocus/useRovingFocusItem';
+import { getToolbarButtonSurface } from './useToolbar';
+
+defineOptions({
+  // `$attrs` are merged under the roving and part bindings: the precedence
+  // the former `RovingFocusItem` wrapper gave them.
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<ToolbarButtonProps>(), { as: 'button' });
-const { forwardRef } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
+const surface = getToolbarButtonSurface(() => props.disabled);
+// Arrow-key navigation (as a composable; the toolbar handles the keys).
+const roving = useRovingFocusItem({
+  element: currentElement,
+  focusable: () => !props.disabled,
+})!;
+
+function renderAttrs(attrs: Record<string, unknown>) {
+  return mergeProps(attrs, roving.attrs(), {
+    type: props.as === 'button'
+      ? 'button'
+      : undefined,
+    ...surface.attrs.value,
+  });
+}
 </script>
 
 <template>
-  <RovingFocusItem
-    as-child
-    :focusable="!disabled"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="renderAttrs($attrs)"
   >
-    <Primitive
-      :ref="forwardRef"
-      :type="as === 'button' ? 'button' : undefined"
-      v-bind="props"
-    >
-      <slot />
-    </Primitive>
-  </RovingFocusItem>
+    <slot />
+  </component>
 </template>

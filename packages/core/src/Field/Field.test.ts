@@ -1,12 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/vue';
-import { mount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import { defineComponent, nextTick } from 'vue';
 import { CheckboxGroupRoot, CheckboxRoot } from '@/Checkbox';
-import { DateFieldRoot } from '@/DateField';
+import { DateFieldInput, DateFieldRoot } from '@/DateField';
 import { FormRoot } from '@/Form';
 import { SelectContent, SelectItem, SelectPortal, SelectRoot, SelectTrigger, SelectViewport } from '@/Select';
+import { providedContext } from '@/test/fieldControlContract';
 import { FieldControl, FieldDescription, FieldError, FieldLabel, FieldRoot, FieldValidity, injectFieldRootContext } from '.';
 
 // Reports arbitrary (non-string) values through the same side channel a
@@ -420,6 +421,79 @@ describe('given pilot controls participating in a Field', () => {
   });
 });
 
+describe('given a Field-wrapped DateField whose parent changes the value while focus is inside', () => {
+  it('marks the field filled, not dirty', async () => {
+    const wrapper = mount({
+      components: { ...components, DateFieldRoot, DateFieldInput },
+      data: () => ({ value: null as unknown }),
+      template: `
+        <FieldRoot name="dob" data-testid="field">
+          <DateFieldRoot v-model="value" granularity="day" v-slot="{ segments }">
+            <DateFieldInput v-for="item in segments" :key="item.part" :part="item.part" :data-segment="item.part">{{ item.value }}</DateFieldInput>
+          </DateFieldRoot>
+        </FieldRoot>
+      `,
+    }, { attachTo: document.body });
+    await nextTick()
+    ;(wrapper.find('[data-segment="month"]').element as HTMLElement).focus();
+    await nextTick();
+    expect(wrapper.find('[data-testid="field"]').attributes('data-focused')).toBe('')
+    ;(wrapper.vm as unknown as { value: unknown }).value = Temporal.PlainDate.from('2024-01-15');
+    await flushPromises();
+    expect(wrapper.find('[data-testid="field"]').attributes('data-filled')).toBe('');
+    expect(wrapper.find('[data-testid="field"]').attributes('data-dirty')).toBeUndefined();
+    wrapper.unmount();
+  });
+});
+
+describe('given a pilot control with its own name inside a named Field', () => {
+  const controls = {
+    Checkbox: '<CheckboxRoot name="control-name" :model-value="true" />',
+    Select: '<SelectRoot name="control-name" model-value="apple"><SelectTrigger>Fruit</SelectTrigger></SelectRoot>',
+    DateField: '<DateFieldRoot name="control-name"><template #default="{ segments }"><DateFieldInput v-for="item in segments" :key="item.part" :part="item.part">{{ item.value }}</DateFieldInput></template></DateFieldRoot>',
+  };
+
+  for (const [family, control] of Object.entries(controls)) {
+    it(`${family} submits natively under the field's name`, async () => {
+      const wrapper = mount({
+        components: {
+          ...components,
+          FormRoot,
+          CheckboxRoot,
+          SelectRoot,
+          SelectTrigger,
+          DateFieldRoot,
+          DateFieldInput,
+        },
+        template: `<FormRoot><FieldRoot name="field-name">${control}</FieldRoot></FormRoot>`,
+      }, { attachTo: document.body });
+      await flushPromises();
+      const names = Array.from((wrapper.element as HTMLElement).querySelectorAll('[name]')).map((element) => element.getAttribute('name'));
+      expect(names).toEqual(['field-name']);
+      wrapper.unmount();
+    });
+
+    it(`${family} keeps its own name when the field has none`, async () => {
+      const wrapper = mount({
+        components: {
+          ...components,
+          FormRoot,
+          CheckboxRoot,
+          SelectRoot,
+          SelectTrigger,
+          DateFieldRoot,
+          DateFieldInput,
+        },
+        template: `<FormRoot><FieldRoot>${control}</FieldRoot></FormRoot>`,
+      }, { attachTo: document.body });
+      await flushPromises();
+      const names = Array.from((wrapper.element as HTMLElement).querySelectorAll('[name]')).map((element) => element.getAttribute('name'));
+      expect(names).toEqual(['control-name']);
+      wrapper.unmount();
+    });
+  }
+});
+
 describe('given a Field-wrapped Select', () => {
   const selectComponents = {
     ...components,
@@ -453,6 +527,25 @@ describe('given a Field-wrapped Select', () => {
 
     await wrapper.setProps({ modelValue: 'apple' });
 
+    expect(field.attributes('data-filled')).toBe('');
+    expect(field.attributes('data-dirty')).toBeUndefined();
+  });
+
+  it('a change through its own imperative API reports filled but not dirty', async () => {
+    const wrapper = mount({
+      components: selectComponents,
+      template: `
+        <FieldRoot name="fruit" data-testid="field">
+          <SelectRoot>
+            <SelectTrigger>Choose a fruit</SelectTrigger>
+          </SelectRoot>
+        </FieldRoot>
+      `,
+    });
+    // As a custom part would: the change reports `'imperative-action'`.
+    providedContext(wrapper, SelectRoot, 'onValueChange').onValueChange('apple');
+    await flushPromises();
+    const field = wrapper.find('[data-testid="field"]');
     expect(field.attributes('data-filled')).toBe('');
     expect(field.attributes('data-dirty')).toBeUndefined();
   });
@@ -519,11 +612,108 @@ describe('given a Field-wrapped Select', () => {
 
     await selectFirstOption(wrapper);
 
-    const trigger = wrapper.find('[role="combobox"]');
-    await trigger.trigger('blur');
+    const trigger = wrapper.find('[role="combobox"]').element as HTMLElement;
+    trigger.focus();
+    trigger.blur();
+    await nextTick();
 
     expect(validate).toHaveBeenCalledWith('apple', expect.anything());
 
+    wrapper.unmount();
+  });
+
+  it('stays untouched while focus is in its popup, and is touched once focus leaves both', async () => {
+    const validate = vi.fn(() => null);
+    const wrapper = mount({
+      components: selectComponents,
+      props: ['validate'],
+      template: `
+        <FieldRoot name="fruit" :validate="validate" validation-mode="onBlur" data-testid="field">
+          <SelectRoot>
+            <SelectTrigger>Choose a fruit</SelectTrigger>
+            <SelectPortal>
+              <SelectContent>
+                <SelectViewport>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                </SelectViewport>
+              </SelectContent>
+            </SelectPortal>
+          </SelectRoot>
+          <button data-testid="outside">Outside</button>
+        </FieldRoot>
+      `,
+    }, {
+      props: { validate },
+      attachTo: document.body,
+    });
+    const field = () => wrapper.find('[data-testid="field"]');
+    const trigger = wrapper.find('[role="combobox"]').element as HTMLElement;
+
+    trigger.focus();
+    await nextTick();
+    expect(field().attributes('data-focused')).toBe('');
+
+    await fireEvent.pointerDown(trigger, { button: 0, ctrlKey: false });
+    await flushPromises();
+    const options = Array.from(document.querySelectorAll('[role="option"]')) as Array<HTMLElement>;
+    options[0].focus();
+    options[1].focus();
+    await nextTick();
+    expect(field().attributes('data-focused')).toBe('');
+    expect(field().attributes('data-touched')).toBeUndefined();
+    expect(validate).not.toHaveBeenCalled();
+
+    // Picking closes the popup and returns focus to the trigger.
+    await fireEvent.pointerUp(options[1]);
+    await fireEvent.pointerUp(options[1]);
+    await flushPromises();
+    trigger.focus();
+    await nextTick();
+    expect(field().attributes('data-touched')).toBeUndefined();
+    expect(validate).not.toHaveBeenCalled()
+
+    ;(wrapper.find('[data-testid="outside"]').element as HTMLElement).focus();
+    await nextTick();
+    expect(field().attributes('data-focused')).toBeUndefined();
+    expect(field().attributes('data-touched')).toBe('');
+    expect(validate).toHaveBeenCalledTimes(1);
+    expect(validate).toHaveBeenCalledWith('banana', expect.anything());
+    wrapper.unmount();
+  });
+
+  it('is touched when focus leaves its open popup for outside the select', async () => {
+    const wrapper = mount({
+      components: selectComponents,
+      template: `
+        <FieldRoot name="fruit" data-testid="field">
+          <SelectRoot>
+            <SelectTrigger>Choose a fruit</SelectTrigger>
+            <SelectPortal>
+              <SelectContent position="popper">
+                <SelectViewport>
+                  <SelectItem value="apple">Apple</SelectItem>
+                </SelectViewport>
+              </SelectContent>
+            </SelectPortal>
+          </SelectRoot>
+          <button data-testid="outside">Outside</button>
+        </FieldRoot>
+      `,
+    }, { attachTo: document.body });
+    const field = () => wrapper.find('[data-testid="field"]');
+    const trigger = wrapper.find('[role="combobox"]').element as HTMLElement;
+    trigger.focus();
+    await fireEvent.pointerDown(trigger, { button: 0, ctrlKey: false });
+    await flushPromises()
+    ;(document.querySelector('[role="option"]') as HTMLElement).focus();
+    await nextTick();
+    expect(field().attributes('data-touched')).toBeUndefined()
+
+    ;(wrapper.find('[data-testid="outside"]').element as HTMLElement).focus();
+    await flushPromises();
+    expect(field().attributes('data-focused')).toBeUndefined();
+    expect(field().attributes('data-touched')).toBe('');
     wrapper.unmount();
   });
 
@@ -1084,6 +1274,68 @@ describe('given a FieldControl with v-model', () => {
     expect(validate).toHaveBeenLastCalledWith('ab', expect.anything());
     expect(wrapper.find('[data-testid="field"]').attributes('data-dirty')).toBe('');
   });
+
+  it('only marks the field filled when the parent changes the value', async () => {
+    const validate = vi.fn(() => null);
+    const wrapper = mount({
+      components,
+      props: ['validate'],
+      data: () => ({ text: '' }),
+      template: `
+        <FieldRoot :validate="validate" validation-mode="onChange" data-testid="field">
+          <FieldControl v-model="text" />
+        </FieldRoot>
+      `,
+    }, {
+      props: { validate },
+    });
+    await flushPromises();
+    validate.mockClear()
+    ;(wrapper.vm as unknown as { text: string }).text = 'from the server';
+    await flushPromises();
+    const field = wrapper.find('[data-testid="field"]');
+    expect((wrapper.find('input').element as HTMLInputElement).value).toBe('from the server');
+    expect(field.attributes('data-filled')).toBe('');
+    expect(field.attributes('data-dirty')).toBeUndefined();
+    expect(validate).not.toHaveBeenCalled();
+  });
+
+  it('reports a value the parent rewrites from the user\'s input as input', async () => {
+    const wrapper = mount({
+      components,
+      data: () => ({ text: '' }),
+      template: `
+        <FieldRoot data-testid="field">
+          <FieldControl :model-value="text" @update:model-value="text = $event.toUpperCase()" />
+        </FieldRoot>
+      `,
+    });
+    await wrapper.find('input').setValue('ab');
+    await flushPromises();
+    expect((wrapper.vm as unknown as { text: string }).text).toBe('AB');
+    expect(wrapper.find('[data-testid="field"]').attributes('data-dirty')).toBe('');
+  });
+
+  // #2828: Base UI's `FieldControl` reports `'none'` with the native event.
+  it('passes change details with reason `none` and the input event', async () => {
+    const onUpdate = vi.fn();
+    const wrapper = mount({
+      components,
+      methods: { onUpdate },
+      template: `
+        <FieldRoot>
+          <FieldControl @update:model-value="onUpdate" />
+        </FieldRoot>
+      `,
+    });
+    await wrapper.find('input').setValue('ab');
+    expect(onUpdate).toHaveBeenCalledTimes(1);
+    const [value, details] = onUpdate.mock.calls[0];
+    expect(value).toBe('ab');
+    expect(details.reason).toBe('none');
+    expect(details.event).toBeInstanceOf(Event);
+    expect(details.event.type).toBe('input');
+  });
 });
 
 describe('given a FieldValidity', () => {
@@ -1199,5 +1451,385 @@ describe('given consumer attributes that change without any field state change',
     for (const selector of ['input', '[role="checkbox"]', '[role="combobox"]']) {
       expect(wrapper.find(selector).attributes('aria-describedby')).toBe('second');
     }
+  });
+});
+
+// A control mounted with `initial`, then reporting edits, so `dirty` is measured
+// against a baseline holding values ohash can't serialize.
+const BaselineProbe = defineComponent({
+  name: 'BaselineProbe',
+  props: {
+    initial: { type: null, default: undefined },
+  },
+  setup(props, { expose }) {
+    const context = injectFieldRootContext();
+    context.registerControl({
+      id: () => 'baseline-probe',
+      element: () => undefined,
+      getValue: () => props.initial,
+    });
+    expose({
+      report: (value: unknown) => context.handleControlInput({ value }),
+    });
+    return () => null;
+  },
+});
+
+describe('fieldRoot dirty/filled with values ohash cannot serialize', () => {
+  const d = (day: number) => Temporal.PlainDate.from({ year: 2024, month: 1, day });
+  const file = new File(['x'], 'a.txt');
+
+  // [initial, an edit, a fresh copy of the initial value]
+  const cases: Array<[string, unknown, unknown, unknown]> = [
+    [
+      'PlainDate',
+      d(1),
+      d(2),
+      d(1),
+    ],
+    [
+      'PlainDateTime',
+      d(1).toPlainDateTime('10:30'),
+      d(1).toPlainDateTime('10:31'),
+      d(1).toPlainDateTime('10:30'),
+    ],
+    [
+      'ZonedDateTime',
+      d(1).toZonedDateTime('Asia/Tokyo'),
+      d(1).toZonedDateTime('Asia/Seoul'),
+      d(1).toZonedDateTime('Asia/Tokyo'),
+    ],
+    [
+      'PlainTime',
+      Temporal.PlainTime.from('10:30'),
+      Temporal.PlainTime.from('10:31'),
+      Temporal.PlainTime.from('10:30'),
+    ],
+    [
+      'a different Temporal type',
+      d(1),
+      d(1).toPlainDateTime('00:00'),
+      d(1),
+    ],
+    [
+      'a Temporal array',
+      [
+        d(1),
+        d(2),
+      ],
+      [
+        d(1),
+      ],
+      [
+        d(1),
+        d(2),
+      ],
+    ],
+    [
+      'a Temporal range',
+      {
+        start: d(1),
+        end: d(2),
+      },
+      {
+        start: d(1),
+        end: d(3),
+      },
+      {
+        start: d(1),
+        end: d(2),
+      },
+    ],
+    [
+      'an object holding Temporal',
+      {
+        meta: {
+          at: d(1),
+        },
+      },
+      {
+        meta: {
+          at: d(2),
+        },
+      },
+      {
+        meta: {
+          at: d(1),
+        },
+      },
+    ],
+    [
+      'a File',
+      file,
+      new File(['x'], 'a.txt'),
+      file,
+    ],
+    [
+      'a File array',
+      [file],
+      [],
+      [file],
+    ],
+    [
+      'a string, edited to a Temporal value',
+      '2024-01-01',
+      d(1),
+      '2024-01-01',
+    ],
+    [
+      'a Temporal value, edited to a string',
+      d(1),
+      '2024-01-01',
+      d(1),
+    ],
+  ];
+
+  it.each(cases)('tracks %s and clears dirty when edited back', async (_, initial, edit, back) => {
+    const errors: Array<unknown> = [];
+    const wrapper = mount(defineComponent({
+      components: { FieldRoot, BaselineProbe },
+      setup: () => ({ initial }),
+      template: '<FieldRoot data-testid="f"><BaselineProbe :initial="initial" /></FieldRoot>',
+    }), {
+      global: {
+        config: {
+          errorHandler: (error) => errors.push(error),
+        },
+      },
+    });
+    const root = wrapper.find('[data-testid="f"]');
+    const report = (wrapper.findComponent(BaselineProbe).vm as any).report;
+
+    expect(root.attributes('data-dirty')).toBeUndefined();
+    report(edit);
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBe('');
+    report(back);
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBeUndefined();
+    expect(errors).toEqual([]);
+  });
+
+  const cyclic: Record<string, unknown> = {
+    date: d(1),
+  };
+  cyclic.self = cyclic;
+  let deep: unknown = d(1);
+  for (let i = 0; i < 120; i++) {
+    deep = [deep];
+  }
+
+  it.each([
+    ['a cycle', cyclic],
+    ['a deeply nested array', deep],
+    [
+      'an object holding a WeakMap',
+      {
+        map: new WeakMap(),
+      },
+    ],
+  ])('stays clean when the control reports %s unchanged', async (_, value) => {
+    const wrapper = mount(defineComponent({
+      components: { FieldRoot, BaselineProbe },
+      setup: () => ({ value }),
+      template: '<FieldRoot data-testid="f"><BaselineProbe :initial="value" /></FieldRoot>',
+    }))
+    ;(wrapper.findComponent(BaselineProbe).vm as any).report(value);
+    await nextTick();
+    expect(wrapper.find('[data-testid="f"]').attributes('data-dirty')).toBeUndefined();
+  });
+
+  it.each([
+    [null],
+    [undefined],
+    [''],
+  ])('treats %s as the empty baseline of a Temporal edit', async (empty) => {
+    const wrapper = mount(defineComponent({
+      components: { FieldRoot, BaselineProbe },
+      setup: () => ({ empty }),
+      template: '<FieldRoot data-testid="f"><BaselineProbe :initial="empty" /></FieldRoot>',
+    }));
+    const root = wrapper.find('[data-testid="f"]');
+    const report = (wrapper.findComponent(BaselineProbe).vm as any).report;
+
+    report(d(1));
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBe('');
+    expect(root.attributes('data-filled')).toBe('');
+    report(null);
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBeUndefined();
+    expect(root.attributes('data-filled')).toBeUndefined();
+    report(undefined);
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBeUndefined();
+  });
+
+  it.each([
+    [
+      'Temporal',
+      d(1),
+    ],
+    ['File', file],
+  ])('a Checkbox with a %s trueValue reports its press', async (_, trueValue) => {
+    const errors: Array<unknown> = [];
+    const wrapper = mount(defineComponent({
+      components: { FieldRoot, CheckboxRoot },
+      setup: () => ({ trueValue }),
+      template: '<FieldRoot data-testid="f"><CheckboxRoot :true-value="trueValue" :false-value="null" :default-value="null" /></FieldRoot>',
+    }), {
+      attachTo: document.body,
+      global: {
+        config: {
+          errorHandler: (error) => errors.push(error),
+        },
+      },
+    });
+    const root = wrapper.find('[data-testid="f"]');
+
+    await wrapper.find('[role="checkbox"]').trigger('click');
+    await nextTick();
+    expect(errors).toEqual([]);
+    expect(wrapper.find('[role="checkbox"]').attributes('data-state')).toBe('checked');
+    expect(root.attributes('data-dirty')).toBe('');
+    expect(root.attributes('data-filled')).toBe('');
+    wrapper.unmount();
+  });
+
+  it('a Temporal edit still sets filled and reaches the validator', async () => {
+    const validate = vi.fn(() => null);
+    const wrapper = mount(defineComponent({
+      components: { FieldRoot, BaselineProbe },
+      setup: () => ({ validate }),
+      template: '<FieldRoot data-testid="f" :validate="validate" validation-mode="onChange"><BaselineProbe /></FieldRoot>',
+    }))
+    ;(wrapper.findComponent(BaselineProbe).vm as any).report(d(1));
+    await nextTick();
+    expect(wrapper.find('[data-testid="f"]').attributes('data-filled')).toBe('');
+    expect(validate).toHaveBeenCalled();
+  });
+
+  it('a form reset clears dirty and a later edit compares against the same baseline', async () => {
+    const wrapper = mount(defineComponent({
+      components: { FormRoot, FieldRoot, BaselineProbe },
+      setup: () => ({
+        initial: d(1),
+      }),
+      template: '<FormRoot><FieldRoot name="a" data-testid="f"><BaselineProbe :initial="initial" /></FieldRoot></FormRoot>',
+    }), { attachTo: document.body });
+    const root = wrapper.find('[data-testid="f"]');
+    const report = (wrapper.findComponent(BaselineProbe).vm as any).report;
+
+    report(d(2));
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBe('');
+
+    await fireEvent.reset(wrapper.find('form').element);
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBeUndefined();
+
+    report(d(3));
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBe('');
+    report(d(1));
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('a DateField edit sets dirty and clears it when edited back', async () => {
+    const errors: Array<unknown> = [];
+    const wrapper = mount(defineComponent({
+      components: { FieldRoot, DateFieldRoot, DateFieldInput },
+      setup: () => ({
+        value: d(15),
+      }),
+      template: `<FieldRoot data-testid="f">
+        <DateFieldRoot v-slot="{ segments }" :default-value="value">
+          <DateFieldInput v-for="s in segments.filter(s => s.part !== 'literal')" :key="s.part" :part="s.part" :data-segment="s.part">{{ s.value }}</DateFieldInput>
+        </DateFieldRoot>
+      </FieldRoot>`,
+    }), {
+      attachTo: document.body,
+      global: {
+        config: {
+          errorHandler: (error) => errors.push(error),
+        },
+      },
+    });
+    const root = wrapper.find('[data-testid="f"]');
+    const month = wrapper.find('[data-segment="month"]');
+
+    await month.trigger('focusin');
+    await month.trigger('keydown', { key: 'ArrowUp' });
+    await nextTick();
+    expect(errors).toEqual([]);
+    expect(root.attributes('data-dirty')).toBe('');
+    expect(root.attributes('data-filled')).toBe('');
+
+    await month.trigger('keydown', { key: 'ArrowDown' });
+    await nextTick();
+    expect(root.attributes('data-dirty')).toBeUndefined();
+    expect(root.attributes('data-filled')).toBe('');
+    wrapper.unmount();
+  });
+
+  it('a multiple Select of Temporal values marks its selection and tracks dirty', async () => {
+    const errors: Array<unknown> = [];
+    const wrapper = mount(defineComponent({
+      components: {
+        FieldRoot,
+        SelectRoot,
+        SelectTrigger,
+        SelectPortal,
+        SelectContent,
+        SelectViewport,
+        SelectItem,
+      },
+      setup: () => ({
+        d,
+        initial: [
+          d(1),
+        ],
+      }),
+      template: `<FieldRoot data-testid="f">
+        <SelectRoot multiple :default-value="initial" :default-open="true">
+          <SelectTrigger />
+          <SelectPortal><SelectContent><SelectViewport>
+            <SelectItem :value="d(1)" data-item="1">One</SelectItem>
+            <SelectItem :value="d(2)" data-item="2">Two</SelectItem>
+          </SelectViewport></SelectContent></SelectPortal>
+        </SelectRoot>
+      </FieldRoot>`,
+    }), {
+      attachTo: document.body,
+      global: {
+        config: {
+          errorHandler: (error) => errors.push(error),
+        },
+      },
+    });
+    await flushPromises();
+    expect(errors).toEqual([]);
+    expect(wrapper.find('[data-testid="f"]').attributes('data-dirty')).toBeUndefined();
+    expect(document.querySelector('[data-item="1"]')!.getAttribute('data-state')).toBe('checked');
+    expect(document.querySelector('[data-item="2"]')!.getAttribute('data-state')).toBe('unchecked');
+
+    const second = document.querySelector('[data-item="2"]') as HTMLElement;
+    const press = async () => {
+      second.focus();
+      await fireEvent.pointerUp(second);
+      await nextTick();
+    };
+    // SelectContentImpl ignores the first, accidental pointerup.
+    await fireEvent.pointerUp(second);
+    await press();
+    expect(wrapper.find('[data-testid="f"]').attributes('data-dirty')).toBe('');
+    expect(second.getAttribute('data-state')).toBe('checked');
+    await press();
+    expect(wrapper.find('[data-testid="f"]').attributes('data-dirty')).toBeUndefined();
+    expect(wrapper.find('[data-testid="f"]').attributes('data-filled')).toBe('');
+    expect(errors).toEqual([]);
+    wrapper.unmount();
   });
 });

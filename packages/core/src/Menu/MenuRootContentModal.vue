@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { MenuContentImplEmits, MenuRootContentTypeProps } from './MenuContentImpl.vue';
-import { useForwardExpose, useForwardPropsEmits, useHideOthers } from '@/shared';
+import { computed } from 'vue';
+import { useForwardElement, useForwardPropsEmits, useHideOthers } from '@/shared';
 import MenuContentImpl from './MenuContentImpl.vue';
 import { injectMenuContext } from './MenuRoot.vue';
 
@@ -13,8 +14,10 @@ const menuContext = injectMenuContext();
 interface MenuRootContentModalProps extends MenuRootContentTypeProps {}
 type MenuRootContentModalEmits = MenuContentImplEmits;
 
-const { forwardRef, currentElement } = useForwardExpose();
-useHideOthers(currentElement);
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
+// Only while open: a `forceMount`ed content that is closed hides nothing.
+useHideOthers(computed(() => menuContext.open.value ? currentElement.value : undefined));
 </script>
 
 <template>
@@ -24,8 +27,8 @@ useHideOthers(currentElement);
     :trap-focus="menuContext.open.value"
     :disable-outside-pointer-events="menuContext.open.value"
     :disable-outside-scroll="true"
-    @dismiss="menuContext.onOpenChange(false)"
-    @focus-outside.prevent="emits('focusOutside', $event)"
+    @dismiss="(details) => menuContext.onOpenChange(false, details.reason, details.event)"
+    @focus-outside.prevent
   >
     <slot />
   </MenuContentImpl>

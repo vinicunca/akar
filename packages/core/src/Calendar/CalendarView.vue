@@ -1,0 +1,63 @@
+<script lang="ts">
+import type { ComputedRef } from 'vue';
+import type { CalendarGridData, CalendarUnit } from '@/date';
+import type { PrimitiveProps } from '@/Primitive';
+import { createContext, useForwardElement } from '@/shared';
+
+export interface CalendarViewProps extends PrimitiveProps {
+  /** The view this part renders. Its content is shown only while the root's `view` matches. */
+  view: CalendarUnit;
+}
+
+export interface CalendarViewContext {
+  /** The unit the cells inside this view render. */
+  unit: ComputedRef<CalendarUnit>;
+}
+
+export const [injectCalendarViewContext, provideCalendarViewContext]
+  = createContext<CalendarViewContext>('CalendarView');
+</script>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import { renderAs } from '@/Primitive/renderAs';
+import { injectCalendarRootContext } from './CalendarRoot.vue';
+
+const props = withDefaults(defineProps<CalendarViewProps>(), { as: 'div' });
+
+defineSlots<{
+  default?: (props: {
+    /** The rendered page(s) of this view */
+    grid: Array<CalendarGridData>;
+    /** The days of the week (day view only) */
+    weekDays: Array<string>;
+    /** This view's unit */
+    view: CalendarUnit;
+  }) => any;
+}>();
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
+const rootContext = injectCalendarRootContext();
+
+provideCalendarViewContext({
+  unit: computed(() => props.view),
+});
+
+const isActive = computed(() => rootContext.view.value === props.view);
+</script>
+
+<template>
+  <component
+    :is="renderAs(as, asChild)"
+    v-if="isActive"
+    :ref="forwardRef"
+    :data-view="view"
+  >
+    <slot
+      :grid="rootContext.grid.value"
+      :week-days="rootContext.weekDays.value"
+      :view="view"
+    />
+  </component>
+</template>

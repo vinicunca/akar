@@ -1,36 +1,32 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 import { injectTagsInputRootContext } from './TagsInputRoot.vue';
+import { getTagsInputClearSurface } from './useTagsInput';
 
 export interface TagsInputClearProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 
-const props = withDefaults(defineProps<TagsInputClearProps>(), {
+withDefaults(defineProps<TagsInputClearProps>(), {
   as: 'button',
 });
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 const context = injectTagsInputRootContext();
-
-function handleCancel() {
-  if (context.disabled.value) {
-    return;
-  }
-  context.modelValue.value = [];
-}
+const clear = getTagsInputClearSurface(context);
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     :type="as === 'button' ? 'button' : undefined"
-    :data-disabled="context.disabled.value ? '' : undefined"
-    @click="handleCancel"
+    v-bind="clear.attrs.value"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

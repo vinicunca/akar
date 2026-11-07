@@ -5,51 +5,54 @@ export interface DrawerOverlayImplProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useBodyScrollLock, useForwardExpose } from '@/shared';
+import { watch } from 'vue';
+import { renderAs } from '@/Primitive/renderAs';
+import { useForwardElement } from '@/shared';
 import { injectDrawerRootContext } from './DrawerRoot.vue';
+import { getDrawerOverlaySurface } from './useDrawer';
 import { DRAWER_CSS_VARS } from './utils';
 
 defineProps<DrawerOverlayImplProps>();
 const rootContext = injectDrawerRootContext();
 
-// Only lock body scroll while the drawer is actually open. With `forceMount`,
-// the overlay may stay mounted while closed — unconditional lock would keep
-// the page scroll blocked.
-const locked = useBodyScrollLock(rootContext.open.value);
-watch(() => rootContext.open.value, (open) => {
-  locked.value = open;
-}, { immediate: true });
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 
-useForwardExpose();
+// BaseUI parity: a press on the backdrop dismisses a modal drawer, a press on
+// anything stacked above it does not (#2822). The page scroll lock follows
+// `modal` and lives in `DrawerContent`.
+watch([
+  currentElement,
+  () => rootContext.open.value,
+], ([element, open], _, onCleanup) => {
+  if (!element || !open) {
+    return;
+  }
+  rootContext.overlayElement.value = element;
+  onCleanup(() => {
+    if (rootContext.overlayElement.value === element) {
+      rootContext.overlayElement.value = undefined;
+    }
+  });
+}, { immediate: true });
 
 // BaseUI parity: the backdrop carries data-swiping / data-swipe-direction so
 // downstream CSS can target `[data-swiping] [data-slot="drawer-backdrop"]`.
-const dataAttributes = computed(() => {
-  const attrs: Record<string, string | undefined> = {
-    'data-state': rootContext.open.value ? 'open' : 'closed',
-    'data-swipe-direction': rootContext.swipeDirection.value,
-  };
-  if (rootContext.isSwiping.value) {
-    attrs['data-swiping'] = '';
-  }
-  return attrs;
-});
+// They derive from the shared surface builder (single source with `useDrawer()`).
+const overlay = getDrawerOverlaySurface(rootContext);
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="asChild"
-    v-bind="dataAttributes"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="overlay.attrs.value"
     :style="{
-      pointerEvents: 'auto',
       userSelect: 'none',
       [DRAWER_CSS_VARS.swipeProgress]: '0',
       [DRAWER_CSS_VARS.swipeStrength]: '1',
     }"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { createContext, useId } from '@/shared';
+import { createContext, useForwardElement, useId } from '@/shared';
 
 export interface SelectGroupProps extends PrimitiveProps {}
 
@@ -13,20 +13,30 @@ export const [injectSelectGroupContext, provideSelectGroupContext]
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
+import { injectSelectContentContext, SelectContentDefaultContextValue } from './SelectContentImpl.vue';
 
 const props = defineProps<SelectGroupProps>();
 
-const id = useId(undefined, 'akar-select-group');
+// A closed content's lean items render no group semantics: they are only
+// there for their labels (and, in a custom element, stay in the page).
+const harvest = !!injectSelectContentContext(SelectContentDefaultContextValue).harvest;
+const id = harvest
+  ? ''
+  : useId(undefined, 'akar-select-group');
 provideSelectGroupContext({ id });
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
-  <Primitive
-    role="group"
-    v-bind="props"
-    :aria-labelledby="id"
+  <component
+    :is="renderAs(props.as, props.asChild)"
+    :ref="forwardRef"
+    :role="harvest ? undefined : 'group'"
+    :aria-labelledby="id || undefined"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

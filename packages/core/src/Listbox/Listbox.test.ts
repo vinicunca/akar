@@ -1,4 +1,5 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
+import type { Mock } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -174,13 +175,13 @@ describe('given a Listbox with hover highlighting', () => {
 
 describe('given a Listbox on initial mount', () => {
   let wrapper: VueWrapper<InstanceType<typeof Listbox>>;
-  let scrollSpy: ReturnType<typeof vi.fn>;
+  let scrollSpy: Mock<HTMLElement['scrollIntoView']>;
 
   window.HTMLElement.prototype.releasePointerCapture = vi.fn();
   window.HTMLElement.prototype.hasPointerCapture = vi.fn();
 
   beforeEach(async () => {
-    scrollSpy = vi.fn();
+    scrollSpy = vi.fn<HTMLElement['scrollIntoView']>();
     window.HTMLElement.prototype.scrollIntoView = scrollSpy;
     document.body.innerHTML = '';
     wrapper = mount(Listbox, { attachTo: document.body });
@@ -208,7 +209,7 @@ describe('given a Listbox on initial mount', () => {
 });
 
 describe('given a virtualized Listbox on initial mount', () => {
-  let scrollSpy: ReturnType<typeof vi.fn>;
+  let scrollSpy: Mock<HTMLElement['scrollIntoView']>;
 
   window.HTMLElement.prototype.releasePointerCapture = vi.fn();
   window.HTMLElement.prototype.hasPointerCapture = vi.fn();
@@ -251,10 +252,19 @@ describe('given a virtualized Listbox on initial mount', () => {
         default: () => [],
       },
       modelValue: { type: null, default: undefined },
+      selectionBehavior: { type: String, default: undefined },
+      getNavigationIntent: { type: Function, default: undefined },
+      labels: { type: Array, default: undefined },
     },
     setup(props) {
-      const options = Array.from({ length: props.count }, (_, i) => ({ label: `Item ${i}`, value: i }));
-      return () => h(ListboxRoot, { multiple: props.multiple, loop: props.loop, modelValue: props.modelValue }, () =>
+      const options = Array.from({ length: props.count }, (_, i) => ({ label: (props.labels?.[i] as string | undefined) ?? `Item ${i}`, value: i }));
+      return () => h(ListboxRoot, {
+        multiple: props.multiple,
+        loop: props.loop,
+        modelValue: props.modelValue,
+        selectionBehavior: props.selectionBehavior as any,
+        getNavigationIntent: props.getNavigationIntent as any,
+      }, () =>
         h(ListboxContent, { style: 'height: 200px; overflow: auto' }, () =>
           h(ListboxVirtualizer, {
             options,
@@ -277,7 +287,7 @@ describe('given a virtualized Listbox on initial mount', () => {
   }
 
   beforeEach(() => {
-    scrollSpy = vi.fn();
+    scrollSpy = vi.fn<HTMLElement['scrollIntoView']>();
     window.HTMLElement.prototype.scrollIntoView = scrollSpy;
     document.body.innerHTML = '';
   });
@@ -416,6 +426,177 @@ describe('given a virtualized Listbox on initial mount', () => {
       await press(content, kbd.ARROW_DOWN);
       expect(document.activeElement?.getAttribute('data-index')).toBe(lastRendered);
     });
+
+    it('should report a Shift range across the loop boundary as `range-select` with the keydown', async () => {
+      const wrapper = mount(VirtualListbox, {
+        props: {
+          loop: true,
+          multiple: true,
+          selectionBehavior: 'replace',
+          count: 5,
+        },
+        attachTo: document.body,
+      });
+      await flush();
+      const content = wrapper.find('[role=listbox]');
+      await content.trigger('focus');
+
+      // Pressing the last option anchors the range on it and highlights it.
+      await wrapper.find('[data-index="4"]').trigger('click');
+      const event = new KeyboardEvent('keydown', {
+        key: kbd.ARROW_DOWN,
+        shiftKey: true,
+        bubbles: true,
+        cancelable: true,
+      });
+      content.element.dispatchEvent(event);
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(null)));
+      await nextTick();
+
+      const emitted = wrapper.findComponent(ListboxRoot).emitted('update:modelValue')!;
+      const [value, details] = emitted.at(-1) as [Array<{ value: number }>, { reason: string; event?: Event }];
+      expect(value.map((o) => o.value)).toEqual([0, 1, 2, 3, 4]);
+      expect(details.reason).toBe('range-select');
+      expect(details.event).toBe(event);
+    });
+  });
+
+  describe('with `getNavigationIntent`', () => {
+    async function press(content: DOMWrapper<Element>, key: string) {
+      const event = new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true });
+      content.element.dispatchEvent(event);
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(null)));
+      await nextTick();
+      return event;
+    }
+
+    it('should not move on Home/End when the override opts them out with `null`', async () => {
+      const getNavigationIntent = (event: KeyboardEvent) => (event.key === 'Home' || event.key === 'End')
+        ? null
+        : undefined;
+      const wrapper = mount(VirtualListbox, {
+        props: { count: 5, getNavigationIntent },
+        attachTo: document.body,
+      });
+      await flush();
+      const content = wrapper.find('[role=listbox]');
+      await content.trigger('focus');
+      expect(document.activeElement?.getAttribute('data-index')).toBe('0');
+
+      const end = await press(content, 'End');
+      expect(end.defaultPrevented).toBe(false);
+      expect(document.activeElement?.getAttribute('data-index')).toBe('0');
+      await press(content, 'ArrowDown');
+      await press(content, 'Home');
+      expect(document.activeElement?.getAttribute('data-index')).toBe('1');
+    });
+
+    it('should honour a custom key mapping instead of treating the key as typeahead', async () => {
+      // Option 3 starts with "j": if the virtualizer re-derived the intent from
+      // `event.key`, the mapped `j` would also run typeahead and jump there.
+      const getNavigationIntent = (event: KeyboardEvent) => event.key === 'j'
+        ? 'next'
+        : event.key === 'k'
+          ? 'prev'
+          : undefined;
+      const wrapper = mount(VirtualListbox, {
+        props: {
+          count: 5,
+          getNavigationIntent,
+          labels: [
+            'Item 0',
+            'Item 1',
+            'Item 2',
+            'jump',
+            'Item 4',
+          ],
+        },
+        attachTo: document.body,
+      });
+      await flush();
+      const content = wrapper.find('[role=listbox]');
+      await content.trigger('focus');
+
+      const j = await press(content, 'j');
+      expect(j.defaultPrevented).toBe(true);
+      expect(document.activeElement?.getAttribute('data-index')).toBe('1');
+      await press(content, 'j');
+      expect(document.activeElement?.getAttribute('data-index')).toBe('2');
+      await press(content, 'k');
+      expect(document.activeElement?.getAttribute('data-index')).toBe('1');
+    });
+  });
+});
+
+describe('given a Listbox with a `getNavigationIntent` override', () => {
+  window.HTMLElement.prototype.scrollIntoView = vi.fn();
+
+  function mountListbox(getNavigationIntent: (event: KeyboardEvent) => any, withFilter = false) {
+    document.body.innerHTML = '';
+    return mount(defineComponent({
+      setup() {
+        return () => h(ListboxRoot, { getNavigationIntent }, () => [
+          withFilter
+            ? h(ListboxFilter, { autoFocus: true })
+            : null,
+          h(ListboxContent, { 'aria-label': 'Letters' }, () => ['a', 'b', 'c'].map((value) => h(ListboxItem, { value }, () => value))),
+        ]);
+      },
+    }), { attachTo: document.body });
+  }
+
+  it('`null` for Enter suppresses the Enter selection on the content', async () => {
+    const wrapper = mountListbox((event) => event.key === 'Enter'
+      ? null
+      : undefined);
+    const content = wrapper.find('[role=listbox]');
+    await content.trigger('focus');
+    await content.trigger('keydown', { key: 'Enter' });
+    expect(wrapper.findComponent(ListboxRoot).emitted('update:modelValue')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('`null` for Enter suppresses the Enter selection in the filter', async () => {
+    const wrapper = mountListbox((event) => event.key === 'Enter'
+      ? null
+      : undefined, true);
+    const items = wrapper.findAll('[role=option]');
+    await vi.waitFor(() => expect(items[0].attributes('data-highlighted')).toBe(''));
+    await wrapper.find('input').trigger('keydown', { key: 'Enter' });
+    expect(wrapper.findComponent(ListboxRoot).emitted('update:modelValue')).toBeUndefined();
+    wrapper.unmount();
+  });
+
+  it('leaves unmodified printable keys in the filter to the text input', async () => {
+    const getNavigationIntent = vi.fn((event: KeyboardEvent) => event.key === 'j'
+      ? 'next' as const
+      : undefined);
+    const wrapper = mountListbox(getNavigationIntent, true);
+    const items = wrapper.findAll('[role=option]');
+    await vi.waitFor(() => expect(items[0].attributes('data-highlighted')).toBe(''));
+    const j = new KeyboardEvent('keydown', { key: 'j', bubbles: true, cancelable: true });
+    wrapper.find('input').element.dispatchEvent(j);
+    await nextTick();
+    expect(j.defaultPrevented).toBe(false);
+    expect(getNavigationIntent).not.toHaveBeenCalledWith(j);
+    expect(items[0].attributes('data-highlighted')).toBe('');
+    // A modified key still reaches the override.
+    await wrapper.find('input').trigger('keydown', { key: 'n', ctrlKey: true });
+    expect(getNavigationIntent).toHaveBeenCalledWith(expect.objectContaining({ key: 'n', ctrlKey: true }));
+    wrapper.unmount();
+  });
+
+  it('a `\'select\'` intent for Space does not toggle the focused item twice', async () => {
+    const wrapper = mountListbox((event) => event.key === ' '
+      ? 'select'
+      : undefined);
+    const content = wrapper.find('[role=listbox]');
+    await content.trigger('focus');
+    const items = wrapper.findAll('[role=option]');
+    await items[0].trigger('keydown', { key: ' ' });
+    expect(wrapper.findComponent(ListboxRoot).emitted('update:modelValue')?.map((args) => args[0])).toEqual(['a']);
+    expect(items[0].attributes('aria-selected')).toBe('true');
+    wrapper.unmount();
   });
 });
 
@@ -464,22 +645,17 @@ describe('given multiple `true` Listbox', () => {
     await content.trigger('keydown', { key: kbd.ENTER });
     await content.trigger('keydown', { key: kbd.ARROW_UP });
     await content.trigger('keydown', { key: kbd.ENTER });
-    expect(wrapper.emitted('update:modelValue')).toEqual([
+    // v3: the second emit argument is the `ChangeEventDetails`; only the value is asserted here.
+    expect(wrapper.emitted('update:modelValue')?.map((args) => args[0])).toEqual([
       [
-        [
-          items[0].text(),
-        ],
+        items[0].text(),
       ],
       [
-        [
-          items[0].text(),
-          items[1].text(),
-        ],
+        items[0].text(),
+        items[1].text(),
       ],
       [
-        [
-          items[1].text(),
-        ],
+        items[1].text(),
       ],
     ]);
   });
@@ -509,21 +685,14 @@ describe('given multiple `true` Listbox', () => {
       await content.trigger('keydown', { key: kbd.ENTER });
       await content.trigger('keydown', { key: kbd.ARROW_DOWN });
       await content.trigger('keydown', { key: kbd.ENTER });
-      expect(wrapper.emitted('update:modelValue')).toEqual([
+      // v3: the second emit argument is the `ChangeEventDetails`; only the value is asserted here.
+      // v3: re-selecting the current value emits nothing, also for a multiple selection.
+      expect(wrapper.emitted('update:modelValue')?.map((args) => args[0])).toEqual([
         [
-          [
-            items[0].text(),
-          ],
+          items[0].text(),
         ],
         [
-          [
-            items[0].text(),
-          ],
-        ], // there's a bug here, it shouldn't emit the same value twice
-        [
-          [
-            items[1].text(),
-          ],
+          items[1].text(),
         ],
       ]);
     });
@@ -545,6 +714,64 @@ describe('given multiple `true` Listbox', () => {
         }
       });
     });
+  });
+});
+
+describe('given horizontal Listbox with a filter', () => {
+  it('leaves ArrowLeft/ArrowRight to the text input instead of navigating', async () => {
+    document.body.innerHTML = '';
+    const wrapper = mount(defineComponent({
+      setup() {
+        return () => h(ListboxRoot, { orientation: 'horizontal' }, () => [
+          h(ListboxFilter, { autoFocus: true }),
+          h(ListboxContent, { 'aria-label': 'Letters' }, () => ['a', 'b', 'c'].map((value) => h(ListboxItem, { value }, () => value))),
+        ]);
+      },
+    }), { attachTo: document.body });
+    const filter = wrapper.find('input');
+    const items = wrapper.findAll('[role=option]');
+    // The mount highlight lands on the first item (nothing is selected). It is
+    // queued through two `nextTick`s inside `highlightSelected`, so wait for it.
+    await vi.waitFor(() => expect(items[0].attributes('data-highlighted')).toBe(''));
+    // ArrowRight would map to `next` in a horizontal listbox; the caret keeps it
+    // (no highlight move, default not prevented). End still navigates.
+    const right = new KeyboardEvent('keydown', { key: 'ArrowRight', cancelable: true, bubbles: true });
+    filter.element.dispatchEvent(right);
+    await nextTick();
+    expect(right.defaultPrevented).toBe(false);
+    expect(items[0].attributes('data-highlighted')).toBe('');
+    expect(items[1].attributes('data-highlighted')).toBeUndefined();
+    await filter.trigger('keydown', { key: 'End' });
+    expect(items[2].attributes('data-highlighted')).toBe('');
+    await filter.trigger('keydown', { key: 'ArrowLeft' });
+    expect(items[2].attributes('data-highlighted')).toBe('');
+    expect(items[1].attributes('data-highlighted')).toBeUndefined();
+    wrapper.unmount();
+  });
+});
+
+describe('given multiple `replace` Listbox with an initial selection', () => {
+  it('pressing the selected item anchors a following Shift+Arrow range on it', async () => {
+    document.body.innerHTML = '';
+    const wrapper = mount(defineComponent({
+      setup() {
+        return () => h(ListboxRoot, {
+          multiple: true,
+          selectionBehavior: 'replace',
+          defaultValue: ['b'],
+        }, () =>
+          h(ListboxContent, { 'aria-label': 'Letters' }, () => ['a', 'b', 'c', 'd'].map((value) => h(ListboxItem, { value }, () => value))));
+      },
+    }), { attachTo: document.body });
+    const items = wrapper.findAll('[role=option]');
+    await vi.waitFor(() => expect(items[1].attributes('data-highlighted')).toBe(''));
+    // Re-pressing the current selection emits nothing, but it still anchors the range.
+    await items[1].trigger('click');
+    await wrapper.find('[role=listbox]').trigger('keydown', { key: 'ArrowDown', shiftKey: true });
+    expect(wrapper.findComponent(ListboxRoot).emitted('update:modelValue')?.map((args) => args[0])).toEqual([
+      ['b', 'c'],
+    ]);
+    wrapper.unmount();
   });
 });
 
@@ -692,7 +919,7 @@ describe('given horizontal Listbox', () => {
 });
 
 // Regression test for https://github.com/unovue/reka-ui/issues/2644
-// `v-memo` on ListboxItem must invalidate when `disabled` (or
+// ListboxItem must re-render when `disabled` (or
 // `rootContext.focusable.value`) changes, otherwise `data-disabled` / `disabled`
 // attributes go stale and the item still participates in keyboard navigation.
 describe('given ListboxItem with reactive `disabled` prop', () => {
@@ -736,8 +963,8 @@ describe('given ListboxItem with reactive `disabled` prop', () => {
 });
 
 // Regression test for https://github.com/unovue/reka-ui/issues/2904
-// The VNode memoized by ListboxItem's `v-memo` spreads `$attrs`, so the memo
-// must also invalidate when a fallthrough attribute changes. Otherwise a
+// ListboxItem spreads `$attrs`, so it must re-render when a fallthrough
+// attribute changes. Otherwise a
 // surviving virtualizer row whose `option` changes after filtering keeps the
 // previous option's attributes (`data-testid`, `aria-setsize`, ...) while its
 // slot content updates.
@@ -906,6 +1133,63 @@ describe('given Listbox in a form', async () => {
         test: items[4].text(),
       });
     });
+  });
+});
+
+describe('listboxItem attribute forwarding', () => {
+  it.each([false, true])('chains consumer listeners once (asChild=%s) and preserves attributes', async (asChild) => {
+    const click = vi.fn();
+    const select = vi.fn();
+    const wrapper = mount(() => h(ListboxRoot, {}, () => h(ListboxContent, {}, () => h(ListboxItem, {
+      'value': 'red',
+      asChild,
+      'onClick': click,
+      'onSelect': select,
+      'aria-label': 'Red',
+      'class': 'custom-option',
+      'style': { color: 'red' },
+    }, () => asChild
+      ? h('button', {}, 'Red')
+      : 'Red'))));
+    try {
+      const item = wrapper.find('[role=option]');
+      await item.trigger('click');
+      expect(click).toHaveBeenCalledOnce();
+      expect(select).toHaveBeenCalledOnce();
+      expect(item.attributes('aria-selected')).toBe('true');
+      expect(item.attributes('aria-label')).toBe('Red');
+      expect(item.classes()).toContain('custom-option');
+      expect(item.attributes('style')).toContain('color: red');
+    } finally {
+      wrapper.unmount();
+    }
+  });
+
+  it.each([false, true])('updates forwarded attributes after mount (asChild=%s)', async (asChild) => {
+    const label = ref('Red');
+    const ReactiveAttributeListbox = defineComponent({
+      setup() {
+        return () => h(ListboxRoot, {}, () => h(ListboxContent, {}, () => h(ListboxItem, {
+          'value': 'red',
+          asChild,
+          'aria-label': label.value,
+        }, () => asChild
+          ? h('button', {}, 'Red')
+          : 'Red')));
+      },
+    });
+    const wrapper = mount(ReactiveAttributeListbox);
+
+    try {
+      expect(wrapper.find('[role=option]').attributes('aria-label')).toBe('Red');
+
+      label.value = 'Rouge';
+      await nextTick();
+
+      expect(wrapper.find('[role=option]').attributes('aria-label')).toBe('Rouge');
+    } finally {
+      wrapper.unmount();
+    }
   });
 });
 

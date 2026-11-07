@@ -1,13 +1,9 @@
 <script lang="ts">
-import type { ComputedRef, VNodeRef } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import type { CollapsibleRootProps } from '../Collapsible';
-import { createContext, useArrowNavigation, useForwardExpose } from '@/shared';
+import type { DisclosureState } from '@/shared';
+import { createContext, mergeExpose, setGeneratedIds, useForwardElement, useId } from '@/shared';
 import { injectAccordionRootContext } from './AccordionRoot.vue';
-
-enum AccordionItemState {
-  Open = 'open',
-  Closed = 'closed',
-}
 
 export interface AccordionItemProps
   extends Omit<CollapsibleRootProps, 'open' | 'defaultOpen' | 'onOpenChange'> {
@@ -24,13 +20,18 @@ export interface AccordionItemProps
   value: string;
 }
 
+export type AccordionItemEmits = {
+  /** Event handler called after the open or close animations of the content have finished. */
+  'update:openComplete': [value: boolean];
+};
+
 interface AccordionItemContext {
   open: ComputedRef<boolean>;
-  dataState: ComputedRef<AccordionItemState>;
+  dataState: ComputedRef<DisclosureState>;
   disabled: ComputedRef<boolean>;
   dataDisabled: ComputedRef<'' | undefined>;
   triggerId: string;
-  currentRef: VNodeRef;
+  currentRef: Ref<HTMLElement | null | undefined>;
   currentElement: ComputedRef<HTMLElement | undefined>;
   value: ComputedRef<string>;
 }
@@ -40,8 +41,9 @@ export const [injectAccordionItemContext, provideAccordionItemContext]
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, shallowRef } from 'vue';
 import { CollapsibleRoot } from '@/Collapsible';
+import { getAccordionItemState } from './useAccordion';
 
 const props = withDefaults(
   defineProps<AccordionItemProps>(),
@@ -49,6 +51,8 @@ const props = withDefaults(
     unmountOnHide: undefined,
   },
 );
+
+const emits = defineEmits<AccordionItemEmits>();
 
 defineSlots<{
   default?: (props: {
@@ -59,70 +63,73 @@ defineSlots<{
 
 const rootContext = injectAccordionRootContext();
 
-const open = computed(() =>
-  rootContext.isSingle.value
-    ? props.value === rootContext.modelValue.value
-    : Array.isArray(rootContext.modelValue.value)
-      && rootContext.modelValue.value.includes(props.value),
-);
-
-const disabled = computed(() => {
-  return (rootContext.disabled.value || props.disabled);
+const surface = getAccordionItemState(rootContext, () => props.value, {
+  disabled: () => props.disabled,
+  unmountOnHide: () => props.unmountOnHide,
 });
+const { open, disabled, unmountOnHide } = surface;
 
-const dataDisabled = computed(() => (disabled.value ? '' : undefined));
+// The derived context refs are created on first read (perf): the item's own
+// parts read none of them, so an item rendered with the default parts never
+// pays for them.
+let dataDisabled: ComputedRef<'' | undefined> | undefined;
+let dataState: ComputedRef<DisclosureState> | undefined;
+let currentElement: ComputedRef<HTMLElement | undefined> | undefined;
+let value: ComputedRef<string> | undefined;
+const getDataDisabled = () => (dataDisabled ??= computed(() => (disabled.value ? '' : undefined)));
 
-const dataState = computed(() =>
-  open.value ? AccordionItemState.Open : AccordionItemState.Closed,
-);
-
-defineExpose({ open, dataDisabled });
-const { currentRef, currentElement } = useForwardExpose();
-
-provideAccordionItemContext({
+const { forwardRef, expose } = useForwardElement();
+defineExpose(mergeExpose(expose, {
   open,
-  dataState,
+  get dataDisabled() {
+    return getDataDisabled();
+  },
+}));
+
+// `AccordionTrigger` feeds its element here; it drives keyboard navigation.
+const currentRef = shallowRef<HTMLElement | null>();
+
+// Allocated here rather than in AccordionTrigger: content may render before its
+// trigger, and SSR serializes `aria-labelledby` once, without a second pass.
+// Writable so an `AccordionTrigger` `id` replaces it (and the content's `aria-labelledby` follows).
+const triggerId = ref(useId(undefined, 'akar-accordion-trigger'));
+const itemContext: AccordionItemContext = {
+  open,
+  get dataState() {
+    return dataState ??= computed(() => surface.state.value.state);
+  },
   disabled,
-  dataDisabled,
-  triggerId: '',
+  get dataDisabled() {
+    return getDataDisabled();
+  },
+  get triggerId() {
+    return triggerId.value;
+  },
+  set triggerId(value) {
+    triggerId.value = value;
+  },
   currentRef,
-  currentElement,
-  value: computed(() => props.value),
-});
-
-function handleArrowKey(e: KeyboardEvent) {
-  const target = e.target as HTMLElement;
-  const allCollectionItems: Array<HTMLElement> = Array.from(rootContext.parentElement.value?.querySelectorAll('[data-akar-collection-item]') ?? []);
-
-  const collectionItemIndex = allCollectionItems.findIndex((item) => item === target);
-  if (collectionItemIndex === -1) {
-    return null;
-  }
-
-  useArrowNavigation(
-    e,
-    target,
-    rootContext.parentElement.value!,
-    {
-      arrowKeyOptions: rootContext.orientation,
-      dir: rootContext.direction.value,
-      focus: true,
-    },
-  );
-}
+  get currentElement() {
+    return currentElement ??= computed(() => currentRef.value ?? undefined);
+  },
+  get value() {
+    return value ??= computed(() => props.value);
+  },
+};
+setGeneratedIds(itemContext, { triggerId: triggerId.value });
+provideAccordionItemContext(itemContext);
 </script>
 
 <template>
   <CollapsibleRoot
-    :data-orientation="rootContext.orientation"
-    :data-disabled="dataDisabled"
-    :data-state="dataState"
-    :disabled="disabled"
-    :open="open"
+    :ref="forwardRef"
     :as="props.as"
     :as-child="props.asChild"
-    :unmount-on-hide="props.unmountOnHide ?? rootContext.unmountOnHide.value"
-    @keydown.up.down.left.right.home.end="handleArrowKey"
+    :open="open"
+    :disabled="disabled"
+    :unmount-on-hide="unmountOnHide"
+    v-bind="surface.item.attrs.value"
+    @update:open-complete="emits('update:openComplete', $event)"
   >
     <slot :open="open" />
   </CollapsibleRoot>

@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
 
 export interface LabelProps extends PrimitiveProps {
   /** The id of the element the label is associated with. */
@@ -9,23 +8,50 @@ export interface LabelProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { mergeProps, useAttrs } from 'vue';
+import { useRender } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
+import { useLabel } from './useLabel';
+
+// Attrs are folded into `renderProps` below so they reach the element on both
+// the default path and the `#render` path (where the root is a fragment and Vue
+// cannot apply fallthrough attrs). Disabling inheritance keeps them applied once.
+defineOptions({
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<LabelProps>(), {
   as: 'label',
 });
+const attrs = useAttrs();
+const { root } = useLabel({
+  for: () => props.for,
+});
 
-useForwardExpose();
+const { renderProps, state, elementRef, expose } = useRender({
+  defaultTagName: 'label',
+  as: () => props.as,
+  asChild: () => props.asChild,
+  // Consumer attrs merge last so their listeners chain after Label's own.
+  props: () => mergeProps(root.attrs.value, attrs),
+});
+defineExpose(expose);
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
-    @mousedown="(event: MouseEvent) => {
-      // prevent text selection when double clicking label
-      if (!event.defaultPrevented && event.detail > 1) event.preventDefault();
-    }"
+  <slot
+    v-if="$slots.render"
+    name="render"
+    :props="renderProps"
+    :state="state"
+    :forward-ref="elementRef"
+  />
+  <component
+    :is="renderAs(as, asChild, 'label')"
+    v-else
+    v-bind="renderProps"
+    :ref="elementRef"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

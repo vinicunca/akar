@@ -1,3 +1,7 @@
+// The reason unions of the root and sub parts (`update:open`) and of the
+// checkbox item and radio group (`update:modelValue`) belong to the
+// underlying Menu family, which is not a root export of the package.
+export { type MenuCheckboxItemChangeReason, type MenuOpenChangeReason, type MenuRadioGroupChangeReason } from '../Menu';
 export {
   default as DropdownMenuArrow,
   type DropdownMenuArrowProps,
@@ -76,3 +80,12 @@ export {
   default as DropdownMenuTrigger,
   type DropdownMenuTriggerProps,
 } from './DropdownMenuTrigger.vue';
+export { createDropdownMenuHandle, DropdownMenuHandle } from './handle';
+export {
+  type DropdownMenuContentSurface,
+  type DropdownMenuOpenChangeReason,
+  type DropdownMenuTriggerState,
+  useDropdownMenu,
+  type UseDropdownMenuProps,
+  type UseDropdownMenuReturn,
+} from './useDropdownMenu';

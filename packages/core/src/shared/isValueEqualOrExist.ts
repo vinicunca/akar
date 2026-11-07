@@ -1,4 +1,5 @@
-import { isEqual } from 'ohash';
+import type { By } from './compare';
+import { compare, isEqual } from './compare';
 import { isNullish } from './nullish';
 
 /**
@@ -6,13 +7,22 @@ import { isNullish } from './nullish';
  * array.
  * @param base - It represents the base value that you want to compare with the `current` value.
  * @param current - The `current` parameter represents the current value that you want to compare with the `base` value or values.
+ * @param [by] - Optional identity strategy (a key or an equality function). When given, the
+ * comparison routes through the shared `compare` (#2824); when omitted the structural `isEqual` check applies.
  * @returns The `isValueEqualOrExist` function returns a boolean value. It checks if the `base` value
  * is equal to the `current` value or if the `current` value exists within the `base` value. The
  * function handles cases where `base` can be a single value, an array of values, or undefined.
  */
-export function isValueEqualOrExist<T>(base: T | Array<T> | undefined, current: T | Array<T> | undefined) {
+export function isValueEqualOrExist<T>(base: T | Array<T> | undefined, current: T | Array<T> | undefined, by?: By<T>) {
   if (isNullish(base)) {
     return false;
+  }
+  if (by !== undefined) {
+    if (Array.isArray(base)) {
+      return base.some((val) => compare(val, current as T, by));
+    } else {
+      return compare(base, current as T, by);
+    }
   }
   if (Array.isArray(base)) {
     return base.some((val) => isEqual(val, current));

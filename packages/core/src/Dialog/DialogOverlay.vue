@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { DialogOverlayImplProps } from './DialogOverlayImpl.vue';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 import DialogOverlayImpl from './DialogOverlayImpl.vue';
 
 export interface DialogOverlayProps extends DialogOverlayImplProps {
@@ -15,12 +15,14 @@ export interface DialogOverlayProps extends DialogOverlayImplProps {
 <script setup lang="ts">
 import { computed } from 'vue';
 import { Presence } from '@/Presence';
+import { isPortalOpening } from '@/Teleport/portalGate';
 import { injectDialogRootContext } from './DialogRoot.vue';
 
 const props = defineProps<DialogOverlayProps>();
 const rootContext = injectDialogRootContext();
 
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 
 // See `DialogContent.vue`: when the overlay is kept mounted across open/close it
 // must report the real presence state, otherwise `DialogOverlayImpl` keeps the
@@ -34,6 +36,7 @@ const staysMounted = computed(
   <Presence
     v-if="rootContext?.modal.value"
     v-slot="{ present }"
+    :appear="isPortalOpening(rootContext)"
     :present="rootContext.open.value"
     :force-mount="staysMounted"
   >

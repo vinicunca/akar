@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { createContext, useId } from '@/shared';
+import { createContext, useForwardElement, useId } from '@/shared';
 
 export interface MenuGroupProps extends PrimitiveProps {}
 
@@ -13,20 +13,24 @@ export const [injectMenuGroupContext, provideMenuGroupContext]
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 
-const props = defineProps<MenuGroupProps>();
+defineProps<MenuGroupProps>();
 
 const id = useId(undefined, 'akar-menu-group');
 provideMenuGroupContext({ id });
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
     role="group"
-    v-bind="props"
     :aria-labelledby="id"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

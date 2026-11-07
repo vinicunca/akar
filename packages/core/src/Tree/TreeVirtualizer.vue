@@ -18,7 +18,8 @@ import { refAutoReset, useParentElement } from '@vueuse/core';
 import { cloneVNode, computed, nextTick, useSlots } from 'vue';
 import { useCollection } from '@/Collection';
 import { MAP_KEY_TO_FOCUS_INTENT } from '@/RovingFocus/utils';
-import { getActiveElement } from '@/shared';
+import { getActiveElement, useForwardElement } from '@/shared';
+import { isDisabledItem } from '@/shared/isDisabledItem';
 import { getNextMatch } from '@/shared/useTypeahead';
 import { injectTreeRootContext } from './TreeRoot.vue';
 
@@ -145,7 +146,7 @@ rootContext.virtualKeydownHook.on((event) => {
   if (rootContext.loop.value && !isMetaKey && (event.key === 'ArrowUp' || event.key === 'ArrowDown')) {
     const isDown = event.key === 'ArrowDown';
     const rendered = getItems(true).map((i) => i.ref);
-    const enabled = rendered.filter((i) => i.dataset.disabled !== '');
+    const enabled = rendered.filter((i) => !isDisabledItem(i));
     const edgeEnabled = isDown
       ? enabled.at(-1)
       : enabled[0];
@@ -169,7 +170,7 @@ rootContext.virtualKeydownHook.on((event) => {
       : rootContext.expandedItems.value.length - 1;
     virtualizer.value.scrollToIndex(index);
     requestAnimationFrame(() => {
-      const items = getItems().filter((i) => i.ref.dataset.disabled !== '');
+      const items = getItems().filter((i) => !isDisabledItem(i.ref));
       if (!items.length) {
         return;
       }
@@ -202,15 +203,20 @@ rootContext.virtualKeydownHook.on((event) => {
   }
 
   nextTick(() => {
+    // The keydown travels with the write, so a Shift range reports `'range-select'` with it.
     if (event.shiftKey && intent) {
-      rootContext.handleMultipleReplace(intent, getActiveElement(), getItems, rootContext.expandedItems.value.map((i) => i.value));
+      rootContext.handleMultipleReplace(intent, getActiveElement(), getItems, rootContext.expandedItems.value.map((i) => i.value), event);
     }
   });
 });
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
   <div
+    :ref="forwardRef"
     data-akar-virtualizer
     :style="{
       position: 'relative',

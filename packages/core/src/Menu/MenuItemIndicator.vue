@@ -2,7 +2,7 @@
 import type { Ref } from 'vue';
 import type { CheckedState } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
-import { createContext } from '@/shared';
+import { createContext, selectionState, useForwardElement } from '@/shared';
 
 interface MenuItemIndicatorContext {
   modelValue: Ref<CheckedState>;
@@ -26,32 +26,40 @@ export const [injectMenuItemIndicatorContext, provideMenuItemIndicatorContext]
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Presence } from '@/Presence';
-import { Primitive } from '@/Primitive';
-import { getCheckedState, isIndeterminate } from './utils';
+import { renderAs } from '@/Primitive/renderAs';
+import { useLingeringPresence } from '@/shared/useLingeringPresence';
+import { isIndeterminate } from './utils';
 
-withDefaults(defineProps<MenuItemIndicatorProps>(), {
+const props = withDefaults(defineProps<MenuItemIndicatorProps>(), {
   as: 'span',
 });
 
 const indicatorContext = injectMenuItemIndicatorContext({
   modelValue: ref(false),
 });
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
+
+// Mounts no `Presence` while not shown; see `useLingeringPresence`.
+const shown = () => props.forceMount || isIndeterminate(indicatorContext.modelValue.value) || indicatorContext.modelValue.value === true;
+const lingering = useLingeringPresence(shown);
 </script>
 
 <template>
   <Presence
-    :present="
-      forceMount
-        || isIndeterminate(indicatorContext.modelValue.value)
-        || indicatorContext.modelValue.value === true
-    "
+    v-if="lingering.mounted()"
+    :ref="forwardRef"
+    :present="shown()"
+    :appear="lingering.appear()"
+    @vue:mounted="lingering.onMounted"
+    @complete="lingering.onComplete"
   >
-    <Primitive
-      :as="as"
-      :as-child="asChild"
-      :data-state="getCheckedState(indicatorContext.modelValue.value)"
+    <component
+      :is="renderAs(as, asChild)"
+      :data-state="selectionState(indicatorContext.modelValue.value)"
     >
       <slot />
-    </Primitive>
+    </component>
   </Presence>
 </template>

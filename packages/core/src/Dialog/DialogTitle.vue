@@ -1,24 +1,37 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement, usePartId } from '@/shared';
 
-export interface DialogTitleProps extends PrimitiveProps {}
+export interface DialogTitleProps extends PrimitiveProps {
+  /**
+   * Id of the element, which the content's `aria-labelledby` points at.
+   * Auto-generated when not provided.
+   */
+  id?: string;
+}
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 import { injectDialogRootContext } from './DialogRoot.vue';
+import { getDialogTitleSurface } from './useDialog';
 
 const props = withDefaults(defineProps<DialogTitleProps>(), { as: 'h2' });
 const rootContext = injectDialogRootContext();
-useForwardExpose();
+// Rendered on the element; mirrored into the context for the content's `aria-*`.
+const id = usePartId(() => props.id, rootContext, 'titleId');
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
+// The `id` the content's `aria-labelledby` points at, from the shared surface builder.
+const title = getDialogTitleSurface(rootContext);
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
-    :id="rootContext.titleId"
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+    v-bind="{ ...title.attrs.value, id }"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

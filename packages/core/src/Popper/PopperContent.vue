@@ -10,7 +10,7 @@ import type {
 } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
 import type { Direction } from '@/shared/types';
-import { useDirection, useForwardExpose, useSize } from '@/shared';
+import { useDirection, useForwardElement, useSize } from '@/shared';
 
 export const PopperContentPropsDefaultValue = {
   side: 'bottom' as Side,
@@ -199,9 +199,7 @@ import {
   useFloating,
 } from '@floating-ui/vue';
 import { computed, ref, watchEffect, watchPostEffect } from 'vue';
-import {
-  Primitive,
-} from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 import { providePopperContentContext } from './PopperContentContext';
 import { injectPopperRootContext } from './PopperRoot.vue';
 import {
@@ -222,7 +220,8 @@ const emits = defineEmits<{
 }>();
 
 const rootContext = injectPopperRootContext();
-const { forwardRef, currentElement: contentElement } = useForwardExpose();
+const { forwardRef, currentElement: contentElement, expose } = useForwardElement();
+defineExpose(expose);
 const dir = useDirection(computed(() => props.dir));
 
 const floatingRef = ref<HTMLElement>();
@@ -415,7 +414,8 @@ providePopperContentContext({
       }),
     }"
   >
-    <Primitive
+    <component
+      :is="renderAs(props.as, props.asChild)"
       v-if="props.memoDependencies"
       :ref="forwardRef"
       v-memo="[
@@ -428,8 +428,6 @@ providePopperContentContext({
         ...props.memoDependencies,
       ]"
       v-bind="$attrs"
-      :as-child="props.asChild"
-      :as="props.as"
       :data-side="placedSide"
       :data-align="placedAlign"
       :style="{
@@ -439,14 +437,13 @@ providePopperContentContext({
       }"
     >
       <slot />
-    </Primitive>
+    </component>
 
-    <Primitive
+    <component
+      :is="renderAs(props.as, props.asChild)"
       v-else
       :ref="forwardRef"
       v-bind="$attrs"
-      :as-child="props.asChild"
-      :as="props.as"
       :data-side="placedSide"
       :data-align="placedAlign"
       :dir="dir"
@@ -457,6 +454,6 @@ providePopperContentContext({
       }"
     >
       <slot />
-    </Primitive>
+    </component>
   </div>
 </template>

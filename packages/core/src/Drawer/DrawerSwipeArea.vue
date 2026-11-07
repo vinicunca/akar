@@ -11,71 +11,34 @@ export interface DrawerSwipeAreaProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { computed, nextTick } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
-import { useSwipeDismiss } from './composables/useSwipeDismiss';
+import { mergeProps } from 'vue';
+import { renderAs } from '@/Primitive/renderAs';
+import { useForwardElement } from '@/shared';
 import { injectDrawerRootContext } from './DrawerRoot.vue';
-import { DRAWER_CSS_VARS } from './utils';
+import { useDrawerSwipeArea } from './useDrawer';
 
 const props = withDefaults(defineProps<DrawerSwipeAreaProps>(), {
   as: 'div',
   disabled: false,
 });
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 const rootContext = injectDrawerRootContext();
 
-const OPPOSITE: Record<string, string> = {
-  up: 'down',
-  down: 'up',
-  left: 'right',
-  right: 'left',
-};
-
-const openDirection = computed<SwipeDirection>(() => {
-  if (props.swipeDirection) {
-    return props.swipeDirection;
-  }
-  return (OPPOSITE[rootContext.swipeDirection.value] ?? 'up') as SwipeDirection;
-});
-
-const enabled = computed(() => !props.disabled && !rootContext.open.value);
-
-// Keep the directions array reactive — `[openDirection.value]` would capture
-// the initial value only and ignore prop/state updates.
-const directions = computed<Array<SwipeDirection>>(() => [openDirection.value]);
-
-const { restore: restoreSwipe } = useSwipeDismiss({
-  enabled,
-  elementRef: currentElement,
-  directions,
-  movementCssVars: {
-    x: DRAWER_CSS_VARS.swipeMovementX,
-    y: DRAWER_CSS_VARS.swipeMovementY,
-  },
-  onDismiss() {
-    if (!rootContext.onOpenChange(true, 'swipe')) {
-      return false;
-    }
-    nextTick(() => {
-      if (!rootContext.open.value) {
-        restoreSwipe();
-      }
-    });
-  },
-  onSwipingChange(swiping) {
-    rootContext.onNestedSwipingChange(swiping);
-  },
+// Swipe-to-open + `data-state` / `data-swipe-direction` from the composable.
+const { swipeArea } = useDrawerSwipeArea(rootContext, {
+  element: currentElement,
+  swipeDirection: () => props.swipeDirection,
+  disabled: () => props.disabled,
 });
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
+  <component
+    :is="renderAs(as, asChild)"
+    v-bind="mergeProps({ swipeDirection: props.swipeDirection, disabled: props.disabled }, swipeArea.attrs.value)"
     :ref="forwardRef"
-    :data-state="rootContext.open.value ? 'open' : 'closed'"
-    :data-swipe-direction="openDirection"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

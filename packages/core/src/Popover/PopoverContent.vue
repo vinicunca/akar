@@ -3,16 +3,6 @@ import type {
   PopoverContentImplEmits,
   PopoverContentImplProps,
 } from './PopoverContentImpl.vue';
-import { defineAsyncComponent } from 'vue';
-
-const PopoverContentModal = defineAsyncComponent({
-  loader: () => import('./PopoverContentModal.vue'),
-  suspensible: false,
-});
-const PopoverContentNonModal = defineAsyncComponent({
-  loader: () => import('./PopoverContentNonModal.vue'),
-  suspensible: false,
-});
 
 export type PopoverContentEmits = PopoverContentImplEmits;
 
@@ -27,32 +17,41 @@ export interface PopoverContentProps extends PopoverContentImplProps {
 
 <script setup lang="ts">
 import { Presence } from '@/Presence';
-import { useForwardExpose, useForwardPropsEmits, useId } from '@/shared';
+import { useForwardElement, useForwardPropsEmits, usePartId } from '@/shared';
+import { isPortalOpening } from '@/Teleport/portalGate';
+import PopoverContentModal from './PopoverContentModal.vue';
+import PopoverContentNonModal from './PopoverContentNonModal.vue';
 import { injectPopoverRootContext } from './PopoverRoot.vue';
 
 const props = defineProps<PopoverContentProps>();
 const emits = defineEmits<PopoverContentEmits>();
 
 const rootContext = injectPopoverRootContext();
-
+// Forwarded as the element's `id`; mirrored into the context for the trigger's `aria-controls`.
+const contentId = usePartId(() => props.id, rootContext, 'contentId');
+// The template binds `id: contentId` after these, so the `id` prop never leaks through.
 const forwarded = useForwardPropsEmits(props, emits);
-const { forwardRef } = useForwardExpose();
-
-rootContext.contentId ||= useId(undefined, 'akar-popover-content');
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
-  <Presence :present="forceMount || rootContext.open.value">
+  <Presence
+    :appear="isPortalOpening(rootContext)"
+    :present="rootContext.open.value"
+    :force-mount="forceMount"
+    @complete="rootContext.notifyOpenComplete"
+  >
     <PopoverContentModal
       v-if="rootContext.modal.value"
-      v-bind="forwarded"
+      v-bind="{ ...forwarded, id: contentId }"
       :ref="forwardRef"
     >
       <slot />
     </PopoverContentModal>
     <PopoverContentNonModal
       v-else
-      v-bind="forwarded"
+      v-bind="{ ...forwarded, id: contentId }"
       :ref="forwardRef"
     >
       <slot />

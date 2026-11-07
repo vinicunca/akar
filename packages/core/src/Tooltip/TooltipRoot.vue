@@ -1,6 +1,28 @@
 <script lang="ts">
-import type { Ref } from 'vue';
-import { createContext, useForwardExpose } from '@/shared';
+import type { ComputedRef, Ref } from 'vue';
+import type { BaseChangeReason, ChangeEventDetails, DisclosureState } from '@/shared';
+import { createContext, useId } from '@/shared';
+
+/**
+ * Why the tooltip's `open` state changed (#2828); the `reason` of `ChangeEventDetails`.
+ *
+ * - `trigger-hover` — the pointer entered the trigger (after the delay, or
+ *   instantly while the provider skips it; `data-delayed` tells which).
+ * - `trigger-leave` — the pointer left the trigger while hoverable content is disabled.
+ * - `trigger-focus` / `trigger-blur` — the trigger gained / lost focus.
+ * - `trigger-press` — the trigger was pressed (unless `disableClosingTrigger`).
+ * - `content-leave` — the pointer left the trigger/content grace area of hoverable content.
+ * - `escape-key` / `outside-press` — dismissed by the `DismissableLayer`.
+ */
+export type TooltipOpenChangeReason
+  = | 'trigger-hover'
+    | 'trigger-leave'
+    | 'trigger-focus'
+    | 'trigger-blur'
+    | 'trigger-press'
+    | 'content-leave'
+    | 'escape-key'
+    | 'outside-press';
 
 export interface TooltipRootProps {
   /**
@@ -46,24 +68,44 @@ export interface TooltipRootProps {
 }
 
 export type TooltipRootEmits = {
+  /** Event handler called before the open state of the tooltip changes; `details.cancel()` keeps the current state. */
+  'beforeUpdate:open': [value: boolean, details: ChangeEventDetails<TooltipOpenChangeReason>];
   /** Event handler called when the open state of the tooltip changes. */
-  'update:open': [value: boolean];
+  'update:open': [value: boolean, details: ChangeEventDetails<TooltipOpenChangeReason>];
+  /** Event handler called after the open or close animations of the content have finished. */
+  'update:openComplete': [value: boolean];
 };
 
 export interface TooltipContext {
+  /** `<baseId>-content`, populated up-front by `useTooltip()` (#2723) — never back-filled by a descendant. */
   contentId: string;
-  open: Ref<boolean>;
-  stateAttribute: Ref<'closed' | 'delayed-open' | 'instant-open'>;
+  open: ComputedRef<boolean>;
+  /** `'open' | 'closed'` — the disclosure axis of `data-state` (#2823). */
+  stateAttribute: Ref<DisclosureState>;
+  /** `true` only while open AND that open came from the delay timer; bound as `data-delayed`. */
+  isDelayed: Ref<boolean>;
+  /**
+   * The provider's grace-area transit flag (`TooltipContentHoverable` publishes
+   * `useGraceArea`'s `isPointerInTransit` on the provider); the trigger's
+   * `pointermove` does not open while it is `true`. Resolved by the root.
+   */
+  isPointerInTransit: Ref<boolean>;
   trigger: Ref<HTMLElement | undefined>;
   onTriggerChange: (trigger: HTMLElement | undefined) => void;
-  onTriggerEnter: () => void;
-  onTriggerLeave: () => void;
-  onOpen: () => void;
-  onClose: () => void;
+  /** Pointer entered the trigger: opens with reason `trigger-hover`, delayed unless the provider is skipping the delay. */
+  onTriggerEnter: (event?: PointerEvent) => void;
+  /** Pointer left the trigger: closes with reason `trigger-leave` when hoverable content is disabled, else only cancels a pending delayed open. */
+  onTriggerLeave: (event?: PointerEvent) => void;
+  /** Opens instantly. Returns `false` when the change was a no-op or cancelled via `beforeUpdate:open`. */
+  onOpen: (reason?: TooltipOpenChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /** Closes and cancels a pending delayed open. Returns `false` when the change was a no-op or cancelled via `beforeUpdate:open`. */
+  onClose: (reason?: TooltipOpenChangeReason | BaseChangeReason, event?: Event) => boolean;
   disableHoverableContent: Ref<boolean>;
   disableClosingTrigger: Ref<boolean>;
   disabled: Ref<boolean>;
   ignoreNonKeyboardFocus: Ref<boolean>;
+  /** Called by the content once its open/close transitions finish; emits `update:openComplete`. */
+  notifyOpenComplete?: (value: boolean) => void;
 }
 
 export const [injectTooltipRootContext, provideTooltipRootContext]
@@ -71,10 +113,10 @@ export const [injectTooltipRootContext, provideTooltipRootContext]
 </script>
 
 <script setup lang="ts">
-import { useTimeoutFn, useVModel } from '@vueuse/core';
-import { computed, ref, watch } from 'vue';
+import { watch } from 'vue';
 import { PopperRoot } from '@/Popper';
 import { injectTooltipProviderContext } from './TooltipProvider.vue';
+import { useTooltip } from './useTooltip';
 import { TOOLTIP_OPEN } from './utils';
 
 const props = withDefaults(defineProps<TooltipRootProps>(), {
@@ -96,21 +138,33 @@ defineSlots<{
   }) => any;
 }>();
 
-useForwardExpose();
 const providerContext = injectTooltipProviderContext();
 
-const disableHoverableContent = computed(() => props.disableHoverableContent ?? providerContext.disableHoverableContent.value);
-const disableClosingTrigger = computed(() => props.disableClosingTrigger ?? providerContext.disableClosingTrigger.value);
-const disableTooltip = computed(() => props.disabled ?? providerContext.disabled.value);
+// The composable owns the controlled/uncontrolled `open` model (every write goes
+// through its `setState` so `beforeUpdate:open` can cancel it), the delayed-open
+// timer and the context. The shell's job is the provider coupling: each root
+// prop falls back to the `TooltipProvider` value, and the provider's skip-delay
+// and grace-area transit flags are handed in as getters (the transit ref is
+// REASSIGNED on the provider context by `TooltipContentHoverable`, so it must be
+// read through the property on every access, never snapshotted). `useId`
+// (ConfigProvider/SSR-aware) stays here and seeds the content id.
+const { open, context } = useTooltip({
+  open: () => props.open,
+  defaultOpen: props.defaultOpen,
+  delayDuration: () => props.delayDuration ?? providerContext.delayDuration.value,
+  isOpenDelayed: () => providerContext.isOpenDelayed.value,
+  isPointerInTransit: () => providerContext.isPointerInTransitRef.value,
+  disableHoverableContent: () => props.disableHoverableContent ?? providerContext.disableHoverableContent.value,
+  disableClosingTrigger: () => props.disableClosingTrigger ?? providerContext.disableClosingTrigger.value,
+  disabled: () => props.disabled ?? providerContext.disabled.value,
+  ignoreNonKeyboardFocus: () => props.ignoreNonKeyboardFocus ?? providerContext.ignoreNonKeyboardFocus.value,
+  baseId: useId(undefined, 'akar-tooltip'),
+  emit,
+  onOpenComplete: (value) => emit('update:openComplete', value),
+});
 
-const delayDuration = computed(() => props.delayDuration ?? providerContext.delayDuration.value);
-const ignoreNonKeyboardFocus = computed(() => props.ignoreNonKeyboardFocus ?? providerContext.ignoreNonKeyboardFocus.value);
-
-const open = useVModel(props, 'open', emit, {
-  defaultValue: props.defaultOpen,
-  passive: (props.open === undefined) as false,
-}) as Ref<boolean>;
-
+// Provider coordination stays in the shell: an open arms the provider's
+// skip-delay window and tells every other tooltip to close (`TOOLTIP_OPEN`).
 watch(open, (isOpen) => {
   if (!providerContext.onClose) {
     return;
@@ -125,64 +179,7 @@ watch(open, (isOpen) => {
   }
 });
 
-const wasOpenDelayedRef = ref(false);
-const trigger = ref<HTMLElement>();
-
-const stateAttribute = computed(() => {
-  if (!open.value) {
-    return 'closed';
-  }
-  return wasOpenDelayedRef.value ? 'delayed-open' : 'instant-open';
-});
-
-const { start: startTimer, stop: clearTimer } = useTimeoutFn(() => {
-  wasOpenDelayedRef.value = true;
-  open.value = true;
-}, delayDuration, { immediate: false });
-
-function handleOpen() {
-  clearTimer();
-  wasOpenDelayedRef.value = false;
-  open.value = true;
-}
-function handleClose() {
-  clearTimer();
-  open.value = false;
-}
-function handleDelayedOpen() {
-  startTimer();
-}
-
-provideTooltipRootContext({
-  contentId: '',
-  open,
-  stateAttribute,
-  trigger,
-  onTriggerChange(el) {
-    trigger.value = el;
-  },
-  onTriggerEnter() {
-    if (providerContext.isOpenDelayed.value) {
-      handleDelayedOpen();
-    } else {
-      handleOpen();
-    }
-  },
-  onTriggerLeave() {
-    if (disableHoverableContent.value) {
-      handleClose();
-    } else {
-      // Clear the timer in case the pointer leaves the trigger before the tooltip is opened.
-      clearTimer();
-    }
-  },
-  onOpen: handleOpen,
-  onClose: handleClose,
-  disableHoverableContent,
-  disableClosingTrigger,
-  disabled: disableTooltip,
-  ignoreNonKeyboardFocus,
-});
+provideTooltipRootContext(context);
 </script>
 
 <template>

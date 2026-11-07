@@ -21,22 +21,20 @@ export const SUB_CLOSE_KEYS: Record<Direction, Array<string>> = {
   rtl: ['ArrowRight'],
 };
 
-export function getOpenState(open: boolean) {
-  return open ? 'open' : 'closed';
+/** Why a menu checkbox item's checked state changed: a click, Enter or Space on the item. */
+export type MenuCheckboxItemChangeReason = 'item-press';
+/** Why a menu radio group's value changed: a click, Enter or Space on one of its items. */
+export type MenuRadioGroupChangeReason = 'item-press';
+
+/** The native event behind a menu item's `select` CustomEvent, if any. */
+export function getItemSelectOriginalEvent(event: Event): Event | undefined {
+  return (event as CustomEvent<{ originalEvent?: Event } | null>).detail?.originalEvent;
 }
 
 export function isIndeterminate(
   checked?: CheckedState,
 ): checked is 'indeterminate' {
   return checked === 'indeterminate';
-}
-
-export function getCheckedState(checked: CheckedState) {
-  return isIndeterminate(checked)
-    ? 'indeterminate'
-    : checked
-      ? 'checked'
-      : 'unchecked';
 }
 
 /**

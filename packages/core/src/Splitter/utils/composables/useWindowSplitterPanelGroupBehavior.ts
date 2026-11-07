@@ -5,7 +5,7 @@ import { assert } from '../assert';
 import { calculateAriaValues } from '../calculate';
 import { fuzzyNumbersEqual } from '../compare';
 import { getPanelGroupElement, getResizeHandleElementsForGroup, getResizeHandlePanelIds } from '../dom';
-import { adjustLayoutByDelta } from '../layout';
+import { adjustLayoutByDelta, compareLayouts } from '../layout';
 import { determinePivotIndices } from '../pivot';
 
 /** https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/ */
@@ -25,7 +25,7 @@ export function useWindowSplitterPanelGroupBehavior({
   layout: Ref<Array<number>>;
   panelDataArray: Array<PanelData>;
   panelGroupElement: Ref<ParentNode | null>;
-  commitLayout: (sizes: Array<number>) => void;
+  commitLayout: (sizes: Array<number>, reason: 'keyboard', event: KeyboardEvent) => void;
   getPanelDataWithPercentConstraints: (groupSizeOverride?: number | null) => Array<PanelData> | null;
 }): void {
   watchEffect((onCleanup) => {
@@ -163,8 +163,10 @@ export function useWindowSplitterPanelGroupBehavior({
                   ),
                   trigger: 'keyboard',
                 });
-                if (layout.value !== nextLayout) {
-                  commitLayout(nextLayout);
+                // Through the group's change path, so the toggle emits like
+                // any other resize and keeps the eager layout in sync.
+                if (!compareLayouts(layout.value, nextLayout)) {
+                  commitLayout(nextLayout, 'keyboard', event);
                 }
               }
             }

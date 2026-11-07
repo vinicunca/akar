@@ -1,6 +1,7 @@
 import type { Ref } from 'vue';
 import type { Direction, ResizeEvent } from './types';
-import { isElement } from '@/shared';
+import { containsComposed, getComposedParentElement, getEventTarget } from '@/shared/getRootNode';
+import { isElement } from '@/shared/isElement';
 import { getResizeEventCoordinates } from './events';
 import { intersects } from './rects';
 import { compare } from './stackingOrder';
@@ -90,7 +91,7 @@ export function registerResizeHandle(
 }
 
 function handlePointerDown(event: ResizeEvent) {
-  const { target } = event;
+  const target = getEventTarget(event);
   const { x, y } = getResizeEventCoordinates(event);
 
   isPointerDown = true;
@@ -109,7 +110,7 @@ function handlePointerMove(event: ResizeEvent) {
   const { x, y } = getResizeEventCoordinates(event);
 
   if (!isPointerDown) {
-    const { target } = event;
+    const target = getEventTarget(event);
     // While transitioning into an iframe, the browser may still dispatch a
     // few trailing "mousemove" events in the parent document whose target
     // resolves to the iframe itself. Ignore those so they don't trigger a
@@ -157,7 +158,7 @@ function isIframeElement(target: EventTarget | null): boolean {
 }
 
 function handlePointerUp(event: ResizeEvent) {
-  const { target } = event;
+  const target = getEventTarget(event);
   const { x, y } = getResizeEventCoordinates(event);
 
   panelConstraintFlags.clear();
@@ -223,8 +224,10 @@ function recalculateIntersectingHandles({
       if (
         targetElement !== null
         && dragHandleElement !== targetElement
-        && !dragHandleElement.contains(targetElement)
-        && !targetElement.contains(dragHandleElement)
+        // The target is the composed (deep) one: it may sit inside a web
+        // component in the handle, or the handle inside another shadow root.
+        && !containsComposed(dragHandleElement, targetElement)
+        && !containsComposed(targetElement, dragHandleElement)
         // Calculating stacking order has a cost, so we should avoid it if possible
         // That is why we only check potentially intersecting handles,
         // and why we skip if the event target is within the handle's DOM
@@ -239,7 +242,7 @@ function recalculateIntersectingHandles({
         let currentElement: Element | null = targetElement;
         let didIntersect = false;
         while (currentElement) {
-          if (currentElement.contains(dragHandleElement)) {
+          if (containsComposed(currentElement, dragHandleElement)) {
             break;
           } else if (
             intersects(
@@ -252,7 +255,7 @@ function recalculateIntersectingHandles({
             break;
           }
 
-          currentElement = currentElement.parentElement;
+          currentElement = getComposedParentElement(currentElement);
         }
 
         if (didIntersect) {

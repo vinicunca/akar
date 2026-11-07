@@ -4,11 +4,15 @@ export {
   type AutocompleteInputProps,
 } from './AutocompleteInput.vue';
 export {
+  type AutocompleteChangeReason,
   default as AutocompleteRoot,
+  type AutocompleteRootContext,
   type AutocompleteRootEmits,
   type AutocompleteRootProps,
   injectAutocompleteRootContext,
 } from './AutocompleteRoot.vue';
+
+export { type ComboboxInputChangeReason as AutocompleteInputChangeReason } from '@/Combobox';
 
 // Re-export Combobox sub-components as Autocomplete equivalents.
 // These components inject ComboboxRootContext which AutocompleteRoot provides.

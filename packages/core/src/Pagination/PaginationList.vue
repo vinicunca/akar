@@ -1,42 +1,38 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 
 export interface PaginationListProps extends PrimitiveProps { }
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 import { injectPaginationRootContext } from './PaginationRoot.vue';
-import { getRange, transform } from './utils';
+import { getPaginationItems } from './usePagination';
 
 const props = defineProps<PaginationListProps>();
 
 defineSlots<{
   default?: (props: {
     /** Pages item */
-    items: typeof transformedRange.value;
+    // Spelled out (not the `PaginationItem` alias) so the generated docs keep the union.
+    items: Array<{ type: 'ellipsis' } | { type: 'page'; value: number }>;
   }) => any;
 }>();
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 const rootContext = injectPaginationRootContext();
 
-const transformedRange = computed(() => {
-  return transform(
-    getRange(
-      rootContext.page.value,
-      rootContext.pageCount.value,
-      rootContext.siblingCount.value,
-      rootContext.showEdges.value,
-    ),
-  );
-});
+// The visible range comes from the same derivation as `usePagination().items`.
+const transformedRange = getPaginationItems(rootContext);
 </script>
 
 <template>
-  <Primitive v-bind="props">
+  <component
+    :is="renderAs(as, asChild)"
+    :ref="forwardRef"
+  >
     <slot :items="transformedRange" />
-  </Primitive>
+  </component>
 </template>

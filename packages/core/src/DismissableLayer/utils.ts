@@ -1,7 +1,9 @@
 import type { MaybeRefOrGetter, Ref } from 'vue';
+import type { OutsideSubscriber } from './layerStack';
 import { isClient } from '@vueuse/shared';
-import { nextTick, ref, toValue, watchEffect } from 'vue';
-import { handleAndDispatchCustomEvent } from '@/shared';
+import { nextTick, toValue, watchEffect } from 'vue';
+import { containsComposed, getActiveElement, handleAndDispatchCustomEvent } from '@/shared';
+import { attachDocument, layerElements, registerOutsideSubscriber } from './layerStack';
 
 export type PointerDownOutsideEvent = CustomEvent<{
   originalEvent: PointerEvent;
@@ -9,7 +11,6 @@ export type PointerDownOutsideEvent = CustomEvent<{
 export type FocusOutsideEvent = CustomEvent<{ originalEvent: FocusEvent }>;
 
 export const DISMISSABLE_LAYER_NAME = 'DismissableLayer';
-export const CONTEXT_UPDATE = 'dismissableLayer.update';
 export const POINTER_DOWN_OUTSIDE = 'dismissableLayer.pointerDownOutside';
 export const FOCUS_OUTSIDE = 'dismissableLayer.focusOutside';
 
@@ -24,7 +25,40 @@ function isElement(node: unknown): node is Element {
     || (!!ownerWindow && node instanceof ownerWindow.Element);
 }
 
-export function isLayerExist(layerElement: HTMLElement, targetElement: HTMLElement) {
+/**
+ * The manager's shared listeners live on the top-level document. A layer
+ * rendered inside an iframe attaches its own document for as long as it
+ * listens; a no-op for the top-level document. Tracks `element`, since the
+ * layer is usually not mounted yet when the composable runs.
+ */
+function useOwnerDocumentListeners(element: Readonly<Ref<HTMLElement | null | undefined>> | undefined, enabled: MaybeRefOrGetter<boolean>) {
+  watchEffect((cleanupFn) => {
+    if (!isClient || !toValue(enabled)) {
+      return;
+    }
+    const ownerDocument = element?.value?.ownerDocument;
+    if (ownerDocument) {
+      cleanupFn(attachDocument(ownerDocument));
+    }
+  });
+}
+
+/**
+ * Whether `targetElement` counts as "inside" `layerElement`: within its own
+ * subtree, or within a layer stacked ABOVE it. Stack order comes from the
+ * manager's `layers` registry (see `layerElements`) rather than a document-wide
+ * `querySelectorAll`, so layers rendered inside shadow roots order like
+ * light-DOM ones; containment is composed for the same reason.
+ */
+export function isLayerExist(
+  layerElement: HTMLElement,
+  targetElement: HTMLElement,
+  // Optional pre-computed `layerElements()` snapshot. The manager builds ONE per
+  // pointerdown event and passes it here so N subscribers share it (the
+  // synchronous pointer path — see layerStack). Omitted (focus path / direct
+  // callers) → the live registry is read.
+  snapshot?: Array<Element>,
+) {
   if (!isElement(targetElement)) {
     return false;
   }
@@ -36,29 +70,50 @@ export function isLayerExist(layerElement: HTMLElement, targetElement: HTMLEleme
   // resolves the same root as its container and may focus it as a fallback
   // when the content has no tabbable children; that focus must not read as
   // focus-outside and dismiss the layer it belongs to (#2803).
-  if (layerElement.contains(targetElement)) {
+  if (containsComposed(layerElement, targetElement)) {
     return true;
   }
 
-  const targetLayer = targetElement.closest(
-    '[data-dismissable-layer]',
-  );
-
-  const mainLayer = layerElement.dataset.dismissableLayer === ''
+  const mainLayer = (layerElement.dataset.dismissableLayer === ''
     ? layerElement
-    : layerElement.querySelector(
-      '[data-dismissable-layer]',
-    ) as HTMLElement;
+    : layerElement.querySelector('[data-dismissable-layer]')) ?? layerElement;
 
-  const nodeList = Array.from(
-    layerElement.ownerDocument.querySelectorAll('[data-dismissable-layer]'),
-  );
-
-  if (targetLayer && (mainLayer === targetLayer || nodeList.indexOf(mainLayer) < nodeList.indexOf(targetLayer))) {
+  // Inside the layer's own subtree (a target in a nested shadow tree counts).
+  if (containsComposed(mainLayer, targetElement)) {
     return true;
-  } else {
-    return false;
   }
+
+  // Otherwise the target must sit inside a layer stacked above this one.
+  const nodeList = snapshot ?? layerElements();
+  const mainIndex = nodeList.indexOf(mainLayer);
+
+  // An unregistered `mainLayer` (e.g. an Editable, which only subscribes and
+  // never registers a `StackLayer`) has no stack index, so fall back to the
+  // document-order rule the `querySelectorAll` snapshot used to encode: a layer
+  // that FOLLOWS it in the document counts as above it. This keeps an Editable
+  // inside a Dialog ending its edit on a click elsewhere in that Dialog.
+  if (mainIndex === -1) {
+    const domTargetLayer = targetElement.closest('[data-dismissable-layer]');
+    return !!domTargetLayer
+      && !!(mainLayer.compareDocumentPosition(domTargetLayer) & Node.DOCUMENT_POSITION_FOLLOWING);
+  }
+
+  const targetLayer = closestStackLayer(targetElement, nodeList);
+  return !!targetLayer && mainIndex < nodeList.indexOf(targetLayer);
+}
+
+/** Nearest composed ancestor of `node` (inclusive) that is one of `nodeList`. */
+function closestStackLayer(node: Node, nodeList: Array<Element>): Element | null {
+  const members = new Set<Node>(nodeList);
+  let current: Node | null = node;
+  while (current) {
+    if (members.has(current)) {
+      return current as Element;
+    }
+    // Cross a shadow boundary: a shadow root has no parent, but a host.
+    current = current.parentNode ?? (current as ShadowRoot).host ?? null;
+  }
+  return null;
 }
 
 /**
@@ -68,38 +123,38 @@ export function isLayerExist(layerElement: HTMLElement, targetElement: HTMLEleme
  */
 export function usePointerDownOutside(
   onPointerDownOutside?: (event: PointerDownOutsideEvent) => void,
-  element?: Ref<HTMLElement | undefined>,
+  element?: Readonly<Ref<HTMLElement | null | undefined>>,
   enabled: MaybeRefOrGetter<boolean> = true,
 ) {
-  const isPointerInsideDOMTree = ref(false);
-  const handleClickRef = ref(() => {});
+  const subscriber: OutsideSubscriber = {
+    armed: false, // set true a macrotask after registration by the manager
+    isPointerInside: false,
+    // Ported from the previous `handlePointerDown` body, branch-for-branch.
+    handlePointerDown: (event, ctx) => {
+      // Arming guard MUST be first — before any flag write. During the arming
+      // window the whole body is skipped, so `isPointerInside` (set by the
+      // capture handler) survives until the next post-arming event.
+      if (!subscriber.armed) {
+        return;
+      }
 
-  watchEffect((cleanupFn) => {
-    if (!isClient || !toValue(enabled)) {
-      return;
-    }
-    // Resolved inside the effect so it tracks `element`: the layer is usually
-    // not mounted yet when this composable runs, and listening on the global
-    // `document` would miss events from a layer rendered inside an iframe.
-    const ownerDocument = element?.value?.ownerDocument ?? globalThis.document;
-    const handlePointerDown = async (event: PointerEvent) => {
-      const target = event.target as HTMLElement | undefined;
-
+      const target = ctx.target as HTMLElement | null;
       if (!element?.value || !target) {
         return;
       }
 
-      if (isLayerExist(element.value, target)) {
-        // A touch `pointerdown` outside arms a one-shot `click` listener that
-        // never fires when the tap becomes a scroll/drag. Drop it here so the
-        // next tap inside a layer cannot trigger the stale dismissal (mirrors
-        // Radix's inside-tree branch, radix-ui/primitives#2171).
-        ownerDocument.removeEventListener('click', handleClickRef.value);
-        isPointerInsideDOMTree.value = false;
+      if (isLayerExist(element.value, target, ctx.nodeList)) {
+        // A touch `pointerdown` outside defers the dispatch to the next `click`,
+        // which never comes when the tap becomes a scroll/drag. Drop the stale
+        // deferral here so the next tap inside this layer (or a layer above it)
+        // cannot trigger it (mirrors Radix's inside-tree branch,
+        // radix-ui/primitives#2171).
+        ctx.cancelTouch(subscriber);
+        subscriber.isPointerInside = false;
         return;
       }
 
-      if (event.target && !isPointerInsideDOMTree.value) {
+      if (!subscriber.isPointerInside) {
         const eventDetail = { originalEvent: event };
 
         function handleAndDispatchPointerDownOutsideEvent() {
@@ -107,6 +162,7 @@ export function usePointerDownOutside(
             POINTER_DOWN_OUTSIDE,
             onPointerDownOutside,
             eventDetail,
+            target,
           );
         }
 
@@ -119,121 +175,102 @@ export function usePointerDownOutside(
          * Additionally, this also lets us deal automatically with cancellations when a click event
          * isn't raised because the page was considered scrolled/drag-scrolled, long-pressed, etc.
          *
-         * This is why we also continuously remove the previous listener, because we cannot be
-         * certain that it was raised, and therefore cleaned-up.
+         * `deferTouch` replaces the previous pending dispatch (= the "continuously
+         * remove the previous listener" behavior) via the manager's shared click listener.
          */
         if (event.pointerType === 'touch') {
-          ownerDocument.removeEventListener('click', handleClickRef.value);
-          handleClickRef.value = handleAndDispatchPointerDownOutsideEvent;
-          ownerDocument.addEventListener('click', handleClickRef.value, {
-            once: true,
-          });
+          ctx.deferTouch(subscriber, handleAndDispatchPointerDownOutsideEvent);
         } else {
           handleAndDispatchPointerDownOutsideEvent();
         }
       } else {
-        // We need to remove the event listener in case the outside click has been canceled.
+        // Cancel a pending deferred dispatch when the outside click was canceled.
         // See: https://github.com/radix-ui/primitives/issues/2171
-        ownerDocument.removeEventListener('click', handleClickRef.value);
+        ctx.cancelTouch(subscriber);
       }
-      isPointerInsideDOMTree.value = false;
-    };
-    /**
-     * if this hook executes in a component that mounts via a `pointerdown` event, the event
-     * would bubble up to the document and trigger a `pointerDownOutside` event. We avoid
-     * this by delaying the event listener registration on the document.
-     * This is how the DOM works, ie:
-     * ```
-     * button.addEventListener('pointerdown', () => {
-     *   console.log('I will log');
-     *   document.addEventListener('pointerdown', () => {
-     *     console.log('I will also log');
-     *   })
-     * });
-     */
-    const timerId = window.setTimeout(() => {
-      ownerDocument.addEventListener('pointerdown', handlePointerDown);
-    }, 0);
+      subscriber.isPointerInside = false;
+    },
+  };
 
-    cleanupFn(() => {
-      window.clearTimeout(timerId);
-      ownerDocument.removeEventListener('pointerdown', handlePointerDown);
-      ownerDocument.removeEventListener('click', handleClickRef.value);
-    });
+  watchEffect((cleanupFn) => {
+    if (!isClient || !toValue(enabled)) {
+      return;
+    }
+    cleanupFn(registerOutsideSubscriber(subscriber));
   });
+  useOwnerDocumentListeners(element, enabled);
 
   return {
     onPointerDownCapture: () => {
       if (!toValue(enabled)) {
         return;
       }
-      isPointerInsideDOMTree.value = true;
+      subscriber.isPointerInside = true;
     },
   };
 }
 
 /**
+ * Whether focus is inside `element`. It takes both: the active element can't see into
+ * a closed shadow root, so a layer rendered in one reads as outside, and `:focus-within`
+ * follows the flat tree through those, but doesn't match while an iframe inside
+ * `element` holds focus, where the active element is that iframe.
+ */
+function isFocusWithin(element: HTMLElement) {
+  return containsComposed(element, getActiveElement(element)) || element.matches(':focus-within');
+}
+
+/**
  * Listens for when focus happens outside a DOM subtree.
- * Returns props to pass to the root (node) of the subtree we want to check.
  */
 export function useFocusOutside(
   onFocusOutside?: (event: FocusOutsideEvent) => void,
-  element?: Ref<HTMLElement | undefined>,
+  element?: Readonly<Ref<HTMLElement | null | undefined>>,
   enabled: MaybeRefOrGetter<boolean> = true,
 ) {
-  const isFocusInsideDOMTree = ref(false);
-  watchEffect((cleanupFn) => {
-    if (!isClient || !toValue(enabled)) {
-      return;
-    }
-    // See `usePointerDownOutside`: resolved inside the effect to track `element`.
-    const ownerDocument = element?.value?.ownerDocument ?? globalThis.document;
-    const handleFocus = async (event: FocusEvent) => {
+  const subscriber: OutsideSubscriber = {
+    // Focus has NO arming today (the `focusin` listener attaches synchronously),
+    // so a focus subscriber is always "armed" and must never gate on it.
+    armed: true,
+    isPointerInside: false,
+    // Ported from the previous `handleFocus` body. Keeps the double `nextTick`
+    // so focus-driven DOM updates settle before the gate reads. Uses the
+    // composed `ctx.target` (captured synchronously by the manager) but a FRESH
+    // `isLayerExist` registry read AFTER the awaits — the stack may have
+    // changed, and a stale snapshot would diverge from today's behavior.
+    handleFocus: async (event, ctx) => {
       if (!element?.value) {
         return;
       }
 
       await nextTick();
       await nextTick();
-      const target = event.target as HTMLElement | undefined;
+      const target = ctx.target as HTMLElement | null;
       if (!element.value || !target || isLayerExist(element.value, target)) {
         return;
       }
 
-      if (event.target && !isFocusInsideDOMTree.value) {
+      // Focus may have come back inside during the ticks above (a focus trap's
+      // recall). Read it from the document: a flag kept by focus and blur capture
+      // listeners on the element goes stale, because Vue skips an invoker attached
+      // in the millisecond of the event's first invoker.
+      if (!isFocusWithin(element.value)) {
         const eventDetail = { originalEvent: event };
         handleAndDispatchCustomEvent(
           FOCUS_OUTSIDE,
           onFocusOutside,
           eventDetail,
+          target,
         );
       }
-    };
-
-    ownerDocument.addEventListener('focusin', handleFocus);
-
-    cleanupFn(() => ownerDocument.removeEventListener('focusin', handleFocus));
-  });
-
-  return {
-    onFocusCapture: () => {
-      if (!toValue(enabled)) {
-        return;
-      }
-
-      isFocusInsideDOMTree.value = true;
-    },
-    onBlurCapture: () => {
-      if (!toValue(enabled)) {
-        return;
-      }
-
-      isFocusInsideDOMTree.value = false;
     },
   };
-}
 
-export function dispatchUpdate() {
-  const event = new CustomEvent(CONTEXT_UPDATE);
-  document.dispatchEvent(event);
+  watchEffect((cleanupFn) => {
+    if (!isClient || !toValue(enabled)) {
+      return;
+    }
+    cleanupFn(registerOutsideSubscriber(subscriber));
+  });
+  useOwnerDocumentListeners(element, enabled);
 }

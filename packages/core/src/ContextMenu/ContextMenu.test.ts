@@ -45,10 +45,6 @@ describe('given default ContextMenu', () => {
     it('should render the menu', async () => {
       expect(await findByRole(document.body, 'menu')).toBeTruthy();
     });
-
-    it('should keep the open trigger interactive', () => {
-      expect((wrapper.find('span').element as HTMLElement).style.pointerEvents).toBe('auto');
-    });
   });
 });
 

@@ -170,14 +170,14 @@ describe('nested px SplitterGroup layout re-initialization (issue #2509)', () =>
     await nextTick(); // panelDataArrayChanged → layout init
 
     const sidebar = wrapper.find('#sidebar');
-    expect(sidebar.attributes('data-state')).toBe('expanded')
+    expect(sidebar.attributes('data-state')).toBe('open')
 
     // Collapse via the public API; the panel reaches collapsedSize through
     // adjustLayoutByDelta, leaving panelSize a float-epsilon off collapsedSize.
     ;(wrapper.vm.$refs.sidebar as { collapse: () => void }).collapse();
     await nextTick();
 
-    expect(sidebar.attributes('data-state')).toBe('collapsed');
+    expect(sidebar.attributes('data-state')).toBe('closed');
   });
 
   // Regression test for https://github.com/unovue/reka-ui/issues/3131
@@ -202,12 +202,12 @@ describe('nested px SplitterGroup layout re-initialization (issue #2509)', () =>
     await nextTick();
 
     const sidebar = wrapper.find('#sidebar');
-    expect(sidebar.attributes('data-state')).toBe('expanded');
+    expect(sidebar.attributes('data-state')).toBe('open');
 
     await wrapper.find('#handle').trigger('keydown', { key: 'Enter' });
-    expect(sidebar.attributes('data-state')).toBe('collapsed');
+    expect(sidebar.attributes('data-state')).toBe('closed');
 
     await wrapper.find('#handle').trigger('keydown', { key: 'Enter' });
-    expect(sidebar.attributes('data-state')).toBe('expanded');
+    expect(sidebar.attributes('data-state')).toBe('open');
   });
 });

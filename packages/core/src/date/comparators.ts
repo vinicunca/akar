@@ -1,6 +1,6 @@
-import type { DateValue } from '@internationalized/date';
-import type { Matcher } from './types';
-import { CalendarDateTime, getDayOfWeek, getLocalTimeZone, parseDate, parseDateTime, parseZonedDateTime, toCalendar, ZonedDateTime } from '@internationalized/date';
+import type { DateValue, Matcher } from './types';
+import { getTemporal } from './runtime';
+import { compareDateValues, getDayOfWeek, isPlainDateTime, isZonedDateTime, startOfMonth, startOfYear, toCalendar, toPlainDate } from './temporal';
 
 /**
  * Given a date string and a reference `DateValue` object, parse the
@@ -10,43 +10,21 @@ import { CalendarDateTime, getDayOfWeek, getLocalTimeZone, parseDate, parseDateT
  * strings, to the same type being used by the date component.
  */
 export function parseStringToDateValue(dateStr: string, referenceVal: DateValue): DateValue {
+  const temporal = getTemporal();
   let dateValue: DateValue;
   if (isZonedDateTime(referenceVal)) {
-    dateValue = parseZonedDateTime(dateStr);
-  } else if (isCalendarDateTime(referenceVal)) {
-    dateValue = parseDateTime(dateStr);
+    dateValue = temporal.ZonedDateTime.from(dateStr);
+  } else if (isPlainDateTime(referenceVal)) {
+    dateValue = temporal.PlainDateTime.from(dateStr);
   } else {
-    dateValue = parseDate(dateStr);
+    dateValue = temporal.PlainDate.from(dateStr);
   }
 
-  return dateValue.calendar !== referenceVal.calendar
-    ? toCalendar(dateValue, referenceVal.calendar)
-    : dateValue;
-}
-
-/**
- * Given a `DateValue` object, convert it to a native `Date` object.
- * If a timezone is provided, the date will be converted to that timezone.
- * If no timezone is provided, the date will be converted to the local timezone.
- */
-export function toDate(dateValue: DateValue, tz: string = getLocalTimeZone()) {
-  if (isZonedDateTime(dateValue)) {
-    return dateValue.toDate();
-  } else {
-    return dateValue.toDate(tz);
-  }
-}
-
-export function isCalendarDateTime(dateValue: DateValue): dateValue is CalendarDateTime {
-  return dateValue instanceof CalendarDateTime;
-}
-
-export function isZonedDateTime(dateValue: DateValue): dateValue is ZonedDateTime {
-  return dateValue instanceof ZonedDateTime;
+  return toCalendar(dateValue, referenceVal.calendarId);
 }
 
 export function hasTime(dateValue: DateValue) {
-  return isCalendarDateTime(dateValue) || isZonedDateTime(dateValue);
+  return isPlainDateTime(dateValue) || isZonedDateTime(dateValue);
 }
 
 /**
@@ -63,7 +41,7 @@ export function getDaysInMonth(date: Date | DateValue) {
      */
     return new Date(year, month, 0).getDate();
   } else {
-    return date.set({ day: 100 }).day;
+    return date.daysInMonth;
   }
 }
 
@@ -75,7 +53,7 @@ export function getDaysInMonth(date: Date | DateValue) {
  * @see {@link isBeforeOrSame} for inclusive
  */
 export function isBefore(dateToCompare: DateValue, referenceDate: DateValue) {
-  return dateToCompare.compare(referenceDate) < 0;
+  return compareDateValues(dateToCompare, referenceDate) < 0;
 }
 
 /**
@@ -86,7 +64,7 @@ export function isBefore(dateToCompare: DateValue, referenceDate: DateValue) {
  * @see {@link isAfterOrSame} for inclusive
  */
 export function isAfter(dateToCompare: DateValue, referenceDate: DateValue) {
-  return dateToCompare.compare(referenceDate) > 0;
+  return compareDateValues(dateToCompare, referenceDate) > 0;
 }
 
 /**
@@ -98,7 +76,7 @@ export function isAfter(dateToCompare: DateValue, referenceDate: DateValue) {
  * @see {@link isBefore} for non-inclusive
  */
 export function isBeforeOrSame(dateToCompare: DateValue, referenceDate: DateValue) {
-  return dateToCompare.compare(referenceDate) <= 0;
+  return compareDateValues(dateToCompare, referenceDate) <= 0;
 }
 
 /**
@@ -110,7 +88,7 @@ export function isBeforeOrSame(dateToCompare: DateValue, referenceDate: DateValu
  * @see {@link isAfter} for non-inclusive
  */
 export function isAfterOrSame(dateToCompare: DateValue, referenceDate: DateValue) {
-  return dateToCompare.compare(referenceDate) >= 0;
+  return compareDateValues(dateToCompare, referenceDate) >= 0;
 }
 
 /**
@@ -224,16 +202,6 @@ export function isSameDateSelection(
   return isSame(left, right);
 }
 
-/**
- * Whether two dates are the exact same value, including calendar system, time, offset, and time zone.
- * `compare()` alone treats the same instant in two zones as equal, and `toString()`
- * serializes every calendar system as Gregorian.
- */
-export function isSameDateValue(a: DateValue, b: DateValue) {
-  return a.calendar.identifier === b.calendar.identifier
-    && a.toString() === b.toString();
-}
-
 /** The date that should drive the visible page: the last multiple value, otherwise the value itself. */
 export function focusedDateValue(value: DateSelection) {
   if (Array.isArray(value)) {
@@ -244,17 +212,64 @@ export function focusedDateValue(value: DateSelection) {
 }
 
 /**
+ * The first day of the month / year containing `date`, as a `PlainDate`
+ * (time and zone dropped). Temporal's `year` is a continuous arithmetic year
+ * (eras do not restart it), so these compare correctly across eras.
+ */
+function monthStart(date: DateValue) {
+  return startOfMonth(toPlainDate(date));
+}
+
+function yearStart(date: DateValue) {
+  return startOfYear(toPlainDate(date));
+}
+
+function comparePlainDates(a: Temporal.PlainDate, b: Temporal.PlainDate) {
+  return getTemporal().PlainDate.compare(a, b);
+}
+
+/**
+ * Inclusive number of `unit`s from `start` to `end`. Counted by stepping, so
+ * eras and calendars with a varying number of months per year are handled.
+ * When `end` is before `start` the result is `2 - count(end..start)`, the same
+ * as subtracting the field values.
+ */
+function countPeriods(start: DateValue, end: DateValue, unit: 'months' | 'years') {
+  const toStart = unit === 'months'
+    ? monthStart
+    : yearStart;
+  const step = unit === 'months'
+    ? { months: 1 }
+    : { years: 1 };
+  const from = toStart(start);
+  const to = toStart(end);
+  const forward = comparePlainDates(to, from) >= 0;
+  const [low, high] = forward
+    ? [from, to]
+    : [to, from];
+  let count = 1;
+  let current = low;
+  while (comparePlainDates(current, high) < 0) {
+    current = toStart(current.add(step));
+    count++;
+  }
+  return forward
+    ? count
+    : 2 - count;
+}
+
+/**
  * Check if two dates are in the same year and month.
  */
 export function isSameYearMonth(a: DateValue, b: DateValue): boolean {
-  return a.year === b.year && a.month === b.month;
+  return compareYearMonth(a, b) === 0;
 }
 
 /**
  * Check if two dates are in the same year.
  */
 export function isSameYear(a: DateValue, b: DateValue): boolean {
-  return a.year === b.year;
+  return compareYear(a, b) === 0;
 }
 
 export function areAllDaysBetweenValid(
@@ -269,16 +284,16 @@ export function areAllDaysBetweenValid(
   }
 
   let dCurrent = start.add({ days: 1 });
-  if ((isDisabled?.(dCurrent) || isUnavailable?.(dCurrent))
-    && !isHighlightable?.(dCurrent)) {
+  if ((isDisabled?.(dCurrent, 'day') || isUnavailable?.(dCurrent, 'day'))
+    && !isHighlightable?.(dCurrent, 'day')) {
     return false;
   }
 
   const dEnd = end;
-  while (dCurrent.compare(dEnd) < 0) {
+  while (compareDateValues(dCurrent, dEnd) < 0) {
     dCurrent = dCurrent.add({ days: 1 });
-    if ((isDisabled?.(dCurrent) || isUnavailable?.(dCurrent))
-      && !isHighlightable?.(dCurrent)) {
+    if ((isDisabled?.(dCurrent, 'day') || isUnavailable?.(dCurrent, 'day'))
+      && !isHighlightable?.(dCurrent, 'day')) {
       return false;
     }
   }
@@ -289,10 +304,14 @@ export function areAllDaysBetweenValid(
  * Compare two dates by year and month only (ignoring day).
  */
 export function compareYearMonth(a: DateValue, b: DateValue): number {
-  if (a.year !== b.year) {
-    return a.year - b.year;
-  }
-  return a.month - b.month;
+  return comparePlainDates(monthStart(a), monthStart(toCalendar(b, a.calendarId)));
+}
+
+/**
+ * Compare two dates by year only (ignoring month and day). Era-safe.
+ */
+export function compareYear(a: DateValue, b: DateValue): number {
+  return comparePlainDates(yearStart(a), yearStart(toCalendar(b, a.calendarId)));
 }
 
 /**
@@ -306,21 +325,21 @@ export function isMonthBetweenInclusive(date: DateValue, start: DateValue, end: 
  * Check if a date's year is between start and end (inclusive), comparing year only.
  */
 export function isYearBetweenInclusive(date: DateValue, start: DateValue, end: DateValue): boolean {
-  return date.year >= start.year && date.year <= end.year;
+  return compareYear(date, start) >= 0 && compareYear(date, end) <= 0;
 }
 
 /**
  * Get the number of months between two dates (inclusive).
  */
 export function getMonthsBetween(start: DateValue, end: DateValue): number {
-  return (end.year - start.year) * 12 + (end.month - start.month) + 1;
+  return countPeriods(start, end, 'months');
 }
 
 /**
  * Get the number of years between two dates (inclusive).
  */
 export function getYearsBetween(start: DateValue, end: DateValue): number {
-  return end.year - start.year + 1;
+  return countPeriods(start, end, 'years');
 }
 
 /**
@@ -331,19 +350,19 @@ export function areAllMonthsBetweenValid(
   end: DateValue,
   isUnavailable: Matcher | undefined,
   isDisabled: Matcher | undefined,
+  isHighlightable?: Matcher | undefined,
 ): boolean {
-  if (isUnavailable === undefined && isDisabled === undefined) {
+  if (isUnavailable === undefined && isDisabled === undefined && isHighlightable === undefined) {
     return true;
   }
 
-  let current = start.set({ day: 1 });
-  const endMonth = end.set({ day: 1 });
+  let current: DateValue = startOfMonth(start);
 
-  while (compareYearMonth(current, endMonth) <= 0) {
-    if (isDisabled?.(current) || isUnavailable?.(current)) {
+  while (compareYearMonth(current, end) <= 0) {
+    if ((isDisabled?.(current, 'month') || isUnavailable?.(current, 'month')) && !isHighlightable?.(current, 'month')) {
       return false;
     }
-    current = current.add({ months: 1 });
+    current = startOfMonth(current.add({ months: 1 }));
   }
   return true;
 }
@@ -356,19 +375,19 @@ export function areAllYearsBetweenValid(
   end: DateValue,
   isUnavailable: Matcher | undefined,
   isDisabled: Matcher | undefined,
+  isHighlightable?: Matcher | undefined,
 ): boolean {
-  if (isUnavailable === undefined && isDisabled === undefined) {
+  if (isUnavailable === undefined && isDisabled === undefined && isHighlightable === undefined) {
     return true;
   }
 
-  let current = start.set({ day: 1, month: 1 });
-  const endYear = end.set({ day: 1, month: 1 });
+  let current: DateValue = startOfYear(start);
 
-  while (current.year <= endYear.year) {
-    if (isDisabled?.(current) || isUnavailable?.(current)) {
+  while (compareYear(current, end) <= 0) {
+    if ((isDisabled?.(current, 'year') || isUnavailable?.(current, 'year')) && !isHighlightable?.(current, 'year')) {
       return false;
     }
-    current = current.add({ years: 1 });
+    current = startOfYear(current.add({ years: 1 }));
   }
   return true;
 }

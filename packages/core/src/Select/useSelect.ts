@@ -1,0 +1,1698 @@
+import type { ComputedRef, MaybeRefOrGetter, Ref } from 'vue';
+import type { HarvestedItem, SelectTypeaheadItem } from './closedItems';
+import type { SelectContentContext } from './SelectContentImpl.vue';
+import type { SelectEvent, SelectItemContext } from './SelectItem.vue';
+import type { SelectRootContext } from './SelectRoot.vue';
+import type { ListboxNavigationIntent } from '@/Listbox/useListbox';
+import type { BaseChangeReason, By, ChangeEventDetails, DisclosureState, PartSurface, SelectionState } from '@/shared';
+import type { AcceptableValue, Direction } from '@/shared/types';
+import { computed, getCurrentScope, isRef, nextTick, onBeforeUnmount, onMounted, onScopeDispose, ref, shallowRef, toValue, watch, watchEffect } from 'vue';
+import { focusFirst } from '@/Menu/utils';
+import {
+  compare,
+  containsComposed,
+  createLabelRegistry,
+  createPartSurface,
+  disclosureState,
+  getActiveElement,
+  getEventTarget,
+  handleAndDispatchCustomEvent,
+  isNullish,
+  selectionState,
+  useControllableState,
+  useListSelection,
+  useTypeahead,
+  valueComparator,
+} from '@/shared';
+import { getterRef } from '@/shared/partSurface';
+import { SelectionSelector } from '@/shared/selectionSelector';
+import { resolveDirection } from '@/shared/useDirection';
+import { getNextMatch, wrapArray } from '@/shared/useTypeahead';
+import { SelectClosedItems } from './closedItems';
+import { OPEN_KEYS, SELECTION_KEYS, shouldShowPlaceholder } from './utils';
+
+// =============================================================================
+// Headless composables for the Select family (#2723, #2824).
+//
+// Overlay contract (validated on Menu/Popover): `useSelectRoot()` is
+// state-only — the value and open models, the label registry and the context
+// the root SFC provides. Surfaces begin at the parts: `useSelectTrigger`,
+// `useSelectValue`, `useSelectContent` (the keyboard/pointer brain of the
+// content), `useSelectItem`, `useSelectItemText` and `useSelectItemIndicator`.
+//
+// Select shares the selection model (`useListSelection`), the `by` comparator,
+// the sticky label registry and the navigation-intent hook with the Listbox
+// cluster, but not the Listbox root contract: its brain is DOM focus on the
+// items, not `aria-activedescendant`.
+//
+// What stays in the SFCs: `PopperRoot`/`PopperAnchor`/`PopperContent` and the
+// item-aligned positioning (measurement), `Presence` and the closed-content
+// fragment, `FocusScope`/`DismissableLayer`, the modal side effects
+// (`useBodyScrollLock`, `useFocusGuards`, `useHideOthers`), `useCollection`,
+// `useId`, Field wiring and the hidden native `<select>`.
+// =============================================================================
+
+/**
+ * Why the value changed; carried as `details.reason` (#2828).
+ *
+ * - `'item-press'`: an item was released under the pointer.
+ * - `'item-keydown'`: Enter or Space on the focused item (or a key that
+ *   `getNavigationIntent` maps to `'select'`).
+ * - `'typeahead'`: typing on the focused, closed trigger selected the next
+ *   item whose text starts with the typed characters (single selection only).
+ * - `'autofill'`: the browser filled the hidden native `<select>`.
+ */
+export type SelectChangeReason = 'item-press' | 'item-keydown' | 'typeahead' | 'autofill';
+
+/**
+ * Why the select opened or closed; carried as `details.reason` (#2828).
+ *
+ * - `'trigger-press'`: a press on the trigger, or Enter / Space on it.
+ * - `'list-navigation'`: ArrowDown / ArrowUp on the trigger.
+ * - `'item-press'` / `'item-keydown'`: selecting an item closed a single select.
+ * - `'escape-key'` / `'outside-press'`: dismissed. Releasing the pointer
+ *   outside the content after dragging from the trigger is also
+ *   `'outside-press'`. Focus moving out does not close a select.
+ */
+export type SelectOpenChangeReason
+  = | 'trigger-press'
+    | 'list-navigation'
+    | 'item-press'
+    | 'item-keydown'
+    | 'escape-key'
+    | 'outside-press';
+
+/**
+ * What a keydown in the content means: one of the four focus moves, or
+ * `'select'` (select the focused item, as Enter does).
+ */
+export type SelectNavigationIntent = ListboxNavigationIntent;
+
+/**
+ * The value a select emits: an array when `multiple` is `true`, a single value
+ * when it is absent or `false`, either while it is a plain `boolean`. No
+ * interaction clears a single select, so it never emits `null` or `undefined`.
+ */
+export type SelectModelValue<T, M extends boolean = boolean> = boolean extends M ? T | Array<T> : M extends true ? Array<T> : T;
+
+/** Semantic state of the trigger (`data-state` / `data-disabled` / `data-placeholder`). */
+export type SelectTriggerState = { state: DisclosureState; disabled: boolean; placeholder: boolean };
+/** Semantic state of the value part: `data-placeholder` holds the placeholder text while nothing is selected. */
+export type SelectValueState = { placeholder: string | undefined };
+/** Semantic state of the content (`data-state`). */
+export type SelectContentState = { state: DisclosureState };
+/** Semantic state of an item (`data-state` / `data-disabled` / `data-highlighted`). */
+export type SelectItemState = { state: SelectionState; disabled: boolean; highlighted: boolean };
+/** Semantic state of an item indicator (`data-state`). */
+export type SelectItemIndicatorState = { state: SelectionState };
+
+export type { SelectTypeaheadItem };
+
+/** One option of the root's `items`. */
+export interface SelectItemData<T = AcceptableValue> {
+  value: T;
+  /** The text `SelectValue`, the closed trigger's typeahead and the hidden native `select` use. */
+  label: string;
+  disabled?: boolean;
+}
+
+/** A group of options in the root's `items`; keys besides `items` (a `label`, say) are free. */
+export interface SelectItemGroupData<T = AcceptableValue> {
+  items: ReadonlyArray<SelectItemData<T>>;
+  [key: string]: unknown;
+}
+
+/**
+ * The root's `items` (Base UI's `Select.Root items`): the options as data. A
+ * record maps each value (a string key; a number value finds its key) to its
+ * label; an array holds `{ value, label, disabled? }` options, or groups of
+ * them (`{ items }`), mixed or not.
+ */
+export type SelectItems<T = AcceptableValue> = Readonly<Record<string, string>> | ReadonlyArray<SelectItemData<T>> | ReadonlyArray<SelectItemGroupData<T>>;
+
+function isItemGroup(item: unknown): item is SelectItemGroupData<any> {
+  return typeof item === 'object' && item !== null && Array.isArray((item as SelectItemGroupData).items);
+}
+
+/** The options of `items`, flat and in order. @internal */
+export function normalizeSelectItems<T>(items: SelectItems<T> | undefined): Array<SelectItemData<T>> | undefined {
+  if (!items) {
+    return undefined;
+  }
+  if (!Array.isArray(items)) {
+    return Object.keys(items).map((value) => ({ value: value as T, label: (items as Record<string, string>)[value] }));
+  }
+  return (items as ReadonlyArray<SelectItemData<T> | SelectItemGroupData<T>>)
+    .flatMap((entry) => isItemGroup(entry)
+      ? entry.items as ReadonlyArray<SelectItemData<T>>
+      : [entry]);
+}
+
+/** `items`, flat, with a lookup by value. @internal */
+export interface SelectItemsIndex<T> {
+  list: Array<SelectItemData<T>>;
+  get: (value: T) => SelectItemData<T> | undefined;
+  /** A record: its values are its (string) keys. */
+  record: boolean;
+}
+
+function isPrimitiveKey(value: unknown): value is string | number | bigint | boolean {
+  const type = typeof value;
+  return type === 'string' || type === 'number' || type === 'bigint' || type === 'boolean';
+}
+
+/**
+ * Indexes `items` for lookups matched with `by`. Plain data, no reactive
+ * writes: the caller's `computed` rebuilds it when `items` changes. A record
+ * matches a value by its string form, as Base UI reads `items[value]`.
+ * @internal
+ */
+export function createSelectItemsIndex<T>(items: SelectItems<T> | undefined, by: By<T> | undefined): SelectItemsIndex<T> | undefined {
+  const list = normalizeSelectItems(items);
+  if (!list) {
+    return undefined;
+  }
+  const isRecord = !Array.isArray(items);
+  const keyOf = (value: unknown): unknown => {
+    if (typeof by === 'function') {
+      return undefined;
+    }
+    if (isRecord) {
+      return isPrimitiveKey(value)
+        ? String(value)
+        : undefined;
+    }
+    const key = typeof by === 'string' && value !== null && typeof value === 'object'
+      ? (value as Record<string, unknown>)[by]
+      : value;
+    return isPrimitiveKey(key)
+      ? key
+      : undefined;
+  };
+  const index = new Map<unknown, SelectItemData<T>>();
+  for (const item of list) {
+    const key = keyOf(item.value);
+    if (key !== undefined && !index.has(key)) {
+      index.set(key, item);
+    }
+  }
+  return {
+    list,
+    record: isRecord,
+    get: (value) => {
+      const key = keyOf(value);
+      if (key !== undefined) {
+        return index.get(key);
+      }
+      return list.find((item) => compare(item.value, value, by));
+    },
+  };
+}
+
+const NAVIGATION_KEYS: Record<string, SelectNavigationIntent> = {
+  ArrowUp: 'prev',
+  ArrowDown: 'next',
+  Home: 'first',
+  End: 'last',
+};
+
+/** Standalone calls without a `baseId` draw `akar-select-<n>` from here. */
+let selectCount = 0;
+/** Standalone items without a `textId` draw from here. */
+let selectItemCount = 0;
+
+/**
+ * -----------------------------------------------------------------------------
+ * Root
+ * -----------------------------------------------------------------------------
+ */
+export interface UseSelectRootProps<T = AcceptableValue> {
+  /**
+   * Controlled value. A getter/ref resolving to `undefined` is uncontrolled;
+   * a writable `Ref` (with no `emit`/`onUpdate`) is written back ("ref-owned").
+   */
+  modelValue?: MaybeRefOrGetter<T | Array<T> | undefined>;
+  /** Initial value when uncontrolled. Defaults to `[]` when `multiple`, else `undefined`. */
+  defaultValue?: T | Array<T>;
+  /** Whether several values can be selected. @defaultValue `false` */
+  multiple?: MaybeRefOrGetter<boolean | undefined>;
+  /**
+   * Identity strategy (a key or an equality function; a function runs for
+   * every value, strings included). A plain value read once at setup, NOT a
+   * getter — a comparison function would otherwise be mistaken for a getter.
+   */
+  by?: By<T>;
+  /**
+   * Controlled open state. A getter/ref resolving to `undefined` is
+   * uncontrolled; a writable `Ref` (with no `emit`/`onUpdateOpen`) is written back.
+   */
+  open?: MaybeRefOrGetter<boolean | undefined>;
+  /** Initial open state when uncontrolled. @defaultValue `false` */
+  defaultOpen?: boolean;
+  /** @defaultValue `false` */
+  disabled?: MaybeRefOrGetter<boolean | undefined>;
+  /** @defaultValue `false` */
+  required?: MaybeRefOrGetter<boolean | undefined>;
+  /** Reading direction. Falls back to the nearest `ConfigProvider`, then `'ltr'`. */
+  dir?: MaybeRefOrGetter<Direction | undefined>;
+  /**
+   * Base id the content id derives from (`<baseId>-content`). Defaults to
+   * `akar-select-<n>` from a per-call counter, which is NOT stable across
+   * server and client: SSR consumers must pass a stable `baseId` (the SFC hands
+   * its `useId(undefined, 'akar-select')`).
+   */
+  baseId?: string;
+  /**
+   * Resolves the text shown for a selected value. Wins over the label
+   * registry, so the value can be shown before its item ever rendered. Pass a
+   * `Ref` to swap the resolver at runtime (a plain function is NOT treated as
+   * a getter). With it set the closed content is not rendered, so the hidden
+   * native `<select>` only holds the selected values (autofill can only
+   * re-pick them) until the content has been opened once.
+   */
+  displayValue?: ((value: T) => string) | Ref<((value: T) => string) | undefined>;
+  /**
+   * The options as data (a record of value → label, or `{ value, label,
+   * disabled? }` options, optionally in `{ items }` groups). With it, the
+   * labels of the trigger, the closed trigger's typeahead and the hidden
+   * native `<select>` come from it; rendered items it does not list still count.
+   */
+  items?: MaybeRefOrGetter<SelectItems<T> | undefined>;
+  /**
+   * Resolves what a keydown in the content means. Return `undefined` to fall
+   * back to the default mapping (ArrowUp/ArrowDown/Home/End), `null` to opt
+   * the key out (for Enter and Space this also skips the selection), or
+   * `'select'` to select the focused item as Enter does.
+   */
+  getNavigationIntent?: (event: KeyboardEvent) => SelectNavigationIntent | null | undefined;
+  /** Component `emit`; receives `beforeUpdate:modelValue`/`update:modelValue` and `beforeUpdate:open`/`update:open`. */
+  emit?: (event: any, ...args: Array<any>) => void;
+  /** Called before the value changes; `details.cancel()` vetoes it. */
+  onBeforeUpdate?: (value: T | Array<T> | undefined, details: ChangeEventDetails<SelectChangeReason>) => void;
+  /** Called after the value changed. */
+  onUpdate?: (value: T | Array<T> | undefined, details: ChangeEventDetails<SelectChangeReason>) => void;
+  /** Called before the open state changes; `details.cancel()` vetoes it. */
+  onBeforeUpdateOpen?: (value: boolean, details: ChangeEventDetails<SelectOpenChangeReason>) => void;
+  /** Called after the open state changed. */
+  onUpdateOpen?: (value: boolean, details: ChangeEventDetails<SelectOpenChangeReason>) => void;
+  /**
+   * Called once the content's open (`true`) or close (`false`) transitions and
+   * animations have finished (`update:openComplete`), reported by the content's
+   * `Presence` through `context.notifyOpenComplete`.
+   */
+  onOpenComplete?: (value: boolean) => void;
+}
+
+export interface UseSelectRootReturn<T = AcceptableValue> {
+  modelValue: ComputedRef<T | Array<T> | undefined>;
+  /** Select an item's value: a single selection is replaced, a multiple one toggled. Returns `false` when unchanged or cancelled. */
+  select: (value: T, reason?: SelectChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /** Write the whole model; returns `false` when unchanged or cancelled. */
+  setModelValue: (value: T | Array<T> | undefined, reason?: SelectChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /** Whether `value` is (part of) the current selection, matched with `by`. */
+  isSelected: (value: T) => boolean;
+  /** `true` while nothing is selected. */
+  isEmptyModelValue: ComputedRef<boolean>;
+  open: ComputedRef<boolean>;
+  /** Returns `false` when unchanged or cancelled via `beforeUpdate:open`. */
+  onOpenChange: (value: boolean, reason?: SelectOpenChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /** The sticky label registry the item texts fill. */
+  labels: SelectRootContext<T>['labels'];
+  /** Text of each selected value: `displayValue`, then the label registry; empty labels are left out. */
+  selectedLabels: ComputedRef<Array<string>>;
+  /** Details of the last value change attempt; initially `{ reason: 'none' }`. */
+  lastChangeDetails: Readonly<Ref<ChangeEventDetails<SelectChangeReason>>>;
+  /** Details of the last open change attempt; initially `{ reason: 'none' }`. */
+  lastOpenChangeDetails: Readonly<Ref<ChangeEventDetails<SelectOpenChangeReason>>>;
+  isControlled: ComputedRef<boolean>;
+  /** The context value — the SFC provides it verbatim. */
+  context: SelectRootContext<T>;
+}
+
+/**
+ * Headless Select root: the value model (single or `multiple`, matched with
+ * `by`), the open model, both with cancellable `beforeUpdate` and `details`,
+ * the sticky label registry and the context. State-only: the surfaces begin at
+ * the parts (`useSelectTrigger`, `useSelectValue`, `useSelectContent`,
+ * `useSelectItem`, …). A standalone consumer must still provide positioning,
+ * presence and dismissal around the content (`PopperContent`, `Presence`,
+ * `DismissableLayer` in the SFCs).
+ *
+ * SSR-safe (no `document`/`window`) and callable outside `setup()`.
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle pure
+ */
+export function useSelectRoot<T extends AcceptableValue = AcceptableValue>(props: UseSelectRootProps<T> = {}): UseSelectRootReturn<T> {
+  const baseId = props.baseId ?? `akar-select-${++selectCount}`;
+  const multiple = computed(() => toValue(props.multiple) ?? false);
+
+  const selection = useListSelection<T, SelectChangeReason>({
+    modelValue: props.modelValue,
+    defaultValue: props.defaultValue,
+    multiple,
+    by: props.by,
+    // A single select keeps the value when its item is pressed again; a multiple one toggles.
+    selectionBehavior: () => multiple.value ? 'toggle' : 'replace',
+    emit: props.emit,
+    onBeforeUpdate: props.onBeforeUpdate,
+    onUpdate: props.onUpdate,
+  });
+  const { modelValue, isSelected } = selection;
+
+  const { state: open, setState: setOpen, lastChangeDetails: lastOpenChangeDetails } = useControllableState<boolean, SelectOpenChangeReason>({
+    prop: props.open,
+    defaultValue: props.defaultOpen ?? false,
+    name: 'open',
+    emit: props.emit,
+    onBeforeUpdate: props.onBeforeUpdateOpen,
+    onUpdate: props.onUpdateOpen,
+  });
+
+  const labels = createLabelRegistry<T>(props.by);
+  const displayValue = computed(() => isRef(props.displayValue)
+    ? props.displayValue.value
+    : props.displayValue);
+  // `items`, flat and indexed by value (matched with `by`): a plain lookup,
+  // rebuilt when `items` changes.
+  const itemsIndex = computed(() => createSelectItemsIndex(toValue(props.items), props.by));
+  const items = computed(() => itemsIndex.value?.list);
+  const getItemData = (value: T) => itemsIndex.value?.get(value);
+  // What the rendered `SelectItem` of each `items` entry registered: its
+  // `disabled`, and its typed value for a record, whose keys are strings. An
+  // array lists the value itself, which stays current after a refetch.
+  const itemRegistrations = computed(() => {
+    const registrations = new Map<SelectItemData<T>, { value: T; disabled: boolean }>();
+    const index = itemsIndex.value;
+    if (index) {
+      for (const entry of labels.entries()) {
+        const data = getItemData(entry.value);
+        if (data) {
+          registrations.set(data, {
+            value: index.record ? entry.value : data.value,
+            disabled: entry.disabled,
+          });
+        }
+      }
+    }
+    return registrations;
+  });
+  const getItemRegistration = (data: SelectItemData<T>) => itemRegistrations.value.get(data);
+  const isRecordItems = () => !!itemsIndex.value?.record;
+
+  const isEmptyModelValue = computed(() => {
+    const value = modelValue.value;
+    if (multiple.value && Array.isArray(value)) {
+      return value.length === 0;
+    }
+    return isNullish(value);
+  });
+
+  function resolveLabel(value: T) {
+    const resolve = displayValue.value;
+    const resolved = resolve && !isNullish(value)
+      ? resolve(value)
+      : undefined;
+    return resolved ?? getItemData(value)?.label ?? labels.get(value);
+  }
+
+  const virtualTypeaheadItems = shallowRef<(() => Array<SelectTypeaheadItem<T>>) | undefined>(undefined);
+  const closedItems = new SelectClosedItems<T>(
+    () => !displayValue.value,
+    // A selection's text comes from `items` when it lists the value.
+    () => {
+      const value = modelValue.value;
+      const values = (Array.isArray(value)
+        ? value
+        : isNullish(value)
+          ? []
+          : [value]) as Array<T>;
+      // An empty string clears the selection: it has no label to show.
+      return values.some((v) => v !== ('' as T) && getItemData(v) === undefined);
+    },
+    () => !!items.value,
+  );
+
+  const selectedLabels = computed(() => {
+    const value = modelValue.value;
+    const values = (Array.isArray(value)
+      ? value
+      : [value]) as Array<T>;
+    return values.map((v) => resolveLabel(v) ?? '').filter(Boolean);
+  });
+
+  function onOpenChange(value: boolean, reason?: SelectOpenChangeReason | BaseChangeReason, event?: Event) {
+    return setOpen(value, reason, event);
+  }
+
+  function setModelValue(value: T | Array<T> | undefined, reason?: SelectChangeReason | BaseChangeReason, event?: Event) {
+    return selection.setModelValue(value, reason, event);
+  }
+
+  function select(value: T, reason?: SelectChangeReason | BaseChangeReason, event?: Event) {
+    return selection.select(value, reason, event);
+  }
+
+  // A press (or Enter / Space) on an item: select it, then close a single
+  // select. A cancelled `beforeUpdate:modelValue` keeps the content open;
+  // re-pressing the selected item (a no-op write) still closes it.
+  function pressItem(value: T, reason: 'item-press' | 'item-keydown' = 'item-press', event?: Event) {
+    const before = selection.lastChangeDetails.value;
+    if (!select(value, reason, event) && selection.lastChangeDetails.value !== before && selection.lastChangeDetails.value.isCanceled) {
+      return false;
+    }
+    if (!multiple.value) {
+      onOpenChange(false, reason, event);
+    }
+    return true;
+  }
+
+  function getNavigationIntent(event: KeyboardEvent): SelectNavigationIntent | null | undefined {
+    const intent = props.getNavigationIntent?.(event);
+    return intent === undefined
+      ? NAVIGATION_KEYS[event.key]
+      : intent;
+  }
+
+  const triggerElement = ref<HTMLElement>();
+  const valueElement = ref<HTMLElement>();
+
+  const context: SelectRootContext<T> = {
+    baseId,
+    contentId: `${baseId}-content`,
+    triggerElement,
+    onTriggerChange: (node) => {
+      triggerElement.value = node;
+    },
+    valueElement,
+    onValueElementChange: (node) => {
+      valueElement.value = node;
+    },
+    modelValue,
+    onValueChange: select,
+    setModelValue,
+    pressItem,
+    isSelected,
+    selection: new SelectionSelector<T>(() => modelValue.value, props.by),
+    open,
+    onOpenChange,
+    multiple,
+    required: computed(() => toValue(props.required) ?? false),
+    disabled: computed(() => toValue(props.disabled) ?? false),
+    by: props.by,
+    dir: resolveDirection(props.dir),
+    triggerPointerDownPosRef: ref({ x: 0, y: 0 }),
+    isEmptyModelValue,
+    labels,
+    selectedLabels,
+    displayValue,
+    items,
+    getItemData,
+    getItemRegistration,
+    isRecordItems,
+    closedItems,
+    getNavigationIntent,
+    virtualTypeaheadItems,
+    notifyOpenComplete: (value) => props.onOpenComplete?.(value),
+  };
+
+  return {
+    modelValue,
+    select,
+    setModelValue,
+    isSelected,
+    isEmptyModelValue,
+    open,
+    onOpenChange,
+    labels,
+    selectedLabels,
+    lastChangeDetails: selection.lastChangeDetails,
+    lastOpenChangeDetails,
+    isControlled: selection.isControlled,
+    context,
+  };
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * Trigger
+ * -----------------------------------------------------------------------------
+ */
+export interface UseSelectTriggerOptions<T = AcceptableValue> {
+  context: SelectRootContext<T>;
+  /** @defaultValue `false` */
+  disabled?: MaybeRefOrGetter<boolean | undefined>;
+  /**
+   * The items the closed trigger's typeahead picks from, in order. Defaults to
+   * the mounted items (open, else the closed lean ones) with `items` labels, else the label
+   * registry.
+   */
+  getItems?: () => Array<SelectTypeaheadItem<T>>;
+}
+
+export interface UseSelectTriggerReturn {
+  /** `role="combobox"`, `aria-*`, `disabled`, `dir` and the open/typeahead handlers. The tag-dependent `type` stays in the SFC. */
+  trigger: PartSurface<SelectTriggerState>;
+  isDisabled: ComputedRef<boolean>;
+}
+
+/**
+ * The trigger: opens on a plain left press (`pointerdown`, or `pointerup` for
+ * touch), on Enter / Space (`'trigger-press'`) and ArrowDown / ArrowUp
+ * (`'list-navigation'`); typing on the closed trigger selects the next
+ * matching item (`'typeahead'`, single selection only). Holds per-instance
+ * pointer and typeahead state: call it once per trigger. Consumer listeners
+ * bound before the surface run first and can opt out with `preventDefault()`.
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle pure
+ */
+export function useSelectTrigger<T extends AcceptableValue = AcceptableValue>(options: UseSelectTriggerOptions<T>): UseSelectTriggerReturn {
+  const { context } = options;
+  const isDisabled = computed(() => context.disabled.value || toValue(options.disabled) || false);
+  const { search, handleTypeaheadSearch, resetTypeahead } = useTypeahead(() => {});
+
+  // The mounted items (the open content's, else the closed lean ones), their
+  // labels from `items` where it lists them, plus the `items` options not
+  // rendered; with nothing mounted (`displayValue`), the label registry.
+  // `dataOnly` marks an `items` option no rendered item backs; `remembered`, an
+  // option disabled only by what its `SelectItem` registered before it unmounted.
+  function getTypeaheadItems(): Array<SelectTypeaheadItem<T> & { dataOnly?: boolean; remembered?: boolean }> {
+    // A `SelectVirtualizer` knows every option, rendered or not.
+    const virtualItems = context.virtualTypeaheadItems?.value;
+    if (virtualItems) {
+      return virtualItems();
+    }
+    const rendered = options.getItems?.() ?? context.closedItems?.getTypeaheadItems();
+    const data = context.items?.value;
+    if (data) {
+      const listed = new Set<SelectItemData<T>>();
+      const merged: Array<SelectTypeaheadItem<T> & { dataOnly?: boolean; remembered?: boolean }> = (rendered ?? []).map((item) => {
+        const entry = context.getItemData?.(item.value);
+        if (!entry) {
+          return item;
+        }
+        listed.add(entry);
+        return { value: item.value, textValue: entry.label, disabled: item.disabled || entry.disabled };
+      });
+      // A selected value keeps its own type for the option it matches (a
+      // number for a record's string key).
+      const model = context.modelValue.value;
+      const selected = new Map<SelectItemData<T>, T>();
+      for (const value of (Array.isArray(model)
+        ? model
+        : isNullish(model)
+          ? []
+          : [model]) as Array<T>) {
+        const entry = context.getItemData?.(value);
+        if (entry) {
+          selected.set(entry, value);
+        }
+      }
+      for (const entry of data) {
+        if (!listed.has(entry)) {
+          // An item rendered earlier (sticky) knows its typed value and its last
+          // `disabled`. While items are rendered, one that is not has no `disabled`.
+          const registration = context.getItemRegistration?.(entry);
+          const value = registration
+            ? registration.value
+            : selected.has(entry)
+              ? selected.get(entry)!
+              : entry.value;
+          const remembered = !rendered && !entry.disabled && !!registration?.disabled;
+          merged.push({
+            value,
+            textValue: entry.label,
+            disabled: entry.disabled || remembered,
+            dataOnly: !registration,
+            remembered,
+          });
+        }
+      }
+      return merged;
+    }
+    if (rendered?.length) {
+      return rendered;
+    }
+    return context.labels.entries().map((entry) => ({ value: entry.value, textValue: entry.label, disabled: entry.disabled }));
+  }
+
+  function typeaheadSelect(event: KeyboardEvent) {
+    if (context.multiple.value || context.open.value) {
+      return;
+    }
+    const closedItems = !options.getItems && context.closedItems;
+    // A closed Select renders its items only when something needs them: the
+    // first key without them renders them, then matches. A focus does not.
+    // With `items`, the key matches `items` right away, unless only a rendered
+    // item can answer it (see `findTypeaheadMatch`), or the match is a record's
+    // string key (the item's own value may be a number).
+    if (closedItems && closedItems.canRender() && !closedItems.hasRendered()) {
+      const found = context.items?.value && findTypeaheadMatch();
+      const next = found && found.next;
+      if (!found || found.unsure || (next && next.dataOnly && context.isRecordItems?.() && !context.isSelected(next.value))) {
+        closedItems.renderThen(() => {
+          if (!matchTypeahead(event)) {
+            matchWhenItemsRegister(closedItems, event);
+          }
+        });
+      } else if (next) {
+        context.setModelValue(next.value, 'typeahead', event);
+      }
+      return;
+    }
+    matchTypeahead(event);
+  }
+
+  // Items that need more than the render's flush (an async wrapper) register
+  // later: the search matches them until it resets.
+  let stopMatching: (() => void) | undefined;
+  function matchWhenItemsRegister(closedItems: SelectClosedItems<T>, event: KeyboardEvent) {
+    stopMatching?.();
+    stopMatching = watch([closedItems.version, search], () => {
+      if (!search.value || context.open.value || matchTypeahead(event)) {
+        stopMatching?.();
+        stopMatching = undefined;
+      }
+    }, { flush: 'post' });
+  }
+
+  // The next match, and whether only the rendered items can settle it:
+  // - nothing matches: an option only a `SelectItem` has may;
+  // - a repeated key's cycle wraps to its first match: the same, after the last
+  //   one it knows. `items` may well list them all, but only the render can
+  //   tell, so such a key renders once per focus. A jump back to another letter,
+  //   or a longer search the selection still matches, renders nothing;
+  // - the match depends on a `disabled` remembered from an unmounted item, which
+  //   its template may have changed since.
+  function findTypeaheadMatch() {
+    const term = search.value;
+    const all = getTypeaheadItems();
+    const items = all.filter((item) => !item.disabled);
+    const current = items.find((item) => context.isSelected(item.value));
+    const match = (list: typeof all) => {
+      const nextMatch = getNextMatch(list.map((item) => item.textValue), term, current?.textValue);
+      return list.find((item) => item.textValue === nextMatch);
+    };
+    const next = match(items);
+    const singleKey = Array.from(term).every((char) => char === term[0]);
+    const prefix = (singleKey
+      ? term[0] ?? ''
+      : term).toLowerCase();
+    const inCycle = !!current && current.textValue.toLowerCase().startsWith(prefix);
+    const unsure = next
+      ? (inCycle && singleKey && items.indexOf(next) < items.indexOf(current!))
+      || (all.some((item) => item.remembered) && match(all.filter((item) => !item.disabled || item.remembered)) !== next)
+      : singleKey || !inCycle;
+    return { next, unsure };
+  }
+
+  function matchTypeahead(event: KeyboardEvent) {
+    if (context.multiple.value || context.open.value) {
+      return true;
+    }
+    const { next } = findTypeaheadMatch();
+    if (next) {
+      context.setModelValue(next.value, 'typeahead', event);
+    }
+    return !!next;
+  }
+
+  function handleOpen(reason: SelectOpenChangeReason, event: Event) {
+    if (isDisabled.value) {
+      return false;
+    }
+    const changed = context.onOpenChange(true, reason, event);
+    // reset typeahead when we open
+    resetTypeahead();
+    return changed;
+  }
+
+  function handlePointerOpen(event: PointerEvent) {
+    const wasOpen = context.open.value;
+    context.triggerPointerDownPosRef.value = {
+      x: Math.round(event.pageX),
+      y: Math.round(event.pageY),
+    };
+    // A press on the trigger of an open select (reachable in `popper`
+    // position, where the trigger is cut out of the backdrop) is closed by the
+    // content's outside-press handling, with `'trigger-press'`.
+    if (wasOpen) {
+      handleOpen('trigger-press', event);
+      return;
+    }
+    // Keep the press only for an open that took: the content's pointer-release
+    // guard reads it, and a stale position would swallow the next release.
+    if (!handleOpen('trigger-press', event)) {
+      context.triggerPointerDownPosRef.value = null;
+      return;
+    }
+    // A controlled parent may ignore `update:open`: drop the press if the
+    // select is still closed once the parent had its chance to re-render.
+    nextTick(() => {
+      if (!context.open.value) {
+        context.triggerPointerDownPosRef.value = null;
+      }
+    });
+  }
+
+  function isPlainLeftClick(event: MouseEvent) {
+    return event.button === 0 && event.ctrlKey === false;
+  }
+
+  // Tracks direct mouse presses handled in `pointerdown` so the Safari label
+  // `click` workaround below does not re-focus the trigger after opening.
+  let openedFromPointerDown = false;
+
+  function onPointerdown(event: PointerEvent) {
+    if (event.defaultPrevented) {
+      return;
+    }
+
+    // Prevent opening on touch down.
+    // https://github.com/unovue/reka-ui/issues/804
+    if (event.pointerType === 'touch') {
+      return event.preventDefault();
+    }
+
+    // prevent implicit pointer capture
+    // https://www.w3.org/TR/pointerevents3/#implicit-pointer-capture
+    const target = event.target as HTMLElement;
+    if (target.hasPointerCapture(event.pointerId)) {
+      target.releasePointerCapture(event.pointerId);
+    }
+
+    // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
+    // but not when the control key is pressed (avoiding MacOS right click)
+    if (isPlainLeftClick(event)) {
+      handlePointerOpen(event);
+      openedFromPointerDown = true;
+    }
+  }
+
+  function onMousedown(event: MouseEvent) {
+    if (event.defaultPrevented) {
+      return;
+    }
+
+    // Prevent trigger from stealing focus from the active item after opening.
+    // We avoid calling `preventDefault` in `pointerdown` because that suppresses
+    // compatibility mouse events (`mousedown`, `mouseup`, `click`).
+    if (isPlainLeftClick(event)) {
+      event.preventDefault();
+    }
+  }
+
+  function onClick(event: MouseEvent) {
+    if (event.defaultPrevented) {
+      openedFromPointerDown = false;
+      return;
+    }
+
+    // Safari: label-associated clicks may not run `pointerdown` on the trigger.
+    // Direct mouse clicks open in `pointerdown` and must not re-focus the trigger
+    // here — `mousedown` `preventDefault` does not suppress `click`.
+    if (!openedFromPointerDown) {
+      (event.currentTarget as HTMLElement)?.focus();
+    }
+
+    openedFromPointerDown = false;
+  }
+
+  function onPointerup(event: PointerEvent) {
+    if (event.defaultPrevented) {
+      return;
+    }
+    event.preventDefault();
+
+    // Only open on pointer up when using touch devices
+    // https://github.com/unovue/reka-ui/issues/804
+    if (event.pointerType === 'touch') {
+      handlePointerOpen(event);
+    }
+  }
+
+  function onKeydown(event: KeyboardEvent) {
+    if (event.defaultPrevented) {
+      return;
+    }
+
+    const isTypingAhead = search.value !== '';
+    const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
+    // Only printable characters extend the search; otherwise keys like `Shift`
+    // or `ArrowLeft` would be appended and swallow the next `Space`.
+    if (!isModifierKey && event.key.length === 1 && !isDisabled.value) {
+      handleTypeaheadSearch(event.key, []);
+      if (event.key !== ' ' || isTypingAhead) {
+        typeaheadSelect(event);
+      }
+    }
+    if (isTypingAhead && event.key === ' ') {
+      return;
+    }
+
+    if (OPEN_KEYS.includes(event.key)) {
+      handleOpen(event.key === 'ArrowUp' || event.key === 'ArrowDown'
+        ? 'list-navigation'
+        : 'trigger-press', event);
+      event.preventDefault();
+    }
+  }
+
+  // The items a key rendered for the typeahead last until focus leaves the
+  // trigger (`focusout`: with `as-child`, focus may be on a descendant).
+  function onFocusout(event: FocusEvent) {
+    if (!(event.currentTarget as Element).contains(event.relatedTarget as Node | null)) {
+      // A search still armed for late items ends here: they are about to unmount.
+      stopMatching?.();
+      stopMatching = undefined;
+      context.closedItems?.releaseTypeahead();
+    }
+  }
+
+  const trigger = createPartSurface<SelectTriggerState>(
+    () => ({
+      'role': 'combobox',
+      'aria-controls': context.open.value ? context.contentId : undefined,
+      'aria-expanded': context.open.value || false,
+      'aria-required': context.required.value,
+      'aria-autocomplete': 'none',
+      'disabled': isDisabled.value,
+      'dir': context.dir.value,
+      onClick,
+      onFocusout,
+      'onPointerdown': onPointerdown,
+      'onMousedown': onMousedown,
+      'onPointerup': onPointerup,
+      'onKeydown': onKeydown,
+    }),
+    () => ({
+      state: disclosureState(context.open.value),
+      disabled: isDisabled.value,
+      placeholder: shouldShowPlaceholder(context.modelValue.value as AcceptableValue | Array<AcceptableValue>),
+    }),
+  );
+
+  return { trigger, isDisabled };
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * Value
+ * -----------------------------------------------------------------------------
+ */
+export interface UseSelectValueOptions<T = AcceptableValue> {
+  context: SelectRootContext<T>;
+  /** Shown while nothing is selected. @defaultValue `''` */
+  placeholder?: MaybeRefOrGetter<string | undefined>;
+}
+
+export interface UseSelectValueReturn {
+  /** `pointer-events: none` plus `data-placeholder` while nothing is selected. */
+  value: PartSurface<SelectValueState>;
+  /** Text of each selected value (`displayValue`, then the label registry). */
+  selectedLabels: ComputedRef<Array<string>>;
+  /** The selected labels joined with `', '`, or the placeholder. */
+  text: ComputedRef<string>;
+}
+
+/**
+ * The displayed value. Labels resolve through the root's `displayValue`, then
+ * the sticky label registry, so they survive the content closing.
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle pure
+ */
+export function useSelectValue<T extends AcceptableValue = AcceptableValue>(options: UseSelectValueOptions<T>): UseSelectValueReturn {
+  const { context } = options;
+  const placeholder = () => toValue(options.placeholder) ?? '';
+  const selectedLabels = context.selectedLabels;
+  const text = computed(() => selectedLabels.value.length
+    ? selectedLabels.value.join(', ')
+    : placeholder());
+  const value = createPartSurface<SelectValueState>(
+    () => ({
+      style: { pointerEvents: 'none' },
+    }),
+    () => ({
+      placeholder: selectedLabels.value.length
+        ? undefined
+        : placeholder(),
+    }),
+  );
+  return { value, selectedLabels, text };
+}
+
+// -----------------------------------------------------------------------------
+// Content
+// -----------------------------------------------------------------------------
+
+/** The `role="listbox"` surface, derived from the root context. */
+export function getSelectContentSurface(context: SelectRootContext<any>): PartSurface<SelectContentState> {
+  return createPartSurface<SelectContentState>(
+    () => ({
+      id: context.contentId,
+      role: 'listbox',
+      dir: context.dir.value,
+    }),
+    () => ({
+      state: disclosureState(context.open.value),
+    }),
+  );
+}
+
+export interface UseSelectContentOptions<T = AcceptableValue> {
+  context: SelectRootContext<T>;
+  /** The content element (the `role="listbox"` element, not the positioning wrapper). */
+  contentElement: Ref<HTMLElement | undefined>;
+  /** The rendered items in DOM order (the SFC injects `useCollection().getItems`). */
+  getItems: () => Array<{ ref: HTMLElement; value?: any }>;
+  /**
+   * Changing it while open re-renders the items in the other mode: the
+   * selected item is tracked afresh and focused once the content is positioned.
+   * @defaultValue `'item-aligned'`
+   */
+  position?: MaybeRefOrGetter<'item-aligned' | 'popper' | undefined>;
+  /** When `true`, keyboard navigation loops from the last item to the first, and vice versa. @defaultValue `false` */
+  loop?: MaybeRefOrGetter<boolean | undefined>;
+}
+
+export interface UseSelectContentReturn {
+  /** `id` / `role="listbox"` / `dir` / layout style, the keyboard handler and the context-menu guard. */
+  content: PartSurface<SelectContentState>;
+  /** The context the SFC provides via `provideSelectContentContext`. */
+  contentContext: SelectContentContext;
+  /** Set to `true` once the content is positioned (the positioning part's `placed`). */
+  isPositioned: Ref<boolean>;
+  focusSelectedItem: () => void;
+}
+
+/**
+ * The content brain: keyboard navigation (through the root's
+ * `getNavigationIntent`) and typeahead over the items, focusing the selected
+ * item once positioned, the item-aligned measurement targets, and the
+ * pointer-release guard after opening from `pointerdown` (a release outside
+ * the content after a drag closes it with `'outside-press'`). Positioning,
+ * focus trapping and dismissal stay in the SFC.
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle setup — owns watchers and document listeners; call inside the mounted content's `setup()`.
+ */
+export function useSelectContent<T extends AcceptableValue = AcceptableValue>(options: UseSelectContentOptions<T>): UseSelectContentReturn {
+  const { context, contentElement, getItems } = options;
+  const { search, handleTypeaheadSearch } = useTypeahead();
+
+  const viewport = ref<HTMLElement>();
+  const selectedItem = ref<HTMLElement>();
+  const selectedItemText = ref<HTMLElement>();
+  const isPositioned = ref(false);
+  let firstValidItemFound = false;
+  let firstSelectedItemInArrayFound = false;
+  // Assigned below; read lazily by the handlers, where `SelectVirtualizer` may
+  // have replaced `focusSelectedItem` / set `onVirtualKeydown` on it.
+  let contentContext: SelectContentContext;
+
+  function focusSelectedItem() {
+    if (selectedItem.value && contentElement.value) {
+      focusFirst([selectedItem.value, contentElement.value]);
+    }
+  }
+
+  const position = () => toValue(options.position) ?? 'item-aligned';
+
+  // While open, focus stays on an item. The content focuses the selected (or
+  // first) item once positioned. When focus is lost afterwards (the focused
+  // item was removed or the list replaced, items arrived only after the content
+  // opened, every item was disabled) and a valid item becomes available, it
+  // focuses the selected one, else the first: when focus is on the body, the
+  // trigger or the content itself, never over an item or other element the user
+  // focused. When the selected item arrives while focus is still on the first
+  // item the content fell back to, focus moves to it, and an item-aligned
+  // content is placed against it.
+  const isOpenSettled = ref(false);
+  let autoFocused: Element | null = null;
+  let isWaitingForPosition = false;
+  watch(contentElement, (element) => {
+    isOpenSettled.value = false;
+    autoFocused = null;
+    // A tick after the content renders, past the mount of the items it opened with.
+    if (element) {
+      nextTick(() => isOpenSettled.value = !!contentElement.value);
+    }
+  }, { flush: 'post' });
+
+  // Any focus move inside the content that the content did not make itself
+  // (keyboard navigation, hover, a click) is the user's: forget the fallback,
+  // even when it lands on that same item again.
+  let isAutoFocusing = false;
+  watch(contentElement, (element, _, onCleanup) => {
+    if (!element) {
+      return;
+    }
+    const onFocusIn = () => {
+      if (!isAutoFocusing) {
+        autoFocused = null;
+      }
+    };
+    element.addEventListener('focusin', onFocusIn);
+    onCleanup(() => element.removeEventListener('focusin', onFocusIn));
+  });
+
+  function focusItem() {
+    isAutoFocusing = true;
+    // Through the context: `SelectVirtualizer` replaces it to reach a selected
+    // item whose row is not rendered.
+    contentContext.focusSelectedItem?.();
+    isAutoFocusing = false;
+    autoFocused = getActiveElement();
+  }
+
+  const isSelectedElement = (element: Element) => element.getAttribute('aria-selected') === 'true';
+
+  function refocus() {
+    const element = contentElement.value;
+    // A virtualizer renders a window of the items and keeps the focus in it itself.
+    if (!element || !context.open.value || contentContext.onVirtualKeydown) {
+      return;
+    }
+    const active = getActiveElement();
+    const isLost = !active || active === element || active === active.ownerDocument.body || active === context.triggerElement.value;
+    const items = getItems().map((item) => item.ref);
+    const target = items.find(isSelectedElement) ?? items[0];
+    if (!target || target === active) {
+      return;
+    }
+    const isOnFallback = !!active && active === autoFocused && !isSelectedElement(active) && isSelectedElement(target);
+    if (!isLost && !isOnFallback) {
+      return;
+    }
+    if (target !== selectedItem.value) {
+      selectedItem.value = target;
+      const textId = target.getAttribute('aria-labelledby');
+      selectedItemText.value = (textId && (target.getRootNode() as Document | ShadowRoot).getElementById?.(textId)) || undefined;
+    }
+    if (!isPositioned.value || isOnFallback) {
+      contentContext.reposition?.();
+    }
+    if (isPositioned.value) {
+      focusItem();
+    } else {
+      isWaitingForPosition = true;
+    }
+  }
+
+  watch(() => isOpenSettled.value && context.open.value
+    ? getItems()
+    : undefined, (items) => {
+    if (items) {
+      refocus();
+    }
+  }, { flush: 'post' });
+
+  watch(isPositioned, (positioned) => {
+    if (!positioned) {
+      return;
+    }
+    if (isWaitingForPosition) {
+      isWaitingForPosition = false;
+      return refocus();
+    }
+    focusItem();
+  });
+
+  // A `position` change renders the items again in the other mode, under a new
+  // content element. Before that render, forget the old items, so the new ones
+  // register as on an open, and focus the selected one once the new mode has
+  // positioned the content.
+  watch(position, () => {
+    firstValidItemFound = false;
+    firstSelectedItemInArrayFound = false;
+    selectedItem.value = undefined;
+    selectedItemText.value = undefined;
+    isPositioned.value = false;
+    isWaitingForPosition = false;
+  });
+
+  // prevent selecting items on `pointerup` in some cases after opening from `pointerdown`
+  // and close on `pointerup` outside.
+  const { triggerPointerDownPosRef } = context;
+  // A press recorded while open (on the trigger of a `popper` select, which
+  // then closes it) must not outlive the open state: its release never reaches
+  // the guard below, and a stale position would swallow the first stationary
+  // release after the next keyboard open.
+  watch(() => context.open.value, (open) => {
+    if (!open) {
+      triggerPointerDownPosRef.value = null;
+    }
+  });
+  watchEffect((cleanupFn) => {
+    // A `forceMount`ed content listens only while open.
+    if (!contentElement.value || !context.open.value) {
+      return;
+    }
+    let pointerMoveDelta = { x: 0, y: 0 };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      pointerMoveDelta = {
+        x: Math.abs(Math.round(event.pageX) - (triggerPointerDownPosRef.value?.x ?? 0)),
+        y: Math.abs(Math.round(event.pageY) - (triggerPointerDownPosRef.value?.y ?? 0)),
+      };
+    };
+    const handlePointerUp = (event: PointerEvent) => {
+      // Prevent options from being untappable on touch devices
+      // https://github.com/unovue/reka-ui/issues/804
+      if (event.pointerType === 'touch') {
+        return;
+      }
+
+      // If the pointer hasn't moved by a certain threshold then we prevent selecting item on `pointerup`.
+      if (pointerMoveDelta.x <= 10 && pointerMoveDelta.y <= 10) {
+        event.preventDefault();
+      } else {
+        // otherwise, if the event was outside the content, close. Document-level
+        // listener → read the composed target so a shadow-mounted content isn't
+        // seen as "outside" itself.
+        if (!contentElement.value || !containsComposed(contentElement.value, getEventTarget<HTMLElement>(event))) {
+          context.onOpenChange(false, 'outside-press', event);
+        }
+      }
+      document.removeEventListener('pointermove', handlePointerMove);
+      triggerPointerDownPosRef.value = null;
+    };
+
+    if (triggerPointerDownPosRef.value !== null) {
+      document.addEventListener('pointermove', handlePointerMove);
+      document.addEventListener('pointerup', handlePointerUp, { capture: true, once: true });
+    }
+
+    cleanupFn(() => {
+      document.removeEventListener('pointermove', handlePointerMove);
+      document.removeEventListener('pointerup', handlePointerUp, { capture: true });
+    });
+  });
+
+  function onKeydown(event: KeyboardEvent) {
+    const isModifierKey = event.ctrlKey || event.altKey || event.metaKey;
+
+    // select should not be navigated using tab key so we prevent it
+    if (event.key === 'Tab') {
+      event.preventDefault();
+    }
+
+    // Space selects the item when no search is in progress; otherwise it's part of the search
+    if (event.code === 'Space') {
+      if (search.value === '') {
+        return;
+      }
+      // SelectItem skips Space during a search, so prevent the scroll here
+      event.preventDefault();
+    }
+
+    const intent = context.getNavigationIntent(event);
+    if (contentContext.onVirtualKeydown?.(event, intent)) {
+      event.preventDefault();
+      return;
+    }
+
+    if (!isModifierKey && event.key.length === 1) {
+      handleTypeaheadSearch(event.key, getItems());
+    }
+
+    if (intent === 'first' || intent === 'last' || intent === 'prev' || intent === 'next') {
+      let candidateNodes = getItems().map((i) => i.ref);
+
+      if (intent === 'prev' || intent === 'last') {
+        candidateNodes = candidateNodes.slice().reverse();
+      }
+
+      if (intent === 'prev' || intent === 'next') {
+        const currentIndex = candidateNodes.indexOf(event.target as HTMLElement);
+        candidateNodes = toValue(options.loop)
+          ? wrapArray(candidateNodes, currentIndex + 1)
+          : candidateNodes.slice(currentIndex + 1);
+      }
+      setTimeout(() => focusFirst(candidateNodes));
+      event.preventDefault();
+    }
+  }
+
+  const base = getSelectContentSurface(context);
+  const content = createPartSurface<SelectContentState>(
+    () => ({
+      ...base.props.value,
+      style: {
+        // flex layout so we can place the scroll buttons properly
+        display: 'flex',
+        flexDirection: 'column',
+        // reset the outline by default as the content MAY get focused
+        outline: 'none',
+      },
+      onKeydown,
+      onContextmenu: (event: Event) => event.preventDefault(),
+    }),
+    base.state,
+  );
+
+  contentContext = {
+    content: contentElement,
+    viewport,
+    onViewportChange: (node) => {
+      viewport.value = node;
+    },
+    itemRefCallback: (node, value, disabled) => {
+      const isFirstValidItem = !firstValidItemFound && !disabled;
+      const isSelectedItem = valueComparator(context.modelValue.value, value as T, context.by);
+
+      if (context.multiple.value) {
+        if (firstSelectedItemInArrayFound) {
+          return;
+        }
+        if (isSelectedItem || isFirstValidItem) {
+          selectedItem.value = node;
+          // make sure to keep the first item highlighted when `multiple`
+          if (isSelectedItem) {
+            firstSelectedItemInArrayFound = true;
+          }
+        }
+      } else if (isSelectedItem || isFirstValidItem) {
+        selectedItem.value = node;
+      }
+
+      if (isFirstValidItem) {
+        firstValidItemFound = true;
+      }
+    },
+    selectedItem,
+    selectedItemText,
+    onItemLeave: () => {
+      contentElement.value?.focus();
+    },
+    itemTextRefCallback: (node, value, disabled) => {
+      const isFirstValidItem = !firstValidItemFound && !disabled;
+      const isSelectedItem = valueComparator(context.modelValue.value, value as T, context.by);
+      if (isSelectedItem || isFirstValidItem) {
+        selectedItemText.value = node;
+      }
+    },
+    focusSelectedItem,
+    get position() {
+      return position();
+    },
+    isPositioned,
+    searchRef: search,
+    loop: () => !!toValue(options.loop),
+  };
+
+  return {
+    content,
+    contentContext,
+    isPositioned,
+    focusSelectedItem,
+  };
+}
+
+// -----------------------------------------------------------------------------
+// Item
+// -----------------------------------------------------------------------------
+
+const SELECT_SELECT = 'select.select';
+
+export interface UseSelectItemOptions<T = AcceptableValue> {
+  context: SelectRootContext<T>;
+  /** The enclosing content's context; omitted, the item works without content-level focus handling. */
+  contentContext?: SelectContentContext;
+  value: MaybeRefOrGetter<T>;
+  /** @defaultValue `false` */
+  disabled?: MaybeRefOrGetter<boolean | undefined>;
+  /** Text for typeahead; defaults to the item text's content. */
+  textValue?: MaybeRefOrGetter<string | undefined>;
+  /**
+   * Id of the item text the option is labelled by. Defaults to a per-call
+   * counter, which is NOT SSR-stable (the SFC hands its `useId`).
+   */
+  textId?: string;
+  /**
+   * Called with the cancellable `select` event before the value changes;
+   * `event.preventDefault()` keeps the value and the content open.
+   */
+  onSelect?: (event: SelectEvent<T>) => void;
+}
+
+export interface UseSelectItemReturn<T = AcceptableValue> {
+  /** `role="option"`, `aria-*`, `tabindex` and the pointer/keyboard handlers. */
+  item: PartSurface<SelectItemState>;
+  isSelected: ComputedRef<boolean>;
+  isFocused: Ref<boolean>;
+  /** The text typeahead matches (`textValue`, else the item text once it mounted). */
+  textValue: Ref<string>;
+  /** The context the SFC provides via `provideSelectItemContext`. */
+  itemContext: SelectItemContext<T>;
+}
+
+/**
+ * An option: selection on pointer release (`'item-press'`) or Enter / Space
+ * (`'item-keydown'`, through the root's `getNavigationIntent`), focus follows
+ * the pointer, and a single select closes after selecting. Holds per-instance
+ * focus state: call it once per item.
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle pure
+ */
+function focusItemOnPointerdown(event: PointerEvent) {
+  (event.currentTarget as HTMLElement).focus({ preventScroll: true });
+}
+
+function preventTouchend(event: TouchEvent) {
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+export function useSelectItem<T extends AcceptableValue = AcceptableValue>(options: UseSelectItemOptions<T>): UseSelectItemReturn<T> {
+  const { context } = options;
+  const contentContext = options.contentContext;
+  const getValue = () => toValue(options.value);
+  const disabled = getterRef(() => toValue(options.disabled) ?? false);
+  // A keyed selector cell: a selection change re-renders only the items it
+  // flips, and a multiple selection is a set lookup.
+  const selectionHold = context.selection?.createHold();
+  if (selectionHold && getCurrentScope()) {
+    onScopeDispose(() => selectionHold.release());
+  }
+  const isSelected = getterRef(() => context.selection
+    ? context.selection.isSelected(getValue(), selectionHold)
+    : valueComparator(context.modelValue.value, getValue(), context.by));
+  const isFocused = ref(false);
+  const textValue = ref(toValue(options.textValue) ?? '');
+  const textId = options.textId ?? `${context.baseId}-item-text-${++selectItemCount}`;
+
+  function handleSelectCustomEvent(ev: PointerEvent | KeyboardEvent, reason: 'item-press' | 'item-keydown') {
+    if (ev.defaultPrevented) {
+      return;
+    }
+    handleAndDispatchCustomEvent(
+      SELECT_SELECT,
+      (event: SelectEvent<T>) => handleSelect(event, reason),
+      {
+        originalEvent: ev,
+        value: getValue(),
+      },
+    );
+  }
+
+  async function handleSelect(ev: SelectEvent<T>, reason: 'item-press' | 'item-keydown') {
+    await nextTick();
+    options.onSelect?.(ev);
+    if (ev.defaultPrevented) {
+      return;
+    }
+    if (!disabled.value) {
+      context.pressItem(getValue(), reason, ev.detail.originalEvent);
+    }
+  }
+
+  async function onPointermove(event: PointerEvent) {
+    await nextTick();
+    if (event.defaultPrevented) {
+      return;
+    }
+    if (disabled.value) {
+      contentContext?.onItemLeave?.();
+    } else {
+      // even though safari doesn't support this option, it's acceptable
+      // as it only means it might scroll a few pixels when using the pointer.
+      (event.currentTarget as HTMLElement | null)?.focus({ preventScroll: true });
+    }
+  }
+
+  async function onPointerleave(event: PointerEvent) {
+    await nextTick();
+    if (event.defaultPrevented) {
+      return;
+    }
+    if (event.currentTarget === getActiveElement()) {
+      contentContext?.onItemLeave?.();
+    }
+  }
+
+  async function onKeydown(event: KeyboardEvent) {
+    await nextTick();
+    if (event.defaultPrevented) {
+      return;
+    }
+    const isTypingAhead = !!contentContext?.searchRef?.value;
+    if (isTypingAhead && event.key === ' ') {
+      return;
+    }
+    const intent = context.getNavigationIntent(event);
+    if (SELECTION_KEYS.includes(event.key)
+      ? intent !== null
+      : intent === 'select') {
+      handleSelectCustomEvent(event, 'item-keydown');
+    }
+    // prevent page scroll if using the space key to select an item
+    if (event.key === ' ') {
+      event.preventDefault();
+    }
+  }
+
+  // Created once per item, not on every render.
+  const onFocus = () => {
+    isFocused.value = true;
+  };
+  const onBlur = () => {
+    isFocused.value = false;
+  };
+  const onPointerup = (event: PointerEvent) => handleSelectCustomEvent(event, 'item-press');
+
+  const item = createPartSurface<SelectItemState>(
+    () => ({
+      'role': 'option',
+      'aria-labelledby': textId,
+      'aria-selected': isSelected.value,
+      'aria-disabled': disabled.value || undefined,
+      'tabindex': disabled.value
+        ? undefined
+        : -1,
+      'onFocus': onFocus,
+      'onBlur': onBlur,
+      'onPointerup': onPointerup,
+      'onPointerdown': focusItemOnPointerdown,
+      'onTouchend': preventTouchend,
+      'onPointermove': onPointermove,
+      'onPointerleave': onPointerleave,
+      'onKeydown': onKeydown,
+    }),
+    () => ({
+      state: selectionState(isSelected.value),
+      disabled: disabled.value,
+      highlighted: isFocused.value,
+    }),
+  );
+
+  const itemContext: SelectItemContext<T> = {
+    get value() {
+      return getValue();
+    },
+    textId,
+    disabled,
+    isSelected,
+    onItemTextChange: (node) => {
+      textValue.value = ((textValue.value || node?.textContent) ?? '').trim();
+    },
+  };
+
+  return {
+    item,
+    isSelected,
+    isFocused,
+    textValue,
+    itemContext,
+  };
+}
+
+/**
+ * A closed content's detached item, rendered only so its text registers its
+ * label (see `SelectClosedItems`): the item context its text needs, the
+ * typeahead text, and nothing else (no surface, focus state or handlers).
+ *
+ * @internal
+ */
+export function useSelectItemLabel<T extends AcceptableValue = AcceptableValue>(options: {
+  context: SelectRootContext<T>;
+  value: () => T;
+  disabled: () => boolean | undefined;
+  textValue: () => string | undefined;
+  /** The item element: places it in document order. */
+  element: () => Element | undefined;
+}): { isSelected: Ref<boolean>; textValue: { readonly value: string }; itemContext: SelectItemContext<T> } {
+  const { context, value } = options;
+  // The item text element, read live: the typeahead sees the current text.
+  let textElement: HTMLElement | undefined;
+  const textValue = {
+    get value() {
+      return (options.textValue() || textElement?.textContent || '').trim();
+    },
+  };
+  // The keyed selector cell, as on a full item: a selection change re-renders
+  // only the lean items it flips, not all of them.
+  const selectionHold = context.selection?.createHold();
+  if (selectionHold && getCurrentScope()) {
+    onScopeDispose(() => selectionHold.release());
+  }
+  const isSelected = getterRef(() => context.selection
+    ? context.selection.isSelected(value(), selectionHold)
+    : context.isSelected(value()));
+  const itemContext: SelectItemContext<T> = {
+    get value() {
+      return value();
+    },
+    textId: '',
+    disabled: getterRef(() => options.disabled() ?? false),
+    isSelected,
+    onItemTextChange: (node) => {
+      textElement = node;
+    },
+  };
+  // Registered with the closed items directly once mounted (sorted into
+  // document order when read): no collection.
+  let harvested: HarvestedItem<T> | undefined;
+  onMounted(() => {
+    harvested = context.closedItems?.addHarvested(() => ({
+      value: value(),
+      textValue: textValue.value,
+      disabled: !!options.disabled(),
+    }), options.element);
+  });
+  onBeforeUnmount(() => harvested && context.closedItems?.removeHarvested(harvested));
+  return { isSelected, textValue, itemContext };
+}
+
+/**
+ * A lean item's text (see `useSelectItemLabel`): registers its text in the
+ * label registry once mounted, and again whenever its text, value or
+ * `disabled` changes, as `useSelectItemText` does. One observer shared by
+ * every lean text (`SelectClosedItems.observeText`) catches text-only changes
+ * and a replaced text element (a dynamic `as`). An as-child text can have no
+ * element at all (a `v-if`, an async child), which no mutation can tie to this
+ * text: only from then on does it watch its element.
+ * @internal
+ */
+export function useSelectItemTextLabel<T extends AcceptableValue = AcceptableValue>(context: SelectRootContext<T>, itemContext: SelectItemContext<T>, element: Ref<HTMLElement | null | undefined>): undefined {
+  /** The element the shared observer holds this text under. */
+  let observed: HTMLElement | null | undefined;
+  let following = false;
+  function register() {
+    const el = element.value;
+    if (el) {
+      if (el !== observed) {
+        context.closedItems?.observeText(el, register, observed);
+        observed = el;
+      }
+      itemContext.onItemTextChange(el);
+      const value = itemContext.value;
+      context.labels.register(value, el.textContent ?? String(value ?? ''), itemContext.disabled.value);
+    } else if (!following) {
+      // This can run from the observer, outside setup. Nothing has to stop it:
+      // it reads only this text's own element, and goes with it.
+      following = true;
+      watch(element, (arrived) => {
+        if (arrived) {
+          register();
+        }
+      }, { flush: 'post' });
+    }
+    return el;
+  }
+  onMounted(register);
+  onBeforeUnmount(() => context.closedItems?.unobserveText(observed));
+  watch([
+    () => itemContext.value,
+    () => itemContext.disabled.value,
+  ], register, { flush: 'post' });
+  return undefined;
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * Item text / indicator
+ * -----------------------------------------------------------------------------
+ */
+export interface UseSelectItemTextOptions<T = AcceptableValue> {
+  context: SelectRootContext<T>;
+  itemContext: SelectItemContext<T>;
+  contentContext?: SelectContentContext;
+  /** The item text element. */
+  element: Ref<HTMLElement | null | undefined>;
+}
+
+/**
+ * The item text: the `id` the option is labelled by. Once mounted (and
+ * whenever its text, value or `disabled` changes) it registers its text in
+ * the root's sticky label registry —
+ * which is what `SelectValue` and the hidden native `<select>` read — and
+ * reports itself to the content for item-aligned positioning.
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle setup — registers on mount and observes its text; call inside the item text's `setup()`.
+ */
+export function useSelectItemText<T extends AcceptableValue = AcceptableValue>(options: UseSelectItemTextOptions<T>): { itemText: PartSurface<Record<string, never>> } {
+  const { context, itemContext } = options;
+
+  function register() {
+    const el = options.element.value;
+    if (!el) {
+      return;
+    }
+    const value = itemContext.value;
+    context.labels.register(value, el.textContent ?? String(value ?? ''), itemContext.disabled.value);
+  }
+
+  // Text-only changes (a translated label, a slot that re-renders on its own)
+  // do not update this component, so watch the text node itself.
+  let observer: MutationObserver | undefined;
+
+  onMounted(() => {
+    const el = options.element.value;
+    if (!el) {
+      return;
+    }
+    itemContext.onItemTextChange(el);
+    options.contentContext?.itemTextRefCallback(el, itemContext.value, itemContext.disabled.value);
+    register();
+    if (typeof MutationObserver !== 'undefined') {
+      observer = new MutationObserver(register);
+      observer.observe(el, { characterData: true, childList: true, subtree: true });
+    }
+  });
+  onBeforeUnmount(() => observer?.disconnect());
+  watch([
+    () => itemContext.value,
+    () => itemContext.disabled.value,
+  ], register, { flush: 'post' });
+
+  const itemText = createPartSurface<Record<string, never>>(
+    () => ({ id: itemContext.textId }),
+    () => ({}),
+  );
+  return { itemText };
+}
+
+/**
+ * The selected-item indicator: `aria-hidden` and `data-state`; `present` is
+ * whether it should render (the SFC wraps it in `Presence`).
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle pure
+ */
+export function useSelectItemIndicator(itemContext: SelectItemContext<any>): { indicator: PartSurface<SelectItemIndicatorState>; present: ComputedRef<boolean> } {
+  const indicator = createPartSurface<SelectItemIndicatorState>(
+    () => ({ 'aria-hidden': 'true' }),
+    () => ({
+      state: selectionState(itemContext.isSelected.value),
+    }),
+  );
+  return {
+    indicator,
+    present: computed(() => itemContext.isSelected.value),
+  };
+}

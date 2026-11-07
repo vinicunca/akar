@@ -1,10 +1,11 @@
 <script lang="ts">
 import type { HTMLAttributes, Ref } from 'vue';
+import type { NumberFieldChangeReason } from './useNumberField';
+import type { FieldControlBinding } from '@/Field/useFieldControl';
 import type { PrimitiveProps } from '@/Primitive';
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared';
 import type { FormFieldProps } from '@/shared/types';
-import { useVModel } from '@vueuse/core';
-import { computed, ref, toRefs } from 'vue';
-import { clamp, createContext, isNullish, snapValueToStep, useFormControl, useLocale } from '@/shared';
+import { createContext, useFormControl, useForwardElement, useLocale } from '@/shared';
 
 export interface NumberFieldRootProps extends PrimitiveProps, FormFieldProps {
   defaultValue?: number;
@@ -43,20 +44,25 @@ export interface NumberFieldRootProps extends PrimitiveProps, FormFieldProps {
 // itself: the docs generator keys event descriptions by name globally, so a comment on
 // `update:modelValue` leaks into every other component that emits it.
 export type NumberFieldRootEmits = {
-  'update:modelValue': [val: number | undefined];
+  'beforeUpdate:modelValue': [val: number | undefined, details: ChangeEventDetails<NumberFieldChangeReason>];
+  'update:modelValue': [val: number | undefined, details: ChangeEventDetails<NumberFieldChangeReason>];
 };
 
-interface NumberFieldRootContext {
+type NumberFieldReason = NumberFieldChangeReason | BaseChangeReason;
+
+export interface NumberFieldRootContext {
+  /** Writable for v2 compatibility: an assignment goes through the cancellable model update. */
   modelValue: Ref<number | undefined>;
-  handleIncrease: (multiplier?: number) => void;
-  handleDecrease: (multiplier?: number) => void;
-  handleMinMaxValue: (type: 'min' | 'max') => void;
+  handleIncrease: (multiplier?: number, reason?: NumberFieldReason, event?: Event) => void;
+  handleDecrease: (multiplier?: number, reason?: NumberFieldReason, event?: Event) => void;
+  handleMinMaxValue: (type: 'min' | 'max', reason?: NumberFieldReason, event?: Event) => void;
   inputEl: Ref<HTMLInputElement | undefined>;
   onInputElement: (el: HTMLInputElement) => void;
   inputMode: Ref<HTMLAttributes['inputmode']>;
   textValue: Ref<string>;
   validate: (val: string) => boolean;
-  applyInputValue: (val: string) => void;
+  /** Returns `false` when the change was cancelled or did not change the value. */
+  applyInputValue: (val: string, reason?: NumberFieldReason, event?: Event) => boolean;
   disabled: Ref<boolean>;
   readonly: Ref<boolean>;
   disableWheelChange: Ref<boolean>;
@@ -69,12 +75,19 @@ interface NumberFieldRootContext {
 }
 
 export const [injectNumberFieldRootContext, provideNumberFieldRootContext] = createContext<NumberFieldRootContext>('NumberFieldRoot');
+
+/** @internal The root's Field binding, for `NumberFieldInput`. Only provided inside a `FieldRoot`. */
+export const [injectNumberFieldFieldControl, provideNumberFieldFieldControl]
+  = createContext<FieldControlBinding | null>('NumberFieldRoot', 'NumberFieldFieldControl');
 </script>
 
 <script setup lang="ts">
-import { Primitive, usePrimitiveElement } from '@/Primitive';
-import { VisuallyHiddenInput } from '@/VisuallyHidden';
-import { handleDecimalOperation, useNumberFormatter, useNumberParser } from './utils';
+import { mergeProps, ref, toRef, watch } from 'vue';
+import { createPendingFieldInput } from '@/Field/pendingFieldInput';
+import { useFieldControl } from '@/Field/useFieldControl';
+import { renderAs } from '@/Primitive/renderAs';
+import { VisuallyHidden, VisuallyHiddenInput } from '@/VisuallyHidden';
+import { useNumberField } from './useNumberField';
 
 defineOptions({
   inheritAttrs: false,
@@ -88,220 +101,96 @@ const props = withDefaults(defineProps<NumberFieldRootProps>(), {
   focusOnChange: true,
 });
 const emits = defineEmits<NumberFieldRootEmits>();
-const { disabled, readonly, disableWheelChange, invertWheelChange, min, max, step, stepSnapping, allowInvalid, formatOptions, id, locale: propLocale, startingValue } = toRefs(props);
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue,
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<number | undefined>;
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 
-const { primitiveElement, currentElement } = usePrimitiveElement();
-
-const locale = useLocale(propLocale);
+// ConfigProvider-aware locale resolution stays in the shell; the composable owns
+// the model (`useControllableState`), formatting, clamping and the emits.
+const locale = useLocale(toRef(() => props.locale));
 const isFormControl = useFormControl(currentElement);
-const inputEl = ref<HTMLInputElement>();
 
-const isDecreaseDisabled = computed(() => {
-  if (isNullish(modelValue.value) || isNaN(modelValue.value)) {
-    return false;
-  }
-  // Disabled when a decrement can't produce a smaller in-range value.
-  return getNextValue('decrease', modelValue.value) >= modelValue.value;
+// Optional Field participation (Base UI parity): `null` outside a `FieldRoot`,
+// so every binding below is inert without a Field. The input takes the field's
+// id and label; the value is `number | null`. A hidden `type="number"` input
+// mirrors the value with `min`/`max`/`required`, so its `ValidityState` drives
+// the field's constraint validation (`rangeUnderflow`/`rangeOverflow` for an
+// `allowInvalid` value out of range).
+const nativeInput = ref<InstanceType<typeof VisuallyHidden>>();
+const field = useFieldControl({
+  // The input renders `id` (or its own), else the field's.
+  id: () => context.inputEl.value?.id || props.id,
+  element: () => context.inputEl.value,
+  getValue: () => modelValue.value ?? null,
+  validityElement: () => nativeInput.value?.$el as HTMLInputElement | undefined,
 });
-const isIncreaseDisabled = computed(() => {
-  if (isNullish(modelValue.value) || isNaN(modelValue.value)) {
-    return false;
-  }
-  // Disabled when an increment can't produce a larger in-range value.
-  return getNextValue('increase', modelValue.value) <= modelValue.value;
+function resolvedName() {
+  return field
+    ? field.name(props.name)
+    : props.name;
+}
+function resolvedRequired() {
+  return field
+    ? field.required(props.required)
+    : props.required;
+}
+// The value of a user change the field committed (typing, a step, the wheel),
+// as opposed to a programmatic or parent-driven one; read once the hidden
+// input has updated. Only in a Field.
+const pendingInput = field
+  ? createPendingFieldInput<number | undefined>()
+  : undefined;
+
+const { modelValue, textValue, readonly, disabled, root, context } = useNumberField({
+  modelValue: () => props.modelValue,
+  defaultValue: props.defaultValue,
+  min: () => props.min,
+  max: () => props.max,
+  step: () => props.step,
+  stepSnapping: () => props.stepSnapping,
+  allowInvalid: () => props.allowInvalid,
+  focusOnChange: () => props.focusOnChange,
+  formatOptions: () => props.formatOptions,
+  locale,
+  disabled: () => field
+    ? field.disabled(props.disabled)
+    : props.disabled,
+  readonly: () => props.readonly,
+  disableWheelChange: () => props.disableWheelChange,
+  invertWheelChange: () => props.invertWheelChange,
+  id: () => field
+    ? field.id()
+    : props.id,
+  startingValue: () => props.startingValue,
+  emit: emits,
+  onUpdate: pendingInput?.record,
 });
 
-// Compute the clamped value a single increment/decrement (or multi-step key) would land on.
-// When snapping is enabled and `from` is off the step grid, a tick snaps to the nearest grid
-// line in the requested direction (HTML stepUp/stepDown semantics), instead of adding a whole
-// step and rounding to nearest — which overshoots (e.g. 18.98 + step 1 -> 19.98 -> 20 not 19).
-function getNextValue(type: 'increase' | 'decrease', from: number, multiplier = 1): number {
-  const stepValue = step.value ?? 1;
-  const operator = type === 'increase'
-    ? '+'
-    : '-';
-  let nextValue: number;
+provideNumberFieldRootContext(context);
 
-  if (stepSnapping.value && !isNaN(stepValue)) {
-    const snapped = snapValueToStep(from, min.value, max.value, stepValue);
-    if (snapped === from) {
-      nextValue = handleDecimalOperation(operator, from, stepValue * multiplier);
+if (field) {
+  provideNumberFieldFieldControl(field);
+  // Flushed after render, so the hidden input's validity reflects the new value.
+  watch(modelValue, (value) => {
+    const pending = pendingInput!.take();
+    if (pending && Object.is(pending.value, value)) {
+      field.input(value ?? null);
     } else {
-      // Align to the grid line in the requested direction first…
-      const aligned = type === 'increase'
-        ? (snapped > from
-            ? snapped
-            : handleDecimalOperation('+', snapped, stepValue))
-        : (snapped < from
-            ? snapped
-            : handleDecimalOperation('-', snapped, stepValue));
-      // …then apply any remaining steps for multi-step keys (PageUp/PageDown).
-      nextValue = multiplier > 1
-        ? handleDecimalOperation(operator, aligned, stepValue * (multiplier - 1))
-        : aligned;
+      field.sync(value ?? null);
     }
-  } else {
-    nextValue = handleDecimalOperation(operator, from, stepValue * multiplier);
-  }
-
-  return clampInputValue(nextValue);
+  }, { flush: 'post' });
 }
 
-function handleChangingValue(type: 'increase' | 'decrease', multiplier = 1) {
-  if (props.focusOnChange) {
-    inputEl.value?.focus();
-  }
-  if (props.disabled || props.readonly) {
-    return;
-  }
-  const currentInputValue = numberParser.parse(inputEl.value?.value ?? '');
-  if (isNaN(currentInputValue)) {
-    // Route the fallback through clampInputValue so the min/max contract still holds
-    // (e.g. a negative max would otherwise be violated by the bare 0 fallback).
-    // `startingValue` is used as given: kept within min/max, but not snapped to the step grid
-    // (a starting price of 40 with step 3 stays 40). The next tick aligns it via getNextValue.
-    modelValue.value = startingValue.value === undefined
-      ? clampInputValue(min.value ?? 0)
-      : numberParser.parse(numberFormatter.format(clamp(startingValue.value, min.value, max.value)));
-    return;
-  }
-
-  const nextValue = getNextValue(type, currentInputValue, multiplier);
-  // An out-of-range value (e.g. typed with `allowInvalid`) would be clamped against the requested
-  // direction — ArrowUp above `max` would lower it. Do nothing instead, like HTML stepUp/stepDown.
-  if (type === 'increase'
-    ? nextValue < currentInputValue
-    : nextValue > currentInputValue) {
-    return;
-  }
-  modelValue.value = nextValue;
+function focusInput() {
+  context.inputEl.value?.focus();
 }
-
-function handleIncrease(multiplier = 1) {
-  handleChangingValue('increase', multiplier);
-}
-function handleDecrease(multiplier = 1) {
-  handleChangingValue('decrease', multiplier);
-}
-
-function handleMinMaxValue(type: 'min' | 'max') {
-  if (type === 'min' && min.value !== undefined) {
-    modelValue.value = clampInputValue(min.value);
-  } else if (type === 'max' && max.value !== undefined) {
-    modelValue.value = clampInputValue(max.value);
-  }
-}
-
-// Formatter
-const numberFormatter = useNumberFormatter(locale, formatOptions);
-const numberParser = useNumberParser(locale, formatOptions);
-
-const inputMode = computed<HTMLAttributes['inputmode']>(() => {
-  // The inputMode attribute influences the software keyboard that is shown on touch devices.
-  // Browsers and operating systems are quite inconsistent about what keys are available, however.
-  // We choose between numeric and decimal based on whether we allow negative and fractional numbers,
-  // and based on testing on various devices to determine what keys are available in each inputMode.
-  const hasDecimals = numberFormatter.resolvedOptions().maximumFractionDigits! > 0;
-
-  return hasDecimals ? 'decimal' : 'numeric';
-});
-// Replace negative textValue formatted using currencySign: 'accounting'
-// with a textValue that can be announced using a minus sign.
-const textValueFormatter = useNumberFormatter(locale, formatOptions);
-const textValue = computed(() => isNullish(modelValue.value) || isNaN(modelValue.value)
-  ? ''
-  : textValueFormatter.format(modelValue.value));
-
-function validate(val: string) {
-  // `allowInvalid` lets out-of-range values be typed, so the bounds are skipped here — they
-  // would otherwise reject a leading minus sign whenever `min >= 0`. The value still has to
-  // parse as a number, so non-numeric input stays rejected.
-  if (allowInvalid.value) {
-    return numberParser.isValidPartialNumber(val);
-  }
-  return numberParser.isValidPartialNumber(val, min.value, max.value);
-}
-
-function setInputValue(val: string) {
-  if (inputEl.value) {
-    inputEl.value.value = val;
-  }
-}
-
-function clampInputValue(val: number) {
-  // Clamp to min and max, round to the nearest step, and round to specified number of digits
-  let clampedValue: number;
-  if (step.value === undefined || isNaN(step.value) || !stepSnapping.value) {
-    clampedValue = clamp(val, min.value, max.value);
-  } else {
-    clampedValue = snapValueToStep(val, min.value, max.value, step.value);
-  }
-
-  clampedValue = numberParser.parse(numberFormatter.format(clampedValue));
-  return clampedValue;
-}
-
-function applyInputValue(val: string) {
-  const parsedValue = numberParser.parse(val);
-  if (isNaN(parsedValue)) {
-    modelValue.value = undefined;
-  } else if (allowInvalid.value)
-  // Keep the typed value as-is, only normalize formatting precision
-  {
-    modelValue.value = numberParser.parse(numberFormatter.format(parsedValue));
-  } else {
-    modelValue.value = clampInputValue(parsedValue);
-  }
-  // Set to empty state if input value is empty
-  if (!val.length) {
-    return setInputValue(val);
-  }
-
-  // if it failed to parse, then reset input to formatted version of current number
-  if (isNaN(parsedValue)) {
-    return setInputValue(textValue.value);
-  }
-
-  return setInputValue(textValue.value);
-}
-
-provideNumberFieldRootContext({
-  modelValue,
-  handleDecrease,
-  handleIncrease,
-  handleMinMaxValue,
-  inputMode,
-  inputEl,
-  onInputElement: (el) => inputEl.value = el,
-  textValue,
-  readonly,
-  validate,
-  applyInputValue,
-  disabled,
-  disableWheelChange,
-  invertWheelChange,
-  max,
-  min,
-  isDecreaseDisabled,
-  isIncreaseDisabled,
-  id,
-});
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
-    ref="primitiveElement"
-    role="group"
-    :as="as"
-    :as-child="asChild"
-    :data-disabled="disabled ? '' : undefined"
-    :data-readonly="readonly ? '' : undefined"
+  <component
+    :is="renderAs(as, asChild)"
+    v-bind="field ? mergeProps(field.dataAttributes(), $attrs, root.attrs.value) : mergeProps($attrs, root.attrs.value)"
+    :ref="forwardRef"
   >
     <slot
       :model-value="modelValue"
@@ -309,8 +198,26 @@ provideNumberFieldRootContext({
       :readonly="readonly"
     />
 
+    <VisuallyHidden
+      v-if="field"
+      ref="nativeInput"
+      as="input"
+      feature="focusable"
+      aria-hidden="true"
+      tabindex="-1"
+      type="number"
+      step="any"
+      :value="modelValue ?? ''"
+      :name="resolvedName()"
+      :min="context.min.value"
+      :max="context.max.value"
+      :disabled="disabled"
+      :readonly="readonly"
+      :required="resolvedRequired()"
+      @focus="focusInput"
+    />
     <VisuallyHiddenInput
-      v-if="isFormControl && name"
+      v-else-if="isFormControl && name"
       type="text"
       :value="modelValue"
       :name="name"
@@ -318,5 +225,5 @@ provideNumberFieldRootContext({
       :readonly="readonly"
       :required="required"
     />
-  </Primitive>
+  </component>
 </template>

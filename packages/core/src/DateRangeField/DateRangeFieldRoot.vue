@@ -1,37 +1,22 @@
 <script lang="ts">
-import type { DateValue } from '@internationalized/date';
 import type { Ref } from 'vue';
-import type { Matcher } from '@/date';
+import type { DateRangeFieldChangeReason } from './useDateRangeField';
+import type { DateValue, Matcher } from '@/date';
 import type { PrimitiveProps } from '@/Primitive';
-import type { Formatter } from '@/shared';
+import type { BaseChangeReason, ChangeEventDetails, Formatter } from '@/shared';
 import type { DateRange, DateStep, Granularity, HourCycle, SegmentPart, SegmentValueObj } from '@/shared/date';
 import type { Direction, FormFieldProps } from '@/shared/types';
-import {
-  areAllDaysBetweenValid,
-  hasTime,
-  isBefore,
-  isBeforeOrSame,
-} from '@/date';
-import { createContext, useDateFormatter, useDirection, useKbd, useLocale } from '@/shared';
-import {
-  createContent,
-  getDefaultDate,
-  getSegmentElements,
-  initializeSegmentValues,
-  isSegmentNavigationKey,
-  normalizeDateStep,
-  normalizeHourCycle,
-
-  syncSegmentValues,
-  useSegmentNavigation,
-} from '@/shared/date';
+import { createContext, mergeExpose, useDirection, useLocale } from '@/shared';
 
 export type DateRangeType = 'start' | 'end';
 
-type DateRangeFieldRootContext = {
+export type DateRangeFieldRootContext = {
   locale: Ref<string>;
+  /** Assigning it requests a change with reason `imperative-action`; prefer `setRangeValue`. */
   startValue: Ref<DateValue | undefined>;
+  /** Assigning it requests a change with reason `imperative-action`; prefer `setRangeValue`. */
   endValue: Ref<DateValue | undefined>;
+  /** Assigning it requests a change with reason `imperative-action`; prefer `setPlaceholder`. */
   placeholder: Ref<DateValue>;
   isDateUnavailable?: Matcher;
   isInvalid: Ref<boolean>;
@@ -40,11 +25,17 @@ type DateRangeFieldRootContext = {
   formatter: Formatter;
   hourCycle: HourCycle;
   step: Ref<DateStep>;
+  stepSnapping: Ref<boolean>;
   segmentValues: Record<DateRangeType, Ref<SegmentValueObj>>;
-  segmentContents: Ref<{ start: Array<{ part: SegmentPart; value: string }>; end: Array<{ part: SegmentPart; value: string }> }>;
+  segmentContents: Ref<Record<DateRangeType, Array<{ part: SegmentPart; value: string }>>>;
   elements: Ref<Set<HTMLElement>>;
   focusNext: () => void;
   setFocusedElement: (el: HTMLElement) => void;
+  /** Request a range change. Returns `false` when unchanged or cancelled. */
+  setModelValue: (value: DateRange, reason?: DateRangeFieldChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /** Change one end of the range, keeping the other. */
+  setRangeValue: (type: DateRangeType, value: DateValue | undefined, reason?: DateRangeFieldChangeReason | BaseChangeReason, event?: Event) => boolean;
+  setPlaceholder: (value: DateValue, reason?: DateRangeFieldChangeReason | BaseChangeReason, event?: Event) => boolean;
 };
 
 export interface DateRangeFieldRootProps extends PrimitiveProps, FormFieldProps {
@@ -54,13 +45,15 @@ export interface DateRangeFieldRootProps extends PrimitiveProps, FormFieldProps 
   defaultPlaceholder?: DateValue;
   /** The placeholder date, which is used to determine what month to display when no date is selected. This updates as the user navigates the calendar and can be used to programmatically control the calendar view */
   placeholder?: DateValue;
-  /** The controlled value of the field. Can be bound as `v-model`. */
+  /** The controlled value of the field. Can be bound as `v-model`. `null` is a controlled empty range. */
   modelValue?: DateRange | null;
   /** The hour cycle used for formatting times. Defaults to the local preference */
   hourCycle?: HourCycle;
   /** The stepping interval for the time fields. Defaults to `1`. */
   step?: DateStep;
-  /** The granularity to use for formatting times. Defaults to day if a CalendarDate is provided, otherwise defaults to minute. The field will render segments for each part of the date up to and including the specified granularity */
+  /** Whether to enforce snapping the time value to the nearest step increment after input. Defaults to `false`. */
+  stepSnapping?: boolean;
+  /** The granularity to use for formatting times. Defaults to day if a `Temporal.PlainDate` is provided, otherwise defaults to minute. The field will render segments for each part of the date up to and including the specified granularity */
   granularity?: Granularity;
   /** Whether or not to hide the time zone segment of the field */
   hideTimeZone?: boolean;
@@ -83,10 +76,14 @@ export interface DateRangeFieldRootProps extends PrimitiveProps, FormFieldProps 
 }
 
 export type DateRangeFieldRootEmits = {
+  /** Called before the range changes; `details.cancel()` keeps the current range. */
+  'beforeUpdate:modelValue': [date: DateRange, details: ChangeEventDetails<DateRangeFieldChangeReason>];
   /** Event handler called whenever the model value changes */
-  'update:modelValue': [date: DateRange];
+  'update:modelValue': [date: DateRange, details: ChangeEventDetails<DateRangeFieldChangeReason>];
+  /** Called before the placeholder changes; `details.cancel()` keeps the current placeholder. */
+  'beforeUpdate:placeholder': [date: DateValue, details: ChangeEventDetails<DateRangeFieldChangeReason>];
   /** Event handler called whenever the placeholder value changes */
-  'update:placeholder': [date: DateValue];
+  'update:placeholder': [date: DateValue, details: ChangeEventDetails<DateRangeFieldChangeReason>];
 };
 
 export const [injectDateRangeFieldRootContext, provideDateRangeFieldRootContext]
@@ -94,10 +91,16 @@ export const [injectDateRangeFieldRootContext, provideDateRangeFieldRootContext]
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { computed, nextTick, onMounted, ref, toRefs, watch } from 'vue';
-import { Primitive, usePrimitiveElement } from '@/Primitive';
+import { computed, mergeProps, toRefs, useAttrs, watch } from 'vue';
+import { createPendingFieldInput } from '@/Field/pendingFieldInput';
+import { useFieldControl } from '@/Field/useFieldControl';
+import { useFieldFocusWithin } from '@/Field/useFieldFocusWithin';
+import { usePrimitiveElement } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
+import { isEqual } from '@/shared/compare';
+import { toRangeFormValue } from '@/shared/date';
 import { VisuallyHidden } from '@/VisuallyHidden';
+import { useDateRangeField } from './useDateRangeField';
 
 defineOptions({
   inheritAttrs: false,
@@ -109,326 +112,166 @@ const props = withDefaults(defineProps<DateRangeFieldRootProps>(), {
   readonly: false,
   placeholder: undefined,
   isDateUnavailable: undefined,
+  stepSnapping: false,
 });
 const emits = defineEmits<DateRangeFieldRootEmits>();
 defineSlots<{
   default?: (props: {
     /** The current date range of the field */
-    modelValue: DateRange | null;
+    modelValue: DateRange;
     /** The date field segment contents */
-    segments: { start: Array<{ part: SegmentPart; value: string }>; end: Array<{ part: SegmentPart; value: string }> };
+    segments: Record<DateRangeType, Array<{ part: SegmentPart; value: string }>>;
     /** Value if the input is invalid */
     isInvalid: boolean;
   }) => any;
 }>();
-const { disabled, readonly, isDateUnavailable: propsIsDateUnavailable, dir: propDir, locale: propLocale } = toRefs(props);
+const { dir: propDir, locale: propLocale } = toRefs(props);
 const locale = useLocale(propLocale);
 const dir = useDirection(propDir);
 
-const formatter = useDateFormatter(locale.value, {
-  hourCycle: normalizeHourCycle(props.hourCycle),
+const { primitiveElement, currentElement: parentElement, expose } = usePrimitiveElement();
+
+// Optional Field participation, as in `DateFieldRoot`: `null` outside a
+// `FieldRoot`, so every binding below is inert without a Field. The hidden
+// input takes the field's id, so `FieldLabel`'s `for` lands on it and its
+// focus handler moves focus into the first segment; the group carries the
+// label/description wiring. The field's value is the range object, and a
+// required range needs both ends: the hidden input can't express that, so
+// `valueMissing` comes from `isFilled` instead of its `ValidityState`.
+const field = useFieldControl({
+  id: () => props.id,
+  // The first segment (the group isn't itself focusable), so `FormRoot` can
+  // move focus into the field on an invalid submit.
+  element: () => Array.from(segmentElements.value)[0],
+  getValue: () => modelValue.value,
+  required: () => props.required,
+  isFilled: (value) => Boolean((value as { start?: unknown; end?: unknown } | undefined)?.start && (value as { end?: unknown }).end),
 });
-const { primitiveElement, currentElement: parentElement }
-  = usePrimitiveElement();
-const segmentElements = ref<Set<HTMLElement>>(new Set());
+function disabled() {
+  return field
+    ? field.disabled(props.disabled)
+    : props.disabled;
+}
+function resolvedId() {
+  return field
+    ? field.id()
+    : props.id;
+}
+function resolvedName() {
+  return field
+    ? field.name(props.name)
+    : props.name;
+}
+function resolvedRequired() {
+  return field
+    ? field.required(props.required)
+    : props.required;
+}
 
-onMounted(() => {
-  getSegmentElements(parentElement.value).forEach((item) => segmentElements.value.add(item as HTMLElement));
-});
+// Controlled/uncontrolled + the `beforeUpdate:` / `update:` emits for the range
+// and the placeholder live in the composable's `useControllableState`.
+// The user's segment edits, decided by reason when they commit: a parent's
+// change (e.g. a reset) or a programmatic `setModelValue` isn't recorded, and
+// a user edit stays one wherever focus goes next. Only in a Field.
+const pendingInput = field
+  ? createPendingFieldInput<unknown>()
+  : undefined;
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? { start: undefined, end: undefined },
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<DateRange | null>;
-
-const defaultDate = getDefaultDate({
-  defaultPlaceholder: props.placeholder,
-  granularity: props.granularity,
-  defaultValue: modelValue.value?.start,
-  locale: props.locale,
-});
-
-const placeholder = useVModel(props, 'placeholder', emits, {
-  defaultValue: props.defaultPlaceholder ?? defaultDate.copy(),
-  passive: (props.placeholder === undefined) as false,
-}) as Ref<DateValue>;
-
-const step = computed(() => normalizeDateStep(props));
-
-const inferredGranularity = computed(() => {
-  if (props.granularity) {
-    return !hasTime(placeholder.value)
-      ? 'day'
-      : props.granularity;
-  }
-
-  return hasTime(placeholder.value)
-    ? 'minute'
-    : 'day';
-});
-
-const isStartInvalid = computed(() => {
-  if (!modelValue.value?.start) {
-    return false;
-  }
-
-  if (propsIsDateUnavailable.value?.(modelValue.value.start)) {
-    return true;
-  }
-
-  if (props.minValue && isBefore(modelValue.value.start, props.minValue)) {
-    return true;
-  }
-
-  if (props.maxValue && isBefore(props.maxValue, modelValue.value.start)) {
-    return true;
-  }
-
-  return false;
-});
-
-const isEndInvalid = computed(() => {
-  if (!modelValue.value?.end) {
-    return false;
-  }
-
-  if (propsIsDateUnavailable.value?.(modelValue.value.end)) {
-    return true;
-  }
-
-  if (props.minValue && isBefore(modelValue.value.end, props.minValue)) {
-    return true;
-  }
-
-  if (props.maxValue && isBefore(props.maxValue, modelValue.value.end)) {
-    return true;
-  }
-
-  return false;
-});
-
-const isInvalid = computed(() => {
-  if (isStartInvalid.value || isEndInvalid.value) {
-    return true;
-  }
-
-  if (!modelValue.value?.start || !modelValue.value?.end) {
-    return false;
-  }
-
-  if (!isBeforeOrSame(modelValue.value.start, modelValue.value.end)) {
-    return true;
-  }
-
-  if (propsIsDateUnavailable.value !== undefined) {
-    const allValid = areAllDaysBetweenValid(
-      modelValue.value.start,
-      modelValue.value.end,
-      propsIsDateUnavailable.value,
-      undefined,
-    );
-    if (!allValid) {
-      return true;
-    }
-  }
-  return false;
-});
-
-const initialSegments = initializeSegmentValues(inferredGranularity.value);
-
-const startSegmentValues = ref<SegmentValueObj>(modelValue.value?.start
-  ? {
-      ...syncSegmentValues({ value: modelValue.value.start, formatter }),
-    }
-  : { ...initialSegments });
-const endSegmentValues = ref<SegmentValueObj>(modelValue.value?.end
-  ? {
-      ...syncSegmentValues({ value: modelValue.value.end, formatter }),
-    }
-  : { ...initialSegments });
-
-const startSegmentContent = computed(() => createContent({
-  granularity: inferredGranularity.value,
-  dateRef: placeholder.value,
-  formatter,
-  hideTimeZone: props.hideTimeZone,
-  hourCycle: props.hourCycle,
-  segmentValues: startSegmentValues.value,
+const { root, context, modelValue, segments, isInvalid, segmentElements, setFocusedElement, focusFirstSegment } = useDateRangeField({
+  modelValue: () => props.modelValue,
+  defaultValue: props.defaultValue,
+  placeholder: () => props.placeholder,
+  defaultPlaceholder: props.defaultPlaceholder,
   locale,
-}));
-
-const endSegmentContent = computed(() => createContent({
-  granularity: inferredGranularity.value,
-  dateRef: placeholder.value,
-  formatter,
-  hideTimeZone: props.hideTimeZone,
-  hourCycle: props.hourCycle,
-  segmentValues: endSegmentValues.value,
-  locale,
-}));
-
-const segmentContents = computed(() => ({
-  start: startSegmentContent.value.arr,
-  end: endSegmentContent.value.arr,
-}));
-
-const editableSegmentContents = computed(() => ({
-  start: segmentContents.value.start.filter(({ part }) => part !== 'literal'),
-  end: segmentContents.value.end.filter(({ part }) => part !== 'literal'),
-}));
-
-const startValue = ref(modelValue.value?.start?.copy()) as Ref<DateValue | undefined>;
-const endValue = ref(modelValue.value?.end?.copy()) as Ref<DateValue | undefined>;
-
-watch([startValue, endValue], ([_startValue, _endValue]) => {
-  modelValue.value = {
-    start: _startValue?.copy(),
-    end: _endValue?.copy(),
-  };
-});
-
-watch(modelValue, (_modelValue) => {
-  const isStartChanged = _modelValue?.start && startValue.value
-    ? _modelValue.start.compare(startValue.value) !== 0
-    : _modelValue?.start !== startValue.value;
-  if (isStartChanged) {
-    startValue.value = _modelValue?.start?.copy();
-  }
-
-  const isEndChanged = _modelValue?.end && endValue.value
-    ? _modelValue.end.compare(endValue.value) !== 0
-    : _modelValue?.end !== endValue.value;
-  if (isEndChanged) {
-    endValue.value = _modelValue?.end?.copy();
-  }
-});
-
-watch([startValue, locale], ([_startValue]) => {
-  if (_startValue !== undefined) {
-    startSegmentValues.value = {
-      ...syncSegmentValues({ value: _startValue, formatter }),
-    };
-  }
-  // If segment has null value, means that user modified it, thus do not reset the segmentValues
-  else if (Object.values(startSegmentValues.value).every((value) => value !== null) && _startValue === undefined) {
-    startSegmentValues.value = { ...initialSegments };
-  }
-});
-
-watch(locale, (value) => {
-  if (formatter.getLocale() !== value) {
-    formatter.setLocale(value);
-    // Locale changed, so we need to clear the segment elements and re-get them (different order)
-    // Get the focusable elements again on the next tick
-    nextTick(() => {
-      segmentElements.value.clear();
-      getSegmentElements(parentElement.value).forEach((item) => segmentElements.value.add(item as HTMLElement));
-    });
-  }
-});
-
-watch(modelValue, (_modelValue) => {
-  if (_modelValue && _modelValue.start !== undefined && placeholder.value.compare(_modelValue.start) !== 0) {
-    placeholder.value = _modelValue.start.copy();
-  }
-});
-
-watch([endValue, locale], ([_endValue]) => {
-  if (_endValue !== undefined) {
-    endSegmentValues.value = {
-      ...syncSegmentValues({ value: _endValue, formatter }),
-    };
-  }
-  // If segment has null value, means that user modified it, thus do not reset the segmentValues
-  else if (Object.values(endSegmentValues.value).every((value) => value !== null) && _endValue === undefined) {
-    endSegmentValues.value = { ...initialSegments };
-  }
-});
-
-const currentFocusedElement = ref<HTMLElement | null>(null);
-
-const { nextFocusableSegment, prevFocusableSegment, focusNext } = useSegmentNavigation({
-  segmentElements,
-  currentFocusedElement,
   dir,
-  segmentAttributes: ['data-akar-date-field-segment', 'data-akar-date-range-field-segment-type'],
-});
-
-const kbd = useKbd();
-
-function handleKeydown(e: KeyboardEvent) {
-  // Don't navigate between segments mid-composition, arrow keys are used for IME candidate navigation
-  if (e.isComposing) {
-    return;
-  }
-  if (!isSegmentNavigationKey(e.key)) {
-    return;
-  }
-  if (e.key === kbd.ARROW_LEFT) {
-    prevFocusableSegment.value?.focus();
-  }
-  if (e.key === kbd.ARROW_RIGHT) {
-    nextFocusableSegment.value?.focus();
-  }
-}
-
-function setFocusedElement(el: HTMLElement) {
-  currentFocusedElement.value = el;
-}
-
-provideDateRangeFieldRootContext({
-  isDateUnavailable: propsIsDateUnavailable.value,
-  locale,
-  startValue,
-  endValue,
-  placeholder,
-  disabled,
-  formatter,
   hourCycle: props.hourCycle,
-  step,
-  readonly,
-  segmentValues: { start: startSegmentValues, end: endSegmentValues },
-  isInvalid,
-  segmentContents: editableSegmentContents,
-  elements: segmentElements,
-  setFocusedElement,
-  focusNext,
+  step: () => props.step,
+  stepSnapping: () => props.stepSnapping,
+  granularity: () => props.granularity,
+  hideTimeZone: () => props.hideTimeZone,
+  minValue: () => props.minValue,
+  maxValue: () => props.maxValue,
+  disabled,
+  readonly: () => props.readonly,
+  isDateUnavailable: computed(() => props.isDateUnavailable),
+  parentElement,
+  emit: emits,
+  onUpdate: pendingInput?.record,
 });
 
-defineExpose({
+// Touched once focus leaves the whole group, not when it moves between the ends.
+const focusWithin = useFieldFocusWithin(field, parentElement);
+
+// The user's recorded edit, once it arrives, is input; anything else is
+// programmatic, which updates `filled` but isn't dirtying. Flushed after
+// render so the hidden input's validity reflects the new value.
+if (field) {
+  watch(modelValue, (value) => {
+    const pending = pendingInput!.take();
+    if (pending && isEqual(pending.value, value)) {
+      field.input(value);
+    } else {
+      field.sync(value);
+    }
+  }, { flush: 'post' });
+}
+
+// `$attrs` isn't reactive, so the Field's wiring is read during render. Its
+// state attributes go first and the group's own (e.g. `data-invalid`) win; its
+// aria ids are merged with the consumer's, and a consumer `aria-invalid` wins.
+const attrs = useAttrs();
+function getRootAttrs() {
+  if (!field) {
+    return mergeProps(attrs, root.attrs.value);
+  }
+  return mergeProps(
+    field.dataAttributes(),
+    attrs,
+    {
+      ...field.ariaAttrs(attrs, disabled()),
+    },
+    root.attrs.value,
+    // The Field's own invalid state also marks the group.
+    {
+      'data-invalid': isInvalid.value || field.context.invalid.value
+        ? ''
+        : undefined,
+    },
+    { onFocusin: focusWithin!.onFocusin, onFocusout: focusWithin!.onFocusout },
+  );
+}
+
+provideDateRangeFieldRootContext(context);
+
+defineExpose(mergeExpose(expose, {
+  /** Records `el` as the focused segment for keyboard navigation. It does not move focus; call `el.focus()` for that. */
   setFocusedElement,
-});
+}));
 </script>
 
 <template>
-  <Primitive
-    v-bind="$attrs"
+  <component
+    :is="renderAs(as, asChild)"
+    v-bind="getRootAttrs()"
     ref="primitiveElement"
-    role="group"
-    :aria-disabled="disabled ? true : undefined"
-    :data-disabled="disabled ? '' : undefined"
-    :data-readonly="readonly ? '' : undefined"
-    :data-invalid="isInvalid ? '' : undefined"
-    :dir="dir"
-    @keydown.left.right="handleKeydown"
   >
     <slot
       :model-value="modelValue"
-      :segments="segmentContents"
+      :segments="segments"
       :is-invalid="isInvalid"
     />
 
     <VisuallyHidden
-      :id="id"
+      :id="resolvedId()"
       as="input"
       feature="focusable"
       aria-hidden="true"
       tabindex="-1"
-      :value="`${modelValue?.start?.toString()} - ${modelValue?.end?.toString()}`"
-      :name="name"
-      :disabled="disabled"
-      :required="required"
-      @focus="Array.from(segmentElements)?.[0]?.focus()"
+      :value="toRangeFormValue(modelValue)"
+      :name="resolvedName()"
+      :disabled="disabled()"
+      :required="resolvedRequired()"
+      @focus="focusFirstSegment"
     />
-  </Primitive>
+  </component>
 </template>

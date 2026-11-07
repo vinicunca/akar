@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
-import { createContext, useForwardExpose } from '@/shared';
+import { createContext, useForwardElement } from '@/shared';
 
 export interface ScrollAreaScrollbarProps extends PrimitiveProps {
   /** The orientation of the scrollbar */
@@ -26,12 +26,7 @@ export const [injectScrollAreaScrollbarContext, provideScrollAreaScrollbarContex
 </script>
 
 <script setup lang="ts">
-import {
-  computed,
-  onUnmounted,
-  toRefs,
-  watch,
-} from 'vue';
+import { computed, onUnmounted, toRef, watch } from 'vue';
 import { injectScrollAreaRootContext } from './ScrollAreaRoot.vue';
 import ScrollAreaScrollbarAuto from './ScrollAreaScrollbarAuto.vue';
 import ScrollAreaScrollbarGlimpse from './ScrollAreaScrollbarGlimpse.vue';
@@ -48,7 +43,8 @@ const props = withDefaults(defineProps<ScrollAreaScrollbarProps>(), {
   as: 'div',
 });
 
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 const rootContext = injectScrollAreaRootContext();
 
 const isHorizontal = computed(() => props.orientation === 'horizontal');
@@ -70,7 +66,13 @@ onUnmounted(() => {
   rootContext.onScrollbarYEnabledChange(false);
 });
 
-const { orientation, forceMount, asChild, as } = toRefs(props);
+const orientation = toRef(props, 'orientation');
+
+const forceMount = toRef(props, 'forceMount');
+
+const asChild = toRef(props, 'asChild');
+
+const as = toRef(props, 'as');
 provideScrollAreaScrollbarContext({
   orientation,
   forceMount,
@@ -117,7 +119,7 @@ provideScrollAreaScrollbarContext({
     v-else-if="rootContext.type.value === 'always'"
     v-bind="$attrs"
     :ref="forwardRef"
-    data-state="visible"
+    data-state="open"
   >
     <slot />
   </ScrollAreaScrollbarVisible>

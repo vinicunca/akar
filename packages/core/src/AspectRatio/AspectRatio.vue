@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 
 export interface AspectRatioProps extends PrimitiveProps {
   /**
@@ -12,8 +12,9 @@ export interface AspectRatioProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Primitive } from '@/Primitive';
+import { mergeProps } from 'vue';
+import { renderAs } from '@/Primitive/renderAs';
+import { useAspectRatio } from './useAspectRatio';
 
 defineOptions({
   inheritAttrs: false,
@@ -29,26 +30,22 @@ defineSlots<{
   }) => any;
 }>();
 
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 
-const aspect = computed(() => {
-  return (1 / props.ratio) * 100;
+const { aspect, wrapper, root } = useAspectRatio({
+  ratio: () => props.ratio,
 });
 </script>
 
 <template>
-  <div
-    :style="`position: relative; width: 100%; padding-bottom: ${aspect}%`"
-    data-akar-aspect-ratio-wrapper
-  >
-    <Primitive
+  <div v-bind="wrapper.attrs.value">
+    <component
+      :is="renderAs(as, asChild)"
       :ref="forwardRef"
-      :as-child="asChild"
-      :as="as"
-      style="position: absolute; inset: 0px"
-      v-bind="$attrs"
+      v-bind="mergeProps(root.attrs.value, $attrs)"
     >
       <slot :aspect="aspect" />
-    </Primitive>
+    </component>
   </div>
 </template>

@@ -5,10 +5,10 @@ export interface ColorSliderThumbProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { getChannelName } from '@/shared/color';
+import { useForwardElement } from '@/shared';
 import { SliderThumb } from '@/Slider';
 import { injectColorSliderRootContext } from './ColorSliderRoot.vue';
+import { getColorSliderThumbSurface } from './useColorSlider';
 
 const props = withDefaults(defineProps<ColorSliderThumbProps>(), {
   as: 'span',
@@ -24,30 +24,21 @@ defineSlots<{
 }>();
 
 const rootContext = injectColorSliderRootContext();
+const thumb = getColorSliderThumbSurface(rootContext);
 
-const ariaLabel = computed(() => {
-  return getChannelName(rootContext.channel.value);
-});
-
-const ariaValueText = computed(() => {
-  const value = rootContext.channelValue.value;
-  const channel = rootContext.channel.value;
-  if (channel === 'alpha') {
-    return `${Math.round(value)}%`;
-  }
-  return String(Math.round(value));
-});
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
   <SliderThumb
+    :ref="forwardRef"
     :as="as"
     :as-child="asChild"
-    :aria-label="ariaLabel"
-    :aria-valuetext="ariaValueText"
+    v-bind="thumb.attrs.value"
   >
     <slot
-      :channel-name="ariaLabel"
+      :channel-name="thumb.props.value['aria-label']"
       :channel-value="rootContext.channelValue.value"
     />
   </SliderThumb>

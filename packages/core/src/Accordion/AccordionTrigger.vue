@@ -1,45 +1,41 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 
-export interface AccordionTriggerProps extends PrimitiveProps {}
+export interface AccordionTriggerProps extends PrimitiveProps {
+  /**
+   * Id of the element, which the content's `aria-labelledby` points at.
+   * Auto-generated when not provided.
+   */
+  id?: string;
+}
 </script>
 
 <script setup lang="ts">
 import { CollapsibleTrigger } from '@/Collapsible';
-import { useId } from '@/shared';
+import { useForwardElement, usePartId } from '@/shared';
 import { injectAccordionItemContext } from './AccordionItem.vue';
 import { injectAccordionRootContext } from './AccordionRoot.vue';
+import { getAccordionTriggerSurface } from './useAccordion';
 
 const props = defineProps<AccordionTriggerProps>();
 
 const rootContext = injectAccordionRootContext();
 const itemContext = injectAccordionItemContext();
+// Rendered on the element; mirrored into the item context for the content's `aria-labelledby`.
+const triggerId = usePartId(() => props.id, itemContext, 'triggerId');
 
-itemContext.triggerId ||= useId(undefined, 'akar-accordion-trigger');
-function changeItem() {
-  const triggerDisabled = rootContext.isSingle.value && itemContext.open.value && !rootContext.collapsible;
-  if (itemContext.disabled.value || triggerDisabled) {
-    return;
-  }
+const surface = getAccordionTriggerSurface(rootContext, itemContext);
 
-  rootContext.changeModelValue(itemContext.value.value);
-}
+const { forwardRef, expose } = useForwardElement(itemContext.currentRef);
+defineExpose(expose);
 </script>
 
 <template>
   <CollapsibleTrigger
-    :id="itemContext.triggerId"
-    :ref="itemContext.currentRef"
-    data-akar-collection-item
+    :ref="forwardRef"
     :as="props.as"
     :as-child="props.asChild"
-    :aria-disabled="itemContext.disabled.value || undefined"
-    :aria-expanded="itemContext.open.value || false"
-    :data-disabled="itemContext.dataDisabled.value"
-    :data-orientation="rootContext.orientation"
-    :data-state="itemContext.dataState.value"
-    :disabled="itemContext.disabled.value"
-    @click="changeItem"
+    v-bind="{ ...surface.attrs.value, id: triggerId }"
   >
     <slot />
   </CollapsibleTrigger>

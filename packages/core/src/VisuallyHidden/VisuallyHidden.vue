@@ -17,15 +17,19 @@ export interface VisuallyHiddenProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { renderAsEmpty, rendersChildren } from '@/Primitive/renderAs';
+import { useForwardElement } from '@/shared';
 
 withDefaults(defineProps<VisuallyHiddenProps>(), { as: 'span', feature: 'focusable' });
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
-  <Primitive
-    :as="as"
-    :as-child="asChild"
+  <component
+    :is="renderAsEmpty(as, asChild)"
+    :ref="forwardRef"
     :aria-hidden="feature === 'fully-hidden' ? 'true' : undefined"
     :data-hidden="feature === 'fully-hidden' ? '' : undefined"
     :tabindex="feature === 'fully-hidden' ? '-1' : undefined"
@@ -49,6 +53,12 @@ withDefaults(defineProps<VisuallyHiddenProps>(), { as: 'span', feature: 'focusab
       left: '-1px',
     }"
   >
-    <slot />
-  </Primitive>
+    <!-- `as="input"` (the hidden form input) renders no children. -->
+    <template
+      v-if="rendersChildren(as, asChild)"
+      #default
+    >
+      <slot />
+    </template>
+  </component>
 </template>

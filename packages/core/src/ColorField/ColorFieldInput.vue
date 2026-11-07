@@ -1,151 +1,93 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 
-const ALLOWED_INPUT_RE = /[\d.-]/;
-
 export interface ColorFieldInputProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useComposing } from '@/shared';
-import { injectColorFieldRootContext } from './ColorFieldRoot.vue';
+import { mergeProps, nextTick, onBeforeUnmount, useAttrs } from 'vue';
+import { renderAsEmpty, rendersChildren } from '@/Primitive/renderAs';
+import { useForwardElement } from '@/shared';
+import { injectColorFieldFieldControl, injectColorFieldRootContext } from './ColorFieldRoot.vue';
+import { createColorFieldInputSurface } from './useColorField';
+
+defineOptions({
+  // Bound explicitly (same merge as fallthrough), so a Field's aria ids can be
+  // merged with the consumer's instead of being replaced by them.
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<ColorFieldInputProps>(), {
   as: 'input',
 });
 
 const rootContext = injectColorFieldRootContext();
+const input = createColorFieldInputSurface(rootContext);
 
-const isFocused = ref(false);
-const { isComposing, handleCompositionStart, handleCompositionEnd } = useComposing();
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 
-const inputType = computed(() => {
-  return rootContext.channel.value ? 'text' : 'text';
-});
-
-const inputMode = computed(() => {
-  return rootContext.channel.value ? 'numeric' : 'text';
-});
-
-function handleInput(event: Event) {
-  const target = event.target as HTMLInputElement;
-  rootContext.updateValue(target.value);
+// The root's Field binding (`null` outside a `FieldRoot`). The input is the
+// field's control: it carries the id, label, description and invalid state,
+// and reports focus and blur (touched).
+const fieldControl = injectColorFieldFieldControl(null);
+const field = fieldControl?.binding;
+if (fieldControl) {
+  const attrs = useAttrs();
+  const registration = {
+    element: () => currentElement.value as HTMLElement | undefined,
+    id: () => attrs.id as string | undefined,
+  };
+  fieldControl.input.value = registration;
+  onBeforeUnmount(() => {
+    if (fieldControl.input.value === registration) {
+      fieldControl.input.value = undefined;
+    }
+  });
 }
 
-function handleBlur() {
-  isFocused.value = false;
-  rootContext.commit();
+// `$attrs` isn't reactive, so the Field's wiring is read during render. Its
+// state attributes go first; its aria ids are merged with the consumer's. A
+// consumer `aria-invalid` wins, then the field's, then the input's own (set
+// when a commit rejected the text).
+function renderAttrs(attrs: Record<string, unknown>) {
+  if (!field) {
+    return mergeProps(input.attrs.value, attrs);
+  }
+  const aria = field.ariaAttrs(attrs, rootContext.disabled.value);
+  return mergeProps(
+    field.dataAttributes(),
+    input.attrs.value,
+    attrs,
+    {
+      ...aria,
+      'id': field.id(),
+      'aria-invalid': aria['aria-invalid'] ?? input.attrs.value['aria-invalid'],
+      'onFocus': field.onFocus,
+      'onBlur': handleFieldBlur,
+    },
+  );
 }
 
-function handleFocus() {
-  isFocused.value = true;
-}
-
-function handleWheel(event: WheelEvent) {
-  if (!isFocused.value) {
-    return;
-  }
-  rootContext.handleWheel(event);
-}
-
-function handleKeydown(event: KeyboardEvent) {
-  // Don't step/commit mid-composition, keys are used for IME candidate navigation and commit.
-  // `isComposing` stays true until the tick after `compositionend`, so the commit keydown
-  // (which can report `event.isComposing === false`) is still skipped.
-  if (isComposing.value || event.isComposing) {
-    return;
-  }
-  switch (event.key) {
-    case 'ArrowUp':
-      event.preventDefault();
-      rootContext.increment();
-      break;
-    case 'ArrowDown':
-      event.preventDefault();
-      rootContext.decrement();
-      break;
-    case 'PageUp':
-      event.preventDefault();
-      rootContext.incrementPage();
-      break;
-    case 'PageDown':
-      event.preventDefault();
-      rootContext.decrementPage();
-      break;
-    case 'Home':
-      event.preventDefault();
-      rootContext.decrementToMin();
-      break;
-    case 'End':
-      event.preventDefault();
-      rootContext.incrementToMax();
-      break;
-    case 'Enter':
-      event.preventDefault();
-      rootContext.commit();
-      break;
-  }
-}
-
-// Handle numeric key validation for channel mode
-function handleBeforeInput(event: InputEvent) {
-  if (event.isComposing) {
-    return;
-  }
-  if (!rootContext.channel.value) {
-    return;
-  } // No validation for hex mode
-
-  const target = event.target as HTMLInputElement;
-  const data = event.data;
-
-  // Allow numbers, decimal point, minus sign
-  if (data && !ALLOWED_INPUT_RE.test(data)) {
-    event.preventDefault();
-    return;
-  }
-
-  // Check the resulting value would be valid
-  const nextValue = target.value.slice(0, target.selectionStart ?? undefined)
-    + (data ?? '')
-    + target.value.slice(target.selectionEnd ?? undefined);
-
-  // Allow empty or partial values while typing
-  if (nextValue === '-' || nextValue === '.' || nextValue === '-.') {
-    return;
-  }
-
-  const numValue = parseFloat(nextValue);
-  if (isNaN(numValue)) {
-    event.preventDefault();
-  }
+// A blur commits the typed text first (the surface's own `onBlur`). Report
+// the blur once that change has rendered, so on-blur validation reads the
+// committed value from a controlled parent.
+function handleFieldBlur() {
+  nextTick(field!.onBlur);
 }
 </script>
 
 <template>
-  <Primitive
-    :as-child="asChild"
-    :as="as"
-    :type="inputType"
-    :inputmode="inputMode"
-    :value="rootContext.inputValue.value"
-    :placeholder="rootContext.placeholder.value"
-    :disabled="rootContext.disabled.value"
-    :readonly="rootContext.readonly.value"
-    :data-disabled="rootContext.disabled.value ? '' : undefined"
-    :data-readonly="rootContext.readonly.value ? '' : undefined"
-    :aria-invalid="!rootContext.channel.value ? undefined : undefined"
-    @input="handleInput"
-    @blur="handleBlur"
-    @focus="handleFocus"
-    @keydown="handleKeydown"
-    @wheel="handleWheel"
-    @beforeinput="handleBeforeInput"
-    @compositionstart="handleCompositionStart"
-    @compositionend="handleCompositionEnd"
+  <component
+    :is="renderAsEmpty(as, asChild)"
+    :ref="forwardRef"
+    v-bind="renderAttrs($attrs)"
   >
-    <slot />
-  </Primitive>
+    <template
+      v-if="rendersChildren(as, asChild)"
+      #default
+    >
+      <slot />
+    </template>
+  </component>
 </template>

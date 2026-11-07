@@ -3,7 +3,7 @@ import type {
   MenuContentEmits,
   MenuContentProps,
 } from '@/Menu';
-import { useForwardExpose, useForwardPropsEmits } from '@/shared';
+import { useForwardElement, useForwardPropsEmits } from '@/shared';
 
 export type ContextMenuContentEmits = Omit<MenuContentEmits, 'entryFocus'>;
 
@@ -19,10 +19,11 @@ export interface ContextMenuContentProps
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { MenuContent } from '@/Menu';
+import { provideMenuBackdropCutoutContext } from '@/Menu/MenuContentImpl.vue';
 import { omitEntryFocusListener } from '@/Menu/utils';
 import { injectContextMenuRootContext } from './ContextMenuRoot.vue';
+import { createContextMenuContentHandlers } from './useContextMenu';
 
 defineOptions({
   inheritAttrs: false,
@@ -39,13 +40,19 @@ const props = withDefaults(defineProps<ContextMenuContentProps>(), {
 const emits = defineEmits<ContextMenuContentEmits>();
 const forwarded = useForwardPropsEmits(props, emits);
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 const rootContext = injectContextMenuRootContext();
-const hasInteractedOutside = ref(false);
+// A right-click inside the trigger area re-opens a modal menu at the new point,
+// so the area stays interactive through the menu's backdrop.
+provideMenuBackdropCutoutContext(rootContext.triggerElement);
+// Bound after the forwarded emits, so they still see a consumer's `preventDefault()`.
+const { onCloseAutoFocus, onInteractOutside } = createContextMenuContentHandlers(rootContext);
 </script>
 
 <template>
   <MenuContent
+    :ref="forwardRef"
     side="right"
     :side-offset="2"
     align="start"
@@ -62,25 +69,8 @@ const hasInteractedOutside = ref(false);
         'var(--akar-popper-anchor-height)',
     }"
     v-bind="{ ...forwarded, ...omitEntryFocusListener($attrs) }"
-    @close-auto-focus="
-      (event) => {
-        if (!event.defaultPrevented && hasInteractedOutside) {
-          event.preventDefault();
-        }
-        hasInteractedOutside = false;
-      }
-    "
-    @interact-outside="
-      (event) => {
-        const originalEvent = event.detail.originalEvent as PointerEvent
-        // Prevent closing when right click (button=2) on the trigger element or its descendants
-        if (originalEvent.button === 2 && rootContext.triggerElement.value?.contains(event.target as Node)) {
-          event.preventDefault()
-        }
-        if (!event.defaultPrevented && !rootContext.modal.value)
-          hasInteractedOutside = true;
-      }
-    "
+    @close-auto-focus="onCloseAutoFocus"
+    @interact-outside="onInteractOutside"
   >
     <slot />
   </MenuContent>

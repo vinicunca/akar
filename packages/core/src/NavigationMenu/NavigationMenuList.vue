@@ -1,16 +1,15 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 
 export interface NavigationMenuListProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import {
-  Primitive,
-} from '@/Primitive';
+import { mergeProps, onMounted } from 'vue';
+import { renderAs } from '@/Primitive/renderAs';
 import { injectNavigationMenuContext } from './NavigationMenuRoot.vue';
+import { getNavigationMenuListSurface } from './useNavigationMenu';
 
 defineOptions({
   inheritAttrs: false,
@@ -21,7 +20,10 @@ const props = withDefaults(defineProps<NavigationMenuListProps>(), {
 });
 
 const menuContext = injectNavigationMenuContext();
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
+
+const list = getNavigationMenuListSurface(menuContext);
 
 onMounted(() => {
   menuContext.onIndicatorTrackChange(currentElement.value);
@@ -29,17 +31,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <Primitive
+  <div
     :ref="forwardRef"
     style="position: relative"
   >
-    <Primitive
-      v-bind="$attrs"
-      :as-child="props.asChild"
-      :as="as"
-      :data-orientation="menuContext.orientation"
+    <component
+      :is="renderAs(as, props.asChild)"
+      v-bind="mergeProps(list.attrs.value, $attrs)"
     >
       <slot />
-    </Primitive>
-  </Primitive>
+    </component>
+  </div>
 </template>

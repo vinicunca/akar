@@ -37,3 +37,14 @@ export {
   default as AlertDialogTrigger,
   type AlertDialogTriggerProps,
 } from './AlertDialogTrigger.vue';
+export { AlertDialogHandle, createAlertDialogHandle } from './handle';
+export {
+  type AlertDialogContentContext,
+  type AlertDialogContentState,
+  type AlertDialogOpenChangeReason,
+  useAlertDialog,
+  useAlertDialogContent,
+  type UseAlertDialogContentReturn,
+  type UseAlertDialogProps,
+  type UseAlertDialogReturn,
+} from './useAlertDialog';

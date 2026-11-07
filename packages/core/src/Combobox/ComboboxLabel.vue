@@ -7,25 +7,28 @@ export interface ComboboxLabelProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
-import { useForwardExpose, useId } from '@/shared';
+import { renderAs } from '@/Primitive/renderAs';
+import { useForwardElement, useId } from '@/shared';
 import { injectComboboxGroupContext } from './ComboboxGroup.vue';
 
 const props = withDefaults(defineProps<ComboboxLabelProps>(), {
   as: 'div',
 });
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 const groupContext = injectComboboxGroupContext({ id: '', labelId: '' });
 
 groupContext.labelId ||= useId(undefined, 'akar-combobox-group-label');
 </script>
 
 <template>
-  <Primitive
-    v-bind="props"
+  <component
+    :is="renderAs(as, asChild)"
+    v-bind="{ for: props.for }"
     :id="groupContext.labelId"
+    :ref="forwardRef"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

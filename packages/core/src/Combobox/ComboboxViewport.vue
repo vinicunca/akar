@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 import { toRefs } from 'vue';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 import { useNonce } from '@/shared/useNonce';
 import { injectComboboxRootContext } from './ComboboxRoot.vue';
 
@@ -14,10 +14,11 @@ export interface ComboboxViewportProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { Primitive } from '@/Primitive';
+import { renderAs } from '@/Primitive/renderAs';
 
 const props = defineProps<ComboboxViewportProps>();
-const { forwardRef } = useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 
 const { nonce: propNonce } = toRefs(props);
 const nonce = useNonce(propNonce);
@@ -26,8 +27,9 @@ const rootContext = injectComboboxRootContext();
 </script>
 
 <template>
-  <Primitive
-    v-bind="{ ...$attrs, ...props }"
+  <component
+    :is="renderAs(as, asChild)"
+    v-bind="{ ...$attrs, nonce: props.nonce }"
     :ref="forwardRef"
     data-akar-combobox-viewport
     role="presentation"
@@ -41,14 +43,14 @@ const rootContext = injectComboboxRootContext();
     }"
   >
     <slot />
-  </Primitive>
-  <Primitive
-    as="style"
+  </component>
+  <component
+    :is="renderAs('style')"
     :nonce="nonce"
   >
     /* Hide scrollbars cross-browser and enable momentum scroll for touch
     devices */ [data-akar-combobox-viewport] { scrollbar-width:none; -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch; }
     [data-akar-combobox-viewport]::-webkit-scrollbar { display: none; }
-  </Primitive>
+  </component>
 </template>

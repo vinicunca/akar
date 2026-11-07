@@ -1,4 +1,3 @@
-import { CalendarDate, CalendarDateTime } from '@internationalized/date';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { userEvent } from 'vitest/browser';
@@ -14,7 +13,7 @@ describe('given a Calendar, in a real browser', () => {
       attachTo: document.body,
       props: {
         calendarProps: {
-          placeholder: new CalendarDate(2024, 3, 20),
+          placeholder: new Temporal.PlainDate(2024, 3, 20),
         },
       },
     });
@@ -32,8 +31,8 @@ describe('given a Calendar, in a real browser', () => {
       attachTo: document.body,
       props: {
         calendarProps: {
-          placeholder: new CalendarDateTime(2024, 3, 20, 10, 30),
-          minValue: new CalendarDate(2024, 2, 25),
+          placeholder: new Temporal.PlainDateTime(2024, 3, 20, 10, 30),
+          minValue: new Temporal.PlainDate(2024, 2, 25),
         },
       },
     });

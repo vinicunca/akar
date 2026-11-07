@@ -1,11 +1,16 @@
 <script lang="ts">
-import type { ListboxFilterEmits, ListboxFilterProps } from '@/Listbox';
-import { useVModel } from '@vueuse/core';
-import { nextTick, onMounted, watch } from 'vue';
-import { usePrimitiveElement } from '@/Primitive';
-import { useComposing } from '@/shared';
+import type { ComboboxInputChangeReason, ComboboxOpenChangeReason } from './useCombobox';
+import type { ListboxFilterProps } from '@/Listbox';
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared';
+import { mergeProps, nextTick, onMounted, onUnmounted, watch } from 'vue';
+import { useControllableState, useForwardElement } from '@/shared';
 
-export type ComboboxInputEmits = ListboxFilterEmits;
+export type ComboboxInputEmits = {
+  /** Called before the input text changes; `details.cancel()` keeps the current text. */
+  'beforeUpdate:modelValue': [value: string, details: ChangeEventDetails<ComboboxInputChangeReason>];
+  /** Event handler called when the input text changes. */
+  'update:modelValue': [value: string, details: ChangeEventDetails<ComboboxInputChangeReason>];
+};
 export interface ComboboxInputProps extends ListboxFilterProps {
   /** The display value of input for selected item. Does not work with `multiple`. */
   displayValue?: (val: any) => string;
@@ -13,177 +18,144 @@ export interface ComboboxInputProps extends ListboxFilterProps {
 </script>
 
 <script setup lang="ts">
-import { ListboxFilter } from '@/Listbox';
-import { injectListboxRootContext } from '@/Listbox/ListboxRoot.vue';
+import { renderAsEmpty, rendersChildren } from '@/Primitive/renderAs';
 import { injectComboboxRootContext } from './ComboboxRoot.vue';
+import { createComboboxInputSurface, getComboboxInputText } from './useCombobox';
+import { getComboboxInputFieldAttrs, injectComboboxFieldContext } from './useComboboxField';
+
+// `$attrs` are merged in the render (as the fall-through did) so the Field's
+// aria ids can be merged with the consumer's.
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<ComboboxInputProps>(), {
   as: 'input',
 });
 const emits = defineEmits<ComboboxInputEmits>();
 
-const rootContext = injectComboboxRootContext();
-const listboxContext = injectListboxRootContext();
-const { primitiveElement, currentElement } = usePrimitiveElement();
+defineSlots<{
+  default?: (props: {
+    /** Current input values */
+    modelValue: typeof modelValue.value;
+  }) => any;
+}>();
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  passive: (props.modelValue === undefined) as false,
+const rootContext = injectComboboxRootContext();
+const fieldContext = injectComboboxFieldContext(null);
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
+
+// The input text, with change details (#2828): typing is `'input-change'` and
+// cancellable through `beforeUpdate:modelValue`.
+const { state: modelValue, setState: setText } = useControllableState<string, ComboboxInputChangeReason>({
+  prop: () => props.modelValue,
+  defaultValue: '',
+  name: 'modelValue',
+  emit: emits,
+});
+
+// role/aria, the open-on-type/focus/click handling, IME composition and the
+// keyboard (routed through `getNavigationIntent`) come from the shared surface.
+const surface = createComboboxInputSurface(rootContext, {
+  modelValue,
+  setText: (value, event) => setText(value, 'input-change', event),
+  disabled: () => props.disabled,
+  closeOnBlur: true,
 });
 
 onMounted(() => {
+  // The input owns the keyboard: the items are highlighted, never focused.
+  rootContext.focusable.value = false;
   if (currentElement.value) {
     rootContext.onInputElementChange(currentElement.value as HTMLInputElement);
   }
-});
-
-const { isComposing, shouldDeferInput, handleCompositionStart, handleCompositionUpdate, handleCompositionEnd } = useComposing((event) => {
-  const el = event.target as HTMLInputElement;
-  if (el) {
-    processInputValue(el.value);
-  }
-});
-
-function handleKeyDown(ev: KeyboardEvent) {
-  // Don't swallow arrow keys mid-composition, they're used for IME candidate navigation
-  if (isComposing.value) {
-    return;
-  }
-  ev.preventDefault();
-  if (!rootContext.open.value) {
-    rootContext.onOpenChange(true);
-  }
-}
-
-function processInputValue(value: string) {
-  if (!rootContext.open.value) {
-    rootContext.onOpenChange(true);
-    nextTick(() => {
-      if (value) {
-        rootContext.filterSearch.value = value;
-        listboxContext.highlightFirstItem();
-      }
-    });
-  } else {
-    rootContext.filterSearch.value = value;
-  }
-}
-
-function handleInput(event: InputEvent) {
-  if (shouldDeferInput.value) {
-    return;
-  }
-  processInputValue((event.target as HTMLInputElement).value);
-}
-
-function handleFocus() {
-  if (rootContext.openOnFocus.value && !rootContext.open.value) {
-    rootContext.onOpenChange(true);
-  }
-}
-
-function handleBlur(ev: FocusEvent) {
-  if (!rootContext.open.value) {
-    return;
-  }
-
-  const nextFocus = ev.relatedTarget as Element | null;
-
-  // If focus moves to nothing (e.g. click on non-focusable area), let DismissableLayer handle it
-  if (!nextFocus) {
-    return;
-  }
-
-  const isInsideRoot = rootContext.parentElement.value?.contains(nextFocus);
-  const isInsideContent = document.getElementById(rootContext.contentId)?.contains(nextFocus);
-
-  if (!isInsideRoot && !isInsideContent) {
-    // Delay to let FocusScope's focus-restoration (handleFocusOut) run first.
-    // Without this, closing fires before FocusScope can pull focus back inside,
-    // causing a second combobox to immediately close when switching between two.
-    requestAnimationFrame(() => {
-      if (!rootContext.open.value) {
-        return;
-      }
-      const active = document.activeElement;
-      const isStillOutside = !rootContext.parentElement.value?.contains(active)
-        && !document.getElementById(rootContext.contentId)?.contains(active);
-      if (isStillOutside) {
-        rootContext.onOpenChange(false);
-      }
-    });
-  }
-}
-
-function handleClick() {
-  if (rootContext.openOnClick.value && !rootContext.open.value) {
-    rootContext.onOpenChange(true);
-  }
-}
-
-function resetSearchTerm() {
-  const rootModelValue = rootContext.modelValue.value;
-
-  if (props.displayValue) {
-    modelValue.value = props.displayValue(rootModelValue);
-  } else if (!rootContext.multiple.value && rootModelValue && !Array.isArray(rootModelValue)) {
-    if (typeof rootModelValue !== 'object') {
-      modelValue.value = rootModelValue.toString();
-    } else {
-      modelValue.value = '';
+  setTimeout(() => {
+    // make sure all DOM was flushed, then capture the focus
+    if (props.autoFocus) {
+      currentElement.value?.focus();
     }
-  } else {
-    modelValue.value = '';
-  }
+  }, 1);
+});
 
+onUnmounted(() => {
+  rootContext.focusable.value = true;
+  // Unless another input took its place: the field's label then follows the trigger.
+  if (!rootContext.inputElement.value?.isConnected) {
+    rootContext.onInputElementChange(undefined);
+  }
+});
+
+// Inside a Field, followed rather than read once: an as-child swap replaces
+// the element while the input stays mounted, and the field focuses (and
+// labels) the connected one.
+if (fieldContext) {
+  watch(currentElement, (element, previous) => {
+    if (element) {
+      rootContext.onInputElementChange(element as HTMLInputElement);
+    } else if (rootContext.inputElement.value === previous) {
+      rootContext.onInputElementChange(undefined);
+    }
+  }, { flush: 'post' });
+}
+
+function resetSearchTerm(reason: ComboboxInputChangeReason | BaseChangeReason) {
+  setText(getComboboxInputText(rootContext, props.displayValue), reason);
   nextTick(() => {
-    // Temporary force reassign
-    // eslint-disable-next-line no-self-assign
-    modelValue.value = modelValue.value;
+    // The text can be unchanged while the DOM still shows typed text (a
+    // controlled text the parent kept): patch the element back.
+    const input = currentElement.value as HTMLInputElement | undefined;
+    if (input && input.value !== (modelValue.value ?? '')) {
+      input.value = modelValue.value ?? '';
+    }
   });
 }
 
-rootContext.onResetSearchTerm(() => {
-  resetSearchTerm();
+// Closing resets the text: `'escape-key'` for Escape, `'input-clear'` when
+// there is no selection to show, else `'none'`.
+rootContext.onResetSearchTerm((closeReason?: ComboboxOpenChangeReason | BaseChangeReason) => {
+  resetSearchTerm(closeReason === 'escape-key'
+    ? 'escape-key'
+    : getComboboxInputText(rootContext, props.displayValue) === ''
+      ? 'input-clear'
+      : 'none');
 });
 
-watch(rootContext.modelValue, async () => {
+rootContext.onClearInput((event?: Event) => {
+  // `false` (a cancelled `beforeUpdate:modelValue`) keeps the text, and `ComboboxCancel` stops.
+  return setText('', 'clear-press', event) || (modelValue.value ?? '') === '';
+});
+
+watch(rootContext.modelValue, () => {
   if (!rootContext.isUserInputted.value && rootContext.resetSearchTermOnSelect.value) {
-    resetSearchTerm();
+    // A selection writes the selected text; a parent's value is `'none'`.
+    const changeReason = rootContext.lastChangeDetails.value.reason;
+    resetSearchTerm(changeReason === 'clear-press'
+      ? 'clear-press'
+      : changeReason === 'item-press' || changeReason === 'item-keydown' || changeReason === 'select-all' || changeReason === 'range-select'
+        ? 'item-press'
+        : 'none');
   }
 }, { immediate: true, deep: true });
 
 watch(rootContext.filterState, (_newValue, oldValue) => {
-  // we exclude virtualized list as the state would be constantly updated,
-  // and only change highlight when previously there were no items displayed
-  if (!rootContext.isVirtual.value && (oldValue.count === 0)) {
-    listboxContext.highlightFirstItem();
+  // A virtualized list updates its state constantly; otherwise only re-highlight
+  // when there were no items to show before.
+  if (!rootContext.isVirtual.value && oldValue.count === 0) {
+    rootContext.highlightFirstItem();
   }
 });
 </script>
 
 <template>
-  <ListboxFilter
-    ref="primitiveElement"
-    v-model="modelValue"
-    :as="as"
-    :as-child="asChild"
-    :auto-focus="autoFocus"
-    :disabled="disabled"
-    :aria-expanded="rootContext.open.value"
-    :aria-controls="rootContext.contentId"
-    :aria-activedescendant="rootContext.open.value ? listboxContext.highlightedElement.value?.id : undefined"
-    aria-autocomplete="list"
-    role="combobox"
-    autocomplete="off"
-    @click="handleClick"
-    @input="handleInput"
-    @keydown.down.up="handleKeyDown"
-    @focus="handleFocus"
-    @blur="handleBlur"
-    @compositionstart="handleCompositionStart"
-    @compositionupdate="handleCompositionUpdate"
-    @compositionend="handleCompositionEnd"
+  <component
+    :is="renderAsEmpty(as, asChild)"
+    :ref="forwardRef"
+    v-bind="fieldContext ? getComboboxInputFieldAttrs(fieldContext, surface.attrs.value, $attrs) : mergeProps(surface.attrs.value, $attrs)"
   >
-    <slot />
-  </ListboxFilter>
+    <template
+      v-if="rendersChildren(as, asChild)"
+      #default
+    >
+      <slot :model-value="modelValue" />
+    </template>
+  </component>
 </template>

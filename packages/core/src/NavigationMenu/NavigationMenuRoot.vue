@@ -1,10 +1,12 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 
+import type { NavigationMenuChangeReason } from './useNavigationMenu';
 import type { Direction, Orientation } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
-import { useCollection } from '@/Collection';
-import { createContext, useDirection, useForwardExpose, useId } from '@/shared';
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared';
+import { useCollection, useCollectionSlot } from '@/Collection';
+import { createContext, useDirection, useForwardElement, useId } from '@/shared';
 import { EVENT_ROOT_CONTENT_DISMISS } from './utils';
 
 export interface NavigationMenuRootProps extends PrimitiveProps {
@@ -59,32 +61,40 @@ export interface NavigationMenuRootProps extends PrimitiveProps {
   unmountOnHide?: boolean;
 }
 export type NavigationMenuRootEmits = {
+  /** Called before the value changes; `details.cancel()` keeps the current value. */
+  'beforeUpdate:modelValue': [value: string, details: ChangeEventDetails<NavigationMenuChangeReason>];
   /** Event handler called when the value changes. */
-  'update:modelValue': [value: string];
+  'update:modelValue': [value: string, details: ChangeEventDetails<NavigationMenuChangeReason>];
+  /** Event handler called after the viewport's open (`true`) or close (`false`) transitions and animations have finished. Requires a `NavigationMenuViewport`. */
+  'update:openComplete': [value: boolean];
 };
 
 export interface NavigationMenuContext {
   isRootMenu: boolean;
-  modelValue: Ref<string>;
+  modelValue: Readonly<Ref<string>>;
   previousValue: Ref<string>;
   baseId: string;
-  dir: Ref<Direction>;
+  dir: Readonly<Ref<Direction>>;
   orientation: Orientation;
-  disableClickTrigger: Ref<boolean>;
-  disableHoverTrigger: Ref<boolean>;
-  unmountOnHide: Ref<boolean>;
+  disableClickTrigger: Readonly<Ref<boolean>>;
+  disableHoverTrigger: Readonly<Ref<boolean>>;
+  unmountOnHide: Readonly<Ref<boolean>>;
   rootNavigationMenu: Ref<HTMLElement | undefined>;
   activeTrigger: Ref<HTMLElement | undefined>;
   indicatorTrack: Ref<HTMLElement | undefined>;
   onIndicatorTrackChange: (indicatorTrack: HTMLElement | undefined) => void;
   viewport: Ref<HTMLElement | undefined>;
   onViewportChange: (viewport: HTMLElement | undefined) => void;
-  onTriggerEnter: (itemValue: string) => void;
-  onTriggerLeave: () => void;
+  onTriggerEnter: (itemValue: string, event?: Event) => void;
+  onTriggerLeave: (event?: Event) => void;
   onContentEnter: (itemValue: string) => void;
-  onContentLeave: () => void;
-  onItemSelect: (itemValue: string) => void;
-  onItemDismiss: () => void;
+  onContentLeave: (event?: Event) => void;
+  /** Opens `itemValue` (`''` closes) at once. Returns `false` when unchanged or cancelled via `beforeUpdate:modelValue`. */
+  onItemSelect: (itemValue: string, reason?: NavigationMenuChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /** Closes the menu at once. Returns `false` when unchanged or cancelled via `beforeUpdate:modelValue`. */
+  onItemDismiss: (reason?: NavigationMenuChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /** Called by the viewport once its open/close transitions finish; emits `update:openComplete`. */
+  notifyOpenComplete?: (value: boolean) => void;
 }
 
 export const [injectNavigationMenuContext, provideNavigationMenuContext]
@@ -92,16 +102,16 @@ export const [injectNavigationMenuContext, provideNavigationMenuContext]
 </script>
 
 <script setup lang="ts">
-import { refAutoReset, useDebounceFn, useEventListener, useVModel } from '@vueuse/core';
-import {
-  computed,
-  ref,
-  toRefs,
-  watchEffect,
-} from 'vue';
-import {
-  Primitive,
-} from '@/Primitive';
+import { useEventListener } from '@vueuse/core';
+import { mergeProps } from 'vue';
+import { renderAs } from '@/Primitive/renderAs';
+import { handleRootDismissEvent, useNavigationMenu } from './useNavigationMenu';
+
+defineOptions({
+  // `$attrs` are merged under the part's own bindings: the precedence the
+  // former `CollectionSlot` wrapper gave them.
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<NavigationMenuRootProps>(), {
   modelValue: undefined,
@@ -122,130 +132,45 @@ defineSlots<{
   }) => any;
 }>();
 
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue ?? '',
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<string>;
-const previousValue = ref('');
+const { forwardRef, currentElement: rootNavigationMenu, expose } = useForwardElement();
+defineExpose(expose);
 
-const { forwardRef, currentElement: rootNavigationMenu } = useForwardExpose();
+const { getItems } = useCollection({ key: 'NavigationMenu', isProvider: true });
+useCollectionSlot(rootNavigationMenu, { key: 'NavigationMenu' });
 
-const indicatorTrack = ref<HTMLElement>();
-const viewport = ref<HTMLElement>();
-const activeTrigger = ref<HTMLElement>();
+// `useDirection` (ConfigProvider-aware) and `useId` (SSR-aware) stay in the
+// shell; the open-item model, hover intent and context live in the composable.
+const dir = useDirection(() => props.dir);
 
-const { getItems, CollectionSlot } = useCollection({ key: 'NavigationMenu', isProvider: true });
-
-const { delayDuration, skipDelayDuration, dir: propDir, disableClickTrigger, disableHoverTrigger, unmountOnHide } = toRefs(props);
-const dir = useDirection(propDir);
-
-const isDelaySkipped = refAutoReset(false, skipDelayDuration);
-const skipNextClose = ref(false);
-const computedDelay = computed(() => {
-  const isOpen = modelValue.value !== '';
-  if (isOpen || isDelaySkipped.value) {
-    return 150;
-  } // 150ms for user to switch trigger or move into content view
-  else {
-    return delayDuration.value;
-  }
-});
-
-const debouncedFn = useDebounceFn((val?: string) => {
-  // passing `undefined` meant to reset the debounce timer
-  if (typeof val === 'string') {
-    if (val === '' && skipNextClose.value) {
-      skipNextClose.value = false;
-      return;
-    }
-    previousValue.value = modelValue.value;
-    modelValue.value = val;
-    if (val === '') {
-      isDelaySkipped.value = true;
-    }
-  }
-}, computedDelay);
-
-watchEffect(() => {
-  if (!modelValue.value) {
-    return;
-  }
-
-  const items = getItems().map((i) => i.ref);
-  activeTrigger.value = items.find((item) =>
-    item.id.includes(modelValue.value),
-  );
-});
-
-useEventListener(rootNavigationMenu, EVENT_ROOT_CONTENT_DISMISS, onItemDismiss);
-
-provideNavigationMenuContext({
-  isRootMenu: true,
-  modelValue,
-  previousValue,
-  baseId: useId(undefined, 'akar-navigation-menu'),
-  disableClickTrigger,
-  disableHoverTrigger,
+const { modelValue, root, context } = useNavigationMenu({
+  modelValue: () => props.modelValue,
+  defaultValue: props.defaultValue,
   dir,
-  unmountOnHide,
   orientation: props.orientation,
-  rootNavigationMenu,
-  indicatorTrack,
-  activeTrigger,
-  onIndicatorTrackChange: (val) => {
-    indicatorTrack.value = val;
-  },
-  viewport,
-  onViewportChange: (val) => {
-    viewport.value = val;
-  },
-  onTriggerEnter: (val) => {
-    if (modelValue.value !== '') {
-      skipNextClose.value = true;
-      previousValue.value = modelValue.value;
-      modelValue.value = val;
-    } else {
-      debouncedFn(val);
-    }
-  },
-  onTriggerLeave: () => {
-    skipNextClose.value = false;
-    debouncedFn('');
-  },
-  onContentEnter: () => {
-    debouncedFn();
-  },
-  onContentLeave: () => {
-    if (!props.disablePointerLeaveClose) {
-      skipNextClose.value = false;
-      debouncedFn('');
-    }
-  },
-  onItemSelect: (val) => {
-    // When selecting item we trigger update immediately
-    previousValue.value = modelValue.value;
-    modelValue.value = val;
-  },
-  onItemDismiss,
+  delayDuration: () => props.delayDuration,
+  skipDelayDuration: () => props.skipDelayDuration,
+  disableClickTrigger: () => props.disableClickTrigger,
+  disableHoverTrigger: () => props.disableHoverTrigger,
+  disablePointerLeaveClose: () => props.disablePointerLeaveClose,
+  unmountOnHide: () => props.unmountOnHide,
+  baseId: useId(undefined, 'akar-navigation-menu'),
+  rootElement: rootNavigationMenu as Ref<HTMLElement | undefined>,
+  getItems: () => getItems().map((i) => i.ref),
+  emit: emits,
+  onOpenComplete: (value) => emits('update:openComplete', value),
 });
 
-function onItemDismiss() {
-  previousValue.value = modelValue.value;
-  modelValue.value = '';
-}
+useEventListener(rootNavigationMenu, EVENT_ROOT_CONTENT_DISMISS, (event: Event) => handleRootDismissEvent(context, event));
+
+provideNavigationMenuContext(context);
 </script>
 
 <template>
-  <CollectionSlot>
-    <Primitive
-      :ref="forwardRef"
-      :as="as"
-      :as-child="asChild"
-      :data-orientation="orientation"
-      :dir="dir"
-      data-akar-navigation-menu
-    >
-      <slot :model-value="modelValue" />
-    </Primitive>
-  </CollectionSlot>
+  <component
+    :is="renderAs(as, asChild)"
+    v-bind="mergeProps($attrs, root.attrs.value)"
+    :ref="forwardRef"
+  >
+    <slot :model-value="modelValue" />
+  </component>
 </template>

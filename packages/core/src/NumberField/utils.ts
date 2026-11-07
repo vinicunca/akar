@@ -1,8 +1,8 @@
 import type { MaybeComputedElementRef } from '@vueuse/core';
-import type { Ref } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import { NumberFormatter, NumberParser } from '@internationalized/number';
 import { unrefElement, useEventListener } from '@vueuse/core';
-import { createEventHook, isClient, reactiveComputed } from '@vueuse/shared';
+import { createEventHook, isClient } from '@vueuse/shared';
 import { computed, onScopeDispose, ref } from 'vue';
 
 const HOLD_DELAY = 400;
@@ -12,7 +12,7 @@ const TOUCH_MOVE_TOLERANCE = 10;
 export function usePressedHold(options: { target?: MaybeComputedElementRef; disabled: Ref<boolean> }) {
   const { disabled } = options;
   const timeout = ref<number>();
-  const triggerHook = createEventHook();
+  const triggerHook = createEventHook<PointerEvent | undefined>();
   const isPressed = ref(false);
   const target = computed(() => unrefElement(options.target));
   let activePointerId: number | undefined;
@@ -38,13 +38,14 @@ export function usePressedHold(options: { target?: MaybeComputedElementRef; disa
     isPressed.value = false;
   };
 
-  const trigger = () => {
+  // Hold repeats fire from a timer and carry no event.
+  const trigger = (event?: PointerEvent) => {
     if (disabled.value) {
       resetPress();
       return false;
     }
 
-    triggerHook.trigger();
+    triggerHook.trigger(event);
     return true;
   };
 
@@ -75,7 +76,7 @@ export function usePressedHold(options: { target?: MaybeComputedElementRef; disa
 
     if (event.pointerType === 'mouse') {
       holdTriggered = true;
-      if (trigger()) {
+      if (trigger(event)) {
         scheduleRepeat(HOLD_DELAY);
       }
       return;
@@ -107,7 +108,7 @@ export function usePressedHold(options: { target?: MaybeComputedElementRef; disa
     resetPress();
 
     if (shouldTriggerTap) {
-      trigger();
+      trigger(event);
     }
   };
 
@@ -132,12 +133,41 @@ export function usePressedHold(options: { target?: MaybeComputedElementRef; disa
   };
 }
 
+/**
+ * The formatter for the current locale and options, rebuilt when either
+ * changes. One computed and one small object with prototype methods; vueuse
+ * `reactiveComputed` added a reactive proxy (and its handler state) on top and
+ * ran every call through it.
+ */
+class ReactiveNumberFormatter {
+  constructor(readonly current: ComputedRef<NumberFormatter>) {}
+  format(value: number): string {
+    return this.current.value.format(value);
+  }
+
+  resolvedOptions(): Intl.ResolvedNumberFormatOptions {
+    return this.current.value.resolvedOptions();
+  }
+}
+
+/** The parser counterpart of `ReactiveNumberFormatter`. */
+class ReactiveNumberParser {
+  constructor(readonly current: ComputedRef<NumberParser>) {}
+  parse(value: string): number {
+    return this.current.value.parse(value);
+  }
+
+  isValidPartialNumber(value: string, minValue?: number, maxValue?: number): boolean {
+    return this.current.value.isValidPartialNumber(value, minValue, maxValue);
+  }
+}
+
 export function useNumberFormatter(locale: Ref<string>, options: Ref<Intl.NumberFormatOptions | undefined> = ref({})) {
-  return reactiveComputed(() => new NumberFormatter(locale.value, options.value));
+  return new ReactiveNumberFormatter(computed(() => new NumberFormatter(locale.value, options.value)));
 }
 
 export function useNumberParser(locale: Ref<string>, options: Ref<Intl.NumberFormatOptions | undefined> = ref({})) {
-  return reactiveComputed(() => new NumberParser(locale.value, options.value));
+  return new ReactiveNumberParser(computed(() => new NumberParser(locale.value, options.value)));
 }
 
 export function handleDecimalOperation(operator: '-' | '+', value1: number, value2: number): number {

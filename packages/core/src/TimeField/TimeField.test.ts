@@ -1,18 +1,17 @@
-import type { DateFields, TimeFields } from '@internationalized/date';
-
 import type { TimeFieldRootProps } from './TimeFieldRoot.vue';
+import type { DateTimeField } from '@/date';
 import type { TimeValue } from '@/shared/date';
-import { CalendarDateTime, now, parseAbsoluteToLocal, Time, toZoned } from '@internationalized/date';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+import { cycleField, getFieldValue } from '@/date';
 import { useTestKbd } from '@/shared';
 import TimeField from './story/_TimeField.vue';
 
-const time = new Time(9, 15, 29);
-const calendarDateTime = new CalendarDateTime(1980, 1, 20, 12, 30, 0, 0);
-const zonedDateTime = toZoned(calendarDateTime, 'America/New_York');
+const time = new Temporal.PlainTime(9, 15, 29);
+const calendarDateTime = new Temporal.PlainDateTime(1980, 1, 20, 12, 30, 0, 0);
+const zonedDateTime = calendarDateTime.toZonedDateTime('America/New_York');
 
 const kbd = useTestKbd();
 
@@ -163,8 +162,8 @@ describe('timeField', async () => {
       },
     });
 
-    function cycle(segment: keyof TimeFields) {
-      return String(zonedDateTime.cycle(segment, 1)[segment]);
+    function cycle(segment: DateTimeField) {
+      return String(getFieldValue(cycleField(zonedDateTime, segment, 1), segment));
     }
 
     const minute = getByTestId('minute');
@@ -189,8 +188,8 @@ describe('timeField', async () => {
       },
     });
 
-    function cycle(segment: keyof TimeFields) {
-      return String(zonedDateTime.cycle(segment, -1)[segment]);
+    function cycle(segment: DateTimeField) {
+      return String(getFieldValue(cycleField(zonedDateTime, segment, -1), segment));
     }
 
     const minute = getByTestId('minute');
@@ -217,8 +216,8 @@ describe('timeField', async () => {
       },
     });
 
-    function cycle(segment: keyof TimeFields, sign: number) {
-      return String(zonedDateTime.cycle(segment, sign)[segment]);
+    function cycle(segment: DateTimeField, sign: number) {
+      return String(getFieldValue(cycleField(zonedDateTime, segment, sign), segment));
     }
 
     const minute = getByTestId('minute');
@@ -371,7 +370,7 @@ describe('timeField', async () => {
       expect(segment).toHaveFocus();
       await user.keyboard(kbd.ARROW_UP);
       expect(segment).toHaveTextContent(
-        String(zonedDateTime[segment.getAttribute('data-akar-time-field-segment') as keyof TimeFields | keyof DateFields]),
+        String(getFieldValue(zonedDateTime, segment.getAttribute('data-akar-time-field-segment') as DateTimeField)),
       );
     }
   });
@@ -395,7 +394,7 @@ describe('timeField', async () => {
   it('allows typing two-digit hours (e.g. 14) in 24h mode regardless of locale', async () => {
     const { hour, user, value, rerender } = setup({
       timeFieldProps: {
-        modelValue: new Time(0, 30, 0),
+        modelValue: new Temporal.PlainTime(0, 30, 0),
         hourCycle: 24,
       },
       emits: {
@@ -555,7 +554,7 @@ describe('timeField', async () => {
   it('displays correct timezone with ZonedDateTime value - `now`', async () => {
     const { getByTestId } = setup({
       timeFieldProps: {
-        modelValue: now('America/Los_Angeles'),
+        modelValue: Temporal.Now.zonedDateTimeISO('America/Los_Angeles'),
       },
     });
 
@@ -570,7 +569,7 @@ describe('timeField', async () => {
   it('displays correct timezone with ZonedDateTime value - absolute -> local', async () => {
     const { getByTestId } = setup({
       timeFieldProps: {
-        modelValue: parseAbsoluteToLocal('2023-10-12T12:30:00Z'),
+        modelValue: Temporal.Instant.from('2023-10-12T12:30:00Z').toZonedDateTimeISO(Temporal.Now.timeZoneId()),
       },
     });
 
@@ -582,7 +581,7 @@ describe('timeField', async () => {
     it('displays midnight (hour 0) as 12 AM', async () => {
       const { hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(0, 30, 0),
+          modelValue: new Temporal.PlainTime(0, 30, 0),
           hourCycle: 12,
         },
       });
@@ -594,7 +593,7 @@ describe('timeField', async () => {
     it('displays noon (hour 12) as 12 PM', async () => {
       const { hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(12, 30, 0),
+          modelValue: new Temporal.PlainTime(12, 30, 0),
           hourCycle: 12,
         },
       });
@@ -606,7 +605,7 @@ describe('timeField', async () => {
     it('converts afternoon hours (13-23) to 12-hour format', async () => {
       const { hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(13, 30, 0),
+          modelValue: new Temporal.PlainTime(13, 30, 0),
           hourCycle: 12,
         },
       });
@@ -618,7 +617,7 @@ describe('timeField', async () => {
     it('converts late evening hour (23) to 11 PM', async () => {
       const { hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(23, 30, 0),
+          modelValue: new Temporal.PlainTime(23, 30, 0),
           hourCycle: 12,
         },
       });
@@ -630,7 +629,7 @@ describe('timeField', async () => {
     it('displays morning hours (1-11) correctly', async () => {
       const { hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 30, 0),
+          modelValue: new Temporal.PlainTime(9, 30, 0),
           hourCycle: 12,
         },
       });
@@ -642,7 +641,7 @@ describe('timeField', async () => {
     it('works with CalendarDateTime values', async () => {
       const { hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new CalendarDateTime(2024, 1, 15, 15, 45, 0, 0),
+          modelValue: new Temporal.PlainDateTime(2024, 1, 15, 15, 45, 0, 0),
           hourCycle: 12,
         },
       });
@@ -654,7 +653,7 @@ describe('timeField', async () => {
     it('works with ZonedDateTime values', async () => {
       const { hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: toZoned(new CalendarDateTime(2024, 1, 15, 0, 30, 0, 0), 'America/New_York'),
+          modelValue: new Temporal.PlainDateTime(2024, 1, 15, 0, 30, 0, 0).toZonedDateTime('America/New_York'),
           hourCycle: 12,
         },
       });
@@ -668,7 +667,7 @@ describe('timeField', async () => {
     it('transitions from PM to AM when cycling from 11 PM to 12 AM', async () => {
       const { hour, user, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(23, 30, 0), // 11 PM
+          modelValue: new Temporal.PlainTime(23, 30, 0), // 11 PM
           hourCycle: 12,
         },
       });
@@ -683,7 +682,7 @@ describe('timeField', async () => {
     it('transitions from AM to PM when cycling from 11 AM to 12 PM', async () => {
       const { hour, user, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(11, 30, 0), // 11 AM
+          modelValue: new Temporal.PlainTime(11, 30, 0), // 11 AM
           hourCycle: 12,
         },
       });
@@ -698,7 +697,7 @@ describe('timeField', async () => {
     it('cycles correctly through all PM hours without changing to AM', async () => {
       const { hour, user, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(13, 30, 0), // 1 PM
+          modelValue: new Temporal.PlainTime(13, 30, 0), // 1 PM
           hourCycle: 12,
         },
         emits: {
@@ -732,7 +731,7 @@ describe('timeField', async () => {
     it('allows typing 10 with AM period', async () => {
       const { hour, user, value, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(0, 30, 0),
+          modelValue: new Temporal.PlainTime(0, 30, 0),
           hourCycle: 12,
         },
         emits: {
@@ -758,7 +757,7 @@ describe('timeField', async () => {
     it('allows typing 11 with AM period', async () => {
       const { hour, user, value, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(0, 30, 0),
+          modelValue: new Temporal.PlainTime(0, 30, 0),
           hourCycle: 12,
         },
         emits: {
@@ -784,7 +783,7 @@ describe('timeField', async () => {
     it('allows typing 12 with PM period', async () => {
       const { hour, user, value, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(13, 30, 0),
+          modelValue: new Temporal.PlainTime(13, 30, 0),
           hourCycle: 12,
         },
         emits: {
@@ -811,7 +810,7 @@ describe('timeField', async () => {
     it('allows typing 10 with PM period - converts to 22:00', async () => {
       const { hour, user, value, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(13, 30, 0),
+          modelValue: new Temporal.PlainTime(13, 30, 0),
           hourCycle: 12,
         },
         emits: {
@@ -838,7 +837,7 @@ describe('timeField', async () => {
     it('allows typing 11 with PM period - converts to 23:00', async () => {
       const { hour, user, value, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(13, 30, 0),
+          modelValue: new Temporal.PlainTime(13, 30, 0),
           hourCycle: 12,
         },
         emits: {
@@ -865,7 +864,7 @@ describe('timeField', async () => {
     it('allows typing 12 with AM period - converts to 00:00', async () => {
       const { hour, user, value, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(1, 30, 0),
+          modelValue: new Temporal.PlainTime(1, 30, 0),
           hourCycle: 12,
         },
         emits: {
@@ -894,7 +893,7 @@ describe('timeField', async () => {
     it('snaps typed minute value to nearest step', async () => {
       const { user, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new CalendarDateTime(1980, 1, 20, 12, 0, 0, 0),
+          modelValue: new Temporal.PlainDateTime(1980, 1, 20, 12, 0, 0, 0),
           granularity: 'second',
           step: { minute: 15 },
           stepSnapping: true,
@@ -923,7 +922,7 @@ describe('timeField', async () => {
     it('snaps typed minute value down to nearest step', async () => {
       const { user, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new CalendarDateTime(1980, 1, 20, 12, 0, 0, 0),
+          modelValue: new Temporal.PlainDateTime(1980, 1, 20, 12, 0, 0, 0),
           granularity: 'second',
           step: { minute: 15 },
           stepSnapping: true,
@@ -952,7 +951,7 @@ describe('timeField', async () => {
     it('does not snap typed values when stepSnapping is false', async () => {
       const { user, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new CalendarDateTime(1980, 1, 20, 12, 0, 0, 0),
+          modelValue: new Temporal.PlainDateTime(1980, 1, 20, 12, 0, 0, 0),
           granularity: 'second',
           step: { minute: 15 },
           stepSnapping: false,
@@ -981,7 +980,7 @@ describe('timeField', async () => {
     it('arrow keys still use step regardless of stepSnapping setting', async () => {
       const { user, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new CalendarDateTime(1980, 1, 20, 12, 0, 0, 0),
+          modelValue: new Temporal.PlainDateTime(1980, 1, 20, 12, 0, 0, 0),
           granularity: 'second',
           step: { minute: 15 },
           stepSnapping: false,
@@ -997,7 +996,7 @@ describe('timeField', async () => {
     it('snaps to max boundary when value exceeds max', async () => {
       const { user, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new CalendarDateTime(1980, 1, 20, 12, 0, 0, 0),
+          modelValue: new Temporal.PlainDateTime(1980, 1, 20, 12, 0, 0, 0),
           granularity: 'second',
           step: { minute: 15 },
           stepSnapping: true,
@@ -1071,7 +1070,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 125:0 (via deleteValue) — single-digit value → modelValue=undefined, segment=null
       const { user, hour } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 30, 0),
+          modelValue: new Temporal.PlainTime(9, 30, 0),
         },
       });
       // Segment is filled (no data-placeholder attribute when value is set)
@@ -1086,7 +1085,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // deleteValue: str.length===2 > 1 → returns parseInt(str.slice(0,-1))
       const { user, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 30, 0),
+          modelValue: new Temporal.PlainTime(9, 30, 0),
           granularity: 'second',
         },
       });
@@ -1104,7 +1103,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 139:0 via deleteValue on single-digit second
       const { user, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 30, 5),
+          modelValue: new Temporal.PlainTime(9, 30, 5),
           granularity: 'second',
         },
       });
@@ -1182,7 +1181,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 61:0 — updateMinuteOrSecond: num > maxStart (5) on first digit → moveToNext=true
       const { user, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 15, 0),
+          modelValue: new Temporal.PlainTime(9, 15, 0),
           granularity: 'second',
         },
       });
@@ -1201,7 +1200,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 65:0 equivalent in updateMinuteOrSecond but for hour
       const { user, hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(1, 30, 0),
+          modelValue: new Temporal.PlainTime(1, 30, 0),
           hourCycle: 12,
         },
       });
@@ -1217,7 +1216,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 63 false path (total <= 59) → moveToNext=true at the end (line 515)
       const { user, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 15, 0),
+          modelValue: new Temporal.PlainTime(9, 15, 0),
           granularity: 'second',
         },
       });
@@ -1236,7 +1235,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 71:0 — updateHour: num > maxStart (2 for max=24) on first digit → moveToNext=true
       const { user, hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 30, 0),
+          modelValue: new Temporal.PlainTime(9, 30, 0),
           hourCycle: 24,
         },
       });
@@ -1253,7 +1252,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 73:1 — num (5) > maxStart (2) → moveToNext=true
       const { user, hour, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 30, 0),
+          modelValue: new Temporal.PlainTime(9, 30, 0),
           hourCycle: 24,
         },
       });
@@ -1272,7 +1271,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 144:0 — inner if(dayPeriod === 'AM') true branch
       const { user, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 30, 0),
+          modelValue: new Temporal.PlainTime(9, 30, 0),
           granularity: 'second',
         },
         emits: {
@@ -1296,7 +1295,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 144:0 — inner if(dayPeriod === 'AM') true branch
       const { user, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(9, 30, 0),
+          modelValue: new Temporal.PlainTime(9, 30, 0),
           granularity: 'second',
         },
         emits: {
@@ -1319,7 +1318,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 144:1 — inner if(dayPeriod === 'AM') is false → falls to lines 858-859 (set AM)
       const { user, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new Time(21, 30, 0), // 9 PM
+          modelValue: new Temporal.PlainTime(21, 30, 0), // 9 PM
           granularity: 'second',
         },
         emits: {
@@ -1342,7 +1341,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 147:1 — ['p','P'].includes(key) && dayPeriod !== 'PM' → false when already PM
       const { user, getByTestId } = setup({
         timeFieldProps: {
-          modelValue: new Time(21, 30, 0), // 9 PM
+          modelValue: new Temporal.PlainTime(21, 30, 0), // 9 PM
           granularity: 'second',
         },
       });
@@ -1360,7 +1359,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 162:0 — after hour snap, if (hour < 12) → set dayPeriod = 'AM'
       const { user, hour, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new CalendarDateTime(1980, 1, 20, 9, 0, 0, 0),
+          modelValue: new Temporal.PlainDateTime(1980, 1, 20, 9, 0, 0, 0),
           granularity: 'second',
           step: { hour: 6 },
           stepSnapping: true,
@@ -1391,7 +1390,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Branch 163:0 — else if (hour) truthy branch → set dayPeriod = 'PM' when hour >= 12
       const { user, hour, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new CalendarDateTime(1980, 1, 20, 14, 0, 0, 0),
+          modelValue: new Temporal.PlainDateTime(1980, 1, 20, 14, 0, 0, 0),
           granularity: 'second',
           step: { hour: 6 },
           stepSnapping: true,
@@ -1426,7 +1425,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
       // Covers the 'second' branch in handleSegmentFocusOut (third else-if at line 937)
       const { user, getByTestId, rerender } = setup({
         timeFieldProps: {
-          modelValue: new CalendarDateTime(1980, 1, 20, 12, 0, 0, 0),
+          modelValue: new Temporal.PlainDateTime(1980, 1, 20, 12, 0, 0, 0),
           granularity: 'second',
           step: { second: 15 },
           stepSnapping: true,
@@ -1483,7 +1482,7 @@ describe('useDateField – time segment characterization tests (coverage gaps)',
  * @see https://github.com/unovue/reka-ui/issues/2956
  */
 describe('timeField dayPeriod across locales', () => {
-  const afternoon = new CalendarDateTime(2024, 1, 20, 15, 30);
+  const afternoon = new Temporal.PlainDateTime(2024, 1, 20, 15, 30);
   const locales = [
     'en-US',
     'es-ES',
@@ -1514,7 +1513,81 @@ describe('timeField dayPeriod across locales', () => {
     await user.click(getByTestId('hour'));
     await user.keyboard('{3}');
 
-    expect(getByTestId('value').textContent).toBe(afternoon.set({ hour: 15 }).toString());
+    expect(getByTestId('value').textContent).toBe(afternoon.with({ hour: 15 }).toString());
     expect(getByTestId('dayPeriod')).toHaveTextContent('PM');
+  });
+});
+
+describe('temporal regressions (#3088 review)', () => {
+  it('steps the hour of a ZonedDateTime over a spring-forward gap', async () => {
+    const onUpdate = vi.fn();
+    // New York springs forward at 02:00 on 2024-03-10: 02:59 does not exist.
+    const { user, hour } = setup({
+      timeFieldProps: {
+        modelValue: Temporal.ZonedDateTime.from('2024-03-10T03:59-04:00[America/New_York]'),
+      },
+      emits: { 'onUpdate:modelValue': onUpdate },
+    });
+    await user.click(hour);
+    await user.keyboard(kbd.ARROW_DOWN);
+    await user.keyboard(kbd.ARROW_DOWN);
+    await vi.waitFor(() => expect(onUpdate).toHaveBeenCalledTimes(2));
+    expect(onUpdate.mock.calls.map(([value]) => value.toString())).toEqual([
+      '2024-03-10T01:59:00-05:00[America/New_York]',
+      '2024-03-10T00:59:00-05:00[America/New_York]',
+    ]);
+  });
+
+  it('does not stick on the hour a fall-back change repeats', async () => {
+    const onUpdate = vi.fn();
+    // New York falls back at 02:00 on 2024-11-03: 01:30 happens twice.
+    const { user, hour } = setup({
+      timeFieldProps: {
+        modelValue: Temporal.ZonedDateTime.from('2024-11-03T00:30-04:00[America/New_York]'),
+      },
+      emits: { 'onUpdate:modelValue': onUpdate },
+    });
+    await user.click(hour);
+    for (let i = 0; i < 3; i++) {
+      await user.keyboard(kbd.ARROW_UP);
+    }
+    await vi.waitFor(() => expect(onUpdate).toHaveBeenCalledTimes(3));
+    expect(onUpdate.mock.calls.map(([value]) => value.toString())).toEqual([
+      '2024-11-03T01:30:00-04:00[America/New_York]',
+      '2024-11-03T02:30:00-05:00[America/New_York]',
+      '2024-11-03T03:30:00-05:00[America/New_York]',
+    ]);
+  });
+});
+
+describe('coderabbit review (#3088)', () => {
+  it('keeps the microseconds and nanoseconds of a PlainTime when a segment changes', async () => {
+    const onUpdate = vi.fn();
+    const { user, hour } = setup({
+      timeFieldProps: {
+        modelValue: new Temporal.PlainTime(9, 15, 29, 1, 2, 3),
+      },
+      emits: { 'onUpdate:modelValue': onUpdate },
+    });
+    await user.click(hour);
+    await user.keyboard(kbd.ARROW_UP);
+    await vi.waitFor(() => expect(onUpdate).toHaveBeenCalled());
+    expect(onUpdate.mock.lastCall![0].toString()).toBe('10:15:29.001002003');
+  });
+
+  it('follows a same-instant change of time zone', async () => {
+    const value = Temporal.ZonedDateTime.from('2024-07-10T12:30[America/New_York]');
+    const { getByTestId, rerender } = setup({
+      timeFieldProps: { modelValue: value, locale: 'en-US' },
+    });
+    expect(getByTestId('timeZoneName')).toHaveTextContent('EDT');
+
+    await rerender({
+      timeFieldProps: {
+        modelValue: value.withTimeZone('America/Chicago'),
+        locale: 'en-US',
+      },
+    });
+    await vi.waitFor(() => expect(getByTestId('timeZoneName')).toHaveTextContent('CDT'));
   });
 });

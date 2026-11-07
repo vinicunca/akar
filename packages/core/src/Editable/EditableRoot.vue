@@ -1,18 +1,23 @@
 <script lang="ts">
+import type { Ref, ShallowRef } from 'vue';
+import type { EditableChangeReason } from './useEditable';
+import type { FieldControlBinding } from '@/Field/useFieldControl';
 import type { PrimitiveProps } from '@/Primitive';
+import type { BaseChangeReason, ChangeEventDetails } from '@/shared';
 import type { Direction, FormFieldProps } from '@/shared/types';
-import { useFocusOutside, usePointerDownOutside } from '@/DismissableLayer';
-import { createContext, useDirection, useFormControl } from '@/shared';
+import { createContext, mergeExpose, useDirection, useFormControl, useForwardElement } from '@/shared';
 
-type ActivationMode = 'focus' | 'dblclick' | 'none';
-type SubmitMode = 'blur' | 'enter' | 'none' | 'both';
+export type ActivationMode = 'focus' | 'dblclick' | 'none';
+export type SubmitMode = 'blur' | 'enter' | 'none' | 'both';
+export type EditableState = 'edit' | 'submit' | 'cancel';
 
-type EditableRootContext = {
+export type EditableRootContext = {
   id: Ref<string | undefined>;
   name: Ref<string | undefined>;
   maxLength: Ref<number | undefined>;
   disabled: Ref<boolean>;
-  modelValue: Ref<string | null | undefined>;
+  /** Read-only: commit a value through `submit()`. */
+  modelValue: Readonly<Ref<string | null | undefined>>;
   inputValue: Ref<string | null | undefined>;
   placeholder: Ref<{ edit: string; preview: string }>;
   isEditing: Ref<boolean>;
@@ -21,7 +26,8 @@ type EditableRootContext = {
   selectOnFocus: Ref<boolean>;
   edit: () => void;
   cancel: () => void;
-  submit: () => void;
+  /** Commits the draft. Returns `false` when `beforeUpdate:modelValue` cancelled it (edit mode stays on). */
+  submit: (reason?: EditableChangeReason | BaseChangeReason, event?: Event) => boolean;
   inputRef: Ref<HTMLInputElement | undefined>;
   startWithEditMode: Ref<boolean>;
   isEmpty: Ref<boolean>;
@@ -59,24 +65,40 @@ export interface EditableRootProps extends PrimitiveProps, FormFieldProps {
 }
 
 export type EditableRootEmits = {
+  /** Event handler called before a submitted value is committed; `details.cancel()` vetoes it and keeps edit mode on. */
+  'beforeUpdate:modelValue': [value: string, details: ChangeEventDetails<EditableChangeReason>];
   /** Event handler called whenever the model value changes */
-  'update:modelValue': [value: string];
+  'update:modelValue': [value: string, details: ChangeEventDetails<EditableChangeReason>];
   /** Event handler called when a value is submitted */
   'submit': [value: string | null | undefined];
   /** Event handler called when the editable field changes state */
-  'update:state': [state: 'edit' | 'submit' | 'cancel'];
+  'update:state': [state: EditableState];
 };
 
 export const [injectEditableRootContext, provideEditableRootContext]
   = createContext<EditableRootContext>('EditableRoot');
+
+/** @internal The root's Field binding, for the parts. Only provided inside a `FieldRoot`. */
+export interface EditableFieldControl {
+  binding: FieldControlBinding;
+  /** Set by `EditablePreview`: focused (rather than the hidden input) while previewing. */
+  preview: ShallowRef<HTMLElement | undefined>;
+}
+
+/** @internal */
+export const [injectEditableFieldControl, provideEditableFieldControl]
+  = createContext<EditableFieldControl | null>('EditableRoot', 'EditableFieldControl');
 </script>
 
 <script setup lang="ts">
-import type { Ref } from 'vue';
-import { useVModel } from '@vueuse/core';
-import { computed, ref, toRefs, watch } from 'vue';
-import { Primitive, usePrimitiveElement } from '@/Primitive';
-import { VisuallyHiddenInput } from '@/VisuallyHidden';
+import { mergeProps, ref, shallowRef, watch } from 'vue';
+import { useFocusOutside, usePointerDownOutside } from '@/DismissableLayer';
+import { createPendingFieldInput } from '@/Field/pendingFieldInput';
+import { useFieldControl } from '@/Field/useFieldControl';
+import { useFieldFocusWithin } from '@/Field/useFieldFocusWithin';
+import { Primitive } from '@/Primitive';
+import { VisuallyHidden, VisuallyHiddenInput } from '@/VisuallyHidden';
+import { useEditable } from './useEditable';
 
 defineOptions({
   inheritAttrs: false,
@@ -102,8 +124,8 @@ defineSlots<{
     modelValue: typeof modelValue.value;
     /** Whether the editable field is empty */
     isEmpty: boolean;
-    /** Function to submit the value of the editable */
-    submit: () => void;
+    /** Function to submit the value of the editable. Bound as a listener (`@click="submit"`), the change reports `'submit-press'`. */
+    submit: (event?: Event) => void;
     /** Function to cancel the value of the editable */
     cancel: () => void;
     /** Function to set the editable in edit mode */
@@ -111,138 +133,170 @@ defineSlots<{
   }) => any;
 }>();
 
-const {
-  id,
-  name,
-  defaultValue,
-  startWithEditMode,
-  placeholder: propPlaceholder,
-  maxLength,
-  disabled,
-  dir: propDir,
-  submitMode,
-  activationMode,
-  selectOnFocus,
-  readonly,
-  autoResize,
-  required,
-} = toRefs(props);
-
-const inputRef = ref<HTMLInputElement | undefined>();
-const dir = useDirection(propDir);
-const isEditing = ref(startWithEditMode.value ?? false);
-
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: defaultValue.value ?? '',
-  passive: (props.modelValue === undefined) as false,
-});
-
-const { primitiveElement, currentElement } = usePrimitiveElement();
-
+// `dir` resolution (ConfigProvider-aware) stays in the shell.
+const dir = useDirection(() => props.dir);
+const { forwardRef, currentElement, expose } = useForwardElement();
 const isFormControl = useFormControl(currentElement);
 
-const placeholder = computed(() => {
-  return typeof propPlaceholder.value === 'string'
-    ? { edit: propPlaceholder.value, preview: propPlaceholder.value }
-    : propPlaceholder.value;
+// Optional Field participation: `null` outside a `FieldRoot`, so every binding
+// below is inert without a Field. The editable input is hidden while
+// previewing, so a label can't point at it: as with the date fields, a hidden
+// native input takes the field's id and forwards focus (to the preview, or to
+// the input while editing). The input carries the label, description and
+// invalid state; the field is touched when focus leaves the whole editable.
+// The value collected is the submitted string, not the draft.
+const nativeInput = ref<InstanceType<typeof VisuallyHidden>>();
+// Created only inside a Field, so a standalone editable doesn't allocate it.
+let previewElement: EditableFieldControl['preview'] | undefined;
+const field = useFieldControl({
+  id: () => props.id,
+  element: () => (isEditing.value ? context.inputRef.value : previewElement?.value) ?? context.inputRef.value,
+  getValue: () => modelValue.value,
+  validityElement: () => nativeInput.value?.$el as HTMLInputElement | undefined,
+});
+if (field) {
+  previewElement = shallowRef();
+}
+const resolvedName = field
+  ? () => field.name(props.name)
+  : () => props.name;
+const resolvedDisabled = field
+  ? () => field.disabled(props.disabled)
+  : () => props.disabled;
+
+const { modelValue, isEditing, isEmpty, edit, cancel, submit, dismiss, root, context } = useEditable({
+  modelValue: () => props.modelValue,
+  defaultValue: () => props.defaultValue,
+  placeholder: () => props.placeholder,
+  dir,
+  disabled: resolvedDisabled,
+  readonly: () => props.readonly,
+  activationMode: () => props.activationMode,
+  selectOnFocus: () => props.selectOnFocus,
+  submitMode: () => props.submitMode,
+  startWithEditMode: () => props.startWithEditMode,
+  maxLength: () => props.maxLength,
+  autoResize: () => props.autoResize,
+  id: () => field
+    ? field.id()
+    : props.id,
+  name: resolvedName,
+  emit: emits,
+  // A submit by the user (a part, Enter, a dismiss, a slot `submit` bound to
+  // a click) is input; a programmatic one (`submit()` from a ref) and a
+  // parent-driven change are reported through the watcher below as `filled`.
+  onUpdate: field
+    ? (value, details) => pendingInput!.record(value, details)
+    : undefined,
 });
 
-const inputValue = ref(modelValue.value);
-
-watch(() => modelValue.value, () => {
-  inputValue.value = modelValue.value;
-}, { immediate: true, deep: true });
-
-function cancel() {
-  isEditing.value = false;
-  emits('update:state', 'cancel');
-}
-
-function edit() {
-  isEditing.value = true;
-  inputValue.value = modelValue.value;
-
-  emits('update:state', 'edit');
-}
-
-function submit() {
-  modelValue.value = inputValue.value;
-  isEditing.value = false;
-
-  emits('update:state', 'submit');
-  emits('submit', inputValue.value);
-}
-
-function handleDismiss() {
-  if (isEditing.value) {
-    if (submitMode.value === 'blur' || submitMode.value === 'both') {
-      submit();
-    } else {
-      cancel();
+// The value of a user's submit, reported once the hidden input has rendered it.
+const pendingInput = field
+  ? createPendingFieldInput<string | null | undefined>()
+  : undefined;
+// Touched once focus leaves the whole editable, not when it moves from the
+// preview to the input. A blur can submit the draft (`submitMode`), through a
+// focus-outside check that settles a couple of ticks later, so the blur is
+// reported after that: on-blur validation then reads the submitted value.
+const focusWithin = useFieldFocusWithin(field && {
+  ...field,
+  onBlur: () => setTimeout(() => {
+    if (!focusWithin!.isFocusWithin()) {
+      field.onBlur();
     }
+  }),
+}, currentElement as Ref<HTMLElement | undefined>);
+
+if (field) {
+  provideEditableFieldControl({ binding: field, preview: previewElement! });
+  watch(modelValue, (value) => {
+    const pending = pendingInput!.take();
+    if (pending && Object.is(pending.value, value)) {
+      field.input(value);
+    } else {
+      field.sync(value);
+    }
+  }, { flush: 'post' });
+}
+
+function focusControl() {
+  (isEditing.value ? context.inputRef.value : previewElement?.value)?.focus();
+}
+
+// The Field's state attributes go first, so the root's own and the consumer's win.
+function getRootAttrs(attrs: Record<string, unknown>) {
+  if (!field) {
+    return mergeProps(root.attrs.value, attrs);
+  }
+  return mergeProps(
+    field.dataAttributes(),
+    root.attrs.value,
+    attrs,
+    { onFocusin: focusWithin!.onFocusin, onFocusout: focusWithin!.onFocusout },
+  );
+}
+
+// Outside detection is DOM-bound (DismissableLayer utilities), so it stays in the shell.
+const pointerDownOutside = usePointerDownOutside((event) => dismiss('outside-press', event), currentElement, isEditing);
+useFocusOutside((event) => dismiss('focus-outside', event), currentElement, isEditing);
+
+// Takes only an event, never a reason: called bare (a template ref) it reports
+// `'imperative-action'`; bound as a listener (`@click="submit"` in the slot) it
+// receives the user's event and reports `'submit-press'`.
+function submitImperative(event?: Event) {
+  if (event instanceof Event) {
+    submit('submit-press', event);
+  } else {
+    submit();
   }
 }
 
-const pointerDownOutside = usePointerDownOutside(() => handleDismiss(), currentElement, isEditing);
-const focusOutside = useFocusOutside(() => handleDismiss(), currentElement, isEditing);
-
-const isEmpty = computed(() => modelValue.value === '');
-
-defineExpose({
+defineExpose(mergeExpose(expose, {
   /** Function to submit the value of the editable */
-  submit,
+  submit: submitImperative,
   /** Function to cancel the value of the editable */
   cancel,
   /** Function to set the editable in edit mode */
   edit,
-});
+}));
 
-provideEditableRootContext({
-  id,
-  name,
-  disabled,
-  isEditing,
-  maxLength,
-  modelValue,
-  inputValue,
-  placeholder,
-  edit,
-  cancel,
-  submit,
-  activationMode,
-  submitMode,
-  selectOnFocus,
-  inputRef,
-  startWithEditMode,
-  isEmpty,
-  readonly,
-  autoResize,
-});
+provideEditableRootContext(context);
 </script>
 
 <template>
   <Primitive
-    v-bind="$attrs"
-    ref="primitiveElement"
+    v-bind="getRootAttrs($attrs)"
+    :ref="forwardRef"
     :as="as"
     :as-child="asChild"
-    :dir="dir"
     data-dismissable-layer
-    @focus.capture="focusOutside.onFocusCapture"
-    @blur.capture="focusOutside.onBlurCapture"
     @pointerdown.capture="pointerDownOutside.onPointerDownCapture"
   >
     <slot
       :model-value="modelValue"
       :is-editing="isEditing"
       :is-empty="isEmpty"
-      :submit="submit"
+      :submit="submitImperative"
       :cancel="cancel"
       :edit="edit"
     />
 
+    <VisuallyHidden
+      v-if="field"
+      :id="field.id()"
+      ref="nativeInput"
+      as="input"
+      feature="focusable"
+      aria-hidden="true"
+      tabindex="-1"
+      :value="modelValue ?? ''"
+      :name="resolvedName()"
+      :disabled="resolvedDisabled()"
+      :required="field ? field.required(required) : required"
+      @focus="focusControl"
+    />
     <VisuallyHiddenInput
-      v-if="isFormControl && name"
+      v-else-if="isFormControl && name"
       type="text"
       :value="modelValue"
       :name="name"

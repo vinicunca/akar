@@ -1,77 +1,126 @@
 <script lang="ts">
+import type { DropdownMenuHandle } from './handle';
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose, useId } from '@/shared';
+import { useForwardElement, useId } from '@/shared';
 
-export interface DropdownMenuTriggerProps extends PrimitiveProps {
+export interface DropdownMenuTriggerProps<Payload = unknown> extends PrimitiveProps {
   /** When `true`, prevents the user from interacting with item */
   disabled?: boolean;
+  /**
+   * A handle from `createDropdownMenuHandle()` that connects this trigger to a
+   * `DropdownMenuRoot` rendered elsewhere (outside this trigger's tree or portal).
+   */
+  handle?: DropdownMenuHandle<Payload>;
+  /** Passed to the Root's default slot while this trigger owns the menu. Requires a `handle`. */
+  payload?: Payload;
 }
 </script>
 
-<script setup lang="ts">
-import { nextTick, onMounted } from 'vue';
-import { MenuAnchor } from '@/Menu';
-import {
-  Primitive,
-} from '@/Primitive';
+<script setup lang="ts" generic="Payload = unknown">
+import { computed, mergeProps, onBeforeUpdate, shallowRef, useAttrs, watch } from 'vue';
+import { usePopperAnchor } from '@/Popper/usePopperAnchor';
+import { renderAs } from '@/Primitive/renderAs';
+import { getPopupRootStore, usePopupHandleTrigger } from '@/shared/popupHandle';
 import { injectDropdownMenuRootContext } from './DropdownMenuRoot.vue';
+import { getDropdownMenuTriggerSurface } from './useDropdownMenu';
 
-const props = withDefaults(defineProps<DropdownMenuTriggerProps>(), {
+defineOptions({
+  // `$attrs` are merged under the part's own bindings: the precedence the
+  // former `MenuAnchor` (as-child) wrapper gave them.
+  inheritAttrs: false,
+});
+
+const props = withDefaults(defineProps<DropdownMenuTriggerProps<Payload>>(), {
   as: 'button',
 });
 
-const rootContext = injectDropdownMenuRootContext();
+// A detached trigger (`handle`) may render outside any `DropdownMenuRoot`.
+const rootContext = injectDropdownMenuRootContext(props.handle ? null : undefined);
 
-const { forwardRef, currentElement: triggerElement } = useForwardExpose();
+const { forwardRef, currentElement: triggerElement, expose } = useForwardElement();
+defineExpose(expose);
 
-onMounted(() => {
-  rootContext.triggerElement = triggerElement;
+// Detached triggers (#2826): this trigger registers with the handle (its own,
+// or its Root's) and derives its own open state, so only the trigger that
+// opened the menu reports `aria-expanded` / `aria-controls`. Only such a
+// trigger draws an id (an extra `useId()` would shift later generated ids);
+// one whose Root gets a `handle` later uses the Root's trigger id. An `id`
+// attribute wins and is tracked across renders.
+const attrs$ = useAttrs();
+const attrId = shallowRef(attrs$.id as string | undefined);
+onBeforeUpdate(() => {
+  attrId.value = attrs$.id as string | undefined;
 });
+const detached = usePopupHandleTrigger<Payload>({
+  handle: () => props.handle,
+  rootContext,
+  attrId,
+  generatedId: props.handle || getPopupRootStore(rootContext)?.handle.value
+    ? useId(undefined, 'akar-dropdown-menu-trigger')
+    : undefined,
+  element: triggerElement,
+  payload: () => props.payload,
+});
+// The handle's view of the trigger surface, built only once a handle is used.
+let detachedTrigger: ReturnType<typeof getDropdownMenuTriggerSurface> | undefined;
+function getDetachedTrigger() {
+  return detachedTrigger ??= getDropdownMenuTriggerSurface({
+    get triggerId() {
+      return detached.id.value;
+    },
+    get contentId() {
+      return detached.contentId.value!;
+    },
+    open: detached.open,
+    onOpenToggle: (reason, event) => {
+      detached.store.value?.pressTrigger(detached.id.value, 'toggle', reason, event);
+    },
+    onOpenChange: (value, reason, event) => {
+      if (value) {
+        detached.store.value?.pressTrigger(detached.id.value, 'open', reason, event);
+      } else {
+        detached.store.value?.closePopup(reason, event, triggerElement.value);
+      }
+    },
+  }, () => props.disabled);
+}
 
-rootContext.triggerId ||= useId(undefined, 'akar-dropdown-menu-trigger');
+// Write this trigger's element into the Root's existing `triggerElement` ref
+// (never replace the ref: with a `handle` it is a writable computed that
+// resolves to the active detached trigger, and the write only sets the Root's
+// own fallback). Watched, so an `asChild` element swap stays in sync.
+if (rootContext) {
+  watch(triggerElement, (element, previous) => {
+    // On unmount, clear it only if it still holds this trigger's element.
+    if (element || rootContext.triggerElement.value === previous) {
+      rootContext.triggerElement.value = element;
+    }
+  }, { immediate: true });
+}
+
+// Ids, aria, `data-state`/`data-disabled` and the click/keydown handlers come
+// from the same builder `useDropdownMenu().trigger` uses.
+const trigger = rootContext
+  ? getDropdownMenuTriggerSurface(rootContext, () => props.disabled)
+  : getDetachedTrigger();
+const attrs = computed(() => detached.enabled.value
+  ? getDetachedTrigger().attrs.value
+  : trigger.attrs.value);
+
+// The menu's anchor, unless the trigger is detached.
+const anchor = usePopperAnchor({
+  consumerAttrs: true,
+  element: triggerElement,
+  enabled: () => !detached.enabled.value,
+});
 </script>
 
 <template>
-  <MenuAnchor as-child>
-    <Primitive
-      :id="rootContext.triggerId"
-      :ref="forwardRef"
-      :type="as === 'button' ? 'button' : undefined"
-      :as-child="props.asChild"
-      :as="as"
-      aria-haspopup="menu"
-      :aria-expanded="rootContext.open.value"
-      :aria-controls="rootContext.open.value ? rootContext.contentId : undefined"
-      :data-disabled="disabled ? '' : undefined"
-      :disabled="disabled"
-      :data-state="rootContext.open.value ? 'open' : 'closed'"
-      @click="
-        async (event: MouseEvent) => {
-          if (event.defaultPrevented) return;
-          // only call handler if it's the left button (mousedown gets triggered by all mouse buttons)
-          // but not when the control key is pressed (avoiding MacOS right click)
-          if (!disabled && event.button === 0 && event.ctrlKey === false) {
-            rootContext?.onOpenToggle();
-            await nextTick()
-            // prevent trigger focusing when opening
-            // this allows the content to be given focus without competition
-            if (rootContext.open.value) event.preventDefault();
-          }
-        }
-      "
-      @keydown.enter.space.arrow-down="
-        (event: KeyboardEvent) => {
-          if (disabled || event.defaultPrevented) return;
-          if (['Enter', ' '].includes(event.key)) rootContext.onOpenToggle();
-          if (event.key === 'ArrowDown') rootContext.onOpenChange(true);
-          // prevent keydown from scrolling window / first focused item to execute
-          // that keydown (inadvertently closing the menu)
-          if (['Enter', ' ', 'ArrowDown'].includes(event.key))
-            event.preventDefault();
-        }
-      "
-    >
-      <slot />
-    </Primitive>
-  </MenuAnchor>
+  <component
+    :is="renderAs(as, props.asChild)"
+    :ref="forwardRef"
+    v-bind="mergeProps(anchor.consumerAttrs($attrs), { type: as === 'button' ? 'button' : undefined }, attrs)"
+  >
+    <slot />
+  </component>
 </template>

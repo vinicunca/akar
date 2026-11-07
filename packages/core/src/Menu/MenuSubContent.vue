@@ -18,7 +18,7 @@ export interface MenuSubContentProps extends Omit<MenuContentImplProps, 'disable
 
 <script setup lang="ts">
 import { Presence } from '@/Presence';
-import { useForwardExpose, useForwardPropsEmits, useId } from '@/shared';
+import { useForwardElement, useForwardPropsEmits } from '@/shared';
 import MenuContentImpl, { injectMenuContentContext } from './MenuContentImpl.vue';
 import { injectMenuContext, injectMenuRootContext } from './MenuRoot.vue';
 import { injectMenuSubContext } from './MenuSub.vue';
@@ -36,13 +36,22 @@ const rootContext = injectMenuRootContext();
 const menuSubContext = injectMenuSubContext();
 const parentContentContext = injectMenuContentContext();
 
-const { forwardRef, currentElement: subContentElement } = useForwardExpose();
-
-menuSubContext.contentId ||= useId(undefined, 'akar-menu-sub-content');
+const { forwardRef, currentElement: subContentElement, expose } = useForwardElement();
+defineExpose(expose);
 </script>
 
 <template>
-  <Presence :present="forceMount || menuContext.open.value">
+  <!--
+    `appear`: a submenu that is already open when its parent menu opens is
+    created open, and enters from `data-starting-style` with its parent
+    (Base UI's `animateInitialOpen`, #2827).
+  -->
+  <Presence
+    :present="menuContext.open.value"
+    :force-mount="forceMount"
+    appear
+    @complete="menuContext.notifyOpenComplete"
+  >
     <MenuContentImpl
       v-bind="forwarded"
       :id="menuSubContext.contentId"
@@ -67,12 +76,12 @@ menuSubContext.contentId ||= useId(undefined, 'akar-menu-sub-content');
           // hovering between submenu and parent menu
           const isMovingToParentContent = parentContentContext.filterElement.value?.contains(event.target as Node);
           if (event.target !== menuSubContext.trigger.value && !isMovingToParentContent)
-            menuContext.onOpenChange(false);
+            menuContext.onOpenChange(false, 'focus-outside', event);
         }
       "
       @escape-key-down="
         (event) => {
-          rootContext.onClose();
+          rootContext.onClose('escape-key', event);
           // ensure pressing escape in submenu doesn't escape full screen mode
           event.preventDefault();
         }
@@ -82,7 +91,7 @@ menuSubContext.contentId ||= useId(undefined, 'akar-menu-sub-content');
         const isKeyDownInside = (event.currentTarget as HTMLElement)?.contains(event.target as HTMLElement);
         const isCloseKey = SUB_CLOSE_KEYS[rootContext.dir.value].includes(event.key);
         if (isKeyDownInside && isCloseKey) {
-          menuContext.onOpenChange(false);
+          menuContext.onOpenChange(false, 'list-navigation', event);
           // We focus manually because we prevented it in `onCloseAutoFocus`
           if (parentContentContext.filterElement.value) {
             parentContentContext.filterElement.value.focus();

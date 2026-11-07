@@ -1,12 +1,11 @@
 import type { DateFieldRootProps } from './DateFieldRoot.vue';
-import { CalendarDate, CalendarDateTime } from '@internationalized/date';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { h, nextTick } from 'vue';
 import DateFieldRoot from './DateFieldRoot.vue';
 
-const value = new CalendarDateTime(2026, 11, 30, 23, 59, 59);
-const minValue = new CalendarDateTime(2026, 10, 7, 15, 20, 6);
+const value = new Temporal.PlainDateTime(2026, 11, 30, 23, 59, 59);
+const minValue = new Temporal.PlainDateTime(2026, 10, 7, 15, 20, 6);
 
 async function mountForm(props: DateFieldRootProps) {
   let submits = 0;
@@ -44,7 +43,7 @@ describe('dateField native validation', () => {
   it.each(['minute', 'day'] as const)('keeps native default step for %s granularity', async (granularity) => {
     const { input, form, getSubmits } = await mountForm({
       modelValue: granularity === 'day'
-        ? new CalendarDate(2026, 11, 30)
+        ? new Temporal.PlainDate(2026, 11, 30)
         : value,
       granularity,
     });
@@ -57,7 +56,7 @@ describe('dateField native validation', () => {
   it.each([
     {
       props: {
-        modelValue: new CalendarDateTime(2026, 10, 7, 15, 20, 5),
+        modelValue: new Temporal.PlainDateTime(2026, 10, 7, 15, 20, 5),
         minValue,
       },
       reason: 'rangeUnderflow',
@@ -65,7 +64,7 @@ describe('dateField native validation', () => {
     {
       props: {
         modelValue: value,
-        maxValue: new CalendarDateTime(2026, 11, 30, 23, 59, 58),
+        maxValue: new Temporal.PlainDateTime(2026, 11, 30, 23, 59, 58),
       },
       reason: 'rangeOverflow',
     },

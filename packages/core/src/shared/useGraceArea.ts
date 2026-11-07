@@ -1,12 +1,14 @@
 import type { Ref } from 'vue';
 import type { Side } from '@/Popper/utils';
-import { createEventHook, refAutoReset, tryOnScopeDispose } from '@vueuse/shared';
+import { createEventHook, tryOnScopeDispose } from '@vueuse/shared';
 import { ref, watchEffect } from 'vue';
+import { closestComposed, containsComposed, getEventTarget } from './getRootNode';
+import { autoResetRef } from './timeout';
 
 export function useGraceArea(triggerElement: Ref<HTMLElement | undefined>, containerElement: Ref<HTMLElement | undefined>) {
 // Reset the inTransit state if idle/scrolled.
-  const isPointerInTransit = refAutoReset(false, 300);
-  // `refAutoReset` will clear timeout-based resets on scope dispose (e.g., component unmount),
+  const isPointerInTransit = autoResetRef(false, 300);
+  // `autoResetRef` will clear timeout-based resets on scope dispose (e.g., component unmount),
   // thus leaving the state as-is without resetting it.
   // So we need to manually reset it in such cases.
   tryOnScopeDispose(() => {
@@ -58,15 +60,21 @@ export function useGraceArea(triggerElement: Ref<HTMLElement | undefined>, conta
   watchEffect((cleanupFn) => {
     if (pointerGraceArea.value) {
       const handleTrackPointerGrace = (event: PointerEvent) => {
-        if (!pointerGraceArea.value || !(event.target instanceof Element)) {
+        // The listener sits on the document, where `event.target` is retargeted
+        // to the shadow host for a menu rendered in a shadow root.
+        const target = getEventTarget<Element>(event);
+        // `nodeType`, not `instanceof Element`: the document can be an iframe's,
+        // whose elements come from another realm.
+        if (!pointerGraceArea.value || target?.nodeType !== Node.ELEMENT_NODE) {
           return;
         }
 
-        const target = event.target;
         const pointerPosition = { x: event.clientX, y: event.clientY };
-        const hasEnteredTarget = triggerElement.value?.contains(target) || containerElement.value?.contains(target);
+        // Composed: the target can sit inside a shadow root nested in the content.
+        const hasEnteredTarget = (!!triggerElement.value && containsComposed(triggerElement.value, target))
+          || (!!containerElement.value && containsComposed(containerElement.value, target));
         const isPointerOutsideGraceArea = !isPointInPolygon(pointerPosition, pointerGraceArea.value);
-        const isAnotherGraceAreaTrigger = !!target.closest('[data-grace-area-trigger]');
+        const isAnotherGraceAreaTrigger = !!closestComposed(target, '[data-grace-area-trigger]');
 
         if (hasEnteredTarget) {
           handleRemoveGraceArea();

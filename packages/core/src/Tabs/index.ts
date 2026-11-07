@@ -20,3 +20,11 @@ export {
   default as TabsTrigger,
   type TabsTriggerProps,
 } from './TabsTrigger.vue';
+export {
+  type TabsChangeReason,
+  type TabsContentState,
+  type TabsTriggerState,
+  useTabs,
+  type UseTabsProps,
+  type UseTabsReturn,
+} from './useTabs';

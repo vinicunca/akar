@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose } from '@/shared';
+import { useForwardElement } from '@/shared';
 
 export interface SelectScrollDownButtonProps extends PrimitiveProps {}
 </script>
@@ -8,8 +8,9 @@ export interface SelectScrollDownButtonProps extends PrimitiveProps {}
 <script setup lang="ts">
 import { ref, watch, watchEffect } from 'vue';
 import { injectSelectContentContext } from './SelectContentImpl.vue';
-import { injectSelectItemAlignedPositionContext } from './SelectItemAlignedPosition.vue';
 import SelectScrollButtonImpl from './SelectScrollButtonImpl.vue';
+import { injectSelectItemAlignedPositionContext } from './useSelectItemAlignedPosition';
+import { getScrollStep } from './utils';
 
 defineProps<SelectScrollDownButtonProps>();
 
@@ -19,7 +20,8 @@ const alignedPositionContext
     ? injectSelectItemAlignedPositionContext()
     : undefined;
 
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 
 const canScrollDown = ref(false);
 
@@ -54,8 +56,8 @@ watch(currentElement, () => {
     @auto-scroll="
       () => {
         const { viewport, selectedItem } = contentContext;
-        if (viewport?.value && selectedItem?.value) {
-          viewport.value.scrollTop = viewport.value.scrollTop + selectedItem.value.offsetHeight;
+        if (viewport?.value) {
+          viewport.value.scrollTop = viewport.value.scrollTop + getScrollStep(viewport.value, selectedItem?.value);
         }
       }
     "

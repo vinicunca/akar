@@ -1,0 +1,1072 @@
+import type { ComputedRef, MaybeRefOrGetter, Ref } from 'vue';
+import type { SelectEvent } from './ListboxItem.vue';
+import type { ListboxRootContext } from './ListboxRoot.vue';
+import type { BaseChangeReason, By, ChangeEventDetails, LabelRegistry, PartSurface, SelectionState } from '@/shared';
+import type { AcceptableValue, DataOrientation, Direction } from '@/shared/types';
+import { createEventHook } from '@vueuse/core';
+import { isClient, refAutoReset } from '@vueuse/shared';
+import { computed, getCurrentScope, isRef, nextTick, onScopeDispose, ref, shallowReactive, toValue, watch } from 'vue';
+import { getFocusIntent } from '@/RovingFocus/utils';
+import { compare, createLabelRegistry, createPartSurface, findValuesBetween, handleAndDispatchCustomEvent, selectionState, useControllableState, useKbd, useListSelection, useTypeahead, valueComparator } from '@/shared';
+import { createKeyedSelector, useSelectorKey } from '@/shared/createKeyedSelector';
+import { isDisabledItem } from '@/shared/isDisabledItem';
+import { SelectionSelector } from '@/shared/selectionSelector';
+import { resolveDirection } from '@/shared/useDirection';
+
+/**
+ * Why the selection changed; carried as `details.reason` on every change (#2828).
+ *
+ * - `'item-press'`: an item was clicked. Enter on the listbox synthesizes a
+ *   `.click()` on the highlighted item, so an Enter selection ALSO arrives as
+ *   `'item-press'` (with the synthesized `MouseEvent` as `details.event`).
+ * - `'item-keydown'`: Space on a focused item.
+ * - `'select-all'`: Meta/Ctrl+A in a `multiple` listbox.
+ * - `'range-select'`: Shift+arrow/Home/End extending a `multiple` + `'replace'` selection.
+ */
+export type ListboxChangeReason = 'item-press' | 'item-keydown' | 'select-all' | 'range-select';
+
+/**
+ * What a keydown means for navigation: the four roving-focus moves plus
+ * `'select'`, which runs the Enter path (select the highlighted item).
+ */
+export type ListboxNavigationIntent = 'first' | 'last' | 'prev' | 'next' | 'select';
+
+/**
+ * What the root hands `ListboxVirtualizer` for a keydown. `intent` is the
+ * already-resolved move (`getNavigationIntent` override included); `null`
+ * means "not a navigation key" — the virtualizer then only runs select-all and
+ * typeahead, and never re-derives a move from `event.key`.
+ */
+export interface ListboxVirtualKeydown {
+  event: KeyboardEvent;
+  intent: Exclude<ListboxNavigationIntent, 'select'> | null;
+}
+
+/** Semantic state of one item (`data-state` / `data-disabled` / `data-highlighted`). */
+export type ListboxItemState = { state: SelectionState; disabled: boolean; highlighted: boolean };
+/** Semantic state of the content part (`data-orientation`). */
+export type ListboxContentState = { orientation: DataOrientation };
+/** Semantic state of the root (`data-disabled`). */
+export type ListboxState = { disabled: boolean };
+
+/** One collection entry, as `useCollection().getItems()` returns them. */
+export interface ListboxCollectionItem<T = AcceptableValue> {
+  ref: HTMLElement;
+  value: T;
+}
+
+/** Controls highlight scrolling while a parent composite is being positioned. */
+export interface ListboxHighlightScroll {
+  suppressHighlightScroll: Readonly<Ref<boolean>>;
+  onHighlightScrollRequest: (scroll: (() => void) | undefined) => void;
+}
+
+/**
+ * The sticky label registry on the root context (#2824): items register the
+ * text they render so a value can be displayed after its item unmounted
+ * (filtered out, virtualized away). Entries are matched with `by`, the last
+ * write for a value wins, and nothing is ever removed automatically.
+ */
+export interface ListboxLabelRegistry<T = AcceptableValue> extends LabelRegistry<T> {}
+
+/**
+ * The `filter` prop (#2824 item 7): whether an item matches the search term.
+ * `text` is the item's `textValue` (or its rendered text content; in a
+ * `ListboxVirtualizer`, the `textContent(option)` result), `search` the
+ * non-empty search term and `value` the item's value.
+ */
+export type ListboxFilterFunction<T = AcceptableValue> = (text: string, search: string, value: T) => boolean;
+
+/** The filtering result, exposed as `filtered` on `ListboxRoot` and `filterState` on `useListboxRoot()`. */
+export interface ListboxFilterState {
+  /** The current search term. */
+  search: string;
+  /** `true` while a `filter` is set and the search term is not empty. */
+  active: boolean;
+  /**
+   * How many items match: the mounted items, or the matching `options` of a
+   * `ListboxVirtualizer`. While inactive, every item counts.
+   */
+  count: number;
+}
+
+/** What a mounted item hands the filter (the `ListboxItem` shell registers it). */
+export interface ListboxFilterItem<T = AcceptableValue> {
+  value: () => T;
+  /** The item's text; `undefined` until it was measured, which keeps it rendered. */
+  label: () => string | undefined;
+  /** The id of the enclosing `ListboxGroup`, if any. */
+  group?: string;
+}
+
+const LISTBOX_SELECT = 'listbox.select';
+
+export interface ListboxItemSurfaceOptions<T = AcceptableValue> {
+  /**
+   * The item's own element (the SFC hands its `useForwardElement`
+   * `currentElement`). Needed for the highlight identity check, the hover
+   * highlight and the post-select highlight; without it the item never reads
+   * as highlighted.
+   */
+  element?: MaybeRefOrGetter<HTMLElement | undefined>;
+  /** The item's DOM id. Omitted from `props` when not given. */
+  id?: MaybeRefOrGetter<string | undefined>;
+  /**
+   * The cancellable `listbox.select` custom event — a callback channel, never
+   * a merged DOM listener. The SFC passes `e => emits('select', e)`; calling
+   * `event.preventDefault()` inside blocks the selection.
+   */
+  onSelect?: (event: SelectEvent<T>) => void;
+}
+
+/**
+ * The per-item surface, derived purely from `(context, value)`: `role="option"`,
+ * the roving `tabindex`, `aria-selected`, the `'' | undefined` `disabled`
+ * shape, the click/Space select protocol and the hover highlight — ported
+ * verbatim from `ListboxItem.vue`. The SFC (which injects the context) and a
+ * standalone `useListboxRoot().getItemSurface()` share ONE derivation.
+ */
+export interface ListboxItemSurface extends PartSurface<ListboxItemState> {
+  /** Tracked: whether the item is (part of) the selection. */
+  isSelected: () => boolean;
+}
+
+export function getListboxItemSurface<T extends AcceptableValue = AcceptableValue>(
+  context: ListboxRootContext<T>,
+  value: MaybeRefOrGetter<T>,
+  disabled?: MaybeRefOrGetter<boolean | undefined>,
+  options: ListboxItemSurfaceOptions<T> = {},
+): ListboxItemSurface {
+  // Highlight and selection read keyed selectors (one cell per held key), so a
+  // highlight move or a selection change re-renders only the items it flips,
+  // not every item of the list. A context built without them (a hand-made
+  // one) compares against the shared state, as before.
+  const readHighlighted = context.highlight
+    ? useSelectorKey(context.highlight, () => toValue(options.element))
+    : () => {
+        const highlighted = context.highlightedElement.value;
+        return highlighted != null && highlighted === toValue(options.element);
+      };
+  // Cached: the read tracks the item's element, which is set after the item
+  // renders (on mount, or when a filtered-out item comes back). Only a change
+  // of the result re-renders the item, not the element ref itself.
+  const highlightedRef = computed(readHighlighted);
+  const isHighlighted = () => highlightedRef.value;
+  const selectionHold = context.selection?.createHold();
+  if (selectionHold && getCurrentScope()) {
+    onScopeDispose(() => selectionHold.release());
+  }
+  function isSelected() {
+    return context.selection
+      ? context.selection.isSelected(toValue(value), selectionHold)
+      : valueComparator(context.modelValue.value, toValue(value), context.by);
+  }
+  // `rootContext.disabled.value || props.disabled` as in ListboxItem.vue, normalised to a boolean.
+  function isDisabled() {
+    return (context.disabled.value || toValue(disabled)) ?? false;
+  }
+
+  function handleSelect(ev: SelectEvent<T>, reason: ListboxChangeReason) {
+    options.onSelect?.(ev);
+    if (ev?.defaultPrevented) {
+      return;
+    }
+
+    if (!isDisabled() && ev) {
+      context.onValueChange(toValue(value), reason, ev.detail.originalEvent);
+      context.changeHighlight(toValue(options.element)!);
+    }
+  }
+
+  function dispatchSelect(event: Event, reason: ListboxChangeReason) {
+    const eventDetail = {
+      originalEvent: event as PointerEvent,
+      value: toValue(value),
+    };
+    handleAndDispatchCustomEvent<SelectEvent<T>, PointerEvent>(LISTBOX_SELECT, (ev) => handleSelect(ev, reason), eventDetail);
+  }
+
+  // Created once per item, not on every render.
+  const onClick = (event: PointerEvent) => dispatchSelect(event, 'item-press');
+  // `@keydown.space.prevent`
+  const onKeydown = (event: KeyboardEvent) => {
+    if (event.key !== ' ') {
+      return;
+    }
+    event.preventDefault();
+    dispatchSelect(event, 'item-keydown');
+  };
+  const onPointermove = () => {
+    const element = toValue(options.element);
+    if (context.highlightedElement.value === element) {
+      return;
+    }
+
+    if (context.highlightOnHover.value) {
+      context.changeHighlight(element!, false, false);
+    }
+  };
+
+  const surface = createPartSurface<ListboxItemState>(
+    () => {
+      const id = toValue(options.id);
+      return {
+        // Only when given: an `id: undefined` entry would clobber a consumer id under `mergeProps`.
+        ...(id !== undefined && { id }),
+        'role': 'option',
+        // `rootContext.focusable.value ? isHighlighted ? '0' : '-1' : -1` — the string/number mix is intentional.
+        'tabindex': context.focusable.value
+          ? (isHighlighted()
+              ? '0'
+              : '-1')
+          : -1,
+        'aria-selected': isSelected(),
+        'disabled': isDisabled()
+          ? ''
+          : undefined,
+        onClick,
+        onKeydown,
+        onPointermove,
+      };
+    },
+    () => ({
+      state: selectionState(isSelected()),
+      disabled: isDisabled(),
+      highlighted: isHighlighted(),
+    }),
+  ) as ListboxItemSurface;
+  surface.isSelected = isSelected;
+  return surface;
+}
+
+export interface ListboxContentSurfaceOptions {
+  /**
+   * `true` right after a left mousedown, so the focus that follows a click
+   * does not run the keyboard entry highlight (the SFC's `refAutoReset(false, 10)`).
+   */
+  isClickFocus: Ref<boolean>;
+  /**
+   * While `true`, the attrs carry the roving `tabindex` as it was at setup
+   * (SSR and the first render), and the part applies the live value itself
+   * (`getListboxContentTabindex`). The tabindex flips whenever the highlight is
+   * set or cleared; bound in the render, every flip would re-render the content
+   * and, through its slot, every item.
+   *
+   * Only for a part that renders the element itself and has no consumer
+   * `tabindex`. Otherwise something the part cannot see may bind over it, so
+   * the value stays in the render.
+   */
+  tabindexOutsideRender?: MaybeRefOrGetter<boolean>;
+}
+
+/** The content's roving `tabindex`: `'0'` while focusable with nothing highlighted, else `'-1'`. */
+export function getListboxContentTabindex(context: ListboxRootContext<any>) {
+  return computed(() => {
+    if (!context.focusable.value) {
+      return '-1';
+    }
+    return context.highlightedElement.value ? '-1' : '0';
+  });
+}
+
+/**
+ * The `role="listbox"` surface, derived purely from the context: the roving
+ * `tabindex`, `aria-orientation`, `aria-multiselectable`, the click-vs-keyboard
+ * entry focus and ONE keydown handler in today's order of effects — navigation
+ * (`preventDefault` only when a navigation key was handled), Enter, typeahead.
+ */
+export function getListboxContentSurface<T extends AcceptableValue = AcceptableValue>(
+  context: ListboxRootContext<T>,
+  options: ListboxContentSurfaceOptions,
+): PartSurface<ListboxContentState> {
+  const tabindex = getListboxContentTabindex(context);
+  // Read at setup, which Vue does not track.
+  const initialTabindex = options.tabindexOutsideRender === undefined
+    ? undefined
+    : tabindex.value;
+  return createPartSurface<ListboxContentState>(
+    () => ({
+      'role': 'listbox',
+      'tabindex': toValue(options.tabindexOutsideRender)
+        ? initialTabindex
+        : tabindex.value,
+      'aria-orientation': context.orientation.value,
+      'aria-multiselectable': !!context.multiple.value,
+      'aria-disabled': context.disabled.value || undefined,
+      // `@mousedown.left`
+      'onMousedown': (event: MouseEvent) => {
+        if (event.button !== 0) {
+          return;
+        }
+        options.isClickFocus.value = true;
+      },
+      'onFocus': (event: FocusEvent) => {
+        if (options.isClickFocus.value) {
+          return;
+        }
+        context.onEnter(event);
+      },
+      'onKeydown': (event: KeyboardEvent) => {
+        // Was `@keydown.down.up.left.right.home.end` + `@keydown.enter` +
+        // `@keydown`, in that order. The key list (and the orientation
+        // filtering) now live in the navigation-intent resolution, resolved
+        // once per keydown. A handled key prevents the default and stops there
+        // (no typeahead, no Enter fallback).
+        const intent = context.getNavigationIntent(event);
+        // The focused item already handled this key (Space selects it and
+        // prevents the default): a `'select'` intent for the same key would run
+        // the Enter path and select it a second time.
+        if (intent === 'select' && event.defaultPrevented) {
+          return;
+        }
+        const canNavigate = intent === 'select' || context.focusable.value;
+        if (intent && canNavigate && context.onKeydownNavigation(event, intent)) {
+          event.preventDefault();
+          return;
+        }
+        // `null` means the override opted the key out, Enter included; only a
+        // key the resolution left alone (`undefined`) falls back to Enter.
+        if (intent === undefined && event.key === 'Enter') {
+          context.onKeydownEnter(event);
+        }
+        context.onKeydownTypeAhead(event);
+      },
+    }),
+    () => ({ orientation: context.orientation.value }),
+  );
+}
+
+export interface UseListboxRootProps<T = AcceptableValue> {
+  /**
+   * Controlled value. A getter/ref resolving to `undefined` is uncontrolled;
+   * a writable `Ref` (with no `emit`/`onUpdate`) is written back ("ref-owned").
+   */
+  modelValue?: MaybeRefOrGetter<T | Array<T> | undefined>;
+  /** Initial value when uncontrolled. Defaults to `[]` when `multiple`, else `undefined`. */
+  defaultValue?: T | Array<T>;
+  /** Whether multiple options can be selected. @defaultValue `false` */
+  multiple?: MaybeRefOrGetter<boolean | undefined>;
+  /** @defaultValue `'vertical'` */
+  orientation?: MaybeRefOrGetter<DataOrientation | undefined>;
+  /** Reading direction. Falls back to the nearest `ConfigProvider`, then `'ltr'`. */
+  dir?: MaybeRefOrGetter<Direction | undefined>;
+  /** @defaultValue `false` */
+  disabled?: MaybeRefOrGetter<boolean | undefined>;
+  /** @defaultValue `'toggle'` */
+  selectionBehavior?: MaybeRefOrGetter<'toggle' | 'replace' | undefined>;
+  /** When `true`, hovering an item highlights it. @defaultValue `false` */
+  highlightOnHover?: MaybeRefOrGetter<boolean | undefined>;
+  /** When `true`, keyboard navigation loops from the last item to the first, and vice versa. @defaultValue `false` */
+  loop?: MaybeRefOrGetter<boolean | undefined>;
+  /**
+   * Identity strategy (a key or an equality function; a function runs for
+   * every value, strings included). A plain value read once at setup, NOT a
+   * getter — a comparison function would otherwise be mistaken for a getter.
+   */
+  by?: By<T>;
+  /**
+   * The single keyboard hook (#2824): resolves what a keydown means. Return
+   * `undefined` to fall through to the default `getFocusIntent` mapping
+   * (arrows/Home/End/PageUp/PageDown, orientation and direction aware), `null`
+   * to opt the key out (no navigation, and no Enter selection for Enter), or
+   * `'select'` to run the Enter path. A `ListboxFilter` never consults it for
+   * unmodified printable keys, Enter, ArrowLeft or ArrowRight (they stay text
+   * input). Space on a focused item already selects that item; a `'select'`
+   * intent for Space is skipped there so the item is not toggled twice.
+   */
+  getNavigationIntent?: (event: KeyboardEvent) => ListboxNavigationIntent | null | undefined;
+  /**
+   * Client-side filtering (#2824 item 7), opt-in: items whose text does not
+   * match the search term are not rendered, and so are skipped by keyboard
+   * navigation, typeahead, select-all and range selection. `null` or omitted
+   * means no client filtering (filter the items yourself, or on a server).
+   * A function, `null`, or a `Ref` holding one — NOT a getter, which would be
+   * mistaken for the filter itself.
+   */
+  filter?: ListboxFilterFunction<T> | null | Ref<ListboxFilterFunction<T> | null | undefined>;
+  /**
+   * Controlled search term the `filter` runs against. A writable `Ref` is
+   * written back; left out, the term is internal and `ListboxFilter` (or
+   * `setFilterSearch`) sets it.
+   */
+  filterSearch?: MaybeRefOrGetter<string | undefined>;
+  /**
+   * The rendered items in DOM order (the SFC injects `useCollection({
+   * isProvider: true }).getItems`) — the seam a composable cannot own itself.
+   * Defaults to an empty collection. Disabled items are left out unless
+   * `includeDisabledItem` is `true`.
+   */
+  getItems?: (includeDisabledItem?: boolean) => Array<ListboxCollectionItem<T>>;
+  /**
+   * Direct lookup of one rendered item by its element (the SFC injects
+   * `useCollection().getItem`), so a highlight change does not scan the whole
+   * collection. Defaults to a search through `getItems()`.
+   */
+  getItem?: (element: HTMLElement) => ListboxCollectionItem<T> | undefined;
+  /**
+   * Highlight-scroll coordination with a parent composite that is still being
+   * positioned (the SFC injects it; Combobox provides it): while suppressed, a
+   * highlight neither scrolls on focus nor calls `scrollIntoView`, and hands
+   * the deferred scroll to the parent instead.
+   */
+  highlightScroll?: ListboxHighlightScroll | null;
+  /**
+   * The root element (the SFC hands its `usePrimitiveElement` `currentElement`);
+   * the root `onFocusout` leaves the highlight only when focus moved outside it.
+   */
+  element?: MaybeRefOrGetter<HTMLElement | null | undefined>;
+  /** Component `emit`; receives `beforeUpdate:modelValue` then `update:modelValue`. */
+  emit?: (event: any, ...args: Array<any>) => void;
+  /** Called before a change commits; `details.cancel()` vetoes it. */
+  onBeforeUpdate?: (value: T | Array<T> | undefined, details: ChangeEventDetails<ListboxChangeReason>) => void;
+  /** Called after a change commits. */
+  onUpdate?: (value: T | Array<T> | undefined, details: ChangeEventDetails<ListboxChangeReason>) => void;
+  /** Fires when the highlighted item changes (the SFC's `highlight` emit). */
+  onHighlight?: (payload: ListboxCollectionItem<T> | undefined) => void;
+  /** Fires with the cancellable `listbox.entryFocus` event when the content receives focus (the SFC's `entryFocus` emit). */
+  onEntryFocus?: (event: CustomEvent) => void;
+  /** Fires when the highlight leaves the listbox (the SFC's `leave` emit). */
+  onLeave?: (event: Event) => void;
+}
+
+export interface UseListboxRootReturn<T = AcceptableValue> {
+  modelValue: ComputedRef<T | Array<T> | undefined>;
+  /**
+   * Select a value following `multiple` / `selectionBehavior`; returns `false`
+   * when unchanged or cancelled. This is what the items call.
+   */
+  select: (value: T, reason?: ListboxChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /** Write the whole model (no toggle rules); returns `false` when unchanged or cancelled. */
+  setModelValue: (value: T | Array<T> | undefined, reason?: ListboxChangeReason | BaseChangeReason, event?: Event) => boolean;
+  /** Whether `value` is (part of) the current selection, matched with `by`. */
+  isSelected: (value: T) => boolean;
+  highlightedElement: Ref<HTMLElement | null>;
+  /** Highlight the item holding `value`. */
+  highlightItem: (value: T) => void;
+  /** Highlight the first enabled item on the next tick. */
+  highlightFirstItem: () => void;
+  /** Highlight the selected item (or the first one); `scroll: false` only sets the roving target. */
+  highlightSelected: (event?: Event, scroll?: boolean) => Promise<void>;
+  changeHighlight: (el: HTMLElement, scrollIntoView?: boolean, focus?: boolean) => void;
+  /** The sticky label registry. */
+  labels: ListboxLabelRegistry<T>;
+  /** The search term `filter` runs against. */
+  filterSearch: ComputedRef<string>;
+  /** Set the search term (what `ListboxFilter` calls on input). */
+  setFilterSearch: (search: string) => void;
+  /** The filtering result: search term, whether it is active, and the match count. */
+  filterState: ComputedRef<ListboxFilterState>;
+  lastChangeDetails: Readonly<Ref<ChangeEventDetails<ListboxChangeReason>>>;
+  isControlled: ComputedRef<boolean>;
+  /** The root surface: `dir` + the pointer-leave / focus-out highlight release. */
+  root: PartSurface<ListboxState>;
+  /** The `role="listbox"` surface. */
+  content: PartSurface<ListboxContentState>;
+  /** Per-item surface built from `(context, value)`. */
+  getItemSurface: (value: MaybeRefOrGetter<T>, disabled?: MaybeRefOrGetter<boolean | undefined>, options?: ListboxItemSurfaceOptions<T>) => PartSurface<ListboxItemState>;
+  context: ListboxRootContext<T>;
+}
+
+/**
+ * Headless Listbox root — the selection model (`useListSelection`), the
+ * highlight/keyboard/typeahead brain and the context the `.vue` shells provide.
+ * A standalone consumer gets selection, `role`/`aria`/`data-*` per part and
+ * the keyboard model, but must hand in `getItems` (the rendered items in DOM
+ * order) and each item's element — the `Collection` family is a component
+ * wrapper a composable cannot absorb.
+ *
+ * Owns the `modelValue` watcher (mount highlight) and DOM highlight effects,
+ * so call it inside `setup()`; SSR-safe (`document`/`window` are never touched
+ * at call scope and `highlightSelected` is client-guarded).
+ *
+ * @experimental Signatures may change in 3.x minors.
+ * @lifecycle setup
+ */
+export function useListboxRoot<T extends AcceptableValue = AcceptableValue>(props: UseListboxRootProps<T> = {}): UseListboxRootReturn<T> {
+  const getItems: (includeDisabledItem?: boolean) => Array<ListboxCollectionItem<T>> = props.getItems ?? (() => []);
+  const getItem = props.getItem ?? ((element: HTMLElement) => getItems().find((i) => i.ref === element));
+  const { handleTypeaheadSearch } = useTypeahead();
+  const kbd = useKbd();
+
+  const multiple = computed(() => toValue(props.multiple) ?? false);
+  const orientation = computed<DataOrientation>(() => toValue(props.orientation) ?? 'vertical');
+  const dir = resolveDirection(props.dir);
+  const disabled = computed(() => toValue(props.disabled) ?? false);
+  const selectionBehavior = computed<'toggle' | 'replace'>(() => toValue(props.selectionBehavior) ?? 'toggle');
+  const highlightOnHover = computed(() => toValue(props.highlightOnHover) ?? false);
+  const loop = computed(() => toValue(props.loop) ?? false);
+
+  const isUserAction = ref(false);
+  const focusable = ref(true);
+
+  const selection = useListSelection<T, ListboxChangeReason>({
+    modelValue: props.modelValue,
+    defaultValue: props.defaultValue,
+    multiple,
+    by: props.by,
+    selectionBehavior,
+    name: 'modelValue',
+    emit: props.emit,
+    onBeforeUpdate: props.onBeforeUpdate,
+    onUpdate: props.onUpdate,
+  });
+  const { modelValue, setModelValue, isSelected, firstValue, lastChangeDetails, isControlled } = selection;
+
+  function onValueChange(val: T, reason: ListboxChangeReason | BaseChangeReason = 'imperative-action', event?: Event) {
+    isUserAction.value = true;
+    const changed = selection.select(val, reason, event);
+    setTimeout(() => {
+      isUserAction.value = false;
+    }, 1);
+    return changed;
+  }
+
+  const highlightedElement = ref<HTMLElement | null>(null);
+  const highlight = createKeyedSelector<HTMLElement>(() => highlightedElement.value);
+  const selectionSelector = new SelectionSelector<T>(() => modelValue.value, props.by);
+  const previousElement = ref<HTMLElement | null>(null);
+  const isVirtual = ref(false);
+  const isComposing = ref(false);
+  const virtualFocusHook = createEventHook<{ event?: Event; scroll: boolean }>();
+  const virtualKeydownHook = createEventHook<ListboxVirtualKeydown>();
+  const virtualHighlightHook = createEventHook<T>();
+
+  // `ListboxVirtualizer` still assigns `context.modelValue.value` directly for
+  // its select-all and shift-range writes, so the context exposes a writable
+  // computed whose setter routes through `useListSelection`. Those writes run
+  // synchronously inside `virtualKeydownHook.trigger(event)`, so the keyboard
+  // event in flight supplies the reason and the event.
+  let virtualKeydownEvent: KeyboardEvent | undefined;
+  function virtualWriteReason(event?: KeyboardEvent): ListboxChangeReason | BaseChangeReason {
+    if (!event) {
+      return 'imperative-action';
+    }
+    const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
+    if (isMetaKey && event.key === 'a') {
+      return 'select-all';
+    }
+    if (event.shiftKey) {
+      return 'range-select';
+    }
+    return 'imperative-action';
+  }
+  const contextModelValue = computed<T | Array<T> | undefined>({
+    get: () => modelValue.value,
+    set: (value) => setModelValue(value, virtualWriteReason(virtualKeydownEvent), virtualKeydownEvent),
+  });
+  function triggerVirtualKeydown(event: KeyboardEvent, intent: ListboxVirtualKeydown['intent']) {
+    virtualKeydownEvent = event;
+    try {
+      return virtualKeydownHook.trigger({ event, intent });
+    } finally {
+      virtualKeydownEvent = undefined;
+    }
+  }
+
+  function getCollectionItem() {
+    return getItems().map((i) => i.ref).filter((i) => !isDisabledItem(i));
+  }
+
+  function changeHighlight(el: HTMLElement, scrollIntoView = true, focus?: boolean) {
+    if (!el) {
+      return;
+    }
+
+    highlightedElement.value = el;
+    const suppressHighlightScroll = props.highlightScroll?.suppressHighlightScroll.value ?? false;
+    if (focus ?? focusable.value) {
+      if (suppressHighlightScroll) {
+        highlightedElement.value.focus({ preventScroll: true });
+      } else {
+        highlightedElement.value.focus();
+      }
+    }
+
+    if (suppressHighlightScroll) {
+      props.highlightScroll?.onHighlightScrollRequest(scrollIntoView
+        ? () => {
+            const element = highlightedElement.value;
+            if (element?.isConnected) {
+              element.scrollIntoView({ block: 'nearest' });
+            }
+          }
+        : undefined);
+    } else if (scrollIntoView) {
+      highlightedElement.value.scrollIntoView({ block: 'nearest' });
+    }
+
+    props.onHighlight?.(getItem(el));
+  }
+
+  function isAtVirtualBoundary(intent: 'prev' | 'next') {
+    // A virtualized list only renders a window of items. Only wrap when that
+    // window reaches the end of the full options list; any rendered items past
+    // the highlighted one are disabled.
+    const rendered = getItems(true).map((i) => i.ref);
+    const edge = intent === 'next'
+      ? rendered.at(-1)
+      : rendered[0];
+    if (!edge) {
+      return false;
+    }
+    const position = Number(edge.getAttribute('aria-posinset'));
+    const size = Number(edge.getAttribute('aria-setsize'));
+    return intent === 'next'
+      ? position === size
+      : position === 1;
+  }
+
+  function highlightItem(value: T) {
+    if (isVirtual.value) {
+      // @ts-expect-error known type issue https://github.com/vueuse/vueuse/issues/4610
+      virtualHighlightHook.trigger(value);
+    } else {
+      const item = getItems().find((i) => compare(i.value, value, props.by));
+      if (item) {
+        highlightedElement.value = item.ref;
+        changeHighlight(item.ref);
+      }
+    }
+  }
+
+  function onKeydownEnter(event: KeyboardEvent): boolean {
+    if (highlightedElement.value && highlightedElement.value.isConnected) {
+      // Modifier combos (e.g. Ctrl+Enter) are not handled here —
+      // let them bubble so parent listeners can react (e.g. submit a form).
+      if (event.ctrlKey || event.metaKey || event.altKey) {
+        return false;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!isComposing.value) {
+        highlightedElement.value.click();
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function onKeydownTypeAhead(event: KeyboardEvent) {
+    if (!focusable.value) {
+      return;
+    }
+    isUserAction.value = true;
+    if (isVirtual.value) {
+      // Not a navigation key (a handled one never reaches typeahead): the
+      // virtualizer only runs select-all and typeahead for it.
+      triggerVirtualKeydown(event, null);
+    } else {
+      const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
+
+      if (isMetaKey && event.key === 'a' && multiple.value) {
+        const collection = getItems();
+        const values = collection.map((i) => i.value);
+        setModelValue([...values], 'select-all', event);
+        event.preventDefault();
+        const lastItem = collection.at(-1);
+        if (lastItem) {
+          changeHighlight(lastItem.ref);
+        }
+      } else if (!isMetaKey) {
+        const el = handleTypeaheadSearch(event.key, getItems());
+        if (el) {
+          changeHighlight(el);
+        }
+      }
+    }
+    setTimeout(() => {
+      isUserAction.value = false;
+    }, 1);
+  }
+
+  function onCompositionStart() {
+    isComposing.value = true;
+  }
+  function onCompositionEnd() {
+    nextTick(() => {
+      isComposing.value = false;
+    });
+  }
+
+  function highlightFirstItem() {
+    nextTick(() => {
+      // An internal move, not a keydown: it never consults the consumer's
+      // `getNavigationIntent` (an override opting PageUp out must not break the
+      // filter's highlight-on-type). The synthetic event still feeds the
+      // range-select and virtualizer paths as before.
+      const event = new KeyboardEvent('keydown', { key: 'PageUp' });
+      navigate('first', event);
+    });
+  }
+
+  function onLeave(event: Event) {
+    const el = highlightedElement.value;
+
+    if ((el as Node)?.isConnected) {
+      previousElement.value = el;
+    }
+
+    highlightedElement.value = null;
+    props.onLeave?.(event);
+  }
+
+  function onEnter(event: Event) {
+    const entryFocusEvent = new CustomEvent('listbox.entryFocus', { bubbles: false, cancelable: true });
+    event.currentTarget?.dispatchEvent(entryFocusEvent);
+    props.onEntryFocus?.(entryFocusEvent);
+
+    if (entryFocusEvent.defaultPrevented) {
+      return;
+    }
+
+    if (previousElement.value) {
+      changeHighlight(previousElement.value);
+    } else {
+      const el = getCollectionItem()?.[0];
+      changeHighlight(el);
+    }
+  }
+
+  /**
+   * The override first; its `undefined` falls through to `getFocusIntent`.
+   * Resolves to `null` when the override opted the key out, and to `undefined`
+   * when neither the override nor the default mapping knows the key.
+   */
+  function getNavigationIntent(event: KeyboardEvent): ListboxNavigationIntent | null | undefined {
+    const intent = props.getNavigationIntent?.(event);
+    if (intent === undefined) {
+      return getFocusIntent(event, orientation.value, dir.value);
+    }
+    return intent;
+  }
+
+  /**
+   * Returns `true` when the key was handled, so a shell prevents the default
+   * only then. A shell that already resolved the intent passes it, so the
+   * override runs once per keydown.
+   */
+  function onKeydownNavigation(event: KeyboardEvent, intent: ListboxNavigationIntent | null | undefined = getNavigationIntent(event)): boolean {
+    if (!intent) {
+      return false;
+    }
+    // A keyboard move is a user action: a range selection it writes must not
+    // trigger the programmatic-change re-highlight (the typeahead path used to
+    // set this for every key).
+    isUserAction.value = true;
+    setTimeout(() => {
+      isUserAction.value = false;
+    }, 1);
+    return navigate(intent, event);
+  }
+
+  /** Runs a resolved intent: `'select'` takes the Enter path, the four moves shift the highlight. */
+  function navigate(intent: ListboxNavigationIntent | undefined, event: KeyboardEvent): boolean {
+    if (!intent) {
+      return false;
+    }
+    if (intent === 'select') {
+      return onKeydownEnter(event);
+    }
+
+    let collection = getCollectionItem();
+    if (highlightedElement.value) {
+      if (intent === 'last') {
+        collection.reverse();
+      } else if (intent === 'prev' || intent === 'next') {
+        if (intent === 'prev') {
+          collection.reverse();
+        }
+
+        const currentIndex = collection.indexOf(highlightedElement.value);
+        const shouldLoop = loop.value && currentIndex === collection.length - 1;
+        if (shouldLoop && isVirtual.value) {
+          if (isAtVirtualBoundary(intent)) {
+            // Let the virtualizer scroll to and highlight the opposite end.
+            // The virtualizer takes the resolved intent, so the user's own
+            // keydown travels with it: a Shift range write it makes reports
+            // `'range-select'` with that event.
+            triggerVirtualKeydown(event, intent === 'next'
+              ? 'first'
+              : 'last');
+            return true;
+          }
+          collection = [];
+        } else {
+          collection = shouldLoop
+            ? collection.slice(0, 1)
+            : collection.slice(currentIndex + 1);
+        }
+      }
+      handleMultipleReplace(event, collection[0]);
+    }
+
+    if (collection.length) {
+      const index = !highlightedElement.value && intent === 'prev'
+        ? collection.length - 1
+        : 0;
+      changeHighlight(collection[index]);
+    }
+
+    if (isVirtual.value) {
+      triggerVirtualKeydown(event, intent);
+    }
+    return true;
+  }
+
+  function handleMultipleReplace(event: KeyboardEvent, targetEl: HTMLElement) {
+    if (isVirtual.value || selectionBehavior.value !== 'replace' || !multiple.value || !Array.isArray(modelValue.value)) {
+      return;
+    }
+    const isMetaKey = event.altKey || event.ctrlKey || event.metaKey;
+    if (isMetaKey && !event.shiftKey) {
+      return;
+    }
+
+    if (event.shiftKey) {
+      const collection = getItems().filter((i) => !isDisabledItem(i.ref));
+      let lastValue = collection.find((i) => i.ref === targetEl)?.value;
+
+      if (event.key === kbd.END) {
+        lastValue = collection.at(-1)?.value;
+      } else if (event.key === kbd.HOME) {
+        lastValue = collection[0]?.value;
+      }
+
+      if (!lastValue || !firstValue.value) {
+        return;
+      }
+
+      const values = findValuesBetween(collection.map((i) => i.value), firstValue.value, lastValue);
+      setModelValue(values, 'range-select', event);
+    }
+  }
+
+  async function highlightSelected(event?: Event, scroll = true) {
+    // highlightSelected is called inside a watch with immediate set to true.
+    // This results in code execution during SSR.
+    // Ensure this code only runs in a browser environment, since it performs
+    // DOM-only side effects (focus, scrollIntoView, synthetic KeyboardEvent).
+    if (!isClient) {
+      return;
+    }
+    await nextTick();
+    if (isVirtual.value) {
+      // Trigger on nextTick for Virtualizer to be mounted.
+      // `scroll` is `false` on the initial mount highlight, so the virtualizer sets
+      // its roving-tabindex target without focusing/scrolling — otherwise a
+      // virtualized Listbox below the fold would pull the page to it on load.
+      virtualFocusHook.trigger({ event, scroll });
+    } else {
+      const collection = getCollectionItem();
+      const item = collection.find((i) => i.dataset.state === 'checked');
+      // On the initial (mount) highlight we only set the roving-tabindex target.
+      // Focusing/scrolling here would scroll the page to a Listbox the user never
+      // interacted with (e.g. one below the fold). Later highlights scroll as before.
+      const focus = scroll ? undefined : false;
+      if (item) {
+        changeHighlight(item, scroll, focus);
+      } else if (collection.length) {
+        changeHighlight(collection[0], scroll, focus);
+      }
+    }
+  }
+
+  // `false` until the initial (mount) modelValue highlight has been queued.
+  // Flipped synchronously in the watcher so the "is this the mount highlight?"
+  // decision never depends on nextTick ordering, which differs between a client
+  // mount and SSR hydration. The intent travels with the call as an argument
+  // rather than via a shared flag released on a later tick.
+  let hasHighlightedOnMount = false;
+
+  // watch for only programmatic changes
+  watch(modelValue, () => {
+    if (!isUserAction.value) {
+      const scroll = hasHighlightedOnMount;
+      hasHighlightedOnMount = true;
+      nextTick(() => {
+        highlightSelected(undefined, scroll);
+      });
+    }
+  }, { immediate: true, deep: true });
+
+  // Sticky label registry: by-aware, last write wins, never auto-removed.
+  const labels: ListboxLabelRegistry<T> = createLabelRegistry<T>(props.by);
+
+  // Filtering (#2824 item 7). Opt-in: without a `filter` function every
+  // check below short-circuits on `isFilterActive` and never reads the item
+  // registry, so a listbox that does not filter pays nothing per item
+  // (Combobox and Autocomplete pass `useFilter`'s `contains` by default). A filtered-out item is not
+  // rendered at all, so the collection — and with it navigation, typeahead,
+  // select-all and range selection — only ever sees the matching items.
+  const filterFn = computed(() => {
+    const filter = isRef(props.filter)
+      ? props.filter.value
+      : props.filter;
+    return typeof filter === 'function'
+      ? filter
+      : null;
+  });
+  const { state: filterSearch, setState: setFilterSearchState } = useControllableState<string>({
+    prop: props.filterSearch,
+    defaultValue: '',
+  });
+  function setFilterSearch(search: string) {
+    setFilterSearchState(search);
+  }
+  const isFilterActive = computed(() => !!filterFn.value && !!filterSearch.value);
+  function filterOption(value: T, text: string) {
+    return !isFilterActive.value || filterFn.value!(text, filterSearch.value, value);
+  }
+  const filterItems = shallowReactive(new Map<string, ListboxFilterItem<T>>());
+  // Bumped whenever an item mounts or unmounts, so the highlight can be checked
+  // after the collection changed (an async list swapping its items).
+  const itemsVersion = ref(0);
+  const filterResult = computed(() => {
+    const hidden = new Set<string>();
+    // Groups with at least one registered item, and those with a match.
+    const groups = new Set<string>();
+    const matched = new Set<string>();
+    for (const [id, item] of filterItems) {
+      const label = item.label();
+      if (item.group) {
+        groups.add(item.group);
+      }
+      // An item that was never measured renders once so it can report its text.
+      if (label === undefined || filterOption(item.value(), label)) {
+        if (item.group) {
+          matched.add(item.group);
+        }
+      } else {
+        hidden.add(id);
+      }
+    }
+    return { hidden, groups, matched };
+  });
+  // Set by `ListboxVirtualizer`: the number of `options` that match.
+  const virtualFilterCount = ref<number>();
+  const filterState = computed<ListboxFilterState>(() => {
+    const active = isFilterActive.value;
+    return {
+      search: filterSearch.value,
+      active,
+      count: isVirtual.value && virtualFilterCount.value !== undefined
+        ? virtualFilterCount.value
+        : filterItems.size - (active ? filterResult.value.hidden.size : 0),
+    };
+  });
+  // A highlighted item that got filtered out is gone from the DOM: drop the
+  // highlight so `aria-activedescendant` never points at a missing id.
+  watch([filterSearch, filterFn], () => {
+    if (highlightedElement.value && !highlightedElement.value.isConnected) {
+      highlightedElement.value = null;
+    }
+  }, { flush: 'post' });
+  // Likewise when the highlighted item itself unmounted (the items were
+  // replaced, as an async list with `:filter="null"` does while the user
+  // types). Not in a virtualized list: rows unmount on scroll there, and the
+  // virtualizer owns the highlight.
+  watch(itemsVersion, () => {
+    if (!isVirtual.value && highlightedElement.value && !highlightedElement.value.isConnected) {
+      highlightedElement.value = null;
+    }
+  }, { flush: 'post' });
+
+  const context: ListboxRootContext<T> = {
+    modelValue: contextModelValue,
+    onValueChange,
+    multiple: multiple as Ref<boolean>,
+    orientation: orientation as Ref<DataOrientation>,
+    dir: dir as Ref<Direction>,
+    disabled: disabled as Ref<boolean>,
+    highlightOnHover: highlightOnHover as Ref<boolean>,
+    loop: loop as Ref<boolean>,
+    highlightedElement,
+    highlight,
+    selection: selectionSelector,
+    isVirtual,
+    virtualFocusHook,
+    virtualKeydownHook,
+    virtualHighlightHook,
+    by: props.by,
+    firstValue,
+    selectionBehavior: selectionBehavior as Ref<'toggle' | 'replace'>,
+
+    focusable,
+    onLeave,
+    onEnter,
+    changeHighlight,
+    onKeydownEnter,
+    onKeydownNavigation,
+    onKeydownTypeAhead,
+    onCompositionStart,
+    onCompositionEnd,
+    highlightFirstItem,
+
+    labels,
+    highlightItem,
+    highlightSelected,
+    getNavigationIntent,
+
+    filterSearch,
+    setFilterSearch,
+    isFilterActive,
+    filterOption,
+    registerFilterItem: (id, item) => {
+      filterItems.set(id, item);
+      itemsVersion.value++;
+      return () => {
+        filterItems.delete(id);
+        itemsVersion.value++;
+      };
+    },
+    isFilteredOut: (id) => !isVirtual.value && isFilterActive.value && filterResult.value.hidden.has(id),
+    // A group renders before its items register (always so during SSR): one
+    // without registered items stays visible rather than flashing `hidden`.
+    isGroupFilteredOut: (id) => !isVirtual.value && isFilterActive.value && filterResult.value.groups.has(id) && !filterResult.value.matched.has(id),
+    virtualFilterCount,
+  };
+
+  const root = createPartSurface<ListboxState>(
+    () => ({
+      dir: dir.value,
+      onPointerleave: onLeave,
+      onFocusout: async (event: FocusEvent) => {
+        const target = (event.relatedTarget || event.target) as HTMLElement | null;
+        await nextTick();
+        const element = toValue(props.element);
+        if (highlightedElement.value && element && !element.contains(target)) {
+          onLeave(event);
+        }
+      },
+    }),
+    () => ({ disabled: disabled.value }),
+  );
+
+  const content = getListboxContentSurface(context, {
+    isClickFocus: refAutoReset(false, 10),
+  });
+
+  return {
+    modelValue,
+    select: onValueChange,
+    setModelValue,
+    isSelected,
+    highlightedElement,
+    highlightItem,
+    highlightFirstItem,
+    highlightSelected,
+    changeHighlight,
+    labels,
+    filterSearch,
+    setFilterSearch,
+    filterState,
+    lastChangeDetails,
+    isControlled,
+    root,
+    content,
+    getItemSurface: (value, disabled, options) => getListboxItemSurface(context, value, disabled, options),
+    context,
+  };
+}

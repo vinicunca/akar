@@ -1,14 +1,17 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { ComputedRef, Ref, ShallowRef } from 'vue';
+import type { ColorFieldChangeReason } from './useColorField';
+import type { FieldControlBinding } from '@/Field/useFieldControl';
 import type { PrimitiveProps } from '@/Primitive';
+import type { ChangeEventDetails } from '@/shared';
 import type { Color, ColorChannel, ColorSpace } from '@/shared/color';
 import type { FormFieldProps } from '@/shared/types';
-import { createContext, useFormControl, useForwardExpose, useLocale } from '@/shared';
+import { createContext, useFormControl, useForwardElement } from '@/shared';
 
 export interface ColorFieldRootProps extends PrimitiveProps, FormFieldProps {
-  /** The color value (controlled). Can be a hex string or Color object. */
+  /** The color value (controlled). A string is parsed once; emitted values are always `Color` objects. */
   modelValue?: string | Color;
-  /** The default color value (uncontrolled). */
+  /** The default color value (uncontrolled). A string is parsed once. */
   defaultValue?: string | Color;
   /** The color space to operate in when displaying a channel. */
   colorSpace?: ColorSpace;
@@ -29,13 +32,25 @@ export interface ColorFieldRootProps extends PrimitiveProps, FormFieldProps {
 }
 
 export type ColorFieldRootEmits = {
-  'update:modelValue': [value: string];
+  /** Event handler called before the color value changes; `details.cancel()` vetoes the change. */
+  'beforeUpdate:modelValue': [value: Color, details: ChangeEventDetails<ColorFieldChangeReason>];
+  /** Event handler called when the color value changes. */
+  'update:modelValue': [value: Color, details: ChangeEventDetails<ColorFieldChangeReason>];
+  /** Event handler called with the same `Color` as `update:modelValue`, after it. */
   'update:color': [value: Color];
+  /** Event handler called with the hex serialization of the new color, after `update:modelValue`. Lossy: drops the hue of greys and sub-byte precision. */
+  'update:hex': [value: string];
+  /** Event handler called when a committed edit, step or wheel change changes the color. Typing does not change the color until it is committed. */
+  'change': [value: Color];
+  /** Event handler called after each committed change once the model holds it: every field change is a complete interaction. With a controlled `modelValue` it fires after the parent applies the update, and not at all if the parent rejects it. */
+  'changeEnd': [value: Color];
 };
 
 export interface ColorFieldRootContext {
-  color: Ref<Color>;
+  color: ComputedRef<Color>;
   inputValue: Ref<string>;
+  /** `true` once a commit rejected text that does not parse (the text reverts), until an edit parses or a change commits. */
+  invalid: ComputedRef<boolean>;
   channel: Ref<ColorChannel | undefined>;
   colorSpace: Ref<ColorSpace>;
   disabled: Ref<boolean>;
@@ -43,35 +58,38 @@ export interface ColorFieldRootContext {
   disableWheelChange: Ref<boolean>;
   placeholder: Ref<string | undefined>;
   updateValue: (value: string) => void;
-  commit: () => void;
-  increment: () => void;
-  decrement: () => void;
-  incrementToMax: () => void;
-  decrementToMin: () => void;
-  incrementPage: () => void;
-  decrementPage: () => void;
+  commit: (event?: Event) => void;
+  increment: (event?: Event) => void;
+  decrement: (event?: Event) => void;
+  incrementToMax: (event?: Event) => void;
+  decrementToMin: (event?: Event) => void;
+  incrementPage: (event?: Event) => void;
+  decrementPage: (event?: Event) => void;
   handleWheel: (event: WheelEvent) => void;
 }
 
 export const [injectColorFieldRootContext, provideColorFieldRootContext]
   = createContext<ColorFieldRootContext>('ColorFieldRoot');
+
+/** @internal The root's Field binding, for `ColorFieldInput`. Only provided inside a `FieldRoot`. */
+export interface ColorFieldFieldControl {
+  binding: FieldControlBinding;
+  /** Set by `ColorFieldInput`: the field's control and, when the consumer gave it one, its own id. */
+  input: ShallowRef<{ element: () => HTMLElement | undefined; id: () => string | undefined } | undefined>;
+}
+
+/** @internal */
+export const [injectColorFieldFieldControl, provideColorFieldFieldControl]
+  = createContext<ColorFieldFieldControl | null>('ColorFieldRoot', 'ColorFieldFieldControl');
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { computed, ref, toRefs, watch } from 'vue';
-import { Primitive } from '@/Primitive';
-import {
-  colorToString,
-  convertToRgb,
-  getChannelRange,
-  getChannelValue,
-  isValidColor,
-  normalizeColor,
-  parseColor,
-  setChannelValue,
-} from '@/shared/color';
+import { mergeProps, shallowRef, watch } from 'vue';
+import { useFieldControl } from '@/Field/useFieldControl';
+import { renderAs } from '@/Primitive/renderAs';
+import { colorToString } from '@/shared/color';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
+import { useColorField } from './useColorField';
 
 const props = withDefaults(defineProps<ColorFieldRootProps>(), {
   colorSpace: 'hsl',
@@ -84,242 +102,68 @@ const props = withDefaults(defineProps<ColorFieldRootProps>(), {
 
 const emits = defineEmits<ColorFieldRootEmits>();
 
-const { colorSpace, channel, disabled, readonly, disableWheelChange, placeholder, locale: propLocale, step: stepProp } = toRefs(props);
-const { forwardRef, currentElement } = useForwardExpose();
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 const isFormControl = useFormControl(currentElement);
-const locale = useLocale(propLocale);
 
-// Normalize the model value
-const modelValue = useVModel(props, 'modelValue', emits, {
-  defaultValue: props.defaultValue,
-  passive: (props.modelValue === undefined) as false,
+// Optional Field participation: `null` outside a `FieldRoot`, so every binding
+// below is inert without a Field. The input is the field's control (id, label,
+// focus); the value collected is the `Color`, as emitted. A color field always
+// holds a color, so `required` never fails.
+// The ref is only created inside a Field, so a standalone field allocates nothing.
+let fieldInput: ColorFieldFieldControl['input'] | undefined;
+const field = useFieldControl({
+  id: () => fieldInput?.value?.id(),
+  element: () => fieldInput?.value?.element(),
+  getValue: () => color.value,
+  required: () => props.required,
+});
+if (field) {
+  fieldInput = shallowRef();
+}
+
+const { root, context, color, disabled } = useColorField({
+  colorSpace: () => props.colorSpace,
+  channel: () => props.channel,
+  disabled: () => field
+    ? field.disabled(props.disabled)
+    : props.disabled,
+  readonly: () => props.readonly,
+  disableWheelChange: () => props.disableWheelChange,
+  placeholder: () => props.placeholder,
+  step: () => props.step,
+  modelValue: () => props.modelValue,
+  defaultValue: () => props.defaultValue,
+  emit: emits,
+  // The Field hears its own commits by reason (`change`): user input, or, for
+  // a programmatic one (`setModelValue` and the like), only the watcher below,
+  // which also reports a parent-driven change.
+  onUpdate: field?.change,
 });
 
-const color = computed({
-  get: () => normalizeColor(modelValue.value ?? '#000000'),
-  set: (newColor: Color) => {
-    const hexString = colorToString(newColor, 'hex');
-    modelValue.value = hexString;
-    emits('update:color', newColor);
-  },
-});
+provideColorFieldRootContext(context);
 
-// Input value for the text field
-const inputValue = ref('');
-const isEditing = ref(false);
-
-// Update input value when color changes (unless user is editing)
-watch(() => color.value, (newColor) => {
-  if (!isEditing.value) {
-    inputValue.value = formatValue(newColor);
-  }
-}, { immediate: true });
-
-function formatValue(c: Color): string {
-  if (channel.value) {
-    const value = getChannelValue(c, channel.value);
-    if (channel.value === 'alpha') {
-      return String(Math.round(value));
-    }
-    return String(Math.round(value));
-  }
-  // Hex mode
-  return colorToString(c, 'hex');
+if (field) {
+  provideColorFieldFieldControl({ binding: field, input: fieldInput! });
+  watch(color, (value) => field.sync(value));
 }
-
-// The effective step size
-const MIN_HEX_INT = 0x000000;
-const MAX_HEX_INT = 0xFFFFFF;
-const PAGE_STEP_MULTIPLIER = 10;
-
-function getStep(): number {
-  if (stepProp.value != null) {
-    return stepProp.value;
-  }
-  if (channel.value) {
-    return getChannelRange(channel.value).step;
-  }
-  // Hex mode: step by 1 in the integer space (like react-spectrum)
-  return 1;
-}
-
-function updateValue(value: string) {
-  inputValue.value = value;
-}
-
-function commit() {
-  isEditing.value = false;
-
-  if (channel.value) {
-    // Channel mode - parse as number
-    const numValue = parseFloat(inputValue.value);
-    if (!isNaN(numValue)) {
-      const range = getChannelRange(channel.value);
-      const clamped = Math.max(range.min, Math.min(range.max, numValue));
-      color.value = setChannelValue(color.value, channel.value, clamped);
-    }
-    // Reset to formatted value
-    inputValue.value = formatValue(color.value);
-  } else {
-    // Hex mode - parse as color
-    const trimmed = inputValue.value.trim();
-    if (isValidColor(trimmed)) {
-      color.value = parseColor(trimmed);
-    }
-    // Reset to formatted value
-    inputValue.value = formatValue(color.value);
-  }
-}
-
-function addHexValue(delta: number) {
-  const intDelta = Math.trunc(delta);
-  const hexInt = color.value.space === 'rgb'
-    ? ((Math.round((color.value as any).r) << 16) | (Math.round((color.value as any).g) << 8) | Math.round((color.value as any).b))
-    : (() => {
-        const rgb = convertToRgb(color.value);
-        return (Math.round(rgb.r) << 16) | (Math.round(rgb.g) << 8) | Math.round(rgb.b);
-      })();
-  const clamped = Math.min(Math.max(hexInt + intDelta, MIN_HEX_INT), MAX_HEX_INT);
-  const hex = `#${clamped.toString(16).padStart(6, '0')}`;
-  color.value = parseColor(hex);
-  inputValue.value = formatValue(color.value);
-}
-
-function increment() {
-  if (disabled.value || readonly.value) {
-    return;
-  }
-  const step = getStep();
-  if (channel.value) {
-    const currentValue = getChannelValue(color.value, channel.value);
-    color.value = setChannelValue(color.value, channel.value, currentValue + step);
-    inputValue.value = formatValue(color.value);
-  } else {
-    addHexValue(step);
-  }
-}
-
-function decrement() {
-  if (disabled.value || readonly.value) {
-    return;
-  }
-  const step = getStep();
-  if (channel.value) {
-    const currentValue = getChannelValue(color.value, channel.value);
-    color.value = setChannelValue(color.value, channel.value, currentValue - step);
-    inputValue.value = formatValue(color.value);
-  } else {
-    addHexValue(-step);
-  }
-}
-
-function incrementPage() {
-  if (disabled.value || readonly.value) {
-    return;
-  }
-  const step = getStep() * PAGE_STEP_MULTIPLIER;
-  if (channel.value) {
-    const currentValue = getChannelValue(color.value, channel.value);
-    color.value = setChannelValue(color.value, channel.value, currentValue + step);
-    inputValue.value = formatValue(color.value);
-  } else {
-    addHexValue(step);
-  }
-}
-
-function decrementPage() {
-  if (disabled.value || readonly.value) {
-    return;
-  }
-  const step = getStep() * PAGE_STEP_MULTIPLIER;
-  if (channel.value) {
-    const currentValue = getChannelValue(color.value, channel.value);
-    color.value = setChannelValue(color.value, channel.value, currentValue - step);
-    inputValue.value = formatValue(color.value);
-  } else {
-    addHexValue(-step);
-  }
-}
-
-function incrementToMax() {
-  if (disabled.value || readonly.value) {
-    return;
-  }
-  if (channel.value) {
-    const range = getChannelRange(channel.value);
-    color.value = setChannelValue(color.value, channel.value, range.max);
-    inputValue.value = formatValue(color.value);
-  } else {
-    addHexValue(MAX_HEX_INT);
-  }
-}
-
-function decrementToMin() {
-  if (disabled.value || readonly.value) {
-    return;
-  }
-  if (channel.value) {
-    const range = getChannelRange(channel.value);
-    color.value = setChannelValue(color.value, channel.value, range.min);
-    inputValue.value = formatValue(color.value);
-  } else {
-    addHexValue(-MAX_HEX_INT);
-  }
-}
-
-function handleWheel(event: WheelEvent) {
-  if (disableWheelChange.value || disabled.value || readonly.value) {
-    return;
-  }
-
-  event.preventDefault();
-
-  if (event.deltaY > 0) {
-    decrement();
-  } else {
-    increment();
-  }
-}
-
-provideColorFieldRootContext({
-  color: computed(() => color.value) as Ref<Color>,
-  inputValue,
-  channel,
-  colorSpace,
-  disabled,
-  readonly,
-  disableWheelChange,
-  placeholder,
-  updateValue,
-  commit,
-  increment,
-  decrement,
-  incrementToMax,
-  decrementToMin,
-  incrementPage,
-  decrementPage,
-  handleWheel,
-});
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, asChild)"
     :ref="forwardRef"
-    :as="as"
-    :as-child="asChild"
-    role="group"
-    :data-disabled="disabled ? '' : undefined"
-    :data-readonly="readonly ? '' : undefined"
+    v-bind="field ? mergeProps(field.dataAttributes(), root.attrs.value) : root.attrs.value"
   >
     <slot />
 
     <VisuallyHiddenInput
-      v-if="isFormControl && name"
+      v-if="isFormControl && (field ? field.name(name) : name)"
       type="text"
       :value="colorToString(color, 'hex')"
-      :name="name"
+      :name="(field ? field.name(name) : name)!"
       :disabled="disabled"
-      :required="required"
+      :required="field ? field.required(required) : required"
     />
-  </Primitive>
+  </component>
 </template>

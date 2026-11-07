@@ -9,8 +9,8 @@ export interface FieldDescriptionProps extends PrimitiveProps {
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import { Primitive } from '@/Primitive';
-import { useForwardExpose, useId } from '@/shared';
+import { renderAs } from '@/Primitive/renderAs';
+import { useForwardElement, useId } from '@/shared';
 import { injectFieldRootContext } from './FieldRoot.vue';
 
 const props = withDefaults(defineProps<FieldDescriptionProps>(), {
@@ -19,7 +19,8 @@ const props = withDefaults(defineProps<FieldDescriptionProps>(), {
 
 const fieldContext = injectFieldRootContext();
 
-useForwardExpose();
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
 
 const descriptionId = ref(useId(props.id));
 
@@ -31,12 +32,12 @@ onBeforeUnmount(() => unregister?.());
 </script>
 
 <template>
-  <Primitive
+  <component
+    :is="renderAs(as, asChild)"
     v-bind="fieldContext.dataAttributes.value"
     :id="descriptionId"
-    :as="as"
-    :as-child="asChild"
+    :ref="forwardRef"
   >
     <slot />
-  </Primitive>
+  </component>
 </template>

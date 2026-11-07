@@ -14,6 +14,9 @@ export type DateRangePickerContentEmits = PopoverContentEmits;
 </script>
 
 <script setup lang="ts">
+import { injectFieldForControl, provideFieldControlOwner } from '@/Field/useFieldControl';
+import { useForwardElement } from '@/shared';
+
 const props = defineProps<DateRangePickerContentProps>();
 const emits = defineEmits<DateRangePickerContentEmits>();
 
@@ -22,11 +25,18 @@ const propsToForward = computed(() => ({
   portal: undefined,
 }));
 const forwarded = useForwardPropsEmits(propsToForward, emits);
+
+const { forwardRef, expose } = useForwardElement();
+defineExpose(expose);
+
+// The picker's field is the composed date field's: a control in the calendar leaves it alone.
+provideFieldControlOwner(injectFieldForControl());
 </script>
 
 <template>
   <PopoverPortal v-bind="portal">
     <PopoverContent
+      :ref="forwardRef"
       v-bind="{ ...forwarded, ...$attrs }"
       @open-auto-focus="event => {
         emits('openAutoFocus', event)

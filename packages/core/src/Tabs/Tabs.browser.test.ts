@@ -28,7 +28,7 @@ describe('given Tabs with automatic activation, in a real browser', () => {
     const get = mountTabs();
 
     await userEvent.click(get('two'));
-    await expect.poll(() => get('two').getAttribute('data-state')).toBe('active');
+    await expect.poll(() => get('two').getAttribute('data-state')).toBe('checked');
   });
 
   // jsdom never moves focus on mousedown, so the focus-driven activation in #2258 only shows up here.
@@ -38,7 +38,7 @@ describe('given Tabs with automatic activation, in a real browser', () => {
     await userEvent.click(get('two'), { button });
 
     expect(document.activeElement).not.toBe(get('two'));
-    expect(get('two').getAttribute('data-state')).toBe('inactive');
-    expect(get('one').getAttribute('data-state')).toBe('active');
+    expect(get('two').getAttribute('data-state')).toBe('unchecked');
+    expect(get('one').getAttribute('data-state')).toBe('checked');
   });
 });

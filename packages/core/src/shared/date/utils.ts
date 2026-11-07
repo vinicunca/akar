@@ -1,6 +1,29 @@
+import type { Ref } from 'vue';
 import type { Granularity } from './comparators';
 import type { DateInputType, DateStep, DateValue, HourCycle } from './types';
 import { defu } from 'defu';
+import { nextTick, watch } from 'vue';
+import { toCalendar, toIsoString } from '@/date/temporal';
+import { getActiveElement } from '@/shared/getActiveElement';
+
+/**
+ * The value a range field submits in a form: `start - end` as ISO strings.
+ * A missing endpoint is empty (`2024-01-01 - `), and an empty range is an
+ * empty string, so `required` sees it as missing.
+ *
+ * @internal
+ */
+export function toRangeFormValue(range: { start?: DateValue | Temporal.PlainTime | null; end?: DateValue | Temporal.PlainTime | null }): string {
+  const { start, end } = range;
+  if (!start && !end) {
+    return '';
+  }
+  return `${start
+    ? toIsoString(start)
+    : ''} - ${end
+    ? toIsoString(end)
+    : ''}`;
+}
 
 export function getOptsByGranularity(granularity: Granularity, hourCycle: HourCycle, isTimeValue: boolean = false) {
   const opts: Intl.DateTimeFormatOptions = {
@@ -71,6 +94,36 @@ export function handleCalendarInitialFocus(calendar: HTMLElement) {
   }
 }
 
+/**
+ * Keeps keyboard focus inside the calendar when the view changes. Selecting a
+ * month or year cell above the granularity drills down, which unmounts the
+ * focused cell; without this the focus falls back to `<body>`. Focus moves to
+ * the tabbable cell of the new view (the placeholder, else the first focusable
+ * cell). A view change that leaves the focus alone (the view trigger, a
+ * controlled `view`) is not touched.
+ *
+ * @lifecycle setup — installs a watcher.
+ */
+export function useCalendarViewFocus(calendar: Ref<HTMLElement | undefined>, view: Ref<unknown>) {
+  // Default (pre) flush: runs before the outgoing view is unmounted.
+  watch(view, () => {
+    const root = calendar.value;
+    const active = root
+      ? getActiveElement(root)
+      : null;
+    if (!root || !active || !root.contains(active) || !active.hasAttribute('data-akar-calendar-cell-trigger')) {
+      return;
+    }
+
+    nextTick(() => {
+      if (root.contains(getActiveElement(root))) {
+        return;
+      }
+      root.querySelector<HTMLElement>('[data-akar-calendar-cell-trigger][tabindex="0"]')?.focus();
+    });
+  });
+}
+
 export function normalizeHourCycle(hourCycle: HourCycle) {
   if (hourCycle === 24) {
     return 'h23';
@@ -104,6 +157,8 @@ export function normalizeInputValue(date: DateValue | undefined, granularity: Gr
 
   const type = getInputType(granularity);
 
+  // Native date inputs take ISO fields, whatever calendar the value is in.
+  date = toCalendar(date, 'iso8601');
   const year = String(date.year).padStart(4, '0');
   const month = String(date.month).padStart(2, '0');
   const day = String(date.day).padStart(2, '0');

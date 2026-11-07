@@ -1,38 +1,22 @@
 import type { AcceptableValue } from '@/shared/types';
-import { isEqual } from 'ohash';
+
+// `compare` / `valueComparator` moved to `@/shared/compare` (#2824); re-exported so existing imports keep working.
+export { compare, valueComparator } from '@/shared';
 
 export const OPEN_KEYS = [' ', 'Enter', 'ArrowUp', 'ArrowDown'];
 export const SELECTION_KEYS = [' ', 'Enter'];
 export const CONTENT_MARGIN = 10;
 
-export function valueComparator<T>(value: T | Array<T> | undefined, currentValue: T, comparator?: string | ((a: T, b: T) => boolean)) {
-  if (value === undefined) {
-    return false;
-  } else if (Array.isArray(value)) {
-    return value.some((val) => compare(val, currentValue, comparator));
-  } else {
-    return compare(value, currentValue, comparator);
+/**
+ * How far a scroll button moves: one item. The selected item's height, or the
+ * first rendered option's when that item is detached (a `SelectVirtualizer`
+ * recycles its rows) or missing.
+ */
+export function getScrollStep(viewport: HTMLElement, selectedItem?: HTMLElement) {
+  if (selectedItem?.isConnected) {
+    return selectedItem.offsetHeight;
   }
-}
-
-export function compare<T>(value?: T, currentValue?: T, comparator?: string | ((a: T, b: T) => boolean)) {
-  if (value === undefined || currentValue === undefined) {
-    return false;
-  }
-
-  if (typeof value === 'string') {
-    return value === currentValue;
-  }
-
-  if (typeof comparator === 'function') {
-    return comparator(value, currentValue);
-  }
-
-  if (typeof comparator === 'string') {
-    return value?.[comparator as keyof T] === currentValue?.[comparator as keyof T];
-  }
-
-  return isEqual(value, currentValue);
+  return viewport.querySelector<HTMLElement>('[role=option]')?.offsetHeight ?? 0;
 }
 
 export function shouldShowPlaceholder(value?: AcceptableValue | Array<AcceptableValue>): boolean {

@@ -49,7 +49,13 @@ export function useImageLoadingStatus(src: Ref<string>, { referrerPolicy, crossO
         return;
       }
 
-      loadingStatus.value = resolveLoadingStatus(img, src.value);
+      // Before `src`: the request is made with the policy in force when `src` is set.
+      if (referrerPolicy?.value) {
+        img.referrerPolicy = referrerPolicy.value;
+      }
+      if (typeof crossOrigin?.value === 'string') {
+        img.crossOrigin = crossOrigin.value;
+      }
 
       const handleLoad = updateStatus('loaded');
       const handleError = updateStatus('error');
@@ -57,12 +63,7 @@ export function useImageLoadingStatus(src: Ref<string>, { referrerPolicy, crossO
       img.addEventListener('load', handleLoad);
       img.addEventListener('error', handleError);
 
-      if (referrerPolicy?.value) {
-        img.referrerPolicy = referrerPolicy.value;
-      }
-      if (typeof crossOrigin?.value === 'string') {
-        img.crossOrigin = crossOrigin.value;
-      }
+      loadingStatus.value = resolveLoadingStatus(img, src.value);
 
       onCleanup(() => {
         img.removeEventListener('load', handleLoad);

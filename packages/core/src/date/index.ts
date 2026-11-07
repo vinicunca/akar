@@ -1,3 +1,5 @@
 export * from './calendar';
 export * from './comparators';
+export * from './temporal';
 export * from './types';
+export * from './units';

@@ -20,6 +20,7 @@ export {
   type DialogPortalProps,
 } from './DialogPortal.vue';
 export {
+  type DialogOpenChangeReason,
   default as DialogRoot,
   type DialogRootEmits,
   type DialogRootProps,
@@ -33,3 +34,12 @@ export {
   default as DialogTrigger,
   type DialogTriggerProps,
 } from './DialogTrigger.vue';
+export { createDialogHandle, DialogHandle } from './handle';
+export {
+  type DialogContentState,
+  type DialogOverlayState,
+  type DialogTriggerState,
+  useDialog,
+  type UseDialogProps,
+  type UseDialogReturn,
+} from './useDialog';

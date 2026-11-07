@@ -266,4 +266,31 @@ describe('test Primitive functionalities', () => {
       expect(element.attributes('class')).toBe('parent-class child-class');
     });
   });
+
+  it('honors the #render slot, letting the consumer own the element', () => {
+    const wrapper = mount(Primitive, {
+      slots: {
+        render: ({ props }: any) => h('section', { ...props, 'data-x': '' }),
+      },
+    });
+    // #render takes precedence: the consumer's element renders, not the default div
+    expect(wrapper.find('section[data-x]').exists()).toBe(true);
+    expect(wrapper.find('div').exists()).toBe(false);
+  });
+});
+
+describe('primitive attrs normalisation', () => {
+  it('keeps an imperatively set CSS property when a bound style string changes', async () => {
+    const color = ref('red');
+    const wrapper = mount(defineComponent({
+      setup: () => () => h(Primitive, { style: `color: ${color.value}` }, () => 'x'),
+    }), { attachTo: document.body });
+    const el = wrapper.element as HTMLElement;
+    el.style.setProperty('--measured-height', '42px');
+    color.value = 'blue';
+    await nextTick();
+    expect(el.style.color).toBe('blue');
+    expect(el.style.getPropertyValue('--measured-height')).toBe('42px');
+    wrapper.unmount();
+  });
 });

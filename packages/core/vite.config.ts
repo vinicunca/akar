@@ -19,6 +19,9 @@ export default defineConfig({
     // `*.browser.test.ts` runs in a real browser, see `vitest.browser.config.ts`
     exclude: ['**/node_modules/**', './**/*.browser.test.{ts,js}'],
     include: ['./**/*.test.{ts,js}'],
+    benchmark: {
+      include: ['./**/*.bench.{ts,js}'],
+    },
     coverage: {
       provider: 'istanbul', // or 'v8'
     },

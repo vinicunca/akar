@@ -1,9 +1,11 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue';
 import type { DataOrientation, Direction, FormFieldProps } from '../shared/types';
+import type { SliderChangeReason } from './useSlider';
 import type { PrimitiveProps } from '@/Primitive';
-import { useCollection } from '@/Collection';
-import { clamp, createContext, useDirection, useFormControl, useForwardExpose } from '@/shared';
+import type { ChangeEventDetails } from '@/shared';
+import { useCollection, useCollectionSlot } from '@/Collection';
+import { createContext, useDirection, useFormControl, useForwardElement } from '@/shared';
 
 type ThumbAlignment = 'contain' | 'overflow';
 
@@ -38,10 +40,12 @@ export interface SliderRootProps extends PrimitiveProps, FormFieldProps {
 }
 
 export type SliderRootEmits = {
+  /** Event handler called before the slider value changes; `details.cancel()` vetoes the change. */
+  'beforeUpdate:modelValue': [payload: Array<number>, details: ChangeEventDetails<SliderChangeReason>];
   /**
    * Event handler called when the slider value changes
    */
-  'update:modelValue': [payload: Array<number> | undefined];
+  'update:modelValue': [payload: Array<number>, details: ChangeEventDetails<SliderChangeReason>];
   /**
    * Event handler called when the value changes at the end of an interaction.
    *
@@ -67,12 +71,15 @@ export const [injectSliderRootContext, provideSliderRootContext]
 </script>
 
 <script setup lang="ts">
-import { useVModel } from '@vueuse/core';
-import { computed, ref, toRaw, toRefs } from 'vue';
+import { computed, getCurrentInstance, mergeProps, useAttrs, watch } from 'vue';
+import { useFieldControl } from '@/Field/useFieldControl';
+import { useFieldFocusWithin } from '@/Field/useFieldFocusWithin';
+import { renderAs } from '@/Primitive/renderAs';
+import { createWrapperEmit, splitWrapperAttrs } from '@/shared/splitWrapperAttrs';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
-import SliderHorizontal from './SliderHorizontal.vue';
-import SliderVertical from './SliderVertical.vue';
-import { ARROW_KEYS, getClosestValueIndex, getDecimalCount, getNextSortedValues, hasMinStepsBetweenValues, PAGE_KEYS, roundValue } from './utils';
+import { useSlider } from './useSlider';
+import { useSliderPointer } from './useSliderPointer';
+import { injectSliderFieldContext, provideSliderFieldContext, provideSliderOrientationContext } from './utils';
 
 defineOptions({
   inheritAttrs: false,
@@ -95,127 +102,181 @@ const emits = defineEmits<SliderRootEmits>();
 defineSlots<{
   default?: (props: {
     /** Current slider values */
-    modelValue: typeof modelValue.value;
+    modelValue: Array<number> | null;
   }) => any;
 }>();
 
-const { min, max, step, minStepsBetweenThumbs, orientation, disabled, thumbAlignment, dir: propDir } = toRefs(props);
-const dir = useDirection(propDir);
-const { forwardRef, currentElement } = useForwardExpose();
+const dir = useDirection(() => props.dir);
+const { forwardRef, currentElement, expose } = useForwardElement();
+defineExpose(expose);
 const isFormControl = useFormControl(currentElement);
 
-const { CollectionSlot } = useCollection({ isProvider: true });
+useCollection({ isProvider: true });
+useCollectionSlot(currentElement);
 
-const modelValue = useVModel(props, 'modelValue', emits, {
+// Optional Field participation: `null` outside a `FieldRoot`, so every
+// binding below is inert without a Field. A wrapping control that owns the
+// value (`ColorSliderRoot`) hands down its own binding instead.
+const inheritedField = injectSliderFieldContext(null);
+const ownField = inheritedField
+  ? null
+  : useFieldControl({
+      // The first thumb renders its own `id`, else the field's.
+      id: () => context.thumbElements.value[0]?.id || undefined,
+      element: () => context.thumbElements.value[0],
+      // Akar's model: an array, even for a single thumb.
+      getValue: () => modelValue.value,
+      required: () => props.required,
+    });
+const field = inheritedField ?? ownField;
+// Getters rather than computeds: cheap, and free for a standalone slider.
+function resolvedName() {
+  return ownField
+    ? ownField.name(props.name)
+    : props.name;
+}
+function resolvedRequired() {
+  return ownField
+    ? ownField.required(props.required)
+    : props.required;
+}
+function resolvedDisabled() {
+  return ownField
+    ? ownField.disabled(props.disabled)
+    : props.disabled;
+}
+
+// Controlled/uncontrolled + `beforeUpdate:` / `update:` / `valueCommit` emits
+// live in the composable (`modelValue === undefined` → uncontrolled).
+const { modelValue, root, orientation: orientationGeometry, startSlide, moveSlide, endSlide, context } = useSlider({
+  modelValue: () => props.modelValue,
   defaultValue: props.defaultValue,
-  passive: (props.modelValue === undefined) as false,
-}) as Ref<Array<number> | null>;
-
-const currentModelValue = computed(() => Array.isArray(modelValue.value)
-  ? [...modelValue.value]
-  : []);
-
-const valueIndexToChangeRef = ref(0);
-const valuesBeforeSlideStartRef = ref(currentModelValue.value);
-
-function handleSlideStart(value: number) {
-  const closestIndex = getClosestValueIndex(currentModelValue.value, value);
-  updateValues(value, closestIndex);
-}
-
-function handleSlideMove(value: number) {
-  updateValues(value, valueIndexToChangeRef.value);
-}
-
-function handleSlideEnd() {
-  const prevValue = valuesBeforeSlideStartRef.value[valueIndexToChangeRef.value];
-  const nextValue = currentModelValue.value[valueIndexToChangeRef.value];
-  const hasChanged = nextValue !== prevValue;
-  if (hasChanged) {
-    emits('valueCommit', toRaw(currentModelValue.value));
-  }
-}
-
-function updateValues(value: number, atIndex: number, { commit } = { commit: false }) {
-  const decimalCount = getDecimalCount(step.value);
-  const snapToStep = roundValue(Math.round((value - min.value) / step.value) * step.value + min.value, decimalCount);
-  const nextValue = clamp(snapToStep, min.value, max.value);
-
-  const nextValues = getNextSortedValues(currentModelValue.value, nextValue, atIndex);
-
-  if (hasMinStepsBetweenValues(nextValues, minStepsBetweenThumbs.value * step.value)) {
-    valueIndexToChangeRef.value = nextValues.indexOf(nextValue);
-    const hasChanged = String(nextValues) !== String(modelValue.value);
-    if (hasChanged && commit) {
-      emits('valueCommit', nextValues);
-    }
-
-    if (hasChanged) {
-      thumbElements.value[valueIndexToChangeRef.value]?.focus();
-      modelValue.value = nextValues;
-    }
-  }
-}
-
-const thumbElements = ref<Array<HTMLElement>>([]);
-provideSliderRootContext({
-  modelValue,
-  currentModelValue,
-  valueIndexToChangeRef,
-  thumbElements,
-  orientation,
-  min,
-  max,
-  disabled,
-  thumbAlignment,
+  disabled: resolvedDisabled,
+  orientation: () => props.orientation,
+  dir,
+  inverted: () => props.inverted,
+  min: () => props.min,
+  max: () => props.max,
+  step: () => props.step,
+  minStepsBetweenThumbs: () => props.minStepsBetweenThumbs,
+  thumbAlignment: () => props.thumbAlignment,
+  emit: emits,
+  // The Field hears its own commits by reason (`change`): user input, or, for
+  // a programmatic one (`setModelValue` and the like), only the watcher below,
+  // which also reports a parent-driven change.
+  onUpdate: ownField?.change,
 });
+
+provideSliderRootContext(context);
+provideSliderFieldContext(field);
+
+if (ownField) {
+  watch(modelValue, (value) => ownField.sync(value));
+}
+
+// The field is focused while focus is on any thumb, and blurred once it
+// leaves the slider.
+const focusWithin = useFieldFocusWithin(field, currentElement as Ref<HTMLElement | undefined>);
+const fieldElementAttrs = focusWithin && { onFocusin: focusWithin.onFocusin, onFocusout: focusWithin.onFocusout };
+provideSliderOrientationContext(orientationGeometry);
+
+// A consumer's `@slide-start` / `@slide-move` / `@slide-end` still hears the
+// slide events, before the slider's own, and never reaches the element.
+const attrs = useAttrs();
+// Held for the emit recreated in a watcher, where there's no current instance.
+const instance = getCurrentInstance();
+const SLIDE_EVENTS = {
+  props: {},
+  emits: ['slideStart', 'slideMove', 'slideEnd'],
+};
+const ownSlideListeners = {
+  onSlideStart: startSlide,
+  onSlideMove: moveSlide,
+  onSlideEnd: () => endSlide(),
+};
+function createSlideEmit() {
+  return createWrapperEmit(() => {
+    const split = splitWrapperAttrs(attrs, SLIDE_EVENTS);
+    return {
+      ...split,
+      listeners: mergeProps(split.listeners, ownSlideListeners),
+    };
+  }, instance);
+}
+let emitSlide = createSlideEmit();
+
+const pointer = useSliderPointer({
+  element: () => currentElement.value,
+  context,
+  orientation: orientationGeometry,
+  emit: (key, ...args) => emitSlide(key, ...args),
+});
+
+// Switching orientation remounts the element (see `:key`), which starts a new
+// drag and lets a `.once` listener run again.
+watch(() => props.orientation, () => {
+  pointer.reset();
+  emitSlide = createSlideEmit();
+});
+
+// Precedence is part of the v2 contract. `mergeProps` chains same-named
+// listeners in argument order and lets later plain attributes win, so:
+// - leading (before `$attrs`): the slider's own keydown handler runs before a
+//   consumer `@keydown`; the orientation's `style`
+//   (`--akar-slider-thumb-transform`) and `data-orientation` sit under the root's
+//   fall-through attributes, so a consumer `style` / `data-orientation` still wins;
+// - trailing (after `$attrs`): `aria-disabled`, `data-disabled` and `dir` are
+//   bound after them, so the component wins;
+// - the pointer handlers run first, and the pointerdown bookkeeping after a consumer's.
+// One split of the root attrs (one computed, one attrs read) for all of it.
+const split = computed(() => {
+  const { onKeydown, onPointerdown, style, 'data-orientation': dataOrientation, ...attrs } = root.attrs.value;
+  return {
+    leading: { onKeydown, style, 'data-orientation': dataOrientation },
+    attrs,
+    onPointerdown,
+  };
+});
+const ownElementAttrs = { 'data-slider-impl': '', ...pointer.handlers };
+
+// `$attrs` is read in the template so attribute changes re-render. The first
+// attributes keep their place on the element: horizontal renders `dir` early.
+function elementProps(consumerAttrs: Record<string, unknown>) {
+  const { leading, attrs: rootAttrs, onPointerdown } = split.value;
+  const merged = mergeProps(
+    fieldElementAttrs || {},
+    ownElementAttrs,
+    props.orientation === 'horizontal'
+      ? { 'dir': rootAttrs.dir as string, 'data-orientation': 'horizontal' }
+      : { 'data-orientation': 'vertical' },
+    leading,
+    splitWrapperAttrs(consumerAttrs, SLIDE_EVENTS).rest,
+    rootAttrs,
+    { onPointerdown },
+  );
+  return field
+    ? field.fillDataAttributes(merged)
+    : merged;
+}
 </script>
 
 <template>
-  <CollectionSlot>
-    <component
-      :is="orientation === 'horizontal' ? SliderHorizontal : SliderVertical"
-      v-bind="$attrs"
-      :ref="forwardRef"
-      :as-child="asChild"
-      :as="as"
-      :min="min"
-      :max="max"
-      :dir="dir"
-      :inverted="inverted"
-      :aria-disabled="disabled"
-      :data-disabled="disabled ? '' : undefined"
-      @pointerdown="() => {
-        if (!disabled) valuesBeforeSlideStartRef = currentModelValue
-      }"
-      @slide-start="!disabled && handleSlideStart($event)"
-      @slide-move="!disabled && handleSlideMove($event)"
-      @slide-end="!disabled && handleSlideEnd()"
-      @home-key-down="!disabled && updateValues(min, 0, { commit: true })"
-      @end-key-down="!disabled && updateValues(max, currentModelValue.length - 1, { commit: true })"
-      @step-key-down="(event, direction) => {
-        if (!disabled) {
-          const isPageKey = PAGE_KEYS.includes(event.key);
-          const isSkipKey = isPageKey || (event.shiftKey && ARROW_KEYS.includes(event.key));
-          const multiplier = isSkipKey ? 10 : 1;
-          const atIndex = valueIndexToChangeRef;
-          const value = currentModelValue[atIndex];
-          const stepInDirection = step * multiplier * direction;
-          updateValues(value + stepInDirection, atIndex, { commit: true });
-        }
-      }"
-    >
-      <slot :model-value="modelValue" />
+  <component
+    :is="renderAs(as, asChild)"
+    :key="orientation === 'horizontal' ? 'horizontal' : 'vertical'"
+    :ref="forwardRef"
+    v-bind="elementProps($attrs)"
+  >
+    <slot :model-value="modelValue ?? null" />
 
-      <VisuallyHiddenInput
-        v-if="isFormControl && name"
-        type="number"
-        :value="modelValue"
-        :name="name"
-        :required="required"
-        :disabled="disabled"
-        :step="step"
-      />
-    </component>
-  </CollectionSlot>
+    <VisuallyHiddenInput
+      v-if="isFormControl && resolvedName()"
+      type="number"
+      :value="modelValue"
+      :name="resolvedName()!"
+      :required="resolvedRequired()"
+      :disabled="resolvedDisabled()"
+      :step="step"
+    />
+  </component>
 </template>
