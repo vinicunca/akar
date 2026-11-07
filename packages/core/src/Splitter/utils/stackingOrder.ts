@@ -9,7 +9,7 @@ import { assert } from './assert';
  * @param a
  * @param b
  */
-export function compare(a: HTMLElement, b: HTMLElement): number {
+export function compare(a: Element, b: Element): number {
   if (a === b) {
     throw new Error('Cannot compare node with itself');
   }
@@ -23,8 +23,8 @@ export function compare(a: HTMLElement, b: HTMLElement): number {
 
   // remove shared ancestors
   while (ancestors.a.at(-1) === ancestors.b.at(-1)) {
-    a = ancestors.a.pop() as HTMLElement;
-    b = ancestors.b.pop() as HTMLElement;
+    a = ancestors.a.pop() as Element;
+    b = ancestors.b.pop() as Element;
 
     commonAncestor = a;
   }
@@ -63,13 +63,13 @@ const props
   = /\b(?:position|zIndex|opacity|transform|webkitTransform|mixBlendMode|filter|webkitFilter|isolation)\b/;
 
 /** @param node */
-function isFlexItem(node: HTMLElement) {
+function isFlexItem(node: Element) {
   const display = getComputedStyle(getParent(node)).display;
   return display === 'flex' || display === 'inline-flex';
 }
 
 /** @param node */
-function createsStackingContext(node: HTMLElement) {
+function createsStackingContext(node: Element) {
   const style = getComputedStyle(node);
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
@@ -120,7 +120,7 @@ function createsStackingContext(node: HTMLElement) {
 }
 
 /** @param nodes */
-function findStackingContext(nodes: Array<HTMLElement>) {
+function findStackingContext(nodes: Array<Element>) {
   let i = nodes.length;
 
   while (i--) {
@@ -135,12 +135,12 @@ function findStackingContext(nodes: Array<HTMLElement>) {
 }
 
 /** @param node */
-function getZIndex(node: HTMLElement | null) {
+function getZIndex(node: Element | null) {
   return (node && Number(getComputedStyle(node).zIndex)) || 0;
 }
 
 /** @param node */
-function getAncestors(node: HTMLElement) {
+function getAncestors(node: Element) {
   const ancestors = [];
 
   while (node) {
@@ -152,7 +152,9 @@ function getAncestors(node: HTMLElement) {
 }
 
 /** @param node */
-function getParent(node: HTMLElement) {
+function getParent(node: Element) {
+  // Check nodeType rather than `instanceof DocumentFragment`: a shadow root in an iframe or a
+  // popup window belongs to another realm
   // @ts-expect-error host should exist
-  return (node.parentNode instanceof DocumentFragment && node.parentNode?.host) || node.parentNode;
+  return (node.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE && node.parentNode.host) || node.parentNode;
 }
