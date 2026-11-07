@@ -1,9 +1,9 @@
 import type { VueWrapper } from '@vue/test-utils';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { h } from 'vue';
-import { sleep } from '@/test';
 import HoverCardRoot from './HoverCardRoot.vue';
 import HoverCardTrigger from './HoverCardTrigger.vue';
 import HoverCard from './story/_HoverCard.vue';
