@@ -58,6 +58,8 @@ export type PanelGroupContext = {
   stopDragging: () => void;
   unregisterPanel: (panelData: PanelData) => void;
   panelGroupElement: Ref<ParentNode | null>;
+  /** Bumped when a resize handle mounts or unmounts, so group-level effects re-run */
+  resizeHandleRegistration: Ref<number>;
 
   // Exposed function for child component
   collapsePanel: (panelData: PanelData) => void;
@@ -125,6 +127,9 @@ const layout = ref<Array<number>>([]);
 const panelIdToLastNotifiedSizeMapRef = ref<Record<string, number>>({});
 const panelSizeBeforeCollapseRef = ref<Map<string, number>>(new Map());
 const prevDeltaRef = ref<number>(0);
+// Bumped whenever a resize handle mounts or unmounts, so the group-level
+// keyboard/aria effects re-run for a handle added after the group (e.g. v-if).
+const resizeHandleRegistration = ref(0);
 
 const committedValuesRef = computed(() => ({
   autoSaveId: props.autoSaveId,
@@ -232,6 +237,7 @@ useWindowSplitterPanelGroupBehavior({
   groupId,
   layout,
   panelDataArray: eagerValuesRef.value.panelDataArray,
+  resizeHandleRegistration,
   commitLayout,
   panelGroupElement: panelGroupElementRef,
   getPanelDataWithPercentConstraints,
@@ -710,7 +716,6 @@ function unregisterPanel(panelData: PanelData) {
     // When a panel is removed from the group, we should delete the most recent prev-size entry for it.
     // If we don't do this, then a conditionally rendered panel might not call onResize when it's re-mounted.
     // Strict effects mode makes this tricky though because all panels will be registered, unregistered, then re-registered on mount.
-    // eslint-disable-next-line ts/no-dynamic-delete
     delete panelIdToLastNotifiedSizeMapRef.value[panelData.id];
 
     eagerValuesRef.value.panelDataArrayChanged = true;
@@ -806,7 +811,6 @@ function expandPanel(panelData: PanelData) {
       const groupSize = groupSizeInPixels.value ?? getGroupSizeInPixels();
 
       const restoredSize
-        // eslint-disable-next-line no-nested-ternary
         = sizeUnit === 'px' && groupSize
           ? prevPanelSize != null
             ? (prevPanelSize / groupSize) * 100
@@ -941,6 +945,7 @@ providePanelGroupContext({
   stopDragging,
   unregisterPanel,
   panelGroupElement: panelGroupElementRef,
+  resizeHandleRegistration,
 
   collapsePanel,
   expandPanel,

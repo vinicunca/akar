@@ -13,7 +13,9 @@ export function useWindowSplitterPanelGroupBehavior({
   eagerValuesRef,
   groupId,
   layout,
+  panelDataArray,
   panelGroupElement,
+  resizeHandleRegistration,
   commitLayout,
   getPanelDataWithPercentConstraints,
 }: {
@@ -24,10 +26,15 @@ export function useWindowSplitterPanelGroupBehavior({
   layout: Ref<Array<number>>;
   panelDataArray: Array<PanelData>;
   panelGroupElement: Ref<ParentNode | null>;
+  resizeHandleRegistration: Ref<number>;
   commitLayout: (sizes: Array<number>) => void;
   getPanelDataWithPercentConstraints: (groupSizeOverride?: number | null) => Array<PanelData> | null;
 }): void {
   watchEffect((onCleanup) => {
+    // Re-run when a resize handle mounts or unmounts on its own, so a handle
+    // added after the group (e.g. via v-if) still gets its aria-* attributes.
+    void resizeHandleRegistration.value;
+
     const _panelGroupElement = panelGroupElement.value;
     if (!_panelGroupElement) {
       return;
@@ -88,6 +95,10 @@ export function useWindowSplitterPanelGroupBehavior({
   });
 
   watchEffect((onCleanup) => {
+    // Re-run when a resize handle mounts or unmounts on its own, so Enter to
+    // collapse works on a handle added after the group (e.g. via v-if).
+    void resizeHandleRegistration.value;
+
     const _panelGroupElement = panelGroupElement.value;
     if (!_panelGroupElement) {
       return;
@@ -123,7 +134,8 @@ export function useWindowSplitterPanelGroupBehavior({
       }
 
       const onKeyDown = (event: KeyboardEvent) => {
-        if (event.defaultPrevented) {
+        // A disabled handle ignores arrow keys and dragging, so it ignores Enter too.
+        if (event.defaultPrevented || handle.hasAttribute('data-disabled')) {
           return;
         }
 

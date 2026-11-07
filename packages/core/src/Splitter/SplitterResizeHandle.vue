@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { ref, toRefs, watch, watchEffect } from 'vue';
 import { useNonce } from '@/shared/useNonce';
 import { useWindowSplitterResizeHandlerBehavior } from './utils/composables/useWindowSplitterBehavior';
 
@@ -32,6 +31,7 @@ export type SplitterResizeHandleEmits = {
 import type { PointerHitAreaMargins, ResizeHandlerAction } from './utils/registry';
 import type { ResizeEvent, ResizeHandler } from './utils/types';
 import { isBrowser } from '@vinicunca/perkakas';
+import { onMounted, onUnmounted, ref, toRefs, watch, watchEffect } from 'vue';
 import { Primitive } from '@/Primitive';
 import { useForwardExpose, useId } from '@/shared';
 import { injectPanelGroupContext } from './SplitterGroup.vue';
@@ -57,12 +57,13 @@ const {
   direction,
   groupId,
   registerResizeHandle: registerResizeHandleWithParentGroup,
+  resizeHandleRegistration,
   startDragging,
   stopDragging,
   panelGroupElement,
 } = panelGroupContext;
 
-const resizeHandleId = useId(props.id, 'akar-splitter-resize-handle');
+const resizeHandleId = useId(props.id, 'reka-splitter-resize-handle');
 const state = ref<ResizeHandlerState>('inactive');
 const isFocused = ref(false);
 const resizeHandler = ref<ResizeHandler | null>(null);
@@ -147,7 +148,15 @@ useWindowSplitterResizeHandlerBehavior({
   resizeHandler,
   handleId: resizeHandleId,
   panelGroupElement,
+  element: currentElement,
 });
+
+// Tell the parent group when this handle mounts or unmounts, so the
+// group-level keyboard/aria effects re-run for a handle that mounts on its
+// own after the group (e.g. with v-if). See issue #3126.
+const bumpResizeHandleRegistration = () => resizeHandleRegistration.value++;
+onMounted(bumpResizeHandleRegistration);
+onUnmounted(bumpResizeHandleRegistration);
 </script>
 
 <template>

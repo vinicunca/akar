@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, expect, it } from 'vitest';
 import { userEvent } from 'vitest/browser';
-import { defineComponent, h } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from '.';
 
 // A horizontal splitter and, stacked above the upper part of its handle, a layer such as a
@@ -22,7 +22,13 @@ function mountCoveredSplitter() {
           'style': 'position: fixed; z-index: 10; width: 40px; height: 80px; background: white;',
         }, [
           h('span', { 'data-testid': 'label', 'style': 'position: absolute; top: 0; left: 0; width: 40px; height: 30px;' }, 'Text'),
-          h('svg', { 'data-testid': 'icon', 'width': 24, 'height': 24, 'viewBox': '0 0 24 24', 'style': 'position: absolute; top: 50px; left: 8px;' }, [
+          h('svg', {
+            'data-testid': 'icon',
+            'width': 24,
+            'height': 24,
+            'viewBox': '0 0 24 24',
+            'style': 'position: absolute; top: 50px; left: 8px;',
+          }, [
             h('rect', { width: 24, height: 24, fill: 'currentColor' }),
           ]),
         ]),
@@ -87,5 +93,65 @@ describe('given a Splitter in a shadow root inside an iframe, in a real browser'
     }));
 
     await expect.poll(() => handle.getAttribute('data-state')).toBe('hover');
+  });
+});
+
+describe('given a Splitter whose resize handle is remounted with v-if, in a real browser', () => {
+  it.each([
+    ['with its panel', true],
+    ['on its own', false],
+  ])('resizes from the keyboard after the handle is remounted %s', async (_, withPanel) => {
+    document.body.innerHTML = '';
+    const shown = ref(true);
+    const layout = ref<Array<number>>([]);
+    const panel = () => h(SplitterPanel, {
+      id: 'side',
+      order: 1,
+      defaultSize: 30,
+      collapsible: true,
+      minSize: 10,
+    });
+    const handle = () => h(SplitterResizeHandle, { 'data-testid': 'handle', 'style': 'width: 4px;' });
+    mount(() => h('div', { style: 'width: 400px; height: 200px;' }, [
+      h(SplitterGroup, {
+        direction: 'horizontal',
+        onLayout: (value: Array<number>) => {
+          layout.value = value;
+        },
+      }, () => [
+        // eslint-disable-next-line no-nested-ternary
+        ...(withPanel
+          ? (shown.value
+              ? [
+                  panel(),
+                  handle(),
+                ]
+              : [])
+          : [
+              panel(),
+              shown.value
+                ? handle()
+                : null,
+            ]),
+        h(SplitterPanel, { id: 'main', order: 2 }),
+      ]),
+    ]), { attachTo: document.body });
+    await nextTick();
+
+    shown.value = false;
+    await nextTick();
+    shown.value = true;
+    await nextTick();
+
+    await userEvent.tab();
+    const el = document.querySelector<HTMLElement>('[data-testid="handle"]')!;
+    expect(document.activeElement).toBe(el);
+
+    await userEvent.keyboard('{ArrowRight}');
+    await expect.poll(() => layout.value[0]).toBe(40);
+    expect(el.getAttribute('aria-valuenow')).toBe('40');
+
+    await userEvent.keyboard('{Enter}');
+    await expect.poll(() => layout.value[0]).toBe(0);
   });
 });
