@@ -95,7 +95,7 @@ describe('given default NavigationMenu', () => {
           await fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
           await sleep(0);
         }
-        expect(links.at(-1)?.element).toBe(document.activeElement);
+        expect(links.at(-1).element).toBe(document.activeElement);
       });
     });
 
@@ -409,7 +409,7 @@ describe('given NavigationMenu and the Space key', () => {
         h(NavigationMenuItem, () => h(NavigationMenuLink, { 'href': '#github', 'data-testid': 'link', 'onClick': onLinkClick }, () => 'GitHub')),
       ])),
     }), { attachTo: document.body });
-    // Vue ignores bubbling events stamped in the same millisecond its listeners were attached.
+    // Vue ignores bubbling events stamped in the same millisecond its listeners were attached
     const mountedAt = Date.now();
     await vi.waitFor(() => expect(Date.now()).toBeGreaterThan(mountedAt));
     return {
@@ -467,5 +467,37 @@ describe('given NavigationMenu and the Space key', () => {
     expect(onLinkClick).not.toHaveBeenCalled();
     expect(event.defaultPrevented).toBe(false);
     wrapper.unmount();
+  });
+});
+
+describe('given NavigationMenuTrigger inside a form', () => {
+  function mountInForm(triggerProps: Record<string, unknown> = {}) {
+    document.body.innerHTML = '';
+    const onSubmit = vi.fn((event: Event) => event.preventDefault());
+    const wrapper = mount(defineComponent({
+      setup: () => () => h('form', { onSubmit }, h(NavigationMenuRoot, () => h(NavigationMenuList, () => h(NavigationMenuItem, { value: 'learn' }, () => [
+        h(NavigationMenuTrigger, triggerProps, () => 'Learn'),
+        h(NavigationMenuContent, () => h(NavigationMenuLink, { href: '#' }, () => 'Docs')),
+      ])))),
+    }), { attachTo: document.body });
+    return {
+      onSubmit,
+      trigger: wrapper.get('[data-navigation-menu-trigger]'),
+    };
+  }
+
+  it('should not submit the form when the trigger is clicked', async () => {
+    const { trigger, onSubmit } = mountInForm();
+
+    expect(trigger.attributes('type')).toBe('button');
+    await trigger.trigger('click');
+
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it('should keep an explicit type', () => {
+    const { trigger } = mountInForm({ type: 'submit' });
+
+    expect(trigger.attributes('type')).toBe('submit');
   });
 });
