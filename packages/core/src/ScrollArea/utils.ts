@@ -40,18 +40,39 @@ export function addUnlinkedScrollListener(
   handler = () => {},
 ) {
   let prevPosition = { left: node.scrollLeft, top: node.scrollTop };
+  let lastChangeTime = performance.now();
   let rAF = 0;
-  (function loop() {
+  function loop() {
+    const now = performance.now();
     const position = { left: node.scrollLeft, top: node.scrollTop };
     const isHorizontalScroll = prevPosition.left !== position.left;
     const isVerticalScroll = prevPosition.top !== position.top;
     if (isHorizontalScroll || isVerticalScroll) {
+      lastChangeTime = now;
       handler();
+    } else if (now - lastChangeTime >= 100) {
+      rAF = 0;
+      return;
     }
     prevPosition = position;
     rAF = window.requestAnimationFrame(loop);
-  })();
-  return () => window.cancelAnimationFrame(rAF);
+  }
+
+  function handleScroll() {
+    if (rAF) {
+      return;
+    }
+    lastChangeTime = performance.now();
+    prevPosition = { left: node.scrollLeft, top: node.scrollTop };
+    handler();
+    rAF = window.requestAnimationFrame(loop);
+  }
+
+  node.addEventListener('scroll', handleScroll);
+  return () => {
+    node.removeEventListener('scroll', handleScroll);
+    window.cancelAnimationFrame(rAF);
+  };
 }
 
 export function getThumbOffsetFromScroll(
