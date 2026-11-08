@@ -2,8 +2,6 @@
 import type { ComputedRef, Ref } from 'vue';
 import type { DataOrientation, Direction, FormFieldProps } from '../shared/types';
 import type { PrimitiveProps } from '@/Primitive';
-import { clamp } from '@vinicunca/perkakas';
-import { useCollection } from '@/Collection';
 import { createContext, useDirection, useFormControl, useForwardExpose } from '@/shared';
 
 type ThumbAlignment = 'contain' | 'overflow';
@@ -68,8 +66,10 @@ export const [injectSliderRootContext, provideSliderRootContext]
 </script>
 
 <script setup lang="ts">
+import { clamp, isIncludedIn } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRaw, toRefs } from 'vue';
+import { useCollection } from '@/Collection';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
 import SliderHorizontal from './SliderHorizontal.vue';
 import SliderVertical from './SliderVertical.vue';
@@ -196,8 +196,8 @@ provideSliderRootContext({
       @end-key-down="!disabled && updateValues(max, currentModelValue.length - 1, { commit: true })"
       @step-key-down="(event, direction) => {
         if (!disabled) {
-          const isPageKey = PAGE_KEYS.includes(event.key);
-          const isSkipKey = isPageKey || (event.shiftKey && ARROW_KEYS.includes(event.key));
+          const isPageKey = isIncludedIn(event.key, PAGE_KEYS);
+          const isSkipKey = isPageKey || (event.shiftKey && isIncludedIn(event.key, ARROW_KEYS));
           const multiplier = isSkipKey ? 10 : 1;
           const atIndex = valueIndexToChangeRef;
           const value = currentModelValue[atIndex];

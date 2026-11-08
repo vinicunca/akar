@@ -14,6 +14,7 @@ export interface SliderImplProps extends PrimitiveProps {}
 </script>
 
 <script setup lang="ts">
+import { isIncludedIn } from '@vinicunca/perkakas';
 import { Primitive } from '@/Primitive';
 import { injectSliderRootContext } from './SliderRoot.vue';
 import { ARROW_KEYS, PAGE_KEYS } from './utils';
@@ -48,7 +49,7 @@ function endSlide(event: PointerEvent) {
         // Prevent scrolling to page end
         event.preventDefault();
       }
-      else if (PAGE_KEYS.concat(ARROW_KEYS).includes(event.key)) {
+      else if (isIncludedIn(event.key, [...PAGE_KEYS, ...ARROW_KEYS])) {
         emits('stepKeyDown', event)
         // Prevent scrolling for directional key presses
         event.preventDefault();
