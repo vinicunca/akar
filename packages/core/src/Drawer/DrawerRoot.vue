@@ -148,6 +148,8 @@ const nestedOpenDrawerCount = ref(0);
 const nestedSwiping = ref(false);
 const isSwiping = ref(false);
 const nestedSwipeProgressStore = createNestedSwipeProgressStore();
+// Whether a nested drawer currently reports a height, i.e. is the frontmost one.
+let isNestedDrawerOpen = false;
 
 // Optional parent context for nested drawer support
 const parentContext = injectDrawerRootContext(null);
@@ -183,10 +185,24 @@ provideDrawerRootContext({
   },
   onPopupHeightChange(h) {
     popupHeight.value = h;
+    // With no nested drawer open, this drawer is the frontmost one.
+    if (!isNestedDrawerOpen && h > 0) {
+      frontmostHeight.value = h;
+    }
     providerContext?.visualStateStore.set({ frontmostHeight: h });
   },
   onNestedFrontmostHeightChange(h) {
-    frontmostHeight.value = h;
+    if (h > 0) {
+      isNestedDrawerOpen = true;
+      frontmostHeight.value = h;
+      return;
+    }
+    // The nested drawer closed: fall back to this drawer's own height rather
+    // than 0, so it keeps its size while the nested drawer animates out.
+    isNestedDrawerOpen = false;
+    if (popupHeight.value > 0) {
+      frontmostHeight.value = popupHeight.value;
+    }
   },
   onNestedDrawerPresenceChange(present) {
     if (present) {
