@@ -92,7 +92,7 @@ export interface MenuRootContentTypeProps
 
 <script setup lang="ts">
 import {
-  onUnmounted,
+  onBeforeUnmount,
   ref,
   shallowRef,
   toRefs,
@@ -188,7 +188,12 @@ watch(contentElement, (el) => {
   menuContext!.onContentChange(el);
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
+  // Clear before a replacement registers its content, as the watcher stops on unmount.
+  // Another content may have registered since, so only clear our own registration.
+  if (menuContext.content.value === contentElement.value) {
+    menuContext.onContentChange(undefined);
+  }
   window.clearTimeout(timerRef.value);
 });
 
