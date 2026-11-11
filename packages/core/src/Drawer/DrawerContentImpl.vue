@@ -315,7 +315,7 @@ function clearOpenCompleteListener() {
   openCompleteCleanup = undefined;
 }
 
-watch(() => rootContext.open.value, (isOpen) => {
+function listenForOpenComplete(isOpen: boolean) {
   clearOpenCompleteListener();
   const el = currentElement.value;
   if (!el) {
@@ -337,7 +337,9 @@ watch(() => rootContext.open.value, (isOpen) => {
     el.removeEventListener('transitionend', handler);
     el.removeEventListener('animationend', handler);
   };
-});
+}
+
+watch(() => rootContext.open.value, listenForOpenComplete);
 
 // Data attributes
 const dataAttributes = computed(() => {
@@ -370,6 +372,12 @@ let unsubscribeNestedProgress: (() => void) | undefined;
 onMounted(() => {
   rootContext.contentElement.value = currentElement.value;
   rootContext.notifyParentHasNestedDrawer?.(true);
+
+  // The content mounts already open, so the `open` watcher above never sees
+  // the opening and the enter animation has to be listened for here.
+  if (rootContext.open.value) {
+    listenForOpenComplete(true);
+  }
 
   // Initial nested-drawer count
   currentElement.value?.style.setProperty(
