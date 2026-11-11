@@ -53,10 +53,12 @@ import {
   AUTOFOCUS_ON_UNMOUNT,
   containsComposed,
   EVENT_OPTIONS,
+  findVisible,
   focus,
   focusFirst,
   getTabbableCandidates,
   getTabbableEdges,
+  getTabStopsAfter,
 } from './utils';
 
 const props = withDefaults(defineProps<FocusScopeProps>(), {
@@ -344,7 +346,8 @@ function handleKeyDown(event: KeyboardEvent) {
 
   if (isTabKey && focusedElement) {
     const container = event.currentTarget as HTMLElement;
-    const [first, last] = getTabbableEdges(container);
+    const candidates = getTabbableCandidates(container);
+    const [first, last] = getTabbableEdges(container, candidates);
     const hasTabbableElementsInside = first && last;
 
     // we can only wrap focus if we have tabbable edges
@@ -353,15 +356,14 @@ function handleKeyDown(event: KeyboardEvent) {
         event.preventDefault();
       }
     } else {
-      if (!event.shiftKey && focusedElement === last) {
+      // Wrap when no visible tab stop is left in the tabbing direction.
+      const tabbingOrder = event.shiftKey
+        ? [...candidates].reverse()
+        : candidates;
+      if (!findVisible(getTabStopsAfter(tabbingOrder, focusedElement), container)) {
         event.preventDefault();
         if (props.loop) {
-          focus(first, { select: true });
-        }
-      } else if (event.shiftKey && focusedElement === first) {
-        event.preventDefault();
-        if (props.loop) {
-          focus(last, { select: true });
+          focus(event.shiftKey ? last : first, { select: true });
         }
       }
     }
