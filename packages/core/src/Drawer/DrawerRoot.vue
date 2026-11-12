@@ -5,7 +5,7 @@ import type {
   NestedSwipeProgressStore,
   SwipeDirection,
 } from './utils';
-import { createContext, useId } from '@/shared';
+import { createContext, defineReactiveIds, useId } from '@/shared';
 
 export type DrawerModal = boolean | 'trap-focus';
 
@@ -167,7 +167,7 @@ const contentId = useId(undefined, 'akar-drawer-content');
 const titleId = useId(undefined, 'akar-drawer-title');
 const descriptionId = useId(undefined, 'akar-drawer-description');
 
-provideDrawerRootContext({
+provideDrawerRootContext(defineReactiveIds({
   open,
   modal,
   swipeDirection,
@@ -244,7 +244,7 @@ provideDrawerRootContext({
   contentId,
   titleId,
   descriptionId,
-});
+}, ['contentId']));
 
 function handleClose() {
   handleOpenChange(false, 'close-press');
