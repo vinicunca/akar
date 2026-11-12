@@ -1,20 +1,22 @@
 import type { Fn } from '@vueuse/shared';
-import { isNumber, isObjectType } from '@vinicunca/perkakas';
+import { isBrowser, isNumber, isObjectType } from '@vinicunca/perkakas';
 import {
   createSharedComposable,
   useEventListener,
 } from '@vueuse/core';
-import { isClient, isIOS, tryOnBeforeUnmount } from '@vueuse/shared';
-import { defu } from 'defu';
+import { isIOS, tryOnBeforeUnmount } from '@vueuse/shared';
 import { computed, nextTick, ref, watch } from 'vue';
 import { injectConfigProviderContext } from '@/ConfigProvider/ConfigProvider.vue';
 import { acquireBodyPointerEvents, releaseBodyPointerEvents } from './bodyPointerEvents';
+
 // The whole lock stack holds a single share of the body pointer-events owner.
 const pointerEventsOwner = Symbol('useBodyScrollLock');
 
 const useBodyLockStackCount = createSharedComposable(() => {
   const map = ref<Map<string, boolean>>(new Map());
   const initialOverflow = ref<string | undefined>();
+  // The inline values the lock overwrites, put back as they were on release.
+  let initialInlineStyle: { paddingRight: string; marginRight: string } | undefined;
 
   const locked = computed(() => {
     for (const value of map.value.values()) {
@@ -32,10 +34,12 @@ const useBodyLockStackCount = createSharedComposable(() => {
   let stopTouchListeners: Fn | null = null;
 
   const resetBodyStyle = () => {
-    document.body.style.paddingRight = '';
-    document.body.style.marginRight = '';
-
-    // Only restored once no `DismissableLayer` still holds it either.
+    if (initialInlineStyle) {
+      document.body.style.paddingRight = initialInlineStyle.paddingRight;
+      document.body.style.marginRight = initialInlineStyle.marginRight;
+      initialInlineStyle = undefined;
+    }
+    // Only restored once no `DismissableLayer` still holds it either (#2784)
     releaseBodyPointerEvents(document, pointerEventsOwner);
     document.documentElement.style.removeProperty('--scrollbar-width');
     document.body.style.overflow = initialOverflow.value ?? '';
@@ -45,7 +49,7 @@ const useBodyLockStackCount = createSharedComposable(() => {
   };
 
   watch(locked, (val, oldVal) => {
-    if (!isClient) {
+    if (!isBrowser) {
       return;
     }
 
@@ -61,29 +65,41 @@ const useBodyLockStackCount = createSharedComposable(() => {
     }
 
     const verticalScrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    const defaultConfig = { padding: verticalScrollbarWidth, margin: 0 };
-
-    // eslint-disable-next-line no-nested-ternary
-    const config = context.scrollBody?.value
-      ? isObjectType(context.scrollBody.value)
-        ? defu({
-            padding: context.scrollBody.value.padding === true
-              ? verticalScrollbarWidth
-              : context.scrollBody.value.padding,
-            margin: context.scrollBody.value.margin === true
-              ? verticalScrollbarWidth
-              : context.scrollBody.value.margin,
-          }, defaultConfig)
-        : defaultConfig
-      : ({ padding: 0, margin: 0 });
 
     if (verticalScrollbarWidth > 0) {
-      document.body.style.paddingRight = isNumber(config.padding)
-        ? `${config.padding}px`
-        : String(config.padding);
-      document.body.style.marginRight = isNumber(config.margin)
-        ? `${config.margin}px`
-        : String(config.margin);
+      const { style } = document.body;
+      initialInlineStyle ??= { paddingRight: style.paddingRight, marginRight: style.marginRight };
+
+      // `false` leaves both alone. Otherwise the padding makes up for the scrollbar by default,
+      // and the margin is only written when asked for. `margin: true` on its own leaves
+      // the padding out, so that the scrollbar is made up for once rather than twice.
+      const scrollBody = context.scrollBody?.value;
+      if (scrollBody) {
+        const option = isObjectType(scrollBody)
+          ? scrollBody
+          : {};
+        const { padding = option.margin !== true, margin = false } = option;
+        const computedStyle = getComputedStyle(document.body);
+        // `true` adds the scrollbar width to what the body already has; a value is used as written.
+        // eslint-disable-next-line no-nested-ternary
+        const resolve = (value: boolean | number | string, existing: string) => value === true
+          ? `${(Number.parseFloat(existing) || 0) + verticalScrollbarWidth}px`
+          : isNumber(value)
+            ? `${value}px`
+            : String(value);
+        const paddingRight = padding === false
+          ? undefined
+          : resolve(padding, computedStyle.paddingRight);
+        const marginRight = margin === false
+          ? undefined
+          : resolve(margin, computedStyle.marginRight);
+        if (paddingRight !== undefined) {
+          style.paddingRight = paddingRight;
+        }
+        if (marginRight !== undefined) {
+          style.marginRight = marginRight;
+        }
+      }
       document.documentElement.style.setProperty('--scrollbar-width', `${verticalScrollbarWidth}px`);
       document.body.style.overflow = 'hidden';
     }
@@ -128,7 +144,6 @@ const useBodyLockStackCount = createSharedComposable(() => {
       };
     }
 
-    // let dismissibleLayer set previous pointerEvent first
     nextTick(() => {
       if (!locked.value) {
         return;

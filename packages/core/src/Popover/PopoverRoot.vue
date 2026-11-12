@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import { createContext } from '@/shared';
+import { createContext, defineReactiveIds } from '@/shared';
 
 export interface PopoverRootProps {
   /**
@@ -71,24 +71,29 @@ const open = useVModel(props, 'open', emit, {
 const triggerElement = ref<HTMLElement>();
 const hasCustomAnchor = ref(false);
 
-providePopoverRootContext({
-  contentId: '',
-  triggerId: '',
-  modal,
-  open,
-  onOpenChange: (value) => {
-    open.value = value;
-  },
-  onOpenToggle: () => {
-    open.value = !open.value;
-  },
-  triggerElement,
-  hasCustomAnchor,
-});
+providePopoverRootContext(
+  defineReactiveIds(
+    {
+      contentId: '',
+      triggerId: '',
+      modal,
+      open,
+      onOpenChange: (value) => {
+        open.value = value;
+      },
+      onOpenToggle: () => {
+        open.value = !open.value;
+      },
+      triggerElement,
+      hasCustomAnchor,
+    },
+    ['triggerId', 'contentId'],
+  ),
+);
 </script>
 
 <template>
-  <PopperRoot>
+  <PopperRoot scope="popover">
     <slot
       :open="open"
       :close="() => open = false"

@@ -16,6 +16,7 @@ export const PopperContentPropsDefaultValue = {
   side: 'bottom' as Side,
   sideOffset: 0,
   sideFlip: true,
+  fallbackAxisSideDirection: 'none' as 'none' | 'start' | 'end',
   align: 'center' as Align,
   alignOffset: 0,
   alignFlip: true,
@@ -38,8 +39,9 @@ export interface PopperContentProps extends PrimitiveProps {
   memoDependencies?: Array<unknown>;
   /**
    * The preferred side of the trigger to render against when open.
-   * Will be reversed when collisions occur and avoidCollisions
-   * is enabled.
+   * Will be reversed when collisions occur and `avoidCollisions`
+   * is enabled. If the opposite side collides as well, the content
+   * stays on this axis unless `fallbackAxisSideDirection` is set.
    *
    * @defaultValue "bottom"
    */
@@ -54,10 +56,25 @@ export interface PopperContentProps extends PrimitiveProps {
 
   /**
    * Flip to the opposite side when colliding with boundary.
+   * Only the opposite side is tried, unless `fallbackAxisSideDirection` is set.
    *
    * @defaultValue true
    */
   sideFlip?: boolean;
+
+  /**
+   * Whether to also try the perpendicular sides when neither the preferred
+   * side nor its opposite fits within the boundary, and which of them to try first.
+   * For `side="left"` or `"right"`, `start` tries top then bottom and `end` tries
+   * bottom then top. For `side="top"` or `"bottom"`, `start` tries left then right
+   * and `end` tries right then left (mirrored in RTL).
+   * `none` keeps the content on the axis of the preferred side.
+   *
+   * Only applies when `avoidCollisions` and `sideFlip` are enabled.
+   *
+   * @defaultValue "none"
+   */
+  fallbackAxisSideDirection?: 'none' | 'start' | 'end';
 
   /**
    * The preferred alignment against the trigger.
@@ -185,6 +202,7 @@ export interface PopperContentProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
+import type { PopperScope } from './PopperRootContext';
 import {
   autoUpdate,
   flip,
@@ -200,7 +218,7 @@ import { isNumber } from '@vinicunca/perkakas';
 import { computed, ref, watchEffect, watchPostEffect } from 'vue';
 import { Primitive } from '@/Primitive';
 import { providePopperContentContext } from './PopperContentContext';
-import { injectPopperRootContext } from './PopperRoot.vue';
+import { injectPopperRootContext } from './PopperRootContext';
 import {
   getSideAndAlignFromPlacement,
   isNotNull,
@@ -211,14 +229,17 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<PopperContentProps>(), {
-  ...PopperContentPropsDefaultValue,
-});
+const props = withDefaults(
+  defineProps<PopperContentProps & { scope?: PopperScope }>(),
+  {
+    ...PopperContentPropsDefaultValue,
+  },
+);
 const emits = defineEmits<{
   placed: [void];
 }>();
 
-const rootContext = injectPopperRootContext();
+const rootContext = injectPopperRootContext(props.scope);
 const { forwardRef, currentElement: contentElement } = useForwardExpose();
 const dir = useDirection(computed(() => props.dir));
 
@@ -266,6 +287,7 @@ const flipOptions = computed(() => {
   return {
     mainAxis: props.sideFlip,
     crossAxis: props.alignFlip,
+    fallbackAxisSideDirection: props.sideFlip ? props.fallbackAxisSideDirection : 'none',
   };
 });
 

@@ -120,7 +120,7 @@ const pointerDownOutside = usePointerDownOutside(async (event) => {
     branch?.contains(event.target as HTMLElement),
   );
 
-  if (!props.present || !isPointerEventsEnabled.value || isPointerDownOnBranch) {
+  if (!props.present || isPointerDownOnBranch) {
     return;
   }
   emits('pointerDownOutside', event);
@@ -129,7 +129,7 @@ const pointerDownOutside = usePointerDownOutside(async (event) => {
   if (!event.defaultPrevented) {
     emits('dismiss');
   }
-}, layerElement, () => props.present);
+}, layerElement, () => props.present, () => isPointerEventsEnabled.value);
 
 const focusOutside = useFocusOutside((event) => {
   const isFocusInBranch = [...context.branches].some((branch) =>
@@ -195,7 +195,7 @@ watch(
       // below — keeps the set accurate when `disableOutsidePointerEvents`
       // toggles `true -> false` while still mounted (e.g. a modal Menu
       // closing). The shared owner restores the body only once the last
-      // layer or scroll lock lets go, whatever the cleanup order (#2674, #2867).
+      // layer or scroll lock lets go, whatever the cleanup order.
       onCleanup(() => {
         context.layersWithOutsidePointerEventsDisabled.delete(element);
         releaseBodyPointerEvents(doc, element);

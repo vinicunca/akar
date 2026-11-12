@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 import { isIncludedIn, KEY_CODES } from '@vinicunca/perkakas';
-import { computed, onMounted, onUnmounted } from 'vue';
+import { computed, watchPostEffect } from 'vue';
 import { getActiveElement, useArrowNavigation, useForwardExpose } from '@/shared';
 
 export interface StepperTriggerProps extends PrimitiveProps {
@@ -73,21 +73,17 @@ function handleKeyDown(event: KeyboardEvent) {
 
 const { forwardRef, currentElement } = useForwardExpose();
 
-let registeredElement: HTMLElement | null = null;
-
-onMounted(() => {
-  registeredElement = currentElement.value;
-
-  if (registeredElement) {
-    rootContext.totalStepperItems.value.add(registeredElement);
+watchPostEffect((cleanup) => {
+  const element = currentElement.value;
+  if (!element) {
+    return;
   }
-});
-
-onUnmounted(() => {
-  if (registeredElement) {
-    rootContext.totalStepperItems.value.delete(registeredElement);
-    registeredElement = null;
-  }
+  rootContext.stepperItemValues.set(element, () => itemContext.step.value);
+  rootContext.totalStepperItems.value.add(element);
+  cleanup(() => {
+    rootContext.stepperItemValues.delete(element);
+    rootContext.totalStepperItems.value.delete(element);
+  });
 });
 </script>
 

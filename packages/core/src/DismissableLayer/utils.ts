@@ -1,7 +1,8 @@
 import type { MaybeRefOrGetter, Ref } from 'vue';
-import { isClient } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
 import { nextTick, ref, toValue, watchEffect } from 'vue';
 import { handleAndDispatchCustomEvent } from '@/shared';
+import { context } from './context';
 
 export type PointerDownOutsideEvent = CustomEvent<{
   originalEvent: PointerEvent;
@@ -50,6 +51,14 @@ export function isLayerExist(layerElement: HTMLElement, targetElement: HTMLEleme
       '[data-dismissable-layer]',
     ) as HTMLElement;
 
+  if (mainLayer?.hasAttribute('data-editable-root') && targetLayer?.hasAttribute('data-editable-root')) {
+    const isInAnotherLayer = [...context.layersRoot].some((layer) => layer.contains(targetElement) && !layer.contains(layerElement));
+
+    if (!isInAnotherLayer) {
+      return false;
+    }
+  }
+
   const nodeList = Array.from(
     layerElement.ownerDocument.querySelectorAll('[data-dismissable-layer]'),
   );
@@ -71,23 +80,35 @@ export function usePointerDownOutside(
   onPointerDownOutside?: (event: PointerDownOutsideEvent) => void,
   element?: Ref<HTMLElement | undefined>,
   enabled: MaybeRefOrGetter<boolean> = true,
+  isPointerEventsEnabled: () => boolean = () => true,
 ) {
   const isPointerInsideDOMTree = ref(false);
   const handleClickRef = ref(() => {});
+  const pointerEventsEnabled = new WeakMap<PointerEvent, boolean>();
 
   watchEffect((cleanupFn) => {
-    if (!isClient || !toValue(enabled)) {
+    if (!isBrowser || !toValue(enabled)) {
       return;
     }
     // Resolved inside the effect so it tracks `element`: the layer is usually
     // not mounted yet when this composable runs, and listening on the global
     // `document` would miss events from a layer rendered inside an iframe.
-    const ownerDocument: Document
-      = element?.value?.ownerDocument ?? globalThis?.document;
+    const ownerDocument = element?.value?.ownerDocument ?? globalThis.document;
+    const handlePointerDownCapture = (event: PointerEvent) => {
+      // Opening another layer in a target handler must not change eligibility
+      // for the same event when it reaches the document's bubble listener.
+      pointerEventsEnabled.set(event, isPointerEventsEnabled());
+    };
     const handlePointerDown = async (event: PointerEvent) => {
       const target = event.target as HTMLElement | undefined;
 
       if (!element?.value || !target) {
+        return;
+      }
+
+      if (!(pointerEventsEnabled.get(event) ?? isPointerEventsEnabled())) {
+        ownerDocument.removeEventListener('click', handleClickRef.value);
+        isPointerInsideDOMTree.value = false;
         return;
       }
 
@@ -154,11 +175,13 @@ export function usePointerDownOutside(
      * });
      */
     const timerId = window.setTimeout(() => {
+      ownerDocument.addEventListener('pointerdown', handlePointerDownCapture, true);
       ownerDocument.addEventListener('pointerdown', handlePointerDown);
     }, 0);
 
     cleanupFn(() => {
       window.clearTimeout(timerId);
+      ownerDocument.removeEventListener('pointerdown', handlePointerDownCapture, true);
       ownerDocument.removeEventListener('pointerdown', handlePointerDown);
       ownerDocument.removeEventListener('click', handleClickRef.value);
     });
@@ -185,12 +208,11 @@ export function useFocusOutside(
 ) {
   const isFocusInsideDOMTree = ref(false);
   watchEffect((cleanupFn) => {
-    if (!isClient || !toValue(enabled)) {
+    if (!isBrowser || !toValue(enabled)) {
       return;
     }
     // See `usePointerDownOutside`: resolved inside the effect to track `element`.
-    const ownerDocument: Document
-      = element?.value?.ownerDocument ?? globalThis?.document;
+    const ownerDocument = element?.value?.ownerDocument ?? globalThis.document;
     const handleFocus = async (event: FocusEvent) => {
       if (!element?.value) {
         return;

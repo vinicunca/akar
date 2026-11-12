@@ -2,7 +2,7 @@
 import type { Ref } from 'vue';
 import type { AcceptableValue, Direction, FormFieldProps } from '@/shared/types';
 import { useCollection } from '@/Collection';
-import { createContext, useDirection, useFormControl } from '@/shared';
+import { createContext, defineReactiveIds, useDirection, useFormControl } from '@/shared';
 import { compare, valueComparator } from './utils';
 
 export interface SelectRootProps<T = AcceptableValue> extends FormFieldProps {
@@ -197,52 +197,57 @@ function getOption(value: SelectOption['value']) {
     .find((option) => valueComparator(value, option.value, props.by));
 }
 
-provideSelectRootContext({
-  triggerElement,
-  onTriggerChange: (node) => {
-    triggerElement.value = node;
-  },
-  valueElement,
-  onValueElementChange: (node) => {
-    valueElement.value = node;
-  },
-  contentId: '',
-  modelValue,
-  // @ts-expect-error Missing infer for AcceptableValue
-  onValueChange: handleValueChange,
-  // @ts-expect-error Missing infer for AcceptableValue
-  by: props.by,
-  open,
-  multiple,
-  required,
-  onOpenChange: (value) => {
-    open.value = value;
-  },
-  dir,
-  triggerPointerDownPosRef,
-  disabled,
-  isEmptyModelValue,
+provideSelectRootContext(
+  defineReactiveIds(
+    {
+      triggerElement,
+      onTriggerChange: (node) => {
+        triggerElement.value = node;
+      },
+      valueElement,
+      onValueElementChange: (node) => {
+        valueElement.value = node;
+      },
+      contentId: '',
+      modelValue,
+      // @ts-expect-error Missing infer for AcceptableValue
+      onValueChange: handleValueChange,
+      // @ts-expect-error Missing infer for AcceptableValue
+      by: props.by,
+      open,
+      multiple,
+      required,
+      onOpenChange: (value) => {
+        open.value = value;
+      },
+      dir,
+      triggerPointerDownPosRef,
+      disabled,
+      isEmptyModelValue,
 
-  optionsSet,
-  onOptionAdd: (option) => {
-    const existingOption = getOption(option.value);
-    if (existingOption) {
-      optionsSet.value.delete(existingOption);
-    }
+      optionsSet,
+      onOptionAdd: (option) => {
+        const existingOption = getOption(option.value);
+        if (existingOption) {
+          optionsSet.value.delete(existingOption);
+        }
 
-    optionsSet.value.add(option);
-  },
-  onOptionRemove: (option) => {
-    const existingOption = getOption(option.value);
-    if (existingOption) {
-      optionsSet.value.delete(existingOption);
-    }
-  },
-});
+        optionsSet.value.add(option);
+      },
+      onOptionRemove: (option) => {
+        const existingOption = getOption(option.value);
+        if (existingOption) {
+          optionsSet.value.delete(existingOption);
+        }
+      },
+    },
+    ['contentId'],
+  ),
+);
 </script>
 
 <template>
-  <PopperRoot>
+  <PopperRoot scope="select">
     <slot
       :model-value="modelValue"
       :open="open"

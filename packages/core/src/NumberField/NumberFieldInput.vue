@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 import { onMounted, ref, watch } from 'vue';
+import { getActiveElement, useComposing } from '@/shared';
 import { injectNumberFieldRootContext } from './NumberFieldRoot.vue';
 
 export interface NumberFieldInputProps extends PrimitiveProps {
@@ -10,11 +11,13 @@ export interface NumberFieldInputProps extends PrimitiveProps {
 <script setup lang="ts">
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
-import { getActiveElement, useComposing } from '@/shared';
 
-const props = withDefaults(defineProps<NumberFieldInputProps>(), {
-  as: 'input',
-});
+const props = withDefaults(
+  defineProps<NumberFieldInputProps>(),
+  {
+    as: 'input',
+  },
+);
 
 const { primitiveElement, currentElement } = usePrimitiveElement();
 const rootContext = injectNumberFieldRootContext();
@@ -54,9 +57,17 @@ function handleKeydown(event: KeyboardEvent) {
       rootContext.handleMinMaxValue('max');
       break;
     case KEY_CODES.ENTER:
-      rootContext.applyInputValue((event.target as HTMLInputElement)?.value);
+      commit((event.target as HTMLInputElement)?.value);
       break;
   }
+}
+
+function commit(value: string | undefined) {
+  rootContext.applyInputValue(value ?? '');
+  // The committed text can leave `textValue` unchanged (reformatted, reverted or rejected input),
+  // so the watcher below would not run and the next render would bring back the stale typed text.
+  // Resync the bound value with what was just written to the element.
+  inputValue.value = (currentElement.value as HTMLInputElement | undefined)?.value ?? rootContext.textValue.value;
 }
 
 function handleWheelEvent(event: WheelEvent) {
@@ -148,7 +159,7 @@ function handleChange() {
       inputValue = target.value
     }"
     @change="handleChange"
-    @blur="rootContext.applyInputValue($event.target?.value)"
+    @blur="commit($event.target?.value)"
     @compositionstart="handleCompositionStart"
     @compositionend="handleCompositionEnd"
   >

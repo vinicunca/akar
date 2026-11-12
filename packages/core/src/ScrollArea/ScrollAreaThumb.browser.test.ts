@@ -1,14 +1,10 @@
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
 import { defineComponent, h } from 'vue';
 import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from '.';
 
-function wait(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
 function nextFrame() {
   return new Promise((resolve) => {
     requestAnimationFrame(resolve);
@@ -46,7 +42,7 @@ describe('scroll area thumb in a real browser', () => {
       await userEvent.wheel(viewport, { delta, times: 3 });
       await expect.poll(() => viewport[offset]).toBeGreaterThan(0);
       await expect.poll(() => Math.abs(thumbOffset() - expectedOffset())).toBeLessThan(0.1);
-      await wait(200);
+      await sleep(200);
 
       const firstPosition = viewport[offset];
       await userEvent.wheel(viewport, { delta, times: 3 });

@@ -1,3 +1,4 @@
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -113,9 +114,7 @@ describe('given a Form with server errors', () => {
 async function submit(wrapper: ReturnType<typeof mount>) {
   const event = new Event('submit', { cancelable: true });
   wrapper.find('form').element.dispatchEvent(event);
-  await new Promise((resolve) => {
-    setTimeout(resolve, 0);
-  });
+  await sleep(0);
   await nextTick();
   return event;
 }
@@ -248,9 +247,7 @@ describe('given a Form submission', () => {
     await submit(wrapper);
     expect(onSubmit).toHaveBeenCalledTimes(1);
 
-    await new Promise((resolve) => {
-      setTimeout(resolve, 20);
-    });
+    await sleep(20);
     await nextTick();
     expect(wrapper.text()).toContain('Already taken');
   });
@@ -284,9 +281,7 @@ describe('given a Form submission', () => {
     const input = wrapper.find('input');
     await input.setValue('taken');
     await input.trigger('blur');
-    await new Promise((resolve) => {
-      setTimeout(resolve, 20);
-    });
+    await sleep(20);
 
     await submit(wrapper);
     expect(onSubmit).not.toHaveBeenCalled();

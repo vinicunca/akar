@@ -2,7 +2,7 @@
 import type { Ref } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
 import { toRefs } from 'vue';
-import { createContext, useForwardExpose } from '@/shared';
+import { createContext, defineReactiveIds, useForwardExpose } from '@/shared';
 
 export interface CollapsibleRootProps extends PrimitiveProps {
   /** The open state of the collapsible when it is initially rendered. <br> Use when you do not need to control its open state. */
@@ -21,6 +21,7 @@ export type CollapsibleRootEmits = {
 };
 
 interface CollapsibleRootContext {
+  /** The id the content renders. Read by the trigger for `aria-controls`. */
   contentId: string;
   disabled?: Ref<boolean>;
   open: Ref<boolean>;
@@ -58,19 +59,21 @@ const open = useVModel(props, 'open', emit, {
 
 const { disabled, unmountOnHide } = toRefs(props);
 
-provideCollapsibleRootContext({
-  contentId: '',
-  disabled,
-  open,
-  unmountOnHide,
-  onOpenToggle: () => {
-    if (disabled.value) {
-      return;
-    }
+provideCollapsibleRootContext(
+  defineReactiveIds({
+    contentId: '',
+    disabled,
+    open,
+    unmountOnHide,
+    onOpenToggle: () => {
+      if (disabled.value) {
+        return;
+      }
 
-    open.value = !open.value;
-  },
-});
+      open.value = !open.value;
+    },
+  }, ['contentId']),
+);
 
 defineExpose({ open });
 useForwardExpose();

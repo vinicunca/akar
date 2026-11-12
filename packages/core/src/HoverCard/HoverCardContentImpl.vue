@@ -99,6 +99,7 @@ onUnmounted(() => {
     <PopperContent
       v-bind="{ ...forwarded, ...$attrs }"
       :ref="forwardRef"
+      scope="hover-card"
       :data-state="rootContext.open.value ? 'open' : 'closed'"
       :style="{
         'userSelect': containSelection ? 'text' : undefined,

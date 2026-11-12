@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { ToastObject } from './createToastManager';
 import type { SwipeEvent } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
-import { isClient } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
 import { useCollection } from '@/Collection';
 import { createContext, getActiveElement, useForwardExpose } from '@/shared';
 
@@ -101,7 +101,7 @@ function startTimer(duration: number) {
   // startTimer is used inside a watch with immediate set to true.
   // This results in code execution during SSR.
   // Ensure this code only runs in a browser environment
-  if (!isClient) {
+  if (!isBrowser) {
     return;
   }
   window.clearTimeout(closeTimerRef.value);
@@ -210,13 +210,21 @@ watch([
   }
 }, { immediate: true });
 
+// Only an Escape from inside this toast closes it, and it goes no further, so it
+// doesn't also close the dialog or popover around it. An Escape inside a layer
+// open in the toast, such as a popover without a portal, is that layer's.
 onKeyStroke('Escape', (event) => {
+  const layer = (event.target as Element | null)?.closest?.('[data-dismissable-layer]');
+  if (layer && currentElement.value?.contains(layer)) {
+    return;
+  }
+  event.stopPropagation();
   emits('escapeKeyDown', event);
   if (!event.defaultPrevented) {
     providerContext.isFocusedToastEscapeKeyDownRef.value = true;
     handleClose();
   }
-});
+}, { target: currentElement });
 
 let unregisterToast: (() => void) | undefined;
 onMounted(() => {

@@ -5,7 +5,7 @@ import type {
   NestedSwipeProgressStore,
   SwipeDirection,
 } from './utils';
-import { createContext, useId } from '@/shared';
+import { createContext, defineReactiveIds, useId } from '@/shared';
 
 export type DrawerModal = boolean | 'trap-focus';
 
@@ -54,6 +54,11 @@ export interface DrawerRootProps {
 
 export type DrawerRootEmits = {
   'update:open': [value: boolean, details: DrawerOpenChangeDetails];
+  /**
+   * Emitted with `true` once the drawer has finished opening and `false` once it has finished closing:
+   * when the animations and transitions running on the popup have ended, or when its content unmounts.
+   * Animations that never end are not waited for.
+   */
   'update:openComplete': [value: boolean];
   'update:snapPoint': [value: DrawerSnapPoint | null];
 };
@@ -101,7 +106,7 @@ export const [injectDrawerRootContext, provideDrawerRootContext]
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { computed, onUnmounted, ref, toRefs, watch } from 'vue';
+import { computed, onBeforeUnmount, onUnmounted, ref, toRefs, watch } from 'vue';
 import { injectDrawerProviderContext } from './DrawerProvider.vue';
 import { createNestedSwipeProgressStore } from './utils';
 
@@ -148,6 +153,9 @@ const nestedOpenDrawerCount = ref(0);
 const nestedSwiping = ref(false);
 const isSwiping = ref(false);
 const nestedSwipeProgressStore = createNestedSwipeProgressStore();
+// Whether a nested drawer currently reports a height, i.e. is the frontmost one.
+let isNestedDrawerOpen = false;
+let isUnmounting = false;
 
 // Optional parent context for nested drawer support
 const parentContext = injectDrawerRootContext(null);
@@ -159,67 +167,89 @@ const contentId = useId(undefined, 'akar-drawer-content');
 const titleId = useId(undefined, 'akar-drawer-title');
 const descriptionId = useId(undefined, 'akar-drawer-description');
 
-provideDrawerRootContext({
-  open,
-  modal,
-  swipeDirection,
-  snapPoints,
-  activeSnapPoint,
-  snapToSequentialPoints,
-  popupHeight,
-  frontmostHeight,
-  hasNestedDrawer,
-  nestedOpenDrawerCount,
-  nestedSwiping,
-  isSwiping,
-  nestedSwipeProgressStore,
-  onOpenChange: handleOpenChange,
-  onOpenToggle: handleOpenToggle,
-  notifyOpenComplete(value) {
-    emit('update:openComplete', value);
-  },
-  setActiveSnapPoint(point) {
-    activeSnapPoint.value = point;
-  },
-  onPopupHeightChange(h) {
-    popupHeight.value = h;
-    providerContext?.visualStateStore.set({ frontmostHeight: h });
-  },
-  onNestedFrontmostHeightChange(h) {
-    frontmostHeight.value = h;
-  },
-  onNestedDrawerPresenceChange(present) {
-    if (present) {
-      nestedOpenDrawerCount.value++;
-    } else {
-      nestedOpenDrawerCount.value = Math.max(0, nestedOpenDrawerCount.value - 1);
-    }
-    hasNestedDrawer.value = nestedOpenDrawerCount.value > 0;
-    parentContext?.notifyParentHasNestedDrawer?.(present);
-  },
-  onNestedSwipingChange(swiping) {
-    nestedSwiping.value = swiping;
-    parentContext?.notifyParentSwipingChange?.(swiping);
-  },
-  onNestedSwipeProgressChange(progress) {
-    nestedSwipeProgressStore.set(progress);
-    parentContext?.notifyParentSwipeProgressChange?.(progress);
-    providerContext?.visualStateStore.set({ swipeProgress: progress });
-  },
-  onSwipingChange(swiping) {
-    isSwiping.value = swiping;
-  },
-  notifyParentFrontmostHeight: parentContext?.onNestedFrontmostHeightChange,
-  notifyParentSwipingChange: parentContext?.onNestedSwipingChange,
-  notifyParentSwipeProgressChange: parentContext?.onNestedSwipeProgressChange,
-  notifyParentHasNestedDrawer: parentContext?.onNestedDrawerPresenceChange,
-  triggerElement,
-  contentElement,
-  viewportElement,
-  contentId,
-  titleId,
-  descriptionId,
-});
+provideDrawerRootContext(
+  defineReactiveIds(
+    {
+      open,
+      modal,
+      swipeDirection,
+      snapPoints,
+      activeSnapPoint,
+      snapToSequentialPoints,
+      popupHeight,
+      frontmostHeight,
+      hasNestedDrawer,
+      nestedOpenDrawerCount,
+      nestedSwiping,
+      isSwiping,
+      nestedSwipeProgressStore,
+      onOpenChange: handleOpenChange,
+      onOpenToggle: handleOpenToggle,
+      notifyOpenComplete(value) {
+        // A drawer that is being removed altogether has not completed a close.
+        if (!isUnmounting) {
+          emit('update:openComplete', value);
+        }
+      },
+      setActiveSnapPoint(point) {
+        activeSnapPoint.value = point;
+      },
+      onPopupHeightChange(h) {
+        popupHeight.value = h;
+        // With no nested drawer open, this drawer is the frontmost one.
+        if (!isNestedDrawerOpen && h > 0) {
+          frontmostHeight.value = h;
+        }
+        providerContext?.visualStateStore.set({ frontmostHeight: h });
+      },
+      onNestedFrontmostHeightChange(h) {
+        if (h > 0) {
+          isNestedDrawerOpen = true;
+          frontmostHeight.value = h;
+          return;
+        }
+        // The nested drawer closed: fall back to this drawer's own height rather
+        // than 0, so it keeps its size while the nested drawer animates out.
+        isNestedDrawerOpen = false;
+        if (popupHeight.value > 0) {
+          frontmostHeight.value = popupHeight.value;
+        }
+      },
+      onNestedDrawerPresenceChange(present) {
+        if (present) {
+          nestedOpenDrawerCount.value++;
+        } else {
+          nestedOpenDrawerCount.value = Math.max(0, nestedOpenDrawerCount.value - 1);
+        }
+        hasNestedDrawer.value = nestedOpenDrawerCount.value > 0;
+        parentContext?.notifyParentHasNestedDrawer?.(present);
+      },
+      onNestedSwipingChange(swiping) {
+        nestedSwiping.value = swiping;
+        parentContext?.notifyParentSwipingChange?.(swiping);
+      },
+      onNestedSwipeProgressChange(progress) {
+        nestedSwipeProgressStore.set(progress);
+        parentContext?.notifyParentSwipeProgressChange?.(progress);
+        providerContext?.visualStateStore.set({ swipeProgress: progress });
+      },
+      onSwipingChange(swiping) {
+        isSwiping.value = swiping;
+      },
+      notifyParentFrontmostHeight: parentContext?.onNestedFrontmostHeightChange,
+      notifyParentSwipingChange: parentContext?.onNestedSwipingChange,
+      notifyParentSwipeProgressChange: parentContext?.onNestedSwipeProgressChange,
+      notifyParentHasNestedDrawer: parentContext?.onNestedDrawerPresenceChange,
+      triggerElement,
+      contentElement,
+      viewportElement,
+      contentId,
+      titleId,
+      descriptionId,
+    },
+    ['contentId'],
+  ),
+);
 
 function handleClose() {
   handleOpenChange(false, 'close-press');
@@ -260,9 +290,13 @@ watch(open, (isOpen) => {
   }
 }, { immediate: true });
 
-// `update:openComplete` is emitted by DrawerContentImpl after the popup's
-// enter/exit transition actually finishes (via transitionend/animationend on
-// the popup element). DrawerRoot just exposes the notify hook through context.
+// `update:openComplete` is emitted by DrawerContentImpl once the popup's
+// animations have finished. DrawerRoot just exposes the notify hook through context.
+
+// Runs before the content unmounts, unlike `onUnmounted`.
+onBeforeUnmount(() => {
+  isUnmounting = true;
+});
 
 onUnmounted(() => {
   providerContext?.removeDrawer(contentId);

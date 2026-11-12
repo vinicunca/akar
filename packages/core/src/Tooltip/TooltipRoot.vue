@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import { createContext, useForwardExpose } from '@/shared';
+import { createContext, defineReactiveIds, useForwardExpose } from '@/shared';
 
 export interface TooltipRootProps {
   /**
@@ -153,40 +153,45 @@ function handleDelayedOpen() {
   startTimer();
 }
 
-provideTooltipRootContext({
-  contentId: '',
-  open,
-  stateAttribute,
-  trigger,
-  onTriggerChange(el) {
-    trigger.value = el;
-  },
-  onTriggerEnter() {
-    if (providerContext.isOpenDelayed.value) {
-      handleDelayedOpen();
-    } else {
-      handleOpen();
-    }
-  },
-  onTriggerLeave() {
-    if (disableHoverableContent.value) {
-      handleClose();
-    } else {
-      // Clear the timer in case the pointer leaves the trigger before the tooltip is opened.
-      clearTimer();
-    }
-  },
-  onOpen: handleOpen,
-  onClose: handleClose,
-  disableHoverableContent,
-  disableClosingTrigger,
-  disabled: disableTooltip,
-  ignoreNonKeyboardFocus,
-});
+provideTooltipRootContext(
+  defineReactiveIds(
+    {
+      contentId: '',
+      open,
+      stateAttribute,
+      trigger,
+      onTriggerChange(el) {
+        trigger.value = el;
+      },
+      onTriggerEnter() {
+        if (providerContext.isOpenDelayed.value) {
+          handleDelayedOpen();
+        } else {
+          handleOpen();
+        }
+      },
+      onTriggerLeave() {
+        if (disableHoverableContent.value) {
+          handleClose();
+        } else {
+          // Clear the timer in case the pointer leaves the trigger before the tooltip is opened.
+          clearTimer();
+        }
+      },
+      onOpen: handleOpen,
+      onClose: handleClose,
+      disableHoverableContent,
+      disableClosingTrigger,
+      disabled: disableTooltip,
+      ignoreNonKeyboardFocus,
+    },
+    ['contentId'],
+  ),
+);
 </script>
 
 <template>
-  <PopperRoot>
+  <PopperRoot scope="tooltip">
     <slot :open="open" />
   </PopperRoot>
 </template>

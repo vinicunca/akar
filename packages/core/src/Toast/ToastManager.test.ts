@@ -1,5 +1,6 @@
 import type { GlobalToastManager, ToastObject, UseToastManagerReturn } from '.';
 import { fireEvent } from '@testing-library/vue';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -266,9 +267,7 @@ describe('useToastManager', () => {
     await flush();
 
     // Announce text renders after two animation frames.
-    await new Promise((resolve) => {
-      setTimeout(resolve, 50);
-    });
+    await sleep(50);
     await flush();
     const alert = document.querySelector('[role="alert"]')!;
     expect(alert.textContent).toContain('Saved');
@@ -315,9 +314,7 @@ describe('useToastManager', () => {
     const { api } = mountToaster();
     api.add({ title: 'Background sync', type: 'background' });
     await flush();
-    await new Promise((resolve) => {
-      setTimeout(resolve, 50);
-    });
+    await sleep(50);
     expect(document.querySelector('[role="alert"]')!.getAttribute('aria-live')).toBe('polite');
   });
 });

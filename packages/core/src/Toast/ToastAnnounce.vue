@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { isClient, useTimeout } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
+import { useTimeout } from '@vueuse/shared';
 import { onScopeDispose, ref } from 'vue';
 import { VisuallyHidden } from '@/VisuallyHidden';
 import { injectToastProviderContext } from './ToastProvider.vue';
@@ -13,7 +14,7 @@ const renderAnnounceText = ref(false);
 // Double rAF mirrors Radix UI's `useNextFrame` behavior.
 let raf1 = 0;
 let raf2 = 0;
-if (isClient) {
+if (isBrowser) {
   raf1 = requestAnimationFrame(() => {
     raf2 = requestAnimationFrame(() => {
       renderAnnounceText.value = true;

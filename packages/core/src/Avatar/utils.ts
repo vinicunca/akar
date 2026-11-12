@@ -1,6 +1,5 @@
 import type { ImgHTMLAttributes, Ref } from 'vue';
-import { isString } from '@vinicunca/perkakas';
-import { isClient } from '@vueuse/shared';
+import { isBrowser, isString } from '@vinicunca/perkakas';
 import { computed, onMounted, onUnmounted, ref, watchEffect } from 'vue';
 
 export type ImageLoadingStatus = 'idle' | 'loading' | 'loaded' | 'error';
@@ -27,7 +26,7 @@ export function useImageLoadingStatus(src: Ref<string>, { referrerPolicy, crossO
     if (!isMounted.value) {
       return null;
     }
-    if (!imageRef.value && isClient) {
+    if (!imageRef.value && isBrowser) {
       imageRef.value = new window.Image();
     }
     return imageRef.value;

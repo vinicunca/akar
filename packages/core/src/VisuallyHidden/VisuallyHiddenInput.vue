@@ -29,8 +29,8 @@ const parsedValue = computed(() => {
   } else if (isObjectType(props.value) && Array.isArray(props.value)) {
     // if array value
     return props.value.flatMap((obj, index) => {
-      // if item in array is object
-      if (isObjectType(obj)) {
+      // if item in array is object (`null` is an empty item, not an object to spread)
+      if (obj !== null && isObjectType(obj)) {
         return Object.entries(obj).map(([key, value]) => ({ name: `${props.name}[${index}][${key}]`, value }));
       } else {
         // if item in array is not object, may be primitive

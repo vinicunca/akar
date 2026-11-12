@@ -1,10 +1,10 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 import type { AcceptableValue, DataOrientation, Direction, FormFieldProps } from '@/shared/types';
-import { KEY_CODES } from '@vinicunca/perkakas';
+import { isBrowser, KEY_CODES } from '@vinicunca/perkakas';
 import { usePrimitiveElement } from '@/Primitive';
 import { getFocusIntent } from '@/RovingFocus/utils';
-import { createContext, findValuesBetween, useDirection, useFormControl, useTypeahead } from '@/shared';
+import { createContext, findValuesBetween, getActiveElement, useDirection, useFormControl, useTypeahead } from '@/shared';
 import { Primitive } from '..';
 
 type ListboxRootContext<T> = {
@@ -92,7 +92,6 @@ export type ListboxRootEmits<T = AcceptableValue> = {
 import type { EventHook } from '@vueuse/core';
 import type { Ref } from 'vue';
 import { createEventHook, useVModel } from '@vueuse/core';
-import { isClient } from '@vueuse/shared';
 import { nextTick, ref, toRefs, watch } from 'vue';
 import { useCollection } from '@/Collection';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
@@ -116,7 +115,6 @@ const { getItems, getItem } = useCollection<{ value: T }>({ isProvider: true });
 const { handleTypeaheadSearch } = useTypeahead();
 const { primitiveElement, currentElement } = usePrimitiveElement();
 const dir = useDirection(propDir);
-
 const highlightScrollContext = injectListboxHighlightScrollContext(null);
 
 // Prevent nested Listbox roots from inheriting this root's scroll coordination.
@@ -302,6 +300,17 @@ function onLeave(event: Event) {
   emits('leave', event);
 }
 
+async function onFocusOut(event: FocusEvent) {
+  const target = (event.relatedTarget || event.target) as HTMLElement | null;
+  await nextTick();
+  const root = currentElement.value;
+  // A removed row loses the focus without a related target. The focus did not leave when a
+  // virtualized list has given it to the new row of the highlighted option by now.
+  if (highlightedElement.value && root && !root.contains(target) && !root.contains(getActiveElement())) {
+    onLeave(event);
+  }
+}
+
 function onEnter(event: Event) {
   const entryFocusEvent = new CustomEvent('listbox.entryFocus', { bubbles: false, cancelable: true });
   event.currentTarget?.dispatchEvent(entryFocusEvent);
@@ -417,7 +426,7 @@ async function highlightSelected(event?: Event, scroll = true) {
   // This results in code execution during SSR.
   // Ensure this code only runs in a browser environment, since it performs
   // DOM-only side effects (focus, scrollIntoView, synthetic KeyboardEvent).
-  if (!isClient) {
+  if (!isBrowser) {
     return;
   }
   await nextTick();
@@ -511,13 +520,7 @@ provideListboxRootContext({
     :dir="dir"
     :data-disabled="disabled ? '' : undefined"
     @pointerleave="onLeave"
-    @focusout="async (event: FocusEvent) => {
-      const target = (event.relatedTarget || event.target) as HTMLElement | null
-      await nextTick()
-      if (highlightedElement && currentElement && !currentElement.contains(target)) {
-        onLeave(event)
-      }
-    }"
+    @focusout="onFocusOut"
   >
     <slot :model-value="modelValue" />
 

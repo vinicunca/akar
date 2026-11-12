@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import type { MenuContext } from './MenuRoot.vue';
-import { createContext } from '@/shared';
+import { createContext, defineReactiveIds } from '@/shared';
 
 export interface MenuSubContext {
   contentId: string;
@@ -69,18 +69,23 @@ provideMenuContext({
   },
 });
 
-provideMenuSubContext({
-  triggerId: '',
-  contentId: '',
-  trigger,
-  onTriggerChange: (element) => {
-    trigger.value = element;
-  },
-});
+provideMenuSubContext(
+  defineReactiveIds(
+    {
+      triggerId: '',
+      contentId: '',
+      trigger,
+      onTriggerChange: (element) => {
+        trigger.value = element;
+      },
+    },
+    ['triggerId', 'contentId'],
+  ),
+);
 </script>
 
 <template>
-  <PopperRoot>
+  <PopperRoot scope="menu">
     <slot />
   </PopperRoot>
 </template>

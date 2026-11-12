@@ -1,6 +1,6 @@
 import type { ReferenceElement } from '@floating-ui/vue';
 import type { ToastPositionerProps } from './ToastPositioner.vue';
-import { isClient } from '@vueuse/shared';
+import { isBrowser, isFunction, isString } from '@vinicunca/perkakas';
 
 /**
  * The status of a toast. `loading` toasts are never dismissed automatically.
@@ -128,10 +128,10 @@ function resolvePromiseState<Value, Data extends object>(
   state: ToastPromiseState<Value, Data>,
   value?: Value,
 ): ToastUpdateOptions<Data> {
-  const resolved = typeof state === 'function'
+  const resolved = isFunction(state)
     ? state(value as Value)
     : state;
-  return typeof resolved === 'string'
+  return isString(resolved)
     ? { description: resolved }
     : resolved;
 }
@@ -142,7 +142,7 @@ export function runToastPromise<Value, Data extends object>(
   add: ToastManager<Data>['add'],
   update: ToastManager<Data>['update'],
 ): Promise<Value> {
-  const loading = typeof options.loading === 'string'
+  const loading = isString(options.loading)
     ? { description: options.loading }
     : options.loading;
   const id = add({ ...loading, status: 'loading' });
@@ -177,7 +177,7 @@ export function createToastManager<Data extends object = any>(): GlobalToastMana
 
   function emit(event: ToastManagerEvent) {
     if (listeners.size === 0) {
-      if (isClient) {
+      if (isBrowser) {
         pending.push(event);
       }
       return;

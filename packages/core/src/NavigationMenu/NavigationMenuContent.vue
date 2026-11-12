@@ -13,7 +13,8 @@ export interface NavigationMenuContentProps extends NavigationMenuContentImplPro
 </script>
 
 <script setup lang="ts">
-import { isClient, reactiveOmit } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
+import { reactiveOmit } from '@vueuse/shared';
 import { computed } from 'vue';
 import { Presence } from '@/Presence';
 import { useForwardExpose, useForwardPropsEmits } from '@/shared';
@@ -51,8 +52,8 @@ const isLastActiveValue = computed(() => {
 
 <template>
   <Teleport
-    :to="isClient && menuContext.viewport.value ? menuContext.viewport.value : 'body'"
-    :disabled="isClient && menuContext.viewport.value ? !menuContext.viewport.value : true"
+    :to="isBrowser && menuContext.viewport.value ? menuContext.viewport.value : 'body'"
+    :disabled="isBrowser && menuContext.viewport.value ? !menuContext.viewport.value : true"
   >
     <Presence
       v-slot="{ present }"

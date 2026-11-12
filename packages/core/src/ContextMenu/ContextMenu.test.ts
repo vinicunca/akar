@@ -1,5 +1,6 @@
 import type { VueWrapper } from '@vue/test-utils';
 import { findByRole, queryByRole, waitFor } from '@testing-library/vue';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -179,9 +180,7 @@ describe('given controlled ContextMenu', () => {
       expect(trigger.attributes('data-state')).toBe('closed');
 
       // Give floating-ui a chance to reposition against a changed anchor.
-      await new Promise((resolve) => {
-        setTimeout(resolve, 50);
-      });
+      await sleep(50);
 
       expect(menuWrapper.style.transform)
         .toContain('translate(298px, 400px)');

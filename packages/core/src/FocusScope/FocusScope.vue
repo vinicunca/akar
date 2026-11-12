@@ -1,6 +1,9 @@
 <script lang="ts">
+import type { FocusScopeNode } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
 import { getActiveElement, useForwardExpose } from '@/shared';
+
+const FOCUS_SCOPE_NODE_KEY = Symbol('FocusScopeNode');
 
 export type FocusScopeEmits = {
   /**
@@ -44,8 +47,8 @@ export interface FocusScopeProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { isClient } from '@vueuse/shared';
-import { nextTick, reactive, ref, watch, watchEffect } from 'vue';
+import { isBrowser } from '@vinicunca/perkakas';
+import { inject, nextTick, provide, reactive, ref, watch, watchEffect } from 'vue';
 import { Primitive } from '@/Primitive';
 import { createFocusScopesStack } from './stack';
 import {
@@ -53,10 +56,14 @@ import {
   AUTOFOCUS_ON_UNMOUNT,
   containsComposed,
   EVENT_OPTIONS,
+  findVisible,
   focus,
   focusFirst,
+  focusScopeNodes,
   getTabbableCandidates,
   getTabbableEdges,
+  getTabStopsAfter,
+  hasFocusLeftScope,
 } from './utils';
 
 const props = withDefaults(defineProps<FocusScopeProps>(), {
@@ -76,6 +83,17 @@ const { currentRef, currentElement } = useForwardExpose();
 const lastFocusedElementRef = ref<HTMLElement | null>(null);
 const focusScopesStack = createFocusScopesStack();
 
+// Lets `hasFocusLeftScope` tell the scopes nested in this one from unrelated ones.
+const scopeNode: FocusScopeNode = {
+  parent: inject<FocusScopeNode | undefined>(FOCUS_SCOPE_NODE_KEY, undefined),
+};
+provide(FOCUS_SCOPE_NODE_KEY, scopeNode);
+watch(currentElement, (container) => {
+  if (container) {
+    focusScopeNodes.set(container, scopeNode);
+  }
+}, { immediate: true });
+
 const focusScope = reactive({
   paused: false,
   pause() {
@@ -87,7 +105,7 @@ const focusScope = reactive({
 });
 
 watchEffect((cleanupFn) => {
-  if (!isClient) {
+  if (!isBrowser) {
     return;
   }
   const container = currentElement.value;
@@ -270,6 +288,7 @@ watchEffect(async (cleanupFn) => {
       emits('unmountAutoFocus', ev);
     };
     container.addEventListener(AUTOFOCUS_ON_UNMOUNT, unmountEventHandler);
+    scopeNode.focusLeftAtUnmount = hasFocusLeftScope(container);
     container.dispatchEvent(unmountEvent);
 
     // Signal that blur events fired below are system-initiated (focus trap
@@ -277,7 +296,9 @@ watchEffect(async (cleanupFn) => {
     container.setAttribute('data-focus-scope-unmounting', '');
 
     setTimeout(() => {
-      if (!unmountEvent.defaultPrevented) {
+      // Focus goes back to where it was, unless something else took it meanwhile, e.g. a
+      // layer opened by the click that closed this one.
+      if (!unmountEvent.defaultPrevented && !hasFocusLeftScope(container)) {
         focus(previouslyFocusedElement ?? document.body, { select: true });
       }
 
@@ -286,6 +307,7 @@ watchEffect(async (cleanupFn) => {
 
       focusScopesStack.remove(focusScope);
       container.removeAttribute('data-focus-scope-unmounting');
+      scopeNode.focusLeftAtUnmount = undefined;
     }, 0);
   });
 });
@@ -299,7 +321,7 @@ watchEffect(async (cleanupFn) => {
 // default it to `true` (see `withDefaults`); since it never changes for them,
 // this watcher never fires and the main effect above owns their stack membership.
 watch(() => props.present, async (present, prevPresent) => {
-  if (!isClient) {
+  if (!isBrowser) {
     return;
   }
 
@@ -340,7 +362,8 @@ function handleKeyDown(event: KeyboardEvent) {
 
   if (isTabKey && focusedElement) {
     const container = event.currentTarget as HTMLElement;
-    const [first, last] = getTabbableEdges(container);
+    const candidates = getTabbableCandidates(container);
+    const [first, last] = getTabbableEdges(container, candidates);
     const hasTabbableElementsInside = first && last;
 
     // we can only wrap focus if we have tabbable edges
@@ -349,15 +372,14 @@ function handleKeyDown(event: KeyboardEvent) {
         event.preventDefault();
       }
     } else {
-      if (!event.shiftKey && focusedElement === last) {
+      // Wrap when no visible tab stop is left in the tabbing direction.
+      const tabbingOrder = event.shiftKey
+        ? [...candidates].reverse()
+        : candidates;
+      if (!findVisible(getTabStopsAfter(tabbingOrder, focusedElement), container)) {
         event.preventDefault();
         if (props.loop) {
-          focus(first, { select: true });
-        }
-      } else if (event.shiftKey && focusedElement === first) {
-        event.preventDefault();
-        if (props.loop) {
-          focus(last, { select: true });
+          focus(event.shiftKey ? last : first, { select: true });
         }
       }
     }

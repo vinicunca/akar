@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { isClient } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
 import { useForwardExpose } from '@/shared';
 
 export interface AvatarFallbackProps extends PrimitiveProps {
@@ -24,7 +24,7 @@ useForwardExpose();
 const canRender = ref(props.delayMs === undefined);
 
 watchEffect((onCleanup) => {
-  if (props.delayMs && isClient) {
+  if (props.delayMs && isBrowser) {
     const timerId = window.setTimeout(() => {
       canRender.value = true;
     }, props.delayMs);

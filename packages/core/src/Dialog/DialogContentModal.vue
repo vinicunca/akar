@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { DialogContentImplEmits, DialogContentImplProps } from './DialogContentImpl.vue';
 import { computed, watch } from 'vue';
+import { hasFocusLeftScope } from '@/FocusScope/utils';
 import { useEmitAsProps, useForwardExpose, useHideOthers } from '@/shared';
+import { useBodyScrollLock } from '@/shared/useBodyScrollLock';
 import DialogContentImpl from './DialogContentImpl.vue';
 import { injectDialogRootContext } from './DialogRoot.vue';
 
@@ -14,6 +16,30 @@ const props = withDefaults(
 const emits = defineEmits<DialogContentImplEmits>();
 
 const rootContext = injectDialogRootContext();
+
+// The overlay is what locks body scroll, and without one the page stays scrollable. Its lock
+// ends when it unmounts, which is right away if it has no exit animation of its own, so the
+// content takes a share of that lock and keeps it until it has finished leaving as well.
+const scrollLocked = useBodyScrollLock(false);
+// Read after rendering, so that a dialog reopened during its exit has its overlay back by then.
+watch(
+  [
+    () => props.present,
+    rootContext.overlayPresent,
+    rootContext.open,
+  ],
+  ([present, overlayPresent, open]) => {
+    if (!present) {
+      scrollLocked.value = false;
+    } else if (overlayPresent) {
+      scrollLocked.value = true;
+    } else if (open) {
+      // An open dialog without an overlay never holds the lock. A closing one keeps what it has.
+      scrollLocked.value = false;
+    }
+  },
+  { immediate: true, flush: 'post' },
+);
 
 const emitsAsProps = useEmitAsProps(emits);
 
@@ -48,7 +74,8 @@ watch(() => props.present, (isPresent, wasPresent) => {
       (event) => {
         if (!event.defaultPrevented) {
           event.preventDefault();
-          rootContext.triggerElement.value?.focus();
+          // Focus that something else took meanwhile, e.g. a layer opened by the same click, stays there
+          if (!hasFocusLeftScope(event.target)) rootContext.triggerElement.value?.focus();
         }
       }
     "

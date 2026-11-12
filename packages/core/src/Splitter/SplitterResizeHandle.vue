@@ -63,7 +63,7 @@ const {
   panelGroupElement,
 } = panelGroupContext;
 
-const resizeHandleId = useId(props.id, 'reka-splitter-resize-handle');
+const resizeHandleId = useId(props.id, 'akar-splitter-resize-handle');
 const state = ref<ResizeHandlerState>('inactive');
 const isFocused = ref(false);
 const resizeHandler = ref<ResizeHandler | null>(null);
@@ -181,7 +181,7 @@ onUnmounted(bumpResizeHandleRegistration);
     :data-panel-resize-handle-enabled="!disabled"
     :data-panel-resize-handle-id=" resizeHandleId"
     @blur="isFocused = false"
-    @focus="isFocused = false"
+    @focus="isFocused = true"
   >
     <slot />
   </Primitive>

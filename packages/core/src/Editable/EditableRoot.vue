@@ -229,6 +229,7 @@ provideEditableRootContext({
     :as-child="asChild"
     :dir="dir"
     data-dismissable-layer
+    data-editable-root
     @focus.capture="focusOutside.onFocusCapture"
     @blur.capture="focusOutside.onBlurCapture"
     @pointerdown.capture="pointerDownOutside.onPointerDownCapture"

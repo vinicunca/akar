@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
+import { isString } from '@vinicunca/perkakas';
 
 export interface FieldErrorProps extends PrimitiveProps {
   /** Id of the element. Auto-generated when not provided. */
@@ -45,7 +46,7 @@ const { forwardRef } = useForwardExpose();
 
 const errorId = ref(useId(props.id));
 
-const isSpecificMatch = computed(() => typeof props.match === 'string');
+const isSpecificMatch = computed(() => isString(props.match));
 
 const visible = computed(() => {
   if (props.match === true) {
@@ -54,7 +55,7 @@ const visible = computed(() => {
   if (fieldContext.disabled.value || props.match === false) {
     return false;
   }
-  if (typeof props.match === 'string') {
+  if (isString(props.match)) {
     return fieldContext.validity.value[props.match as keyof typeof fieldContext.validity.value] === true;
   }
   return fieldContext.serverErrors.value.length > 0 || fieldContext.valid.value === false;

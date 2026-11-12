@@ -14,15 +14,19 @@ import { nextTick, onMounted, watch } from 'vue';
 import { ListboxFilter } from '@/Listbox';
 import { injectListboxRootContext } from '@/Listbox/ListboxRoot.vue';
 import { usePrimitiveElement } from '@/Primitive';
-import { useComposing } from '@/shared';
+import { useComposing, useRenderedContentId } from '@/shared';
 import { injectComboboxRootContext } from './ComboboxRoot.vue';
 
-const props = withDefaults(defineProps<ComboboxInputProps>(), {
-  as: 'input',
-});
+const props = withDefaults(
+  defineProps<ComboboxInputProps>(),
+  {
+    as: 'input',
+  },
+);
 const emits = defineEmits<ComboboxInputEmits>();
 
 const rootContext = injectComboboxRootContext();
+const contentId = useRenderedContentId(rootContext);
 const listboxContext = injectListboxRootContext();
 const { primitiveElement, currentElement } = usePrimitiveElement();
 
@@ -172,7 +176,7 @@ watch(rootContext.filterState, (_newValue, oldValue) => {
     :auto-focus="autoFocus"
     :disabled="disabled"
     :aria-expanded="rootContext.open.value"
-    :aria-controls="rootContext.contentId"
+    :aria-controls="rootContext.open.value ? contentId : undefined"
     :aria-activedescendant="rootContext.open.value ? listboxContext.highlightedElement.value?.id : undefined"
     aria-autocomplete="list"
     role="combobox"

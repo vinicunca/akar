@@ -1,8 +1,9 @@
 import type { MaybeComputedElementRef } from '@vueuse/core';
 import type { Ref } from 'vue';
 import { NumberFormatter, NumberParser } from '@internationalized/number';
+import { isBrowser } from '@vinicunca/perkakas';
 import { unrefElement, useEventListener } from '@vueuse/core';
-import { createEventHook, isClient, reactiveComputed } from '@vueuse/shared';
+import { createEventHook, reactiveComputed } from '@vueuse/shared';
 import { computed, onScopeDispose, ref } from 'vue';
 
 const HOLD_DELAY = 400;
@@ -117,7 +118,7 @@ export function usePressedHold(options: { target?: MaybeComputedElementRef; disa
     }
   };
 
-  if (isClient) {
+  if (isBrowser) {
     useEventListener(target || window, 'pointerdown', onPressStart);
     useEventListener(window, 'pointermove', onPressMove);
     useEventListener(window, 'pointerup', onPressRelease);

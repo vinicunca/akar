@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import { createContext } from '@/shared';
+import { createContext, defineReactiveIds } from '@/shared';
 
 export interface DialogRootProps {
   /** The controlled open state of the dialog. Can be binded as `v-model:open`. */
@@ -34,6 +34,8 @@ export interface DialogRootContext {
   onOpenToggle: () => void;
   triggerElement: Ref<HTMLElement | undefined>;
   contentElement: Ref<HTMLElement | undefined>;
+  /** Whether a `DialogOverlay` is present, which is what locks body scroll. */
+  overlayPresent: Ref<boolean>;
   contentId: string;
   titleId: string;
   descriptionId: string;
@@ -75,27 +77,34 @@ const open = useVModel(props, 'open', emit, {
 
 const triggerElement = ref<HTMLElement>();
 const contentElement = ref<HTMLElement>();
+const overlayPresent = ref(false);
 const { modal, unmountOnHide } = toRefs(props);
 
-provideDialogRootContext({
-  open,
-  modal,
-  unmountOnHide,
-  openModal: () => {
-    open.value = true;
-  },
-  onOpenChange: (value) => {
-    open.value = value;
-  },
-  onOpenToggle: () => {
-    open.value = !open.value;
-  },
-  contentId: '',
-  titleId: '',
-  descriptionId: '',
-  triggerElement,
-  contentElement,
-});
+provideDialogRootContext(
+  defineReactiveIds(
+    {
+      open,
+      modal,
+      unmountOnHide,
+      openModal: () => {
+        open.value = true;
+      },
+      onOpenChange: (value) => {
+        open.value = value;
+      },
+      onOpenToggle: () => {
+        open.value = !open.value;
+      },
+      contentId: '',
+      titleId: '',
+      descriptionId: '',
+      triggerElement,
+      contentElement,
+      overlayPresent,
+    },
+    ['contentId'],
+  ),
+);
 </script>
 
 <template>

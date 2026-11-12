@@ -8,15 +8,15 @@ export interface SelectTriggerProps extends PopperAnchorProps {
 
 <script setup lang="ts">
 import type { PopperAnchorProps } from '@/Popper';
-import { computed, onBeforeUnmount, onMounted, useAttrs } from 'vue';
+import { computed, onBeforeUnmount, onMounted, toRaw, useAttrs } from 'vue';
 import { injectFieldRootContext } from '@/Field';
 import { PopperAnchor } from '@/Popper';
 import { Primitive } from '@/Primitive';
-import { useForwardExpose, useId, useTypeahead } from '@/shared';
+import { useForwardExpose, useId, useRenderedContentId, useTypeahead } from '@/shared';
 import {
   injectSelectRootContext,
 } from './SelectRoot.vue';
-import { OPEN_KEYS, shouldShowPlaceholder } from './utils';
+import { OPEN_KEYS, shouldShowPlaceholder, valueComparator } from './utils';
 
 const props = withDefaults(defineProps<SelectTriggerProps>(), {
   as: 'button',
@@ -27,6 +27,7 @@ const { forwardRef, currentElement: triggerElement } = useForwardExpose();
 const isDisabled = computed(() => rootContext.disabled?.value || props.disabled);
 
 rootContext.contentId ||= useId(undefined, 'akar-select-content');
+const contentId = useRenderedContentId(rootContext);
 onMounted(() => {
   rootContext.onTriggerChange(triggerElement.value);
 });
@@ -77,7 +78,20 @@ onMounted(() => {
 onBeforeUnmount(() => unregisterControl?.());
 
 const { getItems } = useCollection();
-const { search, handleTypeaheadSearch, resetTypeahead } = useTypeahead();
+const { search, handleTypeaheadSearch, findTypeaheadMatch, resetTypeahead } = useTypeahead();
+
+// A closed select has no item to focus, so the match is selected instead, as in
+// a native select. The item selects itself, so its `select` event can still
+// prevent it. The collection is reactive, so `toRaw` reads the item's own value
+// rather than a proxy of it.
+function selectTypeaheadMatch(event: KeyboardEvent) {
+  const items = getItems();
+  const selectedItem = items.find((item) => valueComparator(rootContext.modelValue.value, toRaw(item.value).value, rootContext.by));
+  const match = findTypeaheadMatch(event.key, items, selectedItem);
+  if (match && !isDisabled.value && !rootContext.multiple.value) {
+    toRaw(match.value).typeaheadSelect(event);
+  }
+}
 function handleOpen() {
   if (!isDisabled.value) {
     rootContext.onOpenChange(true);
@@ -181,7 +195,11 @@ function onTriggerKeyDown(event: KeyboardEvent) {
   // Only printable characters extend the search; otherwise keys like `Shift`
   // or `ArrowLeft` would be appended and swallow the next `Space`.
   if (!isModifierKey && event.key.length === 1) {
-    handleTypeaheadSearch(event.key, getItems());
+    if (rootContext.open.value) {
+      handleTypeaheadSearch(event.key, getItems());
+    } else {
+      selectTypeaheadMatch(event);
+    }
   }
   if (isTypingAhead && event.key === ' ') {
     return;
@@ -196,6 +214,7 @@ function onTriggerKeyDown(event: KeyboardEvent) {
 
 <template>
   <PopperAnchor
+    scope="select"
     as-child
     :reference="reference"
   >
@@ -204,7 +223,7 @@ function onTriggerKeyDown(event: KeyboardEvent) {
       :ref="forwardRef"
       role="combobox"
       :type="as === 'button' ? 'button' : undefined"
-      :aria-controls="rootContext.open.value ? rootContext.contentId : undefined"
+      :aria-controls="rootContext.open.value ? contentId : undefined"
       :aria-expanded="rootContext.open.value || false"
       :aria-required="rootContext.required?.value"
       aria-autocomplete="none"

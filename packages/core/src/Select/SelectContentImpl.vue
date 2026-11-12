@@ -9,6 +9,8 @@ import type { AcceptableValue } from '@/shared/types';
 import { useCollection } from '@/Collection';
 import {
   createContext,
+  useContentId,
+  useContentMounted,
   useFocusGuards,
   useForwardProps,
   useHideOthers,
@@ -96,6 +98,7 @@ import {
 } from 'vue';
 import { DismissableLayer } from '@/DismissableLayer';
 import { FocusScope } from '@/FocusScope';
+import { hasFocusLeftScope } from '@/FocusScope/utils';
 import { focusFirst } from '@/Menu/utils';
 import SelectItemAlignedPosition from './SelectItemAlignedPosition.vue';
 import SelectPopperPosition from './SelectPopperPosition.vue';
@@ -117,6 +120,8 @@ const { CollectionSlot, getItems } = useCollection();
 
 const content = ref<HTMLElement>();
 useHideOthers(content);
+useContentId(rootContext, content);
+useContentMounted(rootContext, content);
 
 const { search, handleTypeaheadSearch } = useTypeahead();
 
@@ -305,7 +310,8 @@ provideSelectContentContext({
         (event) => {
           emits('closeAutoFocus', event);
           if (event.defaultPrevented) return;
-          rootContext.triggerElement.value?.focus({ preventScroll: true });
+          // Focus that something else took meanwhile, e.g. a layer opened by the same click, stays there
+          if (!hasFocusLeftScope(event.target)) rootContext.triggerElement.value?.focus({ preventScroll: true });
           event.preventDefault();
         }
       "

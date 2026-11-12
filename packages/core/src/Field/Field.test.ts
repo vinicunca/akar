@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/vue';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -274,9 +275,7 @@ describe('given a Field with a custom validate function', () => {
 
     expect(wrapper.text()).not.toContain('Server says no');
 
-    await new Promise((resolve) => {
-      setTimeout(resolve, 20);
-    });
+    await sleep(20);
     await nextTick();
 
     expect(wrapper.text()).toContain('Server says no');
@@ -557,9 +556,7 @@ describe('given a Field-wrapped Select', () => {
     // required here: our own submit handling awaits each field's async
     // `validateNow`, which takes more microtask turns to settle than a
     // single `nextTick()` guarantees.
-    await new Promise((resolve) => {
-      setTimeout(resolve, 0);
-    });
+    await sleep(0);
     await nextTick();
 
     const field = wrapper.find('[data-testid="field"]');
@@ -671,9 +668,7 @@ describe('given a native control whose value changes without an input event', ()
     ;(control.element as HTMLInputElement).value = 'autofilled@example.com';
 
     await wrapper.find('form').trigger('submit');
-    await new Promise((resolve) => {
-      setTimeout(resolve, 0);
-    });
+    await sleep(0);
     await nextTick();
 
     expect(validate).toHaveBeenLastCalledWith('autofilled@example.com', { email: 'autofilled@example.com' });
@@ -894,9 +889,7 @@ describe('given a FieldError', () => {
 
     await wrapper.setProps({ disabled: true });
     // `Presence` unmounts once any exit animation is done.
-    await new Promise((resolve) => {
-      setTimeout(resolve, 0);
-    });
+    await sleep(0);
     expect(wrapper.find('[data-testid="always"]').exists()).toBe(true);
     expect(wrapper.find('[data-testid="default"]').exists()).toBe(false);
   });
