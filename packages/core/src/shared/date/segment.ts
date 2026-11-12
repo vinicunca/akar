@@ -39,10 +39,10 @@ export function isAcceptableSegmentKey(key: string) {
   return false;
 }
 
-export function getSegmentElements(parentElement: HTMLElement): Array<Element> {
-  return Array.from(parentElement.querySelectorAll('[data-akar-date-field-segment]')).filter((item) => item.getAttribute('data-akar-date-field-segment') !== 'literal');
+export function getSegmentElements(parentElement: HTMLElement | undefined): Array<Element> {
+  return Array.from(parentElement?.querySelectorAll('[data-akar-date-field-segment]') ?? []).filter((item) => item.getAttribute('data-akar-date-field-segment') !== 'literal');
 }
 
-export function getTimeFieldSegmentElements(parentElement: HTMLElement): Array<Element> {
-  return Array.from(parentElement.querySelectorAll('[data-akar-time-field-segment]')).filter((item) => item.getAttribute('data-akar-time-field-segment') !== 'literal');
+export function getTimeFieldSegmentElements(parentElement: HTMLElement | undefined): Array<Element> {
+  return Array.from(parentElement?.querySelectorAll('[data-akar-time-field-segment]') ?? []).filter((item) => item.getAttribute('data-akar-time-field-segment') !== 'literal');
 }
