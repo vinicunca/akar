@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose, useId } from '@/shared';
+import { useForwardExpose, useId, useTriggerId } from '@/shared';
 
 export interface PopoverTriggerProps extends PrimitiveProps {}
 </script>
@@ -19,7 +19,7 @@ const rootContext = injectPopoverRootContext();
 
 const { forwardRef, currentElement: triggerElement } = useForwardExpose();
 
-rootContext.triggerId ||= useId(undefined, 'akar-popover-trigger');
+useTriggerId(rootContext, triggerElement, () => useId(undefined, 'akar-popover-trigger'));
 rootContext.contentId ||= useId(undefined, 'akar-popover-content');
 onMounted(() => {
   rootContext.triggerElement.value = triggerElement.value;

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose, useId } from '@/shared';
+import { useForwardExpose, useId, useTriggerId } from '@/shared';
 
 export interface DropdownMenuTriggerProps extends PrimitiveProps {
   /** When `true`, prevents the user from interacting with item */
@@ -28,7 +28,7 @@ onMounted(() => {
   rootContext.triggerElement = triggerElement;
 });
 
-rootContext.triggerId ||= useId(undefined, 'akar-dropdown-menu-trigger');
+useTriggerId(rootContext, triggerElement, () => useId(undefined, 'akar-dropdown-menu-trigger'));
 </script>
 
 <template>
