@@ -119,13 +119,30 @@ watch(() => rootContext.frontmostHeight.value, (h) => {
 // Report the frontmost height up the stack: this drawer's own height, or the
 // one its own nested drawer reported. Report 0 once it closes or unmounts, so
 // the parent falls back to its own height.
+//
+// The 0 is reported once, when this drawer stops being open. A sibling may
+// open while this one is still animating out, and a second 0 from here
+// would discard the height that sibling reported.
+let isReportingFrontmostHeight = false;
+function releaseFrontmostHeight() {
+  if (!isReportingFrontmostHeight) {
+    return;
+  }
+  isReportingFrontmostHeight = false;
+  rootContext.notifyParentFrontmostHeight?.(0);
+}
 watch(
   [
     () => rootContext.open.value,
     () => rootContext.frontmostHeight.value,
   ],
   ([isOpen, frontmostHeight]) => {
-    rootContext.notifyParentFrontmostHeight?.(isOpen ? frontmostHeight : 0);
+    if (!isOpen) {
+      releaseFrontmostHeight();
+      return;
+    }
+    isReportingFrontmostHeight = true;
+    rootContext.notifyParentFrontmostHeight?.(frontmostHeight);
   },
   { immediate: true },
 );
@@ -417,7 +434,7 @@ onUnmounted(() => {
   }
   registeredElement = undefined;
   rootContext.notifyParentHasNestedDrawer?.(false);
-  rootContext.notifyParentFrontmostHeight?.(0);
+  releaseFrontmostHeight();
   unsubscribeNestedProgress?.();
   cancelOpenCompleteWait?.();
   // The content left before its close was reported, which is what happens
