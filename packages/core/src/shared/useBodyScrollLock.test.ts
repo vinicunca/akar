@@ -204,20 +204,79 @@ describe('useBodyScrollLock', () => {
   });
 
   it.each([
+    { option: {}, padding: '50px', margin: '24px' },
     {
       option: { padding: true },
       padding: '50px',
       margin: '24px',
     },
     {
-      option: { margin: true },
+      option: { padding: false },
+      padding: '40px',
+      margin: '24px',
+    },
+    {
+      option: { padding: 5 },
+      padding: '5px',
+      margin: '24px',
+    },
+    {
+      option: { margin: false },
       padding: '50px',
+      margin: '24px',
+    },
+    // `margin: true` on its own makes up for the scrollbar once, so the padding is not touched.
+    {
+      option: { margin: true },
+      padding: '40px',
       margin: '34px',
     },
+    {
+      option: { padding: undefined, margin: true },
+      padding: '40px',
+      margin: '34px',
+    },
+    // A margin value is a custom margin, and the padding still makes up for the scrollbar.
+    {
+      option: { margin: 5 },
+      padding: '50px',
+      margin: '5px',
+    },
+    {
+      option: { margin: '1rem' },
+      padding: '50px',
+      margin: '1rem',
+    },
+    {
+      option: { margin: 0 },
+      padding: '50px',
+      margin: '0px',
+    },
+    // An explicit padding is always respected.
     {
       option: { padding: false, margin: true },
       padding: '40px',
       margin: '34px',
+    },
+    {
+      option: { padding: true, margin: true },
+      padding: '50px',
+      margin: '34px',
+    },
+    {
+      option: { padding: true, margin: 5 },
+      padding: '50px',
+      margin: '5px',
+    },
+    {
+      option: { padding: true, margin: false },
+      padding: '50px',
+      margin: '24px',
+    },
+    {
+      option: { padding: false, margin: false },
+      padding: '40px',
+      margin: '24px',
     },
     {
       option: { padding: '1rem', margin: 5 },
@@ -234,11 +293,14 @@ describe('useBodyScrollLock', () => {
 
     locked.value = true;
     await nextTick();
-    expect(document.body.style.paddingRight).toBe(padding);
-    expect(document.body.style.marginRight).toBe(margin);
-
-    locked.value = false;
-    await nextTick();
+    try {
+      expect(document.body.style.paddingRight).toBe(padding);
+      expect(document.body.style.marginRight).toBe(margin);
+    } finally {
+      // Released even on a failure, as the lock is shared with the tests that follow.
+      locked.value = false;
+      await nextTick();
+    }
     expect(document.body.style.paddingRight).toBe('40px');
     expect(document.body.style.marginRight).toBe('24px');
   });
