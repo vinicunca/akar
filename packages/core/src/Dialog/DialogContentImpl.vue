@@ -53,7 +53,7 @@ const rootContext = injectDialogRootContext();
 const { forwardRef, currentElement: contentElement } = useForwardExpose();
 
 useContentId(rootContext, contentElement);
-useContentMounted(rootContext);
+useContentMounted(rootContext, contentElement);
 rootContext.titleId ||= useId(undefined, 'akar-dialog-title');
 rootContext.descriptionId ||= useId(undefined, 'akar-dialog-description');
 
