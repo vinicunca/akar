@@ -120,7 +120,7 @@ const pointerDownOutside = usePointerDownOutside(async (event) => {
     branch?.contains(event.target as HTMLElement),
   );
 
-  if (!props.present || !isPointerEventsEnabled.value || isPointerDownOnBranch) {
+  if (!props.present || isPointerDownOnBranch) {
     return;
   }
   emits('pointerDownOutside', event);
@@ -129,7 +129,7 @@ const pointerDownOutside = usePointerDownOutside(async (event) => {
   if (!event.defaultPrevented) {
     emits('dismiss');
   }
-}, layerElement, () => props.present);
+}, layerElement, () => props.present, () => isPointerEventsEnabled.value);
 
 const focusOutside = useFocusOutside((event) => {
   const isFocusInBranch = [...context.branches].some((branch) =>

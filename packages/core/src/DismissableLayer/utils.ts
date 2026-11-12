@@ -79,9 +79,11 @@ export function usePointerDownOutside(
   onPointerDownOutside?: (event: PointerDownOutsideEvent) => void,
   element?: Ref<HTMLElement | undefined>,
   enabled: MaybeRefOrGetter<boolean> = true,
+  isPointerEventsEnabled: () => boolean = () => true,
 ) {
   const isPointerInsideDOMTree = ref(false);
   const handleClickRef = ref(() => {});
+  const pointerEventsEnabled = new WeakMap<PointerEvent, boolean>();
 
   watchEffect((cleanupFn) => {
     if (!isClient || !toValue(enabled)) {
@@ -91,10 +93,21 @@ export function usePointerDownOutside(
     // not mounted yet when this composable runs, and listening on the global
     // `document` would miss events from a layer rendered inside an iframe.
     const ownerDocument = element?.value?.ownerDocument ?? globalThis.document;
+    const handlePointerDownCapture = (event: PointerEvent) => {
+      // Opening another layer in a target handler must not change eligibility
+      // for the same event when it reaches the document's bubble listener.
+      pointerEventsEnabled.set(event, isPointerEventsEnabled());
+    };
     const handlePointerDown = async (event: PointerEvent) => {
       const target = event.target as HTMLElement | undefined;
 
       if (!element?.value || !target) {
+        return;
+      }
+
+      if (!(pointerEventsEnabled.get(event) ?? isPointerEventsEnabled())) {
+        ownerDocument.removeEventListener('click', handleClickRef.value);
+        isPointerInsideDOMTree.value = false;
         return;
       }
 
@@ -161,11 +174,13 @@ export function usePointerDownOutside(
      * });
      */
     const timerId = window.setTimeout(() => {
+      ownerDocument.addEventListener('pointerdown', handlePointerDownCapture, true);
       ownerDocument.addEventListener('pointerdown', handlePointerDown);
     }, 0);
 
     cleanupFn(() => {
       window.clearTimeout(timerId);
+      ownerDocument.removeEventListener('pointerdown', handlePointerDownCapture, true);
       ownerDocument.removeEventListener('pointerdown', handlePointerDown);
       ownerDocument.removeEventListener('click', handleClickRef.value);
     });
