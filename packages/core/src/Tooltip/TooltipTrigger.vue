@@ -107,6 +107,7 @@ function handleClick() {
 
 <template>
   <PopperAnchor
+    scope="tooltip"
     as-child
     :reference="reference ?? triggerElement"
   >

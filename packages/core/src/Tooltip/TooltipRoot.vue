@@ -186,7 +186,7 @@ provideTooltipRootContext({
 </script>
 
 <template>
-  <PopperRoot>
+  <PopperRoot scope="tooltip">
     <slot :open="open" />
   </PopperRoot>
 </template>

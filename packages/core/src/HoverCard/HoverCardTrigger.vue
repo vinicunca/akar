@@ -41,6 +41,7 @@ function handleTouch(event: PointerEvent) {
 
 <template>
   <PopperAnchor
+    scope="hover-card"
     as-child
     :reference="reference"
   >

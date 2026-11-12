@@ -241,7 +241,7 @@ provideSelectRootContext({
 </script>
 
 <template>
-  <PopperRoot>
+  <PopperRoot scope="select">
     <slot
       :model-value="modelValue"
       :open="open"

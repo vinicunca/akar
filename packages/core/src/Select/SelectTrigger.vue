@@ -215,6 +215,7 @@ function onTriggerKeyDown(event: KeyboardEvent) {
 
 <template>
   <PopperAnchor
+    scope="select"
     as-child
     :reference="reference"
   >

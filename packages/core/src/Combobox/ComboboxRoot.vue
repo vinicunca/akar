@@ -289,7 +289,7 @@ provideComboboxRootContext({
 </script>
 
 <template>
-  <PopperRoot>
+  <PopperRoot scope="combobox">
     <ListboxRoot
       ref="primitiveElement"
       v-bind="$attrs"
