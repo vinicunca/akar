@@ -70,9 +70,6 @@ const isLastActiveValue = computed(() => {
         :hidden="!present"
         @pointerenter="menuContext.onContentEnter(itemContext.value)"
         @pointerleave="whenMouse(() => menuContext.onContentLeave())($event)"
-        @pointer-down-outside="emits('pointerDownOutside', $event)"
-        @focus-outside="emits('focusOutside', $event)"
-        @interact-outside="emits('interactOutside', $event)"
       >
         <slot />
       </NavigationMenuContentImpl>
