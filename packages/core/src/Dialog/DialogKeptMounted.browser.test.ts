@@ -24,8 +24,16 @@ const STYLES = `
 const get = (id: string) => document.querySelector<HTMLElement>(`[data-testid="${id}"]`);
 const isFocusWithin = (id: string) => !!get(id)?.contains(document.activeElement);
 const focused = () => document.activeElement?.getAttribute('data-testid') ?? document.activeElement?.tagName;
-const afterTimers = () => new Promise((resolve) => setTimeout(resolve));
-const afterFrames = () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+function afterTimers() {
+  return new Promise((resolve) => {
+    setTimeout(resolve);
+  });
+}
+function afterFrames() {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => requestAnimationFrame(resolve));
+  });
+}
 async function settle() {
   await afterTimers();
   await afterFrames();
@@ -70,7 +78,9 @@ function kept({ kind, keep, modal, open, exit, dismissable = true, onCloseAutoFo
   const parts = KEPT[kind];
   return h(parts.Root as typeof DialogRoot, {
     'open': open.value,
-    'onUpdate:open': (value: boolean) => open.value = value,
+    'onUpdate:open': (value: boolean) => {
+      open.value = value;
+    },
     ...(keep === 'unmountOnHide'
       ? { unmountOnHide: false }
       : {}),
@@ -249,7 +259,9 @@ describe.each(CASES)('$name kept mounted with $keep', ({ kind, keep, modal }) =>
       await userEvent.click(get('other-trigger')!);
       await expect.poll(() => isFocusWithin('other-content')).toBe(true);
       await settle();
-      get('kept-content')!.getAnimations().forEach((animation) => animation.finish());
+      get('kept-content')!.getAnimations().forEach((animation) => {
+        animation.finish();
+      });
       await expect.poll(() => exiting()).toBe(false);
       await expectOtherLayerOwnsFocus();
     });

@@ -183,7 +183,9 @@ function recalculateIntersectingHandles({
   intersectingHandles.splice(0);
 
   // Any element, SVG included: an icon above a handle covers it as much as a DIV does
-  const targetElement = isElement(target) ? target : null;
+  const targetElement = isElement(target)
+    ? target
+    : null;
 
   registeredResizeHandlers.forEach((data) => {
     const { element: dragHandleElement, hitAreaMargins } = data;

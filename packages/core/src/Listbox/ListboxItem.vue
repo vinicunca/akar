@@ -24,7 +24,7 @@ export const [injectListboxItemContext, provideListboxItemContext]
   = createContext<ListboxItemContext>('ListboxItem');
 </script>
 
-<script setup lang="ts"  generic="T extends AcceptableValue = AcceptableValue">
+<script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import type { Ref } from 'vue';
 import type { PrimitiveProps } from '..';
 import type { AcceptableValue } from '@/shared/types';

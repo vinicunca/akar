@@ -39,6 +39,7 @@ function getStaticExportNames() {
 function sortNames(names: Array<string>) {
   return [
     ...new Set(names),
+  // eslint-disable-next-line no-nested-ternary
   ].sort((a, b) => (a < b
     ? -1
     : a > b

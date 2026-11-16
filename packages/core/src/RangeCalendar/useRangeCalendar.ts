@@ -111,10 +111,7 @@ export function useRangeCalendarState(props: UseRangeCalendarProps) {
   };
 
   const isDateHighlightable = (date: DateValue) => {
-    if (props.isDateHighlightable?.(date)) {
-      return true;
-    }
-    return false;
+    return Boolean(props.isDateHighlightable?.(date));
   };
 
   const highlightedRange = computed(() => {

@@ -716,6 +716,7 @@ function unregisterPanel(panelData: PanelData) {
     // When a panel is removed from the group, we should delete the most recent prev-size entry for it.
     // If we don't do this, then a conditionally rendered panel might not call onResize when it's re-mounted.
     // Strict effects mode makes this tricky though because all panels will be registered, unregistered, then re-registered on mount.
+    // eslint-disable-next-line ts/no-dynamic-delete
     delete panelIdToLastNotifiedSizeMapRef.value[panelData.id];
 
     eagerValuesRef.value.panelDataArrayChanged = true;
@@ -810,12 +811,12 @@ function expandPanel(panelData: PanelData) {
       const sizeUnit = panelData.constraints.sizeUnit ?? '%';
       const groupSize = groupSizeInPixels.value ?? getGroupSizeInPixels();
 
-      const restoredSize
-        = sizeUnit === 'px' && groupSize
-          ? prevPanelSize != null
-            ? (prevPanelSize / groupSize) * 100
-            : null
-          : prevPanelSize;
+      // eslint-disable-next-line no-nested-ternary
+      const restoredSize = sizeUnit === 'px' && groupSize
+        ? prevPanelSize != null
+          ? (prevPanelSize / groupSize) * 100
+          : null
+        : prevPanelSize;
 
       const baseSize
         = restoredSize != null && restoredSize >= minSize

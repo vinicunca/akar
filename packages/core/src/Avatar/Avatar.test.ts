@@ -24,7 +24,6 @@ const ImgClass = class MockImage {
         });
       }
     }, DELAY);
-    return this;
   }
 
   addEventListener(event: string, callback: () => void) {

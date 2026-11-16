@@ -251,7 +251,9 @@ describe('given a Popover with content event listeners', () => {
       document.querySelector('[role="dialog"]')!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
     } else if (by === 'outside click') {
       // The outside pointerdown listener is registered on the next macrotask
-      await new Promise((resolve) => setTimeout(resolve));
+      await new Promise((resolve) => {
+        setTimeout(resolve);
+      });
       document.body.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0 }));
     } else {
       await wrapper.get('#trigger').trigger('click');

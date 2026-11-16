@@ -69,7 +69,9 @@ async function bundle(source: string, names: Array<string>) {
       return;
     }
     staticChunks.add(chunk);
-    chunk.imports.forEach((name) => byName.has(name) && visit(byName.get(name)!));
+    chunk.imports.forEach((name) => {
+      byName.has(name) && visit(byName.get(name)!);
+    });
   };
   visit(chunks.find((chunk) => chunk.isEntry)!);
 

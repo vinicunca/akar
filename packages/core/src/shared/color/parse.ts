@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/regex-complexity */
 import type { Color, HSBColor, HSLColor, RGBColor } from './types';
 import { isString } from '@vinicunca/perkakas';
 

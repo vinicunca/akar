@@ -114,6 +114,7 @@ const xValue = ref(Math.round(getChannelValue(color.value, xChannel.value)));
 const yValue = ref(Math.round(getChannelValue(color.value, yChannel.value)));
 
 // Store the hue separately to preserve it when saturation is 0 (grayscale)
+// eslint-disable-next-line no-nested-ternary
 const hueValue = ref(colorSpace.value === 'hsl'
   ? convertToHsl(color.value).h
   : colorSpace.value === 'hsb'

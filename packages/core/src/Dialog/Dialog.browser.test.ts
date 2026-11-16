@@ -172,7 +172,9 @@ describe('given a modal Dialog with an exit animation, in a real browser', () =>
   }
 
   const exiting = (id: string) => get(id)?.getAnimations().some((animation) => animation.playState === 'paused') ?? false;
-  const finishExit = (id: string) => get(id)!.getAnimations().forEach((animation) => animation.finish());
+  const finishExit = (id: string) => get(id)!.getAnimations().forEach((animation) => {
+    animation.finish();
+  });
 
   function dialog(id: string, open: { value: boolean }, options: Options = {}, children?: () => unknown) {
     const { parts = Dialog, modal, overlay = true, overlayExit, contentExit, forceMountOverlay, forceMountContent } = options;

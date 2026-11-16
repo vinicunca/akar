@@ -47,9 +47,13 @@ describe('given a Select whose content animates with CSS, in a real browser', ()
         return () => h('div', { style: 'padding: 200px 40px' }, [
           h(SelectRoot, {
             'modelValue': modelValue.value,
-            'onUpdate:modelValue': (value: string) => modelValue.value = value,
+            'onUpdate:modelValue': (value: string) => {
+              modelValue.value = value;
+            },
             'open': open.value,
-            'onUpdate:open': (value: boolean) => open.value = value,
+            'onUpdate:open': (value: boolean) => {
+              open.value = value;
+            },
           }, () => [
             h(SelectTrigger, { 'data-testid': 'trigger', 'style': 'width: 200px; height: 36px; padding: 0 12px; text-align: left' }, () => h(SelectValue, { 'data-testid': 'value' })),
             h(SelectPortal, () => h(SelectContent, {
@@ -75,7 +79,9 @@ describe('given a Select whose content animates with CSS, in a real browser', ()
 
   const get = (id: string) => document.querySelector<HTMLElement>(`[data-testid="${id}"]`);
   const content = () => document.querySelector<HTMLElement>('.content');
-  const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  const wait = (ms: number) => new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 
   async function openSelect() {
     await userEvent.click(get('trigger')!);

@@ -22,6 +22,7 @@ const props = defineProps<ComboboxGroupProps>();
 const id = useId(undefined, 'akar-combobox-group');
 const rootContext = injectComboboxRootContext();
 
+// eslint-disable-next-line no-nested-ternary
 const isRender = computed(() => rootContext.ignoreFilter.value
   ? true
   : !rootContext.filterSearch.value
