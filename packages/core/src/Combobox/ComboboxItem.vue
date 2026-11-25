@@ -76,6 +76,10 @@ onMounted(() => {
 });
 onUnmounted(() => {
   rootContext.allItems.value.delete(id);
+  // Items come and go while their group stays, so the group must not keep their ids.
+  if (groupContext?.id) {
+    rootContext.allGroups.value.get(groupContext.id)?.delete(id);
+  }
 });
 </script>
 

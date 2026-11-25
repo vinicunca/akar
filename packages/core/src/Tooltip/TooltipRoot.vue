@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import { createContext, defineReactiveIds, useForwardExpose } from '@/shared';
+import { createAkarContext, defineReactiveIds, useForwardExpose } from '@/shared';
 
 export interface TooltipRootProps {
   /**
@@ -67,12 +67,12 @@ export interface TooltipContext {
 }
 
 export const [injectTooltipRootContext, provideTooltipRootContext]
-  = createContext<TooltipContext>('TooltipRoot');
+  = createAkarContext<TooltipContext>('TooltipRoot');
 </script>
 
 <script setup lang="ts">
 import { useTimeoutFn, useVModel } from '@vueuse/core';
-import { computed, ref, watch } from 'vue';
+import { computed, onDeactivated, ref, watch } from 'vue';
 import { PopperRoot } from '@/Popper';
 import { injectTooltipProviderContext } from './TooltipProvider.vue';
 import { TOOLTIP_OPEN } from './utils';
@@ -153,41 +153,39 @@ function handleDelayedOpen() {
   startTimer();
 }
 
-provideTooltipRootContext(
-  defineReactiveIds(
-    {
-      contentId: '',
-      open,
-      stateAttribute,
-      trigger,
-      onTriggerChange(el) {
-        trigger.value = el;
-      },
-      onTriggerEnter() {
-        if (providerContext.isOpenDelayed.value) {
-          handleDelayedOpen();
-        } else {
-          handleOpen();
-        }
-      },
-      onTriggerLeave() {
-        if (disableHoverableContent.value) {
-          handleClose();
-        } else {
-          // Clear the timer in case the pointer leaves the trigger before the tooltip is opened.
-          clearTimer();
-        }
-      },
-      onOpen: handleOpen,
-      onClose: handleClose,
-      disableHoverableContent,
-      disableClosingTrigger,
-      disabled: disableTooltip,
-      ignoreNonKeyboardFocus,
-    },
-    ['contentId'],
-  ),
-);
+// A pending open of a `KeepAlive` page that is left would fire on the page shown instead.
+onDeactivated(clearTimer);
+
+provideTooltipRootContext(defineReactiveIds({
+  contentId: '',
+  open,
+  stateAttribute,
+  trigger,
+  onTriggerChange(el) {
+    trigger.value = el;
+  },
+  onTriggerEnter() {
+    if (providerContext.isOpenDelayed.value) {
+      handleDelayedOpen();
+    } else {
+      handleOpen();
+    }
+  },
+  onTriggerLeave() {
+    if (disableHoverableContent.value) {
+      handleClose();
+    } else {
+      // Clear the timer in case the pointer leaves the trigger before the tooltip is opened.
+      clearTimer();
+    }
+  },
+  onOpen: handleOpen,
+  onClose: handleClose,
+  disableHoverableContent,
+  disableClosingTrigger,
+  disabled: disableTooltip,
+  ignoreNonKeyboardFocus,
+}, ['contentId']));
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Direction } from '@/shared/types';
-import { createContext, getActiveElement, useDirection, useSelectionBehavior, useTypeahead } from '@/shared';
-import { flatten } from './utils';
+import { createAkarContext, getActiveElement, useDirection, useSelectionBehavior, useTypeahead } from '@/shared';
+import { getDescendants } from './utils';
 
 export interface TreeRootProps<T = Record<string, any>, U extends Record<string, any> = Record<string, any>, M extends boolean = false> extends PrimitiveProps {
   /** The controlled value of the tree. Can be binded with `v-model`. */
@@ -42,8 +42,12 @@ export type TreeRootEmits<T = Record<string, any>, M extends boolean = false> = 
 interface TreeRootContext<T = Record<string, any>> {
   modelValue: Ref<T | Array<T>>;
   selectedKeys: Ref<Array<string>>;
+  /** The selected keys as a `Set`, so a lookup does not search every selected key */
+  selectedKeySet: Ref<Set<string>>;
   onSelect: (val: T) => void;
   expanded: Ref<Array<string>>;
+  /** The expanded keys as a `Set`, so a lookup does not search every expanded key */
+  expandedKeys: Ref<Set<string>>;
   onToggle: (val: T) => void;
   items: Ref<Array<T>>;
   expandedItems: Ref<Array<T>>;
@@ -75,7 +79,7 @@ export type FlattenedItem<T> = {
   };
 };
 
-export const [injectTreeRootContext, provideTreeRootContext] = createContext<TreeRootContext<any>>('TreeRoot');
+export const [injectTreeRootContext, provideTreeRootContext] = createAkarContext<TreeRootContext<any>>('TreeRoot');
 </script>
 
 <script setup lang="ts" generic="T extends Record<string, any>, U extends Record<string, any>, M extends boolean = false">
@@ -86,6 +90,7 @@ import { createEventHook, useVModel } from '@vueuse/core';
 import { computed, nextTick, ref, toRefs } from 'vue';
 import { Primitive } from '@/Primitive';
 import { RovingFocusGroup } from '@/RovingFocus';
+import { provideRovingFocusNoActiveItem } from '@/RovingFocus/RovingFocusGroup.vue';
 import { MAP_KEY_TO_FOCUS_INTENT } from '@/RovingFocus/utils';
 
 const props = withDefaults(defineProps<TreeRootProps<T, U, M>>(), {
@@ -140,11 +145,13 @@ const selectedKeys = computed(() => {
   }
 });
 
-function flattenItems(items: Array<T>, level: number = 1, parentItem?: T): Array<FlattenedItem<T>> {
+const selectedKeySet = computed(() => new Set(selectedKeys.value));
+
+function flattenItems(items: Array<T>, expandedKeys: Set<string>, level: number = 1, parentItem?: T): Array<FlattenedItem<T>> {
   return items.reduce((acc: Array<FlattenedItem<T>>, item: T, index: number) => {
     const key = props.getKey(item);
     const children = props.getChildren(item);
-    const isExpanded = expanded.value.includes(key);
+    const isExpanded = expandedKeys.has(key);
 
     const flattenedItem: FlattenedItem<T> = {
       _id: key,
@@ -163,17 +170,19 @@ function flattenItems(items: Array<T>, level: number = 1, parentItem?: T): Array
     acc.push(flattenedItem);
 
     if (children && isExpanded) {
-      acc.push(...flattenItems(children, level + 1, item));
+      acc.push(...flattenItems(children, expandedKeys, level + 1, item));
     }
 
     return acc;
   }, []);
 }
 
+// a Set, so the lookup for each item does not search every expanded key
+const expandedKeys = computed(() => new Set(expanded.value));
+
 const expandedItems = computed(() => {
   const items = props.items;
-  const expandedKeys = expanded.value.map((i) => i);
-  return flattenItems(items ?? []);
+  return flattenItems(items ?? [], expandedKeys.value);
 });
 
 /**
@@ -202,7 +211,7 @@ function handleKeydown(event: KeyboardEvent) {
 
   if (isVirtual.value) {
     virtualKeydownHook.trigger(event);
-  } else {
+  } else if (event.key.length === 1) {
     const collections = rovingFocusGroupRef.value?.getItems() ?? [];
     handleTypeaheadSearch(event.key, collections);
   }
@@ -247,6 +256,7 @@ function handleBubbleSelect(item: FlattenedItem<T>) {
 provideTreeRootContext({
   modelValue,
   selectedKeys,
+  selectedKeySet,
   onSelect: (val) => {
     const condition = (baseValue: U) => props.getKey(baseValue as any ?? {}) === props.getKey(val);
     const exist = props.multiple && Array.isArray(modelValue.value)
@@ -264,22 +274,23 @@ provideTreeRootContext({
     }
 
     if (props.propagateSelect && props.multiple && Array.isArray(modelValue.value)) {
-      const children = flatten<U, any>(props.getChildren(val) ?? []);
+      const children = getDescendants(val, props.getChildren);
 
       if (exist) {
         // remove all child
         modelValue.value = [...modelValue.value]
-          .filter((i) => !children.some((child) => props.getKey(i as any ?? {}) === props.getKey(child as any)));
+          .filter((i) => !children.some((child) => props.getKey(i as any ?? {}) === props.getKey(child)));
       } else {
         // select all child
         modelValue.value = [
           ...modelValue.value,
           ...children,
-        ];
+        ] as Array<U>;
       }
     }
   },
   expanded,
+  expandedKeys,
   onToggle(val) {
     const children = val
       ? props.getChildren(val)
@@ -310,6 +321,9 @@ provideTreeRootContext({
   virtualKeydownHook,
   handleMultipleReplace,
 });
+
+// Tree items are never active.
+provideRovingFocusNoActiveItem(() => true);
 </script>
 
 <template>

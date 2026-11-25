@@ -1,5 +1,5 @@
 <script lang="ts">
-import { createContext, handleAndDispatchCustomEvent, useForwardExpose, useId } from '@/shared';
+import { createAkarContext, handleAndDispatchCustomEvent, useForwardExpose, useId } from '@/shared';
 
 export interface ListboxItemProps<T = AcceptableValue> extends PrimitiveProps {
   /** The value given as data when submitted with a `name`. */
@@ -21,7 +21,7 @@ interface ListboxItemContext {
 }
 
 export const [injectListboxItemContext, provideListboxItemContext]
-  = createContext<ListboxItemContext>('ListboxItem');
+  = createAkarContext<ListboxItemContext>('ListboxItem');
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
@@ -96,6 +96,7 @@ provideListboxItemContext({
       role="option"
       :tabindex="rootContext.focusable.value ? isHighlighted ? '0' : '-1' : -1"
       :aria-selected="isSelected"
+      :aria-disabled="disabled || undefined"
       :as="as"
       :as-child="asChild"
       :disabled="disabled ? '' : undefined"

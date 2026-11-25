@@ -63,6 +63,31 @@ describe('ssr hydration', () => {
     expect(error.mock.calls.flat().join('\n')).not.toContain('Hydration completed but contains mismatches');
   });
 
+  it('makes the active trigger the tab stop in the server HTML, then hands it to the list', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const container = document.createElement('div');
+    container.innerHTML = await renderToString(createSSRApp(TabsHydrationFixture));
+    document.body.innerHTML = '';
+    document.body.append(container);
+
+    const tabindexes = () => [
+      container.querySelector('[role="tablist"]')?.getAttribute('tabindex'),
+      ...Array.from(container.querySelectorAll('[role="tab"]'), (tab) => tab.getAttribute('tabindex')),
+    ];
+    // before hydration the active trigger is the only stop
+    expect(tabindexes()).toEqual(['-1', '0', '-1']);
+
+    createSSRApp(TabsHydrationFixture).mount(container);
+    await nextTick();
+
+    // after mount the list is the stop again and forwards focus to the active trigger
+    expect(tabindexes()).toEqual(['0', '-1', '-1']);
+    expect(warn.mock.calls.flat().join('\n')).not.toContain('Hydration attribute mismatch');
+    expect(error.mock.calls.flat().join('\n')).not.toContain('Hydration completed but contains mismatches');
+  });
+
   // `usedIds` stands for whatever else consumed ids before the tabs: when the server
   // and the client disagree on it, every generated id differs between the two.
   function createTabsFixture(usedIds = 0) {
@@ -126,7 +151,7 @@ describe('ssr hydration', () => {
     };
 
     const server = await renderToString(createSSRApp(createTabsFixture()));
-    expect(server).toMatchInlineSnapshot('"<div dir="ltr" data-orientation="horizontal"><!--[--><div tabindex="-1" data-orientation="horizontal" dir="ltr" style="outline:none;" role="tablist" aria-orientation="horizontal"><!--[--><button data-akar-collection-item tabindex="-1" data-orientation="horizontal" data-active id="akar-tabs-v-0-trigger-account" role="tab" type="button" aria-selected="true" data-state="active"><!--[-->Account<!--]--></button><button data-akar-collection-item tabindex="-1" data-orientation="horizontal" id="akar-tabs-v-0-trigger-password" role="tab" type="button" aria-selected="false" data-state="inactive"><!--[-->Password<!--]--></button><!--]--></div><div id="akar-tabs-v-0-content-account" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-account" tabindex="0" style="animation-duration:0s;"><!--[-->Account content<!--]--></div><div id="akar-tabs-v-0-content-password" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-password" hidden tabindex="0" style=""><!--v-if--></div><!--]--></div>"');
+    expect(server).toMatchInlineSnapshot('"<div dir="ltr" data-orientation="horizontal"><!--[--><div tabindex="-1" data-orientation="horizontal" dir="ltr" style="outline:none;" role="tablist" aria-orientation="horizontal"><!--[--><button data-akar-collection-item tabindex="0" data-orientation="horizontal" data-active id="akar-tabs-v-0-trigger-account" role="tab" type="button" aria-selected="true" data-state="active"><!--[-->Account<!--]--></button><button data-akar-collection-item tabindex="-1" data-orientation="horizontal" id="akar-tabs-v-0-trigger-password" role="tab" type="button" aria-selected="false" data-state="inactive"><!--[-->Password<!--]--></button><!--]--></div><div id="akar-tabs-v-0-content-account" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-account" tabindex="0" style="animation-duration:0s;"><!--[-->Account content<!--]--></div><div id="akar-tabs-v-0-content-password" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-password" hidden tabindex="0" style=""><!--v-if--></div><!--]--></div>"');
 
     const container = document.createElement('div');
     container.innerHTML = server;
@@ -147,7 +172,7 @@ describe('ssr hydration', () => {
     const client = createApp(createTabsFixture());
     client.mount(clientContainer);
     await settled();
-    expect(clientContainer.innerHTML).toMatchInlineSnapshot('"<div dir="ltr" data-orientation="horizontal"><div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline: none;" role="tablist" aria-orientation="horizontal"><button data-akar-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" id="akar-tabs-v-0-trigger-account" role="tab" type="button" aria-selected="true" data-state="active" aria-controls="akar-tabs-v-0-content-account">Account</button><button data-akar-collection-item="" tabindex="-1" data-orientation="horizontal" id="akar-tabs-v-0-trigger-password" role="tab" type="button" aria-selected="false" data-state="inactive" aria-controls="akar-tabs-v-0-content-password">Password</button></div><div id="akar-tabs-v-0-content-account" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-account" tabindex="0" style="">Account content</div><div id="akar-tabs-v-0-content-password" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-password" hidden="" tabindex="0"><!--v-if--></div></div>"');
+    expect(clientContainer.innerHTML).toMatchInlineSnapshot('"<div dir="ltr" data-orientation="horizontal"><div tabindex="0" data-orientation="horizontal" dir="ltr" style="outline: medium;" role="tablist" aria-orientation="horizontal"><button data-akar-collection-item="" tabindex="-1" data-orientation="horizontal" data-active="" id="akar-tabs-v-0-trigger-account" role="tab" type="button" aria-selected="true" data-state="active" aria-controls="akar-tabs-v-0-content-account">Account</button><button data-akar-collection-item="" tabindex="-1" data-orientation="horizontal" id="akar-tabs-v-0-trigger-password" role="tab" type="button" aria-selected="false" data-state="inactive" aria-controls="akar-tabs-v-0-content-password">Password</button></div><div id="akar-tabs-v-0-content-account" role="tabpanel" data-state="active" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-account" tabindex="0" style="">Account content</div><div id="akar-tabs-v-0-content-password" role="tabpanel" data-state="inactive" data-orientation="horizontal" aria-labelledby="akar-tabs-v-0-trigger-password" hidden="" tabindex="0"><!--v-if--></div></div>"');
     client.unmount();
   });
 });

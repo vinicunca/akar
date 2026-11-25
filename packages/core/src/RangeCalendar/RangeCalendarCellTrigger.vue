@@ -10,7 +10,7 @@ import {
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
 import { isBetweenInclusive, toDate } from '@/date';
-import { focusPagination, focusWeekBoundary } from '@/shared';
+import { focusPagination, focusWeekBoundary, getCalendarCellTabindex } from '@/shared';
 
 export interface RangeCalendarCellTriggerProps extends PrimitiveProps {
   day: DateValue;
@@ -57,7 +57,7 @@ defineSlots<RangeCalendarCellTriggerSlot>();
 
 const rootContext = injectRangeCalendarRootContext();
 
-const { primitiveElement } = usePrimitiveElement();
+const { primitiveElement, currentElement } = usePrimitiveElement();
 
 const labelText = computed(() => rootContext.formatter.custom(toDate(props.day), {
   weekday: 'long',
@@ -334,7 +334,7 @@ function handleArrowKey(e: KeyboardEvent) {
     :data-today="isDateToday ? '' : undefined"
     :data-outside-view="isOutsideView ? '' : undefined"
     :data-focused="isFocusedDate ? '' : undefined"
-    :tabindex="isFocusedDate ? 0 : isOutsideView || isDisabled ? undefined : -1"
+    :tabindex="getCalendarCellTabindex(isFocusedDate, isOutsideView || isDisabled, props)"
     @click="handleClick"
     @focusin="handleFocus"
     @mouseenter="handleFocus"

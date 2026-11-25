@@ -9,7 +9,7 @@ import type { Direction } from '@/shared/types';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { compareYearMonth, isSameYearMonth } from '@/date';
 import { useMonthPicker } from '@/MonthPicker/useMonthPicker';
-import { createContext, useDirection, useId, useLocale } from '@/shared';
+import { createAkarContext, useDirection, useId, useLocale } from '@/shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '@/shared/date';
 import { useRangeMonthPickerState } from './useRangeMonthPicker';
 
@@ -106,7 +106,7 @@ export type MonthRangePickerRootEmits = {
 };
 
 export const [injectMonthRangePickerRootContext, provideMonthRangePickerRootContext]
-  = createContext<MonthRangePickerRootContext>('MonthRangePickerRoot');
+  = createAkarContext<MonthRangePickerRootContext>('MonthRangePickerRoot');
 </script>
 
 <script setup lang="ts">

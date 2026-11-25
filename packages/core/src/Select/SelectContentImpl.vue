@@ -8,7 +8,7 @@ import type { PopperContentProps } from '@/Popper';
 import type { AcceptableValue } from '@/shared/types';
 import { useCollection } from '@/Collection';
 import {
-  createContext,
+  createAkarContext,
   useContentId,
   useContentMounted,
   useFocusGuards,
@@ -86,7 +86,7 @@ export interface SelectContentImplProps extends PopperContentProps, DismissableL
 }
 
 export const [injectSelectContentContext, provideSelectContentContext]
-  = createContext<SelectContentContext>('SelectContent');
+  = createAkarContext<SelectContentContext>('SelectContent');
 </script>
 
 <script setup lang="ts">

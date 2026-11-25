@@ -2,7 +2,7 @@
 import type { RadioGroupRootProps } from '@/RadioGroup';
 import { reactiveOmit, useVModel } from '@vueuse/core';
 import { RadioGroupRoot } from '@/RadioGroup';
-import { createContext, useForwardExpose } from '@/shared';
+import { createAkarContext, useForwardExpose } from '@/shared';
 
 export interface RatingRootContext {
   modelValue: Ref<number>;
@@ -37,7 +37,7 @@ export type RatingRootEmits = {
 };
 
 export const [injectRatingRootContext, provideRatingRootContext]
-  = createContext<RatingRootContext>('RatingRoot');
+  = createAkarContext<RatingRootContext>('RatingRoot');
 </script>
 
 <script setup lang="ts">
@@ -113,7 +113,8 @@ provideRatingRootContext({
 
 <template>
   <RadioGroupRoot
-    v-bind="reactiveOmit(props, 'length', 'clearable', 'hoverable', 'step')"
+    v-bind="reactiveOmit(props, 'modelValue', 'defaultValue', 'length', 'clearable', 'hoverable', 'step')"
+    :model-value="modelValue ?? null"
     :disabled="disabled"
     @mouseleave="resetHoveredRating"
   >

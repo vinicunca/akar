@@ -3,7 +3,7 @@ import type { ComputedRef } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
 import { computed } from 'vue';
 import { Primitive } from '@/Primitive';
-import { createContext } from '@/shared';
+import { createAkarContext } from '@/shared';
 import { injectRatingRootContext } from './RatingRoot.vue';
 
 interface RatingItemContext {
@@ -16,7 +16,7 @@ export interface RatingItemProps extends PrimitiveProps {
 }
 
 export const [injectRatingItemContext, provideRatingItemContext]
-  = createContext<RatingItemContext>('RatingItem');
+  = createAkarContext<RatingItemContext>('RatingItem');
 </script>
 
 <script setup lang="ts">

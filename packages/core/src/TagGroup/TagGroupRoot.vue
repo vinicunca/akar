@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
 import type { AcceptableValue, Direction } from '@/shared/types';
 import { useVModel } from '@vueuse/core';
-import { createContext, getActiveElement, useDirection, useForwardExpose, useTypeahead } from '@/shared';
+import { createAkarContext, getActiveElement, useDirection, useForwardExpose, useTypeahead } from '@/shared';
 
 export type TagGroupSelectionMode = 'none' | 'single' | 'multiple';
 
@@ -69,7 +69,7 @@ interface TagGroupRootContext<T = AcceptableValue> {
 }
 
 export const [injectTagGroupRootContext, provideTagGroupRootContext]
-  = createContext<TagGroupRootContext>('TagGroupRoot');
+  = createAkarContext<TagGroupRootContext>('TagGroupRoot');
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
@@ -78,6 +78,7 @@ import { injectFieldRootContext } from '@/Field';
 import { compare, valueComparator } from '@/Listbox/utils';
 import { Primitive } from '@/Primitive';
 import { RovingFocusGroup } from '@/RovingFocus';
+import { provideRovingFocusNoActiveItem } from '@/RovingFocus/RovingFocusGroup.vue';
 
 const props = withDefaults(defineProps<TagGroupRootProps<T>>(), {
   selectionMode: 'none',
@@ -288,6 +289,9 @@ provideTagGroupRootContext({
   onFocusedItemUnmount,
   handleTypeahead,
 });
+
+// Tags are never active.
+provideRovingFocusNoActiveItem(() => true);
 </script>
 
 <template>

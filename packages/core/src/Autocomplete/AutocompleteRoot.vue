@@ -5,7 +5,7 @@ import type { Direction, GenericComponentInstance } from '@/shared/types';
 import { provideComboboxRootContext } from '@/Combobox/ComboboxRoot.vue';
 import { useComboboxContentPositioning } from '@/Combobox/useComboboxContentPositioning';
 import { usePrimitiveElement } from '@/Primitive';
-import { createContext, defineReactiveIds, useDirection, useFilter } from '@/shared';
+import { createAkarContext, defineReactiveIds, useDirection, useFilter } from '@/shared';
 
 export interface AutocompleteRootProps extends PrimitiveProps {
   /** The controlled value of the Autocomplete (the input text). Can be bound with `v-model`. */
@@ -63,7 +63,7 @@ export type AutocompleteRootContext = {
 };
 
 export const [injectAutocompleteRootContext, provideAutocompleteRootContext]
-  = createContext<AutocompleteRootContext>('AutocompleteRoot');
+  = createAkarContext<AutocompleteRootContext>('AutocompleteRoot');
 </script>
 
 <script setup lang="ts">
@@ -217,42 +217,40 @@ defineExpose({
 
 // Provide the Combobox context so all Combobox sub-components work inside Autocomplete
 provideComboboxRootContext(
-  defineReactiveIds(
-    {
-      modelValue: contextModelValue as any,
-      multiple: ref(false),
-      disabled,
-      open,
-      onOpenChange,
-      ...contentPositioning,
-      contentId: '',
-      isUserInputted,
-      isVirtual,
-      inputElement,
-      highlightedElement,
-      onInputElementChange: (val) => {
-        inputElement.value = val;
-      },
-      triggerElement,
-      onTriggerElementChange: (val) => {
-        triggerElement.value = val;
-      },
-      parentElement,
-      resetSearchTermOnSelect: ref(false),
-      onResetSearchTerm: resetSearchTerm.on,
-      allItems,
-      allGroups,
-      filterSearch,
-      filterState,
-      ignoreFilter,
-      openOnFocus,
-      openOnClick,
-      resetModelValueOnClear: ref(true),
-      getClearValue: () => null,
-      unmountOnHide: ref(true),
+  defineReactiveIds({
+    modelValue: contextModelValue as any,
+    multiple: ref(false),
+    disabled,
+    open,
+    onOpenChange,
+    ...contentPositioning,
+    contentId: '',
+    isUserInputted,
+    isVirtual,
+    inputElement,
+    highlightedElement,
+    onInputElementChange: (val) => {
+      inputElement.value = val;
     },
-    ['contentId'],
-  ),
+    focusInputOnOpen: ref(true),
+    triggerElement,
+    onTriggerElementChange: (val) => {
+      triggerElement.value = val;
+    },
+    parentElement,
+    resetSearchTermOnSelect: ref(false),
+    onResetSearchTerm: resetSearchTerm.on,
+    allItems,
+    allGroups,
+    filterSearch,
+    filterState,
+    ignoreFilter,
+    openOnFocus,
+    openOnClick,
+    resetModelValueOnClear: ref(true),
+    getClearValue: () => null,
+    unmountOnHide: ref(true),
+  }, ['contentId']),
 );
 
 // Provide autocomplete-specific context

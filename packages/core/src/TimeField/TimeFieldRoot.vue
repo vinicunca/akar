@@ -8,7 +8,7 @@ import type { Direction, FormFieldProps } from '@/shared/types';
 import { getLocalTimeZone, isEqualDay, Time, toCalendarDateTime, today } from '@internationalized/date';
 import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { isBefore } from '@/date';
-import { createContext, useDateFormatter, useDirection, useLocale } from '@/shared';
+import { createAkarContext, useDateFormatter, useDirection, useLocale } from '@/shared';
 import {
   createContent,
   getDefaultTime,
@@ -82,7 +82,7 @@ export type TimeFieldRootEmits = {
 };
 
 export const [injectTimeFieldRootContext, provideTimeFieldRootContext]
-  = createContext<TimeFieldRootContext>('TimeFieldRoot');
+  = createAkarContext<TimeFieldRootContext>('TimeFieldRoot');
 
 function convertValue(value: TimeValue, date: DateValue = today(getLocalTimeZone())) {
   if (value && 'day' in value) {
@@ -315,7 +315,6 @@ function handleKeydown(e: KeyboardEvent) {
   if (e.isComposing) {
     return;
   }
-
   if (!isSegmentNavigationKey(e.key)) {
     return;
   }

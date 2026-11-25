@@ -1,8 +1,9 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import type { AcceptableValue, Direction, FormFieldProps } from '@/shared/types';
+import { isNullish } from '@vinicunca/perkakas';
 import { useCollection } from '@/Collection';
-import { createContext, defineReactiveIds, useDirection, useFormControl } from '@/shared';
+import { createAkarContext, defineReactiveIds, useDirection, useFormControl } from '@/shared';
 import { compare, valueComparator } from './utils';
 
 export interface SelectRootProps<T = AcceptableValue> extends FormFieldProps {
@@ -59,13 +60,12 @@ export interface SelectRootContext<T> {
 }
 
 export const [injectSelectRootContext, provideSelectRootContext]
-  = createContext<SelectRootContext<AcceptableValue>>('SelectRoot');
+  = createAkarContext<SelectRootContext<AcceptableValue>>('SelectRoot');
 
 interface SelectOption { value: any; disabled?: boolean; textContent: string }
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
-import { isNullish } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs, watch } from 'vue';
 import { injectFieldRootContext } from '@/Field';
@@ -154,17 +154,28 @@ const dir = useDirection(propDir);
 
 const isFormControl = useFormControl(triggerElement);
 const optionsSet = ref<Set<SelectOption>>(new Set());
+const bubbleSelect = ref<{ selectElement?: HTMLElement }>();
 
 // The native `select` only associates the correct default value if the corresponding
 // `option` is rendered as a child **at the same time** as itself.
 // Because it might take a few renders for our items to gather the information to build
 // the native `option`(s), we generate a key on the `select` to make sure Vue re-builds it
-// each time the options change.
+// each time the options change. It also changes with `multiple`, as the two modes bind
+// the selection differently (`value` vs `option.selected`).
 const nativeSelectKey = computed(() => {
-  return Array.from(optionsSet.value)
+  return `${multiple.value ? 'multiple' : 'single'}:${Array.from(optionsSet.value)
     .map((option) => option.value)
-    .join(';');
+    .join(';')}`;
 });
+
+// Switching `multiple` rebuilds the native select (see `nativeSelectKey`), and the new one's
+// watcher starts at the new value. When the value changed in that same update, the form is
+// notified here, once the new select and its options are rendered.
+watch([multiple, modelValue], ([isMultiple, value], [wasMultiple, previousValue]) => {
+  if (isMultiple !== wasMultiple && value !== previousValue) {
+    bubbleSelect.value?.selectElement?.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+}, { flush: 'post' });
 
 function handleValueChange(value: T) {
   let nextValue: T | Array<T>;
@@ -197,53 +208,48 @@ function getOption(value: SelectOption['value']) {
     .find((option) => valueComparator(value, option.value, props.by));
 }
 
-provideSelectRootContext(
-  defineReactiveIds(
-    {
-      triggerElement,
-      onTriggerChange: (node) => {
-        triggerElement.value = node;
-      },
-      valueElement,
-      onValueElementChange: (node) => {
-        valueElement.value = node;
-      },
-      contentId: '',
-      modelValue,
-      // @ts-expect-error Missing infer for AcceptableValue
-      onValueChange: handleValueChange,
-      // @ts-expect-error Missing infer for AcceptableValue
-      by: props.by,
-      open,
-      multiple,
-      required,
-      onOpenChange: (value) => {
-        open.value = value;
-      },
-      dir,
-      triggerPointerDownPosRef,
-      disabled,
-      isEmptyModelValue,
+provideSelectRootContext(defineReactiveIds({
+  triggerElement,
+  onTriggerChange: (node) => {
+    triggerElement.value = node;
+  },
+  valueElement,
+  onValueElementChange: (node) => {
+    valueElement.value = node;
+  },
+  contentId: '',
+  modelValue,
+  // @ts-expect-error Missing infer for AcceptableValue
+  onValueChange: handleValueChange,
+  // @ts-expect-error Missing infer for AcceptableValue
+  by: props.by,
+  open,
+  multiple,
+  required,
+  onOpenChange: (value) => {
+    open.value = value;
+  },
+  dir,
+  triggerPointerDownPosRef,
+  disabled,
+  isEmptyModelValue,
 
-      optionsSet,
-      onOptionAdd: (option) => {
-        const existingOption = getOption(option.value);
-        if (existingOption) {
-          optionsSet.value.delete(existingOption);
-        }
+  optionsSet,
+  onOptionAdd: (option) => {
+    const existingOption = getOption(option.value);
+    if (existingOption) {
+      optionsSet.value.delete(existingOption);
+    }
 
-        optionsSet.value.add(option);
-      },
-      onOptionRemove: (option) => {
-        const existingOption = getOption(option.value);
-        if (existingOption) {
-          optionsSet.value.delete(existingOption);
-        }
-      },
-    },
-    ['contentId'],
-  ),
-);
+    optionsSet.value.add(option);
+  },
+  onOptionRemove: (option) => {
+    const existingOption = getOption(option.value);
+    if (existingOption) {
+      optionsSet.value.delete(existingOption);
+    }
+  },
+}, ['contentId']));
 </script>
 
 <template>
@@ -256,6 +262,7 @@ provideSelectRootContext(
     <BubbleSelect
       v-if="isFormControl && resolvedName"
       :key="nativeSelectKey"
+      ref="bubbleSelect"
       aria-hidden="true"
       tabindex="-1"
       :multiple="multiple"
@@ -268,11 +275,13 @@ provideSelectRootContext(
       <option
         v-if="isNullish(modelValue)"
         :value="nullableValue"
+        selected
       />
       <option
         v-for="option in Array.from(optionsSet)"
         :key="option.value ?? ''"
         v-bind="option"
+        :selected="multiple ? valueComparator(modelValue, option.value, by) : undefined"
       />
     </BubbleSelect>
   </PopperRoot>

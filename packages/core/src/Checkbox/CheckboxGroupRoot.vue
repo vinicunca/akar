@@ -3,9 +3,9 @@ import type { Ref } from 'vue';
 import type { RovingFocusGroupProps } from '@/RovingFocus';
 import type { AcceptableValue, FormFieldProps } from '@/shared/types';
 import { useVModel } from '@vueuse/core';
-import { computed, toRefs } from 'vue';
+import { computed, shallowReactive, toRefs } from 'vue';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
-import { createContext, useDirection, useFormControl } from '@/shared';
+import { createAkarContext, useDirection, useFormControl } from '@/shared';
 
 export interface CheckboxGroupRootProps<T = AcceptableValue> extends Pick<RovingFocusGroupProps, 'as' | 'asChild' | 'dir' | 'orientation' | 'loop'>, FormFieldProps {
   /** The value of the checkbox when it is initially rendered. Use when you do not need to control its value. */
@@ -22,6 +22,11 @@ export interface CheckboxGroupRootProps<T = AcceptableValue> extends Pick<Roving
    * about the limit. Style them with `[aria-disabled="true"]`.
    */
   max?: number | null;
+  /**
+   * Every value a parent checkbox (`CheckboxRoot` with `parent`) controls. The parent is
+   * checked when all of them are in the model, unchecked when none are, and indeterminate otherwise.
+   */
+  allValues?: Array<T>;
 }
 
 export type CheckboxGroupRootEmits<T = AcceptableValue> = {
@@ -29,19 +34,29 @@ export type CheckboxGroupRootEmits<T = AcceptableValue> = {
   'update:modelValue': [value: Array<T>];
 };
 
+interface CheckboxGroupItem {
+  value: () => AcceptableValue;
+  disabled: () => boolean;
+  id: () => string | undefined;
+}
+
 interface CheckboxGroupRootContext {
   modelValue: Ref<Array<AcceptableValue>>;
   rovingFocus: Ref<boolean>;
   disabled: Ref<boolean>;
   max: Ref<number | null | undefined>;
+  allValues: Ref<Array<AcceptableValue> | undefined>;
+  /** The mounted (non-parent) checkboxes, read by a parent checkbox. */
+  items: Set<CheckboxGroupItem>;
 }
 
 export const [injectCheckboxGroupRootContext, provideCheckboxGroupRootContext]
-  = createContext<CheckboxGroupRootContext>('CheckboxGroupRoot');
+  = createAkarContext<CheckboxGroupRootContext>('CheckboxGroupRoot');
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableValue = AcceptableValue">
 import { RovingFocusGroup } from '@/RovingFocus';
+import { provideRovingFocusNoActiveItem } from '@/RovingFocus/RovingFocusGroup.vue';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
 
 const props = withDefaults(defineProps<CheckboxGroupRootProps<T>>(), {
@@ -49,7 +64,7 @@ const props = withDefaults(defineProps<CheckboxGroupRootProps<T>>(), {
 });
 const emits = defineEmits<CheckboxGroupRootEmits<T>>();
 
-const { disabled, max, rovingFocus, dir: propDir } = toRefs(props);
+const { disabled, max, rovingFocus, allValues, dir: propDir } = toRefs(props);
 const dir = useDirection(propDir);
 
 const { primitiveElement, currentElement } = usePrimitiveElement();
@@ -75,7 +90,12 @@ provideCheckboxGroupRootContext({
   rovingFocus,
   disabled,
   max,
+  allValues,
+  items: shallowReactive(new Set()),
 });
+
+// Checkboxes are never active. Without roving focus there is no group to tell.
+provideRovingFocusNoActiveItem(() => rovingFocus.value);
 </script>
 
 <template>

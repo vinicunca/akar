@@ -5,7 +5,7 @@ import type { Direction, Orientation } from './utils';
 import type { PrimitiveProps } from '@/Primitive';
 import { isString } from '@vinicunca/perkakas';
 import { useCollection } from '@/Collection';
-import { createContext, useDirection, useForwardExpose, useId } from '@/shared';
+import { createAkarContext, useDirection, useForwardExpose, useId } from '@/shared';
 import { EVENT_ROOT_CONTENT_DISMISS } from './utils';
 
 export interface NavigationMenuRootProps extends PrimitiveProps {
@@ -89,7 +89,7 @@ export interface NavigationMenuContext {
 }
 
 export const [injectNavigationMenuContext, provideNavigationMenuContext]
-  = createContext<NavigationMenuContext>(['NavigationMenuRoot', 'NavigationMenuSub'], 'NavigationMenuContext');
+  = createAkarContext<NavigationMenuContext>(['NavigationMenuRoot', 'NavigationMenuSub'], 'NavigationMenuContext');
 </script>
 
 <script setup lang="ts">

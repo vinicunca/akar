@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
+import { disabledAttr, useComposing, useForwardExpose } from '@/shared';
 
 export interface TagsInputInputProps extends PrimitiveProps {
   /** The placeholder character to use for empty tags input. */
@@ -14,7 +15,6 @@ export interface TagsInputInputProps extends PrimitiveProps {
 <script setup lang="ts">
 import { nextTick, onMounted } from 'vue';
 import { Primitive } from '@/Primitive';
-import { useComposing, useForwardExpose } from '@/shared';
 import { injectTagsInputRootContext } from './TagsInputRoot.vue';
 
 const props = withDefaults(defineProps<TagsInputInputProps>(), {
@@ -23,9 +23,15 @@ const props = withDefaults(defineProps<TagsInputInputProps>(), {
 
 const context = injectTagsInputRootContext();
 const { forwardRef, currentElement } = useForwardExpose();
+let isBlurFromRejectedTab = false;
 
 function handleBlur(event: FocusEvent) {
   context.selectedElement.value = undefined;
+  const skipAdd = isBlurFromRejectedTab;
+  isBlurFromRejectedTab = false;
+  if (skipAdd) {
+    return;
+  }
 
   if (!context.addOnBlur.value) {
     return;
@@ -42,7 +48,8 @@ function handleBlur(event: FocusEvent) {
     return;
   }
 
-  if (!target.value) {
+  // A blank draft is not a tag.
+  if (!target.value.trim()) {
     return;
   }
 
@@ -83,8 +90,8 @@ async function handleCustomKeydown(event: KeyboardEvent, { preventImplicitSubmit
 
   const target = event.target as HTMLInputElement;
   // A form submits implicitly as soon as the `Enter` keydown dispatch finishes,
-  // so it has to be cancelled synchronously. An empty draft keeps submitting the form.
-  if (preventImplicitSubmit && target.value && !isPreventedByOthers) {
+  // so it has to be cancelled synchronously. An empty or blank draft keeps submitting the form.
+  if (preventImplicitSubmit && target.value.trim() && !isPreventedByOthers) {
     nativePreventDefault();
   }
 
@@ -93,14 +100,17 @@ async function handleCustomKeydown(event: KeyboardEvent, { preventImplicitSubmit
     return;
   }
 
-  if (!target.value) {
+  if (!target.value.trim()) {
     return;
   }
 
   const isAdded = context.onAddValue(target.value);
-  if (isAdded) {
-    target.value = '';
+  if (!isAdded) {
+    isBlurFromRejectedTab = event.key === 'Tab';
+    return;
   }
+
+  target.value = '';
 
   // Keep focus in the input after `Tab` adds a tag. A browser still honours this
   // from a microtask of the keydown dispatch; `Enter` was already cancelled above.
@@ -111,7 +121,7 @@ function handleInput(event: InputEvent) {
   if (isComposing.value) {
     return;
   }
-
+  isBlurFromRejectedTab = false;
   context.isInvalidInput.value = false;
   if (event.data === null) {
     return;
@@ -141,6 +151,9 @@ function handleInputKeydown(event: KeyboardEvent) {
   if (isComposing.value) {
     return;
   }
+  if (event.key !== 'Tab') {
+    isBlurFromRejectedTab = false;
+  }
   context.onInputKeydown(event);
 }
 
@@ -153,14 +166,17 @@ function handlePaste(event: ClipboardEvent) {
     }
 
     const value = clipboardData.getData('text');
-    if (context.delimiter.value) {
-      const splitValue = value.split(context.delimiter.value);
-      splitValue.forEach((v) => {
-        context.onAddValue(v);
-      });
-    } else {
-      context.onAddValue(value);
-    }
+    // Blank pieces (a trailing delimiter, a paste of only spaces) are not tags.
+    // Other pieces are added as pasted, like a typed draft.
+    const delimiter = context.delimiter.value;
+    const texts = (delimiter
+      ? value.split(delimiter)
+      : [value])
+      // A RegExp delimiter's unmatched capture group splits out `undefined`.
+      .filter((text): text is string => typeof text === 'string' && text.trim() !== '');
+    texts.forEach((text) => {
+      context.onAddValue(text);
+    });
   }
 }
 
@@ -194,7 +210,7 @@ onMounted(() => {
     :as-child="asChild"
     :maxlength="maxLength"
     :placeholder="placeholder"
-    :disabled="context.disabled.value"
+    :disabled="disabledAttr(context.disabled.value, props.as, props.asChild)"
     :data-invalid="context.isInvalidInput.value ? '' : undefined"
     @input="handleInput"
     @keydown.enter="handleEnter"

@@ -13,7 +13,7 @@ import {
   isBefore,
   isBeforeOrSame,
 } from '@/date';
-import { createContext, useDateFormatter, useDirection, useLocale } from '@/shared';
+import { createAkarContext, useDateFormatter, useDirection, useLocale } from '@/shared';
 import {
   createContent,
   getDefaultDate,
@@ -90,7 +90,7 @@ export type DateRangeFieldRootEmits = {
 };
 
 export const [injectDateRangeFieldRootContext, provideDateRangeFieldRootContext]
-  = createContext<DateRangeFieldRootContext>('DateRangeFieldRoot');
+  = createAkarContext<DateRangeFieldRootContext>('DateRangeFieldRoot');
 </script>
 
 <script setup lang="ts">

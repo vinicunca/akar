@@ -4,7 +4,7 @@ import type { GlobalToastManager } from './createToastManager';
 import type { ToastStore } from './useToastStore';
 import type { SwipeDirection } from './utils';
 import { useCollection } from '@/Collection';
-import { createContext } from '@/shared';
+import { createAkarContext } from '@/shared';
 
 type ToastProviderContext = {
   label: Ref<string>;
@@ -105,7 +105,7 @@ export interface ToastProviderProps {
 }
 
 export const [injectToastProviderContext, provideToastProviderContext]
-  = createContext<ToastProviderContext>('ToastProvider');
+  = createAkarContext<ToastProviderContext>('ToastProvider');
 </script>
 
 <script setup lang="ts">

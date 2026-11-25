@@ -1,4 +1,5 @@
 import type { VueWrapper } from '@vue/test-utils';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { afterEach, describe, expect, it } from 'vitest';
 import { cdp, userEvent } from 'vitest/browser';
@@ -354,5 +355,159 @@ describe('given a Select used with a real pointer, in a real browser', () => {
       expect(modelValue.value).toEqual(['banana']);
       expect(selects).toEqual(['banana']);
     });
+  });
+});
+
+const PLACEHOLDER = 'Pick a fruit';
+const FRUITS = ['Apple', 'Banana', 'Cherry'];
+
+function mountPlaceholderSelect(defaultValue?: string, position: 'popper' | 'item-aligned' = 'popper') {
+  document.body.innerHTML = '';
+  const Fixture = defineComponent({
+    setup() {
+      return () => h(SelectRoot, { defaultValue }, () => [
+        h(SelectTrigger, { 'data-testid': 'trigger' }, () => h(SelectValue, { placeholder: PLACEHOLDER })),
+        h(SelectPortal, null, () => h(SelectContent, { position }, () => h(SelectViewport, null, () => FRUITS.map((fruit) =>
+          h(SelectItem, { 'key': fruit, 'value': fruit, 'data-testid': `item-${fruit}` }, () => h(SelectItemText, null, () => fruit)),
+        )))),
+      ]);
+    },
+  });
+  mount(Fixture, { attachTo: document.body });
+  return {
+    trigger: () => document.querySelector<HTMLElement>('[data-testid="trigger"]')!,
+    item: (fruit: string) => document.querySelector<HTMLElement>(`[data-testid="item-${fruit}"]`)!,
+  };
+}
+
+function recordTriggerText(trigger: HTMLElement) {
+  const seen: Array<string> = [];
+  const push = () => {
+    const text = trigger.textContent?.trim() ?? '';
+    if (seen.at(-1) !== text) {
+      seen.push(text);
+    }
+  };
+  push();
+
+  const observer = new MutationObserver(push);
+  observer.observe(trigger, { childList: true, subtree: true, characterData: true });
+
+  let frame = requestAnimationFrame(function tick() {
+    push();
+    frame = requestAnimationFrame(tick);
+  });
+
+  return {
+    seen,
+    stop: () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    },
+  };
+}
+
+const settleTriggerText = () => sleep(100);
+
+describe.each(['popper', 'item-aligned'] as const)('given Select with a placeholder and position=%s, in a real browser', (position) => {
+  it('never shows the placeholder while the first selection closes the content', async () => {
+    const { trigger, item } = mountPlaceholderSelect(undefined, position);
+    await userEvent.click(trigger());
+    await expect.poll(() => item('Banana')).not.toBeNull();
+
+    const recorder = recordTriggerText(trigger());
+    await userEvent.click(item('Banana'));
+    await expect.poll(() => document.querySelector('[role="listbox"]')).toBeNull();
+    await settleTriggerText();
+    recorder.stop();
+
+    expect(recorder.seen).toEqual([PLACEHOLDER, 'Banana']);
+  });
+
+  it('never shows the placeholder while switching from one option to another', async () => {
+    const { trigger, item } = mountPlaceholderSelect('Apple', position);
+    await userEvent.click(trigger());
+    await expect.poll(() => item('Cherry')).not.toBeNull();
+
+    const recorder = recordTriggerText(trigger());
+    await userEvent.click(item('Cherry'));
+    await expect.poll(() => document.querySelector('[role="listbox"]')).toBeNull();
+    await settleTriggerText();
+    recorder.stop();
+
+    expect(recorder.seen).toEqual(['Apple', 'Cherry']);
+  });
+});
+
+describe('given a multiple, required Select in a form, in a real browser', () => {
+  let wrapper: VueWrapper | undefined;
+
+  afterEach(() => {
+    wrapper?.unmount();
+    wrapper = undefined;
+    document.body.innerHTML = '';
+  });
+
+  function mountMultipleRequired(initial: Array<string>) {
+    const modelValue = ref(initial);
+    const submitted: Array<Array<string>> = [];
+    wrapper = mount(defineComponent({
+      setup() {
+        return () => h('form', {
+          onSubmit: (event: SubmitEvent) => {
+            event.preventDefault();
+            submitted.push(new FormData(event.target as HTMLFormElement).getAll('fruit') as Array<string>);
+          },
+        }, [
+          h(SelectRoot, {
+            'name': 'fruit',
+            'multiple': true,
+            'required': true,
+            'modelValue': modelValue.value,
+            'onUpdate:modelValue': (value: Array<string>) => {
+              modelValue.value = value;
+            },
+          }, () => [
+            h(SelectTrigger, { 'data-testid': 'trigger' }, () => h(SelectValue)),
+            h(SelectPortal, () => h(SelectContent, { position: 'popper' }, () =>
+              h(SelectViewport, () => ['apple', 'banana', 'cherry'].map((value) =>
+                h(SelectItem, { value, 'data-testid': value }, () => h(SelectItemText, () => value)),
+              )))),
+          ]),
+          h('button', { 'type': 'submit', 'data-testid': 'submit' }, 'Submit'),
+        ]);
+      },
+    }), { attachTo: document.body });
+    return { modelValue, submitted };
+  }
+
+  const get = (id: string) => document.querySelector<HTMLElement>(`[data-testid="${id}"]`)!;
+  const optionsRendered = () => expect.poll(() => document.querySelectorAll('select option').length).toBe(3);
+
+  it('submits every value picked in the menu', async () => {
+    const { modelValue, submitted } = mountMultipleRequired([]);
+
+    await userEvent.click(get('trigger'));
+    await expect.poll(() => document.activeElement?.closest('[role=listbox]')).toBeTruthy();
+    await userEvent.click(get('apple'));
+    await userEvent.click(get('cherry'));
+    await expect.poll(() => modelValue.value).toEqual(['apple', 'cherry']);
+    await userEvent.keyboard('{Escape}');
+    await expect.poll(() => document.querySelector('[role=listbox]')).toBeNull();
+
+    await userEvent.click(get('submit'));
+    await expect.poll(() => submitted).toEqual([
+      ['apple', 'cherry'],
+    ]);
+  });
+
+  it('blocks the submit while nothing is selected', async () => {
+    const { submitted } = mountMultipleRequired([]);
+    await optionsRendered();
+
+    await userEvent.click(get('submit'));
+    await sleep(100);
+    expect(submitted).toEqual([]);
+    expect(document.querySelector('select')!.validity.valueMissing).toBe(true);
   });
 });

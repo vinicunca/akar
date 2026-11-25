@@ -21,6 +21,33 @@ window.HTMLElement.prototype.hasPointerCapture = vi.fn().mockImplementation((id)
 window.HTMLElement.prototype.releasePointerCapture = vi.fn();
 window.HTMLElement.prototype.setPointerCapture = vi.fn();
 
+it.each([
+  { min: 0.5, step: 1, next: 1.5 },
+  { min: -0.025, step: 0.1, next: 0.075 },
+  { min: 1.5e-7, step: 1e-6, next: 1.15e-6 },
+  { min: 0, step: 2.5e-7, next: 2.5e-7 },
+  { min: 0, step: Number.MIN_VALUE, next: Number.MIN_VALUE },
+])('keeps steps relative to min=$min with step=$step', async ({ min, step, next }) => {
+  const wrapper = mount(SliderRoot, {
+    props: {
+      min,
+      step,
+      defaultValue: [min],
+    },
+    slots: {
+      default: () => h(SliderThumb),
+    },
+  });
+  const thumb = wrapper.get('[role="slider"]');
+  await thumb.trigger('keydown', { key: 'ArrowRight' });
+  expect(wrapper.emitted('valueCommit')).toEqual([
+    [
+      [next],
+    ],
+  ]);
+  expect(thumb.attributes('aria-valuenow')).toBe(String(next));
+});
+
 describe('given default Slider', () => {
   let wrapper: VueWrapper<InstanceType<typeof Slider>>;
 
@@ -44,6 +71,10 @@ describe('given default Slider', () => {
     expect(wrapper.html()).toContain('aria-valuenow="50"');
   });
 
+  it('should not mark the thumb as disabled', () => {
+    expect(wrapper.find('[role="slider"]').attributes('aria-disabled')).toBeUndefined();
+  });
+
   describe('when disabled', () => {
     beforeEach(async () => {
       await wrapper.setProps({ disabled: true });
@@ -52,6 +83,7 @@ describe('given default Slider', () => {
     it('should disable the thumb', () => {
       const thumb = wrapper.find('[role="slider"]');
       expect(thumb.attributes('data-disabled')).toBe('');
+      expect(thumb.attributes('aria-disabled')).toBe('true');
       expect(thumb.attributes('aria-valuemin')).toBe('0');
       expect(thumb.attributes('aria-valuemax')).toBe('100');
       expect(thumb.attributes('aria-valuenow')).toBe('50');
@@ -624,6 +656,72 @@ describe('given a range slider whose thumbs change', () => {
 
       expect(value.value).toEqual([10, 80]);
       expect(document.activeElement).toBe(wrapper.find('[data-key="a"]').element);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+});
+
+describe('given a range slider whose thumb is reinserted before the focused one', () => {
+  it('should keep stepping the focused thumb with the keyboard', async () => {
+    const thumbs = ref(['a', 'b']);
+    const value = ref([20, 80]);
+    const wrapper = mountRangeSlider(thumbs, value);
+    try {
+      await nextTick();
+      await wrapper.find('[data-key="b"]').trigger('focus');
+      thumbs.value = ['b'];
+      value.value = [80];
+      await nextTick();
+      thumbs.value = ['a', 'b'];
+      value.value = [20, 80];
+      await nextTick();
+
+      await wrapper.find('[data-key="b"]').trigger('keydown', { key: 'ArrowRight' });
+
+      expect(value.value).toEqual([20, 81]);
+    } finally {
+      wrapper.unmount();
+    }
+  });
+});
+
+describe('given a range slider with an asChild thumb that renders no element', () => {
+  it('should register the other thumbs', async () => {
+    const value = ref([20, 80]);
+    const errors: Array<unknown> = [];
+    const wrapper = mount(defineComponent(() => () => h(
+      SliderRoot,
+      {
+        'modelValue': value.value,
+        'onUpdate:modelValue': (v: Array<number> | undefined) => {
+          value.value = v!;
+        },
+      },
+      () => [
+        h(SliderTrack),
+        h(SliderThumb, { 'data-key': 'a' }),
+        h(SliderThumb, { asChild: true }, () => null),
+        h(SliderThumb, { 'data-key': 'b' }),
+      ],
+    )), {
+      attachTo: document.body,
+      global: {
+        config: {
+          errorHandler: (error) => errors.push(error),
+        },
+      },
+    });
+    try {
+      await nextTick();
+      const sliderImpl = wrapper.find('[data-slider-impl]').element;
+      vi.spyOn(sliderImpl, 'getBoundingClientRect').mockReturnValue(new DOMRect(0, 0, 100, 20));
+
+      await fireEvent.pointerDown(sliderImpl, { clientX: 90, clientY: 10, pointerId: 1 });
+
+      expect(errors).toEqual([]);
+      expect(value.value).toEqual([20, 90]);
+      expect(document.activeElement).toBe(wrapper.find('[data-key="b"]').element);
     } finally {
       wrapper.unmount();
     }

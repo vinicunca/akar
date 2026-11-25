@@ -10,7 +10,7 @@ export interface ColorFieldInputProps extends PrimitiveProps {}
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, ref } from 'vue';
 import { Primitive } from '@/Primitive';
-import { useComposing } from '@/shared';
+import { disabledAttr, useComposing } from '@/shared';
 import { injectColorFieldRootContext } from './ColorFieldRoot.vue';
 
 const props = withDefaults(defineProps<ColorFieldInputProps>(), {
@@ -135,7 +135,7 @@ function handleBeforeInput(event: InputEvent) {
     :inputmode="inputMode"
     :value="rootContext.inputValue.value"
     :placeholder="rootContext.placeholder.value"
-    :disabled="rootContext.disabled.value"
+    :disabled="disabledAttr(rootContext.disabled.value, props.as, props.asChild)"
     :readonly="rootContext.readonly.value"
     :data-disabled="rootContext.disabled.value ? '' : undefined"
     :data-readonly="rootContext.readonly.value ? '' : undefined"

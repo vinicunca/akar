@@ -4,7 +4,7 @@ import type { PrimitiveProps } from '@/Primitive';
 import { clamp } from '@vinicunca/perkakas';
 import { useResizeObserver } from '@vueuse/core';
 import { useCollection } from '@/Collection';
-import { createContext, useForwardExpose } from '@/shared';
+import { createAkarContext, useForwardExpose } from '@/shared';
 
 interface SelectItemAlignedPositionContext {
   contentWrapper?: Ref<HTMLElement | undefined>;
@@ -15,7 +15,7 @@ interface SelectItemAlignedPositionContext {
 export interface SelectItemAlignedPositionProps extends PrimitiveProps {}
 
 export const [injectSelectItemAlignedPositionContext, provideSelectItemAlignedPositionContext]
-  = createContext<SelectItemAlignedPositionContext>('SelectItemAlignedPosition');
+  = createAkarContext<SelectItemAlignedPositionContext>('SelectItemAlignedPosition');
 </script>
 
 <script setup lang="ts">

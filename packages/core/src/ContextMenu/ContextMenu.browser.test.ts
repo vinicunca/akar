@@ -1,6 +1,7 @@
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { describe, expect, it, vi } from 'vitest';
-import { userEvent } from 'vitest/browser';
+import { cdp, userEvent } from 'vitest/browser';
 import { defineComponent, h } from 'vue';
 import { ContextMenuContent, ContextMenuItem, ContextMenuPortal, ContextMenuRoot, ContextMenuTrigger } from '.';
 import { DialogContent, DialogPortal, DialogRoot, DialogTitle } from '../Dialog';
@@ -63,9 +64,7 @@ describe('contextMenu trigger pointer-events, in a real browser', () => {
       position: { x: 150, y: 40 },
       force: true,
     });
-    await new Promise((r) => {
-      setTimeout(r, 100);
-    });
+    await sleep(100);
     expect(onOpen.mock.calls).toEqual([]);
   });
 
@@ -83,9 +82,44 @@ describe('contextMenu trigger pointer-events, in a real browser', () => {
     await expect.poll(() => document.body.style.pointerEvents).toBe('none');
 
     await userEvent.click(get('trigger-d')!, { button: 'right', force: true });
-    await new Promise((r) => {
-      setTimeout(r, 100);
-    });
+    await sleep(100);
     expect(onOpen).not.toHaveBeenCalled();
+  });
+});
+
+// https://github.com/unovue/reka-ui/issues/1844
+describe('nested contextMenu triggers, in a real browser', () => {
+  it('a long press on the inner trigger opens only the inner menu', async () => {
+    const onOuterOpen = vi.fn();
+    mount(defineComponent({
+      setup: () => () => h(ContextMenuRoot, { 'onUpdate:open': onOuterOpen }, () => [
+        h(ContextMenuTrigger, {
+          'data-testid': 'trigger-outer',
+          'style': 'display: block; width: 300px; padding: 40px; background: #ddd;',
+        }, () => menu('inner')),
+        h(ContextMenuPortal, null, () => h(ContextMenuContent, { 'data-testid': 'content-outer' }, () => h(ContextMenuItem, null, () => 'item outer'))),
+      ]),
+    }), { attachTo: document.body });
+
+    // CDP input uses top-level viewport coordinates; the test runs inside an iframe.
+    const rect = get('trigger-inner')!.getBoundingClientRect();
+    const frame = window.frameElement as HTMLElement;
+    const frameRect = frame.getBoundingClientRect();
+    const scale = frameRect.width / frame.offsetWidth;
+    const point = {
+      x: Math.round(frameRect.left + (rect.left + rect.width / 2) * scale),
+      y: Math.round(frameRect.top + (rect.top + rect.height / 2) * scale),
+    };
+    const send = (method: string, params: Record<string, unknown>) => (cdp() as any).send(method, params);
+    await send('Input.dispatchTouchEvent', {
+      type: 'touchStart',
+      touchPoints: [point],
+    });
+    await sleep(1000);
+    await send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+
+    await expect.poll(() => get('content-inner')).not.toBeNull();
+    expect(get('content-outer')).toBeNull();
+    expect(onOuterOpen).not.toHaveBeenCalled();
   });
 });

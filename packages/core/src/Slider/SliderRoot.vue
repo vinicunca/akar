@@ -2,7 +2,9 @@
 import type { ComputedRef, Ref } from 'vue';
 import type { DataOrientation, Direction, FormFieldProps } from '../shared/types';
 import type { PrimitiveProps } from '@/Primitive';
-import { createContext, useDirection, useFormControl, useForwardExpose } from '@/shared';
+import { clamp } from '@vinicunca/perkakas';
+import { useCollection } from '@/Collection';
+import { createAkarContext, getDecimalCount, useDirection, useFormControl, useForwardExpose } from '@/shared';
 
 type ThumbAlignment = 'contain' | 'overflow';
 
@@ -62,18 +64,16 @@ export interface SliderRootContext {
 }
 
 export const [injectSliderRootContext, provideSliderRootContext]
-  = createContext<SliderRootContext>('SliderRoot');
+  = createAkarContext<SliderRootContext>('SliderRoot');
 </script>
 
 <script setup lang="ts">
-import { clamp, isIncludedIn } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRaw, toRefs } from 'vue';
-import { useCollection } from '@/Collection';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
 import SliderHorizontal from './SliderHorizontal.vue';
 import SliderVertical from './SliderVertical.vue';
-import { ARROW_KEYS, getClosestValueIndex, getDecimalCount, getNextSortedValues, hasMinStepsBetweenValues, PAGE_KEYS, roundValue } from './utils';
+import { ARROW_KEYS, getClosestValueIndex, getNextSortedValues, hasMinStepsBetweenValues, PAGE_KEYS, roundValue } from './utils';
 
 defineOptions({
   inheritAttrs: false,
@@ -138,7 +138,7 @@ function handleSlideEnd() {
 }
 
 function updateValues(value: number, atIndex: number, { commit } = { commit: false }) {
-  const decimalCount = getDecimalCount(step.value);
+  const decimalCount = Math.max(getDecimalCount(min.value), getDecimalCount(step.value));
   const snapToStep = roundValue(Math.round((value - min.value) / step.value) * step.value + min.value, decimalCount);
   const nextValue = clamp(snapToStep, { min: min.value, max: max.value });
 
@@ -196,8 +196,8 @@ provideSliderRootContext({
       @end-key-down="!disabled && updateValues(max, currentModelValue.length - 1, { commit: true })"
       @step-key-down="(event, direction) => {
         if (!disabled) {
-          const isPageKey = isIncludedIn(event.key, PAGE_KEYS);
-          const isSkipKey = isPageKey || (event.shiftKey && isIncludedIn(event.key, ARROW_KEYS));
+          const isPageKey = PAGE_KEYS.includes(event.key);
+          const isSkipKey = isPageKey || (event.shiftKey && ARROW_KEYS.includes(event.key));
           const multiplier = isSkipKey ? 10 : 1;
           const atIndex = valueIndexToChangeRef;
           const value = currentModelValue[atIndex];

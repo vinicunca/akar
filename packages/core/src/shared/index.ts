@@ -1,7 +1,8 @@
 export * from './arrays';
 export * from './clamp';
-export { createContext } from './createContext';
+export { createAkarContext, createContext } from './createContext';
 export { type DateRange, type DateStep, type DateValue, type SegmentPart, type TimeRange, type TimeValue } from './date';
+export { ariaDisabledAttr, disabledAttr, isPlainTag } from './disabledAttr';
 export { getActiveElement } from './getActiveElement';
 export { handleAndDispatchCustomEvent } from './handleAndDispatchCustomEvent';
 export { isElement } from './isElement';
@@ -12,7 +13,7 @@ export { onFocusOutside } from './onFocusOutside';
 export { renderSlotFragments } from './renderSlotFragments';
 export { useArrowNavigation } from './useArrowNavigation';
 export { useBodyScrollLock } from './useBodyScrollLock';
-export { clampTargetDate, focusPagination, focusWeekBoundary, getTargetMonthDay, MAX_FOCUS_RETRIES } from './useCalendarKeyboardNavigation';
+export { clampTargetDate, focusPagination, focusWeekBoundary, getCalendarCellTabindex, getTargetMonthDay, MAX_FOCUS_RETRIES } from './useCalendarKeyboardNavigation';
 export { useComposing } from './useComposing';
 export { type Formatter, useDateFormatter } from './useDateFormatter';
 export { useDirection } from './useDirection';

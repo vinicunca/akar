@@ -7,6 +7,10 @@ const defaultValue = {
   start: new Time(10, 0),
   end: new Time(12, 0),
 };
+const overnightValue = {
+  start: new Time(23, 0),
+  end: new Time(7, 0),
+};
 const minValue = new Time(9, 0);
 const maxValue = new Time(18, 0);
 
@@ -38,6 +42,17 @@ const isDisabledTime: Matcher = (time) => {
       <TimeRangeField
         :default-value="defaultValue"
         :is-time-disabled="isDisabledTime"
+      />
+    </Variant>
+
+    <Variant title="Overnight Range">
+      <TimeRangeField :default-value="overnightValue" />
+    </Variant>
+
+    <Variant title="Overnight Range (allowWrap)">
+      <TimeRangeField
+        allow-wrap
+        :default-value="overnightValue"
       />
     </Variant>
   </Story>

@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import { createContext, defineReactiveIds, useForwardExpose, useId } from '@/shared';
+import { createAkarContext, defineReactiveIds, useForwardExpose, useId } from '@/shared';
 
 export interface MenubarMenuProps {
   /**
@@ -20,7 +20,7 @@ type MenubarMenuContext = {
 };
 
 export const [injectMenubarMenuContext, provideMenubarMenuContext]
-  = createContext<MenubarMenuContext>('MenubarMenu');
+  = createAkarContext<MenubarMenuContext>('MenubarMenu');
 </script>
 
 <script setup lang="ts">
@@ -64,6 +64,7 @@ provideMenubarMenuContext(
     :open="open"
     :modal="false"
     :dir="rootContext.dir.value"
+    :unmount-on-hide="rootContext.unmountOnHide.value"
     @update:open="
       (value) => {
         // Menu only calls `@update:open` when dismissing so we

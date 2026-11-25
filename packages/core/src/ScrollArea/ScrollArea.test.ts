@@ -1,10 +1,11 @@
 import type { VueWrapper } from '@vue/test-utils';
 import type { PropType } from 'vue';
 import { sleep } from '@vinicunca/perkakas';
+import { renderToString } from '@vue/server-renderer';
 import { mount } from '@vue/test-utils';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
-import { defineComponent, h } from 'vue';
+import { defineComponent, h, nextTick } from 'vue';
 import ScrollAreaCorner from './ScrollAreaCorner.vue';
 import ScrollAreaRoot from './ScrollAreaRoot.vue';
 import ScrollAreaScrollbar from './ScrollAreaScrollbar.vue';
@@ -12,6 +13,62 @@ import ScrollAreaThumb from './ScrollAreaThumb.vue';
 import ScrollAreaViewport from './ScrollAreaViewport.vue';
 import ScrollAreaVirtualizer from './ScrollAreaVirtualizer.vue';
 import ScrollArea from './story/_ScrollArea.vue';
+
+/** Fires the callback on observe so the scrollbar measures its sizes (jsdom has no ResizeObserver). */
+class ImmediateResizeObserver {
+  private cb: ResizeObserverCallback;
+  constructor(cb: ResizeObserverCallback) {
+    this.cb = cb;
+  }
+
+  observe(target: Element) {
+    this.cb([
+      { target } as ResizeObserverEntry,
+    ], this as unknown as ResizeObserver);
+  }
+
+  unobserve() {}
+  disconnect() {}
+}
+
+describe('given a ScrollAreaViewport', () => {
+  it('renders a camelCase tabIndex only once during SSR', async () => {
+    const html = await renderToString(h(ScrollAreaRoot, null, () => h(ScrollAreaViewport, { tabIndex: -1 })));
+    expect(html.match(/\btabindex="[^"]*"/g)).toEqual(['tabindex="-1"']);
+  });
+
+  it.each([
+    { attrs: {}, expected: '0' },
+    {
+      attrs: { tabindex: '-1' },
+      expected: '-1',
+    },
+    {
+      attrs: { tabindex: null },
+      expected: undefined,
+    },
+  ])('renders $expected for viewport attributes $attrs', ({ attrs, expected }) => {
+    const wrapper = mount(ScrollAreaRoot, {
+      slots: {
+        default: () => h(ScrollAreaViewport, attrs),
+      },
+    });
+
+    expect(wrapper.get('[data-akar-scroll-area-viewport]').attributes('tabindex')).toBe(expected);
+    wrapper.unmount();
+  });
+
+  it('keeps tabindex after the other viewport attributes', () => {
+    const wrapper = mount(ScrollAreaRoot, {
+      slots: {
+        default: () => h(ScrollAreaViewport, { 'class': 'viewport', 'aria-label': 'list' }),
+      },
+    });
+
+    expect(wrapper.get('[data-akar-scroll-area-viewport]').element.getAttributeNames().at(-1)).toBe('tabindex');
+    wrapper.unmount();
+  });
+});
 
 describe('given a virtualized ScrollArea', () => {
   const options = Array.from({ length: 100 }, (_, index) => `Item ${index}`);
@@ -352,6 +409,34 @@ describe('given prop:type="always" ScrollArea', () => {
   });
 });
 
+describe('given a visible scrollbar', () => {
+  // A non-passive wheel listener on the document makes WebKit wait for the main thread
+  // before scrolling anything on the page, so the scrollbar listens on itself.
+  it('listens for wheel events on the scrollbar, not on the document', async () => {
+    const documentListener = vi.spyOn(document, 'addEventListener');
+    const elementListener = vi.spyOn(HTMLElement.prototype, 'addEventListener');
+    const wrapper = mount(ScrollArea, {
+      attachTo: document.body,
+      props: { type: 'always' },
+    });
+    await nextTick();
+
+    expect(documentListener.mock.calls.filter(([type]) => type === 'wheel')).toEqual([]);
+    const scrollbars = Array.from(wrapper.element.querySelectorAll('[data-scrollbarimpl]'));
+    const wheelOnScrollbar = elementListener.mock.contexts
+      .map((context, index) => [context, elementListener.mock.calls[index]] as const)
+      .filter(([context, [type]]) => type === 'wheel' && scrollbars.includes(context as Element));
+    expect(wheelOnScrollbar.length).toBeGreaterThan(0);
+    for (const [, [, , options]] of wheelOnScrollbar) {
+      expect(options).toMatchObject({ passive: false });
+    }
+
+    wrapper.unmount();
+    documentListener.mockRestore();
+    elementListener.mockRestore();
+  });
+});
+
 describe('given prop:type="scroll" ScrollArea', () => {
   let wrapper: VueWrapper<InstanceType<typeof ScrollArea>>;
 
@@ -415,21 +500,7 @@ describe('given prop:type="hover" ScrollArea with both scrollbars and a corner',
 
   beforeEach(() => {
     originalResizeObserver = globalThis.ResizeObserver;
-    globalThis.ResizeObserver = class {
-      private cb: ResizeObserverCallback;
-      constructor(cb: ResizeObserverCallback) {
-        this.cb = cb;
-      }
-
-      observe(target: Element) {
-        this.cb([
-          { target } as ResizeObserverEntry,
-        ], this as unknown as ResizeObserver);
-      }
-
-      unobserve() {}
-      disconnect() {}
-    };
+    globalThis.ResizeObserver = ImmediateResizeObserver;
 
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 10 });
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 10 });
@@ -470,19 +541,7 @@ describe('given prop:type="always" ScrollArea thumb state', () => {
 
   beforeEach(() => {
     originalResizeObserver = globalThis.ResizeObserver;
-    // Fire the callback on observe so the scrollbar measures its sizes (jsdom has no ResizeObserver).
-    globalThis.ResizeObserver = class {
-      constructor(private cb: ResizeObserverCallback) {}
-      // eslint-disable-next-line sonarjs/no-identical-functions
-      observe(target: Element) {
-        this.cb([
-          { target } as ResizeObserverEntry,
-        ], this as unknown as ResizeObserver);
-      }
-
-      unobserve() {}
-      disconnect() {}
-    };
+    globalThis.ResizeObserver = ImmediateResizeObserver;
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 500 });
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 500 });
   });

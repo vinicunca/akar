@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Ref } from 'vue';
+import type { ComponentPublicInstance, Ref } from 'vue';
 import type {
   GraceIntent,
   Side,
@@ -13,7 +13,7 @@ import type { PopperContentProps } from '@/Popper';
 import type { RovingFocusGroupEmits } from '@/RovingFocus';
 
 import {
-  createContext,
+  createAkarContext,
   getActiveElement,
   useArrowNavigation,
   useContentMounted,
@@ -39,7 +39,7 @@ export interface MenuContentContext {
 }
 
 export const [injectMenuContentContext, provideMenuContentContext]
-  = createContext<MenuContentContext>('MenuContent');
+  = createAkarContext<MenuContentContext>('MenuContent');
 
 export interface MenuContentImplPrivateProps {
   /**
@@ -85,6 +85,13 @@ export interface MenuContentImplProps
    * @defaultValue false
    */
   loop?: boolean;
+  /**
+   * When `true`, Space pressed while a typeahead search is in progress is added to the search
+   * instead of selecting the focused item, so that labels with several words, like "New Private Window",
+   * can be reached by typing. With no search in progress, Space still selects the focused item.
+   * @defaultValue false
+   */
+  spaceExtendsTypeahead?: boolean;
 }
 
 export interface MenuRootContentTypeProps
@@ -92,7 +99,9 @@ export interface MenuRootContentTypeProps
 </script>
 
 <script setup lang="ts">
+import { unrefElement } from '@vueuse/core';
 import {
+  computed,
   onBeforeUnmount,
   ref,
   shallowRef,
@@ -116,8 +125,18 @@ import {
   LAST_KEYS,
 } from './utils';
 
-const props = withDefaults(defineProps<MenuContentImplProps>(), {
+const props = withDefaults(defineProps<MenuContentImplProps & {
+  /** Internal: whether a content kept mounted while closed (`unmountOnHide: false`) is shown. */
+  present?: boolean;
+  /**
+   * Internal: whether the dismissal layer and the modal hiding of the page apply. A content
+   * that is only still mounted for its exit animation hands them back at once.
+   */
+  layerPresent?: boolean;
+}>(), {
   ...PopperContentPropsDefaultValue,
+  present: true,
+  layerPresent: undefined,
 });
 const emits = defineEmits<MenuContentImplPrivateEmits>();
 const menuContext = injectMenuContext();
@@ -125,8 +144,10 @@ const rootContext = injectMenuRootContext();
 
 const { trapFocus, disableOutsidePointerEvents, loop } = toRefs(props);
 
-useFocusGuards();
-useBodyScrollLock(disableOutsidePointerEvents.value);
+useFocusGuards(() => props.present);
+// A content kept mounted while closed (`unmountOnHide: false`) holds the lock only while shown.
+// Otherwise `present` never changes, and the lock is held from mount to unmount.
+const scrollLocked = useBodyScrollLock(props.present && disableOutsidePointerEvents.value);
 
 const searchRef = ref('');
 const timerRef = ref(0);
@@ -137,24 +158,63 @@ const lastPointerXRef = ref(0);
 const currentItemId = ref<string | null>(null);
 
 const rovingFocusGroupRef = ref<InstanceType<typeof RovingFocusGroup>>();
+const focusScopeRef = ref<ComponentPublicInstance>();
 const { forwardRef, currentElement: contentElement } = useForwardExpose();
 // Lets the trigger of this menu know that its content is in the document.
 useContentMounted(menuContext, contentElement);
-const { handleTypeaheadSearch } = useTypeahead();
+const { search, handleTypeaheadSearch, resetTypeahead } = useTypeahead();
 
 const highlightedElement = ref<HTMLElement>();
+
+// A content kept mounted while closed stays in the focus scope and layer stacks' place
+// but leaves them, so no unmount returns focus. Let the menu know once it is hidden, with
+// the element that had focus before it was shown, which an unmount would focus back.
+let focusedBeforeShow: HTMLElement | null = null;
+watch(() => props.present, (present, wasPresent) => {
+  if (present) {
+    if (!wasPresent) {
+      focusedBeforeShow = getActiveElement() as HTMLElement | null;
+    }
+    scrollLocked.value = disableOutsidePointerEvents.value;
+  } else if (wasPresent) {
+    scrollLocked.value = false;
+    // Opens afresh next time, as a remounted content would: from the first item, no search.
+    currentItemId.value = null;
+    highlightedElement.value = undefined;
+    searchRef.value = '';
+    resetTypeahead();
+    menuContext.contentHidden({
+      container: unrefElement(focusScopeRef) as HTMLElement | undefined,
+      focusedBeforeShow,
+    });
+    focusedBeforeShow = null;
+  }
+}, { immediate: true });
+
+/**
+ * The items of this menu, without those of a submenu rendered inside it (without a
+ * portal), which a submenu kept mounted while closed leaves in the document.
+ */
+function getOwnItems() {
+  const content = contentElement.value;
+  if (!content) {
+    return [];
+  }
+  const items = content.querySelectorAll<HTMLElement>('[data-akar-collection-item]:not([data-disabled])');
+  return Array.from(items).filter((item) => item.closest('[data-akar-menu-content]') === content);
+}
 
 function onKeydownNavigation(event: KeyboardEvent) {
   const el = useArrowNavigation(
     event,
     (highlightedElement.value || getActiveElement()) as HTMLElement,
-    contentElement.value,
+    undefined,
     {
+      itemsArray: getOwnItems(),
       loop: loop.value,
       arrowKeyOptions: 'vertical',
       dir: rootContext?.dir.value,
       focus: false,
-      attributeName: '[data-akar-collection-item]:not([data-disabled])',
     },
   );
   if (el) {
@@ -238,25 +298,38 @@ function handleKeyDown(event: KeyboardEvent) {
   const el = useArrowNavigation(
     event,
     getActiveElement() as HTMLElement,
-    contentElement.value,
+    undefined,
     {
+      itemsArray: getOwnItems(),
       loop: loop.value,
       arrowKeyOptions: 'vertical',
       dir: rootContext?.dir.value,
       focus: true,
-      attributeName: '[data-akar-collection-item]:not([data-disabled])',
     },
   );
   if (el) {
     return el?.focus();
   }
 
-  // prevent "Space" taken account into handleTypeahead
-  if (event.code === 'Space') {
-    return;
-  }
-
   const collectionItems = rovingFocusGroupRef.value?.getItems() ?? [];
+
+  // With `spaceExtendsTypeahead`, Space selects the item when no search is in progress;
+  // otherwise it's part of the search.
+  // Only on this menu's own items (or the content): other controls in it, and a submenu's
+  // key bubbling up, keep Space as is.
+  if (!props.spaceExtendsTypeahead) {
+    // prevent "Space" taken account into handleTypeahead
+    if (event.code === 'Space') {
+      return;
+    }
+  } else if (event.key === ' ' || event.code === 'Space') {
+    const isOnItem = target === event.currentTarget || collectionItems.some((item) => item.ref === target);
+    if (search.value === '' || !isKeyDownInside || !isOnItem) {
+      return;
+    }
+    // MenuItem skips Space during a search, so prevent the scroll here
+    event.preventDefault();
+  }
 
   if (isKeyDownInside) {
     // menus should not be navigated using tab key so we prevent it
@@ -355,7 +428,13 @@ provideMenuContentContext({
       return false;
     }
   },
-  searchRef,
+  // Items skip Space while the filter has text or, with `spaceExtendsTypeahead`, a typeahead search is in progress.
+  searchRef: computed({
+    get: () => (props.spaceExtendsTypeahead && search.value) || searchRef.value,
+    set: (value: string) => {
+      searchRef.value = value;
+    },
+  }),
   highlightedElement,
   onKeydownNavigation,
   onKeydownEnter,
@@ -373,14 +452,17 @@ provideMenuContentContext({
 
 <template>
   <FocusScope
+    ref="focusScopeRef"
     as-child
     :trapped="trapFocus"
+    :present="present"
     @mount-auto-focus="handleMountAutoFocus"
     @unmount-auto-focus="emits('closeAutoFocus', $event)"
   >
     <DismissableLayer
       as-child
       :disable-outside-pointer-events="disableOutsidePointerEvents"
+      :present="layerPresent ?? present"
       @escape-key-down="emits('escapeKeyDown', $event)"
       @pointer-down-outside="emits('pointerDownOutside', $event)"
       @focus-outside="emits('focusOutside', $event)"
@@ -403,6 +485,7 @@ provideMenuContentContext({
         <PopperContent
           :ref="forwardRef"
           scope="menu"
+          :present="present"
           role="menu"
           :as="as"
           :as-child="asChild"

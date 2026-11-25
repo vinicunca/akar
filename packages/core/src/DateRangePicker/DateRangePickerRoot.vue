@@ -6,7 +6,7 @@ import type { Matcher, WeekDayFormat, WeekStartsOn } from '@/date';
 import type { DateRange, DateStep, Granularity, HourCycle } from '@/shared/date';
 import type { Direction } from '@/shared/types';
 import { getWeekStartsOn } from '@/date';
-import { createContext, useDirection, useLocale } from '@/shared';
+import { createAkarContext, useDirection, useLocale } from '@/shared';
 import { getDefaultDate } from '@/shared/date';
 import { PopoverRoot } from '..';
 
@@ -48,7 +48,7 @@ type DateRangePickerRootContext = {
   closeOnSelect?: Ref<boolean>;
 };
 
-export type DateRangePickerRootProps = Omit<DateRangeFieldRootProps, 'as' | 'asChild'> & PopoverRootProps & Pick<RangeCalendarRootProps, 'isDateDisabled' | 'pagedNavigation' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'numberOfMonths' | 'preventDeselect' | 'isDateUnavailable' | 'isDateHighlightable' | 'allowNonContiguousRanges' | 'fixedDate' | 'maximumDays'> & {
+export type DateRangePickerRootProps = Omit<DateRangeFieldRootProps, 'as' | 'asChild'> & Omit<PopoverRootProps, 'unmountOnHide'> & Pick<RangeCalendarRootProps, 'isDateDisabled' | 'pagedNavigation' | 'weekStartsOn' | 'weekdayFormat' | 'fixedWeeks' | 'numberOfMonths' | 'preventDeselect' | 'isDateUnavailable' | 'isDateHighlightable' | 'allowNonContiguousRanges' | 'fixedDate' | 'maximumDays'> & {
   /** Whether or not to close the popover on range select */
   closeOnSelect?: boolean;
 };
@@ -63,7 +63,7 @@ export type DateRangePickerRootEmits = PopoverRootEmits & {
 };
 
 export const [injectDateRangePickerRootContext, provideDateRangePickerRootContext]
-  = createContext<DateRangePickerRootContext>('DateRangePickerRoot');
+  = createAkarContext<DateRangePickerRootContext>('DateRangePickerRoot');
 </script>
 
 <script setup lang="ts">

@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { DismissableLayerEmits, DismissableLayerProps } from '@/DismissableLayer';
 import type { PopperContentProps } from '@/Popper';
 
-import { createContext, getActiveElement, useContentId, useContentMounted, useFocusGuards, useForwardExpose, useForwardProps, useHideOthers } from '@/shared';
+import { createAkarContext, getActiveElement, useContentId, useContentMounted, useFocusGuards, useForwardExpose, useForwardProps, useHideOthers } from '@/shared';
 import { useBodyScrollLock } from '@/shared/useBodyScrollLock';
 
 export type ComboboxContentImplEmits = DismissableLayerEmits;
@@ -25,7 +25,7 @@ export interface ComboboxContentImplProps extends PopperContentProps, Dismissabl
 }
 
 export const [injectComboboxContentContext, provideComboboxContentContext]
-  = createContext<{
+  = createAkarContext<{
     position: Ref<'inline' | 'popper'>;
   }>('ComboboxContent');
 </script>
@@ -39,13 +39,18 @@ import { PopperContent } from '@/Popper';
 import { Primitive } from '@/Primitive';
 import { injectComboboxRootContext } from './ComboboxRoot.vue';
 
-const props = withDefaults(
-  defineProps<ComboboxContentImplProps & { present?: boolean }>(),
-  {
-    position: 'inline',
-    present: true,
-  },
-);
+const props = withDefaults(defineProps<ComboboxContentImplProps & {
+  present?: boolean;
+  /**
+   * Internal: whether the dismissal layer and the modal hiding of the page apply. A content
+   * that is only still mounted for its exit animation hands them back at once.
+   */
+  layerPresent?: boolean;
+}>(), {
+  position: 'inline',
+  present: true,
+  layerPresent: undefined,
+});
 const emits = defineEmits<ComboboxContentImplEmits>();
 
 const { position } = toRefs(props);
@@ -74,12 +79,14 @@ watch(
   },
 );
 useFocusGuards();
-const ariaHiddenTarget = computed(() => props.present ? rootContext.parentElement.value : undefined);
+const ariaHiddenTarget = computed(() => (props.layerPresent ?? props.present)
+  ? rootContext.parentElement.value
+  : undefined);
 useHideOthers(ariaHiddenTarget);
 
 const pickedProps = computed(() => {
   if (props.position === 'popper') {
-    const { present: _, ...forwardedProps } = props;
+    const { present: _, layerPresent: __, ...forwardedProps } = props;
     return forwardedProps;
   } else {
     return {};
@@ -108,14 +115,26 @@ const isInputWithinContent = ref(false);
 onMounted(() => {
   if (rootContext.inputElement.value) {
     isInputWithinContent.value = currentElement.value?.contains(rootContext.inputElement.value) ?? false;
-    if (props.present && isInputWithinContent.value) {
+    if (props.present && isInputWithinContent.value && rootContext.focusInputOnOpen.value) {
       rootContext.inputElement.value.focus();
     }
   }
 });
 
 watch(() => props.present, async (isPresent, wasPresent) => {
-  if (isPresent || !wasPresent) {
+  if (isPresent) {
+    // Content kept mounted while closed (`unmountOnHide: false`) is still hidden when the root
+    // focuses the input on open, and a hidden input can't take focus. Focus it once it's shown.
+    if (!wasPresent && isInputWithinContent.value) {
+      await nextTick();
+      // Read `focusOnOpen` after the tick: the input may get its new value in this same update.
+      if (props.present && rootContext.focusInputOnOpen.value) {
+        rootContext.inputElement.value?.focus();
+      }
+    }
+    return;
+  }
+  if (!wasPresent) {
     return;
   }
 
@@ -167,7 +186,7 @@ const popperContentEvents = {
     >
       <DismissableLayer
         as-child
-        :present="props.present"
+        :present="props.layerPresent ?? props.present"
         :disable-outside-pointer-events="disableOutsidePointerEvents"
         @dismiss="rootContext.onOpenChange(false)"
         @focus-outside="(ev) => {

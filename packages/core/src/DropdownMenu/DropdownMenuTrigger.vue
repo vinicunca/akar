@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { useForwardExpose, useId, useRenderedContentId, useTriggerId } from '@/shared';
+import { disabledAttr, useForwardExpose, useId, useRenderedContentId, useTriggerId } from '@/shared';
 
 export interface DropdownMenuTriggerProps extends PrimitiveProps {
   /** When `true`, prevents the user from interacting with item */
@@ -10,6 +10,7 @@ export interface DropdownMenuTriggerProps extends PrimitiveProps {
 
 <script setup lang="ts">
 import { nextTick, onMounted } from 'vue';
+import { trackTriggerPress } from '@/DismissableLayer/utils';
 import { injectMenuContext, MenuAnchor } from '@/Menu';
 import {
   Primitive,
@@ -44,8 +45,9 @@ const contentId = useRenderedContentId(rootContext, injectMenuContext());
       :aria-expanded="rootContext.open.value"
       :aria-controls="rootContext.open.value ? contentId : undefined"
       :data-disabled="disabled ? '' : undefined"
-      :disabled="disabled"
+      :disabled="disabledAttr(disabled, props.as, props.asChild)"
       :data-state="rootContext.open.value ? 'open' : 'closed'"
+      @pointerdown="trackTriggerPress"
       @click="
         async (event: MouseEvent) => {
           if (event.defaultPrevented) return;

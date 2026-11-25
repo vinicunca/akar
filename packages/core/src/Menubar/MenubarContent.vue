@@ -9,6 +9,8 @@ export interface MenubarContentProps extends MenuContentProps {}
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { isTriggerPressInFlight } from '@/DismissableLayer/utils';
+import { hasFocusLeftScope } from '@/FocusScope/utils';
 import { injectMenuContext, MenuContent } from '@/Menu';
 import { omitEntryFocusListener } from '@/Menu/utils';
 import { useContentId, useForwardExpose, useForwardPropsEmits, useId } from '@/shared';
@@ -30,12 +32,24 @@ useForwardExpose();
 const rootContext = injectMenubarRootContext();
 const menuContext = injectMenubarMenuContext();
 
+const menuContentContext = injectMenuContext();
 menuContext.contentId ||= useId(undefined, 'akar-menubar-content');
-useContentId(menuContext, injectMenuContext().content);
+useContentId(menuContext, menuContentContext.content);
 
 const { getItems } = useCollection({ key: 'Menubar' });
 
 const hasInteractedOutsideRef = ref(false);
+
+// A content kept mounted while closed (`unmountOnHide: false`) is hidden, not unmounted, so
+// no `closeAutoFocus` returns focus. Return it to the trigger as on unmount, unless another
+// menu of the menubar opened in its place, or focus moved on to another layer.
+menuContentContext.onContentHide(({ container }) => {
+  const menubarOpen = Boolean(rootContext.modelValue.value);
+  if (!menubarOpen && !hasInteractedOutsideRef.value && !hasFocusLeftScope(container ?? null)) {
+    menuContext.triggerElement.value?.focus();
+  }
+  hasInteractedOutsideRef.value = false;
+});
 
 function handleArrowNavigation(event: KeyboardEvent) {
   const target = event.target as HTMLElement;
@@ -89,19 +103,26 @@ function handleArrowNavigation(event: KeyboardEvent) {
     }"
     v-bind="{ ...forwarded, ...omitEntryFocusListener($attrs) }"
     @close-auto-focus="(event) => {
-      const menubarOpen = Boolean(rootContext.modelValue.value);
-      if (!menubarOpen && !hasInteractedOutsideRef) {
-        menuContext.triggerElement.value?.focus();
+      if (!event.defaultPrevented) {
+        const menubarOpen = Boolean(rootContext.modelValue.value);
+        if (!menubarOpen && !hasInteractedOutsideRef) {
+          menuContext.triggerElement.value?.focus();
+        }
+
+        // Always prevent auto focus because we either focus manually or want user agent focus
+        event.preventDefault();
       }
 
       hasInteractedOutsideRef = false;
-      // Always prevent auto focus because we either focus manually or want user agent focus
-      event.preventDefault();
     }"
     @focus-outside="(event) => {
       const target = event.target as HTMLElement;
       const isMenubarTrigger = getItems().filter(i => i.ref.dataset.disabled !== '').some((i) => i.ref.contains(target));
-      if (isMenubarTrigger) event.preventDefault();
+      // WebKit does not focus a pressed button but its focusable ancestor: pressing a
+      // trigger focuses the menubar itself, which must not close the menu it opens (#3360).
+      const trigger = menuContext.triggerElement.value;
+      const isMenubar = isTriggerPressInFlight(trigger) && target === trigger?.closest('[role=menubar]');
+      if (isMenubarTrigger || isMenubar) event.preventDefault();
     }"
     @interact-outside="
       (event) => {

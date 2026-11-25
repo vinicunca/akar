@@ -2,7 +2,7 @@
 import type { PrimitiveProps } from '@/Primitive';
 import type { Direction, FormFieldProps } from '@/shared/types';
 import { useFocusOutside, usePointerDownOutside } from '@/DismissableLayer';
-import { createContext, useDirection, useFormControl } from '@/shared';
+import { createAkarContext, useDirection, useFormControl } from '@/shared';
 
 type ActivationMode = 'focus' | 'dblclick' | 'none';
 type SubmitMode = 'blur' | 'enter' | 'none' | 'both';
@@ -68,7 +68,7 @@ export type EditableRootEmits = {
 };
 
 export const [injectEditableRootContext, provideEditableRootContext]
-  = createContext<EditableRootContext>('EditableRoot');
+  = createAkarContext<EditableRootContext>('EditableRoot');
 </script>
 
 <script setup lang="ts">

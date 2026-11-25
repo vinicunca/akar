@@ -37,6 +37,7 @@ export interface PopperContentProps extends PrimitiveProps {
    * Reactive dependencies that should invalidate the memoized content subtree.
    */
   memoDependencies?: Array<unknown>;
+
   /**
    * The preferred side of the trigger to render against when open.
    * Will be reversed when collisions occur and `avoidCollisions`
@@ -194,6 +195,7 @@ export interface PopperContentProps extends PrimitiveProps {
    *  If provided, it will replace the default anchor element.
    */
   reference?: ReferenceElement;
+
   /**
    * The reading direction of the popper content when applicable. <br> If omitted, inherits globally from `ConfigProvider` or assumes LTR (left-to-right) reading mode.
    */
@@ -214,9 +216,10 @@ import {
   size,
   useFloating,
 } from '@floating-ui/vue';
-import { isNumber } from '@vinicunca/perkakas';
-import { computed, ref, watchEffect, watchPostEffect } from 'vue';
-import { Primitive } from '@/Primitive';
+import { computed, onActivated, onDeactivated, ref, watchEffect, watchPostEffect } from 'vue';
+import {
+  Primitive,
+} from '@/Primitive';
 import { providePopperContentContext } from './PopperContentContext';
 import { injectPopperRootContext } from './PopperRootContext';
 import {
@@ -229,12 +232,14 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(
-  defineProps<PopperContentProps & { scope?: PopperScope }>(),
-  {
-    ...PopperContentPropsDefaultValue,
-  },
-);
+const props = withDefaults(defineProps<PopperContentProps & {
+  scope?: PopperScope;
+  /** Internal: kept-mounted content that is hidden should not track position. */
+  present?: boolean;
+}>(), {
+  present: true,
+  ...PopperContentPropsDefaultValue,
+});
 const emits = defineEmits<{
   placed: [];
 }>();
@@ -257,7 +262,7 @@ const desiredPlacement = computed(
 );
 
 const collisionPadding = computed(() => {
-  return isNumber(props.collisionPadding)
+  return typeof props.collisionPadding === 'number'
     ? props.collisionPadding
     : {
         top: 0,
@@ -353,10 +358,23 @@ const computedMiddleware = computed(() => {
   ] as Array<Middleware>;
 });
 
-// If provided custom reference, it will overwrite the default anchor element
-const reference = computed(() => props.reference ?? rootContext.anchor.value);
+// `KeepAlive` takes a deactivated page out of the document, anchor included.
+const isDeactivated = ref(false);
+onDeactivated(() => {
+  isDeactivated.value = true;
+});
+onActivated(() => {
+  isDeactivated.value = false;
+});
 
-const { floatingStyles, placement, isPositioned, middlewareData } = useFloating(
+// If provided custom reference, it will overwrite the default anchor element.
+// Content kept mounted while closed, or whose page is deactivated, drops it, which stops tracking
+// the position but keeps the last one, so that a leave transition (e.g. `v-show`) ends in place.
+const reference = computed(() => props.present && !isDeactivated.value
+  ? (props.reference ?? rootContext.anchor.value)
+  : undefined);
+
+const { floatingStyles, placement, isPositioned, middlewareData, update } = useFloating(
   reference,
   floatingRef,
   {
@@ -453,7 +471,6 @@ providePopperContentContext({
       :as="props.as"
       :data-side="placedSide"
       :data-align="placedAlign"
-      :dir="dir"
       :style="{
         // if the PopperContent hasn't been placed yet (not all measurements done)
         // we prevent animations so that users's animation don't kick in too early referring wrong sides
@@ -471,6 +488,7 @@ providePopperContentContext({
       :as="props.as"
       :data-side="placedSide"
       :data-align="placedAlign"
+      :dir="dir"
       :style="{
         // if the PopperContent hasn't been placed yet (not all measurements done)
         // we prevent animations so that users's animation don't kick in too early referring wrong sides

@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
 import type { Direction, FormFieldProps } from '@/shared/types';
 import { computed, ref, toRefs } from 'vue';
-import { createContext, useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '@/shared';
+import { createAkarContext, useArrowNavigation, useDirection, useFormControl, useForwardExpose } from '@/shared';
 
 export type AcceptableInputValue = string | number | bigint | Record<string, any>;
 
@@ -50,6 +50,7 @@ export interface TagsInputRootContext<T = AcceptableInputValue> {
   modelValue: Ref<Array<T>>;
   onAddValue: (payload: string) => boolean;
   onRemoveValue: (index: number) => void;
+  onRemoveItem: (element: HTMLElement) => void;
   onInputKeydown: (event: KeyboardEvent) => void;
   selectedElement: Ref<HTMLElement | undefined>;
   isInvalidInput: Ref<boolean>;
@@ -65,11 +66,11 @@ export interface TagsInputRootContext<T = AcceptableInputValue> {
 }
 
 export const [injectTagsInputRootContext, provideTagsInputRootContext]
-  = createContext<TagsInputRootContext>('TagsInputRoot');
+  = createAkarContext<TagsInputRootContext>('TagsInputRoot');
 </script>
 
 <script setup lang="ts" generic="T extends AcceptableInputValue = string">
-import { isDeepEqual, isFunction } from '@vinicunca/perkakas';
+import { isDeepEqual } from '@vinicunca/perkakas';
 import { useFocusWithin, useVModel } from '@vueuse/core';
 import { useCollection } from '@/Collection';
 import { Primitive } from '@/Primitive';
@@ -103,7 +104,7 @@ const { forwardRef, currentElement } = useForwardExpose();
 const { focused } = useFocusWithin(currentElement);
 const isFormControl = useFormControl(currentElement);
 
-const { getItems, CollectionSlot } = useCollection({ isProvider: true });
+const { getItem, getItems, CollectionSlot } = useCollection({ isProvider: true });
 
 const selectedElement = ref<HTMLElement>();
 const isInvalidInput = ref(false);
@@ -120,6 +121,26 @@ function handleRemoveTag(index: number) {
   }
 }
 
+function handleRemoveItem(element: HTMLElement) {
+  const item = getItem(element);
+  if (!item) {
+    return;
+  }
+
+  const { tag, modelIndex } = item.value;
+  const values = currentModelValue.value;
+  if (Number.isInteger(modelIndex) && modelIndex >= 0 && modelIndex < values.length && isDeepEqual(values[modelIndex], tag)) {
+    return handleRemoveTag(modelIndex);
+  }
+
+  // Without a matching index, equal tags are matched in render order, including disabled tags.
+  // A stale or wrong `modelIndex` falls back here, so the delete still removes an equal tag.
+  const matchingItems = getItems(true).filter((other) => isDeepEqual(other.value.tag, tag));
+  const occurrence = matchingItems.indexOf(item);
+  let match = 0;
+  handleRemoveTag(values.findIndex((value) => isDeepEqual(value, tag) && match++ === occurrence));
+}
+
 provideTagsInputRootContext({
   modelValue,
   onAddValue: (_payload) => {
@@ -129,7 +150,7 @@ provideTagsInputRootContext({
 
     // Check if the value is an object and if the convertValue function is provided. We don't check this a type level because the use
     // of `TagsInputInput` is optional.
-    if ((modelValueIsObject || defaultValueIsObject) && !isFunction(props.convertValue)) {
+    if ((modelValueIsObject || defaultValueIsObject) && typeof props.convertValue !== 'function') {
       throw new Error('You must provide a `convertValue` function when using objects as values.');
     }
     const payload = props.convertValue
@@ -159,6 +180,7 @@ provideTagsInputRootContext({
     return false;
   },
   onRemoveValue: handleRemoveTag,
+  onRemoveItem: handleRemoveItem,
   onInputKeydown: (event) => {
     // Don't navigate/select tags mid-composition, keys are used for IME candidate navigation
     if (event.isComposing) {
@@ -180,11 +202,7 @@ provideTagsInputRootContext({
 
         if (selectedElement.value) {
           const index = collection.findIndex((i) => i === selectedElement.value);
-          const selectedItem = getItems().find((i) => i.ref === selectedElement.value);
-          const modelIndex = selectedItem
-            ? modelValue.value.findIndex((v) => isDeepEqual(v, selectedItem.value))
-            : -1;
-          handleRemoveTag(modelIndex);
+          handleRemoveItem(selectedElement.value);
           selectedElement.value = selectedElement.value === lastTag
             ? collection.at(index - 1)
             : collection.at(index + 1);

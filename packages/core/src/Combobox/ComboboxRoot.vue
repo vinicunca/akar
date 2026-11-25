@@ -3,7 +3,7 @@ import type { ComputedRef, Ref } from 'vue';
 import type { ListboxRootProps } from '@/Listbox';
 import type { AcceptableValue, GenericComponentInstance } from '@/shared/types';
 import { usePrimitiveElement } from '@/Primitive';
-import { createContext, defineReactiveIds, useDirection, useFilter } from '@/shared';
+import { createAkarContext, defineReactiveIds, useDirection, useFilter } from '@/shared';
 
 type ComboboxRootContext<T> = {
   modelValue: Ref<T | Array<T> | undefined>;
@@ -19,6 +19,8 @@ type ComboboxRootContext<T> = {
   contentId: string;
   inputElement: Ref<HTMLInputElement | undefined>;
   onInputElementChange: (el: HTMLInputElement) => void;
+  /** Whether opening the combobox moves focus to the input. Set by `ComboboxInput`'s `focusOnOpen`. */
+  focusInputOnOpen: Ref<boolean>;
   triggerElement: Ref<HTMLElement | undefined>;
   onTriggerElementChange: (el: HTMLElement) => void;
   highlightedElement: Ref<HTMLElement | undefined>;
@@ -39,7 +41,7 @@ type ComboboxRootContext<T> = {
 };
 
 export const [injectComboboxRootContext, provideComboboxRootContext]
-  = createContext<ComboboxRootContext<AcceptableValue>>('ComboboxRoot');
+  = createAkarContext<ComboboxRootContext<AcceptableValue>>('ComboboxRoot');
 
 export type ComboboxRootEmits<T = AcceptableValue, ClearValue = never> = {
   /** Event handler called when the value changes. */
@@ -48,9 +50,11 @@ export type ComboboxRootEmits<T = AcceptableValue, ClearValue = never> = {
   'highlight': [payload: { ref: HTMLElement; value: T } | undefined];
   /** Event handler called when the open state of the combobox changes. */
   'update:open': [value: boolean];
+  /** Event handler called when a selection is blocked because it would go over `max`. The payload is the first value over the limit. */
+  'invalid': [payload: T];
 };
 
-export interface ComboboxRootProps<T = AcceptableValue, ClearValue = any> extends Omit<ListboxRootProps<T>, 'orientation' | 'selectionBehavior'> {
+export interface ComboboxRootProps<T = AcceptableValue, ClearValue = any> extends Omit<ListboxRootProps<T>, 'orientation' | 'selectionBehavior' | 'keepFocusOnValueChange'> {
   /** The controlled open state of the Combobox. Can be binded with `v-model:open`. */
   open?: boolean;
   /** The open state of the combobox when it is initially rendered. <br> Use when you do not need to control its open state. */
@@ -114,6 +118,7 @@ import { useComboboxContentPositioning } from './useComboboxContentPositioning';
 const props = withDefaults(
   defineProps<ComboboxRootProps<T, ClearValue>>(),
   {
+    max: 0,
     open: undefined,
     resetSearchTermOnBlur: true,
     resetSearchTermOnSelect: true,
@@ -167,7 +172,9 @@ async function onOpenChange(val: boolean) {
     isOpeningInternally = false;
     primitiveElement.value?.highlightSelected();
     isUserInputted.value = true;
-    inputElement.value?.focus();
+    if (focusInputOnOpen.value) {
+      inputElement.value?.focus();
+    }
   } else {
     isUserInputted.value = false;
     setTimeout(() => {
@@ -182,6 +189,7 @@ const resetSearchTerm = createEventHook();
 const isUserInputted = ref(false);
 const isVirtual = ref(false);
 const inputElement = ref<HTMLInputElement>();
+const focusInputOnOpen = ref(true);
 const triggerElement = ref<HTMLElement>();
 
 const highlightedElement = computed(() => primitiveElement.value?.highlightedElement ?? undefined);
@@ -290,42 +298,40 @@ defineExpose({
 });
 
 provideComboboxRootContext(
-  defineReactiveIds(
-    {
-      modelValue,
-      multiple,
-      disabled,
-      open,
-      onOpenChange,
-      ...contentPositioning,
-      contentId: '',
-      isUserInputted,
-      isVirtual,
-      inputElement,
-      highlightedElement,
-      onInputElementChange: (val) => {
-        inputElement.value = val;
-      },
-      triggerElement,
-      onTriggerElementChange: (val) => {
-        triggerElement.value = val;
-      },
-      parentElement,
-      resetSearchTermOnSelect,
-      onResetSearchTerm: resetSearchTerm.on,
-      allItems,
-      allGroups,
-      filterSearch,
-      filterState,
-      ignoreFilter,
-      openOnFocus,
-      openOnClick,
-      resetModelValueOnClear,
-      getClearValue,
-      unmountOnHide,
+  defineReactiveIds({
+    modelValue,
+    multiple,
+    disabled,
+    open,
+    onOpenChange,
+    ...contentPositioning,
+    contentId: '',
+    isUserInputted,
+    isVirtual,
+    inputElement,
+    highlightedElement,
+    onInputElementChange: (val) => {
+      inputElement.value = val;
     },
-    ['contentId'],
-  ),
+    focusInputOnOpen,
+    triggerElement,
+    onTriggerElementChange: (val) => {
+      triggerElement.value = val;
+    },
+    parentElement,
+    resetSearchTermOnSelect,
+    onResetSearchTerm: resetSearchTerm.on,
+    allItems,
+    allGroups,
+    filterSearch,
+    filterState,
+    ignoreFilter,
+    openOnFocus,
+    openOnClick,
+    resetModelValueOnClear,
+    getClearValue,
+    unmountOnHide,
+  }, ['contentId']),
 );
 </script>
 
@@ -342,12 +348,14 @@ provideComboboxRootContext(
       :as-child="asChild"
       :dir="dir"
       :multiple="multiple"
+      :max="props.max"
       :name="name"
       :required="required"
       :disabled="disabled"
       :highlight-on-hover="highlightOnHover"
       :loop="loop"
       :by="props.by as any"
+      @invalid="emits('invalid', $event as T)"
       @highlight="emits('highlight', $event as any)"
     >
       <slot

@@ -1,6 +1,5 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { isDeepEqual } from '@vinicunca/perkakas';
 import { computed } from 'vue';
 import { useForwardExpose } from '@/shared';
 import { injectTagsInputItemContext } from './TagsInputItem.vue';
@@ -26,8 +25,7 @@ function handleDelete() {
   if (disabled.value) {
     return;
   }
-  const index = context.modelValue.value.findIndex((i) => isDeepEqual(i, itemContext.value.value));
-  context.onRemoveValue(index);
+  itemContext.onRemove();
 }
 </script>
 
@@ -35,7 +33,7 @@ function handleDelete() {
   <Primitive
     tabindex="-1"
     v-bind="props"
-    :aria-labelledby="itemContext.textId"
+    :aria-labelledby="$attrs['aria-label'] ? undefined : itemContext.textId"
     :aria-current="itemContext.isSelected.value"
     :data-state="itemContext.isSelected.value ? 'active' : 'inactive'"
     :data-disabled="disabled ? '' : undefined"

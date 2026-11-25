@@ -131,7 +131,9 @@ const pointerDownOutside = usePointerDownOutside(async (event) => {
   }
 }, layerElement, () => props.present, () => isPointerEventsEnabled.value);
 
-const focusOutside = useFocusOutside((event) => {
+// A focus move during a touch press outside is handled after that press's deferred
+// `pointerDownOutside`, the order a mouse press produces (see `runAfterTouchPress`).
+const focusOutside = useFocusOutside((event) => pointerDownOutside.runAfterTouchPress(() => {
   const isFocusInBranch = [...context.branches].some((branch) =>
     branch?.contains(event.target as HTMLElement),
   );
@@ -144,7 +146,7 @@ const focusOutside = useFocusOutside((event) => {
   if (!event.defaultPrevented) {
     emits('dismiss');
   }
-}, layerElement);
+}), layerElement);
 
 onKeyStroke('Escape', (event) => {
   // A layer that stays mounted while hidden (e.g. a Dialog with

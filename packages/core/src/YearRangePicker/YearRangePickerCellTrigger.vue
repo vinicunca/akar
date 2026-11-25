@@ -5,6 +5,7 @@ import { endOfYear, getLocalTimeZone, startOfYear, toCalendar, today } from '@in
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
 import { isSameYear, isYearBetweenInclusive, toDate } from '@/date';
+import { getCalendarCellTabindex } from '@/shared';
 
 export interface YearRangePickerCellTriggerProps extends PrimitiveProps {
   /** The date value provided to the cell trigger */
@@ -298,7 +299,7 @@ function handleArrowKey(e: KeyboardEvent) {
     :data-unavailable="isUnavailable ? '' : undefined"
     :data-today="isCurrentYear ? '' : undefined"
     :data-focused="isFocusedYear ? '' : undefined"
-    :tabindex="isFocusedYear ? 0 : isDisabled ? undefined : -1"
+    :tabindex="getCalendarCellTabindex(isFocusedYear, isDisabled, props)"
     @click="handleClick"
     @focusin="handleFocus"
     @mouseenter="handleFocus"

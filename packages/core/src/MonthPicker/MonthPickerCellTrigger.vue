@@ -2,8 +2,10 @@
 import type { DateValue } from '@internationalized/date';
 import type { PrimitiveProps } from '@/Primitive';
 import { endOfMonth, getLocalTimeZone, toCalendar, today } from '@internationalized/date';
+import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
 import { isSameYearMonth, toDate } from '@/date';
+import { getCalendarCellTabindex } from '@/shared';
 
 export interface MonthPickerCellTriggerProps extends PrimitiveProps {
   /** The date value provided to the cell trigger */
@@ -27,7 +29,6 @@ export interface MonthPickerCellTriggerSlot {
 </script>
 
 <script setup lang="ts">
-import { KEY_CODES } from '@vinicunca/perkakas';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
 import { injectMonthPickerRootContext } from './MonthPickerRoot.vue';
 
@@ -210,7 +211,7 @@ function handleArrowKey(e: KeyboardEvent) {
     :data-unavailable="isUnavailable ? '' : undefined"
     :data-today="isCurrentMonth ? '' : undefined"
     :data-focused="isFocusedMonth ? '' : undefined"
-    :tabindex="isFocusedMonth ? 0 : isDisabled ? undefined : -1"
+    :tabindex="getCalendarCellTabindex(isFocusedMonth, isDisabled, props)"
     @click="handleClick"
     @keydown.up.down.left.right.space.enter.page-up.page-down="handleArrowKey"
   >

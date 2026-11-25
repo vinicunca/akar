@@ -5,6 +5,7 @@ import { endOfYear, getLocalTimeZone, startOfYear, toCalendar, today } from '@in
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
 import { isSameYear, toDate } from '@/date';
+import { getCalendarCellTabindex } from '@/shared';
 
 export interface YearPickerCellTriggerProps extends PrimitiveProps {
   /** The date value provided to the cell trigger */
@@ -88,13 +89,11 @@ function handleArrowKey(e: KeyboardEvent) {
   if (isDisabled.value) {
     return;
   }
-
   // Modifier combos on Enter/Space (e.g. Ctrl+Enter) are not handled by the cell —
   // let them bubble so parent listeners can react (e.g. submit a form).
   if ((e.code === KEY_CODES.ENTER || e.code === KEY_CODES.SPACE) && (e.ctrlKey || e.metaKey || e.altKey)) {
     return;
   }
-
   e.preventDefault();
   e.stopPropagation();
   const parentElement = rootContext.parentElement.value!;
@@ -219,7 +218,7 @@ function handleArrowKey(e: KeyboardEvent) {
     :data-unavailable="isUnavailable ? '' : undefined"
     :data-today="isCurrentYear ? '' : undefined"
     :data-focused="isFocusedYear ? '' : undefined"
-    :tabindex="isFocusedYear ? 0 : isDisabled ? undefined : -1"
+    :tabindex="getCalendarCellTabindex(isFocusedYear, isDisabled, props)"
     @click="handleClick"
     @keydown.up.down.left.right.space.enter.page-up.page-down="handleArrowKey"
   >

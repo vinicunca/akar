@@ -1,25 +1,25 @@
 import type { InjectionKey } from 'vue';
-import { isString } from '@vinicunca/perkakas';
 import { inject, provide } from 'vue';
 
 /**
- * @param providerComponentName - The name(s) of the component(s) providing the context.
- *
- * There are situations where context can come from multiple components. In such cases, you might need to give an array of component names to provide your context, instead of just a single string.
- *
- * @param contextName The description for injection key symbol.
+ * The exact akar version, replaced at build time (see `tsdown.config.ts`).
+ * Falls back to `'dev'` when the source is compiled without the define.
  */
-export function createContext<ContextValue>(
-  providerComponentName: string | Array<string>,
-  contextName?: string,
-) {
-  const symbolDescription
-    = isString(providerComponentName) && !contextName
+const VERSION = typeof __AKAR_UI_VERSION__ === 'string'
+  ? __AKAR_UI_VERSION__
+  : 'dev';
+
+function getSymbolDescription(providerComponentName: string | Array<string>, contextName?: string) {
+  return contextName
+    ?? (typeof providerComponentName === 'string'
       ? `${providerComponentName}Context`
-      : contextName;
+      : providerComponentName.join('/'));
+}
 
-  const injectionKey: InjectionKey<ContextValue | null> = Symbol(symbolDescription);
-
+function createContextWithKey<ContextValue>(
+  providerComponentName: string | Array<string>,
+  injectionKey: InjectionKey<ContextValue | null>,
+) {
   /**
    * @param fallback The context value to return if the injection fails.
    *
@@ -57,4 +57,50 @@ export function createContext<ContextValue>(
   };
 
   return [injectContext, provideContext] as const;
+}
+
+/**
+ * @param providerComponentName - The name(s) of the component(s) providing the context.
+ *
+ * There are situations where context can come from multiple components. In such cases, you might need to give an array of component names to provide your context, instead of just a single string.
+ *
+ * @param contextName The description for injection key symbol.
+ */
+export function createContext<ContextValue>(
+  providerComponentName: string | Array<string>,
+  contextName?: string,
+) {
+  const injectionKey: InjectionKey<ContextValue | null> = Symbol(getSymbolDescription(providerComponentName, contextName));
+  return createContextWithKey<ContextValue>(providerComponentName, injectionKey);
+}
+
+/**
+ * Create a context keyed in the global symbol registry under `akar@<version>:<name>`.
+ *
+ * @internal
+ */
+export function createVersionedContext<ContextValue>(
+  version: string,
+  providerComponentName: string | Array<string>,
+  contextName?: string,
+) {
+  const injectionKey: InjectionKey<ContextValue | null> = Symbol.for(`akar@${version}:${getSymbolDescription(providerComponentName, contextName)}`);
+  return createContextWithKey<ContextValue>(providerComponentName, injectionKey);
+}
+
+/**
+ * Internal variant of {@link createContext} for akar's own contexts.
+ *
+ * The key lives in the global symbol registry and includes the exact package
+ * version, so two copies of the same akar version (e.g. a duplicated
+ * install sharing one Vue) can provide and inject each other's contexts,
+ * while different versions stay isolated.
+ *
+ * @internal
+ */
+export function createAkarContext<ContextValue>(
+  providerComponentName: string | Array<string>,
+  contextName?: string,
+) {
+  return createVersionedContext<ContextValue>(VERSION, providerComponentName, contextName);
 }

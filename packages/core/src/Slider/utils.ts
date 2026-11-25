@@ -1,6 +1,6 @@
 import type { ComputedRef } from 'vue';
-import { clamp, KEY_CODES } from '@vinicunca/perkakas';
-import { createContext } from '@/shared';
+import { clamp } from '@vinicunca/perkakas';
+import { createAkarContext } from '@/shared';
 
 export interface SliderOrientationPrivateProps {
   min: number;
@@ -114,50 +114,49 @@ export function linearScale(input: readonly [number, number], output: readonly [
   };
 }
 
-export function getDecimalCount(value: number) {
-  return (String(value).split('.')[1] || '').length;
-}
-
 export function roundValue(value: number, decimalCount: number) {
   const rounder = 10 ** decimalCount;
-  return Math.round(value * rounder) / rounder;
+  const scaled = value * rounder;
+  return Number.isFinite(scaled)
+    ? Math.round(scaled) / rounder
+    : value;
 }
 
 export type Direction = 'ltr' | 'rtl';
 
-export const PAGE_KEYS = [KEY_CODES.PAGE_UP, KEY_CODES.PAGE_DOWN];
+export const PAGE_KEYS = ['PageUp', 'PageDown'];
 export const ARROW_KEYS = [
-  KEY_CODES.ARROW_UP,
-  KEY_CODES.ARROW_DOWN,
-  KEY_CODES.ARROW_LEFT,
-  KEY_CODES.ARROW_RIGHT,
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
 ];
 
 type SlideDirection = 'from-left' | 'from-right' | 'from-bottom' | 'from-top';
 export const BACK_KEYS: Record<SlideDirection, Array<string>> = {
   'from-left': [
-    KEY_CODES.HOME,
-    KEY_CODES.PAGE_DOWN,
-    KEY_CODES.ARROW_DOWN,
-    KEY_CODES.ARROW_LEFT,
+    'Home',
+    'PageDown',
+    'ArrowDown',
+    'ArrowLeft',
   ],
   'from-right': [
-    KEY_CODES.HOME,
-    KEY_CODES.PAGE_DOWN,
-    KEY_CODES.ARROW_DOWN,
-    KEY_CODES.ARROW_RIGHT,
+    'Home',
+    'PageDown',
+    'ArrowDown',
+    'ArrowRight',
   ],
   'from-bottom': [
-    KEY_CODES.HOME,
-    KEY_CODES.PAGE_DOWN,
-    KEY_CODES.ARROW_DOWN,
-    KEY_CODES.ARROW_LEFT,
+    'Home',
+    'PageDown',
+    'ArrowDown',
+    'ArrowLeft',
   ],
   'from-top': [
-    KEY_CODES.HOME,
-    KEY_CODES.PAGE_UP,
-    KEY_CODES.ARROW_UP,
-    KEY_CODES.ARROW_LEFT,
+    'Home',
+    'PageUp',
+    'ArrowUp',
+    'ArrowLeft',
   ],
 };
 
@@ -170,4 +169,4 @@ interface SliderOrientation {
 }
 
 export const [injectSliderOrientationContext, provideSliderOrientationContext]
-  = createContext<SliderOrientation>(['SliderVertical', 'SliderHorizontal']);
+  = createAkarContext<SliderOrientation>(['SliderVertical', 'SliderHorizontal']);

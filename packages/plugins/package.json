@@ -1,11 +1,11 @@
 {
   "name": "plugins",
   "type": "module",
-  "version": "2.0.27",
-  "private": true,
-  "description": "Nuxt module for Akar",
+  "version": "0.0.0-upstream",
+  "description": "Nuxt module for Radix Vue",
   "license": "MIT",
   "keywords": [
+    "radix",
     "akar",
     "nuxt-module",
     "nuxt",
@@ -20,10 +20,10 @@
     "stub": "unbuild --stub"
   },
   "dependencies": {
-    "@nuxt/kit": "^4.6.3",
-    "@nuxt/schema": "^4.6.3",
+    "@nuxt/kit": "^4.1.2",
+    "@nuxt/schema": "^4.6.4",
     "akar": "link:../core",
-    "unbuild": "^3.6.1",
-    "unplugin-vue-components": "^32.1.0"
+    "unbuild": "^3.0.0",
+    "unplugin-vue-components": "^32.0.0"
   }
 }

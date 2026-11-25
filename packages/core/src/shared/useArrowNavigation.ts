@@ -21,7 +21,7 @@ interface ArrowNavigationOptions {
    * The parent element where contains all the collection items, this will collect every item to be used when nav
    * It will be ignored if attributeName is provided
    *
-   * @defaultValue []
+   * @default []
    */
   itemsArray?: Array<HTMLElement>;
 

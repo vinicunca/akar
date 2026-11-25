@@ -207,7 +207,7 @@ const virtualizedItems = computed(() => virtualizer.value.getVirtualItems().map(
   };
 }));
 
-rootContext.virtualFocusHook.on(({ event, scroll }) => {
+rootContext.virtualFocusHook.on(({ event, scroll, keepFocus, isStale }) => {
   // `scroll` is `false` only for the initial mount highlight. There we set the
   // roving-tabindex target without focusing or scrolling, so a virtualized
   // Listbox below the fold doesn't pull the page to it on load. User-driven
@@ -226,6 +226,10 @@ rootContext.virtualFocusHook.on(({ event, scroll }) => {
     // only scrolls the listbox container, never the page.
     virtualizer.value.scrollToIndex(index, { align: 'start' });
     requestAnimationFrame(() => {
+      // A later value change under `keepFocusOnValueChange` has queued its own highlight.
+      if (isStale?.()) {
+        return;
+      }
       const item = queryCheckedElement(parentEl.value);
       if (item) {
         // eslint-disable-next-line no-nested-ternary
@@ -235,30 +239,48 @@ rootContext.virtualFocusHook.on(({ event, scroll }) => {
         rootContext.changeHighlight(item, scroll, focus);
       }
     });
+  } else if (scroll && isStale) {
+    // `highlightFirstItem` under `keepFocusOnValueChange`, with a check for a later value change
+    // before the deferred highlight.
+    virtualizer.value.scrollToIndex(0);
+    requestAnimationFrame(() => {
+      const item = getItems().find((i) => i.ref.dataset.disabled !== '')?.ref;
+      if (item && !isStale()) {
+        rootContext.changeHighlight(item);
+      }
+    });
   } else if (scroll) {
     rootContext.highlightFirstItem();
   } else {
     // Mount highlight with no checked item: highlight the first enabled item only,
     // mirroring the non-virtual path. `highlightFirstItem` is reserved for
     // user-driven PageUp/Home navigation, which focuses and scrolls.
+    // A value cleared under `keepFocusOnValueChange` can find the list scrolled away from
+    // the start, so bring the first options into the list's own viewport first.
+    if (keepFocus) {
+      virtualizer.value.scrollToIndex(0);
+    }
     requestAnimationFrame(() => {
       const item = getItems().find((i) => i.ref.dataset.disabled !== '')?.ref;
-      if (item) {
+      if (item && !isStale?.()) {
         rootContext.changeHighlight(item, false, false);
       }
     });
   }
 });
 
-rootContext.virtualHighlightHook.on((value) => {
-  const index = props.options.findIndex((option) => {
-    return compare(option, value, rootContext.by);
-  });
+rootContext.virtualHighlightHook.on(({ value, focus }) => {
+  const index = props.options.findIndex((option) => compare(option, value, rootContext.by));
+  if (index === -1) {
+    return;
+  }
   virtualizer.value.scrollToIndex(index, { align: 'start' });
   requestAnimationFrame(() => {
-    const item = queryCheckedElement(parentEl.value);
+    // Look the value up again, as the options may have changed since the scroll.
+    // `getItems()` leaves out disabled rows, so a disabled item is never highlighted.
+    const item = getItems().find((i) => compare(i.value, value, rootContext.by));
     if (item) {
-      rootContext.changeHighlight(item);
+      rootContext.changeHighlight(item.ref, true, focus);
     }
   });
 });
@@ -307,7 +329,9 @@ function handleMultipleReplace(event: Event, intent: 'first' | 'last' | 'prev' |
       break;
     }
   }
-  rootContext.modelValue.value = value;
+  if (!rootContext.exceedsMax(value ?? [])) {
+    rootContext.modelValue.value = value;
+  }
 }
 
 rootContext.virtualKeydownHook.on((event) => {
@@ -322,7 +346,9 @@ rootContext.virtualKeydownHook.on((event) => {
   // Meta + A, select all feature
   if (isMetaKey && event.key === 'a' && rootContext.multiple.value) {
     event.preventDefault();
-    rootContext.modelValue.value = [...props.options];
+    if (!rootContext.exceedsMax([...props.options])) {
+      rootContext.modelValue.value = [...props.options];
+    }
     // purposely make the focus to last
     intent = 'last';
   } else if (event.shiftKey && intent) {
@@ -345,7 +371,7 @@ rootContext.virtualKeydownHook.on((event) => {
         rootContext.changeHighlight(item.ref);
       }
     });
-  } else if (!intent && !isMetaKey) {
+  } else if (!intent && !isMetaKey && event.key.length === 1) {
     search.value += event.key;
     const currentIndex = Number(getActiveElement()?.getAttribute('data-index'));
     const currentMatch = optionsWithMetadata.value[currentIndex].textContent;

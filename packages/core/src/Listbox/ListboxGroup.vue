@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
-import { createContext, useId } from '@/shared';
+import { createAkarContext, useId } from '@/shared';
 
 export interface ListboxGroupProps extends PrimitiveProps {}
 
@@ -9,7 +9,7 @@ interface ListboxGroupContext {
 }
 
 export const [injectListboxGroupContext, provideListboxGroupContext]
-  = createContext<ListboxGroupContext>('ListboxGroup');
+  = createAkarContext<ListboxGroupContext>('ListboxGroup');
 </script>
 
 <script setup lang="ts">

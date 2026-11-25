@@ -2,9 +2,10 @@
 import type { HTMLAttributes, Ref } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
 import type { FormFieldProps } from '@/shared/types';
+import { clamp, isNullish } from '@vinicunca/perkakas';
 import { useVModel } from '@vueuse/core';
 import { computed, ref, toRefs } from 'vue';
-import { createContext, snapValueToStep, useFormControl, useLocale } from '@/shared';
+import { createAkarContext, snapValueToStep, useFormControl, useLocale } from '@/shared';
 
 export interface NumberFieldRootProps extends PrimitiveProps, FormFieldProps {
   defaultValue?: number;
@@ -70,11 +71,10 @@ interface NumberFieldRootContext {
   id: Ref<string | undefined>;
 }
 
-export const [injectNumberFieldRootContext, provideNumberFieldRootContext] = createContext<NumberFieldRootContext>('NumberFieldRoot');
+export const [injectNumberFieldRootContext, provideNumberFieldRootContext] = createAkarContext<NumberFieldRootContext>('NumberFieldRoot');
 </script>
 
 <script setup lang="ts">
-import { clamp, isNullish } from '@vinicunca/perkakas';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
 import { handleDecimalOperation, useNumberFormatter, useNumberParser } from './utils';
@@ -171,10 +171,7 @@ function handleChangingValue(type: 'increase' | 'decrease', multiplier = 1) {
     // (a starting price of 40 with step 3 stays 40). The next tick aligns it via getNextValue.
     modelValue.value = startingValue.value === undefined
       ? clampInputValue(min.value ?? 0)
-      : numberParser.parse(numberFormatter.format(clamp(startingValue.value, {
-          min: min.value,
-          max: max.value,
-        })));
+      : numberParser.parse(numberFormatter.format(clamp(startingValue.value, { min: min.value, max: max.value })));
     return;
   }
 
@@ -244,10 +241,7 @@ function clampInputValue(val: number) {
   // Clamp to min and max, round to the nearest step, and round to specified number of digits
   let clampedValue: number;
   if (step.value === undefined || isNaN(step.value) || !stepSnapping.value) {
-    clampedValue = clamp(val, {
-      min: min.value,
-      max: max.value,
-    });
+    clampedValue = clamp(val, { min: min.value, max: max.value });
   } else {
     clampedValue = snapValueToStep(val, min.value, max.value, step.value);
   }

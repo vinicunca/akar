@@ -8,7 +8,7 @@ import type { Granularity, HourCycle, SegmentPart, SegmentValueObj } from '@/sha
 import type { Direction, FormFieldProps } from '@/shared/types';
 import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { hasTime, isBefore, isSameDateSelection, isSameDateValue } from '@/date';
-import { createContext, useDateFormatter, useDirection, useLocale } from '@/shared';
+import { createAkarContext, useDateFormatter, useDirection, useLocale } from '@/shared';
 import {
   createContent,
   getDefaultDate,
@@ -87,7 +87,7 @@ export type DateFieldRootEmits = {
 };
 
 export const [injectDateFieldRootContext, provideDateFieldRootContext]
-  = createContext<DateFieldRootContext>('DateFieldRoot');
+  = createAkarContext<DateFieldRootContext>('DateFieldRoot');
 </script>
 
 <script setup lang="ts">

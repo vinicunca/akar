@@ -2,7 +2,7 @@ import type { DOMWrapper, VueWrapper } from '@vue/test-utils';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/vue';
 import { sleep } from '@vinicunca/perkakas';
-import { mount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
 import { useDebounceFn } from '@vueuse/core';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
@@ -503,7 +503,7 @@ describe('given NavigationMenuTrigger inside a form', () => {
 });
 
 describe('given a NavigationMenuContent with outside interaction listeners', () => {
-  function mountWithListeners() {
+  function mountWithListeners(preventClose = false) {
     document.body.innerHTML = '';
     const counts = { pointerDownOutside: 0, focusOutside: 0, interactOutside: 0 };
     const wrapper = mount(defineComponent({
@@ -514,7 +514,12 @@ describe('given a NavigationMenuContent with outside interaction listeners', () 
           h(NavigationMenuContent, {
             onPointerDownOutside: () => counts.pointerDownOutside++,
             onFocusOutside: () => counts.focusOutside++,
-            onInteractOutside: () => counts.interactOutside++,
+            onInteractOutside: (event: Event) => {
+              counts.interactOutside++;
+              if (preventClose) {
+                event.preventDefault();
+              }
+            },
           }, () => h(NavigationMenuLink, { href: '#' }, () => 'Docs')),
         ]))),
       ]),
@@ -529,14 +534,16 @@ describe('given a NavigationMenuContent with outside interaction listeners', () 
     await sleep(0);
   }
 
-  it('should emit pointerDownOutside once per outside pointer down', async () => {
-    const { wrapper, counts } = mountWithListeners();
+  it.each([false, true])('should emit pointerDownOutside and interactOutside once per outside pointer down (preventClose=%s)', async (preventClose) => {
+    const { wrapper, counts } = mountWithListeners(preventClose);
     await openMenu(wrapper);
 
     document.getElementById('outside')!.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0 }));
-    await nextTick();
+    await flushPromises();
 
     expect(counts.pointerDownOutside).toBe(1);
+    expect(counts.interactOutside).toBe(1);
+    expect(wrapper.find('[data-dismissable-layer]').exists()).toBe(preventClose);
     wrapper.unmount();
   });
 

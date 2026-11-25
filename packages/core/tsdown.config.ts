@@ -1,13 +1,16 @@
 import type { OutputPlugin } from 'rolldown';
+import { readFileSync } from 'node:fs';
 import { defineConfig } from 'tsdown';
 
-// Match `defineComponent(`, `createContext(`, `reactive(` at word boundaries,
+// Match `defineComponent(`, `createContext(`, `createAkarContext(`, `reactive(` at word boundaries,
 // skipping calls already preceded by a PURE annotation or prefixed with a
 // word character (e.g. _defineComponent), or preceded by `function` keyword
 // (function declarations should not be annotated).
-const PURE_PATTERN = /(?<!function\s)(?<=^|[^.\w$])(defineComponent|createContext|reactive)\s*\(/g;
+const PURE_PATTERN = /(?<!function\s)(?<=^|[^.\w$])(defineComponent|createContext|createAkarContext|reactive)\s*\(/g;
 const ALREADY_PURE = /\/\*\s*[#@]__PURE__\s*\*\/\s*$/;
 const PATH_SEP = /[\\/]/g;
+
+const { version } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as { version: string };
 
 /**
  * Rolldown output plugin that inserts `/*#__PURE__* /` annotations before
@@ -59,6 +62,8 @@ export default defineConfig({
   define: {
     'import.meta.env.DEV': 'undefined',
     'import.meta.env.MODE': 'undefined',
+    // Keys akar's internal contexts by exact version, see `shared/createContext.ts`
+    '__AKAR_UI_VERSION__': JSON.stringify(version),
   },
 
   inputOptions: {

@@ -3,6 +3,7 @@ import type { ComponentPublicInstance } from 'vue';
 import type { PrimitiveProps } from '@/Primitive';
 import { useCollection } from '@/Collection';
 import { getActiveElement, useForwardExpose } from '@/shared';
+import { resolveElement } from '@/shared/resolveElement';
 
 export interface ToastViewportProps extends PrimitiveProps {
   /**
@@ -82,10 +83,21 @@ onMounted(() => {
   providerContext.onViewportChange(currentElement.value);
   viewportElement.value = currentElement.value;
   observer = new MutationObserver(() => {
-    const element = unrefElement(primitiveRef as ComponentPublicInstance);
+    // A slot that renders several nodes (e.g. an element next to a `v-if` comment) has a
+    // fragment anchor as its root, so read the element inside it.
+    const element = resolveElement(primitiveRef);
     // An `asChild` slot that renders nothing leaves a comment anchor, which can't hold toasts.
     if (element instanceof HTMLElement) {
       viewportElement.value = element;
+    } else if (viewportElement.value) {
+      // An emptied `asChild` slot takes any hover or focus inside it along, as a replaced
+      // element does below. A window-blur pause is kept.
+      // A removed focused element sends no `focusout`.
+      providerContext.focused.value = false;
+      pendingPointerLeave.value = true;
+      if (!isPausedByWindowBlur()) {
+        releasePause(viewportElement.value);
+      }
     }
   });
   observer.observe(unrefElement(branchRef)!, { childList: true });
@@ -101,7 +113,12 @@ const pendingPointerLeave = ref(false);
 // current element when the element is replaced after mount.
 watch(viewportElement, (element) => {
   const previous = providerContext.viewport.value;
-  if (!element || !previous || element === previous) {
+  if (!element || element === previous) {
+    return;
+  }
+  // An `asChild` viewport that mounted empty publishes its first element here.
+  if (!previous) {
+    providerContext.onViewportChange(element);
     return;
   }
 
@@ -156,9 +173,19 @@ function isPausedByWindowBlur() {
 
 // Releases a blur pause, including one left over after the last toast closed, which would
 // otherwise keep later toasts from ever starting their timers.
+//
+// The window gets its focus back before the element that had it, and the `focus` of that
+// element can come in a later task. The active element is already back, so read the focus
+// pause from it: releasing first would run the timers until the element `focus` pauses again.
 useEventListener('focus', () => {
   windowBlurred.value = false;
-  releasePause(viewportElement.value);
+  const viewport = viewportElement.value;
+  if (hasToasts.value && viewport) {
+    providerContext.focused.value = viewport.contains(getActiveElement());
+  }
+  if (!shouldPause()) {
+    releasePause(viewport);
+  }
 });
 
 // Focus inside the viewport and a press on a toast always pause. Hover and window blur

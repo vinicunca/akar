@@ -1,4 +1,5 @@
 import type { VNode } from 'vue';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { userEvent } from 'vitest/browser';
@@ -25,9 +26,7 @@ const get = (id: string) => document.querySelector<HTMLElement>(`[data-testid="$
 const isFocusWithin = (id: string) => !!get(id)?.contains(document.activeElement);
 const focused = () => document.activeElement?.getAttribute('data-testid') ?? document.activeElement?.tagName;
 function afterTimers() {
-  return new Promise((resolve) => {
-    setTimeout(resolve);
-  });
+  return sleep(0);
 }
 function afterFrames() {
   return new Promise((resolve) => {
@@ -140,7 +139,7 @@ const exiting = () => get('kept-content')!.getAnimations().some((animation) => a
 const CLICKABLE_UNDER_MODAL = { style: 'position: fixed; top: 10px; left: 200px; pointer-events: auto;' };
 
 /** Focus is in the other layer, stays there, and goes back to that layer's own trigger when it closes. */
-async function expectOtherLayerOwnsFocus(returnsToTrigger = true) {
+async function expectOtherLayerOwnsFocus() {
   await expect.poll(() => get('other-content')).not.toBeNull();
   await settle();
   expect(focused()).not.toBe('kept-trigger');
@@ -150,9 +149,7 @@ async function expectOtherLayerOwnsFocus(returnsToTrigger = true) {
   await userEvent.keyboard('{Escape}');
   await expect.poll(() => get('other-content')).toBeNull();
   await settle();
-  if (returnsToTrigger) {
-    expect(focused()).toBe('other-trigger');
-  }
+  expect(focused()).toBe('other-trigger');
 }
 
 let sheet: HTMLStyleElement;
@@ -293,9 +290,7 @@ describe.each(CASES)('$name kept mounted with $keep', ({ kind, keep, modal }) =>
 
       open.value = false;
       await settle();
-      // A Dialog that mounts while focus is held in another one takes the element focused
-      // there for its trigger, so where focus goes when it closes is not this test's concern.
-      await expectOtherLayerOwnsFocus(otherKind !== 'dialog');
+      await expectOtherLayerOwnsFocus();
     });
   });
 

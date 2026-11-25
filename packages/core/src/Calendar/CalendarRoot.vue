@@ -7,7 +7,7 @@ import type { Formatter } from '@/shared';
 import type { Direction } from '@/shared/types';
 import { isEqualDay, isSameDay } from '@internationalized/date';
 import { focusedDateValue, getWeekStartsOn, isSameDateSelection } from '@/date';
-import { createContext, useDirection, useLocale } from '@/shared';
+import { createAkarContext, useDirection, useLocale } from '@/shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '@/shared/date';
 import { useCalendar, useCalendarState } from './useCalendar';
 
@@ -111,7 +111,7 @@ export type CalendarRootEmits = {
 };
 
 export const [injectCalendarRootContext, provideCalendarRootContext]
-  = createContext<CalendarRootContext>('CalendarRoot');
+  = createAkarContext<CalendarRootContext>('CalendarRoot');
 </script>
 
 <script setup lang="ts">

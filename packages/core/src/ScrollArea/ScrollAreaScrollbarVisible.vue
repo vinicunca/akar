@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import type { Direction, Sizes } from './types';
-import { createContext, useForwardExpose } from '@/shared';
+import { createAkarContext, useForwardExpose } from '@/shared';
 
 export interface ScrollAreaScrollbarVisibleContext {
   sizes: Ref<Sizes>;
@@ -19,7 +19,7 @@ export interface ScrollAreaScrollbarVisibleContext {
 }
 
 export const [injectScrollAreaScrollbarVisibleContext, provideScrollAreaScrollbarVisibleContext]
-  = createContext<ScrollAreaScrollbarVisibleContext>('ScrollAreaScrollbarVisible');
+  = createAkarContext<ScrollAreaScrollbarVisibleContext>('ScrollAreaScrollbarVisible');
 </script>
 
 <script setup lang="ts">

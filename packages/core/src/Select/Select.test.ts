@@ -7,7 +7,6 @@ import { axe } from 'vitest-axe';
 import { defineComponent, h, inject, nextTick, ref, shallowRef } from 'vue';
 import { handleSubmit } from '@/test';
 import { SelectContent, SelectItem, SelectItemIndicator, SelectItemText, SelectPortal, SelectRoot, SelectTrigger, SelectValue, SelectViewport } from '.';
-import SelectUnmountCleanup from './__test__/SelectUnmountCleanup.vue';
 import { injectSelectContentContext } from './SelectContentImpl.vue';
 import Select from './story/_SelectTest.vue';
 
@@ -692,7 +691,7 @@ describe('given typing on a Select trigger', () => {
   });
 });
 
-describe('given SelectContent cleanup', () => {
+describe('given SelectContent closing after a selection', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
     vi.useFakeTimers();
@@ -702,22 +701,129 @@ describe('given SelectContent cleanup', () => {
     vi.useRealTimers();
   });
 
-  it('should clear delayed presence updates when unmounted after closing', async () => {
-    const clearTimeoutSpy = vi.spyOn(window, 'clearTimeout');
-    const wrapper = mount(SelectUnmountCleanup, { attachTo: document.body });
+  it('shows the selected option once the menu closes, before any timer runs', async () => {
+    const wrapper = mount(Select, {
+      attachTo: document.body,
+      props: { defaultValue: 'Apple' },
+    });
+    const valueBox = wrapper.find('[aria-label="Customise options"]');
 
-    await nextTick();
-    await wrapper.find('button').trigger('click');
-    await nextTick();
-
-    const timerCountAfterClose = vi.getTimerCount();
-    expect(timerCountAfterClose).toBeGreaterThan(0);
-
-    await wrapper.findAll('button')[1].trigger('click');
+    await fireEvent.pointerDown(wrapper.find('button').element, { button: 0, ctrlKey: false });
     await nextTick();
 
-    expect(clearTimeoutSpy).toHaveBeenCalled();
-    expect(vi.getTimerCount()).toBeLessThan(timerCountAfterClose);
+    const banana = wrapper.findAll('[role=option]')[1]
+    ;(banana.element as HTMLElement).focus();
+    await banana.trigger('pointerup');
+    await fireEvent.pointerUp(banana.element);
+    for (let i = 0; i < 5; i++) {
+      await nextTick();
+    }
+
+    expect(valueBox.text()).toContain('Banana');
+    expect(valueBox.text()).not.toContain('Please select a fruit');
+    expect(document.querySelector('[role="listbox"]')).toBeNull();
+  });
+});
+
+describe('given a Select value that no longer matches a mounted option', () => {
+  const placeholder = 'Pick one';
+
+  function mountControlled(initial: { value?: string; options: Array<string>; forceMount?: boolean }) {
+    document.body.innerHTML = '';
+    const model = ref<string | undefined>(initial.value);
+    const options = ref(initial.options);
+    const Fixture = defineComponent({
+      setup() {
+        return () => h(SelectRoot, {
+          'modelValue': model.value,
+          'onUpdate:modelValue': (value: string) => {
+            model.value = value;
+          },
+        }, () => [
+          h(SelectTrigger, { 'aria-label': 'Fruit' }, () => h(SelectValue, { placeholder })),
+          h(SelectPortal, null, () => h(SelectContent, { forceMount: initial.forceMount, position: 'popper' }, () => h(SelectViewport, null, () => options.value.map((fruit) =>
+            h(SelectItem, { key: fruit, value: fruit }, () => h(SelectItemText, null, () => fruit)),
+          )))),
+        ]);
+      },
+    });
+    const wrapper = mount(Fixture, { attachTo: document.body });
+    return {
+      wrapper,
+      model,
+      options,
+      trigger: () => document.querySelector('[role="combobox"]')!,
+    };
+  }
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it('shows the placeholder when the value is cleared', async () => {
+    const { model, trigger } = mountControlled({
+      value: 'Apple',
+      options: ['Apple', 'Banana'],
+    });
+    await nextTick();
+    expect(trigger().textContent).toContain('Apple');
+
+    model.value = undefined;
+    await nextTick();
+
+    expect(trigger().textContent).toContain(placeholder);
+  });
+
+  it('shows the placeholder when the value matches no option', async () => {
+    const { model, trigger } = mountControlled({
+      value: 'Apple',
+      options: ['Apple', 'Banana'],
+    });
+    await nextTick();
+
+    model.value = 'Durian';
+    await nextTick();
+
+    expect(trigger().textContent).toContain(placeholder);
+    expect(trigger().textContent).not.toContain('Apple');
+  });
+
+  it('shows the placeholder when the selected option is removed', async () => {
+    const { options, trigger } = mountControlled({
+      value: 'Apple',
+      options: ['Apple', 'Banana'],
+    });
+    await nextTick();
+    expect(trigger().textContent).toContain('Apple');
+
+    options.value = ['Banana'];
+    await nextTick();
+
+    expect(trigger().textContent).toContain(placeholder);
+    expect(trigger().textContent).not.toContain('Apple');
+  });
+
+  it('keeps the selected option and the menu mounted when forceMount is set', async () => {
+    const { trigger } = mountControlled({
+      value: 'Apple',
+      options: ['Apple', 'Cherry'],
+      forceMount: true,
+    });
+    await nextTick();
+
+    await fireEvent.pointerDown(trigger(), { button: 0, ctrlKey: false });
+    await nextTick();
+    const cherry = document.querySelectorAll<HTMLElement>('[role="option"]')[1];
+    cherry.focus();
+    await fireEvent.pointerUp(cherry);
+    await fireEvent.pointerUp(cherry);
+    await nextTick();
+
+    expect(trigger().textContent).toContain('Cherry');
+    expect(trigger().textContent).not.toContain(placeholder);
+    const listbox = document.querySelector('[role="listbox"]');
+    expect(listbox).not.toBeNull();
+    expect(listbox?.getAttribute('data-state')).toBe('closed');
   });
 });
 
@@ -1095,6 +1201,188 @@ describe('given a Select root that stays mounted', () => {
       expect(openContents.some((content) => closedCollection?.contains(content) || content.contains(closedCollection!))).toBe(false);
     }
 
+    wrapper.unmount();
+  });
+});
+
+function mountFruitsInForm(modelValue: { value: unknown }, rootProps: Record<string, unknown> = {}, items: Array<unknown> = ['apple', 'banana', 'cherry']) {
+  return mount(defineComponent({
+    setup() {
+      return () => h('form', [
+        h(SelectRoot, {
+          'name': 'fruit',
+          'multiple': true,
+          ...rootProps,
+          'modelValue': modelValue.value,
+          'onUpdate:modelValue': (value: unknown) => {
+            modelValue.value = value;
+          },
+        }, () => [
+          h(SelectTrigger, () => h(SelectValue)),
+          h(SelectContent, () => h(SelectViewport, () => items.map((value) =>
+            h(SelectItem, { value }, () => h(SelectItemText, () => JSON.stringify(value))),
+          ))),
+        ]),
+      ]);
+    },
+  }), { attachTo: document.body });
+}
+
+describe('given a multiple Select in a form', () => {
+  let wrapper: VueWrapper | undefined;
+  const form = () => wrapper!.get('form').element as HTMLFormElement;
+  const submitted = () => new FormData(form()).getAll('fruit');
+  const selectedOptions = () => Array.from(form().querySelectorAll('option')).map((option) => option.selected);
+
+  afterEach(() => {
+    wrapper?.unmount();
+    wrapper = undefined;
+    document.body.innerHTML = '';
+  });
+
+  it('submits every selected value', async () => {
+    wrapper = mountFruitsInForm(ref(['apple', 'cherry']));
+    await nextTick();
+
+    expect(submitted()).toEqual(['apple', 'cherry']);
+  });
+
+  it('submits the new selection after the value is replaced or changed in place', async () => {
+    const modelValue = ref(['apple']);
+    wrapper = mountFruitsInForm(modelValue);
+    await nextTick();
+
+    modelValue.value = ['apple', 'banana'];
+    await flushPromises();
+    expect(submitted()).toEqual(['apple', 'banana']);
+
+    modelValue.value.push('cherry');
+    await flushPromises();
+    expect(submitted()).toEqual(['apple', 'banana', 'cherry']);
+  });
+
+  it('bubbles a `change` that reads the new selection', async () => {
+    const modelValue = ref(['apple']);
+    wrapper = mountFruitsInForm(modelValue);
+    await nextTick();
+    const seen: Array<Array<FormDataEntryValue>> = [];
+    form().addEventListener('change', () => seen.push(submitted()));
+
+    modelValue.value = ['apple', 'cherry'];
+    await flushPromises();
+
+    expect(seen).toEqual([
+      ['apple', 'cherry'],
+    ]);
+  });
+
+  it('selects the options of object values, compared with `by`', async () => {
+    wrapper = mountFruitsInForm(ref([
+      { id: 1 },
+      { id: 3 },
+    ]), { by: 'id' }, [
+      { id: 1 },
+      { id: 2 },
+      { id: 3 },
+    ]);
+    await nextTick();
+
+    expect(selectedOptions()).toEqual([true, false, true]);
+  });
+
+  it('is valid when `required` and more than one value is selected', async () => {
+    wrapper = mountFruitsInForm(ref(['apple', 'banana']), { required: true });
+    await nextTick();
+
+    expect(form().checkValidity()).toBe(true);
+  });
+
+  it('is invalid when `required` and nothing is selected', async () => {
+    wrapper = mountFruitsInForm(ref([]), { required: true });
+    await nextTick();
+
+    expect(form().checkValidity()).toBe(false);
+  });
+
+  it('keeps the selection and reads it in `change` when `multiple` is turned on', async () => {
+    const multiple = ref(false);
+    const modelValue = ref<unknown>('apple');
+    wrapper = mount(defineComponent({
+      setup() {
+        return () => h('form', [
+          h(SelectRoot, {
+            'name': 'fruit',
+            'multiple': multiple.value,
+            'modelValue': modelValue.value,
+            'onUpdate:modelValue': (value: unknown) => {
+              modelValue.value = value;
+            },
+          }, () => [
+            h(SelectTrigger, () => h(SelectValue)),
+            h(SelectContent, () => h(SelectViewport, () => ['apple', 'banana', 'cherry'].map((value) =>
+              h(SelectItem, { value }, () => h(SelectItemText, () => value)),
+            ))),
+          ]),
+        ]);
+      },
+    }), { attachTo: document.body });
+    await flushPromises();
+    expect(submitted()).toEqual(['apple']);
+
+    multiple.value = true;
+    modelValue.value = ['apple'];
+    await flushPromises();
+    expect(submitted()).toEqual(['apple']);
+
+    const seen: Array<Array<FormDataEntryValue>> = [];
+    form().addEventListener('change', () => seen.push(submitted()));
+    multiple.value = false;
+    modelValue.value = 'apple';
+    await flushPromises();
+    seen.length = 0;
+    multiple.value = true;
+    modelValue.value = ['cherry'];
+    await flushPromises();
+    expect(submitted()).toEqual(['cherry']);
+    // The mode and the value changed in one update: `change` still fires, with the new selection
+    expect(seen).toEqual([
+      ['cherry'],
+    ]);
+    modelValue.value = ['banana', 'cherry'];
+    await flushPromises();
+    expect(seen.at(-1)).toEqual(['banana', 'cherry']);
+
+    seen.length = 0;
+    multiple.value = false;
+    modelValue.value = 'banana';
+    await flushPromises();
+    expect(seen).toEqual([
+      ['banana'],
+    ]);
+  });
+
+  it('keeps submitting the empty `nullableValue` while the value is nullish', async () => {
+    wrapper = mountFruitsInForm(ref(null));
+    await nextTick();
+
+    expect(submitted()).toEqual(['']);
+  });
+});
+
+describe('given a single Select in a form', () => {
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it('submits the empty `nullableValue` once the value is cleared', async () => {
+    const modelValue = ref<string | null>('apple');
+    const wrapper = mountFruitsInForm(modelValue, { multiple: false });
+    await nextTick();
+
+    modelValue.value = null;
+    await flushPromises();
+
+    expect(new FormData(wrapper.get('form').element).getAll('fruit')).toEqual(['']);
     wrapper.unmount();
   });
 });

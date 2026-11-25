@@ -1,5 +1,5 @@
 import type { Color, HSBColor, HSLColor, RGBColor } from './types';
-import { isString } from '@vinicunca/perkakas';
+import { clamp } from '@vinicunca/perkakas';
 
 const HEX3_RE = /^[0-9A-F]{3}$/i;
 const HEX6_RE = /^[0-9A-F]{6}$/i;
@@ -7,6 +7,13 @@ const HEX8_RE = /^[0-9A-F]{8}$/i;
 const RGB_RE = /rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)/;
 const HSL_RE = /hsla?\(\s*([\d.]+)\s*,\s*([\d.]+)%\s*,\s*([\d.]+)%\s*(?:,\s*([\d.]+)\s*)?\)/;
 const HSB_RE = /hsb[av]?\(\s*([\d.]+)\s*,\s*([\d.]+)%?\s*,\s*([\d.]+)%?\s*(?:,\s*([\d.]+)\s*)?\)/;
+
+/** Hue is an angle: 400 is 40. 360 itself is kept, as the hue channel's range allows it. */
+function wrapHue(hue: number): number {
+  return hue > 360
+    ? hue % 360
+    : hue;
+}
 
 /**
  * Parses a color string into a Color object.
@@ -86,11 +93,11 @@ function parseRgb(rgb: string): RGBColor {
 
   return {
     space: 'rgb',
-    r: parseFloat(match[1]),
-    g: parseFloat(match[2]),
-    b: parseFloat(match[3]),
+    r: clamp(parseFloat(match[1]), { min: 0, max: 255 }),
+    g: clamp(parseFloat(match[2]), { min: 0, max: 255 }),
+    b: clamp(parseFloat(match[3]), { min: 0, max: 255 }),
     alpha: match[4]
-      ? parseFloat(match[4])
+      ? clamp(parseFloat(match[4]), { min: 0, max: 1 })
       : 1,
   };
 }
@@ -103,11 +110,11 @@ function parseHsl(hsl: string): HSLColor {
 
   return {
     space: 'hsl',
-    h: parseFloat(match[1]),
-    s: parseFloat(match[2]),
-    l: parseFloat(match[3]),
+    h: wrapHue(parseFloat(match[1])),
+    s: clamp(parseFloat(match[2]), { min: 0, max: 100 }),
+    l: clamp(parseFloat(match[3]), { min: 0, max: 100 }),
     alpha: match[4]
-      ? parseFloat(match[4])
+      ? clamp(parseFloat(match[4]), { min: 0, max: 1 })
       : 1,
   };
 }
@@ -120,11 +127,11 @@ function parseHsb(hsb: string): HSBColor {
 
   return {
     space: 'hsb',
-    h: parseFloat(match[1]),
-    s: parseFloat(match[2]),
-    b: parseFloat(match[3]),
+    h: wrapHue(parseFloat(match[1])),
+    s: clamp(parseFloat(match[2]), { min: 0, max: 100 }),
+    b: clamp(parseFloat(match[3]), { min: 0, max: 100 }),
     alpha: match[4]
-      ? parseFloat(match[4])
+      ? clamp(parseFloat(match[4]), { min: 0, max: 1 })
       : 1,
   };
 }
@@ -134,7 +141,7 @@ function parseHsb(hsb: string): HSBColor {
  * If already a Color, returns it. If a string, parses it.
  */
 export function normalizeColor(value: string | Color): Color {
-  if (isString(value)) {
+  if (typeof value === 'string') {
     return parseColor(value);
   }
   return value;

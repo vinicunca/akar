@@ -8,7 +8,7 @@ import type { DateRange } from '@/shared/date';
 import type { Direction } from '@/shared/types';
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { isSameYear } from '@/date';
-import { createContext, useDirection, useId, useLocale } from '@/shared';
+import { createAkarContext, useDirection, useId, useLocale } from '@/shared';
 import { getDefaultDate, handleCalendarInitialFocus } from '@/shared/date';
 import { useYearPicker } from '@/YearPicker/useYearPicker';
 import { useRangeYearPickerState } from './useRangeYearPicker';
@@ -109,7 +109,7 @@ export type YearRangePickerRootEmits = {
 };
 
 export const [injectYearRangePickerRootContext, provideYearRangePickerRootContext]
-  = createContext<YearRangePickerRootContext>('YearRangePickerRoot');
+  = createAkarContext<YearRangePickerRootContext>('YearRangePickerRoot');
 </script>
 
 <script setup lang="ts">

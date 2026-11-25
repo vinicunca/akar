@@ -8,10 +8,10 @@ import type { Formatter } from '@/shared';
 import type { DateStep, HourCycle, SegmentPart, SegmentValueObj, TimeValue } from '@/shared/date';
 import type { TimeRange } from '@/shared/date/types';
 import type { Direction, FormFieldProps } from '@/shared/types';
-import { getLocalTimeZone, Time, toCalendarDateTime, today } from '@internationalized/date';
+import { getLocalTimeZone, isSameDay, Time, toCalendarDateTime, today } from '@internationalized/date';
 import { isNullish, KEY_CODES } from '@vinicunca/perkakas';
 import { areAllDaysBetweenValid, isBefore, isBeforeOrSame } from '@/date';
-import { createContext, useDateFormatter, useDirection, useLocale } from '@/shared';
+import { createAkarContext, useDateFormatter, useDirection, useLocale } from '@/shared';
 import {
   createContent,
   getDefaultTime,
@@ -20,8 +20,11 @@ import {
   isSegmentNavigationKey,
   normalizeDateStep,
   normalizeHourCycle,
+
   syncSegmentValues,
+
   syncTimeSegmentValues,
+
   useSegmentNavigation,
 } from '@/shared/date';
 
@@ -76,6 +79,18 @@ export interface TimeRangeFieldRootProps extends PrimitiveProps, FormFieldProps 
   dir?: Direction;
   /** A function that returns whether or not a time is unavailable */
   isTimeUnavailable?: Matcher;
+  /**
+   * Whether a range whose end is earlier than its start is allowed, for a daily window that wraps
+   * past midnight such as `22:00` to `06:00`.
+   *
+   * Wrapping only applies when both values fall on the same calendar day, which is always the case
+   * for `Time` values. When the values carry a date and the end is on an earlier day than the start,
+   * the range stays invalid.
+   *
+   * `minValue` and `maxValue` still bound the start and the end separately, so they cannot describe
+   * a window that crosses midnight.
+   */
+  allowWrap?: boolean;
 }
 
 export type TimeRangeFieldRootEmits = {
@@ -86,7 +101,7 @@ export type TimeRangeFieldRootEmits = {
 };
 
 export const [injectTimeRangeFieldRootContext, provideTimeRangeFieldRootContext]
-  = createContext<TimeRangeFieldRootContext>('TimeRangeFieldRoot');
+  = createAkarContext<TimeRangeFieldRootContext>('TimeRangeFieldRoot');
 
 function convertValue(value: TimeValue, date: DateValue = today(getLocalTimeZone())) {
   if (value && 'day' in value) {
@@ -113,6 +128,7 @@ const props = withDefaults(defineProps<TimeRangeFieldRootProps>(), {
   readonly: false,
   placeholder: undefined,
   isTimeUnavailable: undefined,
+  allowWrap: false,
 });
 const emits = defineEmits<TimeRangeFieldRootEmits>();
 defineSlots<{
@@ -215,11 +231,17 @@ const isInvalid = computed(() => {
     end: convertValue(modelValue.value.end),
   };
 
-  if (!isBeforeOrSame(convertedModelValue.start, convertedModelValue.end)) {
+  const wraps = !isBeforeOrSame(convertedModelValue.start, convertedModelValue.end);
+
+  // Only a time-of-day wrap within the same calendar day is allowed. `Time` values are converted
+  // to today, so they always qualify; date-carrying values on different days stay invalid.
+  if (wraps && !(props.allowWrap && isSameDay(convertedModelValue.start, convertedModelValue.end))) {
     return true;
   }
 
-  if (propsIsTimeUnavailable.value !== undefined) {
+  // `areAllDaysBetweenValid` walks forward from start to end, so it has nothing to walk
+  // over once the range wraps past midnight.
+  if (!wraps && propsIsTimeUnavailable.value !== undefined) {
     const allValid = areAllDaysBetweenValid(
       convertedModelValue.start,
       convertedModelValue.end,
@@ -441,7 +463,6 @@ function handleKeydown(e: KeyboardEvent) {
   if (e.isComposing) {
     return;
   }
-
   if (!isSegmentNavigationKey(e.key)) {
     return;
   }

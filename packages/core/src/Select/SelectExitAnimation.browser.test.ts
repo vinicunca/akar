@@ -1,4 +1,5 @@
 import type { VueWrapper } from '@vue/test-utils';
+import { sleep } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { userEvent } from 'vitest/browser';
@@ -79,9 +80,7 @@ describe('given a Select whose content animates with CSS, in a real browser', ()
 
   const get = (id: string) => document.querySelector<HTMLElement>(`[data-testid="${id}"]`);
   const content = () => document.querySelector<HTMLElement>('.content');
-  const wait = (ms: number) => new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
+  const wait = (ms: number) => sleep(ms);
 
   async function openSelect() {
     await userEvent.click(get('trigger')!);

@@ -47,7 +47,7 @@ export interface FocusScopeProps extends PrimitiveProps {
 </script>
 
 <script setup lang="ts">
-import { isBrowser } from '@vinicunca/perkakas';
+import { isClient } from '@vueuse/shared';
 import { inject, nextTick, provide, reactive, ref, watch, watchEffect } from 'vue';
 import { Primitive } from '@/Primitive';
 import { createFocusScopesStack } from './stack';
@@ -74,7 +74,7 @@ const props = withDefaults(defineProps<FocusScopeProps>(), {
   // `undefined`), and the `props.present !== false` gates below would then skip
   // adding the scope to the stack for every consumer that doesn't pass `present`
   // (e.g. Combobox/Select content). That scope would never pause an ancestor
-  // trap, so a Combobox input inside a Dialog could not be focused.
+  // trap, so a Combobox input inside a Dialog could not be focused (#2749).
   present: true,
 });
 const emits = defineEmits<FocusScopeEmits>();
@@ -101,11 +101,55 @@ const focusScope = reactive({
   },
   resume() {
     this.paused = false;
+    // The focused element may have been removed while another scope was on top.
+    recoverRemovedFocus();
   },
 });
 
+// When the focused element gets removed from the DOM, browsers move focus
+// back to the document.body. In this case, we move focus to the container
+// to keep focus trapped correctly.
+// -- related: https://github.com/unovue/reka-ui/issues/518
+// Akar tentative solution:
+// instead of leaning on document.activeElement, we use lastFocusedElementRef.value to check
+// if the element still exist inside the container,
+// if not then we focus to the container
+function recoverRemovedFocus() {
+  const container = currentElement.value;
+  const lastFocusedElement = lastFocusedElementRef.value;
+
+  // A paused scope is covered by another one (e.g. a nested dialog, whose modal layer
+  // marks this container `aria-hidden`), so it must not pull focus back. It recovers
+  // when it is resumed instead.
+  // Without a previously focused element there is nothing to recover: mutations may be
+  // triggered by something unrelated to focus, e.g. class is set on an element.
+  if (!props.trapped || focusScope.paused || !container || lastFocusedElement === null) {
+    return;
+  }
+
+  // Confirm focus was actually orphaned before pulling it back. `lastFocusedElement`
+  // is only tracked while the scope is not paused, so an open popper (which pauses
+  // this trap and only resumes it in a `setTimeout`) leaves it pointing at a stale
+  // element. Without this check, an element focused inside the container during that
+  // window — e.g. a view swapped in by the popper's `select` handler focusing its own
+  // input on mount — would be robbed of focus.
+  // -- related: https://github.com/unovue/reka-ui/issues/2886
+  // `getActiveElement()` descends into shadow roots, so the check has to cross them too.
+  const activeElement = getActiveElement();
+  if (activeElement && containsComposed(container, activeElement)) {
+    // `handleFocusIn` does not record focus that moved in while the scope was paused, so record
+    // it here. Otherwise the trap would later try to restore focus to a removed element.
+    lastFocusedElementRef.value = activeElement as HTMLElement;
+    return;
+  }
+
+  if (!container.contains(lastFocusedElement)) {
+    focus(container);
+  }
+}
+
 watchEffect((cleanupFn) => {
-  if (!isBrowser) {
+  if (!isClient) {
     return;
   }
   const container = currentElement.value;
@@ -117,6 +161,7 @@ watchEffect((cleanupFn) => {
   // teleported into one, otherwise the document). On `document`, focus events
   // originating inside a shadow root are retargeted to the host, so
   // `container.contains(target)` never matches and focus escapes the trap.
+  // -- related: https://github.com/unovue/reka-ui/issues/1667
   const ownerDocument = container?.ownerDocument ?? document;
   const root = container
     ? (container.getRootNode() as Document | ShadowRoot)
@@ -161,41 +206,10 @@ watchEffect((cleanupFn) => {
     }
   }
 
-  // When the focused element gets removed from the DOM, browsers move focus
-  // back to the document.body. In this case, we move focus to the container
-  // to keep focus trapped correctly.
-  // instead of leaning on document.activeElement, we use lastFocusedElementRef.value to check
-  // if the element still exist inside the container,
-  // if not then we focus to the container
   function handleMutations(mutations: Array<MutationRecord>) {
-    const lastFocusedElement = lastFocusedElementRef.value;
-
-    // Mutation may be triggered by something unrelated to focus, e.g. class is set on an element
-    // so we first check if we even have a previously focused element.
-    if (lastFocusedElement === null) {
-      return;
-    }
-
     // Ensure mutations removed nodes from the DOM at all.
-    const anyNodesRemoved = mutations.some((m) => m.removedNodes.length > 0);
-    if (!anyNodesRemoved) {
-      return;
-    }
-
-    // Confirm focus was actually orphaned before pulling it back. `lastFocusedElement`
-    // is only tracked while the scope is not paused, so an open popper (which pauses
-    // this trap and only resumes it in a `setTimeout`) leaves it pointing at a stale
-    // element. Without this check, an element focused inside the container during that
-    // window — e.g. a view swapped in by the popper's `select` handler focusing its own
-    // input on mount — would be robbed of focus.
-    const activeElement = getActiveElement();
-    if (activeElement && container.contains(activeElement)) {
-      return;
-    }
-
-    const isLastFocusedElementExist = container.contains(lastFocusedElement);
-    if (!isLastFocusedElementExist) {
-      focus(container);
+    if (mutations.some((m) => m.removedNodes.length > 0)) {
+      recoverRemovedFocus();
     }
   }
 
@@ -256,8 +270,16 @@ function dispatchMountAutoFocus(container: HTMLElement, previouslyFocusedElement
 watchEffect(async (cleanupFn) => {
   const container = currentElement.value;
 
+  // A cleanup registered after the `await` below never runs when the effect was stopped
+  // meanwhile (e.g. the scope unmounted within the same tick), which would leave this scope
+  // in the stack, paused others and retaining its container. So note the stop here, before it.
+  let isStale = false;
+  cleanupFn(() => {
+    isStale = true;
+  });
+
   await nextTick();
-  if (!container) {
+  if (!container || isStale) {
     return;
   }
   // A scope that mounts hidden (`present: false`, e.g. a closed Dialog with
@@ -321,7 +343,7 @@ watchEffect(async (cleanupFn) => {
 // default it to `true` (see `withDefaults`); since it never changes for them,
 // this watcher never fires and the main effect above owns their stack membership.
 watch(() => props.present, async (present, prevPresent) => {
-  if (!isBrowser) {
+  if (!isClient) {
     return;
   }
 

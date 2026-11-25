@@ -11,7 +11,7 @@ import { KEY_CODES } from '@vinicunca/perkakas';
 import { useCalendar } from '@/Calendar/useCalendar';
 import { getWeekStartsOn, isBefore } from '@/date';
 import {
-  createContext,
+  createAkarContext,
   useDirection,
   useLocale,
 } from '@/shared';
@@ -145,7 +145,7 @@ export type RangeCalendarRootEmits = {
 };
 
 export const [injectRangeCalendarRootContext, provideRangeCalendarRootContext]
-  = createContext<RangeCalendarRootContext>('RangeCalendarRoot');
+  = createAkarContext<RangeCalendarRootContext>('RangeCalendarRoot');
 </script>
 
 <script setup lang="ts">

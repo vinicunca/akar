@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Ref } from 'vue';
-import { createContext, useForwardExpose } from '@/shared';
+import { createAkarContext, useForwardExpose } from '@/shared';
 
 export interface HoverCardRootProps {
   /** The open state of the hover card when it is initially rendered. Use when you do not need to control its open state. */
@@ -22,7 +22,10 @@ export type HoverCardRootEmits = {
 export interface HoverCardRootContext {
   open: Ref<boolean>;
   onOpenChange: (open: boolean) => void;
-  onOpen: () => void;
+  /** `owner` identifies who requested the open, so only that requester can cancel it with `onCancelOpen`. */
+  onOpen: (owner?: object) => void;
+  /** Withdraws `owner`'s pending open request. The timer is cleared once no other requester remains. Never writes `open`. */
+  onCancelOpen: (owner: object) => void;
   onClose: () => void;
   onDismiss: () => void;
   hasSelectionRef: Ref<boolean>;
@@ -33,12 +36,12 @@ export interface HoverCardRootContext {
 }
 
 export const [injectHoverCardRootContext, provideHoverCardRootContext]
-  = createContext<HoverCardRootContext>('HoverCardRoot');
+  = createAkarContext<HoverCardRootContext>('HoverCardRoot');
 </script>
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { ref, toRefs } from 'vue';
+import { onBeforeUnmount, onDeactivated, ref, toRefs } from 'vue';
 import { PopperRoot } from '@/Popper';
 
 const props = withDefaults(defineProps<HoverCardRootProps>(), {
@@ -72,26 +75,62 @@ const isPointerDownOnContentRef = ref(false);
 const isPointerInTransitRef = ref(false);
 const triggerElement = ref<HTMLElement>();
 
-function handleOpen() {
+// Requesters (trigger, content, ...) sharing the pending open timer
+const openRequesters = new Set<object>();
+const anonymousRequester = {};
+
+function clearOpenTimer() {
+  clearTimeout(openTimerRef.value);
+  openTimerRef.value = 0;
+  openRequesters.clear();
+}
+
+function handleOpen(owner: object = anonymousRequester) {
   clearTimeout(closeTimerRef.value);
+  openRequesters.add(owner);
+  // Keep the deadline of an already pending open (e.g. pointerenter followed by focus)
+  if (openTimerRef.value) {
+    return;
+  }
   openTimerRef.value = window.setTimeout(() => {
+    openTimerRef.value = 0;
+    openRequesters.clear();
     open.value = true;
   }, openDelay.value);
 }
 
+function handleCancelOpen(owner: object) {
+  openRequesters.delete(owner);
+  if (!openRequesters.size) {
+    clearOpenTimer();
+  }
+}
+
 function handleClose() {
-  clearTimeout(openTimerRef.value);
+  clearOpenTimer();
   if (!hasSelectionRef.value && !isPointerDownOnContentRef.value) {
+    clearTimeout(closeTimerRef.value);
     closeTimerRef.value = window.setTimeout(() => {
       open.value = false;
     }, closeDelay.value);
   }
 }
 
+onBeforeUnmount(() => {
+  clearOpenTimer();
+  clearTimeout(closeTimerRef.value);
+});
+
 function handleDismiss() {
-  clearTimeout(openTimerRef.value);
-  open.value = false;
+  clearOpenTimer();
+  // Avoid re-emitting `update:open(false)` when already closed (e.g. dismiss during unmount)
+  if (open.value) {
+    open.value = false;
+  }
 }
+
+// A pending open of a `KeepAlive` page that is left would fire on the page shown instead.
+onDeactivated(clearOpenTimer);
 
 provideHoverCardRootContext({
   open,
@@ -99,6 +138,7 @@ provideHoverCardRootContext({
     open.value = value;
   },
   onOpen: handleOpen,
+  onCancelOpen: handleCancelOpen,
   onClose: handleClose,
   onDismiss: handleDismiss,
   hasSelectionRef,

@@ -1,4 +1,4 @@
-# values (522)
+# values (538)
 AccordionContent
 AccordionHeader
 AccordionItem
@@ -45,6 +45,15 @@ CalendarHeading
 CalendarNext
 CalendarPrev
 CalendarRoot
+CarouselAutoplayToggle
+CarouselContent
+CarouselIndicator
+CarouselIndicatorGroup
+CarouselItem
+CarouselNext
+CarouselPrevious
+CarouselRoot
+CarouselViewport
 CheckboxGroupRoot
 CheckboxIndicator
 CheckboxRoot
@@ -327,6 +336,10 @@ SelectTrigger
 SelectValue
 SelectViewport
 Separator
+SliderAreaArea
+SliderAreaRegion
+SliderAreaRoot
+SliderAreaThumb
 SliderRange
 SliderRoot
 SliderThumb
@@ -437,6 +450,8 @@ injectAlertDialogContentContext
 injectAutocompleteRootContext
 injectAvatarRootContext
 injectCalendarRootContext
+injectCarouselIndicatorGroupContext
+injectCarouselRootContext
 injectCheckboxGroupRootContext
 injectCheckboxRootContext
 injectCollapsibleRootContext
@@ -483,6 +498,7 @@ injectScrollAreaScrollbarContext
 injectSelectGroupContext
 injectSelectItemContext
 injectSelectRootContext
+injectSliderAreaRootContext
 injectSliderRootContext
 injectSplitterGroupContext
 injectStepperItemContext
@@ -522,7 +538,7 @@ useStateMachine
 useToastManager
 withDefault
 
-# types (571)
+# types (592)
 AcceptableInputValue
 AcceptableValue
 AccordionContentProps
@@ -581,6 +597,21 @@ CalendarNextProps
 CalendarPrevProps
 CalendarRootEmits
 CalendarRootProps
+CarouselAlign
+CarouselAutoScrollOptions
+CarouselAutoplayOptions
+CarouselAutoplayToggleProps
+CarouselContainScroll
+CarouselContentProps
+CarouselIndicatorGroupProps
+CarouselIndicatorProps
+CarouselItemProps
+CarouselNextProps
+CarouselPreviousProps
+CarouselRootEmits
+CarouselRootProps
+CarouselSlidesToScroll
+CarouselViewportProps
 CheckboxCheckedState
 CheckboxGroupRootEmits
 CheckboxGroupRootProps
@@ -815,6 +846,7 @@ ListboxFilterEmits
 ListboxFilterProps
 ListboxGroupLabelProps
 ListboxGroupProps
+ListboxHighlightItemOptions
 ListboxItemEmits
 ListboxItemIndicatorProps
 ListboxItemProps
@@ -974,6 +1006,11 @@ SelectViewportProps
 SeparatorProps
 SingleOrMultipleProps
 SingleOrMultipleType
+SliderAreaAreaProps
+SliderAreaRegionProps
+SliderAreaRootEmits
+SliderAreaRootProps
+SliderAreaThumbProps
 SliderRangeProps
 SliderRootEmits
 SliderRootProps
