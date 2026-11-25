@@ -11,21 +11,21 @@ describe('stepper announcements in a real browser', () => {
         defaultValue: 0,
         linear: false,
         dir,
-        announce: (step, total) => `Étape ${step} sur ${total}`,
+        announce: (step, total) => `Step ${step} of ${total}`,
       }, () => [0, 1, 2].map((step) => h(StepperItem, { step }, () =>
         h(StepperTrigger, { 'data-testid': `step-${step}` }, () => h(StepperTitle, () => `Step ${step}`))))),
     }), { attachTo: document.body });
     try {
       const first = fixture.get('[data-testid="step-0"]').element as HTMLElement;
       const second = fixture.get('[data-testid="step-1"]').element as HTMLElement;
-      await expect.poll(() => fixture.get('[role="status"]').text()).toBe('Étape 1 sur 3');
+      await expect.poll(() => fixture.get('[role="status"]').text()).toBe('Step 1 of 3');
       await userEvent.click(first);
       await userEvent.keyboard(dir === 'ltr'
         ? '{ArrowRight}'
         : '{ArrowLeft}');
       expect(document.activeElement).toBe(second);
       await userEvent.keyboard('{Enter}');
-      await expect.poll(() => fixture.get('[role="status"]').text()).toBe('Étape 2 sur 3');
+      await expect.poll(() => fixture.get('[role="status"]').text()).toBe('Step 2 of 3');
     } finally {
       fixture.unmount();
     }
