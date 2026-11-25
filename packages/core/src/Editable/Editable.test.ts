@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
+import { nextTick } from 'vue';
 import { useTestKbd } from '@/shared';
 import Editable from './story/_Editable.vue';
 
@@ -237,5 +238,160 @@ describe('editable', () => {
     await userEvent.type(input, 'lorem ipsum dolor sit amet');
 
     expect(input).toHaveValue('lorem ipsu');
+  });
+});
+
+describe('beforeSubmit', () => {
+  function deferred() {
+    let resolve!: (value: boolean | void) => void;
+    let reject!: (reason?: unknown) => void;
+    const promise = new Promise<boolean | void>((res, rej) => {
+      resolve = res;
+      reject = rej;
+    });
+    return { promise, resolve, reject };
+  }
+
+  it('without beforeSubmit, submit still closes synchronously', async () => {
+    const { input, preview, edit } = setup({
+      editableProps: { submitMode: 'enter' },
+    });
+
+    await userEvent.click(edit);
+    await userEvent.type(input, 'Sync');
+    await userEvent.keyboard('{Enter}');
+    // no await between the keypress and the assertion on purpose
+    expect(preview).toBeVisible();
+    expect(preview).toHaveTextContent('Sync');
+  });
+
+  it('keeps the editor open with the typed value when beforeSubmit resolves false', async () => {
+    const onSubmit = vi.fn();
+    const { input, preview, edit } = setup({
+      editableProps: {
+        submitMode: 'enter',
+        beforeSubmit: () => false,
+      },
+      onSubmit,
+    });
+
+    await userEvent.click(edit);
+    await userEvent.type(input, 'Bad');
+    await userEvent.keyboard('{Enter}');
+
+    await vi.waitFor(() => expect(input).not.toBeDisabled());
+    expect(input).toBeVisible();
+    expect(input.value).toBe('Bad');
+    expect(preview).not.toHaveTextContent('Bad');
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it('keeps the editor open when beforeSubmit rejects', async () => {
+    const onSubmit = vi.fn();
+    const beforeSubmit = vi.fn(() => Promise.reject(new Error('nope')));
+    const { input, edit } = setup({
+      editableProps: { submitMode: 'enter', beforeSubmit },
+      onSubmit,
+    });
+
+    await userEvent.click(edit);
+    await userEvent.type(input, 'Bad');
+    await userEvent.keyboard('{Enter}');
+
+    await vi.waitFor(() => expect(beforeSubmit).toHaveBeenCalledTimes(1));
+    await vi.waitFor(() => expect(input).not.toBeDisabled());
+    expect(input).toBeVisible();
+    expect(input.value).toBe('Bad');
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it('disables the input and sets data-submitting while beforeSubmit is pending', async () => {
+    const pending = deferred();
+    const onSubmit = vi.fn();
+    const { input, root, preview, edit } = setup({
+      editableProps: {
+        submitMode: 'enter',
+        beforeSubmit: () => pending.promise,
+      },
+      onSubmit,
+    });
+
+    await userEvent.click(edit);
+    await userEvent.type(input, 'New');
+    await userEvent.keyboard('{Enter}');
+
+    await vi.waitFor(() => expect(input).toBeDisabled());
+    expect(root).toHaveAttribute('data-submitting');
+    expect(input).toBeVisible();
+
+    pending.resolve();
+
+    await vi.waitFor(() => expect(preview).toBeVisible());
+    expect(preview).toHaveTextContent('New');
+    expect(root).not.toHaveAttribute('data-submitting');
+    expect(onSubmit).toHaveBeenCalledWith('New');
+  });
+
+  it('calls beforeSubmit once when a second submit arrives while pending', async () => {
+    const pending = deferred();
+    const beforeSubmit = vi.fn(() => pending.promise);
+    const { input, edit, preview } = setup({
+      editableProps: { submitMode: 'both', beforeSubmit },
+    });
+
+    await userEvent.click(edit);
+    await userEvent.type(input, 'New');
+    await userEvent.keyboard('{Enter}');
+    await vi.waitFor(() => expect(input).toBeDisabled());
+
+    await userEvent.click(document.body);
+    expect(beforeSubmit).toHaveBeenCalledTimes(1);
+
+    pending.resolve();
+    await vi.waitFor(() => expect(preview).toBeVisible());
+    expect(beforeSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  it('ignores Escape while a submit is pending', async () => {
+    const pending = deferred();
+    const { input, edit, root } = setup({
+      editableProps: {
+        submitMode: 'enter',
+        beforeSubmit: () => pending.promise,
+      },
+    });
+
+    await userEvent.click(edit);
+    await userEvent.type(input, 'New');
+    await userEvent.keyboard('{Enter}');
+    await vi.waitFor(() => expect(root).toHaveAttribute('data-submitting'));
+
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    await nextTick();
+    expect(input).toBeVisible();
+    expect(input.value).toBe('New');
+
+    pending.resolve();
+    await vi.waitFor(() => expect(root).not.toHaveAttribute('data-submitting'));
+  });
+});
+
+describe('multiline', () => {
+  it('enter does not submit; Ctrl+Enter does', async () => {
+    const onSubmit = vi.fn();
+    const { input, preview, edit } = setup({
+      editableProps: { submitMode: 'enter', multiline: true },
+      onSubmit,
+    });
+
+    await userEvent.click(edit);
+    await userEvent.type(input, 'Line');
+    await userEvent.keyboard('{Enter}');
+    expect(input).toBeVisible();
+    expect(onSubmit).not.toHaveBeenCalled();
+
+    await userEvent.keyboard('{Control>}{Enter}{/Control}');
+    expect(preview).toBeVisible();
+    expect(onSubmit).toHaveBeenCalledTimes(1);
   });
 });

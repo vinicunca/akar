@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<EditableInputProps>(), {
 
 const context = injectEditableRootContext();
 
-const disabled = computed(() => context.disabled.value);
+const disabled = computed(() => context.disabled.value || context.isSubmitting.value);
 
 const placeholder = computed(() => context.placeholder.value?.edit);
 
@@ -46,7 +46,16 @@ watch(context.isEditing, (value) => {
 });
 
 function handleSubmitKeyDown(event: KeyboardEvent) {
-  if ((context.submitMode.value === 'enter' || context.submitMode.value === 'both') && event.key === KEY_CODES.ENTER && !event.shiftKey && !event.metaKey && !event.isComposing) {
+  const submitsOnEnter = context.submitMode.value === 'enter' || context.submitMode.value === 'both';
+  if (!submitsOnEnter || event.key !== KEY_CODES.ENTER || event.isComposing) {
+    return;
+  }
+
+  if (context.multiline.value) {
+    if (event.ctrlKey || event.metaKey) {
+      context.submit();
+    }
+  } else if (!event.shiftKey && !event.metaKey) {
     context.submit();
   }
 }
