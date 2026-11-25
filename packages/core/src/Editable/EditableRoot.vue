@@ -187,12 +187,12 @@ function edit() {
   emits('update:state', 'edit');
 }
 
-function commit() {
-  modelValue.value = inputValue.value;
+function commit(value: string | null | undefined) {
+  modelValue.value = value;
   isEditing.value = false;
 
   emits('update:state', 'submit');
-  emits('submit', inputValue.value);
+  emits('submit', value);
 }
 
 async function submit(): Promise<void> {
@@ -202,14 +202,16 @@ async function submit(): Promise<void> {
 
   const guard = props.beforeSubmit;
   if (!guard) {
-    commit();
+    commit(inputValue.value);
     return;
   }
 
+  // Commit the value the guard saw, even if modelValue changes while it is pending.
+  const value = inputValue.value;
   isSubmitting.value = true;
   let accepted = false;
   try {
-    accepted = (await guard(inputValue.value)) !== false;
+    accepted = (await guard(value)) !== false;
   } catch {
     accepted = false;
   } finally {
@@ -217,7 +219,7 @@ async function submit(): Promise<void> {
   }
 
   if (accepted) {
-    commit();
+    commit(value);
   } else {
     // The input was disabled while saving, which drops focus. Give it back.
     await nextTick();

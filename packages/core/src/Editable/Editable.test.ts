@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/vue';
 import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
-import { nextTick } from 'vue';
 import { useTestKbd } from '@/shared';
 import Editable from './story/_Editable.vue';
 
@@ -352,27 +351,57 @@ describe('beforeSubmit', () => {
     expect(beforeSubmit).toHaveBeenCalledTimes(1);
   });
 
-  it('ignores Escape while a submit is pending', async () => {
+  it('ignores Escape and outside dismissal (cancel) while a submit is pending', async () => {
     const pending = deferred();
-    const { input, edit, root } = setup({
+    const { input, edit, root, user } = setup({
       editableProps: {
         submitMode: 'enter',
         beforeSubmit: () => pending.promise,
       },
     });
 
-    await userEvent.click(edit);
-    await userEvent.type(input, 'New');
-    await userEvent.keyboard('{Enter}');
+    await user.click(edit);
+    await user.type(input, 'New');
+    await user.keyboard('{Enter}');
     await vi.waitFor(() => expect(root).toHaveAttribute('data-submitting'));
 
-    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-    await nextTick();
+    // A disabled input drops focus, so Escape cannot reach it. Outside interaction is
+    // the path that still reaches cancel() (submitMode 'enter' cancels on dismiss).
+    await user.keyboard('{Escape}');
+    await user.click(document.body);
     expect(input).toBeVisible();
     expect(input.value).toBe('New');
 
     pending.resolve();
     await vi.waitFor(() => expect(root).not.toHaveAttribute('data-submitting'));
+  });
+
+  it('commits the value beforeSubmit saw when modelValue changes while pending', async () => {
+    const pending = deferred();
+    const beforeSubmit = vi.fn(() => pending.promise);
+    const onSubmit = vi.fn();
+    const onUpdate = vi.fn();
+    const { input, edit, rerender } = setup({
+      editableProps: { modelValue: 'Old', submitMode: 'enter', beforeSubmit },
+      onSubmit,
+      emits: { 'onUpdate:modelValue': onUpdate },
+    });
+
+    await userEvent.click(edit);
+    await userEvent.clear(input);
+    await userEvent.type(input, 'Typed');
+    await userEvent.keyboard('{Enter}');
+    await vi.waitFor(() => expect(input).toBeDisabled());
+
+    await rerender({
+      editableProps: { modelValue: 'External', submitMode: 'enter', beforeSubmit },
+    });
+    pending.resolve();
+
+    await vi.waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
+    expect(beforeSubmit).toHaveBeenCalledWith('Typed');
+    expect(onSubmit).toHaveBeenCalledWith('Typed');
+    expect(onUpdate).toHaveBeenLastCalledWith('Typed');
   });
 });
 
