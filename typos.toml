@@ -11,3 +11,5 @@ Januar = "Januar"
 ba = "ba"
 # "CAF" is a case-insensitive prefix fixture (matching "Café") in useFilter.test.ts
 caf = "caf"
+# "sur" is a typo in the StepperAnnouncement.browser.test.ts
+sur = "sur"
