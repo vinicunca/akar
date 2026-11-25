@@ -1,7 +1,7 @@
 {
   "name": "akar-monorepo",
   "type": "module",
-  "version": "2.0.27",
+  "version": "2.1.0",
   "private": true,
   "packageManager": "pnpm@12.21.0",
   "license": "MIT",
@@ -45,7 +45,8 @@
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
-    "commit-msg": "pnpm commitlint --edit ${1}"
+    "commit-msg": "pnpm commitlint --edit ${1}",
+    "pre-push": "node scripts/check-pushed-tags.mjs"
   },
   "lint-staged": {
     "*": "eslint --fix"
