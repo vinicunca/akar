@@ -113,6 +113,8 @@ import { createEventHook, useVModel } from '@vueuse/core';
 import { computed, getCurrentInstance, nextTick, onMounted, ref, toRefs, watch } from 'vue';
 import { ListboxRoot } from '@/Listbox';
 import { PopperRoot } from '@/Popper';
+import { useLazySlotProps } from '@/shared/lazySlotProps';
+import { useAgentRegistration } from '@/shared/useAgentRegistration';
 import { useComboboxContentPositioning } from './useComboboxContentPositioning';
 
 const props = withDefaults(
@@ -157,6 +159,13 @@ const open = useVModel(props, 'open', emits, {
   defaultValue: props.defaultOpen,
   passive: (props.open === undefined) as false,
 }) as Ref<boolean>;
+
+// Read when a consumer slot uses them, not when the slot is rendered: the slot is rendered by the
+// root's element, and a read there re-renders it, and through it everything in the combobox.
+const slotProps = useLazySlotProps({
+  open: () => open.value,
+  modelValue: () => modelValue.value,
+});
 
 // `true` while `onOpenChange` is opening the list and will highlight the selected item itself
 let isOpeningInternally = false;
@@ -297,7 +306,7 @@ defineExpose({
   highlightSelected: primitiveElement.value?.highlightSelected,
 });
 
-provideComboboxRootContext(
+const agentContext = provideComboboxRootContext(
   defineReactiveIds({
     modelValue,
     multiple,
@@ -333,6 +342,7 @@ provideComboboxRootContext(
     unmountOnHide,
   }, ['contentId']),
 );
+useAgentRegistration('combobox', agentContext, props, parentElement);
 </script>
 
 <template>
@@ -358,10 +368,7 @@ provideComboboxRootContext(
       @invalid="emits('invalid', $event as T)"
       @highlight="emits('highlight', $event as any)"
     >
-      <slot
-        :open="open"
-        :model-value="modelValue"
-      />
+      <slot v-bind="slotProps()" />
     </ListboxRoot>
   </PopperRoot>
 </template>

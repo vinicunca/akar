@@ -34,7 +34,7 @@ export interface DialogContentImplProps extends DismissableLayerProps {
 </script>
 
 <script setup lang="ts">
-import { isClient } from '@vueuse/shared';
+import { isBrowser } from '@vinicunca/perkakas';
 import { onMounted, onUnmounted, shallowRef, watch } from 'vue';
 import { DismissableLayer } from '@/DismissableLayer';
 import { FocusScope } from '@/FocusScope';
@@ -64,7 +64,7 @@ onMounted(() => {
 // mounted (`unmountOnHide: false`) sets up only once. The trigger ref is left alone, so
 // it stays the fallback when that element has left the DOM.
 watch(rootContext.open, (open) => {
-  if (open && isClient) {
+  if (open && isBrowser) {
     recordFocusBeforeOpen(rootContext, contentElement.value);
   }
 }, { immediate: true, flush: 'sync' });
@@ -82,8 +82,7 @@ if (process.env.NODE_ENV !== 'production') {
     titleName: 'DialogTitle',
     contentName: 'DialogContent',
     componentLink: 'dialog.html#title',
-    titleId: rootContext.titleId,
-    descriptionId: rootContext.descriptionId,
+    ids: rootContext,
     contentElement,
   });
 }
@@ -109,6 +108,8 @@ if (process.env.NODE_ENV !== 'production') {
       :aria-describedby="rootContext.descriptionId"
       :aria-labelledby="rootContext.titleId"
       :data-state="getOpenState(rootContext.open.value)"
+      :data-nested-dialog-open="rootContext.nestedOpenDialogCount.value > 0 ? '' : undefined"
+      :style="{ '--nested-dialogs': rootContext.nestedOpenDialogCount.value }"
       v-bind="$attrs"
       @dismiss="rootContext.onOpenChange(false)"
       @escape-key-down="emits('escapeKeyDown', $event)"

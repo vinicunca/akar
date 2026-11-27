@@ -3,7 +3,7 @@ import { KEY_CODES } from '@vinicunca/perkakas';
 import { mount } from '@vue/test-utils';
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
-import { defineComponent, h, nextTick } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import { TreeItem, TreeRoot, TreeVirtualizer } from '.';
 import Tree from './story/_Tree.vue';
 
@@ -934,5 +934,121 @@ describe('given a multiple Tree with many selected keys', () => {
       }
       expect(states[node.id], node.id).toEqual({ selected: isSelected, indeterminate });
     }
+  });
+});
+
+describe('given a Tree whose items carry their subtree', () => {
+  interface Node { id: string; label?: string; children?: Array<Node> }
+
+  // Reading `visited` on a grandchild stands for walking the selected item's subtree.
+  function build() {
+    let visits = 0;
+    const leaf = (id: string): Node => Object.defineProperty({ id } as Node, 'visited', {
+      enumerable: true,
+      get: () => ++visits,
+    });
+    const items: Array<Node> = ['a', 'b'].map((id) => ({
+      id,
+      label: id,
+      children: [
+        {
+          id: `${id}-0`,
+          children: [
+            leaf(`${id}-0-0`),
+            leaf(`${id}-0-1`),
+          ],
+        },
+      ],
+    }));
+    return {
+      items,
+      visits: () => visits,
+    };
+  }
+
+  function mountTree(props: Record<string, any>, items: Array<Node>) {
+    const emitted: Array<any> = [];
+    const wrapper = mount(defineComponent({
+      setup: () => () => h(TreeRoot as any, {
+        items,
+        'getKey': (n: Node) => n.id,
+        'onUpdate:modelValue': (value: any) => emitted.push(value),
+        ...props,
+      }, {
+        default: ({ flattenItems }: any) => flattenItems.map((item: any) => h(TreeItem as any, { key: item._id, ...item.bind }, () => item._id)),
+      }),
+    }), { attachTo: document.body });
+    return { wrapper, emitted };
+  }
+
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it.each([false, true])('should not walk the subtree of the selected item (multiple: %s)', async (multiple) => {
+    const { items, visits } = build();
+    const { wrapper, emitted } = mountTree({ multiple }, items);
+
+    await wrapper.findAll('[role=treeitem]')[0].trigger('click');
+    await nextTick();
+
+    expect(emitted).toHaveLength(1);
+    expect(wrapper.findAll('[role=treeitem]')[0].attributes('aria-selected')).toBe('true');
+    expect(visits()).toBe(0);
+  });
+
+  // The children of a single selected item are not watched, so a change inside them is not a selection change.
+  it('should not watch the children of a single selected item', async () => {
+    const { items } = build();
+    const selected = ref<Node>({ ...items[0] });
+    const { emitted } = mountTree({ modelValue: selected.value }, items);
+
+    selected.value.children!.push({ id: 'a-new' });
+    await nextTick();
+
+    expect(emitted).toHaveLength(0);
+  });
+
+  it('should emit when the parent pushes to or splices the selection in place', async () => {
+    const { items } = build();
+    const selected = ref<Array<Node>>([]);
+    const { wrapper, emitted } = mountTree({ multiple: true, modelValue: selected.value }, items);
+
+    selected.value.push(items[0]);
+    await nextTick();
+    expect(emitted).toHaveLength(1);
+    expect(emitted[0].map((n: Node) => n.id)).toEqual(['a']);
+    expect(wrapper.findAll('[role=treeitem]')[0].attributes('aria-selected')).toBe('true');
+
+    selected.value.splice(0, 1, items[1]);
+    await nextTick();
+    expect(emitted).toHaveLength(2);
+    expect(emitted[1].map((n: Node) => n.id)).toEqual(['b']);
+  });
+
+  it('should emit when a field of an item in a multiple selection is changed in place', async () => {
+    const { items } = build();
+    const selected = ref<Array<Node>>([
+      { ...items[0] },
+    ]);
+    const { emitted } = mountTree({ multiple: true, modelValue: selected.value }, items);
+
+    selected.value[0].label = 'renamed';
+    await nextTick();
+
+    expect(emitted).toHaveLength(1);
+    expect(emitted[0][0].label).toBe('renamed');
+  });
+
+  it('should emit when a field of the selected item is changed in place', async () => {
+    const { items } = build();
+    const selected = ref<Node>({ ...items[0] });
+    const { emitted } = mountTree({ modelValue: selected.value }, items);
+
+    selected.value.label = 'renamed';
+    await nextTick();
+
+    expect(emitted).toHaveLength(1);
+    expect(emitted[0].label).toBe('renamed');
   });
 });

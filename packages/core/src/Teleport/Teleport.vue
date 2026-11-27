@@ -30,7 +30,8 @@ export interface TeleportProps {
 <script setup lang="ts">
 import { useMounted } from '@vueuse/core';
 import { computed } from 'vue';
-import { injectConfigProviderContext } from '@/ConfigProvider';
+import { injectConfigProviderContext } from '@/ConfigProvider/ConfigProvider.vue';
+import { useAgentRegistration } from '@/shared/useAgentRegistration';
 
 const props = defineProps<TeleportProps>();
 
@@ -39,6 +40,7 @@ const configContext = injectConfigProviderContext({});
 const target = computed(() => props.to ?? configContext.teleportTo?.value ?? 'body');
 
 const isMounted = useMounted();
+useAgentRegistration('portal', props, props);
 </script>
 
 <template>

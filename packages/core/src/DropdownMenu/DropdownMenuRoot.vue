@@ -29,6 +29,7 @@ export const [injectDropdownMenuRootContext, provideDropdownMenuRootContext]
 import { useVModel } from '@vueuse/core';
 import { ref, toRefs } from 'vue';
 import { MenuRoot } from '@/Menu';
+import { useAgentRegistration } from '@/shared/useAgentRegistration';
 
 const props = withDefaults(defineProps<DropdownMenuRootProps>(), {
   modal: true,
@@ -54,25 +55,21 @@ const triggerElement = ref<HTMLElement>();
 
 const { modal, dir: propDir } = toRefs(props);
 const dir = useDirection(propDir);
-provideDropdownMenuRootContext(
-  defineReactiveIds(
-    {
-      open,
-      onOpenChange: (value) => {
-        open.value = value;
-      },
-      onOpenToggle: () => {
-        open.value = !open.value;
-      },
-      triggerId: '',
-      triggerElement,
-      contentId: '',
-      modal,
-      dir,
-    },
-    ['triggerId', 'contentId'],
-  ),
-);
+const agentContext = provideDropdownMenuRootContext(defineReactiveIds({
+  open,
+  onOpenChange: (value) => {
+    open.value = value;
+  },
+  onOpenToggle: () => {
+    open.value = !open.value;
+  },
+  triggerId: '',
+  triggerElement,
+  contentId: '',
+  modal,
+  dir,
+}, ['triggerId', 'contentId']));
+useAgentRegistration('menu', agentContext, props);
 </script>
 
 <template>

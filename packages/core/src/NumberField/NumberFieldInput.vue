@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { PrimitiveProps } from '@/Primitive';
 import { onMounted, ref, watch } from 'vue';
-import { getActiveElement, useComposing } from '@/shared';
+import { getActiveElement, useComposing, useTranslations } from '@/shared';
 import { injectNumberFieldRootContext } from './NumberFieldRoot.vue';
 
 export interface NumberFieldInputProps extends PrimitiveProps {
@@ -18,6 +18,8 @@ const props = withDefaults(
     as: 'input',
   },
 );
+
+const t = useTranslations();
 
 const { primitiveElement, currentElement } = usePrimitiveElement();
 const rootContext = injectNumberFieldRootContext();
@@ -133,7 +135,7 @@ function handleChange() {
     autocomplete="off"
     autocorrect="off"
     spellcheck="false"
-    aria-roledescription="Number field"
+    :aria-roledescription="t('numberFieldRoleDescription')"
     :aria-valuenow="rootContext.modelValue.value"
     :aria-valuemin="rootContext.min.value"
     :aria-valuemax="rootContext.max.value"

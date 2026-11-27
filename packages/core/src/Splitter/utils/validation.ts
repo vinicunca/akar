@@ -104,7 +104,8 @@ export function validatePanelConstraints({
   panelId: string | undefined;
   panelIndex: number;
 }): boolean {
-  if (import.meta.env.DEV) {
+  // eslint-disable-next-line node/prefer-global/process -- bundlers replace it, the warning drops in production
+  if (process.env.NODE_ENV !== 'production') {
     const warnings = [];
 
     const panelConstraints = panelConstraintsArray[panelIndex];

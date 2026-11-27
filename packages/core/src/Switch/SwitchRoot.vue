@@ -43,6 +43,7 @@ export const [injectSwitchRootContext, provideSwitchRootContext]
 import { useVModel } from '@vueuse/core';
 import { computed, toRefs } from 'vue';
 import { Primitive } from '@/Primitive';
+import { useAgentRegistration } from '@/shared/useAgentRegistration';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
 
 defineOptions({
@@ -96,11 +97,12 @@ const ariaLabel = computed(() => props.id && currentElement.value
   ? (document.querySelector(`[for="${props.id}"]`) as HTMLLabelElement)?.innerText
   : undefined);
 
-provideSwitchRootContext({
+const agentContext = provideSwitchRootContext({
   checked,
   toggleCheck,
   disabled,
 });
+useAgentRegistration('switch', agentContext, props, currentElement);
 </script>
 
 <template>

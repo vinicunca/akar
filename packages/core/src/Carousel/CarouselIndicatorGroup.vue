@@ -75,7 +75,7 @@ function onKeydown(event: KeyboardEvent) {
     :as="as"
     :as-child="asChild"
     role="tablist"
-    aria-label="Choose slide to display"
+    :aria-label="rootContext.t('carouselIndicatorGroup')"
     :data-orientation="rootContext.orientation.value"
     @keydown="onKeydown"
   >

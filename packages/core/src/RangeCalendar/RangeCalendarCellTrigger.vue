@@ -10,7 +10,7 @@ import {
 import { KEY_CODES } from '@vinicunca/perkakas';
 import { computed, nextTick } from 'vue';
 import { isBetweenInclusive, toDate } from '@/date';
-import { focusPagination, focusWeekBoundary, getCalendarCellTabindex } from '@/shared';
+import { focusPagination, focusWeekBoundary, getCalendarCellTabindex, getCalendarKey } from '@/shared';
 
 export interface RangeCalendarCellTriggerProps extends PrimitiveProps {
   day: DateValue;
@@ -190,7 +190,8 @@ function handleArrowKey(e: KeyboardEvent) {
   }
   // Modifier combos on Enter/Space (e.g. Ctrl+Enter) are not handled by the cell —
   // let them bubble so parent listeners can react (e.g. submit a form).
-  if ((e.code === KEY_CODES.ENTER || e.code === KEY_CODES.SPACE) && (e.ctrlKey || e.metaKey || e.altKey)) {
+  const key = getCalendarKey(e);
+  if ((key === KEY_CODES.ENTER || key === KEY_CODES.SPACE) && (e.ctrlKey || e.metaKey || e.altKey)) {
     return;
   }
 
@@ -201,7 +202,7 @@ function handleArrowKey(e: KeyboardEvent) {
   const sign = rootContext.dir.value === 'rtl'
     ? -1
     : 1;
-  switch (e.code) {
+  switch (key) {
     case KEY_CODES.ARROW_RIGHT:
       shiftFocus(props.day, sign);
       break;

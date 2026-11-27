@@ -6,7 +6,7 @@ import { endOfYear, startOfYear } from '@internationalized/date';
 import { isFunction } from '@vinicunca/perkakas';
 import { computed, ref, watch } from 'vue';
 import { createYearGrid, isAfter, isBefore, isSameYear, toDate } from '@/date';
-import { useDateFormatter } from '@/shared';
+import { useDateFormatter, useTranslations } from '@/shared';
 
 export type UseYearPickerProps = {
   locale: Ref<string>;
@@ -70,6 +70,7 @@ export function useYearPickerState(props: UseYearPickerStateProps) {
 }
 
 export function useYearPicker(props: UseYearPickerProps) {
+  const t = useTranslations();
   const formatter = useDateFormatter(props.locale.value);
 
   const resolveMatcher = (matcher?: Matcher | Ref<Matcher | undefined>) =>
@@ -202,7 +203,7 @@ export function useYearPicker(props: UseYearPickerProps) {
     return `${formatter.fullYear(toDate(firstYear), headingFormatOptions.value)} - ${formatter.fullYear(toDate(lastYear), headingFormatOptions.value)}`;
   });
 
-  const fullCalendarLabel = computed(() => `${props.calendarLabel.value ?? 'Year Picker'}, ${headingValue.value}`);
+  const fullCalendarLabel = computed(() => `${props.calendarLabel.value ?? t('yearPickerLabel')}, ${headingValue.value}`);
 
   return {
     isYearDisabled,

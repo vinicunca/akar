@@ -2,7 +2,7 @@
 import type { PinInputContextValue } from './PinInputRoot.vue';
 import type { PrimitiveProps } from '@/Primitive';
 import { Primitive, usePrimitiveElement } from '@/Primitive';
-import { disabledAttr, getActiveElement, useArrowNavigation, useComposing } from '@/shared';
+import { disabledAttr, getActiveElement, useArrowNavigation, useComposing, useTranslations } from '@/shared';
 import { injectPinInputRootContext } from './PinInputRoot.vue';
 
 export interface PinInputInputProps extends PrimitiveProps {
@@ -22,6 +22,8 @@ const props = withDefaults(
     as: 'input',
   },
 );
+
+const t = useTranslations();
 
 const context = injectPinInputRootContext();
 const inputElements = computed(() => [...context.inputElements!.value]);
@@ -299,7 +301,7 @@ watch([
     autocapitalize="none"
     :as="as"
     :as-child="asChild"
-    :autocomplete="isOtpMode ? 'one-time-code' : 'false'"
+    :autocomplete="isOtpMode ? 'one-time-code' : 'off'"
     :type="isPasswordMode ? 'password' : 'text'"
     :inputmode="context.isNumericMode.value ? 'numeric' : 'text'"
     :pattern="context.isNumericMode.value ? '[0-9]*' : undefined"
@@ -308,7 +310,8 @@ watch([
     :disabled="disabledAttr(disabled, props.as, props.asChild)"
     :data-disabled="disabled ? '' : undefined"
     :data-complete="context.isCompleted.value ? '' : undefined"
-    :aria-label="mountedPosition < 0 ? 'pin input' : `pin input ${mountedPosition + 1} of ${inputElements.length}`"
+    data-akar-pin-input=""
+    :aria-label="mountedPosition < 0 ? t('pinInputLabel') : t('pinInputLabelIndexed', { index: mountedPosition + 1, total: inputElements.length })"
     @input="handleInput($event as InputEvent)"
     @keydown.left.right.up.down.home.end="handleKeydown"
     @keydown.backspace="handleBackspace"

@@ -12,6 +12,8 @@ export const FIRST_LAST_KEYS = [
   ...FIRST_KEYS,
   ...LAST_KEYS,
 ];
+/** The keys `useArrowNavigation` moves on in a vertical menu. */
+export const ARROW_NAVIGATION_KEYS = ['ArrowUp', 'ArrowDown', 'Home', 'End'];
 export const SUB_OPEN_KEYS: Record<Direction, Array<string>> = {
   ltr: [...SELECTION_KEYS, 'ArrowRight'],
   rtl: [...SELECTION_KEYS, 'ArrowLeft'],

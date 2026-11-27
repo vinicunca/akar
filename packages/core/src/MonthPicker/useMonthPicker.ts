@@ -5,7 +5,7 @@ import type { DateFormatterOptions } from '@/shared/useDateFormatter';
 import { endOfMonth, endOfYear } from '@internationalized/date';
 import { computed, ref, watch } from 'vue';
 import { createMonthGrid, isAfter, isBefore, isSameYearMonth, toDate } from '@/date';
-import { useDateFormatter } from '@/shared';
+import { useDateFormatter, useTranslations } from '@/shared';
 
 export type UseMonthPickerProps = {
   locale: Ref<string>;
@@ -68,6 +68,7 @@ export function useMonthPickerState(props: UseMonthPickerStateProps) {
 }
 
 export function useMonthPicker(props: UseMonthPickerProps) {
+  const t = useTranslations();
   const formatter = useDateFormatter(props.locale.value);
 
   const resolveMatcher = (matcher?: Matcher | Ref<Matcher | undefined>) =>
@@ -188,7 +189,7 @@ export function useMonthPicker(props: UseMonthPickerProps) {
     return formatter.fullYear(toDate(grid.value.value), headingFormatOptions.value);
   });
 
-  const fullCalendarLabel = computed(() => `${props.calendarLabel.value ?? 'Month Picker'}, ${headingValue.value}`);
+  const fullCalendarLabel = computed(() => `${props.calendarLabel.value ?? t('monthPickerLabel')}, ${headingValue.value}`);
 
   return {
     isMonthDisabled,

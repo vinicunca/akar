@@ -5,7 +5,7 @@ import type { PrimitiveProps } from '@/Primitive';
 import { useMutationObserver, useVModel } from '@vueuse/core';
 import { computed, nextTick, ref, toRefs, watch, watchPostEffect } from 'vue';
 import { Primitive } from '@/Primitive';
-import { createAkarContext, useDirection, useForwardExpose } from '@/shared';
+import { createAkarContext, useDirection, useForwardExpose, useTranslations } from '@/shared';
 
 export interface StepperRootContext {
   modelValue: Ref<number | undefined>;
@@ -55,6 +55,7 @@ const props = withDefaults(defineProps<StepperRootProps>(), {
   defaultValue: 1,
   announce: undefined,
 });
+
 const emits = defineEmits<StepperRootEmits>();
 
 defineSlots<{
@@ -83,6 +84,8 @@ defineSlots<{
     hasPrev: () => boolean;
   }) => any;
 }>();
+
+const t = useTranslations();
 
 const { dir: propDir, orientation: propOrientation, linear } = toRefs(props);
 const dir = useDirection(propDir);
@@ -117,7 +120,7 @@ function updateAnnouncement() {
   const custom = typeof props.announce === 'function'
     ? props.announce(step, orderedItems.length)
     : undefined;
-  announcement.value = custom ?? `Step ${step} of ${orderedItems.length}`;
+  announcement.value = custom ?? t('stepperAnnouncement', { step, total: orderedItems.length });
 }
 
 watchPostEffect(updateAnnouncement);
@@ -225,7 +228,7 @@ useMutationObserver(currentElement, updateAnnouncement, { childList: true, subtr
   <Primitive
     :ref="forwardRef"
     role="group"
-    aria-label="progress"
+    :aria-label="t('stepperLabel')"
     :as="as"
     :as-child="asChild"
     :data-linear="linear ? '' : undefined"

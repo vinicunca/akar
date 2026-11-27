@@ -1,8 +1,8 @@
 import type { Component, PropType } from 'vue';
 import { isString } from '@vinicunca/perkakas';
-import { defineComponent, h } from 'vue';
+import { defineComponent, getCurrentInstance, h, toRaw } from 'vue';
 import { ariaDisabledAttr } from '@/shared';
-import { Slot } from './Slot';
+import { renderSlotChild } from './Slot';
 
 export type AsTag
   = | 'a'
@@ -124,8 +124,16 @@ export const Primitive = defineComponent({
       default: 'div',
     },
   },
-  setup(props, { attrs, slots }) {
-    const asTag = props.asChild ? 'template' : props.as;
+  // `setup(props)` only: a second parameter makes Vue create a setup context (an attrs proxy, an
+  // `expose` closure) for every instance. The instance holds the same attrs and slots objects, and
+  // Vue updates them in place.
+  setup(props) {
+    const { attrs, slots } = getCurrentInstance()!;
+    // Render reads the raw props and attrs. A new prop or attr only arrives with a parent patch,
+    // which re-renders this component anyway, so tracking them would cost a dep and a link per
+    // Primitive for nothing.
+    const rawProps = toRaw(props);
+    const asTag = rawProps.asChild ? 'template' : rawProps.as;
 
     if (isString(asTag) && SELF_CLOSING_TAGS.includes(asTag)) {
       return () => h(asTag, attrs);
@@ -133,12 +141,12 @@ export const Primitive = defineComponent({
 
     if (asTag !== 'template') {
       return () => {
-        const unsafe = isUnsafeAs(props.as);
+        const unsafe = isUnsafeAs(rawProps.as);
         // eslint-disable-next-line node/prefer-global/process -- bundlers replace it, the warning drops in production
         if (process.env.NODE_ENV !== 'production' && unsafe) {
-          warnUnsafeAs(props.as);
+          warnUnsafeAs(rawProps.as);
         }
-        const tag = unsafe ? 'div' : props.as;
+        const tag = unsafe ? 'div' : rawProps.as;
         // Native `disabled` only works on form controls, so expose it with `aria-disabled` elsewhere
         const ariaDisabled = ariaDisabledAttr(tag, attrs);
         return h(tag, ariaDisabled
@@ -147,6 +155,7 @@ export const Primitive = defineComponent({
       };
     }
 
-    return () => h(Slot, attrs, { default: slots.default });
+    // Rendered here, not through a nested `Slot` component: the same nodes for one instance less
+    return () => renderSlotChild(attrs, slots);
   },
 });

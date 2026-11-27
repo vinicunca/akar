@@ -17,15 +17,17 @@ import { Primitive } from '@/Primitive';
 
 const props = defineProps<ListboxGroupProps>();
 
-const id = useId(undefined, 'akar-listbox-group');
-provideListboxGroupContext({ id });
+// The template reads the id through the context, which follows a consumer `id` on the label.
+const context = provideListboxGroupContext({
+  id: useId(undefined, 'akar-listbox-group'),
+});
 </script>
 
 <template>
   <Primitive
     role="group"
     v-bind="props"
-    :aria-labelledby="id"
+    :aria-labelledby="context.id"
   >
     <slot />
   </Primitive>

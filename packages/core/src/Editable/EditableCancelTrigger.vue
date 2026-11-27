@@ -7,10 +7,12 @@ export interface EditableCancelTriggerProps extends PrimitiveProps {}
 <script setup lang="ts">
 import { computed } from 'vue';
 import { Primitive } from '@/Primitive';
-import { disabledAttr } from '@/shared';
+import { disabledAttr, useTranslations } from '@/shared';
 import { injectEditableRootContext } from './EditableRoot.vue';
 
 const props = withDefaults(defineProps<EditableCancelTriggerProps>(), { as: 'button' });
+
+const t = useTranslations();
 
 const context = injectEditableRootContext();
 
@@ -20,7 +22,7 @@ const disabled = computed(() => context.disabled.value || context.isSubmitting.v
 <template>
   <Primitive
     v-bind="props"
-    aria-label="cancel"
+    :aria-label="t('editableCancel')"
     :aria-disabled="disabled ? '' : undefined"
     :data-disabled="disabled ? '' : undefined"
     :disabled="disabledAttr(disabled, props.as, props.asChild)"
