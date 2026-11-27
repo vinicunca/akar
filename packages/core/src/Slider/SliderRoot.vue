@@ -69,7 +69,7 @@ export const [injectSliderRootContext, provideSliderRootContext]
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { computed, ref, toRaw, toRefs } from 'vue';
+import { computed, ref, toRefs } from 'vue';
 import { useAgentRegistration } from '@/shared/useAgentRegistration';
 import { VisuallyHiddenInput } from '@/VisuallyHidden';
 import SliderHorizontal from './SliderHorizontal.vue';
@@ -134,7 +134,7 @@ function handleSlideEnd() {
   const nextValue = currentModelValue.value[valueIndexToChangeRef.value];
   const hasChanged = nextValue !== prevValue;
   if (hasChanged) {
-    emits('valueCommit', toRaw(currentModelValue.value));
+    emits('valueCommit', currentModelValue.value.map((value) => clamp(value, { min: min.value, max: max.value })));
   }
 }
 

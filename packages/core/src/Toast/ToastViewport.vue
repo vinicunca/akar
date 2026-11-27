@@ -8,6 +8,8 @@ import { resolveElement } from '@/shared/resolveElement';
 export interface ToastViewportProps extends PrimitiveProps {
   /**
    * The keys to use as the keyboard shortcut that will move focus to the toast viewport.
+   * Every entry must be pressed together: a modifier (`altKey`, `ctrlKey`, `metaKey`,
+   * `shiftKey`), a key code (`KeyT`) or a key name (`t`).
    * @defaultValue ['F8']
    */
   hotkey?: Array<string>;
@@ -74,9 +76,25 @@ function forwardPrimitiveRef(ref: Element | ComponentPublicInstance | null) {
   forwardRef(ref);
 }
 
+const MODIFIER_KEYS = [
+  'altKey',
+  'ctrlKey',
+  'metaKey',
+  'shiftKey',
+] as const;
+
+// Every entry must match: a modifier flag, the key's `event.code` (`KeyT`), or its
+// `event.key` (`t`), so hotkeys written as key names keep working.
+function isHotkeyEntryPressed(event: KeyboardEvent, key: string) {
+  if ((MODIFIER_KEYS as ReadonlyArray<string>).includes(key)) {
+    return event[key as typeof MODIFIER_KEYS[number]];
+  }
+  return event.code === key || event.key === key;
+}
+
 useEventListener('keydown', (event: KeyboardEvent) => {
   const isHotkeyPressed = hotkey.value.length !== 0
-    && hotkey.value.every((key) => event[key as keyof KeyboardEvent] || event.code === key);
+    && hotkey.value.every((key) => isHotkeyEntryPressed(event, key));
   if (isHotkeyPressed) {
     viewportElement.value?.focus();
   }

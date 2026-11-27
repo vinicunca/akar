@@ -210,6 +210,9 @@ function handleSlideMove(event: PointerEvent) {
 function handleSlideEnd() {
   rectRef.value = undefined;
   offsetPosition.value = undefined;
+  if (disabled.value) {
+    return;
+  }
   const prevValue = valuesBeforeSlideStartRef.value[valueIndexToChangeRef.value];
   const nextValue = currentModelValue.value[valueIndexToChangeRef.value];
   const hasChanged = prevValue?.[0] !== nextValue?.[0] || prevValue?.[1] !== nextValue?.[1];
@@ -328,6 +331,14 @@ function handleKeyDown(event: KeyboardEvent) {
   }
 }
 
+// The browser can release capture before `pointerup` arrives, so either one ends a pointer's slide, once.
+const slidingPointerIds = new Set<number>();
+function endSlide(event: PointerEvent) {
+  if (slidingPointerIds.delete(event.pointerId)) {
+    handleSlideEnd();
+  }
+}
+
 function handlePointerDown(event: PointerEvent) {
   if (disabled.value) {
     return;
@@ -335,6 +346,7 @@ function handlePointerDown(event: PointerEvent) {
 
   const target = event.target as HTMLElement;
   target.setPointerCapture(event.pointerId);
+  slidingPointerIds.add(event.pointerId);
   event.preventDefault();
 
   valuesBeforeSlideStartRef.value = currentModelValue.value;
@@ -353,6 +365,11 @@ function handlePointerMove(event: PointerEvent) {
   }
   const target = event.target as HTMLElement;
   if (target.hasPointerCapture(event.pointerId)) {
+    // Touch and pen keep the capture of a press made while disabled, so such a slide starts on its first move.
+    if (!slidingPointerIds.has(event.pointerId)) {
+      slidingPointerIds.add(event.pointerId);
+      valuesBeforeSlideStartRef.value = currentModelValue.value;
+    }
     handleSlideMove(event);
   }
 }
@@ -361,10 +378,8 @@ function handlePointerUp(event: PointerEvent) {
   const target = event.target as HTMLElement;
   if (target.hasPointerCapture(event.pointerId)) {
     target.releasePointerCapture(event.pointerId);
-    if (!disabled.value) {
-      handleSlideEnd();
-    }
   }
+  endSlide(event);
 }
 
 provideSliderAreaRootContext({
@@ -399,6 +414,7 @@ provideSliderAreaRootContext({
       @pointerdown="handlePointerDown"
       @pointermove="handlePointerMove"
       @pointerup="handlePointerUp"
+      @lostpointercapture="endSlide"
     >
       <slot :model-value="modelValue" />
 

@@ -87,8 +87,7 @@ async function handleSelect(ev: SelectEvent<T>) {
   }
 
   if (!disabled.value && ev) {
-    rootContext.onValueChange(props.value);
-    rootContext.changeHighlight(currentElement.value);
+    rootContext.onSelection(currentElement.value, () => rootContext.onValueChange(props.value));
   }
 }
 

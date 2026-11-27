@@ -171,7 +171,10 @@ watchEffect((cleanupFn) => {
   const viewport = providerContext.viewport.value;
   if (viewport) {
     const handleResume = () => {
-      startTimer(closeTimerRemainingTimeRef.value);
+      // a closed toast must not re-arm its timer, but still balances the earlier pause
+      if (props.open) {
+        startTimer(closeTimerRemainingTimeRef.value);
+      }
       remainingRaf.resume();
       emits('resume');
     };
@@ -202,6 +205,9 @@ watch([
   duration,
   restartKey,
 ], () => {
+  if (isBrowser) {
+    window.clearTimeout(closeTimerRef.value);
+  }
   // Reset the timer when the toast is rerendered with the new duration
   closeTimerRemainingTimeRef.value = duration.value;
 

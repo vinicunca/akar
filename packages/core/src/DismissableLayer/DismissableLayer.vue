@@ -77,12 +77,23 @@ const props = withDefaults(defineProps<DismissableLayerProps & {
    * internal plumbing between primitives.
    */
   present?: boolean;
+  /**
+   * Whether the layer is animating out. A leaving layer keeps blocking outside
+   * pointer events until it unmounts, but leaves the layer stack straight away,
+   * so the layer below takes Escape and outside interactions during the exit.
+   * Internal, like `present`.
+   */
+  exiting?: boolean;
 }>(), {
   disableOutsidePointerEvents: false,
   present: true,
+  exiting: false,
 });
 
 const emits = defineEmits<DismissableLayerPrivateEmits>();
+
+// In the layer stack: present and not leaving.
+const isActive = computed(() => props.present && !props.exiting);
 
 const { forwardRef, currentElement: layerElement } = useForwardExpose();
 // `undefined` on the server, where there is no document to fall back to.
@@ -104,7 +115,10 @@ const isBodyPointerEventsDisabled = computed(() => {
 
 const isPointerEventsEnabled = computed(() => {
   const localLayers = Array.from(layers.value);
-  const [highestLayerWithOutsidePointerEventsDisabled] = [...context.layersWithOutsidePointerEventsDisabled].slice(-1);
+  // Take the highest blocking layer in stack order. A leaving layer still blocks
+  // the page but is out of the stack, so the layers left in it keep taking
+  // pointer events; a layer reopened while leaving goes back on top of the stack.
+  const [highestLayerWithOutsidePointerEventsDisabled] = localLayers.filter((layer) => context.layersWithOutsidePointerEventsDisabled.has(layer)).slice(-1);
   const highestLayerWithOutsidePointerEventsDisabledIndex = localLayers.indexOf(highestLayerWithOutsidePointerEventsDisabled);
 
   return index.value >= highestLayerWithOutsidePointerEventsDisabledIndex;
@@ -120,7 +134,7 @@ const pointerDownOutside = usePointerDownOutside(async (event) => {
     branch?.contains(event.target as HTMLElement),
   );
 
-  if (!props.present || isPointerDownOnBranch) {
+  if (!isActive.value || isPointerDownOnBranch) {
     return;
   }
   emits('pointerDownOutside', event);
@@ -129,7 +143,7 @@ const pointerDownOutside = usePointerDownOutside(async (event) => {
   if (!event.defaultPrevented) {
     emits('dismiss');
   }
-}, layerElement, () => props.present, () => isPointerEventsEnabled.value);
+}, layerElement, () => isActive.value, () => isPointerEventsEnabled.value);
 
 // A focus move during a touch press outside is handled after that press's deferred
 // `pointerDownOutside`, the order a mouse press produces (see `runAfterTouchPress`).
@@ -138,7 +152,7 @@ const focusOutside = useFocusOutside((event) => pointerDownOutside.runAfterTouch
     branch?.contains(event.target as HTMLElement),
   );
 
-  if (!props.present || isFocusInBranch) {
+  if (!isActive.value || isFocusInBranch) {
     return;
   }
   emits('focusOutside', event);
@@ -153,7 +167,7 @@ onKeyStroke('Escape', (event) => {
   // `unmountOnHide: false`) is out of the layer stack, so its `index` is `-1`.
   // When no layer is visible (`size === 0`), `-1 === size - 1` would otherwise
   // make it look like the highest layer and emit `escapeKeyDown` / `dismiss`.
-  if (!props.present) {
+  if (!isActive.value) {
     return;
   }
   const isHighestLayer = index.value === layers.value.size - 1;
@@ -213,12 +227,9 @@ watch(
 // Kept separate from the pointer-events watch above so a
 // `disableOutsidePointerEvents` toggle alone never re-orders the stack.
 watch(
-  [
-    layerElement,
-    () => props.present,
-  ],
-  ([element, present], _, onCleanup) => {
-    if (!element || !present) {
+  [layerElement, isActive],
+  ([element, active], _, onCleanup) => {
+    if (!element || !active) {
       return;
     }
     layers.value.add(element);

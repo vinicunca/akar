@@ -19,7 +19,7 @@ export interface AvatarImageProps extends PrimitiveProps {
 
 <script setup lang="ts">
 import type { ImgHTMLAttributes } from 'vue';
-import { toRefs, watch } from 'vue';
+import { onUnmounted, toRefs, watch } from 'vue';
 import { Primitive } from '../Primitive';
 import { injectAvatarRootContext } from './AvatarRoot.vue';
 import { useImageLoadingStatus } from './utils';
@@ -43,6 +43,10 @@ watch(
   },
   { immediate: true },
 );
+
+onUnmounted(() => {
+  rootContext.imageLoadingStatus.value = 'idle';
+});
 </script>
 
 <template>
